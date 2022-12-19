@@ -1,0 +1,53 @@
+{
+  "restaurant": [
+    {
+      "id": 0,
+      "name": "Danke",
+      "cuisine": "Italian",
+      "outside-seating": true,
+      "price-range": "cheap"
+    },
+    {
+      "id": 1,
+      "name": "Taco Bell",
+      "cuisine": "Mexican",
+      "outside-seating": false,
+      "price-range": "mid-range"
+    },
+    {
+      "id": 2,
+      "name": "I due forni",
+      "cuisine": "Italian",
+      "outside-seating": true,
+      "price-range": "mid-range"
+    },
+    {
+      "id": 3,
+      "name": "Lụa Restaurant",
+      "cuisine": "Vietnamese",
+      "outside-seating": true,
+      "price-range": "cheap"
+    },
+    {
+      "id": 4,
+      "name": "Thai King",
+      "cuisine": "Thai",
+      "outside-seating": true,
+      "price-range": "mid-range"
+    },
+    {
+      "id": 5,
+      "name": "Marubi Ramen",
+      "cuisine": "Japanese",
+      "outside-seating": false,
+      "price-range": "cheap"
+    },
+    {
+      "id": 6,
+      "name": "Gong Gan",
+      "cuisine": "Korean",
+      "outside-seating": true,
+      "price-range": "cheap"
+    }
+  ]
+}

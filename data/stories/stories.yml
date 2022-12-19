@@ -1,0 +1,41 @@
+version: "3.1"
+
+stories:
+  - story: greet whenever user greets
+    steps:
+      - intent: greet
+      - action: utter_greet
+
+  - story: greet continuously
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: greet
+      - action: utter_greet_again
+      - intent: greet
+      - action: utter_checkout_restaurants
+
+  - story: after greet + mood great
+    steps:
+      - intent: mood_great
+      - action: utter_mood_great_feedback
+      - action: utter_checkout_restaurants
+
+  - story: after greet + mood unhappy
+    steps:
+      - intent: mood_unhappy
+      - action: utter_mood_unhappy_feedback
+      - action: utter_checkout_restaurants
+
+  - story: greet + search restaurant
+    steps:
+      - action: utter_checkout_restaurants
+      - intent: affirm
+      - action: action_show_cuisines
+      - intent: inform_cuisine
+      - action: action_query_knowledge_base
+
+  - story: search restaurants
+    steps:
+      - intent: query_knowledge_base
+      - action: action_query_knowledge_base

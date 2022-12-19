@@ -1,0 +1,97 @@
+version: "3.1"
+
+intents:
+  - greet
+  - mood_unhappy
+  - mood_great
+  - goodbye
+  - affirm
+  - deny
+  - bot_challenge
+  #  - request_restaurant
+  - inform_people_count
+  - inform_cuisine
+  - query_knowledge_base
+
+
+entities:
+  - object_type
+  - mention
+  - attribute
+  - restaurant
+  - cuisine
+  - city
+
+slots:
+  object_type:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: custom
+  mention:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: custom
+  attribute:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: custom
+  restaurant:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: custom
+  city:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: custom
+  cuisine:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: custom
+
+actions:
+  - action_query_knowledge_base
+  - action_show_cuisines
+
+responses:
+  utter_greet:
+    - text: "Hey! How are you?"
+
+  utter_greet_again:
+    - text: "Hi there again!"
+
+  utter_mood_great_feedback:
+    - text: "Cool!"
+    - text: "Nice to hear"
+
+  utter_mood_unhappy_feedback:
+    - text: "Sorry to hear that, maybe having something will make you feel better."
+    - text: "Hmmm, eating something might help"
+
+  utter_checkout_restaurants:
+    - text: "Wanna checkout places to eat something ?"
+  utter_happy:
+    - text: "Great, carry on!"
+
+  utter_goodbye:
+    - text: "Bye"
+
+  utter_iamabot:
+    - text: "I am a bot, powered by Rasa."
+
+  utter_ask_rephrase:
+    - text: "Sorry, I'm not sure I understand. Can you rephrase?"
+    - text: "Can you please rephrase? I did not got that."
+
+  utter_query_search:
+    - text: "Let me check our database"
+    - text: "Sure!"
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
