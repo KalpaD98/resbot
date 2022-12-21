@@ -1,0 +1,44 @@
+mkdir gridresults
+#    default
+
+# 0: default + spacyNLP
+rasa test nlu --config configs/config-0.yml \
+              --cross-validation --runs 1 --folds 2 \
+              --out gridresults/config-0
+# 1: default + spacyNLP + BERT
+rasa test nlu --config configs/config-1.yml \
+              --cross-validation --runs 1 --folds 2 \
+              --out gridresults/config-1
+
+# default + spacyNLP + roBERTa
+rasa test nlu --config configs/config-2.yml \
+              --cross-validation --runs 1 --folds 2 \
+              --out gridresults/config-2
+
+# default + spacyNLP + gpt2
+rasa test nlu --config configs/config-3.yml \
+              --cross-validation --runs 1 --folds 2 \
+              --out gridresults/config-3
+
+# default - check later
+rasa test nlu --config configs/config-3.yml \
+              --cross-validation --runs 1 --folds 2 \
+              --out gridresults/config-3
+
+------------------------------------------------------------
+
+rasa test nlu --config configs/config-0.yml \
+              --cross-validation --runs 1 --folds 2 \
+              --out gridresults/config-0
+
+rasa test nlu --config configs/config-1.yml \
+              --cross-validation --runs 1 --folds 2 \
+              --out gridresults/config-1
+
+rasa test nlu --config configs/config-2.yml \
+              --cross-validation --runs 1 --folds 2 \
+              --out gridresults/config-2
+
+rasa test nlu --config configs/config-3.yml \
+              --cross-validation --runs 1 --folds 2 \
+              --out gridresults/config-3

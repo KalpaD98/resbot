@@ -34,7 +34,7 @@ class ActionShowCuisines(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        # get top personalised for a particular user 5 or 10 cuisines and display them
+        # get top personalised for a particular user 5 or 10 cuisines and display them after preferences are calculated
         cuisines = ['italian', 'Mexican', 'Vietnamese', 'Thai', 'Japanese', 'Korean']
 
         data = []

@@ -71,15 +71,24 @@ responses:
 
   utter_mood_unhappy_feedback:
     - text: "Sorry to hear that, maybe having something will make you feel better."
+    - text: "Sorry to hear that, Are you in the mood of having something to eat? "
     - text: "Hmmm, eating something might help"
 
   utter_checkout_restaurants:
     - text: "Wanna checkout places to eat something ?"
+    - text: "Want to check out some restaurants?"
+    - text: "Interested in finding a restaurant to eat at?"
+
   utter_happy:
     - text: "Great, carry on!"
 
   utter_goodbye:
     - text: "Bye"
+    - text: "Goodbye"
+    - text: "Farewell"
+    - text: "See you later"
+    - text: "Take care"
+    - text: "Ciao"
 
   utter_iamabot:
     - text: "I am a bot, powered by Rasa."
@@ -89,8 +98,12 @@ responses:
     - text: "Can you please rephrase? I did not got that."
 
   utter_query_search:
-    - text: "Let me check our database"
+    - text: "Let me check"
     - text: "Sure!"
+    - text: "I'll check for you."
+    - text: "I'll see what I can find out."
+    - text: "I'll take a look and see what I can find."
+    - text: "I'll check and get back to you."
 
 session_config:
   session_expiration_time: 60
