@@ -1,0 +1,46 @@
+version: "3.1"
+stories:
+- story: sad path 1 (./venv/lib/python3.9/site-packages/rasa/cli/initial_project/tests/test_stories.yml)
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_unhappy
+  - action: utter_cheer_up  # predicted: utter_mood_unhappy_feedback
+  - action: utter_did_that_help  # predicted: action_listen
+  - intent: affirm
+  - action: utter_happy  # predicted: action_show_cuisines after action_unlikely_intent
+  - action: action_listen  # predicted: utter_checkout_restaurants
+- story: sad path 2 (./venv/lib/python3.9/site-packages/rasa/cli/initial_project/tests/test_stories.yml)
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_unhappy
+  - action: utter_cheer_up  # predicted: utter_mood_unhappy_feedback
+  - action: utter_did_that_help  # predicted: action_listen
+  - intent: deny
+  - action: utter_goodbye  # predicted: action_show_cuisines
+- story: sad path 3 (./venv/lib/python3.9/site-packages/rasa/cli/initial_project/tests/test_stories.yml)
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_unhappy
+  - action: utter_cheer_up  # predicted: utter_mood_unhappy_feedback
+  - action: utter_did_that_help  # predicted: action_listen
+  - intent: deny
+  - action: utter_goodbye  # predicted: action_show_cuisines
+- story: happy path 1 (./tests/test_stories.yml)
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_great
+  - action: utter_happy  # predicted: utter_mood_great_feedback
+  - action: action_listen  # predicted: utter_checkout_restaurants
+- story: happy path 2 (./tests/test_stories.yml)
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_great
+  - action: utter_happy  # predicted: utter_mood_great_feedback
+  - action: action_listen  # predicted: utter_checkout_restaurants
+  - intent: goodbye
+  - action: utter_goodbye

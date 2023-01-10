@@ -1,16 +1,15 @@
+
 recipe: default.v1
 language: en
 
 pipeline:
-  # 1: default + spacyNLP + BERT
-  - name: SpacyNLP
-  - name: SpacyTokenizer # remove white space tokenizer because spacy tokenizer handles it
-  - name: SpacyFeaturizer
+  # 02: Default + RoBERTa
+  - name: WhitespaceTokenizer
   - name: RegexFeaturizer
   - name: LexicalSyntacticFeaturizer
   - name: LanguageModelFeaturizer
-    model_name: "bert"
-    model_weights: "rasa/LaBSE"
+    model_name: "roberta"
+    model_weights: "roberta-base"
   - name: CountVectorsFeaturizer
     analyzer: char_wb
     min_ngram: 1
@@ -20,10 +19,10 @@ pipeline:
     constrain_similarities: true
   - name: EntitySynonymMapper
   - name: ResponseSelector
-    epochs: 150
+    epochs: 100
     constrain_similarities: true
-  - name: FallbackClassifier
-    threshold: 0.4
+  - name: FallbackClassifier # added
+    threshold: 0.5
     ambiguity_threshold: 0.1
 
 

@@ -2,13 +2,16 @@ recipe: default.v1
 language: en
 
 pipeline:
-  # 0: default + spacyNLP
+  # default + spacyNLP (LM as Word Vector) + roBERTa
   - name: SpacyNLP
+    model: en_core_web_md
   - name: SpacyTokenizer # remove white space tokenizer because spacy tokenizer handles it
   - name: SpacyFeaturizer
   - name: RegexFeaturizer
   - name: LexicalSyntacticFeaturizer
-  - name: CountVectorsFeaturizer
+  - name: LanguageModelFeaturizer
+    model_name: "roberta"
+    model_weights: "roberta-base"
   - name: CountVectorsFeaturizer
     analyzer: char_wb
     min_ngram: 1
@@ -21,7 +24,7 @@ pipeline:
     epochs: 100
     constrain_similarities: true
   - name: FallbackClassifier
-    threshold: 0.4
+    threshold: 0.5
     ambiguity_threshold: 0.1
 
 

@@ -2,15 +2,13 @@ recipe: default.v1
 language: en
 
 pipeline:
-  # default + spacyNLP + gpt2
-  - name: SpacyNLP
-  - name: SpacyTokenizer # remove white space tokenizer because spacy tokenizer handles it
-  - name: SpacyFeaturizer
+  # 00: Default + Test
+  - name: WhitespaceTokenizer
   - name: RegexFeaturizer
   - name: LexicalSyntacticFeaturizer
   - name: LanguageModelFeaturizer
-    model_name: "gpt2"
-    model_weights: "gpt2"
+    model_name: "distilbert"
+    model_weights: "distilbert-base-uncased"
   - name: CountVectorsFeaturizer
     analyzer: char_wb
     min_ngram: 1
@@ -22,8 +20,8 @@ pipeline:
   - name: ResponseSelector
     epochs: 100
     constrain_similarities: true
-  - name: FallbackClassifier
-    threshold: 0.4
+  - name: FallbackClassifier # added
+    threshold: 0.5
     ambiguity_threshold: 0.1
 
 

@@ -64,10 +64,12 @@ responses:
 
   utter_greet_again:
     - text: "Hi there again!"
+    - text: "Hello again!"
 
   utter_mood_great_feedback:
     - text: "Cool!"
     - text: "Nice to hear"
+    - text: "Thankful to hear that"
 
   utter_mood_unhappy_feedback:
     - text: "Sorry to hear that, maybe having something will make you feel better."

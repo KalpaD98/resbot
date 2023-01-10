@@ -1,20 +1,18 @@
-# The config recipe.
-# https://rasa.com/docs/rasa/model-configuration/
 recipe: default.v1
-
-# NLU Pipeline
-# Configuration for Rasa NLU.
-# https://rasa.com/docs/rasa/nlu/components/
 language: en
 
 pipeline:
-  # default pipeline
-  # No configuration for the NLU pipeline was provided. The following default pipeline was used to train your model.
-  # If you'd like to customize it, uncomment and adjust the pipeline.
-  # See https://rasa.com/docs/rasa/tuning-your-model for more information.
-  - name: ConveRTTokenizer
+  # 04: Default + Test
+  - name: WhitespaceTokenizer
   - name: RegexFeaturizer
-  - name: ConveRTFeaturizer
+  - name: LexicalSyntacticFeaturizer
+  - name: LanguageModelFeaturizer
+    model_name: "gpt"
+    model_weights: "openai-gpt"
+  - name: CountVectorsFeaturizer
+    analyzer: char_wb
+    min_ngram: 1
+    max_ngram: 4
   - name: DIETClassifier
     epochs: 200
     constrain_similarities: true
@@ -22,8 +20,8 @@ pipeline:
   - name: ResponseSelector
     epochs: 100
     constrain_similarities: true
-  - name: FallbackClassifier
-    threshold: 0.4
+  - name: FallbackClassifier # added
+    threshold: 0.5
     ambiguity_threshold: 0.1
 
 

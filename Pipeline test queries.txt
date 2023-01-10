@@ -1,44 +1,44 @@
 mkdir gridresults
-#    default
 
-# 0: default + spacyNLP
-rasa test nlu --config configs/config-0.yml \
+#   test code format
+-------------------------------------------------------
+rasa test nlu --config config.yml \
               --cross-validation --runs 1 --folds 2 \
-              --out gridresults/config-0
-# 1: default + spacyNLP + BERT
-rasa test nlu --config configs/config-1.yml \
-              --cross-validation --runs 1 --folds 2 \
-              --out gridresults/config-1
+              --out gridresults/config-default
+-------------------------------------------------------
 
-# default + spacyNLP + roBERTa
-rasa test nlu --config configs/config-2.yml \
-              --cross-validation --runs 1 --folds 2 \
-              --out gridresults/config-2
+# 01: default + spacyNLP
+rasa test nlu --config configs/config-01-spacy.yml --cross-validation --runs 1 --folds 5 --out gridresults/config-01-spacy
 
-# default + spacyNLP + gpt2
-rasa test nlu --config configs/config-3.yml \
-              --cross-validation --runs 1 --folds 2 \
-              --out gridresults/config-3
+# 02: default + BERT
+rasa test nlu --config configs/config-02-bert.yml --cross-validation --runs 1 --folds 5 --out gridresults/config-02-bert
 
-# default - check later
-rasa test nlu --config configs/config-3.yml \
-              --cross-validation --runs 1 --folds 2 \
-              --out gridresults/config-3
+# 03: default + roBERTa
+rasa test nlu --config configs/config-03-roberta.yml --cross-validation --runs 1 --folds 5 --out gridresults/config-03-roberta
 
-------------------------------------------------------------
+# 04: default + gpt
+rasa test nlu --config configs/config-04-gpt.yml --cross-validation --runs 1 --folds 5 --out gridresults/config-04-gpt
 
-rasa test nlu --config configs/config-0.yml \
-              --cross-validation --runs 1 --folds 2 \
-              --out gridresults/config-0
+# 05: default + gpt2
+rasa test nlu --config configs/config-05-gpt-2.yml --cross-validation --runs 1 --folds 5 --out gridresults/config-05-gpt-2
 
-rasa test nlu --config configs/config-1.yml \
-              --cross-validation --runs 1 --folds 2 \
-              --out gridresults/config-1
+# 06: default + xlnet
+rasa test nlu --config configs/config-06-xlnet.yml --cross-validation --runs 1 --folds 5 --out gridresults/config-06-xlnet
 
-rasa test nlu --config configs/config-2.yml \
-              --cross-validation --runs 1 --folds 2 \
-              --out gridresults/config-2
+# 07: default + distillbert
+rasa test nlu --config configs/config-07-distillbert.yml --cross-validation --runs 1 --folds 5 --out gridresults/config-07-distillbert
 
-rasa test nlu --config configs/config-3.yml \
-              --cross-validation --runs 1 --folds 2 \
-              --out gridresults/config-3
+
+# 00: default + test
+rasa test nlu --config configs/config-00-test.yml --cross-validation --runs 1 --folds 5 --out gridresults/config-00-test
+
+# default + ConveRT
+rasa test nlu --config configs/config-convert.yml --cross-validation --runs 1 --folds 5 --out gridresults/config-convert
+
+# default
+rasa test nlu --config config.yml --cross-validation --runs 1 --folds 2 --out gridresults/config-default
+
+
+# run codes
+rasa run -m models --enable-api --cors "*"
+rasa run -m models --enable-api --cors "*" --debug
