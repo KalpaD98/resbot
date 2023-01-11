@@ -11,22 +11,27 @@ intents:
   - bot_challenge
   - emoji_mood_great
   - emoji_mood_unhappy
-  # ---------Restaurant----------
-  # ---------request------
+
+  # ---------RESTAURANT----------
+
+  # -------------request---------
   - request_menu
   - request_cuisines
   - request_restaurant
   - request_opening_hours
   - request_ambiance
-  # ---------inform------
+  - request_more_options
+
+  # -------------inform----------
   - inform_cuisine
   - inform_location
   - inform_people_count
-  # ---------multi intents------
+
+  # ---------multi intents-------
   - request_restaurant + inform_opening_hours
+
   # ---------knowledge base------
   - query_knowledge_base
-
 
 entities:
   - object_type
@@ -81,58 +86,92 @@ actions:
 
 responses:
   utter_greet:
-    - text: "Hey! How are you?"
+    - text: Hey! How are you?
+    - text: Hi! How are you?
+    - text: Hello! How are you?
+    - text: Hi 😃 there! How are you?
+    - text: Hey there! How are you?
+    - text: Hello there! How are you?
+    - text: Hello 😀 How are you?
 
   utter_greet_again:
-    - text: "Hi there again!"
-    - text: "Hello again!"
+    - text: Hi there again!
+    - text: Hello again!
+    - text: Hi again!
 
   utter_mood_great_feedback:
-    - text: "Cool!"
-    - text: "Nice to hear"
-    - text: "Thankful to hear that"
+    - text: Cool!
+    - text: Nice to hear 😃
+    - text: Thankful to hear that
+    - text: Happy to hear ☺️
 
   utter_mood_unhappy_feedback:
-    - text: "Sorry to hear that, maybe having something will make you feel better."
-    - text: "Sorry to hear that, Are you in the mood of having something to eat? "
-    - text: "Hmmm, eating something might help"
+    - text: Sorry to hear that, maybe having something will make you feel better.
+    - text: Sorry to hear that, Are you in the mood of having something to eat?
+    - text: Hmmm, eating something might help you feel better.
 
   utter_checkout_restaurants:
-    - text: "Wanna checkout places to eat something ?"
-    - text: "Want to check out some restaurants?"
-    - text: "Interested in finding a restaurant to eat at?"
+    - text: Wanna checkout places to eat something ?
+    - text: Want to check out some restaurants?
+    - text: Interested in finding a restaurant to eat at?
 
   utter_happy:
-    - text: "Great, carry on!"
-
-  utter_goodbye:
-    - text: "Bye"
-    - text: "Goodbye"
-    - text: "Farewell"
-    - text: "See you later"
-    - text: "Take care"
-    - text: "Ciao"
-
-  utter_iamabot:
-    - text: "I am a bot, powered by Rasa."
-
-  utter_ask_rephrase:
-    - text: "Sorry, I'm not sure I understand. Can you rephrase?"
-    - text: "Can you please rephrase? I did not got that."
-
-  utter_query_search:
-    - text: "Let me check"
-    - text: "Sure!"
-    - text: "I'll check for you."
-    - text: "I'll see what I can find out."
-    - text: "I'll take a look and see what I can find."
-    - text: "I'll check and get back to you."
+    - text: Great, carry on!
+    - text: Cool!
 
   utter_emoji_great_feedback:
-    - text: "☺️"
+    - text: 😊
+    - text: 😄
 
   utter_emoji_mood_unhappy_feedback:
-    - text: "Eating something might help 🤗"
+    - text: Eating something might help 🤗
+    - text: Eating something might help 😊
+    - text: Eating something might help 😄
+    - text: Eating something might help 😃
+
+  utter_goodbye:
+    - text: Bye
+    - text: Goodbye
+    - text: Farewell
+    - text: See you later
+    - text: Take care
+    - text: Ciao
+
+  utter_bot_challenge/bot:
+    - text: I am ResBot, powered by Rasa.
+    - text: I am ResBot, a bot powered by Rasa.
+    - text: I am ResBot, a bot built using Rasa.
+
+  utter_bot_challenge/who_are_you:
+    - text: I am ResBot, I can recommend you restaurants and help you make a booking 🍴.
+    - text: I am ResBot, I can help you find restaurants  and make a booking 🧂.
+    - text: I am ResBot, I can help you find restaurants and book a table 🍽️.
+
+  utter_ask_rephrase:
+    - text: Sorry, I'm not sure I understand. Can you rephrase?
+    - text: Can you please rephrase? I did not got that.
+
+  utter_out_of_scope/out_of_functionality:
+    - text: Sorry, I can't handle that request 🥲. I can help you book a restaurant 😃.
+    - text: Sorry, I can't do that 😢. I can help you book a restaurant 😃.
+    - text: Sorry, I can't help you with that 🥹. I can help you book a restaurant 😃.
+    - text: Sorry, I am not able to help you with that. I can help you book a restaurant 😃.
+    - text: Sorry, I am not able to help you with that. I can help you book a restaurant 😃.
+    - text: Sorry, I am not able to help you with that. I can help you book a restaurant 😃.
+
+  utter_out_of_scope/food:
+    - text: I understand you want to order food, but i'm afraid i can't handle that skill yet 😢.
+
+  utter_out_of_scope/hotel:
+    - text: I understand you want to book a hotel, but i'm afraid i can't handle that skill yet 😢.
+
+  utter_query_search:
+    - text: Let me check
+    - text: Sure!
+    - text: I'll check for you.
+    - text: I'll see what I can find out.
+    - text: I'll take a look and see what I can find.
+    - text: I'll check and get back to you.
 
 session_config:
   session_expiration_time: 60

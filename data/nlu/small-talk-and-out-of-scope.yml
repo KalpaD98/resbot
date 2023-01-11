@@ -1,0 +1,37 @@
+version: "3.1"
+
+nlu:
+  - intent: bot_challenge/bot
+    examples: |
+      - are you a bot?
+      - are you a human?
+      - am I talking to a bot?
+      - am I talking to a human?
+
+  - intent: bot_challenge/who_are_you
+    examples: |
+      - who are you?
+
+  - intent: out_of_scope/out_of_functionality
+    examples: |
+      - I want to book a flight
+      - I want to book a taxi
+      - What is 2 + 2?
+      - Who's the US President?
+      - What's the weather today?
+      - can you answer any question ?
+
+  - intent: out_of_scope/food
+    examples: |
+      - I want to order food
+      - I want to order a pizza
+      - I want to order a burger
+
+  - intent: out_of_scope/hotel
+    examples: |
+      - I want to book a hotel
+      - I want to book a room
+      - I want to book a suite
+      - I want to book a double room
+      - can i book a hotel room
+      - check hotels

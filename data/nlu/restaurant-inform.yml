@@ -1,0 +1,53 @@
+version: "3.1"
+
+nlu:
+  # User inform  bot
+  - intent: inform_cuisine
+    examples: |
+      - [Mexican](cuisine)
+      - I would like to have [Italian](cuisine)
+      - I want [Thai](cuisine) food
+      - [Italian](cuisine) food
+      - [American](cuisine) food
+      - [Korean](cuisine) restaurants
+      - [Chinese](cuisine) food
+      - [Indian](cuisine) food
+      - [Japanese](cuisine) food
+
+  - intent: inform_location
+    examples: |
+      - [north](location)
+      - [south](location)
+      - recommend a restaurant in [new york](location)
+
+  - intent: inform_people_count
+    examples: |
+      - [5](number_of_people) people are joinining
+      - [10](number_of_people) people
+      - for [ten](number_of_people) people
+      - [2](number_of_people) people
+      - for [three](number_of_people) people
+      - just [one](number_of_people) person
+      - book for [seven](number_of_people) people
+      - [2](number_of_people) please
+      - [nine](number_of_people) people
+      - sorry make it for [four](number_of_people) people
+
+  #  - intent: inform_restaurant_type
+  #    examples: |
+  #      - I would like to visit an italian restaurant
+  #      - A family restaurant
+  #      - mexican
+  #      - Indian
+  #      - Chinese restaurant
+  #      - any restaurant
+  #      - I would like to visit a multicusine restaurant
+  #      - restaurant with a bar
+  #      - restaurant above 4 stars
+  #      - restaurant in open area
+  #      - kid-friendly restaurant
+  #      - restaurant with great ambience
+  #      - the highest rated restaurant
+  #      - dinning with a view
+  #      - restaurant on a terrace
+  #      - fusion restaurant

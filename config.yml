@@ -25,13 +25,16 @@ pipeline:
     max_ngram: 4
   - name: DIETClassifier
     epochs: 200
+  - name: utils.extractors.DateparserEntityExtractor
+    languages: ["en"]
+    prefer_dates_from: "future"
     constrain_similarities: true
   - name: EntitySynonymMapper
   - name: ResponseSelector
     epochs: 100
     constrain_similarities: true
   - name: FallbackClassifier # added
-    threshold: 0.5
+    threshold: 0.6
     ambiguity_threshold: 0.1
 
 # Dialog Management

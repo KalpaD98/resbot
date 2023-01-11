@@ -65,16 +65,15 @@ class ActionMyKB(ActionQueryKnowledgeBase):
                   domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         # hard coded rest data
         restaurants = """
-        [
+        [ {
+              "title":"Taco Bell",
+              "image":"https://b.zmtcdn.com/data/pictures/1/18602861/bd2825ec26c21ebdc945edb7df3b0d99.jpg",
+              "ratings":"4.5"
+           },
            {
               "title":"Danke",
               "image":"https://lh3.googleusercontent.com/p/AF1QipOs5oyEh2eqR1wHmLuL7WPvdkiqPjyJJdHEeCyI=w600-h0",
               "ratings":"5.0"
-           },
-           {
-              "title":"Taco Bell",
-              "image":"https://b.zmtcdn.com/data/pictures/1/18602861/bd2825ec26c21ebdc945edb7df3b0d99.jpg",
-              "ratings":"4.5"
            },
            {
               "id":2,
@@ -119,7 +118,6 @@ class ActionMyKB(ActionQueryKnowledgeBase):
         dispatcher.utter_message(json_message=data)
 
         return []
-
 
 # [
 #                 {

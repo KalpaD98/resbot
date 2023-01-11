@@ -9,6 +9,7 @@ nlu:
       - ello
       - hello there
       - good morning
+      - good morning 🌞
       - gm
       - good evening
       - ge
@@ -27,7 +28,7 @@ nlu:
       - Ciao
       - Salve
       - hola
-      - Hola
+      - Hola 
 
   - intent: mood_great
     examples: |
@@ -62,7 +63,6 @@ nlu:
 
   - intent: emoji_mood_great
     examples: |
-      - great
       - 😊
       - 😁
       - 😎
@@ -75,24 +75,6 @@ nlu:
       - 😆
       - 😇
       - 😻
-      - amazing
-
-  - intent: emoji_mood_unhappy
-      - sad
-      - 😞
-      - 😔
-      - 😟
-      - 😭
-      - 😩
-      - 😢
-      - 😥
-      - 😫
-      - 😣
-      - 😿
-      - 😔
-      - 😢
-      - 😭
-      - crying
 
   - intent: mood_unhappy
     examples: |
@@ -111,6 +93,24 @@ nlu:
       - so saad
       - so sad
 
+  - intent: emoji_mood_unhappy
+    examples: |
+      - sad
+      - 😞
+      - 😔
+      - 😟
+      - 😭
+      - 😩
+      - 😢
+      - 😥
+      - 😫
+      - 😣
+      - 😿
+      - 😔
+      - 😢
+      - 😭
+      - crying
+
   - intent: goodbye
     examples: |
       - cu
@@ -128,13 +128,24 @@ nlu:
       - bye bye
       - see you later
       - tata
-      - have a great day
+      - have a great day  
+
+  - intent: emoji_goodbye
+    examples: |
+      - 👋
+      - ✌️
+      - ✋
+      - 😘
+      - 😙
+      - 😚
 
   - intent: affirm
     examples: |
       - yes
       - y
-      - indeed
+      - y not
+      - why not
+      - hell ya
       - of course
       - that sounds good
       - correct
@@ -163,6 +174,12 @@ nlu:
       - im in
       - i'm in
 
+  - intent: emoji_affirm
+    examples: |
+      - 👍
+      - 🙌
+      - 🫡
+
   - intent: deny
     examples: |
       - no
@@ -185,12 +202,14 @@ nlu:
       - dont
       - don't
 
-  - intent: bot_challenge
+  - intent: emoji_deny
     examples: |
-      - are you a bot?
-      - are you a human?
-      - am I talking to a bot?
-      - am I talking to a human?
+      - 👎
+      - 🙅‍♂️
+      - 🙅‍♀️
+      - 🙅
+      - 🚫
+
 
   - regex: greet
     examples: |
