@@ -1,6 +1,7 @@
 version: "3.1"
 
 intents:
+  # ------------NLU--------------
   - greet
   - mood_unhappy
   - mood_great
@@ -8,9 +9,22 @@ intents:
   - affirm
   - deny
   - bot_challenge
-  #  - request_restaurant
-  - inform_people_count
+  - emoji_mood_great
+  - emoji_mood_unhappy
+  # ---------Restaurant----------
+  # ---------request------
+  - request_menu
+  - request_cuisines
+  - request_restaurant
+  - request_opening_hours
+  - request_ambiance
+  # ---------inform------
   - inform_cuisine
+  - inform_location
+  - inform_people_count
+  # ---------multi intents------
+  - request_restaurant + inform_opening_hours
+  # ---------knowledge base------
   - query_knowledge_base
 
 
@@ -21,6 +35,13 @@ entities:
   - restaurant
   - cuisine
   - city
+  - number_of_people
+  - opening_hours
+  - booking_place
+  - location
+  - booking_detail
+  - ambiance
+  - price_range
 
 slots:
   object_type:
@@ -106,6 +127,12 @@ responses:
     - text: "I'll see what I can find out."
     - text: "I'll take a look and see what I can find."
     - text: "I'll check and get back to you."
+
+  utter_emoji_great_feedback:
+    - text: "☺️"
+
+  utter_emoji_mood_unhappy_feedback:
+    - text: "Eating something might help 🤗"
 
 session_config:
   session_expiration_time: 60

@@ -1,23 +1,9 @@
 version: "3.1"
 
 nlu:
-  ## Change as required
-  - intent: inform_people_count
-    examples: |
-      - [5](number) people are travelling
-      - [10](number) people
-      - [5](number) people
-      - for [ten](number) people
-      - [2](number) people
-      - for [three](number) people
-      - just [one](number) person
-      - book for [seven](number) people
-      - [2](number) please
-      - [nine](number) people
-      - instead could it be for [four](number) people
-
-  #  Change to match with dataset
-  - intent: ask_menu
+  # user requests from bot
+  #----------------------------------------------REQUEST----------------------------------------------------------------
+  - intent: request_menu
     examples: |
       - can I see the menu of place [Danke](booking_place)
       - [Airport Lounge](booking_place) menu please
@@ -26,11 +12,13 @@ nlu:
       - what foods are available in [pizza hut](booking_place)
       - what cuisines are available in [kfc](booking_place)
       - what drinks are available in [McDonalds](booking_place)
-      - show me the menu of [choys](booking_place)
-      - can i view the menu of [choys](booking_place)
-      - can I see the menu of [choys](booking_place)
+      - show me the menu of [Subway](booking_place)
+      - can i view the menu of [Subway](booking_place)
+      - can I see the menu of [Subway](booking_place)
       - what foods are available
       - show me the foods they have
+      - i want to see their menu
+      - can i see their menu
 
   - intent: request_cuisines
     examples: |
@@ -58,19 +46,63 @@ nlu:
       - im looking for a restaurant serving [italian](cuisine) food
       - restaurant please
       - i'd like to book a table for two with [spanish](cuisine) cuisine
-      - i need a table for [4](number)
+      - i need a table for [4](number_of_people)
       - book me a table for three at the [italian](cuisine) restaurant
-      - can you please book a table for [5](number)?
-      - I would like to book a table for [2](number)
+      - can you please book a table for [5](number_of_people)?
+      - I would like to book a table for [2](number_of_people)
       - looking for a table at the [mexican](cuisine) restaurant for five
-      - find me a table for [7](number) people
+      - find me a table for [7](number_of_people) people
       - Can I get a table for four at the place which server [greek](cuisine) food?
+      - I'm looking for a place to eat in [New York](location)
+      - I'm looking for a place in the [north](location) of town
+      - Show me [Chinese](cuisine) restaurants in [San Francisco](location)
+      - Show me a [Mexican](cuisine) place in the [downtown](location)
+      - I am looking for an [Indian](cuisine) spot in [Chicago](location)
+      - Search for restaurants in [Los Angeles](location)
+      - Find me some restaurants in [Houston](location)
+      - Find me a restaurant in [Seattle](location)
+      - I'm hungry in [Miami](location)!
+      - Find a restaurant in [Philadelphia](location)
+      - Can you suggest me some places to eat in [Boston](location)?
+      - List of restaurants in [San Diego](location)
+      - I want to grab lunch in [Las Vegas](location)
+      - I am searching for a dinner spot in [Orlando](location)
+      - Anywhere near [18328](location)
+      - I am looking a restaurant in [29432](location)
+      - In [New York](location) City
+      - [Chicago](location)
+      - Oh, sorry, in [Los Angeles](location)
+      - In [Houston](location)
+      - In [Seattle](location)
+      - I am looking for some restaurants in [San Francisco](location).
+      - Please help me to find restaurants in [Chicago](location)
+      - I’m hungry. Looking out for some good [Chinese](cuisine) restaurants in [Los Angeles](location)
+      - Find restaurants in [New York](location) for [Chinese](cuisine) cuisine
 
-  # - add to appropriate places
-  #        - what foods are good ?
-  #        - can you suggest me some foods?
+  - intent: request_opening_hours
+    examples: |
+      - what are the opening hours
+      - what are the opening hours of [McDonalds](booking_place)
 
-  # add this to inform/cuisine breakdown the intents
+  - intent: request_booking_details
+    examples: |
+      - What's the [confirmation number_of_people](booking_detail) for my reservation
+
+  - intent: request_ambiance
+    examples: |
+      - what is the ambiance
+      - what is the atmosphere
+      - tell me about the ambiance
+      - tell me about the atmosphere
+      - what is the atmosphere like
+      - what is the ambiance like
+      - what is the atmosphere like in the restaurant
+      - what is the ambiance like in the restaurant
+      - what is the atmosphere like in the place
+      - what is the ambiance like in the place
+
+  # --------------------------------------------------INFORM------------------------------------------------------------
+  # User inform  bot
   - intent: inform_cuisine
     examples: |
       - [Mexican](cuisine)
@@ -83,6 +115,59 @@ nlu:
       - [Indian](cuisine) food
       - [Japanese](cuisine) food
 
+  - intent: inform_location
+    examples: |
+      - [north](location)
+      - [south](location)
+      - recommend a restaurant in [new york](location)
+
+  - intent: inform_people_count
+    examples: |
+      - [5](number_of_people) people are joinining
+      - [10](number_of_people) people
+      - for [ten](number_of_people) people
+      - [2](number_of_people) people
+      - for [three](number_of_people) people
+      - just [one](number_of_people) person
+      - book for [seven](number_of_people) people
+      - [2](number_of_people) please
+      - [nine](number_of_people) people
+      - sorry make it for [four](number_of_people) people
+
+  #  - intent: inform_restaurant_type
+  #    examples: |
+  #      - I would like to visit an italian restaurant
+  #      - A family restaurant
+  #      - mexican
+  #      - Indian
+  #      - Chinese restaurant
+  #      - any restaurant
+  #      - I would like to visit a multicusine restaurant
+  #      - restaurant with a bar
+  #      - restaurant above 4 stars
+  #      - restaurant in open area
+  #      - kid-friendly restaurant
+  #      - restaurant with great ambience
+  #      - the highest rated restaurant
+  #      - dinning with a view
+  #      - restaurant on a terrace
+  #      - fusion restaurant
+
+  # ---------------------------------------------MULTI-INTENT => REQUEST + INFORM---------------------------------------
+
+  # early since 6 a.m
+  # late till midnight (00:00)
+  - intent: request_restaurant+inform_opening_hours
+    examples: |
+      - i need to find a restaurant that serves [chinese](cuisine) food and is [open now](opening_hours)
+      - Can you recommend a restaurant that is open [late](opening_hours)?
+      - I'm looking for a restaurant that is open [early](opening_hours)
+      - Can you suggest a restaurant that is open [24 hours](opening_hours)?
+
+  # ---------------------------------------------QUERY-KNOWLEDGE-BASE---------------------------------------------------
+  # - add to appropriate places
+  #        - what foods are good ?
+  #        - can you suggest me some foods?
   - intent: query_knowledge_base
     examples: |
       - what [restaurants]{"entity": "object_type", "value": "restaurant"} can you recommend?
@@ -105,9 +190,11 @@ nlu:
       - what is the [price range]{"entity": "attribute", "value": "price-range"} of [that place]{"entity": "mention"}?
   
 
+  #----------------------------------------------------LOOKUP-TABLE-------------------------------------------------------
+
   # create lookups for all restaurants, their categories and their foods
   # add the top 20 restaurant names from the dataset
-
+  # Examples only >> Change to fit the dataset ->  use a separate file (check docs)
   - lookup: cuisine
     examples: |
       - italian
@@ -130,7 +217,11 @@ nlu:
       - street food
       - caribbean
       - swedish
+      - vietnamese
+      - german
+  
 
+  # Examples only >> Change to fit the dataset ->  use a separate file (check docs)
   - lookup: restaurant
     examples: |
       - Danke
@@ -144,7 +235,13 @@ nlu:
       - KFC
       - Burger King
       - McDonalds
-  
+      - Subway
+      - Domino's Pizza
+      - Pizza Express
+      - Pizza Hut
+      - Pizza Nova
+      - Pizza Pizza
+      - Pizza Town
 
   # Extra data -------------------------------
 

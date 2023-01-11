@@ -28,6 +28,7 @@ nlu:
       - Salve
       - hola
       - Hola
+
   - intent: mood_great
     examples: |
       - perfect
@@ -58,6 +59,40 @@ nlu:
       - im okay
       - im ok
       - im fine thank you
+
+  - intent: emoji_mood_great
+    examples: |
+      - great
+      - 😊
+      - 😁
+      - 😎
+      - 🤩
+      - 😍
+      - 🥳
+      - 😄
+      - 😃
+      - 😀
+      - 😆
+      - 😇
+      - 😻
+      - amazing
+
+  - intent: emoji_mood_unhappy
+      - sad
+      - 😞
+      - 😔
+      - 😟
+      - 😭
+      - 😩
+      - 😢
+      - 😥
+      - 😫
+      - 😣
+      - 😿
+      - 😔
+      - 😢
+      - 😭
+      - crying
 
   - intent: mood_unhappy
     examples: |

@@ -15,6 +15,10 @@ pipeline:
   - name: DIETClassifier
     epochs: 200
     constrain_similarities: true
+  - name: utils.extractors.DateparserEntityExtractor
+    languages: [ "en" ]
+    prefer_dates_from: "future"
+    relative_base: "2023-01-01"
   - name: EntitySynonymMapper
   - name: ResponseSelector
     epochs: 100

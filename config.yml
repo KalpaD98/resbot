@@ -13,6 +13,9 @@ pipeline:
   # If you'd like to customize it, uncomment and adjust the pipeline.
   # See https://rasa.com/docs/rasa/tuning-your-model for more information.
   - name: WhitespaceTokenizer
+  # to use multi intents added below two
+    intent_tokenization_flag: True
+    intent_split_symbol: "+"
   - name: RegexFeaturizer
   - name: LexicalSyntacticFeaturizer
   - name: CountVectorsFeaturizer
@@ -30,7 +33,6 @@ pipeline:
   - name: FallbackClassifier # added
     threshold: 0.5
     ambiguity_threshold: 0.1
-
 
 # Dialog Management
 

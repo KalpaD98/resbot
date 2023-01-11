@@ -96,6 +96,7 @@
 #      - find some [north indian](cuisine) restaurants for me having budget [between 300 to 700](budget)
 #      - I'm looking for some restaurants for me having budget [more than 700](budget)
 #      - show me some restaurants for me having budget [lesser than rs. 300]{"entity": "budget", "value": "lesser than 300"}
+
 #      - [bombay]{"entity": "location", "value": "mumbai"}
 #      - [baroda]{"entity": "location", "value": "vadodara"}
 #      - [trivandrum]{"entity": "location", "value": "thiruvananthapuram"}
