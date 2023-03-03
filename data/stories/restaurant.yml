@@ -1,5 +1,4 @@
 version: "3.1"
-
 stories:
   - story: greet + search restaurant
     steps:
@@ -13,29 +12,3 @@ stories:
     steps:
       - intent: query_knowledge_base
       - action: action_query_knowledge_base
-
-  - story: greet and book restaurant happy path
-    steps:
-      - action: utter_wanna_checkout_restaurants
-      - intent: affirm
-        action: action_show_cuisines
-      - intent: inform_cuisine
-        action: action_show_restaurants_filter_by_cuisine
-      - intent: inform_restaurant
-        action: action_show_selected_restaurant_details
-        slot_was_set:
-          - restaurant_id: "restaurant_id_value"
-      - action: utter_wanna_book
-      - intent: affirm
-        action: utter_ask_date_time
-      - intent: inform_date_time
-        action: utter_ask_no_of_people
-        slot_was_set:
-          - date_time: "date_time_value"
-      - intent: inform_no_of_people
-        action: action_show_booking_summary
-        slot_was_set:
-          - no_of_people: "no_of_people_value"
-      - action: utter_ask_to_confirm_booking
-      - intent: affirm
-        action: action_confirm_booking

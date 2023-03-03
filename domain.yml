@@ -158,9 +158,9 @@ responses:
 
 
   utter_ask_no_of_people:
-    How many people will be joining you for the booking?
-    Can you please tell me the number of people for the booking?
-    What is the size of your group for the booking?
+    - text: How many people will be joining you for the booking?
+    - text: Can you please tell me the number of people for the booking?
+    - text: What is the size of your group for the booking?
 
   utter_ask_to_confirm_booking:
     - text: Here is the summary of your booking. Please confirm if it looks good to you.
