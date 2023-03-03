@@ -12,3 +12,33 @@ stories:
     steps:
       - intent: query_knowledge_base
       - action: action_query_knowledge_base
+
+  - story: User searches for restaurants by cuisine
+    steps:
+      - action: action_show_restaurants_filter_by_cuisine
+      - intent: inform_restaurant_id
+      - action: action_show_selected_restaurant_details
+      - slot_was_set:
+          - restaurant_id: [ "rtid_121290" ]
+
+  - story: Inform date and time
+    steps:
+      - action: utter_ask_date_time
+      - intent: inform_date_time
+      - slot_was_set:
+          - date_time: [ "2020-01-01T12:00:00+00:00" ]
+
+  - story: Inform number of people
+    steps:
+      - action: utter_ask_number_of_people
+      - intent: inform_number_of_people
+      - slot_was_set:
+          - number_of_people: [ "2" ]
+
+  - story: Confirm to book a restaurant
+    steps:
+      - slot_was_set:
+            - restaurant_id: [ "rtid_12sda0" ]
+      - action: action_show_booking_summary
+      - action: utter_ask_to_confirm_booking
+      - intent: affirm
