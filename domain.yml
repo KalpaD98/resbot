@@ -2,6 +2,7 @@ version: "3.1"
 
 intents:
   # ------------NLU--------------
+  # -----------Basic-------------
   - greet
   - mood_unhappy
   - mood_great
@@ -22,10 +23,16 @@ intents:
   - request_ambiance
   - request_more_options
 
+  # ------------- show ----------
+  - show_restaurant
+  - show_cuisines
+
   # -------------inform----------
   - inform_cuisine
   - inform_location
   - inform_people_count
+  - inform_restaurant
+  - inform_restaurant_id
 
   # ---------multi intents-------
   - request_restaurant + inform_opening_hours
@@ -38,6 +45,8 @@ entities:
   - mention
   - attribute
   - restaurant
+  - restaurant_name
+  - restaurant_id
   - cuisine
   - city
   - number_of_people
@@ -49,32 +58,44 @@ entities:
   - price_range
 
 slots:
+
   object_type:
     type: text
     influence_conversation: false
     mappings:
       - type: custom
+
   mention:
     type: text
     influence_conversation: false
     mappings:
       - type: custom
+
   attribute:
     type: text
     influence_conversation: false
     mappings:
       - type: custom
+
   restaurant:
     type: text
     influence_conversation: false
     mappings:
       - type: custom
+
   city:
     type: text
     influence_conversation: false
     mappings:
       - type: custom
+
   cuisine:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: custom
+
+  number_of_people:
     type: text
     influence_conversation: false
     mappings:
@@ -83,8 +104,13 @@ slots:
 actions:
   - action_query_knowledge_base
   - action_show_cuisines
+  - action_show_restaurants_filter_by_cuisine
+  - action_show_selected_restaurant_details
+  - action_show_booking_summary
+  - action_confirm_booking
 
 responses:
+
   utter_greet:
     - text: Hey! How are you?
     - text: Hi! How are you?
@@ -110,10 +136,36 @@ responses:
     - text: Sorry to hear that, Are you in the mood of having something to eat?
     - text: Hmmm, eating something might help you feel better.
 
+# restaurant related responses
+
   utter_checkout_restaurants:
     - text: Wanna checkout places to eat something ?
     - text: Want to check out some restaurants?
     - text: Interested in finding a restaurant to eat at?
+
+  utter_wanna_book:
+    - text: Do you want to book a table?
+    - text: Do you want to make a booking?
+    - text: Do you want to book a table?
+    - text: Do you want to make a booking?
+    - text: Do you want to book a table?
+    - text: Do you want to make a booking?
+
+  utter_ask_date_time:
+    - text: When would you like to make the booking?
+    - text: Please let me know the date and time for the booking.
+    - text: What date and time do you have in mind for the booking?
+
+
+  utter_ask_no_of_people:
+    How many people will be joining you for the booking?
+    Can you please tell me the number of people for the booking?
+    What is the size of your group for the booking?
+
+  utter_ask_to_confirm_booking:
+    - text: Here is the summary of your booking. Please confirm if it looks good to you.
+    - text: Before we proceed with the booking, could you please confirm the details?
+    - text: Are you okay with the details of the booking? Please let me know if you want to make any changes.
 
   utter_happy:
     - text: Great, carry on!
@@ -122,6 +174,7 @@ responses:
   utter_emoji_great_feedback:
     - text: 😊
     - text: 😄
+    - text: 😃
 
   utter_emoji_mood_unhappy_feedback:
     - text: Eating something might help 🤗

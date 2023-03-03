@@ -1,19 +1,17 @@
-# This files contains  custom actions which can be used to run custom Python code.
+# This files contains custom actions which can be used to run custom Python code.
 
 # See this guide on how to implement these action:
 # https://rasa.com/docs/rasa/custom-actions
 
+import json
 from typing import Any, Text, Dict, List
 
 from rasa_sdk import Action, Tracker
-from rasa_sdk.endpoint import HTTPResponse
 from rasa_sdk.executor import CollectingDispatcher
-
 from rasa_sdk.knowledge_base.storage import InMemoryKnowledgeBase
-from rasa_sdk.knowledge_base.actions import ActionQueryKnowledgeBase
-import asyncio
-import json
 
+
+# action to show top cuisines based on user preferences
 
 class ActionShowCuisines(Action):
     def name(self) -> Text:
@@ -42,7 +40,7 @@ class ActionShowCuisines(Action):
         return []
 
 
-class ActionMyKB(ActionQueryKnowledgeBase):
+class ActionShowRestaurantFilterByCuisine(Action):
     def __init__(self):
         # load knowledge base with data from the given file
 
@@ -58,48 +56,65 @@ class ActionMyKB(ActionQueryKnowledgeBase):
         super().__init__(kb)
 
     def name(self) -> Text:
-        return "action_query_knowledge_base"
+        return "action_show_restaurants_filter_by_cuisine"
 
     async def run(self, dispatcher: CollectingDispatcher,
                   tracker: Tracker,
                   domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        # get cuisine from the tracker
+        cuisine = tracker.get_slot("cuisine")
+
         # hard coded rest data
         restaurants = """
         [ {
               "title":"Taco Bell",
               "image":"https://b.zmtcdn.com/data/pictures/1/18602861/bd2825ec26c21ebdc945edb7df3b0d99.jpg",
-              "ratings":"4.5"
+              "id":"itmx_taco_bell",
+              "ratings":"4.5",
+              "cuisine": "Mexican"
            },
            {
               "title":"Danke",
               "image":"https://lh3.googleusercontent.com/p/AF1QipOs5oyEh2eqR1wHmLuL7WPvdkiqPjyJJdHEeCyI=w600-h0",
-              "ratings":"5.0"
+              "id":"itmx_danke",
+              "ratings":"5.0",
+              "cuisine": "Italian"
            },
            {
               "id":2,
               "title":"I due forni",
               "image":"https://b.zmtcdn.com/data/pictures/4/18357374/661d0edd484343c669da600a272e2256.jpg",
-              "ratings":"4"
+              "id":"itmx_i_due_forni",
+              "ratings":"4",
+              "cuisine": "Italian"
            },
            {
               "title":"Lụa Restaurant",
               "image":"https://www.collinsdictionary.com/images/full/restaurant_135621509.jpg",
-              "ratings":"4.5"
+              "id":"itmx_lua_restaurant",
+              "ratings":"4.5",
+              "cuisine": "Vietnamese"
            },
            {
               "title":"Thai King",
               "image":"https://upload.wikimedia.org/wikipedia/commons/6/62/Barbieri_-_ViaSophia25668.jpg",
-              "ratings":"3.5"
+              "id":"itmx_thai_king",
+              "ratings":"3.5",
+              "cuisine": "Thai"
            },
            {
               "title":"Marubi Ramen",
               "image":"https://b.zmtcdn.com/data/pictures/4/18902194/e92e2a3d4b5c6e25fd4211d06b9a909e.jpg",
-              "ratings":"4.0"
+              "id":"itmx_marubi_ramen",
+              "ratings":"4.0",
+              "cuisine": "Japanese"
            },
            {
               "title":"Gong Gan",
               "image":"https://b.zmtcdn.com/data/pictures/3/17871363/c53db6ba261c3e2d4db1afc47ec3eeb0.jpg",
-              "ratings":"3.0"
+              "id":"itmx_gong_gan",
+              "ratings":"3.0",
+              "cuisine": "Korean"
            }
         ]"""
 
@@ -118,6 +133,26 @@ class ActionMyKB(ActionQueryKnowledgeBase):
         dispatcher.utter_message(json_message=data)
 
         return []
+
+
+# action_show_selected_restaurant_details
+
+class ActionShowSelectedRestaurantDetails(Action):
+    def name(self) -> Text:
+        return "action_show_selected_restaurant_details"
+
+
+# action_show_booking_summary
+
+class ActionShowBookingSummary(Action):
+    def name(self) -> Text:
+        return "action_show_booking_summary"
+
+
+# action_confirm_booking
+class ActionConfirmBooking(Action):
+    def name(self) -> Text:
+        return "action_confirm_booking"
 
 # [
 #                 {

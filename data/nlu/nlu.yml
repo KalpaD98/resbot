@@ -64,17 +64,21 @@ nlu:
   - intent: emoji_mood_great
     examples: |
       - 😊
-      - 😁
-      - 😎
-      - 🤩
-      - 😍
+      - I'm feeling 😊 today!
       - 🥳
       - 😄
       - 😃
       - 😀
       - 😆
       - 😇
+      - I'm feeling 😃 today!
+      - 😁
+      - 😎
+      - 🤩
+      - 😍
       - 😻
+      - 😸
+      - I'm feeling 😁 today!
 
   - intent: mood_unhappy
     examples: |
@@ -95,7 +99,7 @@ nlu:
 
   - intent: emoji_mood_unhappy
     examples: |
-      - sad
+      - sad 😢
       - 😞
       - 😔
       - 😟
@@ -109,7 +113,9 @@ nlu:
       - 😔
       - 😢
       - 😭
-      - crying
+      - crying 😢
+      - 😞
+      - 😟
 
   - intent: goodbye
     examples: |
@@ -210,7 +216,10 @@ nlu:
       - 🙅
       - 🚫
 
-
   - regex: greet
     examples: |
       - hey[^\s]*
+
+  - regex: restaurant_id
+    examples: |
+      - itmx[^\s]*

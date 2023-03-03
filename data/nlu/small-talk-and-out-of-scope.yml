@@ -26,6 +26,10 @@ nlu:
       - I want to order food
       - I want to order a pizza
       - I want to order a burger
+      - I want to order a sandwich
+      - can i order food
+      - check food
+      
 
   - intent: out_of_scope/hotel
     examples: |

@@ -7,12 +7,8 @@ nlu:
       - [Mexican](cuisine)
       - I would like to have [Italian](cuisine)
       - I want [Thai](cuisine) food
-      - [Italian](cuisine) food
-      - [American](cuisine) food
       - [Korean](cuisine) restaurants
       - [Chinese](cuisine) food
-      - [Indian](cuisine) food
-      - [Japanese](cuisine) food
 
   - intent: inform_location
     examples: |
@@ -22,7 +18,7 @@ nlu:
 
   - intent: inform_people_count
     examples: |
-      - [5](number_of_people) people are joinining
+      - [5](number_of_people) people are joining
       - [10](number_of_people) people
       - for [ten](number_of_people) people
       - [2](number_of_people) people
@@ -32,6 +28,42 @@ nlu:
       - [2](number_of_people) please
       - [nine](number_of_people) people
       - sorry make it for [four](number_of_people) people
+
+  - intent: inform_restaurant
+    examples: |
+      - [Burger King](restaurant)
+      - [McDonalds](restaurant)
+      - [KFC](restaurant)
+      - [Pizza Hut](restaurant)
+      - [Subway](restaurant)
+      - [Domino's Pizza](restaurant)
+      - [Wendy's](restaurant)
+      - [Taco Bell](restaurant)
+      - [Panda Express](restaurant)
+      - [Starbucks](restaurant)
+      - [Dunkin' Donuts](restaurant)
+      - [Chipotle Mexican Grill](restaurant)
+      - [Chick-fil-A](restaurant)
+      - [Panera Bread](restaurant)
+      - [Arby's](restaurant)
+      - [Jack in the Box](restaurant)
+      - [Dairy Queen](restaurant)
+      - [Popeyes Louisiana Kitchen](restaurant)
+      - [Sonic Drive-In](restaurant)
+      - [Carl's Jr.](restaurant)
+      - [Hardee's](restaurant)
+      - [Little Caesars](restaurant)
+      - [Papa John's](restaurant)
+      - [Pizza Inn](restaurant)
+      - [Pizza Ranch](restaurant)
+      - [Pizza Hut](restaurant)
+      - [Papa Murphy's](restaurant)
+      - [Papa Gino's](restaurant)
+
+  - intent: inform_restaurant_id
+    examples: |
+      - htid_(restaurant_id)
+
 
   #  - intent: inform_restaurant_type
   #    examples: |
