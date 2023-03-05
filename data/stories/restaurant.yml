@@ -30,15 +30,15 @@ stories:
 
   - story: Inform number of people
     steps:
-      - action: utter_ask_number_of_people
-      - intent: inform_number_of_people
+      - action: utter_ask_num_people
+      - intent: inform_people_count
       - slot_was_set:
-          - number_of_people: [ "2" ]
+          - num_people: [ "2" ]
 
   - story: Confirm to book a restaurant
     steps:
       - slot_was_set:
-            - restaurant_id: [ "rtid_12sda0" ]
+          - restaurant_id: [ "rtid_12sda0" ]
       - action: action_show_booking_summary
       - action: utter_ask_to_confirm_booking
       - intent: affirm

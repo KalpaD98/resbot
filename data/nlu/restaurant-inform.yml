@@ -18,16 +18,16 @@ nlu:
 
   - intent: inform_people_count
     examples: |
-      - [5](number_of_people) people are joining
-      - [10](number_of_people) people
-      - for [ten](number_of_people) people
-      - [2](number_of_people) people
-      - for [three](number_of_people) people
-      - just [one](number_of_people) person
-      - book for [seven](number_of_people) people
-      - [2](number_of_people) please
-      - [nine](number_of_people) people
-      - sorry make it for [four](number_of_people) people
+      - [5](num_people) people are joining
+      - [10](num_people) people
+      - for [ten](num_people) people
+      - [2](num_people) people
+      - for [three](num_people) people
+      - just [one](num_people) person
+      - book for [seven](num_people) people
+      - [2](num_people) please
+      - [nine](num_people) people
+      - sorry make it for [four](num_people) people
 
   - intent: inform_restaurant
     examples: |
@@ -64,7 +64,7 @@ nlu:
     examples: |
       - rtid_(restaurant_id)
 
-# find a way to extract date from descriptions apart from duckling server
+  # find a way to extract date from descriptions apart from duckling server
   - intent: inform_date_time
     examples: |
       - [2020-01-01](date_time)
@@ -78,7 +78,7 @@ nlu:
       - Do you have any tables available at 5:30 pm next Monday?
       - Can I reserve a table for 2 people on Friday, February 4th at 7 pm?
       - I'd like to make a reservation for 3 people on Sunday, January 30th at 12:30 pm.
-   
+  
 
   #  - intent: inform_restaurant_type
   #    examples: |

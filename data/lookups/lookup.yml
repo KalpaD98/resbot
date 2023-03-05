@@ -1,0 +1,52 @@
+version: "3.1"
+
+nlu:
+  #----------------------------------------------------LOOKUP-TABLE-------------------------------------------------------
+  # create lookups for all restaurants, their categories and their foods
+  # add the top 20 restaurant names from the dataset
+  # Examples only >> Change to fit the dataset ->  use a separate file (check docs)
+  - lookup: cuisine
+    examples: |
+      - italian
+      - japanese
+      - chinese
+      - thai
+      - thailand
+      - fast food
+      - fast-food
+      - indian
+      - singaporean
+      - american
+      - mexican
+      - french
+      - spanish
+      - korean
+      - malay
+      - malaysian
+      - greek
+      - street food
+      - caribbean
+      - swedish
+      - vietnamese
+      - german
+  
+
+  # Examples only >> Change to fit the dataset ->  use a separate file (check docs)
+  - lookup: restaurant
+    examples: |
+      - Danke
+      - Taco Bell
+      - I due forni
+      - Lụa Restaurant
+      - Pfefferberg
+      - Marubi Ramen
+      - Gong Gan
+      - Pizza Hut
+      - KFC
+      - Burger King
+      - McDonalds
+      - Subway
+      - Domino's Pizza
+      - Pizza Express
+      - Pizza Hut
+      - Pizza Nova

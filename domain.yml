@@ -45,16 +45,13 @@ entities:
   - object_type
   - mention
   - attribute
-  - restaurant
   - restaurant_name
   - restaurant_id
   - cuisine
   - city
-  - number_of_people
+  - num_people
   - opening_hours
-  - booking_place
-  - location
-  - booking_detail
+  - date_time
   - ambiance
   - price_range
 
@@ -96,7 +93,7 @@ slots:
     mappings:
       - type: custom
 
-  number_of_people:
+  num_people:
     type: text
     influence_conversation: false
     mappings:
@@ -115,12 +112,89 @@ slots:
       - type: custom
 
 actions:
-  - action_query_knowledge_base
-  - action_show_cuisines
-  - action_show_restaurants_filter_by_cuisine
-  - action_show_selected_restaurant_details
-  - action_show_booking_summary
-  - action_confirm_booking
+  - action_query_knowledge_base                                 # query knowledge base
+  - action_show_cuisines                                        # show cuisines
+  - action_show_restaurants_filter_by_cuisine                   # show restaurants filter by cuisine
+  - action_show_selected_restaurant_details                     # show selected restaurant details
+  - action_show_booking_summary                                 # show booking summary
+  - action_confirm_booking                                      # confirm booking
+
+  - validate_restaurant_form                                    # validate restaurant form
+
+forms:
+# short forms
+  - user_id_form:
+      ignored_intents:
+        - out_of_scope
+        - bot_challenge
+      required_slots:
+        - user_id
+
+  - restaurant_id_form:
+      ignored_intents:
+        - out_of_scope
+        - bot_challenge
+      required_slots:
+        - restaurant_id
+
+  - cuisine_form:
+      ignored_intents:
+        - out_of_scope
+        - bot_challenge
+      required_slots:
+        - cuisine
+
+  - city_form:
+      ignored_intents:
+        - out_of_scope
+        - bot_challenge
+      required_slots:
+        - city
+
+  - preferences_form:
+      ignored_intents:
+        - out_of_scope
+        - bot_challenge
+      required_slots:
+        - preferences
+
+  - num_people_form:
+      ignored_intents:
+        - out_of_scope
+        - bot_challenge
+      required_slots:
+        - num_people
+
+  - date_time_form:
+      ignored_intents:
+        - out_of_scope
+        - bot_challenge
+      required_slots:
+        - date_time
+
+# long forms
+
+  - restaurant_search_form:
+      ignored_intents:
+        - out_of_scope
+        - bot_challenge
+      required_slots:
+        - user_id
+        - cuisine
+        - city
+        - preferences                                             # intent:preference, utter_ask_preference; What would you like to have ?
+
+  - restaurant_form:
+      ignored_intents:
+        - out_of_scope
+        - bot_challenge
+      required_slots:
+        - user_id
+        - restaurant_id
+        - num_people
+        - date_time
+
+# ------------------ bot utterances ------------------
 
 responses:
 
@@ -149,12 +223,20 @@ responses:
     - text: Sorry to hear that, Are you in the mood of having something to eat?
     - text: Hmmm, eating something might help you feel better.
 
-# restaurant related responses
+  # restaurant related responses
 
   utter_checkout_restaurants:
     - text: Wanna checkout places to eat something ?
     - text: Want to check out some restaurants?
     - text: Interested in finding a restaurant to eat at?
+
+  utter_ask_registered_user:
+    - text: Are you a registered user?
+    - text: Are you a registered user?
+    - text: Are you a returning customer?
+    - text: Did you create an account with us previously?
+    - text: Have you signed up with us in the past?
+    - text: Do you have an existing account with us?
 
   utter_wanna_book:
     - text: Do you want to book a table?
@@ -169,7 +251,6 @@ responses:
     - text: Please let me know the date and time for the booking.
     - text: What date and time do you have in mind for the booking?
 
-
   utter_ask_no_of_people:
     - text: How many people will be joining you for the booking?
     - text: Can you please tell me the number of people for the booking?
@@ -179,7 +260,6 @@ responses:
     - text: Here is the summary of your booking. Please confirm if it looks good to you.
     - text: Before we proceed with the booking, could you please confirm the details?
     - text: Are you okay with the details of the booking? Please let me know if you want to make any changes.
-
 
   utter_happy:
     - text: Great, carry on!
