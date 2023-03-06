@@ -22,14 +22,17 @@ intents:
   # -------------request---------
   - request_menu
   - request_cuisines
-  - request_restaurant
   - request_opening_hours
   - request_ambiance
   - request_more_options
 
+  # -------------search----------
+  - search_restaurants
+
   # ------------- show ----------
   - show_restaurant
   - show_cuisines
+  - show_restaurants
 
   # -------------inform----------
   - inform_cuisine
@@ -125,6 +128,7 @@ slots:
 actions:
   - action_query_knowledge_base                                 # query knowledge base
   - action_show_cuisines                                        # show cuisines
+  - action_show_restaurants                                     # show restaurants
   - action_show_restaurants_filter_by_cuisine                   # show restaurants filter by cuisine
   - action_show_selected_restaurant_details                     # show selected restaurant details
   - action_show_booking_summary                                 # show booking summary

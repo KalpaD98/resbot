@@ -5,10 +5,8 @@
 import json
 from typing import Any, Text, Dict, List
 
-from SPARQLWrapper import SPARQLWrapper, JSON
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
-from rasa_sdk.knowledge_base.storage import InMemoryKnowledgeBase
 
 from actions.submodules.mock_data import *
 
@@ -41,20 +39,20 @@ class ActionShowCuisines(Action):
 
 
 # action to show top restaurants based on user preferences and the given cuisine
-class ActionShowRestaurantFilterByCuisine(Action):
-    def __init__(self):
-        # load knowledge base with data from the given file
-
-        kb = InMemoryKnowledgeBase("knowledge_base_data.json")
-
-        # overwrite the representation function of the restaurant object
-        # by default the representation function is just the name of the object
-
-        kb.set_representation_function_of_object(
-            "restaurant", lambda obj: obj["name"] + "(" + obj["cuisine"] + ")"
-        )
-
-        super().__init__(kb)
+class ActionShowRestaurantsFilterByCuisine(Action):
+    # def __init__(self):
+    #     # load knowledge base with data from the given file
+    #
+    #     kb = InMemoryKnowledgeBase("knowledge_base_data.json")
+    #
+    #     # overwrite the representation function of the restaurant object
+    #     # by default the representation function is just the name of the object
+    #
+    #     kb.set_representation_function_of_object(
+    #         "restaurant", lambda obj: obj["name"] + "(" + obj["cuisine"] + ")"
+    #     )
+    #
+    #     super().__init__(kb)
 
     def name(self) -> Text:
         return "action_show_restaurants_filter_by_cuisine"
@@ -71,6 +69,41 @@ class ActionShowRestaurantFilterByCuisine(Action):
 
         # get restaurant data into an array
         # every restaurant must have a 'name', 'image' (URL), id, ratings (1 - 5) and cuisine.
+
+        # hard coded restaurant data
+
+        rest_list = json.loads(restaurants)
+
+        data_set = []
+
+        for i in range(len(rest_list)):
+            data_set.insert(i, rest_list[i])
+
+        data = {
+            "payload": 'cardsCarousel',
+            "data": data_set
+        }
+
+        dispatcher.utter_message(json_message=data)
+
+        return []
+
+
+# action to show top restaurants based on user preferences and the given cuisine
+class ActionShowRestaurants(Action):
+
+    def name(self) -> Text:
+        return "action_show_restaurants"
+
+    async def run(self, dispatcher: CollectingDispatcher,
+                  tracker: Tracker,
+                  domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        # send http request to recommendation engine to get top 10 restaurants for the user
+
+        # every restaurant must have a 'name', 'image' (URL), id, ratings (1 - 5) and cuisine.
+
+        # get restaurant data into an array
 
         # hard coded restaurant data
 

@@ -9,19 +9,34 @@ stories:
       - intent: inform_cuisine
       - action: action_show_restaurants_filter_by_cuisine
 
-  - story: search restaurants
+  - story: knowledge query
     steps:
       - intent: query_knowledge_base
       - action: action_query_knowledge_base
 
-  - story: User searches for restaurants by cuisine
+  - story: restaurant search directly
+    steps:
+      - intent: show_restaurants
+      - action: action_show_restaurants
+
+  # generalize  action_show_restaurants and action_show_restaurants_filter_by_cuisine
+
+  - story: User selects a restaurant after setting cuisine
     steps:
       - action: action_show_restaurants_filter_by_cuisine
       - intent: inform_restaurant_id
-      - action: action_show_selected_restaurant_details
       - slot_was_set:
           - restaurant_id: [ "rtid_121290" ]
+      - action: action_show_selected_restaurant_details
 
+  - story: User selects a restaurant
+    steps:
+      - action: action_show_restaurants
+      - intent: inform_restaurant_id
+      - slot_was_set:
+          - restaurant_id: [ "rtid_121290" ]
+      - action: action_show_selected_restaurant_details
+  # ---------------------------------------------------------------------------------------------------------------------
   - story: Inform date and time
     steps:
       - action: utter_ask_date_time

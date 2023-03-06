@@ -30,8 +30,18 @@ nlu:
       - show cuisines
       - cuisines
 
+  - intent: show_restaurants
+    examples: |
+      - show me restaurants
+      - show restaurants 
+      - show me the restaurants
+      - show me the restaurants please
+      - restaurant recommendations
+      - display restaurants
+      - restaurants please
+
   #  Change to match with dataset
-  - intent: request_restaurant
+  - intent: search_restaurants
     examples: |
       - im looking for a restaurant
       - can i get [swedish](cuisine) food in any area
@@ -44,7 +54,6 @@ nlu:
       - uh im looking for a restaurant that serves [kosher](cuisine) food
       - uh can i find a restaurant and it should serve [brazilian](cuisine) food
       - im looking for a restaurant serving [italian](cuisine) food
-      - restaurant please
       - i'd like to book a table for two with [spanish](cuisine) cuisine
       - i need a table for [4](num_people)
       - book me a table for three at the [italian](cuisine) restaurant

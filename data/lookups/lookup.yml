@@ -9,6 +9,7 @@ nlu:
   # Examples only >> Change to fit the dataset ->  use a separate file (check docs)
   - lookup: cuisine
     examples: |
+      - any cuisine
       - italian
       - japanese
       - chinese
