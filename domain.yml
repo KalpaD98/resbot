@@ -1,4 +1,8 @@
+# domain.yml is the file where you define the domain of your assistant.
+# This includes the intents, entities, slots, templates, actions, and forms your assistant uses.
+
 version: "3.1"
+
 
 intents:
   # ------------NLU--------------
@@ -45,8 +49,9 @@ entities:
   - object_type
   - mention
   - attribute
-  - restaurant_name
+  - user_id
   - restaurant_id
+  - restaurant_name
   - cuisine
   - city
   - num_people
@@ -99,6 +104,12 @@ slots:
     mappings:
       - type: custom
 
+  user_id:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: custom
+
   restaurant_id:
     type: text
     influence_conversation: false
@@ -122,77 +133,77 @@ actions:
   - validate_restaurant_form                                    # validate restaurant form
 
 forms:
-# short forms
-  - user_id_form:
-      ignored_intents:
-        - out_of_scope
-        - bot_challenge
-      required_slots:
-        - user_id
+  # short forms
+  user_id_form:
+    ignored_intents:
+      - out_of_scope
+      - bot_challenge
+    required_slots:
+      - user_id
 
-  - restaurant_id_form:
-      ignored_intents:
-        - out_of_scope
-        - bot_challenge
-      required_slots:
-        - restaurant_id
+  restaurant_id_form:
+    ignored_intents:
+      - out_of_scope
+      - bot_challenge
+    required_slots:
+      - restaurant_id
 
-  - cuisine_form:
-      ignored_intents:
-        - out_of_scope
-        - bot_challenge
-      required_slots:
-        - cuisine
+  cuisine_form:
+    ignored_intents:
+      - out_of_scope
+      - bot_challenge
+    required_slots:
+      - cuisine
 
-  - city_form:
-      ignored_intents:
-        - out_of_scope
-        - bot_challenge
-      required_slots:
-        - city
+  city_form:
+    ignored_intents:
+      - out_of_scope
+      - bot_challenge
+    required_slots:
+      - city
 
-  - preferences_form:
-      ignored_intents:
-        - out_of_scope
-        - bot_challenge
-      required_slots:
-        - preferences
+  preferences_form:
+    ignored_intents:
+      - out_of_scope
+      - bot_challenge
+    required_slots:
+      - preferences
 
-  - num_people_form:
-      ignored_intents:
-        - out_of_scope
-        - bot_challenge
-      required_slots:
-        - num_people
+  num_people_form:
+    ignored_intents:
+      - out_of_scope
+      - bot_challenge
+    required_slots:
+      - num_people
 
-  - date_time_form:
-      ignored_intents:
-        - out_of_scope
-        - bot_challenge
-      required_slots:
-        - date_time
+  date_time_form:
+    ignored_intents:
+      - out_of_scope
+      - bot_challenge
+    required_slots:
+      - date_time
 
-# long forms
+  # long forms
 
-  - restaurant_search_form:
-      ignored_intents:
-        - out_of_scope
-        - bot_challenge
-      required_slots:
-        - user_id
-        - cuisine
-        - city
-        - preferences                                             # intent:preference, utter_ask_preference; What would you like to have ?
+  restaurant_search_form:
+    ignored_intents:
+      - out_of_scope
+      - bot_challenge
+    required_slots:
+      - user_id
+      - cuisine
+      - city
+      - preferences                                             # intent:preference, utter_ask_preference; What would you like to have ?
 
-  - restaurant_form:
-      ignored_intents:
-        - out_of_scope
-        - bot_challenge
-      required_slots:
-        - user_id
-        - restaurant_id
-        - num_people
-        - date_time
+  restaurant_form:
+    ignored_intents:
+      - out_of_scope
+      - bot_challenge
+    required_slots:
+      - user_id
+      - restaurant_id
+      - num_people
+      - date_time
 
 # ------------------ bot utterances ------------------
 

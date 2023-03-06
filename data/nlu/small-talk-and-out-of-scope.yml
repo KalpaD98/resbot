@@ -1,5 +1,5 @@
 version: "3.1"
-
+# small-talk-and-out-of-scope.yml has out-of-scope intent examples
 nlu:
   - intent: bot_challenge/bot
     examples: |

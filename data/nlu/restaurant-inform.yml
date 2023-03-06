@@ -1,5 +1,5 @@
 version: "3.1"
-
+# restaurant-inform.yml is a file where you define your NLU training data.
 nlu:
   # User inform  bot
   - intent: inform_cuisine
@@ -44,14 +44,10 @@ nlu:
       - [Dunkin' Donuts](restaurant)
       - [Chipotle Mexican Grill](restaurant)
       - [Chick-fil-A](restaurant)
-      - [Panera Bread](restaurant)
-      - [Arby's](restaurant)
       - [Jack in the Box](restaurant)
       - [Dairy Queen](restaurant)
       - [Popeyes Louisiana Kitchen](restaurant)
       - [Sonic Drive-In](restaurant)
-      - [Carl's Jr.](restaurant)
-      - [Hardee's](restaurant)
       - [Little Caesars](restaurant)
       - [Papa John's](restaurant)
       - [Pizza Inn](restaurant)
@@ -78,7 +74,6 @@ nlu:
       - Do you have any tables available at 5:30 pm next Monday?
       - Can I reserve a table for 2 people on Friday, February 4th at 7 pm?
       - I'd like to make a reservation for 3 people on Sunday, January 30th at 12:30 pm.
-  
 
   #  - intent: inform_restaurant_type
   #    examples: |

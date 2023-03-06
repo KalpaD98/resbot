@@ -1,4 +1,4 @@
-# This files contains custom actions which can be used to run custom Python code.
+# Actions.py This files contains custom actions which can be used to run custom Python code.
 
 # See this guide on how to implement these action:
 # https://rasa.com/docs/rasa/custom-actions
@@ -6,13 +6,15 @@
 import json
 from typing import Any, Text, Dict, List
 
+from SPARQLWrapper import SPARQLWrapper, JSON
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.knowledge_base.storage import InMemoryKnowledgeBase
 
+from .data import *
+
 
 # action to show top cuisines based on user preferences
-
 class ActionShowCuisines(Action):
     def name(self) -> Text:
         return "action_show_cuisines"
@@ -39,6 +41,7 @@ class ActionShowCuisines(Action):
         return []
 
 
+# action to show top restaurants based on user preferences and the given cuisine
 class ActionShowRestaurantFilterByCuisine(Action):
     def __init__(self):
         # load knowledge base with data from the given file
@@ -71,153 +74,6 @@ class ActionShowRestaurantFilterByCuisine(Action):
         # every restaurant must have a 'name', 'image' (URL), id, ratings (1 - 5) and cuisine.
 
         # hard coded restaurant data
-        restaurants = """
-        [ {
-              "title":"Taco Bell",
-              "image":"https://b.zmtcdn.com/data/pictures/1/18602861/bd2825ec26c21ebdc945edb7df3b0d99.jpg",
-              "id": "rtid_1232JHKJ",
-              "ratings":"4.5",
-              "cuisine": "Mexican",
-              "opening_hours": {
-                  "Monday": {
-                      "open": "9:00 AM",
-                      "close": "10:00 PM"
-                  },
-                  "Tuesday": {
-                      "open": "9:00 AM",
-                      "close": "10:00 PM"
-                  },
-                  "Wednesday": {
-                      "open": "9:00 AM",
-                      "close": "10:00 PM"
-                  },
-                  "Thursday": {
-                      "open": "9:00 AM",
-                      "close": "10:00 PM"
-                  },
-                  "Friday": {
-                      "open": "9:00 AM",
-                      "close": "11:00 PM"
-                  },
-                  "Saturday": {
-                      "open": "10:00 AM",
-                      "close": "11:00 PM"
-                  },
-                  "Sunday": {
-                      "open": "10:00 AM",
-                      "close": "10:00 PM"
-                  }
-              },
-              "address": {
-                  "street": "1234 Main St",
-                  "city": "Anytown",
-                  "state": "CA",
-                  "zip": "12345"
-              }
-           },
-           {
-              "title":"Danke",
-              "image":"https://lh3.googleusercontent.com/p/AF1QipOs5oyEh2eqR1wHmLuL7WPvdkiqPjyJJdHEeCyI=w600-h0",
-              "id": "rtid_4567HJKL",
-              "cuisine": "Italian",
-              "opening_hours": {
-                  "Monday": {
-                      "open": "11:00 AM",
-                      "close": "9:00 PM"
-                  },
-                  "Tuesday": {
-                      "open": "11:00 AM",
-                      "close": "9:00 PM"
-                  },
-                  "Wednesday": {
-                      "open": "11:00 AM",
-                      "close": "9:00 PM"
-                  },
-                  "Thursday": {
-                      "open": "11:00 AM",
-                      "close": "9:00 PM"
-                  },
-                  "Friday": {
-                      "open": "11:00 AM",
-                      "close": "11:00 PM"
-                  },
-                  "Saturday": {
-                      "open": "10:00 AM",
-                      "close": "11:00 PM"
-                  },
-                  "Sunday": {
-                      "open": "10:00 AM",
-                      "close": "9:00 PM"
-                  }
-              },
-              "address": {
-                  "street": "5678 Maple St",
-                  "city": "Anycity",
-                  "state": "CA",
-                  "zip": "67890"
-              }
-           },
-           {
-            "title": "Lụa Restaurant",
-            "image": "https://www.collinsdictionary.com/images/full/restaurant_135621509.jpg",
-            "id": "rtid_1234ABCD",
-            "ratings": "4.5",
-            "cuisine": "Vietnamese",
-            "address": "123 Main Street, Anytown, USA",
-            "opening_hours": {
-                "monday": {
-                    "open": "09:00",
-                    "close": "17:00"
-                },
-                "tuesday": {
-                    "open": "09:00",
-                    "close": "17:00"
-                },
-                "wednesday": {
-                    "open": "09:00",
-                    "close": "17:00"
-                },
-                "thursday": {
-                    "open": "09:00",
-                    "close": "17:00"
-                },
-                "friday": {
-                    "open": "09:00",
-                    "close": "17:00"
-                },
-                "saturday": {
-                    "open": "11:00",
-                    "close": "23:00"
-                },
-                "sunday": {
-                    "open": "11:00",
-                    "close": "23:00"
-                        }
-                    }
-            },
-           {
-              "title":"Thai King",
-              "image":"https://upload.wikimedia.org/wikipedia/commons/6/62/Barbieri_-_ViaSophia25668.jpg",
-              "id":"rtid_4567HJKL",
-              "ratings":"3.5",
-              "cuisine": "Thai",
-              "opening_hours": {}
-           },
-           {
-              "title":"Marubi Ramen",
-              "image":"https://b.zmtcdn.com/data/pictures/4/18902194/e92e2a3d4b5c6e25fd4211d06b9a909e.jpg",
-              "id":"rtid_1234JHJK",
-              "ratings":"4.0",
-              "cuisine": "Japanese"
-           },
-           {
-              "title":"Gong Gan",
-              "image":"https://b.zmtcdn.com/data/pictures/3/17871363/c53db6ba261c3e2d4db1afc47ec3eeb0.jpg",
-              "id":"rtid_4567HJKL",
-              "ratings":"3.0",
-              "cuisine": "Korean"
-           }
-        ]"""
 
         rest_list = json.loads(restaurants)
 
@@ -236,12 +92,9 @@ class ActionShowRestaurantFilterByCuisine(Action):
         return []
 
 
-# action_show_selected_restaurant_details
-
-# This function will fetch data of the selected restaurant and send it in the message
-# This will include a small description about the restaurant, its address and opening hours
-
-
+# action_show_selected_restaurant_details.
+# This function will fetch data of the selected restaurant and send it in the message.
+# This will include a small description about the restaurant, its address and opening hours.
 class ActionShowSelectedRestaurantDetails(Action):
     def name(self) -> Text:
         return "action_show_selected_restaurant_details"
@@ -270,9 +123,8 @@ class ActionShowSelectedRestaurantDetails(Action):
         return []
 
 
-# action_show_booking_summary
-# This function is used to generate a booking summary and send it to the user as a message
-
+# action_show_booking_summary.
+# This function is used to generate a booking summary and send it to the user as a message.
 class ActionShowBookingSummary(Action):
 
     # action name
@@ -306,9 +158,9 @@ class ActionShowBookingSummary(Action):
         return []
 
 
-# action_confirm_booking
-# This function is used to confirm the booking and send a message to the user based on their response
-# run this function after confirming the booking
+# action_confirm_booking.
+# This function is used to confirm the booking and send a message to the user based on their response.
+# run this function after confirming the booking.
 class ActionConfirmBooking(Action):
     def name(self) -> Text:
         return "action_confirm_booking"
@@ -341,33 +193,59 @@ class ActionConfirmBooking(Action):
         dispatcher.utter_message(text=message)
         return []
 
-# add these later
-# phone: The phone number of the restaurant
-# website: The website of the restaurant
-# price_level: A rating of the restaurant's price level, with 1 being the cheapest and 4 being the most expensive
 
-# [
-#                 {
-#                     "image": "https://b.zmtcdn.com/data/pictures/1/18602861/bd2825ec26c21ebdc945edb7df3b0d99.jpg",
-#                     "title": "Taftoon Bar & Kitchen",
-#                     "ratings": "4.5",
-#                 },
-#                 {
-#                     "image": "https://b.zmtcdn.com/data/pictures/4/18357374/661d0edd484343c669da600a272e2256.jpg",
-#
-#                     "ratings": "4.0",
-#                     "title": "Veranda"
-#                 },
-#                 {
-#                     "image": "https://b.zmtcdn.com/data/pictures/4/18902194/e92e2a3d4b5c6e25fd4211d06b9a909e.jpg",
-#
-#                     "ratings": "4.0",
-#                     "title": "145 The Mill"
-#                 },
-#                 {
-#                     "image": "https://b.zmtcdn.com/data/pictures/3/17871363/c53db6ba261c3e2d4db1afc47ec3eeb0.jpg",
-#
-#                     "ratings": "4.0",
-#                     "title": "The Fatty Bao"
-#                 },
-#             ]
+# action_request_more_restaurant_options.
+# This function is used to pull more restaurant options for the user if they request for more.
+class ActionRequestMoreRestaurantOptions(Action):
+
+    def name(self) -> Text:
+        return "action_request_more_restaurant_options"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        # get more restaurants from the knowledge base that are not in the list of restaurants already shown to the user
+
+        # if there are more restaurants, send them to the user
+
+        # else send a message to the user saying that there are no more restaurants
+        dispatcher.utter_message(text="Sorry, I did not find any more restaurants. "
+                                      "Please try again with a different "
+                                      "cuisine.")
+
+        return []
+
+
+# knowledge graph connection
+
+class QueryKnowledgeGraph(Action):
+    def name(self) -> Text:
+        return "action_query_knowledge_graph"
+
+    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        # Get the entity value from user input
+        entity = tracker.latest_message['entities'][0]['value']
+
+        # Create a SPARQL query to retrieve relevant information from the knowledge graph
+        query = f"""
+            PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX schema: <http://schema.org/>
+            SELECT ?description
+            WHERE {{
+                ?entity rdfs:label "{entity}"@en ;
+                        schema:description ?description .
+            }}
+        """
+
+        # Send the query to the knowledge graph using the SPARQLWrapper library
+        sparql = SPARQLWrapper("http://dbpedia.org/sparql")
+        sparql.setQuery(query)
+        sparql.setReturnFormat(JSON)
+        results = sparql.query().convert()
+
+        # Extract the information from the query results and send it back to the chatbot
+        description = results['results']['bindings'][0]['description']['value']
+        dispatcher.utter_message(text=f"The description of {entity} is: {description}")
+
+        return []

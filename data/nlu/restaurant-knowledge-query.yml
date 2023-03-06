@@ -1,5 +1,5 @@
 version: "3.1"
-
+# restaurant-knowledge-query.yml has knowledge base query intents
 nlu:
   # - add to appropriate places
   #        - what foods are good ?

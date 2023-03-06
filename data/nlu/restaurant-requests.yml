@@ -1,5 +1,5 @@
 version: "3.1"
-
+# restaurant-requests.yml has restaurant request examples for intents
 nlu:
   # user requests from bot
   #----------------------------------------------REQUEST----------------------------------------------------------------

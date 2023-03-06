@@ -1,5 +1,5 @@
 version: "3.1"
-
+# stories.yml has general stories for the restaurant bot
 stories:
   - story: greet whenever user greets
     steps:
