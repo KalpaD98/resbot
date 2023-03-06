@@ -1,5 +1,4 @@
 # Actions.py This files contains custom actions which can be used to run custom Python code.
-
 # See this guide on how to implement these action:
 # https://rasa.com/docs/rasa/custom-actions
 
@@ -34,7 +33,7 @@ class ActionShowCuisines(Action):
 
         # this is for bot front web-chat
 
-        # dispatcher.utter_message(text="Do you want me to find a perfect hotel that can you can fit in for a dine ? ",
+        # dispatcher.utter_message(text="Do you want me to find a perfect hotel that can you can fit in for a Din ? ",
         #                          quick_replies=[{"title": "Italian"},
         #                                         {"title": "Chinese"}])
 
@@ -212,40 +211,5 @@ class ActionRequestMoreRestaurantOptions(Action):
         dispatcher.utter_message(text="Sorry, I did not find any more restaurants. "
                                       "Please try again with a different "
                                       "cuisine.")
-
-        return []
-
-
-# knowledge graph connection
-
-class QueryKnowledgeGraph(Action):
-    def name(self) -> Text:
-        return "action_query_knowledge_graph"
-
-    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        # Get the entity value from user input
-        entity = tracker.latest_message['entities'][0]['value']
-
-        # Create a SPARQL query to retrieve relevant information from the knowledge graph
-        query = f"""
-            PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-            PREFIX schema: <http://schema.org/>
-            SELECT ?description
-            WHERE {{
-                ?entity rdfs:label "{entity}"@en ;
-                        schema:description ?description .
-            }}
-        """
-
-        # Send the query to the knowledge graph using the SPARQLWrapper library
-        sparql = SPARQLWrapper("http://dbpedia.org/sparql")
-        sparql.setQuery(query)
-        sparql.setReturnFormat(JSON)
-        results = sparql.query().convert()
-
-        # Extract the information from the query results and send it back to the chatbot
-        description = results['results']['bindings'][0]['description']['value']
-        dispatcher.utter_message(text=f"The description of {entity} is: {description}")
 
         return []
