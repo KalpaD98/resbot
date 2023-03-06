@@ -267,3 +267,16 @@ restaurants = """
 #                     "title": "The Fatty Bao"
 #                 },
 #             ]
+
+# Python follows the PEP 8 Style Guide for Python Code, which recommends the following naming conventions for Python
+# files:
+
+# Module names should be short and lowercase. If the module name contains multiple words,
+# separate them with underscores (e.g., my_module.py).
+# Package names should also be short and lowercase, with no underscores (e.g., mypackage).
+# Class names should be in CamelCase (capitalized words with no spaces between them). For example, MyClass.
+# Function and variable names should be lowercase, with words separated by underscores (e.g., my_function, my_variable).
+# Constants should be in all caps, with words separated by underscores (e.g., MY_CONSTANT).
+
+# Note that these conventions are not enforced by the Python interpreter, but they are widely adopted by the Python
+# community to improve readability and maintainability of code.
