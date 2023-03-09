@@ -3,6 +3,9 @@
 
 version: "3.1"
 
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# ---------------------------------------------------- Intents ------------------------------------------------------ #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 intents:
   # ------------NLU--------------
@@ -30,7 +33,6 @@ intents:
   - search_restaurants
 
   # ------------- show ----------
-  - show_restaurant
   - show_cuisines
   - show_restaurants
 
@@ -38,7 +40,7 @@ intents:
   - inform_cuisine
   - inform_location
   - inform_people_count
-  - inform_restaurant
+  - inform_restaurant_name
   - inform_restaurant_id
   - inform_date_time
 
@@ -47,6 +49,11 @@ intents:
 
   # ---------knowledge base------
   - query_knowledge_base
+
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# ---------------------------------------------------- Entities ------------------------------------------------------ #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 entities:
   - object_type
@@ -62,6 +69,10 @@ entities:
   - date_time
   - ambiance
   - price_range
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# ----------------------------------------------------- Slots ------------------------------------------------------- #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 slots:
 
@@ -125,16 +136,9 @@ slots:
     mappings:
       - type: custom
 
-actions:
-  - action_query_knowledge_base                                 # query knowledge base
-  - action_show_cuisines                                        # show cuisines
-  - action_show_restaurants                                     # show restaurants
-  - action_show_restaurants_filter_by_cuisine                   # show restaurants filter by cuisine
-  - action_show_selected_restaurant_details                     # show selected restaurant details
-  - action_show_booking_summary                                 # show booking summary
-  - action_confirm_booking                                      # confirm booking
-
-  - validate_restaurant_form                                    # validate restaurant form
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# ------------------------------------------------------ Forms ------------------------------------------------------ #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 forms:
   # short forms
@@ -209,7 +213,26 @@ forms:
       - num_people
       - date_time
 
-# ------------------ bot utterances ------------------
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# ---------------------------------------------------- Actions ------------------------------------------------------ #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+actions:
+  - action_query_knowledge_base                                 # query knowledge base
+  - action_show_cuisines                                        # show cuisines
+  - action_show_restaurants                                     # show restaurants
+  - action_show_restaurants_filter_by_cuisine                   # show restaurants filter by cuisine
+  - action_show_selected_restaurant_details                     # show selected restaurant details
+  - action_show_booking_summary                                 # show booking summary
+  - action_confirm_booking                                      # confirm booking
+
+  - validate_restaurant_form                                    # validate restaurant form
+
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# ------------------------------------------- Responses: Bot Utterances --------------------------------------------- #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 responses:
 

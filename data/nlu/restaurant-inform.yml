@@ -29,7 +29,7 @@ nlu:
       - [nine](num_people) people
       - sorry make it for [four](num_people) people
 
-  - intent: inform_restaurant
+  - intent: inform_restaurant_name
     examples: |
       - [Burger King](restaurant)
       - [McDonalds](restaurant)
