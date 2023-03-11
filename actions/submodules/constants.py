@@ -1,4 +1,19 @@
-#  Used in the ontologyQueryFile
+# response generator Constants
+TYPE = "type"
+TEMPLATE = "template"
+PAYLOAD = "payload"
+TEMPLATE_TYPE = "template_type"
+GENERIC = "generic"
+ELEMENTS = "elements"
+DEFAULT_ACTION = "default_action"
+WEB_URL = "web_url"
+URL = "url"
+IMAGE_URL = "image_url"
+TITLE = "title"
+SUBTITLE = "subtitle"
+BUTTONS = "buttons"
+
+#  Used in the Queries
 CITY = "city"
 CUISINE = "cuisine"
 
@@ -18,21 +33,6 @@ NAME = "name"
 RATINGS = "ratings"
 MENU = "menu"
 
-# response generator Constants
-TYPE = "type"
-TEMPLATE = "template"
-PAYLOAD = "payload"
-TEMPLATE_TYPE = "template_type"
-GENERIC = "generic"
-ELEMENTS = "elements"
-DEFAULT_ACTION = "default_action"
-WEB_URL = "web_url"
-URL = "url"
-IMAGE_URL = "image_url"
-TITLE = "title"
-SUBTITLE = "subtitle"
-BUTTONS = "buttons"
-
 # Cuisines categories
 CHINESE = "Chinese"
 ITALIAN = "Italian"
@@ -44,7 +44,7 @@ THAI = "Thai"
 
 
 # Components
-COMPONENT_CARROUSAL = {"type": "template", "payload": {"template_type": "generic"}}
+COMPONENT_CAROUSAL = {TYPE: TEMPLATE, PAYLOAD: {TEMPLATE_TYPE: GENERIC}}
 SUBCOMPONENT_CARD = {
     "default_action": {"type": "", "url": ""},
     "image_url": "",

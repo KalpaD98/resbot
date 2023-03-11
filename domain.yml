@@ -248,6 +248,29 @@ responses:
     - text: Hello there! How are you?
     - text: Hello 😀 How are you?
 
+  # Implement below if you want to greet the user by name
+
+  #slots:
+  #  logged_in:
+  #    type: bool
+  #    influence_conversation: False
+  #    mappings:
+  #    - type: custom
+  #  name:
+  #    type: text
+  #    influence_conversation: False
+  #    mappings:
+  #    - type: custom
+
+  #  utter_greet:
+  #    - condition:
+  #        - type: slot
+  #          name: logged_in
+  #          value: true
+  #      text: "Hey, {name}. Nice to see you again! How are you?"
+  #
+  #    - text: "Welcome. How is your day going?"
+
   utter_greet_again:
     - text: Hi there again!
     - text: Hello again!

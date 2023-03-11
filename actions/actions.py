@@ -3,13 +3,16 @@
 # https://rasa.com/docs/rasa/custom-actions
 
 import json
+import logging
 from typing import Any, Text, Dict, List
 
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.knowledge_base.storage import InMemoryKnowledgeBase
 
+from actions.submodules.constants import *
 from actions.submodules.mock_data import *
+from actions.submodules.response_generator import ResponseGenerator
 
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -29,17 +32,20 @@ class ActionShowCuisines(Action):
 
         cuisines = ['Any Cuisine', 'Italian', 'Mexican', 'Vietnamese', 'Thai', 'Japanese', 'Korean']
 
-        data = [{"title": cuisine, "payload": cuisine + "_payload"} for cuisine in cuisines]
+        # Add payload to quick replies
+        cuisines_with_entity_payload = []
+        for cuisine in cuisines:
+            cuisines_with_entity_payload.append({TITLE: cuisine, PAYLOAD: f"/inform{{\"cuisine\": \"{cuisine}\"}}"})
 
-        # This is working for normal UI
-        message = {"payload": "quickReplies", "data": data}
-        dispatcher.utter_message(text="Please choose a cuisine", json_message=message)
+        ResponseGenerator.quick_replies("Please choose a cuisine", cuisines_with_entity_payload, dispatcher,
+                                        with_payload=True)
 
-        # this is for bot front web-chat
-
-        # dispatcher.utter_message(text="Do you want me to find a perfect hotel that can you can fit in for a Din ? ",
-        #                          quick_replies=[{"title": "Italian"},
-        #                                         {"title": "Chinese"}])
+        # this is for vanilla JS UI
+        # data = [{"title": cuisine, "payload": cuisine + "_payload"} for cuisine in cuisines]
+        #
+        # # This is working for normal UI
+        # message = {"payload": "quickReplies", "data": data}
+        # dispatcher.utter_message(text="Please choose a cuisine", json_message=message)
 
         return []
 
@@ -69,7 +75,7 @@ class ActionShowRestaurants(Action):
                   domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         # get cuisine from the tracker
         cuisine = tracker.get_slot("cuisine")
-
+        logging.info("Cuisine: " + cuisine)
         # if cuisine is 'Any Cuisine' then don't filter by cuisine
 
         # if cuisine is null ask if user wants to filter by cuisine

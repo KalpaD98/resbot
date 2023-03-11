@@ -1,84 +1,178 @@
-import logging
 import sys
 
-from constants import *
+from rasa_sdk.executor import CollectingDispatcher
+
+from actions.submodules.constants import *
 
 sys.path.append("/Users/kalpafernando/PycharmProjects/resbot/actions/submodules")
 
 
-# -------------------------- Chat Widget --------------------------------
+# ------------------------------------------------ Bot Front Chat Widget -----------------------------------------------
 
-# -------------------------- BOT-FRONT --------------------------------
+# This class is used to generate the response for the bot front chat widget
+class ResponseGenerator:
 
-# change this according to my needs
-def response_generator(criteria_based_restaurant_documents):
-    if criteria_based_restaurant_documents and criteria_based_restaurant_documents is not None:
-        logging.info("Utils [responseGenerator]:  reformation the responses")
+    # this method has quick_replies_list, message and dispatcher as parameters
+    # method is used to generate the quick replies for the bot front chat widget
+    @staticmethod
+    def quick_replies(text_message, quick_replies_list, dispatcher: CollectingDispatcher, with_payload=False):
+        quick_reply_data_list = []
 
-        carousel = COMPONENT_CARROUSAL
+        # loop through the quick replies and add them to the quick_reply_data_list list
+        for quick_reply in quick_replies_list:
+            if with_payload:
+                quick_reply_data_list.append(
+                    {TITLE: quick_reply[TITLE].capitalize(), PAYLOAD: quick_reply[PAYLOAD]})
+            else:
+                quick_reply_data_list.append({TITLE: quick_reply.capitalize(), PAYLOAD: quick_reply})
+
+        # Add the quick replies to the response
+        dispatcher.utter_message(text=text_message, quick_replies=quick_reply_data_list)
+
+    # -----------------------------------------------------------------------------------------------------------------#
+    # this method has message, carousal_data,  and dispatcher as parameters
+    # method is used to generate an options carousal for the bot front chat widget
+    @staticmethod
+    def option_carousal(text_message, carousal_objects, dispatcher: CollectingDispatcher):
+
         elements_list = []
-        for i in criteria_based_restaurant_documents:
-            card = {}
-            # card[DEFAULT_ACTION] = {TYPE: WEB_URL, URL: i.get(PAGE_URL)}
-            # card[IMAGE_URL] = i.get(IMAGE_URL)
-            # card[TITLE] = i.get(NAME)
-            # card[SUBTITLE] = "Rating " + str(i.get(STARRATE))
-            #
-            # buttonsList = []
-            # button1 = {}
-            # button2 = {}
-            # button1[URL] = i.get(PAGE_URL)
-            # button1[TITLE] = VIEW_PAGE
-            # button1[TYPE] = WEB_URL
-            # button2[URL] = i.get(MENU)
-            # button2[TITLE] = "Menu"
-            # button2[TYPE] = WEB_URL
-            #
-            # buttonsList.append(button1)
-            # buttonsList.append(button2)
-            #
-            # card[BUTTONS] = buttonsList
+        for carousal_object in carousal_objects:
+            element = {
+                TITLE: carousal_object[TITLE],
+                SUBTITLE: carousal_object[SUBTITLE],
+                IMAGE_URL: carousal_object[IMAGE_URL],
+                BUTTONS: carousal_object[BUTTONS]
+            }
+            elements_list.append(element)
 
-            elements_list.append(card)
-            # SUBCOMPONENT_CARD[]=i.get()
-            # SUBCOMPONENT_CARD[]=i.get()
-            # SUBCOMPONENT_CARD[]=i.get()
-            # SUBCOMPONENT_CARD[]=i.get()
+        carousel = COMPONENT_CAROUSAL[PAYLOAD][ELEMENTS] = elements_list
 
-        carousel[PAYLOAD][ELEMENTS] = elements_list
-        return carousel
-    else:
-        logging.error("Utils [responseGenerator]:  FAILED reformating the responses")
-        return None
+        # Send the carousel using the `template` object
+        dispatcher.utter_message(text=text_message, attachment={TYPE: TEMPLATE, PAYLOAD: carousel})
+
+        # < below is the buttons object for the carousal >
+        # "buttons": [{"title": carousal_object["button_title"],
+        #              "payload": carousal_object["button_payload"]}]})
+        # < - Add the quick replies to the response ->
+
+        # If you would like the buttons to also pass entities to the assistant:
+
+        #     utter_greet:
+        #     - text: "Hey! Would you like to purchase motor or home insurance?"
+        #     buttons:
+        #     - title: "Motor insurance"
+        #     payload: '/inform{{"insurance":"motor"}}'
+        #
+        # - title: "Home insurance"
+        # payload: '/inform{{"insurance":"home"}}'
+    # -----------------------------------------------------------------------------------------------------------------#
 
 
-def response_generator_shell(restaurant_documents):
-    response_txt = None
+########################################################################################################################
 
-    if restaurant_documents is not None and restaurant_documents:
-        logging.info("Utils [responseGenerator_Shell]: Hotel Docs FOUND and generating shell response")
-
-        num = 1
-        response_txt = ""
-        for i in restaurant_documents:
-            response_txt = response_txt + str(num) + ". " + i.get("name") + "    "
-            num = num + 1
-        return response_txt
-    else:
-        logging.warning("Utils [responseGenerator_Shell]: Hotel Docs NOT FOUND and Fail to genenrate shell response")
-        return response_txt
+class WebResponseGenerator:
+    pass
 
 
-# returns a list of elements in List of list  so as in [[1,2][3,4][5,6]]--->[1,2,3,4,5,6]
-def get_total_elements_in_list(list_of_lists):
-    if list_of_lists and list_of_lists is not None:
-        flat_list = [item for sublist in list_of_lists for item in sublist]
-        return flat_list
-    else:
-        logging.warning("Utils [getTotalElementsInList] : Something Went Wrong in getTotalElementsInList method")
-        return None
+########################################################################################################################
+class CmdResponseGenerator:
+    pass
 
-    # remove duplicate dictionaries from the list
+    ################# commented old code ####################
+
+    # this method has message, carousal_data,  and dispatcher as parameters
+    #  method is used to generate an options carousal for the bot front chat widget
+    # @staticmethod
+    # def option_carousal(message, carousal_objects, dispatcher: CollectingDispatcher):
+    #
+    #
+    #     carousal_data_list = []
+    #
+    #     # loop through the carousal_objects and add them to the carousal_data_list list.
+    #     for carousal_object in carousal_objects:
+    #         carousal_data_list.append({TITLE: carousal_object[TITLE].capitalize(),
+    #                                    SUBTITLE: carousal_object[SUBTITLE].capitalize(),
+    #                                    IMAGE_URL: carousal_object[IMAGE_URL],
+    #                                    BUTTONS: carousal_object[BUTTONS]})
+    #
+    #     dispatcher.utter_message(text=message, quick_replies=carousal_data_list)
+    ################# commented old code ####################
+
+#################################### -------- Response Generation Guide -------- #######################################
+
+# Checkout https://rasa.com/docs/rasa/responses/ for more details
+
+
+########################################## ------ Commented Code ------ ################################################
+
+# def response_generator(criteria_based_restaurant_documents):
+#     if criteria_based_restaurant_documents and criteria_based_restaurant_documents is not None:
+#         logging.info("Utils [responseGenerator]:  reformation the responses")
+#
+#         carousel = COMPONENT_CARROUSAL
+#         elements_list = []
+#         for i in criteria_based_restaurant_documents:
+#             card = {}
+#             # card[DEFAULT_ACTION] = {TYPE: WEB_URL, URL: i.get(PAGE_URL)}
+#             # card[IMAGE_URL] = i.get(IMAGE_URL)
+#             # card[TITLE] = i.get(NAME)
+#             # card[SUBTITLE] = "Rating " + str(i.get(STARRATE))
+#             #
+#             # buttonsList = []
+#             # button1 = {}
+#             # button2 = {}
+#             # button1[URL] = i.get(PAGE_URL)
+#             # button1[TITLE] = VIEW_PAGE
+#             # button1[TYPE] = WEB_URL
+#             # button2[URL] = i.get(MENU)
+#             # button2[TITLE] = "Menu"
+#             # button2[TYPE] = WEB_URL
+#             #
+#             # buttonsList.append(button1)
+#             # buttonsList.append(button2)
+#             #
+#             # card[BUTTONS] = buttonsList
+#
+#             elements_list.append(card)
+#             # SUBCOMPONENT_CARD[]=i.get()
+#             # SUBCOMPONENT_CARD[]=i.get()
+#             # SUBCOMPONENT_CARD[]=i.get()
+#             # SUBCOMPONENT_CARD[]=i.get()
+#
+#         carousel[PAYLOAD][ELEMENTS] = elements_list
+#         return carousel
+#     else:
+#         logging.error("Utils [responseGenerator]:  FAILED reformating the responses")
+#         return None
+#
+#
+# def response_generator_shell(restaurant_documents):
+#     response_txt = None
+#
+#     if restaurant_documents is not None and restaurant_documents:
+#         logging.info("Utils [responseGenerator_Shell]: Hotel Docs FOUND and generating shell response")
+#
+#         num = 1
+#         response_txt = ""
+#         for i in restaurant_documents:
+#             response_txt = response_txt + str(num) + ". " + i.get("name") + "    "
+#             num = num + 1
+#         return response_txt
+#     else:
+#         logging.warning("Utils [responseGenerator_Shell]: Hotel Docs NOT FOUND and Fail to genenrate shell response")
+#         return response_txt
+#
+#
+# # returns a list of elements in List of list  so as in [[1,2][3,4][5,6]]--->[1,2,3,4,5,6]
+# def get_total_elements_in_list(list_of_lists):
+#     if list_of_lists and list_of_lists is not None:
+#         flat_list = [item for sublist in list_of_lists for item in sublist]
+#         return flat_list
+#     else:
+#         logging.warning("Utils [getTotalElementsInList] : Something Went Wrong in getTotalElementsInList method")
+#         return None
+
+# remove duplicate dictionaries from the list
 
 # def responseGenerator(CriteriaBasedHotelDocuments):
 
