@@ -1,12 +1,10 @@
 # ----- Data Structure ----- #
-
 """
 
-restaurant: {id, name, image_url, cuisine, ratings, address, opening_hours, telephone, menu_url}
+restaurant: {id, name, image_url, cuisine, ratings, telephone, menu_url, address, opening_hours }
 user: {id, name, preferences}
 
 """
-
 # ----- -------------- ----- #
 
 restaurants = """
@@ -17,6 +15,8 @@ restaurants = """
           "image_url":"https://b.zmtcdn.com/data/pictures/1/18602861/bd2825ec26c21ebdc945edb7df3b0d99.jpg",
           "cuisine":"Mexican",
           "ratings":"4.5",
+          "telephone":"(123) 456-7890",
+          "menu_url":"https://www.tacobell.com/menu",
           "address":"123 Main Street, Anytown, USA",
           "opening_hours":{
              "Monday":"9:00 AM - 10:00 PM",
@@ -33,6 +33,8 @@ restaurants = """
           "name":"Danke",
           "image_url":"https://lh3.googleusercontent.com/p/AF1QipOs5oyEh2eqR1wHmLuL7WPvdkiqPjyJJdHEeCyI=w600-h0",
           "cuisine":"Italian",
+          "telephone":"(123) 456-7890",
+          "menu_url":"https://www.tacobell.com/menu",
           "address":"123 Main Street, Any-town, USA",
           "opening_hours":{
              "Monday":"9:00 AM - 10:00 PM",
@@ -50,6 +52,8 @@ restaurants = """
           "image_url":"https://www.collinsdictionary.com/images/full/restaurant_135621509.jpg",
           "ratings":"4.5",
           "cuisine":"Vietnamese",
+          "telephone":"(123) 456-7890",
+          "menu_url":"https://www.tacobell.com/menu",
           "address":"123 Main Street, Anytown, USA",
           "opening_hours":{
              "Monday":"9:00 AM - 10:00 PM",
@@ -66,6 +70,8 @@ restaurants = """
           "image_url":"https://upload.wikimedia.org/wikipedia/commons/6/62/Barbieri_-_ViaSophia25668.jpg",
           "ratings":"3.5",
           "cuisine":"Thai",
+          "telephone":"(123) 456-7890",
+          "menu_url":"https://www.tacobell.com/menu",
           "address":"123 Main Street, Anytown, USA",
           "opening_hours":{
              "Monday":"9:00 AM - 10:00 PM",
@@ -83,6 +89,8 @@ restaurants = """
           "id":"rtid_1234JHJK",
           "ratings":"4.0",
           "cuisine":"Japanese",
+          "telephone":"(123) 456-7890",
+          "menu_url":"https://www.tacobell.com/menu",
           "address":"123 Main Street, Anytown, USA",
           "opening_hours":{
              "Monday":"9:00 AM - 10:00 PM",
@@ -100,6 +108,8 @@ restaurants = """
           "id":"rtid_4567HJKL",
           "ratings":"3.0",
           "cuisine":"Korean",
+          "telephone":"(123) 456-7890",
+          "menu_url":"https://www.tacobell.com/menu",
           "address":"123 Main Street, Anytown, USA",
           "opening_hours":{
              "Monday":"9:00 AM - 10:00 PM",
