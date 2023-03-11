@@ -7,11 +7,17 @@ from typing import Any, Text, Dict, List
 
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
+from rasa_sdk.knowledge_base.storage import InMemoryKnowledgeBase
 
 from actions.submodules.mock_data import *
 
 
-# action to show top cuisines based on user preferences
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# ----------------------------------------------- Restaurant Actions ------------------------------------------------ #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+# action to show top cuisines based on user preferences.
+# This will be shown as a quick reply.
 class ActionShowCuisines(Action):
     def name(self) -> Text:
         return "action_show_cuisines"
@@ -38,24 +44,25 @@ class ActionShowCuisines(Action):
         return []
 
 
-# action to show top restaurants based on user preferences and the given cuisine
-class ActionShowRestaurantsFilterByCuisine(Action):
-    # def __init__(self):
-    #     # load knowledge base with data from the given file
-    #
-    #     kb = InMemoryKnowledgeBase("knowledge_base_data.json")
-    #
-    #     # overwrite the representation function of the restaurant object
-    #     # by default the representation function is just the name of the object
-    #
-    #     kb.set_representation_function_of_object(
-    #         "restaurant", lambda obj: obj["name"] + "(" + obj["cuisine"] + ")"
-    #     )
-    #
-    #     super().__init__(kb)
+# action to show top restaurants based on user preferences and the given cuisine (or without specific cuisine).
+class ActionShowRestaurants(Action):
+
+    def __init__(self):
+        # load knowledge base with data from the given file
+
+        kb = InMemoryKnowledgeBase("knowledge_base_data.json")
+
+        # # overwrite the representation function of the restaurant object
+        # # by default the representation function is just the name of the object
+        #
+        # kb.set_representation_function_of_object(
+        #     "restaurant", lambda obj: obj["name"] + "(" + obj["cuisine"] + ")"
+        # )
+        #
+        # super().__init__(kb)
 
     def name(self) -> Text:
-        return "action_show_restaurants_filter_by_cuisine"
+        return "action_show_restaurants"
 
     async def run(self, dispatcher: CollectingDispatcher,
                   tracker: Tracker,
@@ -65,39 +72,11 @@ class ActionShowRestaurantsFilterByCuisine(Action):
 
         # if cuisine is 'Any Cuisine' then don't filter by cuisine
 
-        # send http request with cuisine to recommendation engine to get top 10 restaurants for the user
+        # if cuisine is null ask if user wants to filter by cuisine
 
-        # get restaurant data into an array
-        # every restaurant must have a 'name', 'image' (URL), id, ratings (1 - 5) and cuisine.
+        # if yes then ask for cuisine (utter_ask_cuisine)
 
-        # hard coded restaurant data
-
-        rest_list = json.loads(restaurants)
-
-        data_set = []
-
-        for i in range(len(rest_list)):
-            data_set.insert(i, rest_list[i])
-
-        data = {
-            "payload": 'cardsCarousel',
-            "data": data_set
-        }
-
-        dispatcher.utter_message(json_message=data)
-
-        return []
-
-
-# action to show top restaurants based on user preferences and the given cuisine
-class ActionShowRestaurants(Action):
-
-    def name(self) -> Text:
-        return "action_show_restaurants"
-
-    async def run(self, dispatcher: CollectingDispatcher,
-                  tracker: Tracker,
-                  domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        # if no then send http request to recommendation engine to get top 10 restaurants for the user
 
         # send http request to recommendation engine to get top 10 restaurants for the user
 
@@ -120,6 +99,28 @@ class ActionShowRestaurants(Action):
         }
 
         dispatcher.utter_message(json_message=data)
+
+        return []
+
+
+# action_request_more_restaurant_options.
+# This function is used to pull more restaurant options for the user if they request for more.
+class ActionRequestMoreRestaurantOptions(Action):
+
+    def name(self) -> Text:
+        return "action_request_more_restaurant_options"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        # get more restaurants from the knowledge base that are not in the list of restaurants already shown to the user
+
+        # if there are more restaurants, send them to the user
+
+        # else send a message to the user saying that there are no more restaurants
+        dispatcher.utter_message(text="Sorry, I did not find any more restaurants. "
+                                      "Please try again with a different "
+                                      "cuisine.")
 
         return []
 
@@ -226,23 +227,37 @@ class ActionConfirmBooking(Action):
         return []
 
 
-# action_request_more_restaurant_options.
-# This function is used to pull more restaurant options for the user if they request for more.
-class ActionRequestMoreRestaurantOptions(Action):
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# --------------------------------------------- Knowledge Base Actions ---------------------------------------------- #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+
+# action to show top restaurants based on user preferences and the given cuisine (or without specific cuisine).
+class ActionQueryKnowledgeBase(Action):
+
+    def __init__(self):
+        # load knowledge base with data from the given file
+
+        kb = InMemoryKnowledgeBase("knowledge_base_data.json")
+
+        # # overwrite the representation function of the restaurant object
+        # # by default the representation function is just the name of the object
+        #
+        # kb.set_representation_function_of_object(
+        #     "restaurant", lambda obj: obj["name"] + "(" + obj["cuisine"] + ")"
+        # )
+        #
+        # super().__init__(kb)
 
     def name(self) -> Text:
-        return "action_request_more_restaurant_options"
+        return "action_query_knowledge_base"
 
-    def run(self, dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        # get more restaurants from the knowledge base that are not in the list of restaurants already shown to the user
+    async def run(self, dispatcher: CollectingDispatcher,
+                  tracker: Tracker,
+                  domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        # get details from tracker
 
-        # if there are more restaurants, send them to the user
-
-        # else send a message to the user saying that there are no more restaurants
-        dispatcher.utter_message(text="Sorry, I did not find any more restaurants. "
-                                      "Please try again with a different "
-                                      "cuisine.")
+        # tracker.get_slot("")
+        # tracker.get_slot("cuisine")
 
         return []

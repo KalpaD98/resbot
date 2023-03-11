@@ -3,12 +3,14 @@
 
 version: "3.1"
 
+# NLU
+
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # ---------------------------------------------------- Intents ------------------------------------------------------ #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 intents:
-  # ------------NLU--------------
+
   # -----------Basic-------------
   - greet
   - mood_unhappy
@@ -20,7 +22,7 @@ intents:
   - emoji_mood_great
   - emoji_mood_unhappy
 
-  # ---------RESTAURANT----------
+  # --------- Restaurant ----------
 
   # -------------request---------
   - request_menu
@@ -29,14 +31,14 @@ intents:
   - request_ambiance
   - request_more_options
 
-  # -------------search----------
+  # ------------- search ----------
   - search_restaurants
 
   # ------------- show ----------
   - show_cuisines
   - show_restaurants
 
-  # -------------inform----------
+  # ------------- inform ----------
   - inform_cuisine
   - inform_location
   - inform_people_count
@@ -44,11 +46,13 @@ intents:
   - inform_restaurant_id
   - inform_date_time
 
+  # ---------knowledge base------
+  - query_knowledge_base
+
   # ---------multi intents-------
   - request_restaurant + inform_opening_hours
 
-  # ---------knowledge base------
-  - query_knowledge_base
+
 
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -201,7 +205,7 @@ forms:
       - user_id
       - cuisine
       - city
-      - preferences                                             # intent:preference, utter_ask_preference; What would you like to have ?
+      - preferences                        # intent:preference, utter_ask_preference; What would you like to have ?
 
   restaurant_form:
     ignored_intents:
@@ -221,8 +225,7 @@ forms:
 actions:
   - action_query_knowledge_base                                 # query knowledge base
   - action_show_cuisines                                        # show cuisines
-  - action_show_restaurants                                     # show restaurants
-  - action_show_restaurants_filter_by_cuisine                   # show restaurants filter by cuisine
+  - action_show_restaurants                                     # show restaurants (will filter by cuisine and city if provided)
   - action_show_selected_restaurant_details                     # show selected restaurant details
   - action_show_booking_summary                                 # show booking summary
   - action_confirm_booking                                      # confirm booking
@@ -254,12 +257,12 @@ responses:
     - text: Cool!
     - text: Nice to hear 😃
     - text: Thankful to hear that
-    - text: Happy to hear ☺️
+    - text: Happy to hear 😊
 
   utter_mood_unhappy_feedback:
     - text: Sorry to hear that, maybe having something will make you feel better.
     - text: Sorry to hear that, Are you in the mood of having something to eat?
-    - text: Hmmm, eating something might help you feel better.
+    - text: Hmm, eating something might help you feel better.
 
   # restaurant related responses
 
@@ -278,11 +281,12 @@ responses:
 
   utter_wanna_book:
     - text: Do you want to book a table?
+    - text: Would you like to make a booking?
+    - text: Would you like to make a reservation?
+    - text: Shall we proceed with a booking?
     - text: Do you want to make a booking?
     - text: Do you want to book a table?
-    - text: Do you want to make a booking?
-    - text: Do you want to book a table?
-    - text: Do you want to make a booking?
+    - text: Do you want to make a reservation?
 
   utter_ask_date_time:
     - text: When would you like to make the booking?
@@ -344,12 +348,6 @@ responses:
     - text: Sorry, I am not able to help you with that. I can help you book a restaurant 😃.
     - text: Sorry, I am not able to help you with that. I can help you book a restaurant 😃.
 
-  utter_out_of_scope/food:
-    - text: I understand you want to order food, but i'm afraid i can't handle that skill yet 😢.
-
-  utter_out_of_scope/hotel:
-    - text: I understand you want to book a hotel, but i'm afraid i can't handle that skill yet 😢.
-
   utter_query_search:
     - text: Let me check
     - text: Sure!
@@ -357,6 +355,13 @@ responses:
     - text: I'll see what I can find out.
     - text: I'll take a look and see what I can find.
     - text: I'll check and get back to you.
+
+  utter_out_of_scope/food:
+    - text: I understand you want to order food, but i'm afraid i can't handle that skill yet 😢.
+
+  utter_out_of_scope/hotel:
+    - text: I understand you want to book a hotel, but i'm afraid i can't handle that skill yet 😢.
+
 
 session_config:
   session_expiration_time: 60

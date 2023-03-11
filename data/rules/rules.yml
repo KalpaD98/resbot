@@ -16,7 +16,6 @@ rules:
       - intent: out_of_scope
       - action: utter_out_of_scope
 
-  # in memory KB query test
   - rule: query knowledge base
     steps:
       - intent: query_knowledge_base
