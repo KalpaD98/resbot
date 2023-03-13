@@ -11,6 +11,7 @@ from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.knowledge_base.storage import InMemoryKnowledgeBase
 
 from actions.submodules.constants import *
+from actions.submodules.constants import TITLE
 from actions.submodules.mock_data import *
 from actions.submodules.response_generator import ResponseGenerator
 
@@ -73,6 +74,11 @@ class ActionShowRestaurants(Action):
     async def run(self, dispatcher: CollectingDispatcher,
                   tracker: Tracker,
                   domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        print('\n----------------------Slots-----------------------------------')
+        logging.info(tracker.slots)
+        print('--------------------------------------------------------------------\n')
+
         # get cuisine from the tracker
         cuisine = tracker.get_slot("cuisine")
 
@@ -103,37 +109,34 @@ class ActionShowRestaurants(Action):
 
         # Add data to the carousel card
         for restaurant in rest_list:
-            carousal_object = {
-                TITLE: restaurant.get(NAME),
-                IMAGE_URL: restaurant.get(IMAGE_URL),
-                SUBTITLE: restaurant.get(CUISINE) + " | " + str(restaurant.get(RATINGS)) + " ⭐️"
-            }
+            carousal_object = SUBCOMPONENT_CARD.copy()
+            carousal_object[TITLE] = restaurant.get(NAME)
+            carousal_object[IMAGE_URL] = restaurant.get(IMAGE_URL)
+            carousal_object[SUBTITLE] = restaurant.get(CUISINE) + " |  ⭐️ " + str(restaurant.get(RATINGS))
+
+            default_action_payload = SUBCOMPONENT_DEFAULT_ACTION_PAYLOAD.copy()
+            default_action_payload[PAYLOAD] = '/inform_restaurant_id{{"restaurant_id": "' + restaurant.get(ID) + '"}}'
 
             buttons = []
 
-            button1 = {
-                TITLE: "Menu",
-                TYPE: WEB_URL,
-                URL: restaurant.get(IMAGE_URL)  # later replace this with the menu URL
-            }
+            button1 = SUBCOMPONENT_BUTTON_URL.copy()
+            button1[TITLE] = "Menu"
+            button1[URL] = restaurant.get(IMAGE_URL)  # later replace this with the menu URL
 
-            button2 = {
-                TITLE: "Book Table",
-                TYPE: POST_BACK,
-                PAYLOAD: '/book_restaurant{{"restaurant_id": "' + restaurant.get(ID) + '"}}'
-            }
+            button2 = SUBCOMPONENT_BUTTON_PAYLOAD.copy()
+            button2[TITLE] = "Book Table"
+            button2[PAYLOAD] = '/book_restaurant{{"restaurant_id": "' + restaurant.get(ID) + '"}}'
 
-            button3 = {
-                TITLE: "View Details",
-                TYPE: POST_BACK,
-                PAYLOAD: '/request_details{"restaurant_id": "' + restaurant.get(ID) + '"}'
-            }
+            button3 = SUBCOMPONENT_BUTTON_PAYLOAD.copy()
+            button3[TITLE] = "View Details"
+            button3[PAYLOAD] = '/request_details{{"restaurant_id": "' + restaurant.get(ID) + '"}}'
 
             buttons.append(button1)
             buttons.append(button2)
             buttons.append(button3)
 
             carousal_object[BUTTONS] = buttons
+            carousal_object[DEFAULT_ACTION] = default_action_payload
             carousal_objects.append(carousal_object)
 
         dispatcher.utter_message(text="Here are some restaurants I found:",
@@ -152,6 +155,11 @@ class ActionRequestMoreRestaurantOptions(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        # print slots
+        print('\n----------------------Slots-----------------------------------')
+        logging.info(tracker.slots)
+        print('--------------------------------------------------------------------\n')
+
         # get more restaurants from the knowledge base that are not in the list of restaurants already shown to the user
 
         # if there are more restaurants, send them to the user
@@ -176,14 +184,16 @@ class ActionShowSelectedRestaurantDetails(Action):
     async def run(self, dispatcher: CollectingDispatcher,
                   tracker: Tracker,
                   domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        print('\n----------------------Slots-----------------------------------')
+        logging.info(tracker.slots)
+        print('--------------------------------------------------------------------\n')
+
         # get the restaurant id from the tracker
         restaurant_id = tracker.get_slot("restaurant_id")
-        print("\n----------------------Restaurant ID slot state-----------------------------------")
+
         if restaurant_id is None:
             logging.info("Restaurant ID not set")
-        else:
-            logging.info("Restaurant ID: " + restaurant_id)
-        print("--------------------------------------------------------------------\n")
+
         # get the restaurant data from the knowledge base
         # restaurant = await self.knowledge_base.get_object("restaurant", restaurant_id)
 
@@ -213,6 +223,10 @@ class ActionShowBookingSummary(Action):
     async def run(self, dispatcher: CollectingDispatcher,
                   tracker: Tracker,
                   domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        print('\n----------------------Slots-----------------------------------')
+        logging.info(tracker.slots)
+        print('--------------------------------------------------------------------\n')
+
         # get restaurant id from the tracker
         restaurant_id = tracker.get_slot("restaurant_id")
 
@@ -220,18 +234,12 @@ class ActionShowBookingSummary(Action):
         # restaurant = await self.knowledge_base.get_object("restaurant", restaurant_id)
 
         # get the date from the tracker
-        date = tracker.get_slot("date")
-
-        # get the time from the tracker
-        time = tracker.get_slot("time")
+        # date = tracker.get_slot("date_time")
 
         # generate the booking summary
         # message = "Shall I confirm your booking for " + restaurant["name"] + " located at " + restaurant["address"] + \
         #           "on " + date + " at " + time + "."
 
-        # generate the booking summary
-        message = "Shall I confirm your booking for restaurant_name" + " located at " + "restaurant address" + \
-                  "on " + date + " at " + time + "."
 
         # add a response after this asking if the user would like to confirm the booking
         # send the message to the user
@@ -251,8 +259,9 @@ class ActionConfirmBooking(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
         print('\n----------------------Slots-----------------------------------')
-        print(tracker.slots)
+        logging.info(tracker.slots)
         print('--------------------------------------------------------------------\n')
 
         # get the restaurant id from the tracker
@@ -263,23 +272,28 @@ class ActionConfirmBooking(Action):
 
         # get the date from the tracker
         date_time = tracker.get_slot("date_time")
+        if date_time is None:
+            logging.info("Date and time not set")
+            dispatcher.utter_message(
+                text="I did not understood the date and time. Please try again (Ex: 202X/XX/XX 7:30 p.m.).")
+        else:
+            # extract the date from the date_time slot
+            date = date_time.split("T")[0]
 
-        # extract the date from the date_time slot
-        date = date_time.split("T")[0]
+            # extract the time from the date_time slot
+            time = date_time.split("T")[1]
 
-        # extract the time from the date_time slot
-        time = date_time.split("T")[1]
+            # generate the booking summary
+            message = "Your booking for restaurant_name" + " located at " + "restaurant address" + \
+                      "on " + "<date>" + " at " + "<time>" + " has been confirmed. Thank you for using our service."
+            #
+            # # generate the booking summary
+            # message = "Your booking for " + restaurant["name"] + " located at " + restaurant["address"] + \
+            #           "on " + date + " at " + time + " has been confirmed. Thank you for using our service."
 
-        # generate the booking summary
-        message = "Your booking for restaurant_name" + " located at " + "restaurant address" + \
-                  "on " + date + " at " + time + " has been confirmed. Thank you for using our service."
-        #
-        # # generate the booking summary
-        # message = "Your booking for " + restaurant["name"] + " located at " + restaurant["address"] + \
-        #           "on " + date + " at " + time + " has been confirmed. Thank you for using our service."
+            # send the message to the user
+            dispatcher.utter_message(text=message)
 
-        # send the message to the user
-        dispatcher.utter_message(text=message)
         return []
 
 

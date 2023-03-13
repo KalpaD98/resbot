@@ -7,6 +7,12 @@ stories:
       - intent: greet
       - action: utter_greet
 
+  - story: greet + request restaurant
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: request_restaurant
+
   - story: when user greet continuously
     steps:
       - intent: greet
@@ -14,13 +20,13 @@ stories:
       - intent: greet
       - action: utter_greet_again
 
-  - story: after greet + mood great
+  - story: after greet + mood great + ask checkout restaurant
     steps:
       - intent: mood_great
       - action: utter_mood_great_feedback
       - action: utter_checkout_restaurants
 
-  - story: after greet + mood unhappy
+  - story: after greet + mood unhappy + ask checkout restaurant
     steps:
       - intent: mood_unhappy
       - action: utter_mood_unhappy_feedback
@@ -28,13 +34,13 @@ stories:
 
   # when user replies with emojis
 
-  - story: after greet + mood great emoji
+  - story: after greet + mood great emoji + ask checkout restaurant
     steps:
       - intent: emoji_mood_great
       - action: utter_emoji_great_feedback
       - action: utter_checkout_restaurants
 
-  - story: after greet + mood unhappy emoji
+  - story: after greet + mood unhappy emoji + ask checkout restaurant
     steps:
       - intent: emoji_mood_unhappy
       - action: utter_emoji_mood_unhappy_feedback

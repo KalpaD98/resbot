@@ -34,11 +34,46 @@ nlu:
     examples: |
       - show me restaurants
       - show restaurants 
+      - what restaurants are available
       - show me the restaurants
-      - show me the restaurants please
+      - show me restaurants please
       - restaurant recommendations
       - display restaurants
       - restaurants please
+
+  - intent: request_opening_hours
+    examples: |
+      - what are the opening hours
+      - what are the opening hours of [McDonalds](booking_place)
+
+  - intent: request_more_restaurant_options
+    examples: |
+      - anything else?
+      - any other places?
+      - can i have more recommendations
+      - can i see more restaurants
+      - more options
+      - more suggestions
+      - more places
+      - any other suggestions
+
+
+  - intent: request_booking_details
+    examples: |
+      - What's the status of my reservation
+
+  - intent: request_ambiance
+    examples: |
+      - what is the ambiance
+      - what is the atmosphere
+      - tell me about the ambiance
+      - tell me about the atmosphere
+      - what is the atmosphere like
+      - what is the ambiance like
+      - what is the atmosphere like in the restaurant
+      - what is the ambiance like in the restaurant
+      - what is the atmosphere like in the place
+      - what is the ambiance like in the place
 
   #  Change to match with dataset
   - intent: search_restaurants
@@ -87,35 +122,3 @@ nlu:
       - Please help me to find restaurants in [Chicago](location)
       - I’m hungry. Looking out for some good [Chinese](cuisine) restaurants in [Los Angeles](location)
       - Find restaurants in [New York](location) for [Chinese](cuisine) cuisine
-
-  - intent: request_opening_hours
-    examples: |
-      - what are the opening hours
-      - what are the opening hours of [McDonalds](booking_place)
-
-  - intent: request_more_options
-    examples: |
-      - can i have more recommendations
-      - can i have more options
-      - can i have more suggestions
-      - can i have more places
-      - can i see more
-      - can i see more options
-      - can i see more places
-
-  - intent: request_booking_details
-    examples: |
-      - What's the [confirmation num_people](booking_detail) for my reservation
-
-  - intent: request_ambiance
-    examples: |
-      - what is the ambiance
-      - what is the atmosphere
-      - tell me about the ambiance
-      - tell me about the atmosphere
-      - what is the atmosphere like
-      - what is the ambiance like
-      - what is the atmosphere like in the restaurant
-      - what is the ambiance like in the restaurant
-      - what is the atmosphere like in the place
-      - what is the ambiance like in the place

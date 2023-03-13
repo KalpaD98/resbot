@@ -1,4 +1,5 @@
-# response generator Constants
+# constant.py contains all the constants used in the project
+# Response Generator Constants
 TYPE = "type"
 TEMPLATE = "template"
 PAYLOAD = "payload"
@@ -9,35 +10,58 @@ DEFAULT_ACTION = "default_action"
 WEB_URL = "web_url"
 POST_BACK = "postback"
 URL = "url"
-IMAGE_URL = "image_url"
-PAGE_URL = "page_url"
 TITLE = "title"
 SUBTITLE = "subtitle"
 BUTTONS = "buttons"
 
+# ----- ----- ----- ----- ----- Components ----- ----- ----- ----- ----- #
+
+# carousal component
+COMPONENT_CAROUSAL = {TYPE: TEMPLATE, PAYLOAD: {TEMPLATE_TYPE: GENERIC}}
+
+# Subcomponents of the carousal
+SUBCOMPONENT_CARD = {
+    "default_action": {"type": "", "url": ""},
+    "image_url": "",
+    "title": "",
+    "subtitle": "",
+    "buttons": []
+}
+
+SUBCOMPONENT_DEFAULT_ACTION_URL = {TYPE: WEB_URL, URL: ""}
+
+SUBCOMPONENT_DEFAULT_ACTION_PAYLOAD = {TYPE: POST_BACK, PAYLOAD: ""}
+
+SUBCOMPONENT_BUTTON_URL = {TITLE: "", TYPE: WEB_URL, URL: ""}
+
+SUBCOMPONENT_BUTTON_PAYLOAD = {TITLE: "", TYPE: POST_BACK, PAYLOAD: ""}
+
+# ----- ----- ----- ----- ----- -----  ----- ----- ----- ----- ----- ----- #
+
+# Utterance Templates
+UTTER_TEMPLATE__RESTAURANT_SUGGESTION = "It Seems you'll like "
+UTTER_TEMPLATE__RESTAURANT_SUGGESTION_NOT_FOUND = "your favor not found... I am afraid you said something invalid 😥 "
+
 # Restaurant Constants
 ID = "id"
-
-#  Used in the Queries
+NAME = "name"
 CITY = "city"
 CUISINE = "cuisine"
+RATINGS = "ratings"
+IMAGE_URL = "image_url"
+PAGE_URL = "page_url"
+MENU_URL = "menu_url"
 
 UPCOUNTRY = "Upcountry"
 COASTAL = "Coastal"
 
-RATINGS = "ratings"
 FIVE_STAR = "⭐️⭐️⭐️⭐️⭐️"
 FOUR_STAR = "⭐️⭐️⭐️⭐️️"
 THREE_STAR = "⭐️⭐️⭐️"
 TWO_STAR = "⭐️⭐️️"
 ONE_STAR = "⭐️️"
 
-# Restaurant details
-RESTAURANT_URL = "url"
-NAME = "name"
-MENU = "menu"
-
-# Cuisines categories
+# Cuisines
 CHINESE = "Chinese"
 ITALIAN = "Italian"
 MEXICAN = "Mexican"
@@ -47,21 +71,6 @@ THAI = "Thai"
 # Categories
 # add categories from the dataset
 
-# Components
-COMPONENT_CAROUSAL = {TYPE: TEMPLATE, PAYLOAD: {TEMPLATE_TYPE: GENERIC}}
-SUBCOMPONENT_CARD = {
-    "default_action": {"type": "", "url": ""},
-    "image_url": "",
-    "title": "",
-    "subtitle": "",
-    "buttons": []
-}
-
-SUBCOMPONENT_BUTTON = {"url": "", "title": "", "type": ""}
-
-# Utterance Templates
-RESTAURANT__SUGGESTION_UTTER_TEMPLATE = "It Seems you'll like "
-RESTAURANT_SUGGESTION_NOT_FOUND_UTTER_TEMPLATE = "your favor not found... I am afraid you said something invalid 😥 "
 
 # food taste categories
 BITTER = "bitter"

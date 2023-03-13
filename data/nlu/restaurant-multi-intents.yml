@@ -6,14 +6,14 @@ nlu:
   # early since 6 a.m
   # late till midnight (00:00)
 
-  - intent: request_restaurant+inform_opening_hours
+  - intent: search_restaurant + inform_opening_hours
     examples: |
       - i need to find a restaurant that serves [chinese](cuisine) food and is [open now](opening_hours)
       - Can you recommend a restaurant that is open [late](opening_hours)?
       - I'm looking for a restaurant that is open [early](opening_hours)
       - Can you suggest a restaurant that is open [24 hours](opening_hours)?
 
-  - intent: request_restaurant+inform_location
+  - intent: search_restaurant + inform_location
     examples: |
       - i need to find a restaurant in [central park](location)
       - Can you recommend a restaurant that is open [brooklyn](location)?

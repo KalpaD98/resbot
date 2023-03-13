@@ -37,53 +37,53 @@ stories:
 
   # These stories are broken down into sub-stories to make them easier to understand when user interrupts the flow.
 
-  - story: display restaurant list
-    steps:
-      - action: utter_checkout_restaurants
-      - intent: affirm
-      - action: action_show_cuisines
-      - intent: inform_cuisine
-      - action: action_show_restaurants
-
-  - story: show restaurant list + filter by cuisine
-    steps:
-      - intent: request_cuisines
-      - action: action_show_cuisines
-      - intent: inform_cuisine
-      - active_loop: cuisine_form
-      - active_loop: null
-      - slot_was_set:
-          - cuisine: [ "Italian" ]
-      - action: action_show_restaurants
-
-  - story: User selects a restaurant
-    steps:
-      - action: action_show_restaurants
-      - intent: inform_restaurant_id
-      - slot_was_set:
-          - restaurant_id: [ "rtid_121290" ]
-      - action: action_show_selected_restaurant_details
-
-  - story: Inform date and time
-    steps:
-      - action: utter_ask_date_time
-      - intent: inform_date_time
-      - slot_was_set:
-          - date_time: [ "2020-01-01T12:00:00+00:00" ]
-
-  - story: Inform number of people
-    steps:
-      - action: utter_ask_num_people
-      - intent: inform_num_people
-      - slot_was_set:
-          - num_people: [ "2" ]
-
-  - story: Confirm to book a restaurant
-    steps:
-      - slot_was_set:
-          - restaurant_id: [ "rtid_12sda0" ]
-      - action: action_show_booking_summary
-      - action: utter_ask_to_confirm_booking
-      - intent: affirm
+#  - story: display restaurant list
+#    steps:
+#      - action: utter_checkout_restaurants
+#      - intent: affirm
+#      - action: action_show_cuisines
+#      - intent: inform_cuisine
+#      - action: action_show_restaurants
+#
+#  - story: show restaurant list + filter by cuisine
+#    steps:
+#      - intent: request_cuisines
+#      - action: action_show_cuisines
+#      - intent: inform_cuisine
+#      - active_loop: cuisine_form
+#      - active_loop: null
+#      - slot_was_set:
+#          - cuisine: [ "Italian" ]
+#      - action: action_show_restaurants
+#
+#  - story: User selects a restaurant
+#    steps:
+#      - action: action_show_restaurants
+#      - intent: inform_restaurant_id
+#      - slot_was_set:
+#          - restaurant_id: [ "rtid_121290" ]
+#      - action: action_show_selected_restaurant_details
+#
+#  - story: Inform date and time
+#    steps:
+#      - action: utter_ask_date_time
+#      - intent: inform_date_time
+#      - slot_was_set:
+#          - date_time: [ "2020-01-01T12:00:00+00:00" ]
+#
+#  - story: Inform number of people
+#    steps:
+#      - action: utter_ask_num_people
+#      - intent: inform_num_people
+#      - slot_was_set:
+#          - num_people: [ "2" ]
+#
+#  - story: Confirm to book a restaurant
+#    steps:
+#      - slot_was_set:
+#          - restaurant_id: [ "rtid_12sda0" ]
+#      - action: action_show_booking_summary
+#      - action: utter_ask_to_confirm_booking
+#      - intent: affirm
 
 # ---------------------------------------------- Knowledge Base -------------------------------------------------------- #

@@ -22,21 +22,15 @@ intents:
   - emoji_mood_great
   - emoji_mood_unhappy
 
-  # --------- Restaurant ----------
-
-  # -------------request---------
-
+  # ------------- restaurant-request ---------
   - request_cuisines
+  - request_more_restaurant_options
   - request_restaurants
   - request_menu
   - request_opening_hours
   - request_ambiance
-  - request_more_options
 
-  # ------------- show ----------
-  - show_restaurants
-
-  # ------------- inform ----------
+  # ------------- restaurant-inform.yml ----------
   - inform_cuisine
   - inform_location
   - inform_num_people
@@ -44,10 +38,10 @@ intents:
   - inform_restaurant_id
   - inform_date_time
 
-  # ---------knowledge base------
+  # --------- restaurant-knowledge-query ------
   - query_knowledge_base
 
-  # ---------multi intents-------
+  # --------- multi intents -------
   - request_restaurant + inform_opening_hours
 
 

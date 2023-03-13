@@ -43,7 +43,7 @@ class ResponseGenerator:
         carousel = COMPONENT_CAROUSAL
 
         for carousal_object in carousal_objects:
-            card = {DEFAULT_ACTION: {TYPE: WEB_URL, URL: carousal_object.get(URL)},
+            card = {DEFAULT_ACTION: carousal_object[DEFAULT_ACTION],
                     IMAGE_URL: carousal_object.get(IMAGE_URL),
                     TITLE: carousal_object.get(TITLE),
                     SUBTITLE: carousal_object.get(SUBTITLE)}
@@ -51,7 +51,9 @@ class ResponseGenerator:
             buttons_list = carousal_object.get(BUTTONS)
 
             card[BUTTONS] = buttons_list
-
+            print()
+            print(card)
+            print()
             elements_list.append(card)
 
         carousel[PAYLOAD][ELEMENTS] = elements_list
