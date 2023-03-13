@@ -1,4 +1,4 @@
-## for request_restaurant
+## for search_restaurant
 ## Change below training data to fit with PREPOST reviews
 ##  Change to match with dataset
 #  - intent: request_restaurant

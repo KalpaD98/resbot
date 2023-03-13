@@ -6,6 +6,7 @@ recipe: default.v1
 # Configuration for Rasa NLU.
 # https://rasa.com/docs/rasa/nlu/components/
 language: en
+#- Avoid using `tokenizers` before the fork if possible
 
 pipeline:
   # default pipeline

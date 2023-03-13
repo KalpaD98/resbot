@@ -23,7 +23,7 @@ rules:
 
   - rule: when user request restaurant display restaurants carousal
     steps:
-      - intent: show_restaurants
+      - intent: request_restaurants
       - action: action_show_restaurants
 
   # Experimental

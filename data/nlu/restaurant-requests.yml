@@ -61,6 +61,13 @@ nlu:
   - intent: request_booking_details
     examples: |
       - What's the status of my reservation
+      - What's the status of my booking
+      - show my booking details
+      - show my reservation details
+      - booking details
+      - reservation details
+      - booking details please
+      - reservation details pls
 
   - intent: request_ambiance
     examples: |

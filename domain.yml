@@ -42,7 +42,7 @@ intents:
   - query_knowledge_base
 
   # --------- multi intents -------
-  - request_restaurant + inform_opening_hours
+  - request_restaurants + inform_opening_hours
 
 
 

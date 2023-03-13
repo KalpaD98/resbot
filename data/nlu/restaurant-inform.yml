@@ -81,17 +81,20 @@ nlu:
   # find a way to extract date from descriptions apart from duckling server
   - intent: inform_date_time
     examples: |
-      - [2020-01-01](date_time)
-      - I want to book a table for 2 people at 7 pm tonight.
-      - Can I make a reservation for tomorrow at 1 pm?
-      - What availability do you have for Sunday at noon?
-      - I need to reserve a table for next Friday at 6 pm.
-      - Can you tell me what times you have available on Wednesday?
-      - I'm looking to book a table for 4 on Saturday evening.
-      - I want to make a reservation for this Thursday at 8 pm.
-      - Do you have any tables available at 5:30 pm next Monday?
-      - Can I reserve a table for 2 people on Friday, February 4th at 7 pm?
-      - I'd like to make a reservation for 3 people on Sunday, January 30th at 12:30 pm
+      - [2023-04-01T12:00:00+00:00](date_time)
+      - [2023-01-01 7:30 pm](date_time)
+      - [2023-02-05 12:30 p.m.](date_time)
+      - [2020/01/01 9:30 a.m.](date_time)
+      - I want to book a table for [2](num_people) people at [7 pm tonight](date_time).
+      - Can I make a reservation for [tomorrow at 1 pm](date_time)?
+      - What availability do you have for [Sunday at noon](date_time)?
+      - I need to reserve a table for [next Friday at 6 pm](date_time).
+      - Can you tell me what times you have available on [Wednesday](date_time)?
+      - I'm looking to book a table for [4](num_people) on [Saturday evening](date_time).
+      - I want to make a reservation for [this Thursday at 8 pm](date_time).
+      - Do you have any tables available at [5:30 pm next Monday](date_time)?
+      - Can I reserve a table for [2](num_people) people on Friday, [February 4th at 7 pm](date_time)?
+      - I'd like to make a reservation for [3](num_people) people on Sunday, [January 30th at 12:30 pm](date_time)
   
 
   #  - intent: query_knowledge_base

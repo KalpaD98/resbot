@@ -11,7 +11,8 @@ stories:
     steps:
       - intent: greet
       - action: utter_greet
-      - intent: request_restaurant
+      - intent: request_restaurants
+      - action: action_show_restaurants
 
   - story: when user greet continuously
     steps:

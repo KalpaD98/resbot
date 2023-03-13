@@ -120,23 +120,25 @@ class ActionShowRestaurants(Action):
             buttons = []
 
             button1 = SUBCOMPONENT_BUTTON_URL.copy()
-            button1[TITLE] = "Menu"
-            button1[URL] = restaurant.get(IMAGE_URL)  # later replace this with the menu URL
+            button1[TITLE] = "Check Menu"
+            button1[URL] = restaurant.get(IMAGE_URL)  # later replace this with restaurant menu url
 
             button2 = SUBCOMPONENT_BUTTON_PAYLOAD.copy()
             button2[TITLE] = "Book Table"
             button2[PAYLOAD] = '/book_restaurant{{"restaurant_id": "' + restaurant.get(ID) + '"}}'
+            # book table intent has not been added yet, example: book rtid_s3wjdsud3, book restaurant rtid_s3wjdsud3
 
             button3 = SUBCOMPONENT_BUTTON_PAYLOAD.copy()
             button3[TITLE] = "View Details"
-            button3[PAYLOAD] = '/request_details{{"restaurant_id": "' + restaurant.get(ID) + '"}}'
+            button3[PAYLOAD] = restaurant.get(ID)
 
             buttons.append(button1)
-            buttons.append(button2)
             buttons.append(button3)
+            buttons.append(button2)
 
             carousal_object[BUTTONS] = buttons
-            carousal_object[DEFAULT_ACTION] = default_action_payload
+            carousal_object[DEFAULT_ACTION] = ""  # set to null for temporary debugging
+            # carousal_object[DEFAULT_ACTION] = default_action_payload # add a title for def action if possible
             carousal_objects.append(carousal_object)
 
         dispatcher.utter_message(text="Here are some restaurants I found:",
@@ -206,7 +208,8 @@ class ActionShowSelectedRestaurantDetails(Action):
         # message += "Description: " + restaurant["description"] + "\n"
 
         # send the message back to the user
-        dispatcher.utter_message(text="your restaurant details\n Name, Address, Open, Close, Description")
+        dispatcher.utter_message(text="here's your restaurant details")
+        dispatcher.utter_message(text="Name, Address, Open, Close, Description")
         return []
 
 
@@ -239,7 +242,6 @@ class ActionShowBookingSummary(Action):
         # generate the booking summary
         # message = "Shall I confirm your booking for " + restaurant["name"] + " located at " + restaurant["address"] + \
         #           "on " + date + " at " + time + "."
-
 
         # add a response after this asking if the user would like to confirm the booking
         # send the message to the user
@@ -278,10 +280,13 @@ class ActionConfirmBooking(Action):
                 text="I did not understood the date and time. Please try again (Ex: 202X/XX/XX 7:30 p.m.).")
         else:
             # extract the date from the date_time slot
-            date = date_time.split("T")[0]
-
-            # extract the time from the date_time slot
-            time = date_time.split("T")[1]
+            if "T" in date_time:
+                date = date_time.split("T")[0]
+                # extract the time from the date_time slot
+                time = date_time.split("T")[1]
+            else:
+                date = date_time
+                time = ""
 
             # generate the booking summary
             message = "Your booking for restaurant_name" + " located at " + "restaurant address" + \
