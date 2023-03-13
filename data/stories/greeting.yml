@@ -1,7 +1,8 @@
-version: "3.1"
-# stories.yml has general stories for the restaurant bot
+version: "3.1" # greeting.yml has general stories for the restaurant bot
+
 stories:
-  - story: greet whenever user greets
+
+  - story: greet
     steps:
       - intent: greet
       - action: utter_greet
@@ -12,8 +13,6 @@ stories:
       - action: utter_greet
       - intent: greet
       - action: utter_greet_again
-      - intent: greet
-      - action: utter_checkout_restaurants
 
   - story: after greet + mood great
     steps:
@@ -26,6 +25,8 @@ stories:
       - intent: mood_unhappy
       - action: utter_mood_unhappy_feedback
       - action: utter_checkout_restaurants
+
+  # when user replies with emojis
 
   - story: after greet + mood great emoji
     steps:

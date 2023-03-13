@@ -25,23 +25,21 @@ intents:
   # --------- Restaurant ----------
 
   # -------------request---------
-  - request_menu
+
   - request_cuisines
+  - request_restaurants
+  - request_menu
   - request_opening_hours
   - request_ambiance
   - request_more_options
 
-  # ------------- search ----------
-  - search_restaurants
-
   # ------------- show ----------
-  - show_cuisines
   - show_restaurants
 
   # ------------- inform ----------
   - inform_cuisine
   - inform_location
-  - inform_people_count
+  - inform_num_people
   - inform_restaurant_name
   - inform_restaurant_id
   - inform_date_time
@@ -73,6 +71,7 @@ entities:
   - date_time
   - ambiance
   - price_range
+  - preferences
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # ----------------------------------------------------- Slots ------------------------------------------------------- #
@@ -80,72 +79,101 @@ entities:
 
 slots:
 
-  object_type:
-    type: text
-    influence_conversation: false
-    mappings:
-      - type: custom
-
-  mention:
-    type: text
-    influence_conversation: false
-    mappings:
-      - type: custom
-
-  attribute:
-    type: text
-    influence_conversation: false
-    mappings:
-      - type: custom
-
-  restaurant:
-    type: text
-    influence_conversation: false
-    mappings:
-      - type: custom
-
-  city:
-    type: text
-    influence_conversation: false
-    mappings:
-      - type: custom
-
-  cuisine:
-    type: text
-    influence_conversation: false
-    mappings:
-      - type: custom
-
-  num_people:
-    type: text
-    influence_conversation: false
-    mappings:
-      - type: custom
-
   user_id:
     type: text
     influence_conversation: false
     mappings:
-      - type: custom
+      - type: from_entity
+        entity: user_id
+
+  cuisine:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: cuisine
+        intent:
+          - inform_cuisine
+          - search_restaurants
 
   restaurant_id:
     type: text
     influence_conversation: false
     mappings:
-      - type: custom
+      - type: from_entity
+        entity: restaurant_id
+        intent:
+          - inform_restaurant_id
+
+  num_people:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: num_people
+        intent:
+          - inform_num_people
 
   date_time:
     type: text
     influence_conversation: false
     mappings:
-      - type: custom
+      - type: from_entity
+        entity: date_time
+        intent:
+          - inform_date_time
+          - search_restaurants
+
+  # -------------------------- Knowledge base query related --------------------------
+  object_type:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: object_type
+
+  preferences:
+    type: list
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: preferences
+
+  mention:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: mention
+
+  attribute:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: attribute
+
+  restaurant_name:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: restaurant_name
+
+  city:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: city
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # ------------------------------------------------------ Forms ------------------------------------------------------ #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 forms:
+
   # short forms
+
   user_id_form:
     ignored_intents:
       - out_of_scope
@@ -157,6 +185,7 @@ forms:
     ignored_intents:
       - out_of_scope
       - bot_challenge
+      - inform_cuisine
     required_slots:
       - restaurant_id
 
@@ -316,7 +345,7 @@ responses:
     - text: Please let me know the date and time for the booking.
     - text: What date and time do you have in mind for the booking?
 
-  utter_ask_no_of_people:
+  utter_ask_num_people:
     - text: How many people will be joining you for the booking?
     - text: Can you please tell me the number of people for the booking?
     - text: What is the size of your group for the booking?
@@ -385,6 +414,8 @@ responses:
   utter_out_of_scope/hotel:
     - text: I understand you want to book a hotel, but i'm afraid i can't handle that skill yet 😢.
 
+config:
+  store_entities_as_slots: true
 
 session_config:
   session_expiration_time: 60

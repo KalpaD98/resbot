@@ -35,7 +35,7 @@ class ActionShowCuisines(Action):
         # Add payload to quick replies
         cuisines_with_entity_payload = []
         for cuisine in cuisines:
-            cuisines_with_entity_payload.append({TITLE: cuisine, PAYLOAD: f"/inform{{\"cuisine\": \"{cuisine}\"}}"})
+            cuisines_with_entity_payload.append({TITLE: cuisine, PAYLOAD: cuisine})
 
         ResponseGenerator.quick_replies("Please choose a cuisine", cuisines_with_entity_payload, dispatcher,
                                         with_payload=True)
@@ -75,10 +75,14 @@ class ActionShowRestaurants(Action):
                   domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         # get cuisine from the tracker
         cuisine = tracker.get_slot("cuisine")
-        logging.info("Cuisine: " + cuisine)
+
         # if cuisine is 'Any Cuisine' then don't filter by cuisine
 
         # if cuisine is null ask if user wants to filter by cuisine
+        if cuisine is None:
+            logging.info("Cuisine not set")
+        else:
+            logging.info("Cuisine: " + cuisine)
 
         # if yes then ask for cuisine (utter_ask_cuisine)
 
@@ -94,17 +98,46 @@ class ActionShowRestaurants(Action):
 
         rest_list = json.loads(restaurants)
 
-        data_set = []
+        # Generate restaurant cards with Response Generator
+        carousal_objects = []
 
-        for i in range(len(rest_list)):
-            data_set.insert(i, rest_list[i])
+        # Add data to the carousel card
+        for restaurant in rest_list:
+            carousal_object = {
+                TITLE: restaurant.get(NAME),
+                IMAGE_URL: restaurant.get(IMAGE_URL),
+                SUBTITLE: restaurant.get(CUISINE) + " | " + str(restaurant.get(RATINGS)) + " ⭐️"
+            }
 
-        data = {
-            "payload": 'cardsCarousel',
-            "data": data_set
-        }
+            buttons = []
 
-        dispatcher.utter_message(json_message=data)
+            button1 = {
+                TITLE: "Menu",
+                TYPE: WEB_URL,
+                URL: restaurant.get(IMAGE_URL)  # later replace this with the menu URL
+            }
+
+            button2 = {
+                TITLE: "Book Table",
+                TYPE: POST_BACK,
+                PAYLOAD: '/book_restaurant{{"restaurant_id": "' + restaurant.get(ID) + '"}}'
+            }
+
+            button3 = {
+                TITLE: "View Details",
+                TYPE: POST_BACK,
+                PAYLOAD: '/request_details{"restaurant_id": "' + restaurant.get(ID) + '"}'
+            }
+
+            buttons.append(button1)
+            buttons.append(button2)
+            buttons.append(button3)
+
+            carousal_object[BUTTONS] = buttons
+            carousal_objects.append(carousal_object)
+
+        dispatcher.utter_message(text="Here are some restaurants I found:",
+                                 attachment=ResponseGenerator.option_carousal(carousal_objects))
 
         return []
 
@@ -144,21 +177,27 @@ class ActionShowSelectedRestaurantDetails(Action):
                   tracker: Tracker,
                   domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         # get the restaurant id from the tracker
-        restaurant_id = tracker.get_slot("restaurant")
-
+        restaurant_id = tracker.get_slot("restaurant_id")
+        print("\n----------------------Restaurant ID slot state-----------------------------------")
+        if restaurant_id is None:
+            logging.info("Restaurant ID not set")
+        else:
+            logging.info("Restaurant ID: " + restaurant_id)
+        print("--------------------------------------------------------------------\n")
         # get the restaurant data from the knowledge base
-        restaurant = await self.knowledge_base.get_object("restaurant", restaurant_id)
+        # restaurant = await self.knowledge_base.get_object("restaurant", restaurant_id)
 
         # create a message to show the restaurant details
-        message = "Here are some details about the restaurant: \n"
-        message += "Name: " + restaurant["name"] + "\n"
-        message += "Address: " + restaurant["address"] + "\n"
-        message += "Open: " + restaurant["open"] + "\n"
-        message += "Close: " + restaurant["close"] + "\n"
-        message += "Description: " + restaurant["description"] + "\n"
+        # message = "Here are some details about the restaurant: \n"
+        # message += "Name: " + restaurant["name"] + "\n"
+        # message += "Address: " + restaurant["address"] + "\n"
+        # message += "Open: " + restaurant["open"] + "\n"
+        # message += "Close: " + restaurant["close"] + "\n"
+        # message += "Description: " + restaurant["description"] + "\n"
 
         # send the message back to the user
-        dispatcher.utter_message(text=message)
+        dispatcher.utter_message(text="your restaurant details")
+        dispatcher.utter_message(text="Would you like to book this restaurant?")
         return []
 
 
@@ -179,7 +218,7 @@ class ActionShowBookingSummary(Action):
         restaurant_id = tracker.get_slot("restaurant_id")
 
         # get the restaurant data from the knowledge base
-        restaurant = await self.knowledge_base.get_object("restaurant", restaurant_id)
+        # restaurant = await self.knowledge_base.get_object("restaurant", restaurant_id)
 
         # get the date from the tracker
         date = tracker.get_slot("date")
@@ -188,7 +227,11 @@ class ActionShowBookingSummary(Action):
         time = tracker.get_slot("time")
 
         # generate the booking summary
-        message = "Shall I confirm your booking for " + restaurant["name"] + " located at " + restaurant["address"] + \
+        # message = "Shall I confirm your booking for " + restaurant["name"] + " located at " + restaurant["address"] + \
+        #           "on " + date + " at " + time + "."
+
+        # generate the booking summary
+        message = "Shall I confirm your booking for restaurant_name" + " located at " + "restaurant address" + \
                   "on " + date + " at " + time + "."
 
         # add a response after this asking if the user would like to confirm the booking
@@ -209,11 +252,15 @@ class ActionConfirmBooking(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        print('\n----------------------Slots-----------------------------------')
+        print(tracker.slots)
+        print('--------------------------------------------------------------------\n')
+
         # get the restaurant id from the tracker
         restaurant_id = tracker.get_slot("restaurant_id")
 
         # get the restaurant data from the knowledge base
-        restaurant = self.knowledge_base.get_object("restaurant", restaurant_id)
+        # restaurant = self.knowledge_base.get_object("restaurant", restaurant_id)
 
         # get the date from the tracker
         date_time = tracker.get_slot("date_time")
@@ -225,8 +272,12 @@ class ActionConfirmBooking(Action):
         time = date_time.split("T")[1]
 
         # generate the booking summary
-        message = "Your booking for " + restaurant["name"] + " located at " + restaurant["address"] + \
+        message = "Your booking for restaurant_name" + " located at " + "restaurant address" + \
                   "on " + date + " at " + time + " has been confirmed. Thank you for using our service."
+        #
+        # # generate the booking summary
+        # message = "Your booking for " + restaurant["name"] + " located at " + restaurant["address"] + \
+        #           "on " + date + " at " + time + " has been confirmed. Thank you for using our service."
 
         # send the message to the user
         dispatcher.utter_message(text=message)
@@ -267,3 +318,50 @@ class ActionQueryKnowledgeBase(Action):
         # tracker.get_slot("cuisine")
 
         return []
+
+######## Important Commented Code ########
+
+###### Documentation for bot - front web chat ######
+
+# TITLE: The title or text displayed on the button
+# TYPE: The type of button, which can be either "web_url" or "postback"
+# URL: The URL to open if the button is clicked (only used for "web_url" buttons)
+# PAYLOAD: The payload to send back to the server if the button is clicked (only used for "postback" buttons)
+
+# carousel = ResponseGenerator.option_carousal(carousal_objects)
+
+#
+#
+# carousal = COMPONENT_CAROUSAL
+# elements_list = []
+#
+# for restaurant in rest_list:
+#     card = {DEFAULT_ACTION: {TYPE: WEB_URL, URL: restaurant.get(IMAGE_URL)},
+#             IMAGE_URL: restaurant.get(IMAGE_URL), TITLE: restaurant.get(NAME),
+#             SUBTITLE: restaurant.get(CUISINE)}
+#
+#     buttons_list = []
+#
+#     button1 = {}
+#     button2 = {}
+#
+#     button1[URL] = restaurant.get(IMAGE_URL)
+#     button1[TITLE] = "VIEW_PAGE"
+#     # button1[TYPE] = WEB_URL
+#
+#     button2[URL] = restaurant.get(IMAGE_URL)
+#     button2[TITLE] = "Menu"
+#     button2[TYPE] = WEB_URL
+#
+#     buttons_list.append(button1)
+#     buttons_list.append(button2)
+#
+#     card[BUTTONS] = buttons_list
+#
+#     elements_list.append(card)
+#     # SUBCOMPONENT_CARD[]=restaurant.get()
+#     # SUBCOMPONENT_CARD[]=restaurant.get()
+#     # SUBCOMPONENT_CARD[]=restaurant.get()
+#     # SUBCOMPONENT_CARD[]=restaurant.get()
+#
+# carousal[PAYLOAD][ELEMENTS] = elements_list

@@ -1,5 +1,4 @@
-version: "3.1"
-# restaurant-inform.yml is a file where you define your NLU training data.
+version: "3.1" # restaurant-inform.yml is a file where you define your NLU training data.
 nlu:
   # User inform  bot
   - intent: inform_cuisine
@@ -9,6 +8,11 @@ nlu:
       - I want [Thai](cuisine) food
       - [Korean](cuisine) restaurants
       - [Chinese](cuisine) food
+      - I want to order some [Mexican](cuisine) food
+      - Can you recommend a good [Italian](cuisine) restaurant?
+      - I'm in the mood for [Thai](cuisine) food tonight
+      - [Japanese](cuisine) please
+      - I'm looking for a [Vietnam](cuisine) restaurant
 
   - intent: inform_location
     examples: |
@@ -16,7 +20,7 @@ nlu:
       - [south](location)
       - recommend a restaurant in [new york](location)
 
-  - intent: inform_people_count
+  - intent: inform_num_people
     examples: |
       - [5](num_people) people are joining
       - [10](num_people) people
@@ -26,6 +30,9 @@ nlu:
       - just [one](num_people) person
       - book for [seven](num_people) people
       - [2](num_people) please
+      - [2](num_people)
+      - [3](num_people)
+      - about [four](num_people) people
       - [nine](num_people) people
       - sorry make it for [four](num_people) people
 
@@ -58,7 +65,10 @@ nlu:
 
   - intent: inform_restaurant_id
     examples: |
-      - rtid_(restaurant_id)
+      - [rtid_290239](restaurant_id)
+      - [rtid_121290](restaurant_id)
+      - [rtid_121290](restaurant_id)
+      - [rtid_121290](restaurant_id)
 
   # find a way to extract date from descriptions apart from duckling server
   - intent: inform_date_time
@@ -73,7 +83,12 @@ nlu:
       - I want to make a reservation for this Thursday at 8 pm.
       - Do you have any tables available at 5:30 pm next Monday?
       - Can I reserve a table for 2 people on Friday, February 4th at 7 pm?
-      - I'd like to make a reservation for 3 people on Sunday, January 30th at 12:30 pm.
+      - I'd like to make a reservation for 3 people on Sunday, January 30th at 12:30 pm
+  
+
+  #  - intent: query_knowledge_base
+  #    examples: |
+  #      - I am looking for a [French](cuisine) restaurant in the [new york](location) area
 
   #  - intent: inform_restaurant_type
   #    examples: |

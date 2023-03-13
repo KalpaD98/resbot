@@ -17,7 +17,6 @@ pipeline:
     # to use multi intents added below two
     intent_tokenization_flag: True
     intent_split_symbol: "+"
-
   - name: RegexFeaturizer
   - name: LexicalSyntacticFeaturizer
   - name: CountVectorsFeaturizer # one hot encoding
@@ -25,9 +24,8 @@ pipeline:
     analyzer: char_wb
     min_ngram: 1
     max_ngram: 4
-
   - name: DIETClassifier
-    epochs: 200
+    epochs: 100
   #    learning_rate: 0.001 #  learning rate hyperparameter (0.001 default)
   #    number_of_transformer_layers: 4 # number of transformer layers hyperparameter (2 default)
   #    transformer_size: 256 # transformer size hyperparameter (256 default)
@@ -40,18 +38,15 @@ pipeline:
   #    hidden_layers_sizes: # hidden layers sizes hyperparameter
   #      text: [ 256, 128 ] # 256 FF -> 128 FF
   #      text: [ 512, 128 ] # 512 FF -> 128 FF
-
-  - name: utils.extractors.DateparserEntityExtractor
-    languages: [ "en" ]
-    prefer_dates_from: "future"
-    constrain_similarities: true
-
+  #
+  #  - name: utils.extractors.DateparserEntityExtractor
+  #    languages: [ "en" ]
+  #    prefer_dates_from: "future"
+  #    constrain_similarities: true
   - name: EntitySynonymMapper
-
   - name: ResponseSelector
     epochs: 100
     constrain_similarities: true
-
   - name: FallbackClassifier # added
     threshold: 0.6
     ambiguity_threshold: 0.1

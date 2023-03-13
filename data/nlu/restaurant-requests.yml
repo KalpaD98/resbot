@@ -2,7 +2,7 @@ version: "3.1"
 # restaurant-requests.yml has restaurant request examples for intents
 nlu:
   # user requests from bot
-  #----------------------------------------------REQUEST----------------------------------------------------------------
+  #--------------------------------------------- Request ---------------------------------------------------------------
   - intent: request_menu
     examples: |
       - can I see the menu of place [Danke](booking_place)
@@ -30,7 +30,7 @@ nlu:
       - show cuisines
       - cuisines
 
-  - intent: show_restaurants
+  - intent: request_restaurants
     examples: |
       - show me restaurants
       - show restaurants 

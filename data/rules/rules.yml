@@ -16,7 +16,28 @@ rules:
       - intent: out_of_scope
       - action: utter_out_of_scope
 
-  - rule: query knowledge base
+  - rule: when user ask to display cuisines show quick replies
     steps:
-      - intent: query_knowledge_base
-      - action: action_query_knowledge_base
+      - intent: request_cuisines
+      - action: action_show_cuisines
+
+  - rule: when user request restaurant display restaurants carousal
+    steps:
+      - intent: show_restaurants
+      - action: action_show_restaurants
+
+  # Experimental
+
+  #  - rule: query knowledge base
+  #    steps:
+  #      - intent: query_knowledge_base
+  #      - action: action_query_knowledge_base
+
+
+  # Rules can be useful when implementing: #https://rasa.com/docs/rasa/rules#rules
+
+  # One-turn interactions: Some messages do not require any context to answer them. Rules are an easy way to map intents to  responses, specifying fixed answers to these messages.
+
+  # Fallback behavior: In combination with the FallbackClassifier, you can write rules to respond to low-confidence user messages with a certain fallback behavior.
+
+  # Forms: Both activating and submitting a form will often follow a fixed path. You can also write rules to handle unexpected input during a form.

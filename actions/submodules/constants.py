@@ -7,11 +7,16 @@ GENERIC = "generic"
 ELEMENTS = "elements"
 DEFAULT_ACTION = "default_action"
 WEB_URL = "web_url"
+POST_BACK = "postback"
 URL = "url"
 IMAGE_URL = "image_url"
+PAGE_URL = "page_url"
 TITLE = "title"
 SUBTITLE = "subtitle"
 BUTTONS = "buttons"
+
+# Restaurant Constants
+ID = "id"
 
 #  Used in the Queries
 CITY = "city"
@@ -21,16 +26,15 @@ UPCOUNTRY = "Upcountry"
 COASTAL = "Coastal"
 
 RATINGS = "ratings"
-FIVE_STAR = "FiveStar"
-FOUR_STAR = "FourStar"
-THREE_STAR = "ThreeStar"
-TWO_STAR = "TwoStar"
-ONE_STAR = "OneStar"
+FIVE_STAR = "⭐️⭐️⭐️⭐️⭐️"
+FOUR_STAR = "⭐️⭐️⭐️⭐️️"
+THREE_STAR = "⭐️⭐️⭐️"
+TWO_STAR = "⭐️⭐️️"
+ONE_STAR = "⭐️️"
 
 # Restaurant details
 RESTAURANT_URL = "url"
 NAME = "name"
-RATINGS = "ratings"
 MENU = "menu"
 
 # Cuisines categories
@@ -41,7 +45,7 @@ SRI_LANKAN = "Sri Lankan"
 THAI = "Thai"
 
 # Categories
-
+# add categories from the dataset
 
 # Components
 COMPONENT_CAROUSAL = {TYPE: TEMPLATE, PAYLOAD: {TEMPLATE_TYPE: GENERIC}}

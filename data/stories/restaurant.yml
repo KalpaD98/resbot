@@ -1,7 +1,43 @@
 version: "3.1"
 # stories/restaurant.yml has stories for the restaurant bot
+
+# Because rules do not generalize to unseen conversations, you should reserve them for single-turn conversation snippets, and use stories to train on multi-turn conversations.
+
 stories:
-  - story: greet + search restaurant
+  # ---------------------------------------------- Happy Paths ------------------------------------------------------- #
+  # Happy path for booking a restaurant
+
+  - story: Book a restaurant
+    steps:
+      - action: utter_checkout_restaurants
+      - intent: affirm
+      - action: action_show_cuisines
+      - intent: inform_cuisine
+      - action: action_show_restaurants
+      - intent: inform_restaurant_id
+      - slot_was_set:
+          - restaurant_id: [ "rtid_121290" ]
+      - action: action_show_selected_restaurant_details
+      - action: utter_wanna_book
+      - intent: affirm
+      - action: utter_ask_num_people
+      - intent: inform_num_people
+      - slot_was_set:
+          - num_people: [ 2 ]
+      - action: utter_ask_date_time
+      - intent: inform_date_time
+      - slot_was_set:
+          - date_time: [ "2023-04-01T12:00:00+00:00" ]
+      - action: action_show_booking_summary
+      - action: utter_ask_to_confirm_booking
+      - intent: affirm # or mood great or emoji mood great intent (there is a problem in this story)
+      - action: action_confirm_booking # after confirming send dispatch a message
+
+  # ----------------------------------------------- Sub Stories -------------------------------------------------------- #
+
+  # These stories are broken down into sub-stories to make them easier to understand when user interrupts the flow.
+
+  - story: display restaurant list
     steps:
       - action: utter_checkout_restaurants
       - intent: affirm
@@ -9,9 +45,15 @@ stories:
       - intent: inform_cuisine
       - action: action_show_restaurants
 
-  - story: show restaurant list
+  - story: show restaurant list + filter by cuisine
     steps:
-      - intent: show_restaurants
+      - intent: request_cuisines
+      - action: action_show_cuisines
+      - intent: inform_cuisine
+      - active_loop: cuisine_form
+      - active_loop: null
+      - slot_was_set:
+          - cuisine: [ "Italian" ]
       - action: action_show_restaurants
 
   - story: User selects a restaurant
@@ -22,7 +64,6 @@ stories:
           - restaurant_id: [ "rtid_121290" ]
       - action: action_show_selected_restaurant_details
 
-  # ---------------------------------------------------------------------------------------------------------------------
   - story: Inform date and time
     steps:
       - action: utter_ask_date_time
@@ -33,7 +74,7 @@ stories:
   - story: Inform number of people
     steps:
       - action: utter_ask_num_people
-      - intent: inform_people_count
+      - intent: inform_num_people
       - slot_was_set:
           - num_people: [ "2" ]
 
@@ -45,9 +86,4 @@ stories:
       - action: utter_ask_to_confirm_booking
       - intent: affirm
 
-  # ---------
-
-  - story: knowledge query
-    steps:
-      - intent: query_knowledge_base
-      - action: action_query_knowledge_base
+# ---------------------------------------------- Knowledge Base -------------------------------------------------------- #
