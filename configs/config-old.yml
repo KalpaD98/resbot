@@ -13,15 +13,14 @@ pipeline:
   # If you'd like to customize it, uncomment and adjust the pipeline.
   # See https://rasa.com/docs/rasa/tuning-your-model for more information.
   # language model
-  - name: SpacyNLP
-    model: en_core_web_trf
-  - name: SpacyTokenizer
+  - name: WhitespaceTokenizer
+
     intent_tokenization_flag: True # to use multi intents
     intent_split_symbol: "+"
-  - name: SpacyFeaturizer
   - name: RegexFeaturizer
   - name: LexicalSyntacticFeaturizer
   - name: CountVectorsFeaturizer # one hot encoding
+
   - name: CountVectorsFeaturizer # char level
     analyzer: char_wb
     min_ngram: 1

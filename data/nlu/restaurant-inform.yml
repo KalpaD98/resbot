@@ -9,10 +9,18 @@ nlu:
       - [Korean](cuisine) restaurants
       - [Chinese](cuisine) food
       - I want to order some [Mexican](cuisine) food
-      - Can you recommend a good [Italian](cuisine) restaurant?
+      - [Italian](cuisine) restaurant
       - I'm in the mood for [Thai](cuisine) food tonight
       - [Japanese](cuisine) please
       - I'm looking for a [Vietnam](cuisine) restaurant
+      - looking for a [Vietnam](cuisine) restaurant
+      - I'm in the mood for something different. How about [Korean](cuisine) food?
+      - craving for [Mexican](cuisine) food
+      - craving for some [Italian](cuisine) food
+      - [Any](cuisine) cuisine
+      - whatever [Any](cuisine) cuisine 
+      - [Any](cuisine) thing
+      - [Multi](cuisine) cuisine
 
   - intent: inform_location
     examples: |

@@ -10,9 +10,6 @@ pipeline:
   - name: RegexFeaturizer
   - name: LexicalSyntacticFeaturizer
   - name: CountVectorsFeaturizer
-  # REMOVE IF CAUSES ERROR
-  - name: "SpacyEntityExtractor"
-    dimensions: [ "PERSON","DATE","TIME" ]
     analyzer: char_wb
     min_ngram: 1
     max_ngram: 4

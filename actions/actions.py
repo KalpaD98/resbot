@@ -30,8 +30,8 @@ class ActionShowCuisines(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         # get top 10 personalised cuisines for a particular user from the recommendation engine
 
-        cuisines = ['Any Cuisine', 'Italian', 'Mexican', 'Vietnamese', 'Thai', 'Japanese', 'Korean']
-
+        cuisines = ['Any', 'Italian', 'Mexican', 'Vietnamese', 'Thai', 'Japanese', 'Korean']
+        # generate synonyms for 'Any' cuisine
         # Add payload to quick replies
         cuisines_with_entity_payload = []
         for cuisine in cuisines:
@@ -196,8 +196,7 @@ class ActionShowSelectedRestaurantDetails(Action):
         # message += "Description: " + restaurant["description"] + "\n"
 
         # send the message back to the user
-        dispatcher.utter_message(text="your restaurant details")
-        dispatcher.utter_message(text="Would you like to book this restaurant?")
+        dispatcher.utter_message(text="your restaurant details\n Name, Address, Open, Close, Description")
         return []
 
 
@@ -236,7 +235,7 @@ class ActionShowBookingSummary(Action):
 
         # add a response after this asking if the user would like to confirm the booking
         # send the message to the user
-        dispatcher.utter_message(text=message)
+        dispatcher.utter_message(text="Booking summary message here")
         return []
 
 
