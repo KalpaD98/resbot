@@ -24,10 +24,10 @@ stories:
       - intent: inform_num_people
       - slot_was_set:
           - num_people: [ 2 ]
-      - action: utter_ask_date_time
-      - intent: inform_date_time
+      - action: utter_ask_date
+      - intent: inform_date
       - slot_was_set:
-          - date_time: [ "2023-04-01T12:00:00+00:00" ]
+          - date: [ "2023-04-01" ]
       - action: action_show_booking_summary
       - action: utter_ask_to_confirm_booking
       - intent: affirm # or mood great or emoji mood great intent (there is a problem in this story)
@@ -66,10 +66,10 @@ stories:
 #
 #  - story: Inform date and time
 #    steps:
-#      - action: utter_ask_date_time
-#      - intent: inform_date_time
+#      - action: utter_ask_date
+#      - intent: inform_date
 #      - slot_was_set:
-#          - date_time: [ "2020-01-01T12:00:00+00:00" ]
+#          - date: [ "2020-01-01" ]
 #
 #  - story: Inform number of people
 #    steps:

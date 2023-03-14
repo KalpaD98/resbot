@@ -237,11 +237,11 @@ class ActionShowBookingSummary(Action):
         # restaurant = await self.knowledge_base.get_object("restaurant", restaurant_id)
 
         # get the date from the tracker
-        # date = tracker.get_slot("date_time")
+        # date = tracker.get_slot("date")
 
         # generate the booking summary
-        # message = "Shall I confirm your booking for " + restaurant["name"] + " located at " + restaurant["address"] + \
-        #           "on " + date + " at " + time + "."
+        # message = "Shall I confirm your booking for " + restaurant["name"] + " located at " + \
+        #           restaurant["address"] + "on " + date + " at " + time + "."
 
         # add a response after this asking if the user would like to confirm the booking
         # send the message to the user
@@ -261,7 +261,6 @@ class ActionConfirmBooking(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-
         print('\n----------------------Slots-----------------------------------')
         logging.info(tracker.slots)
         print('--------------------------------------------------------------------\n')
@@ -273,20 +272,9 @@ class ActionConfirmBooking(Action):
         # restaurant = self.knowledge_base.get_object("restaurant", restaurant_id)
 
         # get the date from the tracker
-        date_time = tracker.get_slot("date_time")
-        if date_time is None:
-            logging.info("Date and time not set")
-            dispatcher.utter_message(
-                text="I did not understood the date and time. Please try again (Ex: 202X/XX/XX 7:30 p.m.).")
-        else:
-            # extract the date from the date_time slot
-            if "T" in date_time:
-                date = date_time.split("T")[0]
-                # extract the time from the date_time slot
-                time = date_time.split("T")[1]
-            else:
-                date = date_time
-                time = ""
+        date = tracker.get_slot("date")
+        if date is None:
+            logging.info("Date not set")
 
             # generate the booking summary
             message = "Your booking for restaurant_name" + " located at " + "restaurant address" + \
