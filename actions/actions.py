@@ -11,7 +11,7 @@ from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.knowledge_base.storage import InMemoryKnowledgeBase
 
 from actions.submodules.constants import *
-from actions.submodules.constants import TITLE
+from actions.submodules.constants import TITLE, SUBCOMPONENT_BUTTON_PAYLOAD
 from actions.submodules.mock_data import *
 from actions.submodules.response_generator import ResponseGenerator
 
