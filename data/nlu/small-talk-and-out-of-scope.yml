@@ -8,9 +8,17 @@ nlu:
       - am I talking to a bot?
       - am I talking to a human?
 
+  - intent: bot_challenge/what_can_you_do
+    examples: |
+      - what can you do?
+      - what can you do for me?
+
   - intent: bot_challenge/who_are_you
     examples: |
       - who are you?
+      - what are you?
+      - what are you doing?
+      - what is your name?
 
   - intent: out_of_scope/out_of_functionality
     examples: |

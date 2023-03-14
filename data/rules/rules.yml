@@ -1,10 +1,6 @@
 version: "3.1"
 # rules.yml has rules for the bot
 rules:
-  - rule: Say goodbye anytime the user says goodbye
-    steps:
-      - intent: goodbye
-      - action: utter_goodbye
 
   - rule: bot challenge
     steps:

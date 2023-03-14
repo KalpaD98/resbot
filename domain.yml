@@ -263,13 +263,13 @@ actions:
 responses:
 
   utter_greet:
-    - text: Hey! How are you?
-    - text: Hi! How are you?
-    - text: Hello! How are you?
-    - text: Hi 😃 there! How are you?
-    - text: Hey there! How are you?
-    - text: Hello there! How are you?
-    - text: Hello 😀 How are you?
+    - text: Hey!
+    - text: Hi!
+    - text: Hello!
+    - text: Hi 😃 there!
+    - text: Hey there!
+    - text: Hello there 😀 ?
+    - text: Hello 😀 there!
 
   # Implement below if you want to greet the user by name
 
@@ -325,14 +325,14 @@ responses:
     - text: Have you signed up with us in the past?
     - text: Do you have an existing account with us?
 
-  utter_wanna_book:
-    - text: Do you want to book a table?
-    - text: Would you like to make a booking?
-    - text: Would you like to make a reservation?
-    - text: Shall we proceed with a booking?
-    - text: Do you want to make a booking?
-    - text: Do you want to book a table?
-    - text: Do you want to make a reservation?
+  #  utter_wanna_book:
+  #    - text: Do you want to book a table?
+  #    - text: Would you like to make a booking?
+  #    - text: Would you like to make a reservation?
+  #    - text: Shall we proceed with a booking?
+  #    - text: Do you want to make a booking?
+  #    - text: Do you want to book a table?
+  #    - text: Do you want to make a reservation?
 
   utter_ask_date:
     - text: When would you like to make the booking? (Enter a date in the format DD-MM-YYYY)
@@ -362,13 +362,16 @@ responses:
     - text: Eating something might help 😄
     - text: Eating something might help 😃
 
+  utter_thank_you:
+    - text: Thank you for using our service.
+
   utter_goodbye:
     - text: Bye
     - text: Goodbye
+
+  utter_goodbye_again:
     - text: Farewell
     - text: See you later
-    - text: Take care
-    - text: Ciao
 
   utter_bot_challenge/bot:
     - text: I am ResBot, powered by Rasa.
@@ -376,9 +379,16 @@ responses:
     - text: I am ResBot, a bot built using Rasa.
 
   utter_bot_challenge/who_are_you:
-    - text: I am ResBot, I can recommend you restaurants and help you make a booking 🍴.
+    - text: I am ResBot, I can recommend you restaurants and help you make a reservation 🍴.
     - text: I am ResBot, I can help you find restaurants  and make a booking 🧂.
     - text: I am ResBot, I can help you find restaurants and book a table 🍽️.
+
+  utter_bot_challenge/what_can_you_do:
+    - text: I can help you book a restaurant 🍴.
+    - text: I can help you find restaurants and book a table 🍽️.
+    - text: I can help you find restaurants and book a table 🧂.
+    - text: I can help you find restaurants and book a table 🍽️.
+    - text: I can help you find restaurants and book a table 🍴.
 
   utter_ask_rephrase:
     - text: Sorry, I'm not sure I understand. Can you rephrase?
@@ -405,6 +415,8 @@ responses:
 
   utter_out_of_scope/hotel:
     - text: I understand you want to book a hotel, but i'm afraid i can't handle that skill yet 😢.
+
+
 
 config:
   store_entities_as_slots: true

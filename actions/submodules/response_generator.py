@@ -1,10 +1,6 @@
 import logging
 import sys
-
-from rasa_sdk.executor import CollectingDispatcher
-
 from actions.submodules.constants import *
-
 sys.path.append("/Users/kalpafernando/PycharmProjects/resbot/actions/submodules")
 
 
@@ -16,20 +12,18 @@ class ResponseGenerator:
     # this method has quick_replies_list, message and dispatcher as parameters
     # method is used to generate the quick replies for the bot front chat widget
     @staticmethod
-    def quick_replies(text_message, quick_replies_list, dispatcher: CollectingDispatcher, with_payload=False):
-        quick_reply_data_list = []
+    def quick_replies(quick_replies_list, with_payload=False):
+        quick_reply_text_icons = []
 
-        # loop through the quick replies and add them to the quick_reply_data_list list
+        # loop through the quick replies and add them to the quick_reply_text_icons list
         for quick_reply in quick_replies_list:
             if with_payload:
-
-                quick_reply_data_list.append(
+                quick_reply_text_icons.append(
                     {TITLE: quick_reply.get(TITLE), PAYLOAD: quick_reply.get(PAYLOAD)})
             else:
-                quick_reply_data_list.append({TITLE: quick_reply, PAYLOAD: quick_reply})
+                quick_reply_text_icons.append({TITLE: quick_reply, PAYLOAD: quick_reply})
 
-        # Add the quick replies to the response
-        dispatcher.utter_message(text=text_message, quick_replies=quick_reply_data_list)
+        return quick_reply_text_icons
 
     # -----------------------------------------------------------------------------------------------------------------#
     # this method has message, carousal_data,  and dispatcher as parameters
@@ -51,9 +45,6 @@ class ResponseGenerator:
             buttons_list = carousal_object.get(BUTTONS)
 
             card[BUTTONS] = buttons_list
-            print()
-            print(card)
-            print()
             elements_list.append(card)
 
         carousel[PAYLOAD][ELEMENTS] = elements_list

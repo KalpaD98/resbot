@@ -38,17 +38,17 @@ class ActionShowCuisines(Action):
         for cuisine in cuisines:
             cuisines_with_entity_payload.append({TITLE: cuisine, PAYLOAD: cuisine})
 
-        ResponseGenerator.quick_replies("Please choose a cuisine", cuisines_with_entity_payload, dispatcher,
-                                        with_payload=True)
+        # Generate quick replies with Response Generator
+        quick_replies_cuisines = ResponseGenerator.quick_replies(cuisines_with_entity_payload, with_payload=True)
 
-        # this is for vanilla JS UI
-        # data = [{"title": cuisine, "payload": cuisine + "_payload"} for cuisine in cuisines]
-        #
-        # # This is working for normal UI
-        # message = {"payload": "quickReplies", "data": data}
-        # dispatcher.utter_message(text="Please choose a cuisine", json_message=message)
+        dispatcher.utter_message(text="Please choose a cuisine", quick_replies=quick_replies_cuisines)
 
         return []
+        # this is for vanilla JS UI
+        # data = [{"title": cuisine, "payload": cuisine + "_payload"} for cuisine in cuisines]
+
+        # # This is working for normal UI
+        # message = {"payload": "quickReplies", "data": data}
 
 
 # action to show top restaurants based on user preferences and the given cuisine (or without specific cuisine).
@@ -141,13 +141,13 @@ class ActionShowRestaurants(Action):
             # carousal_object[DEFAULT_ACTION] = default_action_payload # add a title for def action if possible
             carousal_objects.append(carousal_object)
 
-        dispatcher.utter_message(text="Here are some restaurants I found:",
+        dispatcher.utter_message(text="Here are some " + cuisine.lower() + "restaurants I found:",
                                  attachment=ResponseGenerator.option_carousal(carousal_objects))
 
         return []
 
 
-# action_request_more_restaurant_options.
+# TODO: action_request_more_restaurant_options.
 # This function is used to pull more restaurant options for the user if they request for more.
 class ActionRequestMoreRestaurantOptions(Action):
 
@@ -207,9 +207,17 @@ class ActionShowSelectedRestaurantDetails(Action):
         # message += "Close: " + restaurant["close"] + "\n"
         # message += "Description: " + restaurant["description"] + "\n"
 
+        # Send the image to the user
+        # dispatcher.utter_message(image=image_path)
+
         # send the message back to the user
-        dispatcher.utter_message(text="here's your restaurant details")
-        dispatcher.utter_message(text="Name, Address, Open, Close, Description")
+        dispatcher.utter_message(text="Details of <Restaurant Name>")
+        # add multiple messages for each below
+        dispatcher.utter_message(text="<small description>, <address>, <Opening hours [weekend,weekdays]>")
+        # TODO: after this bot utters Do you want to book a table?.
+        dispatcher.utter_message(
+            text="Would like to book a table at <restaurant_name>?",
+            quick_replies=ResponseGenerator.quick_replies(["Yes", "No"]))
         return []
 
 
@@ -239,13 +247,22 @@ class ActionShowBookingSummary(Action):
         # get the date from the tracker
         # date = tracker.get_slot("date")
 
+        # send the message to the user
+        dispatcher.utter_message(text="Your booking summary is as follows:")
         # generate the booking summary
         # message = "Shall I confirm your booking for " + restaurant["name"] + " located at " + \
         #           restaurant["address"] + "on " + date + " at " + time + "."
+        dispatcher.utter_message(text="<Booking summary message here>")
 
-        # add a response after this asking if the user would like to confirm the booking
-        # send the message to the user
-        dispatcher.utter_message(text="Booking summary message here")
+        # ask to confirm the booking
+        # dispatch a message asking if the user would like to confirm the booking with quick replies <FIX>
+
+        ResponseGenerator.quick_replies(["Yes", "No"])
+        # if yes confirm the booking, save in database and send a message to the user (in next action)
+        # TODO: if no -> ask if they would like to book a table of another restaurant or exit
+        dispatcher.utter_message(text="Would you like to confirm this booking?",
+                                 quick_replies=ResponseGenerator.quick_replies(["Yes", "No"]))
+        # "Please choose a cuisine",
         return []
 
 
@@ -267,6 +284,7 @@ class ActionConfirmBooking(Action):
 
         # get the restaurant id from the tracker
         restaurant_id = tracker.get_slot("restaurant_id")
+        user_id = tracker.get_slot("user_id")
 
         # get the restaurant data from the knowledge base
         # restaurant = self.knowledge_base.get_object("restaurant", restaurant_id)

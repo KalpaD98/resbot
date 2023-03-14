@@ -2,15 +2,28 @@ version: "3.1" # greeting.yml has general stories for the restaurant bot
 
 stories:
 
-  - story: greet
+  - story: Say goodbye when user says goodbye
+    steps:
+      - intent: goodbye
+      - action: utter_goodbye
+
+  - story: greet + introduce bot
     steps:
       - intent: greet
       - action: utter_greet
+      - action: utter_bot_challenge/who_are_you
+
+  - story: good bye again
+    steps:
+      - action: utter_goodbye
+      - intent: goodbye
+      - action: utter_goodbye_again
 
   - story: greet + request restaurant
     steps:
       - intent: greet
       - action: utter_greet
+      - action: utter_bot_challenge/who_are_you
       - intent: request_restaurants
       - action: action_show_restaurants
 
@@ -18,8 +31,11 @@ stories:
     steps:
       - intent: greet
       - action: utter_greet
+      - action: utter_bot_challenge/who_are_you
       - intent: greet
       - action: utter_greet_again
+      - intent: greet
+      - action: utter_checkout_restaurants
 
   - story: after greet + mood great + ask checkout restaurant
     steps:

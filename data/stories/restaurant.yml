@@ -1,24 +1,30 @@
 version: "3.1"
 # stories/restaurant.yml has stories for the restaurant bot
-
 # Because rules do not generalize to unseen conversations, you should reserve them for single-turn conversation snippets, and use stories to train on multi-turn conversations.
 
 stories:
   # ---------------------------------------------- Happy Paths ------------------------------------------------------- #
   # Happy path for booking a restaurant
 
-  - story: Book a restaurant
+  - story: greet and book restaurant happy path
     steps:
+      - intent: greet
+      - action: utter_greet
       - action: utter_checkout_restaurants
       - intent: affirm
       - action: action_show_cuisines
       - intent: inform_cuisine
       - action: action_show_restaurants
+      # from here onwards few main things can happen
+      # user ask for details,
+      # check menu of restaurant,
+      # directly wants to book a restaurant
+      # wants to check out more restaurants,
+      # search restaurants by criteria they provide
       - intent: inform_restaurant_id
       - slot_was_set:
           - restaurant_id: [ "rtid_121290" ]
       - action: action_show_selected_restaurant_details
-      - action: utter_wanna_book
       - intent: affirm
       - action: utter_ask_num_people
       - intent: inform_num_people
@@ -31,7 +37,9 @@ stories:
       - action: action_show_booking_summary
       - action: utter_ask_to_confirm_booking
       - intent: affirm # or mood great or emoji mood great intent (there is a problem in this story)
-      - action: action_confirm_booking # after confirming send dispatch a message
+      - action: action_confirm_booking
+      - action: utter_thank_you
+      - action: utter_goodbye
 
   # ----------------------------------------------- Sub Stories -------------------------------------------------------- #
 
