@@ -141,7 +141,7 @@ class ActionShowRestaurants(Action):
             # carousal_object[DEFAULT_ACTION] = default_action_payload # add a title for def action if possible
             carousal_objects.append(carousal_object)
 
-        dispatcher.utter_message(text="Here are some " + cuisine.lower() + "restaurants I found:",
+        dispatcher.utter_message(text="Here are some " + cuisine.lower() + " restaurants I found:",
                                  attachment=ResponseGenerator.option_carousal(carousal_objects))
 
         return []

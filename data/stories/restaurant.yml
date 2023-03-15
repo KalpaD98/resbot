@@ -5,15 +5,17 @@ version: "3.1"
 stories:
   # ---------------------------------------------- Happy Paths ------------------------------------------------------- #
   # Happy path for booking a restaurant
+  # can use intent: sorry to roll back to previous story
 
   - story: greet and book restaurant happy path
     steps:
       - intent: greet
       - action: utter_greet
+      - action: utter_bot_challenge/who_are_you
       - action: utter_checkout_restaurants
       - intent: affirm
-      - action: action_show_cuisines
-      - intent: inform_cuisine
+      - action: action_show_cuisines # can break from this point inform cuisines or deny can come next
+      - intent: inform_cuisine # if user does not want to select cuisine? (intent deny also include here)
       - action: action_show_restaurants
       # from here onwards few main things can happen
       # user ask for details,
@@ -21,7 +23,7 @@ stories:
       # directly wants to book a restaurant
       # wants to check out more restaurants,
       # search restaurants by criteria they provide
-      - intent: inform_restaurant_id
+      - intent: inform_restaurant_id # change to view details of restaurant
       - slot_was_set:
           - restaurant_id: [ "rtid_121290" ]
       - action: action_show_selected_restaurant_details
@@ -35,11 +37,15 @@ stories:
       - slot_was_set:
           - date: [ "2023-04-01" ]
       - action: action_show_booking_summary
-      - action: utter_ask_to_confirm_booking
+      # - action: utter_ask_to_confirm_booking  # remove this line because previous action already asks for confirmation
       - intent: affirm # or mood great or emoji mood great intent (there is a problem in this story)
       - action: action_confirm_booking
       - action: utter_thank_you
       - action: utter_goodbye
+
+
+
+  # ---------------------------------------------- Unhappy Paths ----------------------------------------------------- #
 
   # ----------------------------------------------- Sub Stories -------------------------------------------------------- #
 
