@@ -74,9 +74,19 @@ nlu:
   - intent: inform_restaurant_id
     examples: |
       - [rtid_290239](restaurant_id)
-      - [rtid_121290](restaurant_id)
-      - [rtid_121290](restaurant_id)
-      - [rtid_121290](restaurant_id)
+      - [rtid_121293](restaurant_id)
+      - [rtid_122284](restaurant_id)
+      - [rtid_121391](restaurant_id)
+
+  - intent: inform_booking_restaurant_id
+    examples: |
+      - book [rtid_290239](restaurant_id)
+      - book restaurant [rtid_121293](restaurant_id)
+
+  - intent: inform_view_details_restaurant_id
+    examples: |
+      - view details [rtid_290239](restaurant_id)
+      - view details of restaurant [rtid_121293](restaurant_id)
 
   # find a way to extract date from descriptions apart from duckling server
   - intent: inform_date

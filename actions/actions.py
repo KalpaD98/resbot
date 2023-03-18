@@ -121,16 +121,16 @@ class ActionShowRestaurants(Action):
 
             button1 = SUBCOMPONENT_BUTTON_URL.copy()
             button1[TITLE] = "Check Menu"
-            button1[URL] = restaurant.get(IMAGE_URL)  # later replace this with restaurant menu url
+            button1[URL] = "view menu " + restaurant.get(IMAGE_URL)  # later replace this with restaurant menu url
 
             button2 = SUBCOMPONENT_BUTTON_PAYLOAD.copy()
             button2[TITLE] = "Book Table"
-            button2[PAYLOAD] = '/book_restaurant{{"restaurant_id": "' + restaurant.get(ID) + '"}}'
+            button2[PAYLOAD] = "book" + restaurant.get(ID)
             # book table intent has not been added yet, example: book rtid_s3wjdsud3, book restaurant rtid_s3wjdsud3
 
             button3 = SUBCOMPONENT_BUTTON_PAYLOAD.copy()
             button3[TITLE] = "View Details"
-            button3[PAYLOAD] = restaurant.get(ID)
+            button3[PAYLOAD] = "view details " + restaurant.get(ID)
 
             buttons.append(button1)
             buttons.append(button3)

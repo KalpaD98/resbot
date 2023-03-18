@@ -36,6 +36,8 @@ intents:
   - inform_num_people
   - inform_restaurant_name
   - inform_restaurant_id
+  - inform_booking_restaurant_id
+  - inform_view_details_restaurant_id
   - inform_date
 
   # --------- restaurant-knowledge-query ------
@@ -415,7 +417,6 @@ responses:
 
   utter_out_of_scope/hotel:
     - text: I understand you want to book a hotel, but i'm afraid i can't handle that skill yet 😢.
-
 
 
 config:

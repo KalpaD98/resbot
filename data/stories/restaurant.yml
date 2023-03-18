@@ -4,7 +4,7 @@ version: "3.1"
 
 stories:
   # ---------------------------------------------- Happy Paths ------------------------------------------------------- #
-  # Happy path for booking a restaurant
+  # Happy path initiation
   # can use intent: sorry to roll back to previous story
 
   - story: greet and book restaurant happy path
@@ -16,18 +16,46 @@ stories:
       - intent: affirm
       - action: action_show_cuisines # can break from this point inform cuisines or deny can come next
       - intent: inform_cuisine # if user does not want to select cuisine? (intent deny also include here)
+
       - action: action_show_restaurants
-      # from here onwards few main things can happen
-      # user ask for details,
-      # check menu of restaurant,
-      # directly wants to book a restaurant
-      # wants to check out more restaurants,
-      # search restaurants by criteria they provide
-      - intent: inform_restaurant_id # change to view details of restaurant
+    #      # from here onwards few main things can happen
+    #      # user ask for details,
+    #      # check menu of restaurant,
+    #      # directly wants to book a restaurant
+    #      # wants to check out more restaurants,
+    #      # search restaurants by criteria they provide
+    #
+    #      - intent: inform_restaurant_id # change to view details of restaurant
+    #      - slot_was_set:
+    #          - restaurant_id: [ "rtid_121290" ]
+    #      - action: action_show_selected_restaurant_details
+    #      - intent: affirm
+    #      - action: utter_ask_num_people
+    #      - intent: inform_num_people
+    #      - slot_was_set:
+    #          - num_people: [ 2 ]
+    #      - action: utter_ask_date
+    #      - intent: inform_date
+    #      - slot_was_set:
+    #          - date: [ "2023-04-01" ]
+    #      - action: action_show_booking_summary
+    #      # - action: utter_ask_to_confirm_booking  # remove this line because previous action already asks for confirmation
+    #      - intent: affirm # or mood great or emoji mood great intent (there is a problem in this story)
+    #      - action: action_confirm_booking
+    #      - action: utter_thank_you
+    #      - action: utter_goodbye
+
+
+    # Continuation from Happy path initiation -> Happy path for user ask for detail and book restaurant
+
+  - story: book restaurant after view details happy path
+    steps:
+      - action: action_show_restaurants
+      - intent: inform_view_details_restaurant_id #view details of restaurant
       - slot_was_set:
           - restaurant_id: [ "rtid_121290" ]
-      - action: action_show_selected_restaurant_details
-      - intent: affirm
+      - action: action_show_selected_restaurant_details # after this ask don't ask for confirmation
+      - intent: affirm # add new intent to catch if you would like to book or not
       - action: utter_ask_num_people
       - intent: inform_num_people
       - slot_was_set:
@@ -44,6 +72,28 @@ stories:
       - action: utter_goodbye
 
 
+  # Happy path for user directly wants to book a restaurant selected from carousal
+  - story: book restaurant directly happy path
+    steps:
+      - action: action_show_restaurants
+      - intent: inform_booking_restaurant_id # book restaurant
+      - slot_was_set:
+          - restaurant_id: [ "rtid_121290" ]
+      - action: action_show_selected_restaurant_details # update the action a bit to match the case in this story
+      - intent: affirm
+      - action: utter_ask_num_people
+      - intent: inform_num_people
+      - slot_was_set:
+          - num_people: [ 2 ]
+      - action: utter_ask_date
+      - intent: inform_date
+      - slot_was_set:
+          - date: [ "2023-04-01" ]
+      - action: action_show_booking_summary
+      - intent: affirm # or mood great or emoji mood great intent (there is a problem in this story)
+      - action: action_confirm_booking
+      - action: utter_thank_you
+      - action: utter_goodbye
 
   # ---------------------------------------------- Unhappy Paths ----------------------------------------------------- #
 
