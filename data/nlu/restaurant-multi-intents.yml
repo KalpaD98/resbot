@@ -19,5 +19,12 @@ nlu:
 
   # can have multi intents -> date + time, date + time + num_people
 
+  - intent: search_restaurant + inform_date + inform_time + inform_num_people
+    examples: |
+      - i need to find a restaurant that serves [chinese](cuisine) food and is [open now](opening_hours) for [5](num_people) people
+      - Can you recommend a restaurant that is open [late](opening_hours) for [10](num_people) people?
+      - I'm looking for a restaurant that is open [early](opening_hours) for [2](num_people) people
+      - Can you suggest a restaurant that is open [24 hours](opening_hours) for [3](num_people) people?
+
   # early since 6 a.m
   # late till midnight (00:00)

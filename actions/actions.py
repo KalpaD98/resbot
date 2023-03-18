@@ -142,7 +142,7 @@ class ActionShowRestaurants(Action):
             carousal_objects.append(carousal_object)
 
         dispatcher.utter_message(text="Here are some " + cuisine.lower() + " restaurants I found:",
-                                 attachment=ResponseGenerator.option_carousal(carousal_objects))
+                                 attachment=ResponseGenerator.card_options_carousal(carousal_objects))
 
         return []
 
@@ -218,6 +218,48 @@ class ActionShowSelectedRestaurantDetails(Action):
         dispatcher.utter_message(
             text="Would like to book a table at <restaurant_name>?",
             quick_replies=ResponseGenerator.quick_replies(["Yes", "No"]))
+        return []
+
+
+# action_select_restaurant_ask_booking_confirmation.
+class ActionBookSelectedRestaurant(Action):
+    def name(self) -> Text:
+        return "action_select_restaurant_ask_booking_confirmation"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        # print slots
+        print('\n----------------------Slots-----------------------------------')
+        logging.info(tracker.slots)
+        print('--------------------------------------------------------------------\n')
+
+        # get the restaurant id from the tracker
+        restaurant_id = tracker.get_slot("restaurant_id")
+
+        if restaurant_id is None:
+            logging.info("Restaurant ID not set")
+
+        # get the restaurant data from the knowledge base
+        # restaurant = await self.knowledge_base.get_object("restaurant", restaurant_id)
+
+        # create a message to show the restaurant details
+        # message = "Here are some details about the restaurant: \n"
+        # message += "Name: " + restaurant["name"] + "\n"
+        # message += "Address: " + restaurant["address"] + "\n"
+        # message += "Open: " + restaurant["open"] + "\n"
+        # message += "Close: " + restaurant["close"] + "\n"
+        # message += "Description: " + restaurant["description"] + "\n"
+
+        # Send the image to the user
+        # dispatcher.utter_message(image=image_path)
+
+        # send the message back to the user
+        dispatcher.utter_message(text="You have selected <Restaurant Name>")
+        # add multiple messages for each below
+        dispatcher.utter_message(text="<small description>, <address>, <Opening hours [weekend,weekdays]>")
+        dispatcher.utter_message(text="Would you like to book a table at <restaurant_name>?")
+
         return []
 
 

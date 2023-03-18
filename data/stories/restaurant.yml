@@ -19,9 +19,9 @@ stories:
 
       - action: action_show_restaurants
     #      # from here onwards few main things can happen
-    #      # user ask for details,
-    #      # check menu of restaurant,
-    #      # directly wants to book a restaurant
+    #      # user ask for details, ✅
+    #      # check menu of restaurant,  ✅ -> Menu URL button
+    #      # directly wants to book a restaurant  ✅
     #      # wants to check out more restaurants,
     #      # search restaurants by criteria they provide
     #
@@ -54,7 +54,7 @@ stories:
       - intent: inform_view_details_restaurant_id #view details of restaurant
       - slot_was_set:
           - restaurant_id: [ "rtid_121290" ]
-      - action: action_show_selected_restaurant_details # after this ask don't ask for confirmation
+      - action: action_show_selected_restaurant_details
       - intent: affirm # add new intent to catch if you would like to book or not
       - action: utter_ask_num_people
       - intent: inform_num_people
@@ -79,7 +79,7 @@ stories:
       - intent: inform_booking_restaurant_id # book restaurant
       - slot_was_set:
           - restaurant_id: [ "rtid_121290" ]
-      - action: action_show_selected_restaurant_details # update the action a bit to match the case in this story
+      - action: action_select_restaurant_ask_booking_confirmation # updated the action a bit to case in this story
       - intent: affirm
       - action: utter_ask_num_people
       - intent: inform_num_people
@@ -95,59 +95,116 @@ stories:
       - action: utter_thank_you
       - action: utter_goodbye
 
-  # ---------------------------------------------- Unhappy Paths ----------------------------------------------------- #
 
-  # ----------------------------------------------- Sub Stories -------------------------------------------------------- #
+  # Happy path for user wants to check out more restaurants
+  - story: check out more restaurants happy path
+    steps:
+      - action: action_show_restaurants
+      - intent: inform_more_restaurants # check out more restaurants
+      - action: action_show_restaurants # modify to get new ones
 
-  # These stories are broken down into sub-stories to make them easier to understand when user interrupts the flow.
 
-#  - story: display restaurant list
-#    steps:
-#      - action: utter_checkout_restaurants
-#      - intent: affirm
-#      - action: action_show_cuisines
-#      - intent: inform_cuisine
-#      - action: action_show_restaurants
-#
-#  - story: show restaurant list + filter by cuisine
-#    steps:
-#      - intent: request_cuisines
-#      - action: action_show_cuisines
-#      - intent: inform_cuisine
-#      - active_loop: cuisine_form
-#      - active_loop: null
-#      - slot_was_set:
-#          - cuisine: [ "Italian" ]
-#      - action: action_show_restaurants
-#
-#  - story: User selects a restaurant
-#    steps:
-#      - action: action_show_restaurants
-#      - intent: inform_restaurant_id
-#      - slot_was_set:
-#          - restaurant_id: [ "rtid_121290" ]
-#      - action: action_show_selected_restaurant_details
-#
-#  - story: Inform date and time
-#    steps:
-#      - action: utter_ask_date
-#      - intent: inform_date
-#      - slot_was_set:
-#          - date: [ "2020-01-01" ]
-#
-#  - story: Inform number of people
-#    steps:
-#      - action: utter_ask_num_people
-#      - intent: inform_num_people
-#      - slot_was_set:
-#          - num_people: [ "2" ]
-#
-#  - story: Confirm to book a restaurant
-#    steps:
-#      - slot_was_set:
-#          - restaurant_id: [ "rtid_12sda0" ]
-#      - action: action_show_booking_summary
-#      - action: utter_ask_to_confirm_booking
-#      - intent: affirm
+    # Happy path for user wants to search restaurants by criteria they provide
 
-# ---------------------------------------------- Knowledge Base -------------------------------------------------------- #
+
+    # ---------------------------------------------- Unhappy Paths ----------------------------------------------------- #
+
+    # ----------------------------------------------- Sub Stories -------------------------------------------------------- #
+
+    # These stories are broken down into sub-stories to make them easier to understand when user interrupts the flow.
+
+    #  - story: display restaurant list
+    #    steps:
+    #      - action: utter_checkout_restaurants
+    #      - intent: affirm
+    #      - action: action_show_cuisines
+    #      - intent: inform_cuisine
+    #      - action: action_show_restaurants
+    #
+    #  - story: show restaurant list + filter by cuisine
+    #    steps:
+    #      - intent: request_cuisines
+    #      - action: action_show_cuisines
+    #      - intent: inform_cuisine
+    #      - active_loop: cuisine_form
+    #      - active_loop: null
+    #      - slot_was_set:
+    #          - cuisine: [ "Italian" ]
+    #      - action: action_show_restaurants
+    #
+    #  - story: User selects a restaurant
+    #    steps:
+    #      - action: action_show_restaurants
+    #      - intent: inform_restaurant_id
+    #      - slot_was_set:
+    #          - restaurant_id: [ "rtid_121290" ]
+    #      - action: action_show_selected_restaurant_details
+    #
+    #  - story: Inform date and time
+    #    steps:
+    #      - action: utter_ask_date
+    #      - intent: inform_date
+    #      - slot_was_set:
+    #          - date: [ "2020-01-01" ]
+    #
+    #  - story: Inform number of people
+    #    steps:
+    #      - action: utter_ask_num_people
+    #      - intent: inform_num_people
+    #      - slot_was_set:
+    #          - num_people: [ "2" ]
+    #
+    #  - story: Confirm to book a restaurant
+    #    steps:
+    #      - slot_was_set:
+    #          - restaurant_id: [ "rtid_12sda0" ]
+    #      - action: action_show_booking_summary
+    #      - action: utter_ask_to_confirm_booking
+    #      - intent: affirm
+
+    # ---------------------------------------------- Knowledge Base -------------------------------------------------------- #
+
+
+
+
+    # ---------------------------------------------- Backup ------------------------------------------------------- #
+    # Happy path initiation
+    # can use intent: sorry to roll back to previous story
+
+    #  - story: greet and book restaurant happy path
+    #    steps:
+    #      - intent: greet
+    #      - action: utter_greet
+    #      - action: utter_bot_challenge/who_are_you
+    #      - action: utter_checkout_restaurants
+    #      - intent: affirm
+    #      - action: action_show_cuisines # can break from this point inform cuisines or deny can come next
+    #      - intent: inform_cuisine # if user does not want to select cuisine? (intent deny also include here)
+    #
+    #      - action: action_show_restaurants
+    #      # from here onwards few main things can happen
+    #      # user ask for details,
+    #      # check menu of restaurant,
+    #      # directly wants to book a restaurant
+    #      # wants to check out more restaurants,
+    #      # search restaurants by criteria they provide
+    #
+    #      - intent: inform_restaurant_id # change to view details of restaurant
+    #      - slot_was_set:
+    #          - restaurant_id: [ "rtid_121290" ]
+    #      - action: action_show_selected_restaurant_details
+    #      - intent: affirm
+    #      - action: utter_ask_num_people
+    #      - intent: inform_num_people
+    #      - slot_was_set:
+    #          - num_people: [ 2 ]
+    #      - action: utter_ask_date
+    #      - intent: inform_date
+    #      - slot_was_set:
+    #          - date: [ "2023-04-01" ]
+    #      - action: action_show_booking_summary
+    #      # - action: utter_ask_to_confirm_booking  # remove this line because previous action already asks for confirmation
+    #      - intent: affirm # or mood great or emoji mood great intent (there is a problem in this story)
+    #      - action: action_confirm_booking
+    #      - action: utter_thank_you
+    #      - action: utter_goodbye

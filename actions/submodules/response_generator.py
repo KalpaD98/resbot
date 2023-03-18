@@ -1,6 +1,8 @@
 import logging
 import sys
+
 from actions.submodules.constants import *
+
 sys.path.append("/Users/kalpafernando/PycharmProjects/resbot/actions/submodules")
 
 
@@ -29,7 +31,7 @@ class ResponseGenerator:
     # this method has message, carousal_data,  and dispatcher as parameters
     # method is used to generate an options carousal for the bot front chat widget
     @staticmethod
-    def option_carousal(carousal_objects):
+    def card_options_carousal(carousal_objects):
 
         logging.info("Utils [responseGenerator]:  reformation the responses")
 
