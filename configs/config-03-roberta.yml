@@ -14,15 +14,27 @@ pipeline:
     analyzer: char_wb
     min_ngram: 1
     max_ngram: 4
+
   - name: DIETClassifier
-    epochs: 200
+    epochs: 100
     constrain_similarities: true
+
+  - name: utils.extractors.DateparserEntityExtractor # remove when duckling is on
+    languages: [ "en" ]
+    prefer_dates_from: "future"
+    relative_base: "2023-03-01"
+
+#  - name: "DucklingEntityExtractor" # add in Windows environment
+#    url: "http://localhost:8000"
+#    dimensions: [ "time", "number", "amount-of-money", "distance" ] # modify as per requirements
+
   - name: EntitySynonymMapper
   - name: ResponseSelector
     epochs: 100
     constrain_similarities: true
-  - name: FallbackClassifier # added
-    threshold: 0.5
+
+  - name: FallbackClassifier
+    threshold: 0.6
     ambiguity_threshold: 0.1
 
 
