@@ -3,10 +3,13 @@ version: "3.1"
 # Because rules do not generalize to unseen conversations, you should reserve them for single-turn conversation snippets, and use stories to train on multi-turn conversations.
 
 stories:
-  # ---------------------------------------------- Happy Paths ------------------------------------------------------- #
+
+  # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+  # --------------------------------------------------- Happy Paths ------------------------------------------------- #
+  # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #  # # # # # # # # # # # # # #
+
   # Happy path initiation
   # can use intent: sorry to roll back to previous story
-
   - story: greet and book restaurant happy path
     steps:
       - intent: greet
@@ -18,32 +21,13 @@ stories:
       - intent: inform_cuisine # if user does not want to select cuisine? (intent deny also include here)
 
       - action: action_show_restaurants
-    #      # from here onwards few main things can happen
-    #      # user ask for details, ✅
-    #      # check menu of restaurant,  ✅ -> Menu URL button
-    #      # directly wants to book a restaurant  ✅
-    #      # wants to check out more restaurants,
-    #      # search restaurants by criteria they provide
-    #
-    #      - intent: inform_restaurant_id # change to view details of restaurant
-    #      - slot_was_set:
-    #          - restaurant_id: [ "rtid_121290" ]
-    #      - action: action_show_selected_restaurant_details
-    #      - intent: affirm
-    #      - action: utter_ask_num_people
-    #      - intent: inform_num_people
-    #      - slot_was_set:
-    #          - num_people: [ 2 ]
-    #      - action: utter_ask_date
-    #      - intent: inform_date
-    #      - slot_was_set:
-    #          - date: [ "2023-04-01" ]
-    #      - action: action_show_booking_summary
-    #      # - action: utter_ask_to_confirm_booking  # remove this line because previous action already asks for confirmation
-    #      - intent: affirm # or mood great or emoji mood great intent (there is a problem in this story)
-    #      - action: action_confirm_booking
-    #      - action: utter_thank_you
-    #      - action: utter_goodbye
+        # from here onwards few main things can happen
+        # - user ask for details, ✅
+        # - check menu of restaurant,  ✅ -> Menu URL button
+        # - directly wants to book a restaurant  ✅
+
+        # wants to check out more restaurants
+        # search restaurants by criteria they provide
 
 
     # Continuation from Happy path initiation -> Happy path for user ask for detail and book restaurant
@@ -95,22 +79,25 @@ stories:
       - action: utter_thank_you
       - action: utter_goodbye
 
-
-# debug this
-#  # Happy path for user wants to check out more restaurants
-#  - story: check out more restaurants happy path
-#    steps:
-#      - action: action_show_restaurants
-#      - intent: inform_more_restaurants # check out more restaurants
-#      - action: action_show_restaurants # modify to get new ones
+      # Happy path for user wants to check out more restaurants
+      - story: check out more restaurants happy path
+        steps:
+          - action: action_show_restaurants
+          - intent: inform_more_restaurants # check out more restaurants
+          - action: action_show_restaurants # modify to get new ones
 
 
     # Happy path for user wants to search restaurants by criteria they provide
 
 
-    # ---------------------------------------------- Unhappy Paths ----------------------------------------------------- #
+    # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #  # # # # # # # # # # # # # # # # # # # # # # # # #
+    # ------------------------------------------------ Unhappy Paths ------------------------------------------------- #
+    # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #  # # # # # # # # # # # # # # # # # # # # # # # #
 
-    # ----------------------------------------------- Sub Stories -------------------------------------------------------- #
+
+    # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+    # -------------------------------------------------- Sub stories ------------------------------------------------ #
+    # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
     # These stories are broken down into sub-stories to make them easier to understand when user interrupts the flow.
 
@@ -189,7 +176,6 @@ stories:
     #      # directly wants to book a restaurant
     #      # wants to check out more restaurants,
     #      # search restaurants by criteria they provide
-    #
     #      - intent: inform_restaurant_id # change to view details of restaurant
     #      - slot_was_set:
     #          - restaurant_id: [ "rtid_121290" ]

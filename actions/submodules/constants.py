@@ -1,4 +1,9 @@
 # constant.py contains all the constants used in the project
+
+# Actions
+
+ACTION_DEFAULT_FALLBACK_NAME = "action_default_fallback"
+
 # Response Generator Constants
 TYPE = "type"
 TEMPLATE = "template"
@@ -72,7 +77,6 @@ THAI = "Thai"
 
 # Categories
 # add categories from the dataset
-
 
 # food taste categories
 BITTER = "bitter"
