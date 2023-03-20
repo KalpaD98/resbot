@@ -39,6 +39,7 @@ intents:
   - inform_booking_restaurant_id
   - inform_view_details_restaurant_id
   - inform_date
+  - inform_more_restaurants
 
   # --------- restaurant-knowledge-query ------
   - query_knowledge_base
@@ -251,6 +252,7 @@ actions:
   - action_show_selected_restaurant_details                     # show selected restaurant details
   - action_show_booking_summary                                 # show booking summary
   - action_confirm_booking                                      # confirm booking
+  - action_select_restaurant_ask_booking_confirmation
 
   - validate_restaurant_form                                    # validate restaurant form
 

@@ -142,6 +142,7 @@ class ActionShowRestaurants(Action):
             carousal_object[DEFAULT_ACTION] = ""  # set to null for temporary debugging
             # carousal_object[DEFAULT_ACTION] = default_action_payload # add a title for def action if possible
             carousal_objects.append(carousal_object)
+            print(carousal_object)
 
         dispatcher.utter_message(text="Here are some " + cuisine.lower() + " restaurants I found:",
                                  attachment=ResponseGenerator.card_options_carousal(carousal_objects))
@@ -216,7 +217,7 @@ class ActionShowSelectedRestaurantDetails(Action):
         # dispatcher.utter_message(image=image_path)
 
         # send the message back to the user
-        dispatcher.utter_message(text="Details of " + restaurant_id)
+        dispatcher.utter_message(text="Details of <restaurant> ")
         # add multiple messages for each below
         dispatcher.utter_message(text="<small description>, <address>, <Opening hours [weekend,weekdays]>")
         # TODO: after this bot utters Do you want to book a table?.
