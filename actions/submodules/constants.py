@@ -13,6 +13,8 @@ URL = "url"
 TITLE = "title"
 SUBTITLE = "subtitle"
 BUTTONS = "buttons"
+HOME_PAGE = "home_page"
+Menu_URL = "Menu_URL"
 
 # ----- ----- ----- ----- ----- Components ----- ----- ----- ----- ----- #
 

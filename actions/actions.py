@@ -29,9 +29,10 @@ class ActionShowCuisines(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        # get top 10 personalised cuisines for a particular user from the recommendation engine
-
+        # get top 10 personalised cuisines for a particular user from the recommendation engine or most popular
+        # (frequent)
         cuisines = ['Any', 'Italian', 'Mexican', 'Vietnamese', 'Thai', 'Japanese', 'Korean']
+
         # generate synonyms for 'Any' cuisine
         # Add payload to quick replies
         cuisines_with_entity_payload = []
@@ -44,6 +45,7 @@ class ActionShowCuisines(Action):
         dispatcher.utter_message(text="Please choose a cuisine", quick_replies=quick_replies_cuisines)
 
         return []
+
         # this is for vanilla JS UI
         # data = [{"title": cuisine, "payload": cuisine + "_payload"} for cuisine in cuisines]
 
@@ -115,13 +117,13 @@ class ActionShowRestaurants(Action):
             carousal_object[SUBTITLE] = restaurant.get(CUISINE) + " |  ⭐️ " + str(restaurant.get(RATINGS))
 
             default_action_payload = SUBCOMPONENT_DEFAULT_ACTION_PAYLOAD.copy()
-            default_action_payload[PAYLOAD] = '/inform_restaurant_id{{"restaurant_id": "' + restaurant.get(ID) + '"}}'
+            default_action_payload[PAYLOAD] = restaurant.get(ID)  # determine a default action for the card later
 
             buttons = []
 
             button1 = SUBCOMPONENT_BUTTON_URL.copy()
             button1[TITLE] = "Check Menu"
-            button1[URL] = "view menu " + restaurant.get(IMAGE_URL)  # later replace this with restaurant menu url
+            button1[URL] = restaurant.get(MENU_URL)  # later replace this with restaurant menu url
 
             button2 = SUBCOMPONENT_BUTTON_PAYLOAD.copy()
             button2[TITLE] = "Book Table"
@@ -162,7 +164,8 @@ class ActionRequestMoreRestaurantOptions(Action):
         logging.info(tracker.slots)
         print('--------------------------------------------------------------------\n')
 
-        # get more restaurants from the knowledge base that are not in the list of restaurants already shown to the user
+        # get more restaurants from the knowledge base that are not in the list of restaurants (remove if exists)
+        # already shown to the user
 
         # if there are more restaurants, send them to the user
 
@@ -197,6 +200,8 @@ class ActionShowSelectedRestaurantDetails(Action):
             logging.info("Restaurant ID not set")
 
         # get the restaurant data from the knowledge base
+        # for now getting from mock data
+
         # restaurant = await self.knowledge_base.get_object("restaurant", restaurant_id)
 
         # create a message to show the restaurant details
@@ -211,7 +216,7 @@ class ActionShowSelectedRestaurantDetails(Action):
         # dispatcher.utter_message(image=image_path)
 
         # send the message back to the user
-        dispatcher.utter_message(text="Details of <Restaurant Name>")
+        dispatcher.utter_message(text="Details of " + restaurant_id)
         # add multiple messages for each below
         dispatcher.utter_message(text="<small description>, <address>, <Opening hours [weekend,weekdays]>")
         # TODO: after this bot utters Do you want to book a table?.
