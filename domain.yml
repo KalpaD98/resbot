@@ -267,11 +267,12 @@ forms:
 actions:
   - action_query_knowledge_base                                 # query knowledge base
   - action_show_cuisines                                        # show cuisines
-  - action_show_restaurants                                     # show restaurants (will filter by cuisine and city if provided)
+  - action_show_restaurants                                     # show restaurants (will filter by cuisine if provided)
+  - action_show_more_restaurant_options                         # show more restaurant options
   - action_show_selected_restaurant_details                     # show selected restaurant details
   - action_show_booking_summary                                 # show booking summary
   - action_confirm_booking                                      # confirm booking
-  - action_select_restaurant_ask_booking_confirmation
+  - action_select_restaurant_ask_booking_confirmation           # ask booking confirmation for the selected restaurant
 
   - validate_restaurant_form                                    # validate restaurant form
 

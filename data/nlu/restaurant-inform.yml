@@ -106,12 +106,12 @@ nlu:
       - Can I reserve a table for [2](num_people) people on Friday, [February 4th](date)?
       - I'd like to make a reservation for [3](num_people) people on Sunday, [January 30th](date)
 
-      - intent: inform_time
-        examples: |
-          - [7 pm](time)
-          - [10:30 am](time)
-          - [12:00 p.m.](time)
-          - [12:00 pm](time)
+  - intent: inform_time
+    examples: |
+      - [7 pm](time)
+      - [10:30 am](time)
+      - [12:00 p.m.](time)
+      - [12:00 pm](time)
 
   #  - intent: query_knowledge_base
   #    examples: |

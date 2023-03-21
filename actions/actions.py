@@ -7,12 +7,10 @@ import logging
 from typing import Any, Text, Dict, List
 
 from rasa_sdk import Action, Tracker
-from rasa_sdk.events import UserUtteranceReverted
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.knowledge_base.storage import InMemoryKnowledgeBase
 
 from actions.submodules.constants import *
-from actions.submodules.constants import TITLE, SUBCOMPONENT_BUTTON_PAYLOAD
 from actions.submodules.mock_data import *
 from actions.submodules.response_generator import ResponseGenerator
 
@@ -25,7 +23,7 @@ from actions.submodules.response_generator import ResponseGenerator
 # This will be shown as a quick reply.
 class ActionShowCuisines(Action):
     def name(self) -> Text:
-        return "action_show_cuisines"
+        return ACTION_SHOW_CUISINES
 
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
@@ -72,7 +70,7 @@ class ActionShowRestaurants(Action):
         # super().__init__(kb)
 
     def name(self) -> Text:
-        return "action_show_restaurants"
+        return ACTION_SHOW_RESTAURANTS
 
     async def run(self, dispatcher: CollectingDispatcher,
                   tracker: Tracker,
@@ -156,7 +154,7 @@ class ActionShowRestaurants(Action):
 class ActionRequestMoreRestaurantOptions(Action):
 
     def name(self) -> Text:
-        return "action_request_more_restaurant_options"
+        return ACTION_SHOW_MORE_RESTAURANT_OPTIONS
 
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
@@ -184,7 +182,7 @@ class ActionRequestMoreRestaurantOptions(Action):
 # This will include a small description about the restaurant, its address and opening hours.
 class ActionShowSelectedRestaurantDetails(Action):
     def name(self) -> Text:
-        return "action_show_selected_restaurant_details"
+        return ACTION_SHOW_SELECTED_RESTAURANT_DETAILS
 
     # async run function to fetch restaurant data from the knowledge base
 
@@ -231,7 +229,7 @@ class ActionShowSelectedRestaurantDetails(Action):
 # action_select_restaurant_ask_booking_confirmation.
 class ActionBookSelectedRestaurant(Action):
     def name(self) -> Text:
-        return "action_select_restaurant_ask_booking_confirmation"
+        return ACTION_SHOW_SELECTED_RESTAURANT_ASK_BOOKING_CONFIRMATION
 
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
@@ -276,7 +274,7 @@ class ActionShowBookingSummary(Action):
 
     # action name
     def name(self) -> Text:
-        return "action_show_booking_summary"
+        return ACTION_SHOW_BOOKING_SUMMARY
 
     # async run function to generate booking summary that include restaurant, restaurant address, date and time.
 
@@ -320,7 +318,7 @@ class ActionShowBookingSummary(Action):
 # run this function after confirming the booking.
 class ActionConfirmBooking(Action):
     def name(self) -> Text:
-        return "action_confirm_booking"
+        return ACTION_CONFIRM_BOOKING
 
     # run method to confirm the booking, save on database and send a message to the user based on their response
 
@@ -380,7 +378,7 @@ class ActionQueryKnowledgeBase(Action):
         # super().__init__(kb)
 
     def name(self) -> Text:
-        return "action_query_knowledge_base"
+        return ACTION_QUERY_KNOWLEDGE_BASE
 
     async def run(self, dispatcher: CollectingDispatcher,
                   tracker: Tracker,
@@ -392,6 +390,9 @@ class ActionQueryKnowledgeBase(Action):
 
         return []
 
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# ------------------------------------------------- Commented Code -------------------------------------------------- #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 # Executes the fallback action and goes back to the previous state of the dialogue
 # class ActionDefaultFallback(Action):

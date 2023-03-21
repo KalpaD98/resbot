@@ -1,10 +1,26 @@
 # constant.py contains all the constants used in the project
 
-# Actions
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# ------------------------------------------------ Action Constants ------------------------------------------------- #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 ACTION_DEFAULT_FALLBACK_NAME = "action_default_fallback"
 
-# Response Generator Constants
+ACTION_SHOW_CUISINES = "action_show_cuisines"
+ACTION_SHOW_RESTAURANTS = "action_show_restaurants"
+ACTION_SHOW_SELECTED_RESTAURANT_DETAILS = "action_show_selected_restaurant_details"
+ACTION_SHOW_BOOKING_SUMMARY = "action_show_booking_summary"
+ACTION_SHOW_MORE_RESTAURANT_OPTIONS = "action_show_more_restaurant_options"
+ACTION_SHOW_SELECTED_RESTAURANT_ASK_BOOKING_CONFIRMATION = "action_select_restaurant_ask_booking_confirmation"
+
+ACTION_CONFIRM_BOOKING = "action_confirm_booking"
+
+ACTION_QUERY_KNOWLEDGE_BASE = "action_query_knowledge_base"
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# ------------------------------------------ Response Generator Constants ------------------------------------------- #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
 TYPE = "type"
 TEMPLATE = "template"
 PAYLOAD = "payload"
@@ -21,7 +37,7 @@ BUTTONS = "buttons"
 HOME_PAGE = "home_page"
 Menu_URL = "Menu_URL"
 
-# ----- ----- ----- ----- ----- Components ----- ----- ----- ----- ----- #
+# --- ----- ----- ----- ----- ----- -----  ----- ----- Components ----- ----- ----- ----- ----- ----- ----- -----  --- #
 
 # carousal component
 COMPONENT_CAROUSAL = {TYPE: TEMPLATE, PAYLOAD: {TEMPLATE_TYPE: GENERIC}}
@@ -43,13 +59,20 @@ SUBCOMPONENT_BUTTON_URL = {TITLE: "", TYPE: WEB_URL, URL: ""}
 
 SUBCOMPONENT_BUTTON_PAYLOAD = {TITLE: "", TYPE: POST_BACK, PAYLOAD: ""}
 
-# ----- ----- ----- ----- ----- -----  ----- ----- ----- ----- ----- ----- #
+# ------- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ------ #
 
-# Utterance Templates
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# ------------------------------------------ Utterance Templates Constants ------------------------------------------ #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
 UTTER_TEMPLATE__RESTAURANT_SUGGESTION = "It Seems you'll like "
 UTTER_TEMPLATE__RESTAURANT_SUGGESTION_NOT_FOUND = "your favor not found... I am afraid you said something invalid 😥 "
 
-# Restaurant Constants
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# ------------------------------------------- Restaurant Object Constants ------------------------------------------- #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
 ID = "id"
 NAME = "name"
 CITY = "city"

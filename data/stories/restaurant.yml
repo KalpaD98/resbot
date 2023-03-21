@@ -79,12 +79,12 @@ stories:
       - action: utter_thank_you
       - action: utter_goodbye
 
-      # Happy path for user wants to check out more restaurants
-      - story: check out more restaurants happy path
-        steps:
-          - action: action_show_restaurants
-          - intent: inform_more_restaurants # check out more restaurants
-          - action: action_show_restaurants # modify to get new ones
+#      # Happy path for user wants to check out more restaurants
+#      - story: check out more restaurants happy path
+#        steps:
+#          - action: action_show_restaurants
+#          - intent: request_more_restaurant_options
+#          - action: action_show_more_restaurant_options
 
 
     # Happy path for user wants to search restaurants by criteria they provide
