@@ -5,9 +5,11 @@ restaurant: {id, name, image_url, cuisine, ratings, telephone, menu_url, address
 user: {id, name, preferences}
 
 """
+import json
+
 # ----- -------------- ----- #
 
-restaurants = """
+json_restaurant_list = """
 [
    {
       "id":"rtid_1232JHKJ",
@@ -20,13 +22,8 @@ restaurants = """
       "menu_url":"https://www.tacobell.com/menu",
       "address":"123 Main Street, Anytown, USA",
       "opening_hours":{
-         "Monday":"9:00 AM - 10:00 PM",
-         "Tuesday":"9:00 AM - 10:00 PM",
-         "Wednesday":"9:00 AM - 10:00 PM",
-         "Thursday":"9:00 AM - 10:00 PM",
-         "Friday":"9:00 AM - 10:00 PM",
-         "Saturday":"10:00 AM - 11:00 PM",
-         "Sunday":"10:00 AM - 11:00 PM"
+         "Mon - Fri":"9:00 AM - 10:00 PM",
+         "Sat, Sun":"10:00 AM - 11:00 PM"
       }
    },
    {
@@ -40,13 +37,8 @@ restaurants = """
       "menu_url":"https://www.tacobell.com/menu",
       "address":"123 Main Street, Any-town, USA",
       "opening_hours":{
-         "Monday":"9:00 AM - 10:00 PM",
-         "Tuesday":"9:00 AM - 10:00 PM",
-         "Wednesday":"9:00 AM - 10:00 PM",
-         "Thursday":"9:00 AM - 10:00 PM",
-         "Friday":"9:00 AM - 10:00 PM",
-         "Saturday":"10:00 AM - 11:00 PM",
-         "Sunday":"10:00 AM - 11:00 PM"
+         "Mon - Fri":"9:00 AM - 10:00 PM",
+         "Sat, Sun":"10:00 AM - 11:00 PM"
       }
    },
    {
@@ -60,13 +52,8 @@ restaurants = """
       "menu_url":"https://www.tacobell.com/menu",
       "address":"123 Main Street, Anytown, USA",
       "opening_hours":{
-         "Monday":"9:00 AM - 10:00 PM",
-         "Tuesday":"9:00 AM - 10:00 PM",
-         "Wednesday":"9:00 AM - 10:00 PM",
-         "Thursday":"9:00 AM - 10:00 PM",
-         "Friday":"9:00 AM - 10:00 PM",
-         "Saturday":"10:00 AM - 11:00 PM",
-         "Sunday":"10:00 AM - 11:00 PM"
+         "Mon - Fri":"9:00 AM - 10:00 PM",
+         "Sat, Sun":"10:00 AM - 11:00 PM"
       }
    },
    {
@@ -80,13 +67,8 @@ restaurants = """
       "menu_url":"https://www.tacobell.com/menu",
       "address":"123 Main Street, Anytown, USA",
       "opening_hours":{
-         "Monday":"9:00 AM - 10:00 PM",
-         "Tuesday":"9:00 AM - 10:00 PM",
-         "Wednesday":"9:00 AM - 10:00 PM",
-         "Thursday":"9:00 AM - 10:00 PM",
-         "Friday":"9:00 AM - 10:00 PM",
-         "Saturday":"10:00 AM - 11:00 PM",
-         "Sunday":"10:00 AM - 11:00 PM"
+         "Mon - Fri":"9:00 AM - 10:00 PM",
+         "Sat, Sun":"10:00 AM - 11:00 PM"
       }
    },
    {
@@ -100,13 +82,8 @@ restaurants = """
       "menu_url":"https://www.tacobell.com/menu",
       "address":"123 Main Street, Anytown, USA",
       "opening_hours":{
-         "Monday":"9:00 AM - 10:00 PM",
-         "Tuesday":"9:00 AM - 10:00 PM",
-         "Wednesday":"9:00 AM - 10:00 PM",
-         "Thursday":"9:00 AM - 10:00 PM",
-         "Friday":"9:00 AM - 10:00 PM",
-         "Saturday":"10:00 AM - 11:00 PM",
-         "Sunday":"10:00 AM - 11:00 PM"
+         "Mon - Fri":"9:00 AM - 10:00 PM",
+         "Sat, Sun":"10:00 AM - 11:00 PM"
       }
    },
    {
@@ -120,16 +97,21 @@ restaurants = """
       "menu_url":"https://www.tacobell.com/menu",
       "address":"123 Main Street, Anytown, USA",
       "opening_hours":{
-         "Monday":"9:00 AM - 10:00 PM",
-         "Tuesday":"9:00 AM - 10:00 PM",
-         "Wednesday":"9:00 AM - 10:00 PM",
-         "Thursday":"9:00 AM - 10:00 PM",
-         "Friday":"9:00 AM - 10:00 PM",
-         "Saturday":"10:00 AM - 11:00 PM",
-         "Sunday":"10:00 AM - 11:00 PM"
+         "Mon - Fri":"9:00 AM - 10:00 PM",
+         "Sat, Sun":"10:00 AM - 11:00 PM"
       }
    }
 ]"""
+
+rest_list = json.loads(json_restaurant_list)
+
+users = [
+    {"id": "uid_0", "name": "Alice"},
+    {"id": "uid_1", "name": "Bob"},
+    {"id": "uid_2", "name": "Carol"},
+    {"id": "uid_3", "name": "David"},
+    {"id": "uid_4", "name": "Eva"}
+]
 
 # add these later
 # phone: The phone number of the restaurant

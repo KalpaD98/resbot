@@ -2,16 +2,17 @@
 # See this guide on how to implement these action:
 # https://rasa.com/docs/rasa/custom-actions
 
-import json
 import logging
 from typing import Any, Text, Dict, List
 
 from rasa_sdk import Action, Tracker
+from rasa_sdk.events import (SlotSet)
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.knowledge_base.storage import InMemoryKnowledgeBase
 
 from actions.submodules.constants import *
 from actions.submodules.mock_data import *
+from actions.submodules.object_utils import ObjectUtil
 from actions.submodules.response_generator import ResponseGenerator
 
 
@@ -30,13 +31,16 @@ class ActionShowCuisines(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         # get top 10 personalised cuisines for a particular user from the recommendation engine or most popular
         # (frequent)
-        cuisines = ['Any', 'Italian', 'Mexican', 'Vietnamese', 'Thai', 'Japanese', 'Korean']
+        cuisines = ['any', 'italian', 'mexican', 'vietnamese', 'thai', 'japanese', 'korean']
 
         # generate synonyms for 'Any' cuisine
         # Add payload to quick replies
         cuisines_with_entity_payload = []
         for cuisine in cuisines:
-            cuisines_with_entity_payload.append({TITLE: cuisine, PAYLOAD: cuisine})
+            # cuisines_with_entity_payload.append({TITLE: cuisine, PAYLOAD: cuisine})
+            cuisines_with_entity_payload.append({
+                TITLE: cuisine.capitalize(),
+                PAYLOAD: "/inform_cuisine{\"cuisine\":\"" + cuisine.lower() + "\"}"})
 
         # Generate quick replies with Response Generator
         quick_replies_cuisines = ResponseGenerator.quick_replies(cuisines_with_entity_payload, with_payload=True)
@@ -45,29 +49,14 @@ class ActionShowCuisines(Action):
 
         return []
 
-        # this is for vanilla JS UI
-        # data = [{"title": cuisine, "payload": cuisine + "_payload"} for cuisine in cuisines]
-
-        # # This is working for normal UI
-        # message = {"payload": "quickReplies", "data": data}
-
 
 # action to show top restaurants based on user preferences and the given cuisine (or without specific cuisine).
 class ActionShowRestaurants(Action):
 
-    def __init__(self):
-        # load knowledge base with data from the given file
-
-        kb = InMemoryKnowledgeBase("knowledge_base_data.json")
-
-        # # overwrite the representation function of the restaurant object
-        # # by default the representation function is just the name of the object
-        #
-        # kb.set_representation_function_of_object(
-        #     "restaurant", lambda obj: obj["name"] + "(" + obj["cuisine"] + ")"
-        # )
-        #
-        # super().__init__(kb)
+    # constructor
+    # def __init__(self):
+    #     # load knowledge base with data from the given file
+    #     kb = InMemoryKnowledgeBase("knowledge_base_data.json")
 
     def name(self) -> Text:
         return ACTION_SHOW_RESTAURANTS
@@ -76,9 +65,9 @@ class ActionShowRestaurants(Action):
                   tracker: Tracker,
                   domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
-        print('\n----------------------Slots-----------------------------------')
+        print('\n--------------------------------------------------------Slots----------------------------------------')
         logging.info(tracker.slots)
-        print('--------------------------------------------------------------------\n')
+        print('-----------------------------------------------------------------------------------------------------\n')
 
         # get cuisine from the tracker
         cuisine = tracker.get_slot("cuisine")
@@ -103,48 +92,9 @@ class ActionShowRestaurants(Action):
 
         # hard coded restaurant data
 
-        rest_list = json.loads(restaurants)
-
-        # Generate restaurant cards with Response Generator
-        carousal_objects = []
-
-        # Add data to the carousel card
-        for restaurant in rest_list:
-            carousal_object = SUBCOMPONENT_CARD.copy()
-            carousal_object[TITLE] = restaurant.get(NAME)
-            carousal_object[IMAGE_URL] = restaurant.get(IMAGE_URL)
-            carousal_object[SUBTITLE] = restaurant.get(CUISINE) + " |  ⭐️ " + str(restaurant.get(RATINGS))
-
-            default_action_payload = SUBCOMPONENT_DEFAULT_ACTION_PAYLOAD.copy()
-            default_action_payload[PAYLOAD] = restaurant.get(ID)  # determine a default action for the card later
-
-            buttons = []
-
-            button1 = SUBCOMPONENT_BUTTON_URL.copy()
-            button1[TITLE] = "Check Menu"
-            button1[URL] = restaurant.get(MENU_URL)  # later replace this with restaurant menu url
-
-            button2 = SUBCOMPONENT_BUTTON_PAYLOAD.copy()
-            button2[TITLE] = "Book Table"
-            button2[PAYLOAD] = "book" + restaurant.get(ID)
-            # book table intent has not been added yet, example: book rtid_s3wjdsud3, book restaurant rtid_s3wjdsud3
-
-            button3 = SUBCOMPONENT_BUTTON_PAYLOAD.copy()
-            button3[TITLE] = "View Details"
-            button3[PAYLOAD] = "view details " + restaurant.get(ID)
-
-            buttons.append(button1)
-            buttons.append(button3)
-            buttons.append(button2)
-
-            carousal_object[BUTTONS] = buttons
-            carousal_object[DEFAULT_ACTION] = ""  # set to null for temporary debugging
-            # carousal_object[DEFAULT_ACTION] = default_action_payload # add a title for def action if possible
-            carousal_objects.append(carousal_object)
-            print(carousal_object)
-
         dispatcher.utter_message(text="Here are some " + cuisine.lower() + " restaurants I found:",
-                                 attachment=ResponseGenerator.card_options_carousal(carousal_objects))
+                                 attachment=ResponseGenerator.card_options_carousal(
+                                     ObjectUtil.restaurant_list_to_carousal_object(rest_list)))
 
         return []
 
@@ -164,15 +114,11 @@ class ActionRequestMoreRestaurantOptions(Action):
         logging.info(tracker.slots)
         print('--------------------------------------------------------------------\n')
 
-        # get more restaurants from the knowledge base that are not in the list of restaurants (remove if exists)
-        # already shown to the user
-
-        # if there are more restaurants, send them to the user
-
-        # else send a message to the user saying that there are no more restaurants
-        dispatcher.utter_message(text="Sorry, I did not find any more restaurants. "
-                                      "Please try again with a different "
-                                      "cuisine.")
+        dispatcher.utter_message(text="Here are some more restaurants I found",
+                                 attachment=ResponseGenerator.card_options_carousal(
+                                     ObjectUtil.restaurant_list_to_carousal_object(rest_list)))
+        if rest_list is None:
+            dispatcher.utter_message(text="Sorry, I did not find any more restaurants.")
 
         return []
 
@@ -197,33 +143,32 @@ class ActionShowSelectedRestaurantDetails(Action):
         restaurant_id = tracker.get_slot("restaurant_id")
 
         if restaurant_id is None:
-            logging.info("Restaurant ID not set")
-
-        # get the restaurant data from the knowledge base
-        # for now getting from mock data
+            dispatcher.utter_message(text="Cannot show restaurant details. Please select a restaurant first.")
+            return []
 
         # restaurant = await self.knowledge_base.get_object("restaurant", restaurant_id)
-
-        # create a message to show the restaurant details
-        # message = "Here are some details about the restaurant: \n"
-        # message += "Name: " + restaurant["name"] + "\n"
-        # message += "Address: " + restaurant["address"] + "\n"
-        # message += "Open: " + restaurant["open"] + "\n"
-        # message += "Close: " + restaurant["close"] + "\n"
-        # message += "Description: " + restaurant["description"] + "\n"
 
         # Send the image to the user
         # dispatcher.utter_message(image=image_path)
 
+        # get the restaurant details by passing the id
+        restaurant = ObjectUtil.find_by_id(restaurant_id, rest_list)
+        logging.info(restaurant)
+
         # send the message back to the user
-        dispatcher.utter_message(text="Details of <restaurant> ")
-        # add multiple messages for each below
-        dispatcher.utter_message(text="<small description>, <address>, <Opening hours [weekend,weekdays]>")
-        # TODO: after this bot utters Do you want to book a table?.
+
+        dispatcher.utter_message(image=restaurant[IMAGE_URL])
         dispatcher.utter_message(
-            text="Would like to book a table at <restaurant_name>?",
-            quick_replies=ResponseGenerator.quick_replies(["Yes", "No"]))
-        return []
+            text=restaurant[NAME] + " is a " + restaurant[CUISINE] + " restaurant located at " + restaurant[ADDRESS])
+        dispatcher.utter_message(text="Their opening hours are, ")
+        dispatcher.utter_message(text="Mon - Fri: " + restaurant[OPENING_HOURS][MON_TO_FRI])
+        dispatcher.utter_message(text="Sat - Sun: " + restaurant[OPENING_HOURS][SAT_SUN])
+
+        dispatcher.utter_message(
+            text=ObjectUtil.get_random_sentence(restaurant[NAME], UTTER_SENTENCE_LIST_FOR_ASKING_TO_MAKE_RESERVATION),
+            quick_replies=ResponseGenerator.quick_replies([QR_YES, QR_NO]))
+
+        return [SlotSet("restaurant_name", restaurant[NAME])]
 
 
 # action_select_restaurant_ask_booking_confirmation.
@@ -244,28 +189,21 @@ class ActionBookSelectedRestaurant(Action):
 
         if restaurant_id is None:
             logging.info("Restaurant ID not set")
+            dispatcher.utter_message(text="Cannot show restaurant details. Please select a restaurant first.")
+            return []
 
-        # get the restaurant data from the knowledge base
-        # restaurant = await self.knowledge_base.get_object("restaurant", restaurant_id)
-
-        # create a message to show the restaurant details
-        # message = "Here are some details about the restaurant: \n"
-        # message += "Name: " + restaurant["name"] + "\n"
-        # message += "Address: " + restaurant["address"] + "\n"
-        # message += "Open: " + restaurant["open"] + "\n"
-        # message += "Close: " + restaurant["close"] + "\n"
-        # message += "Description: " + restaurant["description"] + "\n"
-
-        # Send the image to the user
-        # dispatcher.utter_message(image=image_path)
+        # get the restaurant details by passing the id
+        restaurant = ObjectUtil.find_by_id(rest_list, restaurant_id)
+        logging.info(restaurant)
 
         # send the message back to the user
-        dispatcher.utter_message(text="You have selected <Restaurant Name>")
+        dispatcher.utter_message(text="You selected " + restaurant[NAME])
         # add multiple messages for each below
-        dispatcher.utter_message(text="<small description>, <address>, <Opening hours [weekend,weekdays]>")
-        dispatcher.utter_message(text="Would you like to book a table at <restaurant_name>?")
+        # dispatcher.utter_message(text="<small description>, <address>, <Opening hours [weekend,weekdays]>")
+        dispatcher.utter_message(text="Would you like to proceed with the booking?",
+                                 quick_replies=ResponseGenerator.quick_replies([QR_YES, QR_NO]))
 
-        return []
+        return [SlotSet("restaurant_id", restaurant_id)]
 
 
 # action_show_booking_summary.
@@ -295,20 +233,20 @@ class ActionShowBookingSummary(Action):
         # date = tracker.get_slot("date")
 
         # send the message to the user
-        dispatcher.utter_message(text="Your booking summary is as follows:")
+        dispatcher.utter_message(
+            text="Your booking summary for " + tracker.get_slot(RESTAURANT_NAME) + " is as follows:")
         # generate the booking summary
-        # message = "Shall I confirm your booking for " + restaurant["name"] + " located at " + \
-        #           restaurant["address"] + "on " + date + " at " + time + "."
-        dispatcher.utter_message(text="<Booking summary message here>")
+        dispatcher.utter_message(text="Number of people: " + tracker.get_slot(NUM_PEOPLE))
+        dispatcher.utter_message(text="Date: " + tracker.get_slot(DATE))
+        if tracker.get_slot("time") is not None:
+            dispatcher.utter_message(text="Time: " + tracker.get_slot(TIME))
 
         # ask to confirm the booking
         # dispatch a message asking if the user would like to confirm the booking with quick replies <FIX>
 
-        ResponseGenerator.quick_replies(["Yes", "No"])
-        # if yes confirm the booking, save in database and send a message to the user (in next action)
         # TODO: if no -> ask if they would like to book a table of another restaurant or exit
         dispatcher.utter_message(text="Would you like to confirm this booking?",
-                                 quick_replies=ResponseGenerator.quick_replies(["Yes", "No"]))
+                                 quick_replies=ResponseGenerator.quick_replies([QR_YES, QR_NO]))
         # "Please choose a cuisine",
         return []
 
@@ -341,16 +279,17 @@ class ActionConfirmBooking(Action):
         if date is None:
             logging.info("Date not set")
 
-            # generate the booking summary
-            message = "Your booking for restaurant_name" + " located at " + "restaurant address" + \
-                      "on " + "<date>" + " at " + "<time>" + " has been confirmed. Thank you for using our service."
-            #
-            # # generate the booking summary
-            # message = "Your booking for " + restaurant["name"] + " located at " + restaurant["address"] + \
-            #           "on " + date + " at " + time + " has been confirmed. Thank you for using our service."
+        # generate the booking summary
+        message = "Your booking for restaurant_name" + " located at " + "restaurant address" + \
+                  " on " + "<date>" + " at " + "<time>" + " has been confirmed"
+        #
+        # # generate the booking summary
+        # message = "Your booking for " + restaurant["name"] + " located at " + restaurant["address"] + \
+        #           "on " + date + " at " + time + " has been confirmed. Thank you for using our service."
 
-            # send the message to the user
-            dispatcher.utter_message(text=message)
+        # send the message to the user
+        dispatcher.utter_message(text=message)
+        dispatcher.utter_message(text="Your booking reference id is: <brid_1213jnaskd>")
 
         return []
 
@@ -412,47 +351,11 @@ class ActionQueryKnowledgeBase(Action):
 
 ######## Important Commented Code ########
 
-###### Documentation for bot - front web chat ######
 
-# TITLE: The title or text displayed on the button
-# TYPE: The type of button, which can be either "web_url" or "postback"
-# URL: The URL to open if the button is clicked (only used for "web_url" buttons)
-# PAYLOAD: The payload to send back to the server if the button is clicked (only used for "postback" buttons)
+# Vanilla JS UI
 
-# carousel = ResponseGenerator.option_carousal(carousal_objects)
+# this is for vanilla JS UI
+# data = [{"title": cuisine, "payload": cuisine + "_payload"} for cuisine in cuisines]
 
-#
-#
-# carousal = COMPONENT_CAROUSAL
-# elements_list = []
-#
-# for restaurant in rest_list:
-#     card = {DEFAULT_ACTION: {TYPE: WEB_URL, URL: restaurant.get(IMAGE_URL)},
-#             IMAGE_URL: restaurant.get(IMAGE_URL), TITLE: restaurant.get(NAME),
-#             SUBTITLE: restaurant.get(CUISINE)}
-#
-#     buttons_list = []
-#
-#     button1 = {}
-#     button2 = {}
-#
-#     button1[URL] = restaurant.get(IMAGE_URL)
-#     button1[TITLE] = "VIEW_PAGE"
-#     # button1[TYPE] = WEB_URL
-#
-#     button2[URL] = restaurant.get(IMAGE_URL)
-#     button2[TITLE] = "Menu"
-#     button2[TYPE] = WEB_URL
-#
-#     buttons_list.append(button1)
-#     buttons_list.append(button2)
-#
-#     card[BUTTONS] = buttons_list
-#
-#     elements_list.append(card)
-#     # SUBCOMPONENT_CARD[]=restaurant.get()
-#     # SUBCOMPONENT_CARD[]=restaurant.get()
-#     # SUBCOMPONENT_CARD[]=restaurant.get()
-#     # SUBCOMPONENT_CARD[]=restaurant.get()
-#
-# carousal[PAYLOAD][ELEMENTS] = elements_list
+# # This is working for normal UI
+# message = {"payload": "quickReplies", "data": data}

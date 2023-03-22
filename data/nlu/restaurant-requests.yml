@@ -5,20 +5,13 @@ nlu:
   #--------------------------------------------- Request ---------------------------------------------------------------
   - intent: request_menu
     examples: |
-      - can I see the menu of place [Danke](booking_place)
-      - [Airport Lounge](booking_place) menu please
-      - i need to see the menu of [Taco bell](booking_place)
-      - is there a menu to see in [burger king](booking_place)
-      - what foods are available in [pizza hut](booking_place)
-      - what cuisines are available in [kfc](booking_place)
-      - what drinks are available in [McDonalds](booking_place)
-      - show me the menu of [Subway](booking_place)
-      - can i view the menu of [Subway](booking_place)
-      - can I see the menu of [Subway](booking_place)
-      - what foods are available
+      - what foods are available in this restaurant
       - show me the foods they have
       - i want to see their menu
       - can i see their menu
+      - show me the menu
+      - menu please
+      - show menu
 
   - intent: request_cuisines
     examples: |

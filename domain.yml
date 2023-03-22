@@ -11,7 +11,7 @@ version: "3.1"
 
 intents:
 
-  # ----------- Basic ----------- #
+  # ----------------------------------------------------- Basic ------------------------------------------------------ #
   - greet
   - mood_unhappy
   - mood_great
@@ -22,29 +22,29 @@ intents:
   - emoji_mood_great
   - emoji_mood_unhappy
 
-  # ----------- restaurant-request ----------- #
-  - request_cuisines
-  - request_more_restaurant_options
-  - request_restaurants
+  # ---------------------------------------------- restaurant-inform.yml --------------------------------------------- #
+  - inform_cuisine                                        #
+  - inform_restaurant_id                                  #
+  - inform_booking_restaurant_id                          #
+  - inform_view_details_restaurant_id                     #
+  - inform_num_people                                     #
+  - inform_date                                           #
+  - inform_location                                       #
+  - inform_restaurant_name                                #
+  - inform_more_restaurants                               #
+
+  # ----------------------------------------------- restaurant-request ----------------------------------------------- #
+  - request_restaurants                                   #
+  - request_cuisines                                      #
+  - request_more_restaurant_options                       #
   - request_menu
   - request_opening_hours
   - request_ambiance
 
-  # ------------- restaurant-inform.yml ---------- #
-  - inform_cuisine
-  - inform_location
-  - inform_num_people
-  - inform_restaurant_name
-  - inform_restaurant_id
-  - inform_booking_restaurant_id
-  - inform_view_details_restaurant_id
-  - inform_date
-  - inform_more_restaurants
-
-  # ----------- restaurant-knowledge-query ----------- #
+  # ------------------------------------------- restaurant-knowledge-query ------------------------------------------- #
   - query_knowledge_base
 
-  # ----------- multi intents ----------- #
+  # ------------------------------------------------- multi intents -------------------------------------------------- #
   - request_restaurants + inform_opening_hours
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -98,6 +98,8 @@ slots:
         entity: restaurant_id
         intent:
           - inform_restaurant_id
+          - inform_booking_restaurant_id
+          - inform_view_details_restaurant_id
 
   num_people:
     type: text
@@ -337,6 +339,7 @@ responses:
   # restaurant related responses
 
   utter_checkout_restaurants:
+    - text: Wanna checkout restaurants?
     - text: Wanna checkout places to eat something ?
     - text: Want to check out some restaurants?
     - text: Interested in finding a restaurant to eat at?
@@ -387,6 +390,14 @@ responses:
   utter_goodbye_again:
     - text: Farewell
     - text: See you later
+
+  utter_welcome:
+    - text: You're welcome!
+    - text: No problem!
+    - text: Happy to help!
+    - text: My pleasure!
+    - text: Anytime!
+    - text: Always happy to help!
 
   utter_bot_challenge/bot:
     - text: I am ResBot, powered by Rasa.

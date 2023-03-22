@@ -35,7 +35,6 @@ TITLE = "title"
 SUBTITLE = "subtitle"
 BUTTONS = "buttons"
 HOME_PAGE = "home_page"
-Menu_URL = "Menu_URL"
 
 # --- ----- ----- ----- ----- ----- -----  ----- ----- Components ----- ----- ----- ----- ----- ----- ----- -----  --- #
 
@@ -59,6 +58,11 @@ SUBCOMPONENT_BUTTON_URL = {TITLE: "", TYPE: WEB_URL, URL: ""}
 
 SUBCOMPONENT_BUTTON_PAYLOAD = {TITLE: "", TYPE: POST_BACK, PAYLOAD: ""}
 
+#    ----- ----- ----- ----- ----- ----- ----- Quick Replies ----- ----- ----- ----- ----- ----- ----- ----- -----    #
+
+QR_YES = "Yes"
+QR_NO = "No"
+
 # ------- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ------ #
 
 
@@ -69,6 +73,37 @@ SUBCOMPONENT_BUTTON_PAYLOAD = {TITLE: "", TYPE: POST_BACK, PAYLOAD: ""}
 UTTER_TEMPLATE__RESTAURANT_SUGGESTION = "It Seems you'll like "
 UTTER_TEMPLATE__RESTAURANT_SUGGESTION_NOT_FOUND = "your favor not found... I am afraid you said something invalid 😥 "
 
+# ---------------------------------------------------- Utterance Variables ------------------------------------------- #
+UTTER_SENTENCE_LIST_FOR_ASKING_TO_MAKE_RESERVATION = [
+    "Do you want to book a table at {}?",
+    "Are you interested in making a reservation at {}?",
+    "Would you like me to reserve a spot for you at {}?",
+    "Shall I go ahead and book a table for you at {}?",
+    "Do you wish to secure a reservation at {}?",
+    "Is a reservation at {} something you'd like me to arrange?",
+    "Can I assist you in booking a table at {}?"
+]
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# -------------------------------------------------- Slot Constants ------------------------------------------------- #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+
+USER_ID = "user_id"
+# CUISINE = "cuisine"
+RESTAURANT_ID = "restaurant_id"
+RESTAURANT_NAME = "restaurant_name"
+NUM_PEOPLE = "num_people"
+DATE = "date"
+TIME = "time"
+PREFERENCES = "preferences"
+# CITY = "city"
+
+# -------------------------- Knowledge base query related --------------------------
+OBJECT_TYPE = "object_type"
+MENTION = "mention"
+ATTRIBUTE = "attribute"
+
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # ------------------------------------------- Restaurant Object Constants ------------------------------------------- #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -76,11 +111,16 @@ UTTER_TEMPLATE__RESTAURANT_SUGGESTION_NOT_FOUND = "your favor not found... I am 
 ID = "id"
 NAME = "name"
 CITY = "city"
+ADDRESS = "address"
+TELEPHONE = "telephone"
 CUISINE = "cuisine"
 RATINGS = "ratings"
+OPENING_HOURS = "opening_hours"
 IMAGE_URL = "image_url"
 PAGE_URL = "page_url"
 MENU_URL = "menu_url"
+MON_TO_FRI = "Mon - Fri"
+SAT_SUN = "Sat, Sun"
 
 UPCOUNTRY = "Upcountry"
 COASTAL = "Coastal"
@@ -108,3 +148,5 @@ SAVORY = "Savory"
 SOUR = "Sour"
 SPICY = "Spicy"
 SWEET = "Sweet"
+
+#
