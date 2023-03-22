@@ -1,28 +1,27 @@
-import numpy as np
 import logging
-from bpemb import BPEmb
 from typing import Any, Text, Dict, List, Type
 
-from rasa.engine.recipes.default_recipe import DefaultV1Recipe
+import numpy as np
+from bpemb import BPEmb
 from rasa.engine.graph import ExecutionContext, GraphComponent
+from rasa.engine.recipes.default_recipe import DefaultV1Recipe
 from rasa.engine.storage.resource import Resource
 from rasa.engine.storage.storage import ModelStorage
-from rasa.nlu.featurizers.dense_featurizer.dense_featurizer import DenseFeaturizer
-from rasa.nlu.tokenizers.tokenizer import Tokenizer
-from rasa.shared.nlu.training_data.training_data import TrainingData
-from rasa.shared.nlu.training_data.features import Features
-from rasa.shared.nlu.training_data.message import Message
 from rasa.nlu.constants import (
     DENSE_FEATURIZABLE_ATTRIBUTES,
     FEATURIZER_CLASS_ALIAS,
 )
+from rasa.nlu.featurizers.dense_featurizer.dense_featurizer import DenseFeaturizer
+from rasa.nlu.tokenizers.tokenizer import Tokenizer
 from rasa.shared.nlu.constants import (
     TEXT,
     TEXT_TOKENS,
     FEATURE_TYPE_SENTENCE,
     FEATURE_TYPE_SEQUENCE,
 )
-
+from rasa.shared.nlu.training_data.features import Features
+from rasa.shared.nlu.training_data.message import Message
+from rasa.shared.nlu.training_data.training_data import TrainingData
 
 logger = logging.getLogger(__name__)
 
@@ -56,9 +55,9 @@ class BytePairFeaturizer(DenseFeaturizer, GraphComponent):
         }
 
     def __init__(
-        self,
-        config: Dict[Text, Any],
-        name: Text,
+            self,
+            config: Dict[Text, Any],
+            name: Text,
     ) -> None:
         """Constructs a new byte pair vectorizer."""
         config["alias"] = name if not config.get("alias") else config["alias"]
@@ -74,11 +73,11 @@ class BytePairFeaturizer(DenseFeaturizer, GraphComponent):
 
     @classmethod
     def create(
-        cls,
-        config: Dict[Text, Any],
-        model_storage: ModelStorage,
-        resource: Resource,
-        execution_context: ExecutionContext,
+            cls,
+            config: Dict[Text, Any],
+            model_storage: ModelStorage,
+            resource: Resource,
+            execution_context: ExecutionContext,
     ) -> GraphComponent:
         """Creates a new component (see parent class for full docstring)."""
         return cls(config, execution_context.node_name)

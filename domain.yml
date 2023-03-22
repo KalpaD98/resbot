@@ -405,9 +405,22 @@ responses:
     - text: I am ResBot, a bot built using Rasa.
 
   utter_bot_challenge/who_are_you:
-    - text: I am ResBot, I can recommend you restaurants and help you make a reservation 🍴.
+    - text: I am ResBot, I can recommend restaurants and help you make a reservation 🍴.
     - text: I am ResBot, I can help you find restaurants  and make a booking 🧂.
     - text: I am ResBot, I can help you find restaurants and book a table 🍽️.
+    - text: I am ResBot, an AI-powered chatbot here to help you with your restaurant booking needs.
+
+  utter_bot_challenge_init_who_are_you:
+    - text: I am ResBot, I can recommend restaurants and help you make a reservation 🍴. Would you like to make a reservation?
+
+  utter_wanna_book:
+    - text: Do you want to book a table?
+    - text: Would you like to make a booking?
+    - text: Would you like to make a reservation?
+    - text: Shall we proceed with a booking?
+    - text: Do you want to make a booking?
+    - text: Do you want to book a table?
+    - text: Do you want to make a reservation?
 
   utter_bot_challenge/what_can_you_do:
     - text: I can help you book a restaurant 🍴.
@@ -445,14 +458,7 @@ responses:
 
   #----------------- Removed utterances -----------------#
 
-  #  utter_wanna_book:
-  #    - text: Do you want to book a table?
-  #    - text: Would you like to make a booking?
-  #    - text: Would you like to make a reservation?
-  #    - text: Shall we proceed with a booking?
-  #    - text: Do you want to make a booking?
-  #    - text: Do you want to book a table?
-  #    - text: Do you want to make a reservation?
+
 
 config:
   store_entities_as_slots: true

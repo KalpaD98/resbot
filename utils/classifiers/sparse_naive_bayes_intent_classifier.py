@@ -1,24 +1,20 @@
-from typing import Any
-
-from sklearn.naive_bayes import BernoulliNB
-
 import logging
+from typing import Any
 from typing import Text, Dict, List, Type
 
 from joblib import dump, load
-from scipy.sparse import vstack, csr_matrix
-
+from rasa.engine.graph import ExecutionContext, GraphComponent
+from rasa.engine.recipes.default_recipe import DefaultV1Recipe
 from rasa.engine.storage.resource import Resource
 from rasa.engine.storage.storage import ModelStorage
-from rasa.engine.recipes.default_recipe import DefaultV1Recipe
-from rasa.engine.graph import ExecutionContext, GraphComponent
-from rasa.nlu.featurizers.featurizer import Featurizer
-from rasa.nlu.classifiers.classifier import IntentClassifier
 from rasa.nlu.classifiers import LABEL_RANKING_LENGTH
-from rasa.shared.nlu.training_data.training_data import TrainingData
-from rasa.shared.nlu.training_data.message import Message
+from rasa.nlu.classifiers.classifier import IntentClassifier
+from rasa.nlu.featurizers.featurizer import Featurizer
 from rasa.shared.nlu.constants import TEXT, INTENT
-
+from rasa.shared.nlu.training_data.message import Message
+from rasa.shared.nlu.training_data.training_data import TrainingData
+from scipy.sparse import vstack, csr_matrix
+from sklearn.naive_bayes import BernoulliNB
 
 logger = logging.getLogger(__name__)
 
@@ -53,11 +49,11 @@ class SparseNaiveBayesClassifier(IntentClassifier, GraphComponent):
         }
 
     def __init__(
-        self,
-        config: Dict[Text, Any],
-        name: Text,
-        model_storage: ModelStorage,
-        resource: Resource,
+            self,
+            config: Dict[Text, Any],
+            name: Text,
+            model_storage: ModelStorage,
+            resource: Resource,
     ) -> None:
         self.name = name
         self.clf = BernoulliNB(
@@ -112,11 +108,11 @@ class SparseNaiveBayesClassifier(IntentClassifier, GraphComponent):
 
     @classmethod
     def create(
-        cls,
-        config: Dict[Text, Any],
-        model_storage: ModelStorage,
-        resource: Resource,
-        execution_context: ExecutionContext,
+            cls,
+            config: Dict[Text, Any],
+            model_storage: ModelStorage,
+            resource: Resource,
+            execution_context: ExecutionContext,
     ) -> GraphComponent:
         return cls(config, execution_context.node_name, model_storage, resource)
 
@@ -145,11 +141,11 @@ class SparseNaiveBayesClassifier(IntentClassifier, GraphComponent):
 
     @classmethod
     def load(
-        cls,
-        config: Dict[Text, Any],
-        model_storage: ModelStorage,
-        resource: Resource,
-        execution_context: ExecutionContext,
+            cls,
+            config: Dict[Text, Any],
+            model_storage: ModelStorage,
+            resource: Resource,
+            execution_context: ExecutionContext,
     ) -> GraphComponent:
         with model_storage.read_from(resource) as model_dir:
             classifier = load(model_dir / f"{resource.name}.joblib")

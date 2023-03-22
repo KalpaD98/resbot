@@ -1,10 +1,10 @@
 import pathlib
-import numpy as np
 
-from sklearn.base import BaseEstimator, ClassifierMixin
+import numpy as np
 from rasa.cli.utils import get_validated_path
-from rasa.model import get_model, get_model_subdirectories
 from rasa.core.interpreter import RasaNLUInterpreter
+from rasa.model import get_model, get_model_subdirectories
+from sklearn.base import BaseEstimator, ClassifierMixin
 
 
 def load_interpreter(model_dir, model):

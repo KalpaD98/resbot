@@ -30,7 +30,7 @@ rules:
   - rule: when user say thank you reply welcome
     steps:
       - intent: thank_you
-      - action: utter_thank_you
+      - action: utter_welcome
 
   # Experimental
   #  - rule: query knowledge base

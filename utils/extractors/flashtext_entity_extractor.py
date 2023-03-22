@@ -3,13 +3,12 @@ import pathlib
 from typing import Any, Text, Dict, List, Type
 
 import rasa.shared.utils.io
-from rasa.engine.recipes.default_recipe import DefaultV1Recipe
+from flashtext import KeywordProcessor
 from rasa.engine.graph import ExecutionContext, GraphComponent
+from rasa.engine.recipes.default_recipe import DefaultV1Recipe
 from rasa.engine.storage.resource import Resource
 from rasa.engine.storage.storage import ModelStorage
-from rasa.shared.nlu.training_data.training_data import TrainingData
 from rasa.nlu.extractors.extractor import EntityExtractorMixin
-from rasa.shared.nlu.training_data.message import Message
 from rasa.nlu.tokenizers.tokenizer import Tokenizer
 from rasa.shared.nlu.constants import (
     TEXT,
@@ -19,7 +18,8 @@ from rasa.shared.nlu.constants import (
     ENTITY_ATTRIBUTE_VALUE,
     ENTITIES,
 )
-from flashtext import KeywordProcessor
+from rasa.shared.nlu.training_data.message import Message
+from rasa.shared.nlu.training_data.training_data import TrainingData
 
 logger = logging.getLogger(__name__)
 
@@ -49,11 +49,11 @@ class FlashTextEntityExtractor(EntityExtractorMixin, GraphComponent):
         }
 
     def __init__(
-        self,
-        config: Dict[Text, Any],
-        name: Text,
-        model_storage: ModelStorage,
-        resource: Resource,
+            self,
+            config: Dict[Text, Any],
+            name: Text,
+            model_storage: ModelStorage,
+            resource: Resource,
     ) -> None:
         self.validate_config(config=config)
         config = {**self.get_default_config(), **config}
@@ -79,11 +79,11 @@ class FlashTextEntityExtractor(EntityExtractorMixin, GraphComponent):
 
     @classmethod
     def create(
-        cls,
-        config: Dict[Text, Any],
-        model_storage: ModelStorage,
-        resource: Resource,
-        execution_context: ExecutionContext,
+            cls,
+            config: Dict[Text, Any],
+            model_storage: ModelStorage,
+            resource: Resource,
+            execution_context: ExecutionContext,
     ) -> GraphComponent:
         return cls(config, execution_context.node_name, model_storage, resource)
 

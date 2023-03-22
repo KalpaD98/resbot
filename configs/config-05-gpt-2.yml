@@ -24,9 +24,9 @@ pipeline:
     prefer_dates_from: "future"
     relative_base: "2023-03-01"
 
-#  - name: "DucklingEntityExtractor" # add in Windows environment
-#    url: "http://localhost:8000"
-#    dimensions: [ "time", "number", "amount-of-money", "distance" ] # modify as per requirements
+  #  - name: "DucklingEntityExtractor" # add in Windows environment
+  #    url: "http://localhost:8000"
+  #    dimensions: [ "time", "number", "amount-of-money", "distance" ] # modify as per requirements
 
   - name: EntitySynonymMapper
   - name: ResponseSelector

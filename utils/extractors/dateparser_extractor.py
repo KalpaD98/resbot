@@ -1,14 +1,14 @@
-import re
-import logging
 import datetime as dt
+import logging
+import re
 from typing import Any, Text, Dict, List, Type
-from rasa.engine.recipes.default_recipe import DefaultV1Recipe
+
+from dateparser.search import search_dates
 from rasa.engine.graph import ExecutionContext, GraphComponent
+from rasa.engine.recipes.default_recipe import DefaultV1Recipe
 from rasa.engine.storage.resource import Resource
 from rasa.engine.storage.storage import ModelStorage
-from rasa.shared.nlu.training_data.training_data import TrainingData
 from rasa.nlu.extractors.extractor import EntityExtractorMixin
-from rasa.shared.nlu.training_data.message import Message
 from rasa.shared.nlu.constants import (
     TEXT,
     ENTITY_ATTRIBUTE_TYPE,
@@ -17,7 +17,8 @@ from rasa.shared.nlu.constants import (
     ENTITY_ATTRIBUTE_VALUE,
     ENTITIES,
 )
-from dateparser.search import search_dates
+from rasa.shared.nlu.training_data.message import Message
+from rasa.shared.nlu.training_data.training_data import TrainingData
 
 logger = logging.getLogger(__name__)
 
@@ -44,11 +45,11 @@ class DateparserEntityExtractor(EntityExtractorMixin, GraphComponent):
         }
 
     def __init__(
-        self,
-        config: Dict[Text, Any],
-        name: Text,
-        model_storage: ModelStorage,
-        resource: Resource,
+            self,
+            config: Dict[Text, Any],
+            name: Text,
+            model_storage: ModelStorage,
+            resource: Resource,
     ) -> None:
         self.entity_name = config.get("entity_name")
         self.settings = {}
@@ -66,11 +67,11 @@ class DateparserEntityExtractor(EntityExtractorMixin, GraphComponent):
 
     @classmethod
     def create(
-        cls,
-        config: Dict[Text, Any],
-        model_storage: ModelStorage,
-        resource: Resource,
-        execution_context: ExecutionContext,
+            cls,
+            config: Dict[Text, Any],
+            model_storage: ModelStorage,
+            resource: Resource,
+            execution_context: ExecutionContext,
     ) -> GraphComponent:
         return cls(config, execution_context.node_name, model_storage, resource)
 
@@ -101,8 +102,8 @@ class DateparserEntityExtractor(EntityExtractorMixin, GraphComponent):
                         ENTITY_ATTRIBUTE_START: match.start(),
                         ENTITY_ATTRIBUTE_END: match.end(),
                         ENTITY_ATTRIBUTE_VALUE: message.get(TEXT)[
-                            match.start() : match.end()
-                        ],
+                                                match.start(): match.end()
+                                                ],
                         "parsed_date": str(timestamp),
                         "confidence": 1.0,
                         "extractor": "DateparserEntityExtractor",

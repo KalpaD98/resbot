@@ -1,7 +1,8 @@
-import yaml
 import json
 import pathlib
+
 import pandas as pd
+import yaml
 
 
 def nlu_path_to_dataframe(path):

@@ -50,9 +50,9 @@ class FastTextFeaturizer(DenseFeaturizer, GraphComponent):
         }
 
     def __init__(
-        self,
-        config: Dict[Text, Any],
-        name: Text,
+            self,
+            config: Dict[Text, Any],
+            name: Text,
     ) -> None:
         """Constructs a new byte pair vectorizer."""
         self.validate_config(config)
@@ -62,11 +62,11 @@ class FastTextFeaturizer(DenseFeaturizer, GraphComponent):
 
     @classmethod
     def create(
-        cls,
-        config: Dict[Text, Any],
-        model_storage: ModelStorage,
-        resource: Resource,
-        execution_context: ExecutionContext,
+            cls,
+            config: Dict[Text, Any],
+            model_storage: ModelStorage,
+            resource: Resource,
+            execution_context: ExecutionContext,
     ) -> GraphComponent:
         """Creates a new component (see parent class for full docstring)."""
         return cls(config, execution_context.node_name)

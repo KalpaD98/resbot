@@ -12,17 +12,17 @@ stories:
   # can use intent: sorry to roll back to previous story
   - story: greet and book restaurant happy path
     steps:
-      - intent: greet
-      - action: utter_greet
+      #      - intent: greet
+      #      - action: utter_greet # will connect from greeting.yml story
       - action: utter_bot_challenge/who_are_you
-      - action: utter_checkout_restaurants
+      - action: utter_wanna_book # -> pitch simple search and advance search
       - intent: affirm
       - action: action_show_cuisines # can break from this point inform cuisines or deny can come next
       - intent: inform_cuisine # if user does not want to select cuisine? (intent deny also include here)
 
       - action: action_show_restaurants
 
-        # from here onwards few main things can happen
+        # ----------- ----------- from here onwards few main things can happen ----------- ----------- #
 
         # - user ask for details, ✅
         # - check menu of restaurant,  ✅ -> Menu URL button

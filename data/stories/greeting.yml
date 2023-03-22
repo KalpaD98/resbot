@@ -12,6 +12,7 @@ stories:
       - intent: greet
       - action: utter_greet
       - action: utter_bot_challenge/who_are_you
+      - action: utter_wanna_book
 
   - story: good bye again
     steps:
@@ -19,23 +20,24 @@ stories:
       - intent: goodbye
       - action: utter_goodbye_again
 
-  - story: greet + request restaurant
+  - story: greet + bot introduce himself + user request restaurant
     steps:
       - intent: greet
       - action: utter_greet
       - action: utter_bot_challenge/who_are_you
-      - intent: request_restaurants
+      - action: utter_wanna_book
+      - intent: request_restaurants # user request restaurant or ask for search
       - action: action_show_restaurants
 
-  - story: when user greet continuously
-    steps:
-      - intent: greet
-      - action: utter_greet
-      - action: utter_bot_challenge/who_are_you
-      - intent: greet
-      - action: utter_greet_again
-      - intent: greet
-      - action: utter_checkout_restaurants
+  #  - story: when user greet continuously
+  #    steps:
+  #      - intent: greet
+  #      - action: utter_greet
+  #      - action: utter_bot_challenge/who_are_you
+  #      - intent: greet
+  #      - action: utter_greet_again
+  #      - intent: greet
+  #      - action: utter_checkout_restaurants
 
   - story: after greet + mood great + ask checkout restaurant
     steps:

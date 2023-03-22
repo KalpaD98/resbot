@@ -1,22 +1,21 @@
 from typing import Any, Optional, Text, Dict, List, Type
 
 import numpy as np
-from sklearn.feature_extraction.text import HashingVectorizer
+from rasa.engine.graph import ExecutionContext, GraphComponent
+from rasa.engine.recipes.default_recipe import DefaultV1Recipe
 from rasa.engine.storage.resource import Resource
-from rasa.nlu.tokenizers.tokenizer import Tokenizer
 from rasa.engine.storage.storage import ModelStorage
-from rasa.shared.nlu.training_data.message import Message
-from rasa.shared.nlu.training_data.features import Features
-from rasa.nlu.featurizers.sparse_featurizer.sparse_featurizer import SparseFeaturizer
-from rasa.shared.nlu.training_data.training_data import TrainingData
-from rasa.shared.nlu.constants import TEXT, FEATURE_TYPE_SENTENCE, FEATURE_TYPE_SEQUENCE
 from rasa.nlu.constants import (
     FEATURIZER_CLASS_ALIAS,
     TOKENS_NAMES,
 )
-
-from rasa.engine.recipes.default_recipe import DefaultV1Recipe
-from rasa.engine.graph import ExecutionContext, GraphComponent
+from rasa.nlu.featurizers.sparse_featurizer.sparse_featurizer import SparseFeaturizer
+from rasa.nlu.tokenizers.tokenizer import Tokenizer
+from rasa.shared.nlu.constants import TEXT, FEATURE_TYPE_SENTENCE, FEATURE_TYPE_SEQUENCE
+from rasa.shared.nlu.training_data.features import Features
+from rasa.shared.nlu.training_data.message import Message
+from rasa.shared.nlu.training_data.training_data import TrainingData
+from sklearn.feature_extraction.text import HashingVectorizer
 
 
 @DefaultV1Recipe.register(
@@ -97,11 +96,11 @@ class HashingFeaturizer(GraphComponent, SparseFeaturizer):
 
     @classmethod
     def create(
-        cls,
-        config: Dict[Text, Any],
-        model_storage: ModelStorage,
-        resource: Resource,
-        execution_context: ExecutionContext,
+            cls,
+            config: Dict[Text, Any],
+            model_storage: ModelStorage,
+            resource: Resource,
+            execution_context: ExecutionContext,
     ) -> GraphComponent:
         """Creates a new component (see parent class for full docstring)."""
         return cls(config, execution_context.node_name)

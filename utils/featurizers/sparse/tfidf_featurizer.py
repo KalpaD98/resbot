@@ -1,27 +1,27 @@
 import logging
 from typing import Any, Text, Dict, List, Type
 
-from sklearn.feature_extraction.text import TfidfVectorizer
-from rasa.engine.recipes.default_recipe import DefaultV1Recipe
+from joblib import dump, load
 from rasa.engine.graph import ExecutionContext, GraphComponent
+from rasa.engine.recipes.default_recipe import DefaultV1Recipe
 from rasa.engine.storage.resource import Resource
 from rasa.engine.storage.storage import ModelStorage
-from rasa.nlu.featurizers.sparse_featurizer.sparse_featurizer import SparseFeaturizer
-from rasa.nlu.tokenizers.tokenizer import Tokenizer
-from rasa.shared.nlu.training_data.training_data import TrainingData
-from rasa.shared.nlu.training_data.features import Features
-from rasa.shared.nlu.training_data.message import Message
 from rasa.nlu.constants import (
     DENSE_FEATURIZABLE_ATTRIBUTES,
     FEATURIZER_CLASS_ALIAS,
 )
-from joblib import dump, load
+from rasa.nlu.featurizers.sparse_featurizer.sparse_featurizer import SparseFeaturizer
+from rasa.nlu.tokenizers.tokenizer import Tokenizer
 from rasa.shared.nlu.constants import (
     TEXT,
     TEXT_TOKENS,
     FEATURE_TYPE_SENTENCE,
     FEATURE_TYPE_SEQUENCE,
 )
+from rasa.shared.nlu.training_data.features import Features
+from rasa.shared.nlu.training_data.message import Message
+from rasa.shared.nlu.training_data.training_data import TrainingData
+from sklearn.feature_extraction.text import TfidfVectorizer
 
 logger = logging.getLogger(__name__)
 
@@ -51,11 +51,11 @@ class TfIdfFeaturizer(SparseFeaturizer, GraphComponent):
         }
 
     def __init__(
-        self,
-        config: Dict[Text, Any],
-        name: Text,
-        model_storage: ModelStorage,
-        resource: Resource,
+            self,
+            config: Dict[Text, Any],
+            name: Text,
+            model_storage: ModelStorage,
+            resource: Resource,
     ) -> None:
         """Constructs a new tf/idf vectorizer using the sklearn framework."""
         super().__init__(name, config)
@@ -78,11 +78,11 @@ class TfIdfFeaturizer(SparseFeaturizer, GraphComponent):
 
     @classmethod
     def create(
-        cls,
-        config: Dict[Text, Any],
-        model_storage: ModelStorage,
-        resource: Resource,
-        execution_context: ExecutionContext,
+            cls,
+            config: Dict[Text, Any],
+            model_storage: ModelStorage,
+            resource: Resource,
+            execution_context: ExecutionContext,
     ) -> GraphComponent:
         """Creates a new untrained component (see parent class for full docstring)."""
         return cls(config, execution_context.node_name, model_storage, resource)
@@ -137,11 +137,11 @@ class TfIdfFeaturizer(SparseFeaturizer, GraphComponent):
 
     @classmethod
     def load(
-        cls,
-        config: Dict[Text, Any],
-        model_storage: ModelStorage,
-        resource: Resource,
-        execution_context: ExecutionContext,
+            cls,
+            config: Dict[Text, Any],
+            model_storage: ModelStorage,
+            resource: Resource,
+            execution_context: ExecutionContext,
     ) -> GraphComponent:
         """Loads trained component from disk."""
         try:

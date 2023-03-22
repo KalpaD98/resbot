@@ -18,14 +18,14 @@ pipeline:
     epochs: 100
     constrain_similarities: true
 
-#  - name: utils.extractors.DateparserEntityExtractor # remove when duckling is on
-#    languages: [ "en" ]
-#    prefer_dates_from: "future"
-#    relative_base: "2023-03-01"
+  #  - name: utils.extractors.DateparserEntityExtractor # remove when duckling is on
+  #    languages: [ "en" ]
+  #    prefer_dates_from: "future"
+  #    relative_base: "2023-03-01"
 
-#  - name: "DucklingEntityExtractor" # add in Windows environment
-#    url: "http://localhost:8000"
-#    dimensions: [ "time", "number", "amount-of-money", "distance" ] # modify as per requirements
+  #  - name: "DucklingEntityExtractor" # add in Windows environment
+  #    url: "http://localhost:8000"
+  #    dimensions: [ "time", "number", "amount-of-money", "distance" ] # modify as per requirements
 
   - name: EntitySynonymMapper
   - name: ResponseSelector
