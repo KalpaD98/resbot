@@ -6,15 +6,15 @@ stories:
 
   # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
   # --------------------------------------------------- Happy Paths ------------------------------------------------- #
-  # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #  # # # # # # # # # # # # # #
+  # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
   # Happy path initiation
   # can use intent: sorry to roll back to previous story
-  - story: greet and book restaurant happy path
+  - story: greet and book restaurant happy path #10
     steps:
       #      - intent: greet
       #      - action: utter_greet # will connect from greeting.yml story
-      - action: utter_bot_challenge/who_are_you
+      - action: utter_bot_intro
       - action: utter_wanna_book # -> pitch simple search and advance search
       - intent: affirm
       - action: action_show_cuisines # can break from this point inform cuisines or deny can come next
@@ -25,16 +25,21 @@ stories:
         # ----------- ----------- from here onwards few main things can happen ----------- ----------- #
 
         # - user ask for details, ✅
-        # - check menu of restaurant,  ✅ -> Menu URL button
+            # Yes
+            # No
+
         # - directly wants to book a restaurant  ✅
+            # Yes
+            # No
 
         # wants to check out more restaurants
-        # search restaurants by criteria they provide
+
+        # search restaurants by criteria they provide (basic and advance)
 
 
     # Continuation from Happy path initiation -> Happy path for user ask for detail and book restaurant
 
-  - story: book restaurant after view details happy path
+  - story: book restaurant after view details happy path #11
     steps:
       - action: action_show_restaurants
       - intent: inform_view_details_restaurant_id #view details of restaurant
@@ -58,7 +63,7 @@ stories:
 
 
   # Happy path for user directly wants to book a restaurant selected from carousal
-  - story: book restaurant directly happy path
+  - story: book restaurant directly happy path #12
     steps:
       - action: action_show_restaurants
       - intent: inform_booking_restaurant_id # book restaurant
@@ -89,14 +94,14 @@ stories:
 
     # Happy path for user wants to search restaurants by criteria they provide
 
-    # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #  # # # # # # # # # # # # # # # # # # # # # # # # #
-    # ------------------------------------------------ Unhappy Paths ------------------------------------------------- #
-    # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #  # # # # # # # # # # # # # # # # # # # # # # # #
+    # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #  # # # # # # # # # # # # # # # # # # # # # # # #
+    # ------------------------------------------------ Unhappy Paths ----------------------------------------------- #
+    # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #  # # # # # # # # # # # # # # # # # # # # # # #
 
 
-    # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-    # -------------------------------------------------- Sub stories ------------------------------------------------ #
-    # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+    # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+    # ------------------------------------------------- Sub stories ----------------------------------------------- #
+    # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
     # These stories are broken down into sub-stories to make them easier to understand when user interrupts the flow.
 

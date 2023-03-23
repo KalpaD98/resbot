@@ -11,10 +11,14 @@
 - Once you have developed your bot and you are ready to integrate the bot with the UI, you can start the Rasa server
   using the below command
 
-  ```
-rasa run -m models --enable-api --cors "*" --debug
-  ```
+Rasa run
 
-  ```
+```
+rasa run -m models --enable-api --cors "*" --debug
+```
+
+Run action server
+
+```
 rasa run actions --cors "*" --debug
-  ```
+```

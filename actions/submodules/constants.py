@@ -77,11 +77,8 @@ UTTER_TEMPLATE__RESTAURANT_SUGGESTION_NOT_FOUND = "your favor not found... I am 
 UTTER_SENTENCE_LIST_FOR_ASKING_TO_MAKE_RESERVATION = [
     "Do you want to book a table at {}?",
     "Are you interested in making a reservation at {}?",
-    "Would you like me to reserve a spot for you at {}?",
     "Shall I go ahead and book a table for you at {}?",
-    "Do you wish to secure a reservation at {}?",
-    "Is a reservation at {} something you'd like me to arrange?",
-    "Can I assist you in booking a table at {}?"
+    "Would you like me to reserve a spot for you at {}?"
 ]
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -93,6 +90,7 @@ USER_ID = "user_id"
 # CUISINE = "cuisine"
 RESTAURANT_ID = "restaurant_id"
 RESTAURANT_NAME = "restaurant_name"
+SELECTED_RESTAURANT = "selected_restaurant"
 NUM_PEOPLE = "num_people"
 DATE = "date"
 TIME = "time"

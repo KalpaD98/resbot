@@ -91,8 +91,8 @@ class ActionShowRestaurants(Action):
         # get restaurant data into an array
 
         # hard coded restaurant data
-
-        dispatcher.utter_message(text="Here are some " + cuisine.lower() + " restaurants I found:",
+        text_msg = f"I've found some great {cuisine.lower()} restaurants for you to try out!"
+        dispatcher.utter_message(text=text_msg,
                                  attachment=ResponseGenerator.card_options_carousal(
                                      ObjectUtil.restaurant_list_to_carousal_object(rest_list)))
 
@@ -159,7 +159,8 @@ class ActionShowSelectedRestaurantDetails(Action):
 
         dispatcher.utter_message(image=restaurant[IMAGE_URL])
         dispatcher.utter_message(
-            text=restaurant[NAME] + " is a " + restaurant[CUISINE] + " restaurant located at " + restaurant[ADDRESS])
+            text=restaurant[NAME] + " mainly serves " + restaurant[CUISINE] + " food and its located at "
+                                                                              "" + restaurant[ADDRESS])
         dispatcher.utter_message(text="Their opening hours are, ")
         dispatcher.utter_message(text="Mon - Fri: " + restaurant[OPENING_HOURS][MON_TO_FRI])
         dispatcher.utter_message(text="Sat - Sun: " + restaurant[OPENING_HOURS][SAT_SUN])
@@ -168,7 +169,7 @@ class ActionShowSelectedRestaurantDetails(Action):
             text=ObjectUtil.get_random_sentence(restaurant[NAME], UTTER_SENTENCE_LIST_FOR_ASKING_TO_MAKE_RESERVATION),
             quick_replies=ResponseGenerator.quick_replies([QR_YES, QR_NO]))
 
-        return [SlotSet("restaurant_name", restaurant[NAME])]
+        return [SlotSet("selected_restaurant", restaurant)]
 
 
 # action_select_restaurant_ask_booking_confirmation.
@@ -202,8 +203,10 @@ class ActionBookSelectedRestaurant(Action):
         # dispatcher.utter_message(text="<small description>, <address>, <Opening hours [weekend,weekdays]>")
         dispatcher.utter_message(text="Would you like to proceed with the booking?",
                                  quick_replies=ResponseGenerator.quick_replies([QR_YES, QR_NO]))
-
-        return [SlotSet("restaurant_id", restaurant_id)]
+        # if yes -> fill slot
+        return [SlotSet(SELECTED_RESTAURANT, restaurant)]
+        # if no
+        # Clear the slots related to restaurant selection
 
 
 # action_show_booking_summary.
@@ -224,31 +227,34 @@ class ActionShowBookingSummary(Action):
         print('--------------------------------------------------------------------\n')
 
         # get restaurant id from the tracker
-        restaurant_id = tracker.get_slot("restaurant_id")
+        # restaurant_id = tracker.get_slot("restaurant_id")
 
         # get the restaurant data from the knowledge base
         # restaurant = await self.knowledge_base.get_object("restaurant", restaurant_id)
 
         # get the date from the tracker
-        # date = tracker.get_slot("date")
-
+        date = tracker.get_slot("date")
+        time = tracker.get_slot("time")
+        restaurant = tracker.get_slot(SELECTED_RESTAURANT)
         # send the message to the user
         dispatcher.utter_message(
-            text="Your booking summary for " + tracker.get_slot(RESTAURANT_NAME) + " is as follows:")
+            text="Your booking summary for " + restaurant[NAME] + " is as follows:")
         # generate the booking summary
         dispatcher.utter_message(text="Number of people: " + tracker.get_slot(NUM_PEOPLE))
-        dispatcher.utter_message(text="Date: " + tracker.get_slot(DATE))
-        if tracker.get_slot("time") is not None:
-            dispatcher.utter_message(text="Time: " + tracker.get_slot(TIME))
+        dispatcher.utter_message(text="Date: " + date)
+        if time is not None:
+            dispatcher.utter_message(text="Time: " + time)
 
         # ask to confirm the booking
-        # dispatch a message asking if the user would like to confirm the booking with quick replies <FIX>
 
         # TODO: if no -> ask if they would like to book a table of another restaurant or exit
+
         dispatcher.utter_message(text="Would you like to confirm this booking?",
                                  quick_replies=ResponseGenerator.quick_replies([QR_YES, QR_NO]))
         # "Please choose a cuisine",
+        # if yes
         return []
+        # if no clear restaurant  slots by far
 
 
 # action_confirm_booking.
@@ -279,17 +285,15 @@ class ActionConfirmBooking(Action):
         if date is None:
             logging.info("Date not set")
 
+        selected_restaurant = tracker.get_slot(SELECTED_RESTAURANT)
+
         # generate the booking summary
-        message = "Your booking for restaurant_name" + " located at " + "restaurant address" + \
-                  " on " + "<date>" + " at " + "<time>" + " has been confirmed"
-        #
-        # # generate the booking summary
-        # message = "Your booking for " + restaurant["name"] + " located at " + restaurant["address"] + \
-        #           "on " + date + " at " + time + " has been confirmed. Thank you for using our service."
+        message = "Your booking for" + selected_restaurant[NAME] + " located at " + selected_restaurant[ADDRESS] + \
+                  " on " + date + " has been confirmed"
 
         # send the message to the user
         dispatcher.utter_message(text=message)
-        dispatcher.utter_message(text="Your booking reference id is: <brid_1213jnaskd>")
+        dispatcher.utter_message(text="Your booking reference id is: brid_1213jnaskd")
 
         return []
 
