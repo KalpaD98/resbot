@@ -18,9 +18,13 @@ intents:
   - goodbye
   - affirm
   - deny
+  - thank_you
   - bot_challenge
   - emoji_mood_great
   - emoji_mood_unhappy
+  - emoji_goodbye
+  - emoji_affirm
+  - emoji_deny
 
   # ---------------------------------------------- restaurant-inform.yml -------------------------------------------- #
   - inform_cuisine                                        #
@@ -29,9 +33,10 @@ intents:
   - inform_view_details_restaurant_id                     #
   - inform_num_people                                     #
   - inform_date                                           #
+  - inform_time                                           #
   - inform_location                                       #
   - inform_restaurant_name                                #
-  - inform_more_restaurants                               #
+  - stop
 
   # ----------------------------------------------- restaurant-request ---------------------------------------------- #
   - request_restaurants                                   #
@@ -40,12 +45,16 @@ intents:
   - request_menu
   - request_opening_hours
   - request_ambiance
-
+  - request_booking_details
+  # ---------------------------------------------- restaurant-search.yml -------------------------------------------- #
+  - search_restaurants
   # ------------------------------------------- restaurant-knowledge-query ------------------------------------------ #
   - query_knowledge_base
 
   # ------------------------------------------------- multi intents ------------------------------------------------- #
-  - request_restaurants + inform_opening_hours
+  - search_restaurant + inform_opening_hours
+  - search_restaurant + inform_location
+  - search_restaurant + inform_date + inform_time + inform_num_people
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # ---------------------------------------------------- Entities ----------------------------------------------------- #
@@ -458,12 +467,9 @@ responses:
   utter_out_of_scope/hotel:
     - text: I understand you want to book a hotel, but i'm afraid i can't handle that skill yet 😢.
 
-
-
 config:
   store_entities_as_slots: true
 
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
-

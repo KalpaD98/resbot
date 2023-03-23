@@ -153,6 +153,7 @@ nlu:
       - why not
       - hell ya
       - of course
+      - sounds good
       - that sounds good
       - correct
       - yep
@@ -174,7 +175,7 @@ nlu:
       - ok
       - yeah sure
       - cool ok
-      - cool
+      - sounds cool
       - yup
       - sure
       - im in
