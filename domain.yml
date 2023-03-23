@@ -46,9 +46,9 @@ intents:
   - request_opening_hours
   - request_ambiance
   - request_booking_details
+
   # ---------------------------------------------- restaurant-search.yml -------------------------------------------- #
   - search_restaurants
-  # ------------------------------------------- restaurant-knowledge-query ------------------------------------------ #
   - query_knowledge_base
 
   # ------------------------------------------------- multi intents ------------------------------------------------- #
@@ -147,7 +147,7 @@ slots:
           - inform_time
           - search_restaurants
 
-  # ------------------------------------------ Knowledge base query related ------------------------------------------ #
+  # --------------------------------------- Knowledge base query related slots --------------------------------------- #
   object_type:
     type: text
     influence_conversation: false
@@ -290,11 +290,14 @@ actions:
   - action_show_more_restaurant_options                         # show more restaurant options
   - action_show_selected_restaurant_details                     # show selected restaurant details
   - action_show_booking_summary                                 # show booking summary
+
   - action_confirm_booking                                      # confirm booking
   - action_select_restaurant_ask_booking_confirmation           # ask booking confirmation for the selected restaurant
 
-  - validate_restaurant_form                                    # validate restaurant form
+  - action_ask_anything_else                                    # ask anything else with quick replies
 
+  # -------------------------------------------- Form Validation Actions --------------------------------------------- #
+  - validate_restaurant_form                                    # validate restaurant form
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # ------------------------------------------- Responses: Bot Utterances --------------------------------------------- #
@@ -311,31 +314,12 @@ responses:
     - text: Hello there 😀 ?
     - text: Hello 😀 there!
 
-  # Implement below if you want to greet the user by name
-  #slots:
-  #  logged_in:
-  #    type: bool
-  #    influence_conversation: False
-  #    mappings:
-  #    - type: custom
-  #  name:
-  #    type: text
-  #    influence_conversation: False
-  #    mappings:
-  #    - type: custom
-
-  #  utter_greet:
-  #    - condition:
-  #        - type: slot
-  #          name: logged_in
-  #          value: true
-  #      text: "Hey, {name}. Nice to see you again! How are you?"
-  #
-  #    - text: "Welcome. How is your day going?"
-
   utter_please_rephrase:
     - text: I'm sorry, I couldn't understand that. Could you rephrase it?
     - text: I'm sorry, I didn't get that. Could you rephrase it?
+    - text: Sorry I didn't get that. Can you rephrase?
+    - text: Sorry, I'm not sure I understand. Can you rephrase?
+    - text: Can you please rephrase? I did not got that.
 
   utter_greet_again:
     - text: Hi there again!
@@ -353,21 +337,13 @@ responses:
     - text: Sorry to hear that, Are you in the mood of having something to eat?
     - text: Hmm, eating something might help you feel better.
 
-  # restaurant related responses
+  # restaurant and booking related responses
 
   utter_checkout_restaurants:
     - text: Wanna checkout restaurants?
     - text: Wanna checkout places to eat something ?
     - text: Want to check out some restaurants?
     - text: Interested in finding a restaurant to eat at?
-
-  utter_ask_registered_user:
-    - text: Are you a registered user?
-    - text: Are you a registered user?
-    - text: Are you a returning customer?
-    - text: Did you create an account with us previously?
-    - text: Have you signed up with us in the past?
-    - text: Do you have an existing account with us?
 
   utter_ask_date:
     - text: When would you like to make the booking? (Enter a date in the format DD-MM-YYYY)
@@ -378,13 +354,16 @@ responses:
     - text: May I know the number of people for the booking?
     - text: For how many people are you planing to make the reservation?
 
-  utter_ask_to_confirm_booking:
-    - text: Here is the summary of your booking please confirm if it looks ok.
-    - text: Here is the summary of your booking. Are you okay with the details of the booking?
+  # user related responses
 
-  utter_happy:
-    - text: Great, carry on!
-    - text: Cool!
+  utter_ask_registered_user:
+    - text: Are you a registered user?
+    - text: Are you a registered user?
+    - text: Are you a returning customer?
+    - text: Did you create an account with us previously?
+    - text: Have you signed up with us in the past?
+    - text: Do you have an existing account with us?
+
 
   utter_emoji_great_feedback:
     - text: 😊
@@ -400,6 +379,14 @@ responses:
   utter_thank_you:
     - text: Thank you for using our service.
 
+  utter_welcome:
+    - text: You're welcome!
+    - text: No problem!
+    - text: Happy to help!
+    - text: My pleasure!
+    - text: Anytime!
+    - text: Always happy to help!
+
   utter_goodbye:
     - text: Bye
     - text: Goodbye
@@ -408,13 +395,46 @@ responses:
     - text: Farewell
     - text: See you later
 
-  utter_welcome:
-    - text: You're welcome!
-    - text: No problem!
-    - text: Happy to help!
-    - text: My pleasure!
-    - text: Anytime!
-    - text: Always happy to help!
+  utter_bot_intro:
+    - text: I'm ResBot! 🍴, I'll find amazing restaurants for you and easily book reservations 🌟.
+    - text: I'm ResBot, your personal dining concierge 🍴. I'm here to help you discover the perfect restaurants tailored to your taste, and effortlessly make reservations for you.
+
+  utter_wanna_book:
+    - text: Would you like to reserve a table at a fantastic restaurant? 🍽️
+
+  utter_processing_the_request: # change data a bit
+    - text: Let me check
+    - text: Sure!
+    - text: I'll check for you.
+    - text: I'll see what I can find out.
+    - text: I'll take a look and see what I can find.
+    - text: I'll check and get back to you.
+
+  utter_thank_you_see_you_later:
+    - text: Thank you for using our service. See you later!
+    - text: Thank you for using our service. Bye!
+    - text: Thank you for using our service. Goodbye!
+    - text: Thank you for using our service. Farewell!
+    - text: Thank you for using our service. See you later!
+    - text: Thank you for using our service. Bye!
+    - text: Thank you for using our service. Goodbye!
+    - text: Thank you for using our service. Farewell!
+
+  # ----------------------------------------------- Retrieval Intents ------------------------------------------------ #
+  utter_bot_challenge/what_can_you_do:
+    - text: I can help you book a restaurant 🍴.
+    - text: I can help you find restaurants and book a table 🍽️.
+    - text: I can help you find restaurants and book a table 🧂.
+    - text: I can help you find restaurants and book a table 🍽️.
+    - text: I can help you find restaurants and book a table 🍴.
+
+  utter_out_of_scope/out_of_functionality:
+    - text: Sorry, I can't handle that request 🥲. I can help you book a restaurant 😃.
+    - text: Sorry, I can't do that 😢. I can help you book a restaurant 😃.
+    - text: Sorry, I can't help you with that 🥹. I can help you book a restaurant 😃.
+    - text: Sorry, I am not able to help you with that. I can help you book a restaurant 😃.
+    - text: Sorry, I am not able to help you with that. I can help you book a restaurant 😃.
+    - text: Sorry, I am not able to help you with that. I can help you book a restaurant 😃.
 
   utter_bot_challenge/bot:
     - text: I am ResBot, powered by Rasa.
@@ -427,45 +447,13 @@ responses:
     - text: I am ResBot, I can help you find restaurants and book a table 🍽️.
     - text: I am ResBot, an AI-powered chatbot here to help you with your restaurant booking needs.
 
-  utter_bot_intro:
-    - text: I'm ResBot! 🍴, I'll find amazing restaurants for you and easily book reservations 🌟.
-    - text: I'm ResBot, your personal dining concierge 🍴. I'm here to help you discover the perfect restaurants tailored to your taste, and effortlessly make reservations for you.
-
-  utter_wanna_book:
-    - text: Would you like to reserve a table at a fantastic restaurant? 🍽️
-
-  utter_bot_challenge/what_can_you_do:
-    - text: I can help you book a restaurant 🍴.
-    - text: I can help you find restaurants and book a table 🍽️.
-    - text: I can help you find restaurants and book a table 🧂.
-    - text: I can help you find restaurants and book a table 🍽️.
-    - text: I can help you find restaurants and book a table 🍴.
-
-  utter_ask_rephrase:
-    - text: Sorry, I'm not sure I understand. Can you rephrase?
-    - text: Can you please rephrase? I did not got that.
-
-  utter_out_of_scope/out_of_functionality:
-    - text: Sorry, I can't handle that request 🥲. I can help you book a restaurant 😃.
-    - text: Sorry, I can't do that 😢. I can help you book a restaurant 😃.
-    - text: Sorry, I can't help you with that 🥹. I can help you book a restaurant 😃.
-    - text: Sorry, I am not able to help you with that. I can help you book a restaurant 😃.
-    - text: Sorry, I am not able to help you with that. I can help you book a restaurant 😃.
-    - text: Sorry, I am not able to help you with that. I can help you book a restaurant 😃.
-
-  utter_query_search:
-    - text: Let me check
-    - text: Sure!
-    - text: I'll check for you.
-    - text: I'll see what I can find out.
-    - text: I'll take a look and see what I can find.
-    - text: I'll check and get back to you.
-
   utter_out_of_scope/food:
     - text: I understand you want to order food, but i'm afraid i can't handle that skill yet 😢.
 
   utter_out_of_scope/hotel:
     - text: I understand you want to book a hotel, but i'm afraid i can't handle that skill yet 😢.
+
+# -------------------------------------------------------------------------------------------------------------------- #
 
 config:
   store_entities_as_slots: true

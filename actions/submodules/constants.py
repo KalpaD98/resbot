@@ -15,6 +15,8 @@ ACTION_SHOW_SELECTED_RESTAURANT_ASK_BOOKING_CONFIRMATION = "action_select_restau
 
 ACTION_CONFIRM_BOOKING = "action_confirm_booking"
 
+ACTION_ASK_ANYTHING_ELSE = "action_ask_anything_else"
+
 ACTION_QUERY_KNOWLEDGE_BASE = "action_query_knowledge_base"
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -62,6 +64,9 @@ SUBCOMPONENT_BUTTON_PAYLOAD = {TITLE: "", TYPE: POST_BACK, PAYLOAD: ""}
 
 QR_YES = "Yes"
 QR_NO = "No"
+QR_STOP = "Stop"
+QR_SHOW_MORE_RESTAURANTS = "Show more restaurants"
+QR_SEARCH_RESTAURANTS = "Search restaurants"
 
 # ------- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ------ #
 

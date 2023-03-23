@@ -293,8 +293,35 @@ class ActionConfirmBooking(Action):
 
         # send the message to the user
         dispatcher.utter_message(text=message)
-        dispatcher.utter_message(text="Your booking reference id is: brid_1213jnaskd")
+        dispatcher.utter_message(text="Your booking reference id is: brid_1FK2H1G3")
 
+        return []
+
+
+# anything else with quick replies
+class ActionAnythingElse(Action):
+    def name(self) -> Text:
+        return ACTION_ASK_ANYTHING_ELSE
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        # quick replies for show more and search with payload
+        quick_replies_with_payload = []
+
+        quick_reply_show_more = {
+            TITLE: QR_SHOW_MORE_RESTAURANTS,
+            PAYLOAD: "/request_more_restaurant_options"}
+
+        quick_reply_search_restaurant = {
+            TITLE: QR_SEARCH_RESTAURANTS,
+            PAYLOAD: "/want_to_search_restaurants"}
+
+        quick_replies_with_payload.append(quick_reply_show_more)
+        quick_replies_with_payload.append(quick_reply_search_restaurant)
+
+        dispatcher.utter_message(text="Is there anything else I can help you with?",
+                                 quick_replies=ResponseGenerator.quick_replies(quick_replies_with_payload, True))
         return []
 
 

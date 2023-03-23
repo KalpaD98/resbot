@@ -18,15 +18,12 @@ stories:
       - intent: request_restaurants # user request restaurant or ask for search
       - action: action_show_restaurants # after this story continues from restaurant.yml first story
 
-#  - story: when user greet continuously #3
-#    steps:
-#      - intent: greet
-#      - action: utter_greet
-#      - action: utter_bot_intro
-#      - intent: greet
-#      - action: utter_greet_again
-#      - intent: greet
-#      - action: utter_checkout_restaurants
+  - story: when user greet continuously #3
+    steps:
+      - action: utter_wanna_book
+      - intent: greet
+      - action: utter_greet_again
+      - action: utter_checkout_restaurants
 
   # ------------------------------------------------- Good bye handling ---------------------------------------------- #
   - story: Say goodbye when user says goodbye #4
@@ -39,8 +36,6 @@ stories:
       - action: utter_goodbye
       - intent: goodbye
       - action: utter_goodbye_again
-
-
 
   # --------------------------------------------------- User Mood check ---------------------------------------------- #
 

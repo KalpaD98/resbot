@@ -1,7 +1,7 @@
 # ----- Data Structure ----- #
 """
 
-restaurant: {id, name, image_url, cuisine, ratings, telephone, menu_url, address, opening_hours }
+restaurant: {id, name, image_url, cuisine, ratings, telephone, menu_url, address, opening_hours, any_other_attributes }
 user: {id, name, preferences}
 
 """

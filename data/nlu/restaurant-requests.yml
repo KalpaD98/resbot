@@ -2,17 +2,7 @@ version: "3.1"
 # restaurant-requests.yml has restaurant request examples for intents
 nlu:
   # user requests from bot
-  #--------------------------------------------- Request ---------------------------------------------------------------
-  - intent: request_menu
-    examples: |
-      - what foods are available in this restaurant
-      - show me the foods they have
-      - i want to see their menu
-      - can i see their menu
-      - show me the menu
-      - menu please
-      - show menu
-
+  #--------------------------------------------- Request --------------------------------------------------------------#
   - intent: request_cuisines
     examples: |
       - what cuisines are available
@@ -34,10 +24,15 @@ nlu:
       - display restaurants
       - restaurants please
 
-  - intent: request_opening_hours
+  - intent: request_menu
     examples: |
-      - what are the opening hours
-      - what are the opening hours of [McDonalds](booking_place)
+      - what foods are available in this restaurant
+      - show me the foods they have
+      - i want to see their menu
+      - can i see their menu
+      - show me the menu
+      - menu please
+      - show menu
 
   - intent: request_more_restaurant_options
     examples: |
@@ -50,7 +45,6 @@ nlu:
       - more places
       - any other suggestions
 
-
   - intent: request_booking_details
     examples: |
       - What's the status of my reservation
@@ -61,6 +55,11 @@ nlu:
       - reservation details
       - booking details please
       - reservation details pls
+
+  - intent: request_opening_hours
+    examples: |
+      - what are the opening hours
+      - what are the opening hours of [McDonalds](booking_place)
 
   - intent: request_ambiance
     examples: |
@@ -74,51 +73,3 @@ nlu:
       - what is the ambiance like in the restaurant
       - what is the atmosphere like in the place
       - what is the ambiance like in the place
-
-  #  Change to match with dataset
-  - intent: search_restaurants
-    examples: |
-      - im looking for a restaurant
-      - can i get [swedish](cuisine) food in any area
-      - a restaurant that serves [caribbean](cuisine) food
-      - id like a restaurant
-      - im looking for a restaurant that serves [mediterranean](cuisine) food
-      - can i find a restaurant that serves [chinese](cuisine)
-      - i am looking for any place that serves [indonesian](cuisine) food for three
-      - i need to find a restaurant
-      - uh im looking for a restaurant that serves [kosher](cuisine) food
-      - uh can i find a restaurant and it should serve [brazilian](cuisine) food
-      - im looking for a restaurant serving [italian](cuisine) food
-      - i'd like to book a table for two with [spanish](cuisine) cuisine
-      - i need a table for [4](num_people)
-      - book me a table for three at the [italian](cuisine) restaurant
-      - can you please book a table for [5](num_people)?
-      - I would like to book a table for [2](num_people)
-      - looking for a table at the [mexican](cuisine) restaurant for five
-      - find me a table for [7](num_people) people
-      - Can I get a table for four at the place which server [greek](cuisine) food?
-      - I'm looking for a place to eat in [New York](location)
-      - I'm looking for a place in the [north](location) of town
-      - Show me [Chinese](cuisine) restaurants in [San Francisco](location)
-      - Show me a [Mexican](cuisine) place in the [downtown](location)
-      - I am looking for an [Indian](cuisine) spot in [Chicago](location)
-      - Search for restaurants in [Los Angeles](location)
-      - Find me some restaurants in [Houston](location)
-      - Find me a restaurant in [Seattle](location)
-      - I'm hungry in [Miami](location)!
-      - Find a restaurant in [Philadelphia](location)
-      - Can you suggest me some places to eat in [Boston](location)?
-      - List of restaurants in [San Diego](location)
-      - I want to grab lunch in [Las Vegas](location)
-      - I am searching for a dinner spot in [Orlando](location)
-      - Anywhere near [18328](location)
-      - I am looking a restaurant in [29432](location)
-      - In [New York](location) City
-      - [Chicago](location)
-      - Oh, sorry, in [Los Angeles](location)
-      - In [Houston](location)
-      - In [Seattle](location)
-      - I am looking for some restaurants in [San Francisco](location).
-      - Please help me to find restaurants in [Chicago](location)
-      - I’m hungry. Looking out for some good [Chinese](cuisine) restaurants in [Los Angeles](location)
-      - Find restaurants in [New York](location) for [Chinese](cuisine) cuisine

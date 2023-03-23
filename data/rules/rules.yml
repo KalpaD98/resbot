@@ -1,5 +1,5 @@
 version: "3.1"
-# rules.yml has rules for the bot
+# rules.yml has rules for the bot. Rules can be useful when implementing: #https://rasa.com/docs/rasa/rules#rules
 rules:
 
   - rule: bot challenge
@@ -32,16 +32,29 @@ rules:
       - intent: thank_you
       - action: utter_welcome
 
-  # Experimental
-  #  - rule: query knowledge base
-  #    steps:
-  #      - intent: query_knowledge_base
-  #      - action: action_query_knowledge_base
+  - rule: when user say stop reply see you later
+    steps:
+      - intent: stop
+      - action: utter_thank_you_see_you_later
 
-  # Rules can be useful when implementing: #https://rasa.com/docs/rasa/rules#rules
+#  - rule: when user want to search provide search options
+#    steps:
+#      - intent: want_to_search_restaurants
+#      - action: 2 search modes
+
+  - rule: Ask the user to rephrase whenever they send a message with low NLU confidence
+    steps:
+      - intent: nlu_fallback
+      - action: utter_please_rephrase
 
   # One-turn interactions: Some messages do not require any context to answer them. Rules are an easy way to map intents to  responses, specifying fixed answers to these messages.
 
   # Fallback behavior: In combination with the FallbackClassifier, you can write rules to respond to low-confidence user messages with a certain fallback behavior.
 
   # Forms: Both activating and submitting a form will often follow a fixed path. You can also write rules to handle unexpected input during a form.
+
+  # Experimental
+  #  - rule: query knowledge base
+  #    steps:
+  #      - intent: query_knowledge_base
+  #      - action: action_query_knowledge_base
