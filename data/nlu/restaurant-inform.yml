@@ -32,6 +32,7 @@ nlu:
     examples: |
       - [5](num_people) people are joining
       - [10](num_people) people
+      - [4] pax
       - for [ten](num_people) people
       - [2](num_people) people
       - for [three](num_people) people
@@ -43,6 +44,9 @@ nlu:
       - about [four](num_people) people
       - [nine](num_people) people
       - sorry make it for [four](num_people) people
+      - no make it for [four](num_people) people
+      - no just [2](num_people) people
+  # how to catch only me, me and my wife (girlfriend), me and my friends, me and my family, me wife and the kids, my family
 
   - intent: inform_restaurant_name
     examples: |

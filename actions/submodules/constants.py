@@ -19,6 +19,8 @@ ACTION_ASK_ANYTHING_ELSE = "action_ask_anything_else"
 
 ACTION_QUERY_KNOWLEDGE_BASE = "action_query_knowledge_base"
 
+ACTION_VALIDATE_DATE = "action_validate_date"
+
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # ------------------------------------------ Response Generator Constants ------------------------------------------- #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #

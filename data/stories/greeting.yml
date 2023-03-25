@@ -2,7 +2,7 @@ version: "3.1" # greeting.yml has general stories for the restaurant bot
 
 stories:
   # --------------------------------- Greet and push towards book restaurant happy path -------------------------------- #
-  - story: greet + introduce bot #1
+  - story: Greet + Introduce bot #1
     steps:
       - intent: greet
       - action: utter_greet
@@ -23,7 +23,7 @@ stories:
       - action: utter_wanna_book
       - intent: greet
       - action: utter_greet_again
-      - action: utter_checkout_restaurants
+      - action: utter_wanna_book
 
   # ------------------------------------------------- Good bye handling ---------------------------------------------- #
   - story: Say goodbye when user says goodbye #4
@@ -44,13 +44,13 @@ stories:
     steps:
       - intent: mood_great
       - action: utter_mood_great_feedback
-      - action: utter_checkout_restaurants
+      - action: utter_wanna_book
 
   - story: after greet + mood unhappy + ask checkout restaurant #7
     steps:
       - intent: mood_unhappy
       - action: utter_mood_unhappy_feedback
-      - action: utter_checkout_restaurants
+      - action: utter_wanna_book
 
   # ---------------------------------------------------- emojis ------------------------------------------------------ #
 
@@ -58,10 +58,10 @@ stories:
     steps:
       - intent: emoji_mood_great
       - action: utter_emoji_great_feedback
-      - action: utter_checkout_restaurants
+      - action: utter_wanna_book
 
   - story: after greet + mood unhappy emoji + ask checkout restaurant #9
     steps:
       - intent: emoji_mood_unhappy
       - action: utter_emoji_mood_unhappy_feedback
-      - action: utter_checkout_restaurants
+      - action: utter_wanna_book

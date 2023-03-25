@@ -2,11 +2,13 @@
 # See this guide on how to implement these action:
 # https://rasa.com/docs/rasa/custom-actions
 
+import datetime
 import logging
 from typing import Any, Text, Dict, List
 
+import dateparser
 from rasa_sdk import Action, Tracker
-from rasa_sdk.events import (SlotSet)
+from rasa_sdk.events import (SlotSet, FollowupAction)
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.knowledge_base.storage import InMemoryKnowledgeBase
 
@@ -324,6 +326,56 @@ class ActionAnythingElse(Action):
                                  quick_replies=ResponseGenerator.quick_replies(quick_replies_with_payload, True))
         return []
 
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# --------------------------------------------- Form Validation Actions --------------------------------------------- #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+class ActionValidateDate(Action):
+    def name(self):
+        return ACTION_VALIDATE_DATE
+
+    def run(self, dispatcher, tracker, domain):
+        date_entity = next(tracker.get_latest_entity_values("date"), None)
+
+        if date_entity:
+            # Try to parse the date entity using dateparser
+            date_obj = dateparser.parse(date_entity)
+
+            if date_obj:
+                # Get today's date and calculate tomorrow's date
+                today = datetime.datetime.now().date()
+                tomorrow = today + datetime.timedelta(days=1)
+
+                if date_obj.date() >= tomorrow:
+                    # Date is valid (tomorrow or in the future)
+                    return [SlotSet("date", date_obj.date().isoformat()), FollowupAction(ACTION_SHOW_BOOKING_SUMMARY)]
+                else:
+                    # Date is not valid (today or in the past)
+                    dispatcher.utter_message("Please provide a date that is tomorrow or later.")
+                    return [SlotSet("date", None)]
+            else:
+                dispatcher.utter_message("I couldn't understand the date you provided. Please try again.")
+                return [SlotSet("date", None)]
+        else:
+            dispatcher.utter_message("I couldn't understand the date you provided. Please try again.")
+            return [SlotSet("date", None)]
+
+
+############# include below to run above action #############
+
+# actions:
+#   - action_validate_date
+#
+# rules:
+# - rule: Validate date
+#   steps:
+#   - intent: inform_date
+#   - action: action_validate_date
+#   - slot_was_set:
+#     - date: null
+
+# --------------------------------------------------------- #
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # --------------------------------------------- Knowledge Base Actions ---------------------------------------------- #

@@ -10,7 +10,7 @@ stories:
   # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
   # Happy path for restaurant booking initiation
-  - story: greet and book restaurant happy path #10
+  - story: Greet and book restaurant happy path #10
     steps:
       #      - intent: greet
       #      - action: utter_greet # will connect from greeting.yml story
@@ -32,12 +32,11 @@ stories:
         # Yes ✅
         # No ✅ -> anything else with quick replies
 
-        # wants to check out more restaurants - rule added for this
+        # wants to check out more restaurants ✅ - rule added for this
 
 
-    # Continuation from Happy path initiation -> Happy path for user ask for detail and book restaurant
-
-  - story: happy path book restaurant after view details  #11 Continuation from above story (#10)
+  # Continuation from Happy path initiation -> Happy path for user ask for detail and book restaurant
+  - story: Happy path book restaurant after view details  #11 Continuation from above story (#10)
     steps:
       - action: action_show_restaurants
       - intent: inform_view_details_restaurant_id #view details of restaurant
@@ -58,7 +57,7 @@ stories:
   #      - action: action_confirm_booking
   #      - action: utter_thank_you
 
-  - story: user ask detail and book restaurant affirmation #11.1 # Continuation from above story (#11) - affirm
+  - story: User ask detail and book restaurant affirmation #11.1 # Continuation from above story (#11) - affirm
     steps:
       - slot_was_set:
           - restaurant_id: [ "rtid_121290" ]
@@ -83,11 +82,11 @@ stories:
           - restaurant_id: [ "rtid_121290" ]
       - action: action_show_selected_restaurant_details
       - intent: deny
-      - action: utter_thank_you # add some below
-      - action: action_ask_anything_else
+      - action: utter_thank_you
+      - action: action_ask_anything_else #  build up story for continuation from search restaurant
 
   # Happy path for user directly wants to book a restaurant selected from carousal
-  - story: happy path book restaurant directly #12
+  - story: User want to book restaurant directly #12
     steps:
       - action: action_show_restaurants
       - intent: inform_booking_restaurant_id # book restaurant
@@ -108,7 +107,7 @@ stories:
   #      - action: action_confirm_booking
   #      - action: utter_thank_you
 
-  - story: user directly book restaurant affirmation # 12.1 Continuation from above story (#12) - affirm
+  - story: User directly book restaurant by affirming # 12.1 Continuation from above story (#12) - affirm
     steps:
       - slot_was_set:
           - restaurant_id: [ "rtid_121290" ]
@@ -127,7 +126,7 @@ stories:
       #      - action: action_confirm_booking
       #      - action: utter_thank_you
 
-  - story: Continuation for user directly book restaurant deny # 12.2 # Continuation from above story (#12)
+  - story: Continuation for user directly want to book restaurant but deny at confirmation # 12.2 # Continuation from above story (#12)
     steps:
       - slot_was_set:
           - restaurant_id: [ "rtid_121290" ]
@@ -136,7 +135,7 @@ stories:
       - action: utter_thank_you
       - action: action_ask_anything_else
 
-  # Happy path for user wants to check out more restaurants
+  # Happy path user filling booking form
   - story: Continuation for filling basic booking form #13 # Continuation from above stories (#11.1 and #12.1)
     steps:
       - action: utter_ask_num_people
@@ -145,6 +144,7 @@ stories:
           - num_people: [ 2 ]
       - action: utter_ask_date
       - intent: inform_date
+      - action: action_validate_date
       - slot_was_set:
           - date: [ "2023-04-01" ]
       - action: action_show_booking_summary
@@ -158,6 +158,51 @@ stories:
     # ------------------------------------------------ Unhappy Paths ----------------------------------------------- #
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #  # # # # # # # # # # # # # # # # # # # # # # #
 
+    # ---------------------------------------------- Knowledge Base -------------------------------------------------------- #
+
+
+    # ---------------------------------------------- Backup ------------------------------------------------------- #
+    # Happy path initiation
+    # can use intent: sorry to roll back to previous story
+
+    #  - story: greet and book restaurant happy path
+    #    steps:
+    #      - intent: greet
+    #      - action: utter_greet
+    #      - action: utter_bot_challenge/who_are_you
+    #      - action: utter_checkout_restaurants
+    #      - intent: affirm
+    #      - action: action_show_cuisines # can break from this point inform cuisines or deny can come next
+    #      - intent: inform_cuisine # if user does not want to select cuisine? (intent deny also include here)
+    #
+    #      - action: action_show_restaurants
+    #      # from here onwards few main things can happen
+    #      # user ask for details,
+    #      # check menu of restaurant,
+    #      # directly wants to book a restaurant
+    #      # wants to check out more restaurants,
+    #      # search restaurants by criteria they provide
+    #      - intent: inform_restaurant_id # change to view details of restaurant
+    #      - slot_was_set:
+    #          - restaurant_id: [ "rtid_121290" ]
+    #      - action: action_show_selected_restaurant_details
+    #      - intent: affirm
+    #      - action: utter_ask_num_people
+    #      - intent: inform_num_people
+    #      - slot_was_set:
+    #          - num_people: [ 2 ]
+    #      - action: utter_ask_date
+    #      - intent: inform_date
+    #      - slot_was_set:
+    #          - date: [ "2023-04-01" ]
+    #      - action: action_show_booking_summary
+    #      # - action: utter_ask_to_confirm_booking  # remove this line because previous action already asks for confirmation
+    #      - intent: affirm # or mood great or emoji mood great intent (there is a problem in this story)
+    #      - action: action_confirm_booking
+    #      - action: utter_thank_you
+    #      - action: utter_goodbye
+
+    # can use intent: sorry to roll back to previous story
 
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
     # ------------------------------------------------- Sub stories ----------------------------------------------- #
@@ -213,51 +258,3 @@ stories:
     #      - action: action_show_booking_summary
     #      - action: utter_ask_to_confirm_booking
     #      - intent: affirm
-
-    # ---------------------------------------------- Knowledge Base -------------------------------------------------------- #
-
-
-
-
-    # ---------------------------------------------- Backup ------------------------------------------------------- #
-    # Happy path initiation
-    # can use intent: sorry to roll back to previous story
-
-    #  - story: greet and book restaurant happy path
-    #    steps:
-    #      - intent: greet
-    #      - action: utter_greet
-    #      - action: utter_bot_challenge/who_are_you
-    #      - action: utter_checkout_restaurants
-    #      - intent: affirm
-    #      - action: action_show_cuisines # can break from this point inform cuisines or deny can come next
-    #      - intent: inform_cuisine # if user does not want to select cuisine? (intent deny also include here)
-    #
-    #      - action: action_show_restaurants
-    #      # from here onwards few main things can happen
-    #      # user ask for details,
-    #      # check menu of restaurant,
-    #      # directly wants to book a restaurant
-    #      # wants to check out more restaurants,
-    #      # search restaurants by criteria they provide
-    #      - intent: inform_restaurant_id # change to view details of restaurant
-    #      - slot_was_set:
-    #          - restaurant_id: [ "rtid_121290" ]
-    #      - action: action_show_selected_restaurant_details
-    #      - intent: affirm
-    #      - action: utter_ask_num_people
-    #      - intent: inform_num_people
-    #      - slot_was_set:
-    #          - num_people: [ 2 ]
-    #      - action: utter_ask_date
-    #      - intent: inform_date
-    #      - slot_was_set:
-    #          - date: [ "2023-04-01" ]
-    #      - action: action_show_booking_summary
-    #      # - action: utter_ask_to_confirm_booking  # remove this line because previous action already asks for confirmation
-    #      - intent: affirm # or mood great or emoji mood great intent (there is a problem in this story)
-    #      - action: action_confirm_booking
-    #      - action: utter_thank_you
-    #      - action: utter_goodbye
-
-    # can use intent: sorry to roll back to previous story

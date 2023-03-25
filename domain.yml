@@ -3,7 +3,7 @@
 
 version: "3.1"
 
-# NLU
+# NLU training data
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # ---------------------------------------------------- Intents ------------------------------------------------------ #
@@ -297,7 +297,8 @@ actions:
   - action_ask_anything_else                                    # ask anything else with quick replies
 
   # -------------------------------------------- Form Validation Actions --------------------------------------------- #
-  - validate_restaurant_form                                    # validate restaurant form
+  #  - validate_restaurant_form                                    # validate restaurant form
+  - action_validate_date
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # ------------------------------------------- Responses: Bot Utterances --------------------------------------------- #
@@ -338,12 +339,6 @@ responses:
     - text: Hmm, eating something might help you feel better.
 
   # restaurant and booking related responses
-
-  utter_checkout_restaurants:
-    - text: Wanna checkout restaurants?
-    - text: Wanna checkout places to eat something ?
-    - text: Want to check out some restaurants?
-    - text: Interested in finding a restaurant to eat at?
 
   utter_ask_date:
     - text: When would you like to make the booking? (Enter a date in the format DD-MM-YYYY)
@@ -461,3 +456,11 @@ config:
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
+
+# ----------------------------------------------- Removed Utterances ------------------------------------------------- #
+
+#  utter_checkout_restaurants:
+#    - text: Wanna checkout restaurants?
+#    - text: Wanna checkout places to eat something ?
+#    - text: Want to check out some restaurants?
+#    - text: Interested in finding a restaurant to eat at?
