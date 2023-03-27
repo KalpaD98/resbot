@@ -341,9 +341,12 @@ responses:
   # restaurant and booking related responses
 
   utter_ask_date:
-    - text: When would you like to make the booking? (Enter a date in the format DD-MM-YYYY)
-    - text: Please let me know the date for the booking. (Enter a date in the format DD-MM-YYYY)
-    - text: What date do you have in mind for the booking? (Enter a date in the format DD-MM-YYYY)
+    - text: When would you like to make the booking?
+    - text: Please let me know the date for the booking
+    - text: What date do you have in mind for the booking?
+
+  utter_preferred_date_format:
+    - text: A future date (tomorrow or later) in the format [DD-MM-YYYY] is preferred
 
   utter_ask_num_people:
     - text: May I know the number of people for the booking?

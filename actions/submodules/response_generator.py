@@ -1,23 +1,28 @@
 import logging
 import sys
+from typing import List, Dict, Union
 
 from actions.submodules.constants import *
 
 sys.path.append("/Users/kalpafernando/PycharmProjects/resbot/actions/submodules")
 
 
-# ------------------------------------------------ Bot Front Chat Widget -----------------------------------------------
+# ------------------------------------------------ Bot Front Chat Widget --------------------------------------------- #
 
-# This class is used to generate the response for the bot front chat widget
 class ResponseGenerator:
 
-    # this method has quick_replies_list, message and dispatcher as parameters
-    # method is used to generate the quick replies for the bot front chat widget
     @staticmethod
-    def quick_replies(quick_replies_list, with_payload=False):
+    def quick_replies(quick_replies_list: List[Union[str, Dict[str, str]]], with_payload: bool = False) -> List[
+        Dict[str, str]]:
+        """
+        Generate quick replies for the chat widget.
+
+        :param quick_replies_list: List of quick reply strings or dictionaries containing title and payload
+        :param with_payload: If True, quick_replies_list should contain dictionaries with title and payload
+        :return: List of quick reply dictionaries containing title and payload
+        """
         quick_reply_text_icons = []
 
-        # loop through the quick replies and add them to the quick_reply_text_icons list
         for quick_reply in quick_replies_list:
             if with_payload:
                 quick_reply_text_icons.append(
@@ -27,12 +32,15 @@ class ResponseGenerator:
 
         return quick_reply_text_icons
 
-    # -----------------------------------------------------------------------------------------------------------------#
-    # this method has message, carousal_data,  and dispatcher as parameters
-    # method is used to generate an options carousal for the bot front chat widget
     @staticmethod
-    def card_options_carousal(carousal_objects):
+    def card_options_carousal(carousal_objects: List[Dict[str, Union[str, List[Dict[str, str]]]]]) -> Dict[
+        str, Union[str, Dict[str, Union[str, List[Dict[str, str]]]]]]:
+        """
+        Generate an options carousel for the chat widget.
 
+        :param carousal_objects: List of carousel object dictionaries
+        :return: Carousel dictionary containing carousel elements
+        """
         logging.info("Utils [responseGenerator]:  reformation the responses")
 
         elements_list = []
@@ -53,27 +61,81 @@ class ResponseGenerator:
 
         return carousel
 
-        # Send the carousel using the `template` object
 
-        # < below is the buttons object for the carousal >
-        # "buttons": [{"title": carousal_object["button_title"],
-        #              "payload": carousal_object["button_payload"]}]})
-        # < - Add the quick replies to the response ->
+# -------------------------------------------------------------------------------------------------------------------- #
 
-        # If you would like the buttons to also pass entities to the assistant:
+# before reformatting code #
 
-        #     utter_greet:
-        #     - text: "Hey! Would you like to purchase motor or home insurance?"
-        #     buttons:
-        #     - title: "Motor insurance"
-        #     payload: '/inform{{"insurance":"motor"}}'
-        #
-        # - title: "Home insurance"
-        # payload: '/inform{{"insurance":"home"}}'
-    # -----------------------------------------------------------------------------------------------------------------#
-
+#
+# # This class is used to generate the response for the bot front chat widget
+# class ResponseGenerator:
+#
+#     # this method has quick_replies_list, message and dispatcher as parameters
+#     # method is used to generate the quick replies for the bot front chat widget
+#     @staticmethod
+#     def quick_replies(quick_replies_list, with_payload=False):
+#         quick_reply_text_icons = []
+#
+#         # loop through the quick replies and add them to the quick_reply_text_icons list
+#         for quick_reply in quick_replies_list:
+#             if with_payload:
+#                 quick_reply_text_icons.append(
+#                     {TITLE: quick_reply.get(TITLE), PAYLOAD: quick_reply.get(PAYLOAD)})
+#             else:
+#                 quick_reply_text_icons.append({TITLE: quick_reply, PAYLOAD: quick_reply})
+#
+#         return quick_reply_text_icons
+#
+#     # -----------------------------------------------------------------------------------------------------------------#
+#     # this method has message, carousal_data,  and dispatcher as parameters
+#     # method is used to generate an options carousal for the bot front chat widget
+#     @staticmethod
+#     def card_options_carousal(carousal_objects):
+#
+#         logging.info("Utils [responseGenerator]:  reformation the responses")
+#
+#         elements_list = []
+#         carousel = COMPONENT_CAROUSAL
+#
+#         for carousal_object in carousal_objects:
+#             card = {DEFAULT_ACTION: carousal_object[DEFAULT_ACTION],
+#                     IMAGE_URL: carousal_object.get(IMAGE_URL),
+#                     TITLE: carousal_object.get(TITLE),
+#                     SUBTITLE: carousal_object.get(SUBTITLE)}
+#
+#             buttons_list = carousal_object.get(BUTTONS)
+#
+#             card[BUTTONS] = buttons_list
+#             elements_list.append(card)
+#
+#         carousel[PAYLOAD][ELEMENTS] = elements_list
+#
+#         return carousel
+# ----------------------------------------------------------#
 
 ########################################################################################################################
+
+
+# Send the carousel using the `template` object
+
+# < below is the buttons object for the carousal >
+# "buttons": [{"title": carousal_object["button_title"],
+#              "payload": carousal_object["button_payload"]}]})
+# < - Add the quick replies to the response ->
+
+# If you would like the buttons to also pass entities to the assistant:
+
+#     utter_greet:
+#     - text: "Hey! Would you like to purchase motor or home insurance?"
+#     buttons:
+#     - title: "Motor insurance"
+#     payload: '/inform{{"insurance":"motor"}}'
+#
+# - title: "Home insurance"
+# payload: '/inform{{"insurance":"home"}}'
+
+# -----------------------------------------------------------------------------------------------------------------#
+
 
 class WebResponseGenerator:
     pass

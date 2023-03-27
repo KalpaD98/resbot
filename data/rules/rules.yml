@@ -12,6 +12,16 @@ rules:
       - intent: out_of_scope
       - action: utter_out_of_scope
 
+  - rule: Ask the user to rephrase whenever they send a message with low NLU confidence
+    steps:
+      - intent: nlu_fallback
+      - action: utter_please_rephrase
+
+  - rule: when user say thank you reply welcome
+    steps:
+      - intent: thank_you
+      - action: utter_welcome
+
   - rule: when user ask to display cuisines show quick replies
     steps:
       - intent: request_cuisines
@@ -27,25 +37,17 @@ rules:
       - intent: request_more_restaurant_options
       - action: action_show_more_restaurant_options
 
-  - rule: when user say thank you reply welcome
-    steps:
-      - intent: thank_you
-      - action: utter_welcome
 
   - rule: when user say stop reply see you later
     steps:
       - intent: stop
       - action: utter_thank_you_see_you_later
 
+
   #  - rule: when user want to search provide search options
   #    steps:
   #      - intent: want_to_search_restaurants
   #      - action: 2 search modes
-
-  - rule: Ask the user to rephrase whenever they send a message with low NLU confidence
-    steps:
-      - intent: nlu_fallback
-      - action: utter_please_rephrase
 
 
   #  - rule: when user enter invalid date reply invalid date and wait for input

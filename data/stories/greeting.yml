@@ -2,7 +2,7 @@ version: "3.1" # greeting.yml has general stories for the restaurant bot
 
 stories:
   # --------------------------------- Greet and push towards book restaurant happy path -------------------------------- #
-  - story: Greet + Introduce bot #1
+  - story: greet + bot introduce himself #1
     steps:
       - intent: greet
       - action: utter_greet
@@ -15,8 +15,8 @@ stories:
       - action: utter_greet
       - action: utter_bot_intro
       - action: utter_wanna_book
-      - intent: request_restaurants # user request restaurant or ask for search
-      - action: action_show_restaurants # after this story continues from restaurant.yml first story
+      - intent: request_restaurants # or search_restaurants -> add later
+      - action: action_show_restaurants
 
   - story: when user greet continuously #3
     steps:
@@ -26,7 +26,8 @@ stories:
       - action: utter_wanna_book
 
   # ------------------------------------------------- Good bye handling ---------------------------------------------- #
-  - story: Say goodbye when user says goodbye #4
+
+  - story: say goodbye when user says goodbye #4
     steps:
       - intent: goodbye
       - action: utter_goodbye
@@ -38,7 +39,6 @@ stories:
       - action: utter_goodbye_again
 
   # --------------------------------------------------- User Mood check ---------------------------------------------- #
-
 
   - story: after greet + mood great + ask checkout restaurant #6
     steps:
