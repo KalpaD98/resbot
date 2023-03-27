@@ -6,11 +6,9 @@ version: "3.1"
 stories:
   # ----------------------------------------------- Restaurant Booking ----------------------------------------------- #
 
-  #10 Happy path for restaurant booking initiation
-  - story: greet and book restaurant happy path
+  #7 Happy path for restaurant booking initiation
+  - story: greet and book restaurant after view details happy path
     steps:
-      - action: utter_greet
-      - action: utter_bot_intro
       - action: utter_wanna_book
       - intent: affirm
       - action: action_show_cuisines
@@ -36,11 +34,9 @@ stories:
       - action: action_confirm_booking
       - action: utter_thank_you
 
-  #11
+  #8 User denies after viewing restaurant details
   - story: User denies after viewing restaurant details
     steps:
-      - action: utter_greet
-      - action: utter_bot_intro
       - action: utter_wanna_book
       - intent: affirm
       - action: action_show_cuisines
@@ -54,11 +50,9 @@ stories:
       - action: utter_thank_you
       - action: action_ask_anything_else
 
-  #12 User denies booking after viewing booking summary
+  #9 User denies booking after viewing booking summary (for view details path)
   - story: User denies booking after viewing booking summary
     steps:
-      - action: utter_greet
-      - action: utter_bot_intro
       - action: utter_wanna_book
       - intent: affirm
       - action: action_show_cuisines
@@ -84,11 +78,9 @@ stories:
       - action: utter_thank_you
       - action: action_ask_anything_else
 
-  #13 directly book a restaurant by selecting from carousal
+  #10 directly book a restaurant by selecting from carousal
   - story: User want to book restaurant directly
     steps:
-      - action: utter_greet
-      - action: utter_bot_intro
       - action: utter_wanna_book
       - intent: affirm
       - action: action_show_cuisines
@@ -114,12 +106,9 @@ stories:
       - action: action_confirm_booking
       - action: utter_thank_you
 
-  #14 deny to book after selection
+  #11 deny to book after selection
   - story: User denies to book restaurant directly after selection
     steps:
-      - action: utter_greet
-      - action: utter_bot_intro
-      - action: utter_wanna_book
       - intent: affirm
       - action: action_show_cuisines
       - intent: inform_cuisine
@@ -131,11 +120,10 @@ stories:
       - intent: deny
       - action: utter_thank_you
       - action: action_ask_anything_else
-  #15
+
+  #12 deny to book after seeing booking details
   - story: User denies to book restaurant directly after seeing booking details
     steps:
-      - action: utter_greet
-      - action: utter_bot_intro
       - action: utter_wanna_book
       - intent: affirm
       - action: action_show_cuisines
@@ -153,7 +141,7 @@ stories:
       - action: utter_ask_date
       - action: utter_preferred_date_format
       - intent: inform_date
-      - action: action_validate_date
+      - action: action_validate_date # didnt validate date properly (34-05-2023 got validated as true)
       - slot_was_set:
           - date: [ "2023-04-01" ]
       - action: action_show_booking_summary

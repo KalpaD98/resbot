@@ -299,6 +299,12 @@ actions:
   # -------------------------------------------- Form Validation Actions --------------------------------------------- #
   #  - validate_restaurant_form                                    # validate restaurant form
   - action_validate_date
+  - action_validate_time
+  - action_validate_num_people
+  - action_validate_cuisine
+  - action_validate_restaurant_id
+  - action_validate_user_id
+  - action_validate_booking_reference_id
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # ------------------------------------------- Responses: Bot Utterances --------------------------------------------- #
@@ -312,8 +318,7 @@ responses:
     - text: Hello!
     - text: Hi 😃 there!
     - text: Hey there!
-    - text: Hello there 😀 ?
-    - text: Hello 😀 there!
+    - text: Hello there 😀
 
   utter_please_rephrase:
     - text: I'm sorry, I couldn't understand that. Could you rephrase it?
@@ -388,8 +393,6 @@ responses:
   utter_goodbye:
     - text: Bye
     - text: Goodbye
-
-  utter_goodbye_again:
     - text: Farewell
     - text: See you later
 
@@ -408,15 +411,8 @@ responses:
     - text: I'll take a look and see what I can find.
     - text: I'll check and get back to you.
 
-  utter_thank_you_see_you_later:
-    - text: Thank you for using our service. See you later!
-    - text: Thank you for using our service. Bye!
-    - text: Thank you for using our service. Goodbye!
-    - text: Thank you for using our service. Farewell!
-    - text: Thank you for using our service. See you later!
-    - text: Thank you for using our service. Bye!
-    - text: Thank you for using our service. Goodbye!
-    - text: Thank you for using our service. Farewell!
+  utter_bye_see_you_later:
+    - text: Good Bye. See you later!
 
   # ----------------------------------------------- Retrieval Intents ------------------------------------------------ #
   utter_bot_challenge/what_can_you_do:

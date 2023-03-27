@@ -17,6 +17,11 @@ rules:
       - intent: nlu_fallback
       - action: utter_please_rephrase
 
+  - rule: say goodbye whenever user says goodbye
+    steps:
+      - intent: goodbye
+      - action: utter_goodbye
+
   - rule: when user say thank you reply welcome
     steps:
       - intent: thank_you
@@ -41,7 +46,7 @@ rules:
   - rule: when user say stop reply see you later
     steps:
       - intent: stop
-      - action: utter_thank_you_see_you_later
+      - action: utter_bye_see_you_later
 
 
   #  - rule: when user want to search provide search options

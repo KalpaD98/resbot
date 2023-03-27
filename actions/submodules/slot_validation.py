@@ -1,26 +1,25 @@
 import datetime
+from datetime import datetime
 from typing import Tuple
-
-import dateparser
 
 
 class SlotValidator:
     @staticmethod
-    def validate_date(self, date_entity: str) -> (bool, str, str):
+    def validate_date(date_entity: str) -> (bool, str, str):
         if date_entity:
-            date_obj = dateparser.parse(date_entity)
-
-            if date_obj:
-                today = datetime.datetime.now().date()
-                tomorrow = today + datetime.timedelta(days=1)
-
-                if date_obj.date() >= tomorrow:
-                    return True, date_obj.date().isoformat(), ""
-                else:
-                    return False, "", "Please provide a date that is tomorrow or later."
-            else:
+            try:
+                date_obj = datetime.strptime(date_entity, "%d-%m-%Y").date()
+            except ValueError:
                 return False, "", "I couldn't understand the date you provided. It seems to be invalid. Please try " \
                                   "again."
+
+            today = datetime.now().date()
+            tomorrow = today + datetime.timedelta(days=1)
+
+            if date_obj >= tomorrow:
+                return True, date_obj.isoformat(), ""
+            else:
+                return False, "", "Please provide a date that is tomorrow or later."
         else:
             return False, "", "I couldn't understand the date you provided. It seems to be invalid. Please try again."
 

@@ -32,9 +32,10 @@ class ActionShowCuisines(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         # get top 10 personalised cuisines for a particular user from the recommendation engine or most popular
         # (frequent)
-        cuisines = ['any', 'italian', 'mexican', 'vietnamese', 'thai', 'japanese', 'korean']
+        cuisines = ['italian', 'mexican', 'vietnamese', 'thai', 'japanese', 'korean']
 
-        # generate synonyms for 'Any' cuisine
+        cuisines.append('any cuisine')  # generate synonyms for 'Any' cuisine
+
         # Add payload to quick replies
         cuisines_with_entity_payload = []
         for cuisine in cuisines:
@@ -279,7 +280,7 @@ class ActionConfirmBooking(Action):
         selected_restaurant = tracker.get_slot(SELECTED_RESTAURANT)
 
         # generate the booking summary
-        message = "Your booking for" + selected_restaurant[NAME] + " located at " + selected_restaurant[ADDRESS] + \
+        message = "Your booking for " + selected_restaurant[NAME] + " located at " + selected_restaurant[ADDRESS] + \
                   " on " + date + " has been confirmed"
 
         # send the message to the user
@@ -309,7 +310,7 @@ class ActionAnythingElse(Action):
             PAYLOAD: "/want_to_search_restaurants"}
 
         quick_reply_no = {
-            TITLE: QR_NO,
+            TITLE: "No thanks",
             PAYLOAD: "/stop"}
 
         quick_replies_with_payload.append(quick_reply_show_more)
@@ -330,7 +331,8 @@ class ActionValidateDate(Action):
         return ACTION_VALIDATE_DATE
 
     def run(self, dispatcher, tracker, domain):
-        date_entity = next(tracker.get_latest_entity_values("date"), None)
+        logging.info("Validating date")
+        date_entity = tracker.get_slot("date")
         is_valid, date, message = SlotValidator.validate_date(date_entity)
 
         if is_valid:
