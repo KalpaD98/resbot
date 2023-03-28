@@ -42,12 +42,17 @@ rules:
       - intent: request_more_restaurant_options
       - action: action_show_more_restaurant_options
 
-
   - rule: when user say stop reply see you later
     steps:
       - intent: stop
       - action: utter_bye_see_you_later
 
+  # ------------------------------------------------------ Slot Rules ------------------------------------------------ #
+
+  # ------------------------------------------------------ Form Rules ------------------------------------------------ #
+
+
+  # ------------------------------------------------- Commented Rules -------------------------------------------------#
 
   #  - rule: when user want to search provide search options
   #    steps:
@@ -71,3 +76,23 @@ rules:
   #    steps:
   #      - intent: query_knowledge_base
   #      - action: action_query_knowledge_base
+
+#  - rule: activate restaurant booking form
+#    steps:
+#      - action: action_select_restaurant_ask_booking_confirmation
+#      - intent: affirm
+#      - action: restaurant_booking_form
+#      - active_loop: restaurant_booking_form
+#
+#  - rule: submit restaurant booking form
+#    condition:
+#      - active_loop: restaurant_booking_form
+#    steps:
+#      - action: restaurant_booking_form
+#      - active_loop: null
+#      - slot_was_set:
+#          - requested_slot: null
+#      - action: action_show_booking_summary
+#      - intent: affirm
+#      - action: action_confirm_booking
+#      - action: utter_thank_you

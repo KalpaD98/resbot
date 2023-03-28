@@ -27,6 +27,10 @@ ACTION_VALIDATE_NUM_PEOPLE = "action_validate_num_people"
 ACTION_VALIDATE_TIME = "action_validate_time"
 ACTION_VALIDATE_BOOKING_REFERENCE_ID = "action_validate_booking_reference_id"
 
+# Form validation actions
+
+VALIDATE_RESTAURANT_BOOKING_FORM = "validate_restaurant_booking_form"
+VALIDATE_RESTAURANT_SEARCH_FORM = "validate_restaurant_search_form"
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # ------------------------------------------ Response Generator Constants ------------------------------------------- #
@@ -110,6 +114,8 @@ DATE = "date"
 TIME = "time"
 PREFERENCES = "preferences"
 # CITY = "city"
+
+BOOKING_REFERENCE_ID = "booking_reference_id"
 
 # -------------------------- Knowledge base query related --------------------------
 OBJECT_TYPE = "object_type"

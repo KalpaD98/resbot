@@ -30,6 +30,10 @@ nlu:
 
   - intent: inform_num_people
     examples: |
+      - [2](num_people)
+      - around [4](num_people)
+      - around [4](num_people) people
+      - [4](num_people) people
       - [5](num_people) people are joining
       - [10](num_people) people
       - [4] pax
@@ -99,16 +103,19 @@ nlu:
       - [2023 01 01](date)
       - [2023-02-05](date)
       - [2024/01/01](date)
-      - I want to book a table for [2](num_people) people at [tonight](date).
       - Can I make a reservation for [tomorrow](date)?
       - What availability do you have for [Sunday](date)?
       - I need to reserve a table for [next Friday](date).
       - Can you tell me what times you have available on [Wednesday](date)?
-      - I'm looking to book a table for [4](num_people) on [Saturday](date).
       - I want to make a reservation for [this Thursday](date).
       - Do you have any tables available at [next Monday](date)?
-      - Can I reserve a table for [2](num_people) people on Friday, [February 4th](date)?
-      - I'd like to make a reservation for [3](num_people) people on Sunday, [January 30th](date)
+
+#      - Can I reserve a table for [2](num_people) people on Friday, [February 4th](date)?
+#      - I'd like to make a reservation for [3](num_people) people on Sunday, [January 30th](date)
+#      - I want to book a table for [2](num_people) people at [tonight](date).
+#      - I'm looking to book a table for [4](num_people) on [Saturday](date).
+
+
 
   - intent: inform_time
     examples: |

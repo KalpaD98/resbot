@@ -195,87 +195,7 @@ slots:
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 forms:
-  # long forms
-  basic_restaurant_search_form:
-    ignored_intents:
-      - out_of_scope
-      - bot_challenge
-    required_slots:
-      #- user_id
-      - cuisine
-
-  advance_restaurant_search_form:
-    ignored_intents:
-      - out_of_scope
-      - bot_challenge
-    required_slots:
-      - user_id
-      - cuisine
-      - city
-      - preferences                        # intent:preference, utter_ask_preference; What would you like to have ?
-
-  restaurant_form:
-    ignored_intents:
-      - out_of_scope
-      - bot_challenge
-    required_slots:
-      - user_id
-      - restaurant_id
-      - num_people
-      - date
-
-  # future forms
-  # sign up form
-
-  # short forms
-
-  user_id_form:
-    ignored_intents:
-      - out_of_scope
-      - bot_challenge
-    required_slots:
-      - user_id
-
-  restaurant_id_form:
-    ignored_intents:
-      - out_of_scope
-      - bot_challenge
-      - inform_cuisine
-    required_slots:
-      - restaurant_id
-
-  cuisine_form:
-    ignored_intents:
-      - out_of_scope
-      - bot_challenge
-    required_slots:
-      - cuisine
-
-  city_form:
-    ignored_intents:
-      - out_of_scope
-      - bot_challenge
-    required_slots:
-      - city
-
-  preferences_form:
-    ignored_intents:
-      - out_of_scope
-      - bot_challenge
-    required_slots:
-      - preferences
-
-  num_people_form:
-    ignored_intents:
-      - out_of_scope
-      - bot_challenge
-    required_slots:
-      - num_people
-
   date_form:
-    ignored_intents:
-      - out_of_scope
-      - bot_challenge
     required_slots:
       - date
 
@@ -296,15 +216,21 @@ actions:
 
   - action_ask_anything_else                                    # ask anything else with quick replies
 
-  # -------------------------------------------- Form Validation Actions --------------------------------------------- #
-  #  - validate_restaurant_form                                    # validate restaurant form
-  - action_validate_date
-  - action_validate_time
-  - action_validate_num_people
+  # -------------------------------------------- Slot Validation Actions --------------------------------------------- #
   - action_validate_cuisine
   - action_validate_restaurant_id
+  - action_validate_num_people
+  - action_validate_date
+  - action_validate_time
   - action_validate_user_id
   - action_validate_booking_reference_id
+
+  - action_ask_date
+
+
+  # -------------------------------------------- Form Validation Actions --------------------------------------------- #
+  #  - validate_restaurant_booking_form
+  - action_date_form
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # ------------------------------------------- Responses: Bot Utterances --------------------------------------------- #
@@ -343,15 +269,15 @@ responses:
     - text: Sorry to hear that, Are you in the mood of having something to eat?
     - text: Hmm, eating something might help you feel better.
 
-  # restaurant and booking related responses
+  # restaurant and booking related responses. [utter_ask_<slot_name>] for slot filling
 
   utter_ask_date:
-    - text: When would you like to make the booking?
-    - text: Please let me know the date for the booking
-    - text: What date do you have in mind for the booking?
+    - text: When would you like to make the booking? A future date (tomorrow or later) in the format [YYYY/MM/DD] is preferred
+    - text: Please let me know the date for the booking  A future date (tomorrow or later) in the format [YYYY/MM/DD] is preferred
+    - text: What date do you have in mind for the booking?  A future date (tomorrow or later) in the format [YYYY/MM/DD] is preferred
 
-  utter_preferred_date_format:
-    - text: A future date (tomorrow or later) in the format [DD-MM-YYYY] is preferred
+  #  utter_preferred_date_format:
+  #    - text: A future date (tomorrow or later) in the format [DD-MM-YYYY] is preferred
 
   utter_ask_num_people:
     - text: May I know the number of people for the booking?
@@ -397,8 +323,8 @@ responses:
     - text: See you later
 
   utter_bot_intro:
-    - text: I'm ResBot! 🍴, I'll find amazing restaurants for you and easily book reservations 🌟.
-    - text: I'm ResBot, your personal dining concierge 🍴. I'm here to help you discover the perfect restaurants tailored to your taste, and effortlessly make reservations for you.
+    - text: I'm ResBot! 🍴, I can recommend amazing restaurants and make reservations seamless for you 🌟.
+    - text: I'm ResBot, your dining assistant. I help find ideal restaurants and make reservations for you 🌟.
 
   utter_wanna_book:
     - text: Would you like to reserve a table at a fantastic restaurant? 🍽️
@@ -406,9 +332,7 @@ responses:
   utter_processing_the_request: # change data a bit
     - text: Let me check
     - text: Sure!
-    - text: I'll check for you.
     - text: I'll see what I can find out.
-    - text: I'll take a look and see what I can find.
     - text: I'll check and get back to you.
 
   utter_bye_see_you_later:
@@ -456,10 +380,100 @@ session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
 
-# ----------------------------------------------- Removed Utterances ------------------------------------------------- #
+  # ----------------------------------------------- Removed Utterances ------------------------------------------------- #
 
-#  utter_checkout_restaurants:
-#    - text: Wanna checkout restaurants?
-#    - text: Wanna checkout places to eat something ?
-#    - text: Want to check out some restaurants?
-#    - text: Interested in finding a restaurant to eat at?
+  #  utter_checkout_restaurants:
+  #    - text: Wanna checkout restaurants?
+  #    - text: Wanna checkout places to eat something ?
+  #    - text: Want to check out some restaurants?
+  #    - text: Interested in finding a restaurant to eat at?
+
+  # ------------------------------------------------- Removed Forms ---------------------------------------------------- #
+
+
+  # long forms
+  #  basic_restaurant_search_form:
+  #    ignored_intents:
+  #      - out_of_scope
+  #      - bot_challenge
+  #    required_slots:
+  #      - cuisine
+  #  #      - user_id
+  #
+  #  advance_restaurant_search_form:
+  #    ignored_intents:
+  #      - out_of_scope
+  #      - bot_challenge
+  #    required_slots:
+  #      - user_id
+  #      - cuisine
+  #      - city
+  #      - preferences                        # intent:preference, utter_ask_preference; What would you like to have ?
+  #
+  #  restaurant_booking_form:
+  #    ignored_intents:
+  #      - out_of_scope
+  #      - bot_challenge
+  #    required_slots:
+  #      - restaurant_id
+  #      - num_people
+  #      - date
+
+  #      - user_id # for now we don't need this
+
+  # future forms
+
+  # sign up form
+  # user_name
+
+  # short forms
+#
+#  user_id_form:
+#    ignored_intents:
+#      - out_of_scope
+#      - bot_challenge
+#    required_slots:
+#      - user_id
+#
+#  restaurant_id_form:
+#    ignored_intents:
+#      - out_of_scope
+#      - bot_challenge
+#      - inform_cuisine
+#    required_slots:
+#      - restaurant_id
+#
+#  cuisine_form:
+#    ignored_intents:
+#      - out_of_scope
+#      - bot_challenge
+#    required_slots:
+#      - cuisine
+#
+#  city_form:
+#    ignored_intents:
+#      - out_of_scope
+#      - bot_challenge
+#    required_slots:
+#      - city
+#
+#  preferences_form:
+#    ignored_intents:
+#      - out_of_scope
+#      - bot_challenge
+#    required_slots:
+#      - preferences
+#
+#  num_people_form:
+#    ignored_intents:
+#      - out_of_scope
+#      - bot_challenge
+#    required_slots:
+#      - num_people
+#
+#  date_form:
+#    ignored_intents:
+#      - out_of_scope
+#      - bot_challenge
+#    required_slots:
+#      - date

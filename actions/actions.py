@@ -3,10 +3,11 @@
 # https://rasa.com/docs/rasa/custom-actions
 
 import logging
-from typing import Any, Text, Dict, List
+from typing import Any, Dict, List, Text
 
+from rasa.core.actions.forms import FormAction
 from rasa_sdk import Action, Tracker
-from rasa_sdk.events import (SlotSet, FollowupAction)
+from rasa_sdk.events import FollowupAction, SlotSet, EventType
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.knowledge_base.storage import InMemoryKnowledgeBase
 
@@ -15,6 +16,8 @@ from actions.submodules.mock_data import *
 from actions.submodules.object_utils import ObjectUtil
 from actions.submodules.response_generator import ResponseGenerator
 from actions.submodules.slot_validation import SlotValidator
+
+logger = logging.getLogger(__name__)
 
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -323,119 +326,179 @@ class ActionAnythingElse(Action):
 
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-# -----------------------------------------------  Validation Actions ----------------------------------------------- #
+# --------------------------------------------- Slot Validation Actions --------------------------------------------- #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
-class ActionValidateDate(Action):
-    def name(self):
-        return ACTION_VALIDATE_DATE
-
-    def run(self, dispatcher, tracker, domain):
-        logging.info("Validating date")
-        date_entity = tracker.get_slot("date")
-        is_valid, date, message = SlotValidator.validate_date(date_entity)
-
-        if is_valid:
-            return [SlotSet("date", date), FollowupAction(ACTION_SHOW_BOOKING_SUMMARY)]
-        else:
-            dispatcher.utter_message(message)
-            return [SlotSet("date", None), FollowupAction("utter_ask_date")]
-
-
-class ActionValidateUserID(Action):
-    def name(self) -> Text:
-        return ACTION_VALIDATE_USER_ID
-
-    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        user_id = tracker.get_slot("user_id")
-        is_valid, error_message = SlotValidator.validate_user_id(user_id)
-
-        if is_valid:
-            return [SlotSet("user_id", user_id)]
-        else:
-            dispatcher.utter_message(error_message)
-            return [SlotSet("user_id", None)]
-
-
-class ActionValidateRestaurantID(Action):
+class ActionValidateRestaurantId(Action):
     def name(self) -> Text:
         return ACTION_VALIDATE_RESTAURANT_ID
 
-    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        restaurant_id = tracker.get_slot("restaurant_id")
-        is_valid, error_message = SlotValidator.validate_restaurant_id(restaurant_id)
+    async def run(
+            self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]
+    ) -> List[EventType]:
+        restaurant_id = tracker.get_slot(RESTAURANT_ID)
+        is_valid, message = SlotValidator.validate_restaurant_id(restaurant_id)
 
         if is_valid:
-            return [SlotSet("restaurant_id", restaurant_id)]
+            return [SlotSet(RESTAURANT_ID, restaurant_id)]
         else:
-            dispatcher.utter_message(error_message)
-            return [SlotSet("restaurant_id", None)]
-
-
-class ActionValidateCuisine(Action):
-    def name(self) -> Text:
-        return ACTION_VALIDATE_CUISINE
-
-    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        cuisine = tracker.get_slot("cuisine")
-        is_valid, error_message = SlotValidator.validate_cuisine(cuisine)
-
-        if is_valid:
-            return [SlotSet("cuisine", cuisine)]
-        else:
-            dispatcher.utter_message(error_message)
-            return [SlotSet("cuisine", None)]
+            dispatcher.utter_message(text=message)
+            return [SlotSet(RESTAURANT_ID, None)]
 
 
 class ActionValidateNumPeople(Action):
     def name(self) -> Text:
         return ACTION_VALIDATE_NUM_PEOPLE
 
-    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        num_people = tracker.get_slot("num_people")
-        is_valid, error_message = SlotValidator.validate_num_people(num_people)
+    async def run(
+            self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]
+    ) -> List[EventType]:
+        num_people = tracker.get_slot(NUM_PEOPLE)
+        is_valid, message = SlotValidator.validate_num_people(num_people)
 
         if is_valid:
-            return [SlotSet("num_people", num_people)]
+            return [SlotSet(NUM_PEOPLE, num_people)]
         else:
-            dispatcher.utter_message(error_message)
-            return [SlotSet("num_people", None)]
+            dispatcher.utter_message(text=message)
+            return [SlotSet(NUM_PEOPLE, None)]
+
+
+class ActionAskDate(Action):
+    def name(self) -> Text:
+        return "action_ask_date"
+
+    async def run(
+            self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]
+    ) -> List[EventType]:
+        dispatcher.utter_message(text="Can you please provide the date again")
+        dispatcher.utter_message(text="you can enter the date in a format like dd/mm/yyyy or similar")
+        return []
+
+
+class ActionValidateDate(Action):
+    def name(self) -> Text:
+        return "action_validate_date"
+
+    async def run(
+            self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]
+    ) -> List[EventType]:
+        date_slot = "date"
+        date = tracker.get_slot(date_slot)
+        is_valid, date_value, message = SlotValidator.validate_date(date)
+
+        if is_valid:
+            return [SlotSet(date_slot, date_value)]
+        else:
+            dispatcher.utter_message(text=message)
+            return [SlotSet(date_slot, None), FollowupAction("action_ask_date")]
+
+
+class DateForm(FormAction):
+    def name(self) -> Text:
+        return "action_date_form"
+
+    @staticmethod
+    def required_slots(tracker: Tracker) -> List[Text]:
+        return ["date"]
+
+    def slot_mappings(self) -> Dict[Text, Any]:
+        return {
+            "date": self.from_entity(entity="date", intent="inform_date"),
+        }
+
+    async def validate_date(
+            self,
+            value: Text,
+            dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any],
+    ) -> Dict[Text, Any]:
+        is_valid, date_value, message = SlotValidator.validate_date(value)
+        if is_valid:
+            return {"date": date_value}
+        else:
+            dispatcher.utter_message(text=message)
+            return {"date": None}
 
 
 class ActionValidateTime(Action):
     def name(self) -> Text:
         return ACTION_VALIDATE_TIME
 
-    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        time_entity = next(tracker.get_latest_entity_values("time"), None)
-        is_valid, time, error_message = SlotValidator.validate_time(time_entity)
+    async def run(
+            self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]
+    ) -> List[EventType]:
+        time = tracker.get_slot(TIME)
+        is_valid, time_value, message = SlotValidator.validate_time(time)
 
         if is_valid:
-            return [SlotSet("time", time)]
+            return [SlotSet(TIME, time_value)]
         else:
-            dispatcher.utter_message(error_message)
-            return [SlotSet("time", None)]
+            dispatcher.utter_message(text=message)
+            return [SlotSet(TIME, None)]
 
 
-class ActionValidateBookingReferenceID(Action):
+class ActionValidateUserId(Action):
     def name(self) -> Text:
-        return ACTION_VALIDATE_BOOKING_REFERENCE_ID
+        return ACTION_VALIDATE_USER_ID
 
-    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        booking_reference_id = tracker.get_slot("booking_reference_id")
-        is_valid, error_message = SlotValidator.validate_booking_reference_id(booking_reference_id)
+    async def run(
+            self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]
+    ) -> List[EventType]:
+        user_id = tracker.get_slot(USER_ID)
+        is_valid, message = SlotValidator.validate_user_id(user_id)
 
         if is_valid:
-            return [SlotSet("booking_reference_id", booking_reference_id)]
+            return [SlotSet(USER_ID, user_id)]
         else:
-            dispatcher.utter_message(error_message)
-            return [SlotSet("booking_reference_id", None)]
+            dispatcher.utter_message(text=message)
+            return [SlotSet(USER_ID, None)]
+
+
+class ActionValidateCuisine(Action):
+    def name(self) -> Text:
+        return ACTION_VALIDATE_CUISINE
+
+    async def run(
+            self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]
+    ) -> List[EventType]:
+        cuisine = tracker.get_slot(CUISINE)
+        is_valid, message = SlotValidator.validate_cuisine(cuisine)
+
+        if is_valid:
+            return [SlotSet(CUISINE, cuisine)]
+        else:
+            dispatcher.utter_message(text=message)
+            return [SlotSet(CUISINE, None)]
+
+
+class ActionValidateBookingReferenceId(Action):
+    def name(self) -> Text:
+        return "action_validate_booking_reference_id"
+
+    async def run(
+            self,
+            dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]
+    ) -> List[Dict[Text, Any]]:
+
+        booking_reference_id = tracker.get_slot(BOOKING_REFERENCE_ID)
+        is_valid, message = SlotValidator.validate_booking_reference_id(booking_reference_id)
+
+        if is_valid:
+            return [SlotSet(BOOKING_REFERENCE_ID, booking_reference_id)]
+        else:
+            dispatcher.utter_message(text=message)
+            return [SlotSet(BOOKING_REFERENCE_ID, None)]
+
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# --------------------------------------------- Form Validation Actions --------------------------------------------- #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 
 ############# include below to run above action #############
-
-# actions:
-#   - action_validate_date
 #
 # rules:
 # - rule: Validate date
@@ -475,20 +538,25 @@ class ActionQueryKnowledgeBase(Action):
     async def run(self, dispatcher: CollectingDispatcher,
                   tracker: Tracker,
                   domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        # get details from tracker
-
-        # tracker.get_slot("")
-        # tracker.get_slot("cuisine")
-
         return []
 
 
 # print all slot values from Tracker
 def print_slots(tracker: Tracker):  # -> List[Dict[Text, Any]]:
-    print("Slots:")
+    print()
+    print("Slots with values:")
+    empty_slots = []
+
     for slot in tracker.slots:
-        print(slot, ":", tracker.get_slot(slot))
-    print("")
+        value = tracker.get_slot(slot)
+        if value is not None:
+            print(slot, ":", value)
+        else:
+            empty_slots.append(slot)
+
+    print("\nEmpty slots: ", ", ".join(empty_slots))
+    print()
+
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # ------------------------------------------------- Commented Code -------------------------------------------------- #
@@ -520,3 +588,151 @@ def print_slots(tracker: Tracker):  # -> List[Dict[Text, Any]]:
 
 # # This is working for normal UI
 # message = {"payload": "quickReplies", "data": data}
+#
+
+#
+# class ValidateRestaurantBookingForm(FormValidationAction):
+#     def name(self) -> Text:
+#         return VALIDATE_RESTAURANT_BOOKING_FORM
+#
+#     async def run(
+#             self,
+#             dispatcher: CollectingDispatcher,
+#             tracker: Tracker,
+#             domain: Dict[Text, Any],
+#     ) -> List[EventType]:
+#         # Extract all slot values
+#         slot_values = await self.extract_slots(dispatcher, tracker, domain)
+#         validation_output = await self.validate(dispatcher, tracker, domain)
+#
+#         # Update the tracker with the extracted slots
+#         for slot, value in slot_values.items():
+#             if slot not in validation_output:
+#                 validation_output[slot] = {"value": value}
+#
+#         # Get the list of required slots
+#         required_slots = await self.required_slots(
+#             self.slots_mapped_in_domain(domain), dispatcher, tracker, domain
+#         )
+#
+#         # Check if any slot has an error
+#         has_error = False
+#         for slot, value in validation_output.items():
+#             if value is None:
+#                 has_error = True
+#                 break
+#
+#         # If there is an error or not all required slots are filled and validated, return the validation output
+#         if has_error or not all(tracker.get_slot(slot) for slot in required_slots):
+#             return [SlotSet(slot, value) for slot, value in validation_output.items()]
+#
+#         # If all slots are filled and validated, deactivate the form and return the extracted slots
+#         return await self.deactivate()
+#
+#     async def required_slots(
+#             self,
+#             slots_mapped_in_domain: List[Text],
+#             dispatcher: CollectingDispatcher,
+#             tracker: Tracker,
+#             domain: Dict[Text, Any],
+#     ) -> List[Text]:
+#         required_slots_list = [slot for slot in slots_mapped_in_domain if not tracker.get_slot(slot)]
+#         print("Required slots: ", required_slots_list)
+#         return required_slots_list
+#
+#     async def extract_slots(
+#             self,
+#             dispatcher: CollectingDispatcher,
+#             tracker: Tracker,
+#             domain: Dict[Text, Any],
+#     ) -> Dict[Text, Any]:
+#         slot_values = await super().extract_slots(dispatcher, tracker, domain)
+#         print("Extracted slots: ", slot_values)
+#         return slot_values
+#
+#     async def validate_date(
+#             self,
+#             slot_value: Any,
+#             dispatcher: CollectingDispatcher,
+#             tracker: Tracker,
+#             domain: Dict[Text, Any],
+#     ) -> Dict[Text, Any]:
+#         is_valid, date, message = SlotValidator.validate_date(slot_value)
+#         if is_valid:
+#             return {"date": date}
+#         else:
+#             dispatcher.utter_message(text=message)
+#             return {"date": None}
+#
+#     async def validate_restaurant_id(
+#             self,
+#             slot_value: Any,
+#             dispatcher: CollectingDispatcher,
+#             tracker: Tracker,
+#             domain: Dict[Text, Any],
+#     ) -> Dict[Text, Any]:
+#         is_valid, message = SlotValidator.validate_restaurant_id(slot_value)
+#         if is_valid:
+#             return {"restaurant_id": slot_value}
+#         else:
+#             dispatcher.utter_message(text=message)
+#             return {"restaurant_id": None}
+#
+#     async def validate_num_people(
+#             self,
+#             slot_value: Any,
+#             dispatcher: CollectingDispatcher,
+#             tracker: Tracker,
+#             domain: Dict[Text, Any],
+#     ) -> Dict[Text, Any]:
+#
+#         is_valid, message = SlotValidator.validate_num_people(slot_value)
+#
+#         if is_valid:
+#             return {"num_people": slot_value}
+#         else:
+#             dispatcher.utter_message(text=message)
+#             return {"num_people": None}
+#
+#     async def deactivate(self) -> List[EventType]:
+#         return [ActiveLoop(None), SlotSet("requested_slot", None)]
+
+
+class ActionValidateDate(Action):
+    def name(self) -> Text:
+        return ACTION_VALIDATE_DATE
+
+    async def run(
+            self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]
+    ) -> List[EventType]:
+        date = tracker.get_slot(DATE)
+        is_valid, date_value, message = SlotValidator.validate_date(date)
+
+        if is_valid:
+            return [SlotSet(DATE, date_value)]
+        else:
+            dispatcher.utter_message(text=message)
+            return [SlotSet(DATE, None)]
+
+# class ActionAskDate(Action):
+#     def name(self) -> Text:
+#         return "action_ask_date"
+#
+#     async def run(
+#             self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]
+#     ) -> List[EventType]:
+#         date_slot = "date"
+#         date = tracker.get_slot(date_slot)
+#         is_valid, date_value, message = SlotValidator.validate_date(date)
+#
+#         while not is_valid:
+#             dispatcher.utter_message(text=message)
+#             date = await self._ask_date(dispatcher)
+#             is_valid, date_value, message = SlotValidator.validate_date(date)
+#
+#         return [SlotSet(date_slot, date_value)]
+#
+#     @staticmethod
+#     async def _ask_date(dispatcher: CollectingDispatcher) -> str:
+#         date_event = await dispatcher.event_input({"type": "slot", "name": "date"})
+#         return date_event["value"]

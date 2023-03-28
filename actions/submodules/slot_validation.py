@@ -2,16 +2,18 @@ import datetime
 from datetime import datetime
 from typing import Tuple
 
+from dateutil import parser
+
 
 class SlotValidator:
+
     @staticmethod
     def validate_date(date_entity: str) -> (bool, str, str):
         if date_entity:
             try:
-                date_obj = datetime.strptime(date_entity, "%d-%m-%Y").date()
+                date_obj = parser.parse(date_entity).date()
             except ValueError:
-                return False, "", "I couldn't understand the date you provided. It seems to be invalid. Please try " \
-                                  "again."
+                return False, "", "I couldn't understand the date you provided. It seems to be invalid."
 
             today = datetime.now().date()
             tomorrow = today + datetime.timedelta(days=1)
@@ -21,14 +23,7 @@ class SlotValidator:
             else:
                 return False, "", "Please provide a date that is tomorrow or later."
         else:
-            return False, "", "I couldn't understand the date you provided. It seems to be invalid. Please try again."
-
-    @staticmethod
-    def validate_user_id(user_id: str) -> Tuple[bool, str]:
-        if user_id.startswith("uid"):
-            return True, ""
-        else:
-            return False, "User ID should start with 'uid'. Please provide a valid user ID."
+            return False, "", "I couldn't understand the date you provided. It seems to be invalid."
 
     @staticmethod
     def validate_restaurant_id(restaurant_id: str) -> Tuple[bool, str]:
@@ -36,14 +31,6 @@ class SlotValidator:
             return True, ""
         else:
             return False, "Restaurant ID should start with 'rtid'. Please provide a valid restaurant ID."
-
-    @staticmethod
-    def validate_cuisine(cuisine: str) -> Tuple[bool, str]:
-        supported_cuisines = ["Italian", "Chinese", "Indian", "Mexican", "Japanese"]
-        if cuisine.lower() in [c.lower() for c in supported_cuisines]:
-            return True, ""
-        else:
-            return False, f"Please provide a valid cuisine type. Supported cuisines are: {', '.join(supported_cuisines)}."
 
     @staticmethod
     def validate_num_people(num_people: str) -> Tuple[bool, str]:
@@ -55,6 +42,21 @@ class SlotValidator:
                 return False, "The number of people should be greater than 0. Please provide a valid number."
         except ValueError:
             return False, "Please provide a valid number for the number of people."
+
+    @staticmethod
+    def validate_cuisine(cuisine: str) -> Tuple[bool, str]:
+        supported_cuisines = ["Italian", "Chinese", "Indian", "Mexican", "Japanese"]
+        if cuisine.lower() in [c.lower() for c in supported_cuisines]:
+            return True, ""
+        else:
+            return False, f"Please provide a valid cuisine type. Supported cuisines are: {', '.join(supported_cuisines)}."
+
+    @staticmethod
+    def validate_user_id(user_id: str) -> Tuple[bool, str]:
+        if user_id.startswith("uid"):
+            return True, ""
+        else:
+            return False, "User ID should start with 'uid'. Please provide a valid user ID."
 
     @staticmethod
     def validate_time(time: str) -> Tuple[bool, str, str]:
