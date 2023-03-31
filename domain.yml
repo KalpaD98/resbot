@@ -3,7 +3,7 @@
 
 version: "3.1"
 
-# NLU training data
+# NLU training dataF
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # ---------------------------------------------------- Intents ------------------------------------------------------ #
@@ -37,19 +37,23 @@ intents:
   - inform_location                                       #
   - inform_restaurant_name                                #
   - stop
-
+  # ----------------------------------------------------- user.yml --------------------------------------------------- #
+  - request_user_registration_form
+  - inform_user_name
+  - inform_user_email
+  - inform_password
   # ----------------------------------------------- restaurant-request ---------------------------------------------- #
   - request_restaurants                                   #
   - request_cuisines                                      #
   - request_more_restaurant_options                       #
-  - request_menu
-  - request_opening_hours
-  - request_ambiance
-  - request_booking_details
+  - request_menu                                          #
+  - request_opening_hours                                 #
+  - request_ambiance                                      #
+  - request_booking_details                               #
 
   # ---------------------------------------------- restaurant-search.yml -------------------------------------------- #
-  - search_restaurants
-  - query_knowledge_base
+  - search_restaurants                                    #
+  - query_knowledge_base                                  #
 
   # ------------------------------------------------- multi intents ------------------------------------------------- #
   - search_restaurant + inform_opening_hours
@@ -64,18 +68,24 @@ entities:
   - object_type
   - mention
   - attribute
-  - user_id
-  - restaurant_id
-  - restaurant_name
+
   - selected_restaurant
+  - restaurant_name
+  - restaurant_id
+  - opening_hours
+  - price_range
+  - ambiance
   - cuisine
   - city
+
   - num_people
-  - opening_hours
   - date
   - time
-  - ambiance
-  - price_range
+
+  - user_id
+  - user_name
+  - user_email
+  - password
   - preferences
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -83,14 +93,6 @@ entities:
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 slots:
-
-  user_id:
-    type: text
-    influence_conversation: false
-    mappings:
-      - type: from_entity
-        entity: user_id
-
   cuisine:
     type: text
     mappings:
@@ -147,6 +149,37 @@ slots:
           - inform_time
           - search_restaurants
 
+
+  # --------------------------------------- user registration related slots --------------------------------------- #
+
+  user_id:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: user_id
+
+  user_name:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: user_name
+
+  user_email:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: user_email
+
+  password:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: password
+
   # --------------------------------------- Knowledge base query related slots --------------------------------------- #
   object_type:
     type: text
@@ -190,14 +223,22 @@ slots:
       - type: from_entity
         entity: city
 
+
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # ------------------------------------------------------ Forms ------------------------------------------------------ #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 forms:
-  date_form:
+  booking_form:
     required_slots:
+      - num_people
       - date
+
+  registration_form:
+    required_slots:
+      - user_name
+      - password
+      - user_email
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # ---------------------------------------------------- Actions ------------------------------------------------------ #
@@ -212,7 +253,7 @@ actions:
   - action_show_booking_summary                                 # show booking summary
 
   - action_confirm_booking                                      # confirm booking
-  - action_select_restaurant_ask_booking_confirmation           # ask booking confirmation for the selected restaurant
+  - action_show_selected_restaurant_ask_booking_confirmation    # ask booking confirmation for the selected restaurant
 
   - action_ask_anything_else                                    # ask anything else with quick replies
 
@@ -225,12 +266,12 @@ actions:
   - action_validate_user_id
   - action_validate_booking_reference_id
 
-  - action_ask_date
-
+  - action_save_user_and_complete_registration
 
   # -------------------------------------------- Form Validation Actions --------------------------------------------- #
-  #  - validate_restaurant_booking_form
-  - action_date_form
+
+  - validate_booking_form
+  - validate_registration_form
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # ------------------------------------------- Responses: Bot Utterances --------------------------------------------- #
@@ -337,6 +378,15 @@ responses:
 
   utter_bye_see_you_later:
     - text: Good Bye. See you later!
+
+  utter_ask_user_name:
+    - text: Enter an username
+  utter_ask_user_email:
+    - text: Enter your email address
+  utter_ask_password:
+    - text: Please create a password.
+  utter_registration_successful:
+    - text: Registration successful! we automatically logged you in {user_name}
 
   # ----------------------------------------------- Retrieval Intents ------------------------------------------------ #
   utter_bot_challenge/what_can_you_do:

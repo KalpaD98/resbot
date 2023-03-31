@@ -258,4 +258,26 @@ nlu:
 
   - regex: restaurant_id
     examples: |
-      - rtid_[^\s]*
+      - ^rtid_[^\s]+$
+
+  - regex: user_id
+    examples: |
+      - ^uid_[^\s]+$
+
+  - regex: booking_reference_id
+    examples: |
+      - ^brid_[^\s]+$
+
+  - regex: email
+    examples: |
+      - \b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b
+      
+
+  - lookup: cuisine
+    examples: |
+      - italian
+      - japanese
+      - chinese
+      - any cuisine
+      - thai
+      - indian

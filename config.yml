@@ -50,7 +50,7 @@ pipeline:
 
   - name: FallbackClassifier
     threshold: 0.6
-    ambiguity_threshold: 0.1
+    ambiguity_threshold: 0.3
 
 # ------------ Dialog Management ---------- #
 # Configuration for Rasa Core.
@@ -65,14 +65,14 @@ policies:
     # Confidence threshold for the `core_fallback_action_name` to apply.
     # The action will apply if no other action was predicted with
     # a confidence >= core_fallback_threshold
-    core_fallback_threshold: 0.4
+    core_fallback_threshold: 0.3
     core_fallback_action_name: "action_default_fallback"
     enable_fallback_prediction: True
   - name: UnexpecTEDIntentPolicy
-    max_history: 5
+    max_history: 16
     epochs: 100
   - name: TEDPolicy
-    max_history: 8
+    max_history: 16
     epochs: 100
     constrain_similarities: true
 

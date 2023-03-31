@@ -1,12 +1,12 @@
 import datetime
-from datetime import datetime
+import re
+from datetime import datetime, timedelta
 from typing import Tuple
 
 from dateutil import parser
 
 
-class SlotValidator:
-
+class SlotValidators:
     @staticmethod
     def validate_date(date_entity: str) -> (bool, str, str):
         if date_entity:
@@ -16,7 +16,7 @@ class SlotValidator:
                 return False, "", "I couldn't understand the date you provided. It seems to be invalid."
 
             today = datetime.now().date()
-            tomorrow = today + datetime.timedelta(days=1)
+            tomorrow = today + timedelta(days=1)
 
             if date_obj >= tomorrow:
                 return True, date_obj.isoformat(), ""
@@ -57,6 +57,31 @@ class SlotValidator:
             return True, ""
         else:
             return False, "User ID should start with 'uid'. Please provide a valid user ID."
+
+    @staticmethod
+    def validate_user_name(user_name: str) -> Tuple[bool, str, str]:
+        if user_name and len(user_name) >= 3:
+            return True, user_name, ""
+        else:
+            return False, "", "Please provide a username with at least 3 characters."
+
+    @staticmethod
+    def validate_email(email: str) -> Tuple[bool, str, str]:
+        if email:
+            email_regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
+            if re.match(email_regex, email):
+                return True, email, ""
+            else:
+                return False, "", "Please provide a valid email address."
+        else:
+            return False, "", "Please provide a valid email address."
+
+    @staticmethod
+    def validate_password(password: str) -> Tuple[bool, str, str]:
+        if password and len(password) >= 4:
+            return True, password, ""
+        else:
+            return False, "", "Please provide a password with at least 4 characters."
 
     @staticmethod
     def validate_time(time: str) -> Tuple[bool, str, str]:

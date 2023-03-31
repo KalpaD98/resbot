@@ -5,17 +5,18 @@
 import logging
 from typing import Any, Dict, List, Text
 
-from rasa.core.actions.forms import FormAction
-from rasa_sdk import Action, Tracker
+from rasa_sdk import Action, Tracker, FormValidationAction
 from rasa_sdk.events import FollowupAction, SlotSet, EventType
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.knowledge_base.storage import InMemoryKnowledgeBase
 
 from actions.submodules.constants import *
 from actions.submodules.mock_data import *
-from actions.submodules.object_utils import ObjectUtil
+from actions.submodules.object_utils import ObjectUtils
 from actions.submodules.response_generator import ResponseGenerator
-from actions.submodules.slot_validation import SlotValidator
+from actions.submodules.restaurant_utils import RestaurantUtils
+from actions.submodules.slot_validator import SlotValidators
+from actions.submodules.entities.user import User
 
 logger = logging.getLogger(__name__)
 
@@ -92,7 +93,7 @@ class ActionShowRestaurants(Action):
         # get restaurant data into an array
 
         # hard coded restaurant data
-        if (cuisine == 'any') or cuisine is None:
+        if (cuisine == 'any cuisine') or cuisine is None:
             text_msg = f"I've found some great restaurants for you to try out!"
         else:
             text_msg = f"I've found some great {cuisine.lower()} restaurants for you to try out!"
@@ -101,7 +102,7 @@ class ActionShowRestaurants(Action):
 
         dispatcher.utter_message(text=text_msg,
                                  attachment=ResponseGenerator.card_options_carousal(
-                                     ObjectUtil.restaurant_list_to_carousal_object(rest_list)))
+                                     RestaurantUtils.restaurant_list_to_carousal_object(rest_list)))
 
         return []
 
@@ -120,7 +121,7 @@ class ActionRequestMoreRestaurantOptions(Action):
 
         dispatcher.utter_message(text="Here are some more restaurants I found",
                                  attachment=ResponseGenerator.card_options_carousal(
-                                     ObjectUtil.restaurant_list_to_carousal_object(rest_list)))
+                                     RestaurantUtils.restaurant_list_to_carousal_object(rest_list)))
         if rest_list is None:
             dispatcher.utter_message(text="Sorry, I did not find any more restaurants.")
 
@@ -154,7 +155,7 @@ class ActionShowSelectedRestaurantDetails(Action):
         # dispatcher.utter_message(image=image_path)
 
         # get the restaurant details by passing the id
-        restaurant = ObjectUtil.find_by_id(restaurant_id, rest_list)
+        restaurant = ObjectUtils.find_by_id(restaurant_id, rest_list)
         logging.info(restaurant)
 
         # send the message back to the user
@@ -168,13 +169,13 @@ class ActionShowSelectedRestaurantDetails(Action):
         dispatcher.utter_message(text="Sat - Sun: " + restaurant[OPENING_HOURS][SAT_SUN])
 
         dispatcher.utter_message(
-            text=ObjectUtil.get_random_sentence(restaurant[NAME], UTTER_SENTENCE_LIST_FOR_ASKING_TO_MAKE_RESERVATION),
+            text=ObjectUtils.get_random_sentence(restaurant[NAME], UTTER_SENTENCE_LIST_FOR_ASKING_TO_MAKE_RESERVATION),
             quick_replies=ResponseGenerator.quick_replies([QR_YES, QR_NO]))
 
         return [SlotSet("selected_restaurant", restaurant), SlotSet("restaurant_id", restaurant_id)]
 
 
-# action_select_restaurant_ask_booking_confirmation.
+# action_show_selected_restaurant_ask_booking_confirmation.
 class ActionBookSelectedRestaurant(Action):
     def name(self) -> Text:
         return ACTION_SHOW_SELECTED_RESTAURANT_ASK_BOOKING_CONFIRMATION
@@ -193,15 +194,27 @@ class ActionBookSelectedRestaurant(Action):
             return []
 
         # get the restaurant details by passing the id
-        restaurant = ObjectUtil.find_by_id(restaurant_id, rest_list)
-        logging.info(restaurant)
+        restaurant = ObjectUtils.find_by_id(restaurant_id, rest_list)
+        # logging.info(restaurant)
 
+        y_n_quick_replies_with_payload = []
+
+        quick_reply_yes = {
+            TITLE: QR_YES,
+            PAYLOAD: "/affirm"}
+
+        quick_reply_no = {
+            TITLE: QR_NO,
+            PAYLOAD: "/deny"}
+
+        y_n_quick_replies_with_payload.append(quick_reply_yes)
+        y_n_quick_replies_with_payload.append(quick_reply_no)
         # send the message back to the user
         dispatcher.utter_message(text="You selected " + restaurant[NAME])
         # add multiple messages for each below
         # dispatcher.utter_message(text="<small description>, <address>, <Opening hours [weekend,weekdays]>")
         dispatcher.utter_message(text="Would you like to proceed with the booking?",
-                                 quick_replies=ResponseGenerator.quick_replies([QR_YES, QR_NO]))
+                                 quick_replies=ResponseGenerator.quick_replies(y_n_quick_replies_with_payload, True))
         # if yes -> fill slot
         return [SlotSet(SELECTED_RESTAURANT, restaurant)]
         # if no
@@ -325,6 +338,32 @@ class ActionAnythingElse(Action):
         return []
 
 
+# user related actions
+class ActionCompleteRegistration(Action):
+
+    def name(self) -> Text:
+        return "action_save_user_and_complete_registration"
+
+    async def run(
+            self,
+            dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any],
+    ) -> List[Dict[Text, Any]]:
+        user_name = tracker.get_slot("user_name")
+        user_email = tracker.get_slot("user_email")
+        password = tracker.get_slot("password")
+
+        # Create a UserDetails object and add it to the users list
+        user = User(user_name, user_email, password)
+        users.append(user)
+
+        # Optionally, send a confirmation message to the user
+        dispatcher.utter_message(text="Registration complete! Your details have been saved.")
+
+        return []
+
+
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # --------------------------------------------- Slot Validation Actions --------------------------------------------- #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -337,7 +376,7 @@ class ActionValidateRestaurantId(Action):
             self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]
     ) -> List[EventType]:
         restaurant_id = tracker.get_slot(RESTAURANT_ID)
-        is_valid, message = SlotValidator.validate_restaurant_id(restaurant_id)
+        is_valid, message = SlotValidators.validate_restaurant_id(restaurant_id)
 
         if is_valid:
             return [SlotSet(RESTAURANT_ID, restaurant_id)]
@@ -354,7 +393,7 @@ class ActionValidateNumPeople(Action):
             self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]
     ) -> List[EventType]:
         num_people = tracker.get_slot(NUM_PEOPLE)
-        is_valid, message = SlotValidator.validate_num_people(num_people)
+        is_valid, message = SlotValidators.validate_num_people(num_people)
 
         if is_valid:
             return [SlotSet(NUM_PEOPLE, num_people)]
@@ -384,7 +423,7 @@ class ActionValidateDate(Action):
     ) -> List[EventType]:
         date_slot = "date"
         date = tracker.get_slot(date_slot)
-        is_valid, date_value, message = SlotValidator.validate_date(date)
+        is_valid, date_value, message = SlotValidators.validate_date(date)
 
         if is_valid:
             return [SlotSet(date_slot, date_value)]
@@ -393,18 +432,9 @@ class ActionValidateDate(Action):
             return [SlotSet(date_slot, None), FollowupAction("action_ask_date")]
 
 
-class DateForm(FormAction):
+class DateForm(FormValidationAction):
     def name(self) -> Text:
-        return "action_date_form"
-
-    @staticmethod
-    def required_slots(tracker: Tracker) -> List[Text]:
-        return ["date"]
-
-    def slot_mappings(self) -> Dict[Text, Any]:
-        return {
-            "date": self.from_entity(entity="date", intent="inform_date"),
-        }
+        return "validate_date_form"
 
     async def validate_date(
             self,
@@ -413,7 +443,7 @@ class DateForm(FormAction):
             tracker: Tracker,
             domain: Dict[Text, Any],
     ) -> Dict[Text, Any]:
-        is_valid, date_value, message = SlotValidator.validate_date(value)
+        is_valid, date_value, message = SlotValidators.validate_date(value)
         if is_valid:
             return {"date": date_value}
         else:
@@ -429,7 +459,7 @@ class ActionValidateTime(Action):
             self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]
     ) -> List[EventType]:
         time = tracker.get_slot(TIME)
-        is_valid, time_value, message = SlotValidator.validate_time(time)
+        is_valid, time_value, message = SlotValidators.validate_time(time)
 
         if is_valid:
             return [SlotSet(TIME, time_value)]
@@ -446,7 +476,7 @@ class ActionValidateUserId(Action):
             self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]
     ) -> List[EventType]:
         user_id = tracker.get_slot(USER_ID)
-        is_valid, message = SlotValidator.validate_user_id(user_id)
+        is_valid, message = SlotValidators.validate_user_id(user_id)
 
         if is_valid:
             return [SlotSet(USER_ID, user_id)]
@@ -463,7 +493,7 @@ class ActionValidateCuisine(Action):
             self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]
     ) -> List[EventType]:
         cuisine = tracker.get_slot(CUISINE)
-        is_valid, message = SlotValidator.validate_cuisine(cuisine)
+        is_valid, message = SlotValidators.validate_cuisine(cuisine)
 
         if is_valid:
             return [SlotSet(CUISINE, cuisine)]
@@ -484,7 +514,7 @@ class ActionValidateBookingReferenceId(Action):
     ) -> List[Dict[Text, Any]]:
 
         booking_reference_id = tracker.get_slot(BOOKING_REFERENCE_ID)
-        is_valid, message = SlotValidator.validate_booking_reference_id(booking_reference_id)
+        is_valid, message = SlotValidators.validate_booking_reference_id(booking_reference_id)
 
         if is_valid:
             return [SlotSet(BOOKING_REFERENCE_ID, booking_reference_id)]
@@ -497,18 +527,94 @@ class ActionValidateBookingReferenceId(Action):
 # --------------------------------------------- Form Validation Actions --------------------------------------------- #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
+class BookingForm(FormValidationAction):
+    def name(self) -> Text:
+        return "validate_booking_form"
 
-############# include below to run above action #############
-#
-# rules:
-# - rule: Validate date
-#   steps:
-#   - intent: inform_date
-#   - action: action_validate_date
-#   - slot_was_set:
-#     - date: null
+    async def required_slots(
+            self,
+            slots_mapped_in_domain: List[Text],
+            dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any],
+    ) -> List[Text]:
+        return ["num_people", "date"]
 
-# --------------------------------------------------------- #
+    async def validate_num_people(
+            self,
+            value: Text,
+            dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any],
+    ) -> Dict[Text, Any]:
+        is_valid, message = SlotValidators.validate_num_people(value)
+        if is_valid:
+            return {"num_people": value}
+        else:
+            dispatcher.utter_message(text=message)
+            return {"num_people": None}
+
+    async def validate_date(
+            self,
+            value: Text,
+            dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any],
+    ) -> Dict[Text, Any]:
+        is_valid, date_value, message = SlotValidators.validate_date(value)
+        if is_valid:
+            return {"date": date_value}
+        else:
+            dispatcher.utter_message(text=message)
+            return {"date": None}
+
+
+class ValidateRegistrationForm(FormValidationAction):
+    def name(self) -> Text:
+        return "validate_registration_form"
+
+    async def validate_name(
+            self,
+            value: Text,
+            dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any],
+    ) -> Dict[Text, Any]:
+        is_valid, name_value, message = SlotValidators.validate_user_name(value)
+        if is_valid:
+            return {"name": name_value}
+        else:
+            dispatcher.utter_message(text=message)
+            return {"name": None}
+
+    async def validate_email(
+            self,
+            value: Text,
+            dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any],
+    ) -> Dict[Text, Any]:
+        is_valid, email_value, message = SlotValidators.validate_email(value)
+        if is_valid:
+            return {"email": email_value}
+        else:
+            dispatcher.utter_message(text=message)
+            return {"email": None}
+
+    async def validate_password(
+            self,
+            value: Text,
+            dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any],
+    ) -> Dict[Text, Any]:
+        is_valid, password_value, message = SlotValidators.validate_password(value)
+        if is_valid:
+            return {"password": password_value}
+        else:
+            dispatcher.utter_message(text=message)
+            return {"password": None}
+
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # --------------------------------------------- Knowledge Base Actions ---------------------------------------------- #
@@ -557,7 +663,6 @@ def print_slots(tracker: Tracker):  # -> List[Dict[Text, Any]]:
     print("\nEmpty slots: ", ", ".join(empty_slots))
     print()
 
-
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # ------------------------------------------------- Commented Code -------------------------------------------------- #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -577,162 +682,3 @@ def print_slots(tracker: Tracker):  # -> List[Dict[Text, Any]]:
 #
 #         # Revert user message which led to fallback.
 #         return [UserUtteranceReverted()]
-
-######## Important Commented Code ########
-
-
-# Vanilla JS UI
-
-# this is for vanilla JS UI
-# data = [{"title": cuisine, "payload": cuisine + "_payload"} for cuisine in cuisines]
-
-# # This is working for normal UI
-# message = {"payload": "quickReplies", "data": data}
-#
-
-#
-# class ValidateRestaurantBookingForm(FormValidationAction):
-#     def name(self) -> Text:
-#         return VALIDATE_RESTAURANT_BOOKING_FORM
-#
-#     async def run(
-#             self,
-#             dispatcher: CollectingDispatcher,
-#             tracker: Tracker,
-#             domain: Dict[Text, Any],
-#     ) -> List[EventType]:
-#         # Extract all slot values
-#         slot_values = await self.extract_slots(dispatcher, tracker, domain)
-#         validation_output = await self.validate(dispatcher, tracker, domain)
-#
-#         # Update the tracker with the extracted slots
-#         for slot, value in slot_values.items():
-#             if slot not in validation_output:
-#                 validation_output[slot] = {"value": value}
-#
-#         # Get the list of required slots
-#         required_slots = await self.required_slots(
-#             self.slots_mapped_in_domain(domain), dispatcher, tracker, domain
-#         )
-#
-#         # Check if any slot has an error
-#         has_error = False
-#         for slot, value in validation_output.items():
-#             if value is None:
-#                 has_error = True
-#                 break
-#
-#         # If there is an error or not all required slots are filled and validated, return the validation output
-#         if has_error or not all(tracker.get_slot(slot) for slot in required_slots):
-#             return [SlotSet(slot, value) for slot, value in validation_output.items()]
-#
-#         # If all slots are filled and validated, deactivate the form and return the extracted slots
-#         return await self.deactivate()
-#
-#     async def required_slots(
-#             self,
-#             slots_mapped_in_domain: List[Text],
-#             dispatcher: CollectingDispatcher,
-#             tracker: Tracker,
-#             domain: Dict[Text, Any],
-#     ) -> List[Text]:
-#         required_slots_list = [slot for slot in slots_mapped_in_domain if not tracker.get_slot(slot)]
-#         print("Required slots: ", required_slots_list)
-#         return required_slots_list
-#
-#     async def extract_slots(
-#             self,
-#             dispatcher: CollectingDispatcher,
-#             tracker: Tracker,
-#             domain: Dict[Text, Any],
-#     ) -> Dict[Text, Any]:
-#         slot_values = await super().extract_slots(dispatcher, tracker, domain)
-#         print("Extracted slots: ", slot_values)
-#         return slot_values
-#
-#     async def validate_date(
-#             self,
-#             slot_value: Any,
-#             dispatcher: CollectingDispatcher,
-#             tracker: Tracker,
-#             domain: Dict[Text, Any],
-#     ) -> Dict[Text, Any]:
-#         is_valid, date, message = SlotValidator.validate_date(slot_value)
-#         if is_valid:
-#             return {"date": date}
-#         else:
-#             dispatcher.utter_message(text=message)
-#             return {"date": None}
-#
-#     async def validate_restaurant_id(
-#             self,
-#             slot_value: Any,
-#             dispatcher: CollectingDispatcher,
-#             tracker: Tracker,
-#             domain: Dict[Text, Any],
-#     ) -> Dict[Text, Any]:
-#         is_valid, message = SlotValidator.validate_restaurant_id(slot_value)
-#         if is_valid:
-#             return {"restaurant_id": slot_value}
-#         else:
-#             dispatcher.utter_message(text=message)
-#             return {"restaurant_id": None}
-#
-#     async def validate_num_people(
-#             self,
-#             slot_value: Any,
-#             dispatcher: CollectingDispatcher,
-#             tracker: Tracker,
-#             domain: Dict[Text, Any],
-#     ) -> Dict[Text, Any]:
-#
-#         is_valid, message = SlotValidator.validate_num_people(slot_value)
-#
-#         if is_valid:
-#             return {"num_people": slot_value}
-#         else:
-#             dispatcher.utter_message(text=message)
-#             return {"num_people": None}
-#
-#     async def deactivate(self) -> List[EventType]:
-#         return [ActiveLoop(None), SlotSet("requested_slot", None)]
-
-
-class ActionValidateDate(Action):
-    def name(self) -> Text:
-        return ACTION_VALIDATE_DATE
-
-    async def run(
-            self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]
-    ) -> List[EventType]:
-        date = tracker.get_slot(DATE)
-        is_valid, date_value, message = SlotValidator.validate_date(date)
-
-        if is_valid:
-            return [SlotSet(DATE, date_value)]
-        else:
-            dispatcher.utter_message(text=message)
-            return [SlotSet(DATE, None)]
-
-# class ActionAskDate(Action):
-#     def name(self) -> Text:
-#         return "action_ask_date"
-#
-#     async def run(
-#             self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]
-#     ) -> List[EventType]:
-#         date_slot = "date"
-#         date = tracker.get_slot(date_slot)
-#         is_valid, date_value, message = SlotValidator.validate_date(date)
-#
-#         while not is_valid:
-#             dispatcher.utter_message(text=message)
-#             date = await self._ask_date(dispatcher)
-#             is_valid, date_value, message = SlotValidator.validate_date(date)
-#
-#         return [SlotSet(date_slot, date_value)]
-#
-#     @staticmethod
-#     async def _ask_date(dispatcher: CollectingDispatcher) -> str:
-#         date_event = await dispatcher.event_input({"type": "slot", "name": "date"})
-#         return date_event["value"]

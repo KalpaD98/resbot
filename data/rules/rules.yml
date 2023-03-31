@@ -27,55 +27,37 @@ rules:
       - intent: thank_you
       - action: utter_welcome
 
-  - rule: when user ask to display cuisines show quick replies
-    steps:
-      - intent: request_cuisines
-      - action: action_show_cuisines
-
-  - rule: when user request restaurant display restaurants carousal
-    steps:
-      - intent: request_restaurants
-      - action: action_show_restaurants
-
-  - rule: when user request restaurant display restaurants carousal
-    steps:
-      - intent: request_more_restaurant_options
-      - action: action_show_more_restaurant_options
-
   - rule: when user say stop reply see you later
     steps:
       - intent: stop
       - action: utter_bye_see_you_later
 
-  # ------------------------------------------------------ Slot Rules ------------------------------------------------ #
-
-  # ------------------------------------------------------ Form Rules ------------------------------------------------ #
 
 
-  # ------------------------------------------------- Commented Rules -------------------------------------------------#
+    # ------------------------------------------------- Commented Rules -------------------------------------------------#
 
-  #  - rule: when user want to search provide search options
-  #    steps:
-  #      - intent: want_to_search_restaurants
-  #      - action: 2 search modes
+    #  - rule: when user want to search provide search options
+    #    steps:
+    #      - intent: want_to_search_restaurants
+    #      - action: 2 search modes
 
 
-  #  - rule: when user enter invalid date reply invalid date and wait for input
-  #    steps:
-  #      - action: action_validate_date
-  #      - intent: inform_date
+    #  - rule: when user enter invalid date reply invalid date and wait for input
+    #    steps:
+    #      - action: action_validate_date
+    #      - intent: inform_date
 
-  # One-turn interactions: Some messages do not require any context to answer them. Rules are an easy way to map intents to  responses, specifying fixed answers to these messages.
+    # One-turn interactions: Some messages do not require any context to answer them. Rules are an easy way to map intents to  responses, specifying fixed answers to these messages.
 
-  # Fallback behavior: In combination with the FallbackClassifier, you can write rules to respond to low-confidence user messages with a certain fallback behavior.
+    # Fallback behavior: In combination with the FallbackClassifier, you can write rules to respond to low-confidence user messages with a certain fallback behavior.
 
-  # Forms: Both activating and submitting a form will often follow a fixed path. You can also write rules to handle unexpected input during a form.
+    # Forms: Both activating and submitting a form will often follow a fixed path. You can also write rules to handle unexpected input during a form.
 
-  # Experimental
-  #  - rule: query knowledge base
-  #    steps:
-  #      - intent: query_knowledge_base
-  #      - action: action_query_knowledge_base
+    # Experimental
+    #  - rule: query knowledge base
+    #    steps:
+    #      - intent: query_knowledge_base
+    #      - action: action_query_knowledge_base
 
 #  - rule: activate restaurant booking form
 #    steps:

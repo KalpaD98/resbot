@@ -110,12 +110,10 @@ nlu:
       - I want to make a reservation for [this Thursday](date).
       - Do you have any tables available at [next Monday](date)?
 
-#      - Can I reserve a table for [2](num_people) people on Friday, [February 4th](date)?
-#      - I'd like to make a reservation for [3](num_people) people on Sunday, [January 30th](date)
-#      - I want to book a table for [2](num_people) people at [tonight](date).
-#      - I'm looking to book a table for [4](num_people) on [Saturday](date).
-
-
+  #      - Can I reserve a table for [2](num_people) people on Friday, [February 4th](date)?
+  #      - I'd like to make a reservation for [3](num_people) people on Sunday, [January 30th](date)
+  #      - I want to book a table for [2](num_people) people at [tonight](date).
+  #      - I'm looking to book a table for [4](num_people) on [Saturday](date).
 
   - intent: inform_time
     examples: |
@@ -123,6 +121,7 @@ nlu:
       - [10:30 am](time)
       - [12:00 p.m.](time)
       - [12:00 pm](time)
+
 
   #  - intent: query_knowledge_base
   #    examples: |

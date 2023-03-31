@@ -106,11 +106,11 @@ json_restaurant_list = """
 rest_list = json.loads(json_restaurant_list)
 
 users = [
-    {"id": "uid_0", "name": "Alice"},
-    {"id": "uid_1", "name": "Bob"},
-    {"id": "uid_2", "name": "Carol"},
-    {"id": "uid_3", "name": "David"},
-    {"id": "uid_4", "name": "Eva"}
+    {"id": "uid_0", "name": "Alice", "email": "alice@gmail.com", "password": "1234"},
+    {"id": "uid_1", "name": "Bob", "email": "bob@gmail.com", "password": "5678"},
+    {"id": "uid_2", "name": "Carol", "email": "carol@gmail.com", "password": "9876"},
+    {"id": "uid_3", "name": "David", "email": "david@gmail.com", "password": "4321"},
+    {"id": "uid_4", "name": "Eva", "email": "eva@gmail.com", "password": "2468"}
 ]
 
 # add these later

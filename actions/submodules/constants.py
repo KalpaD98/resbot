@@ -11,7 +11,7 @@ ACTION_SHOW_RESTAURANTS = "action_show_restaurants"
 ACTION_SHOW_SELECTED_RESTAURANT_DETAILS = "action_show_selected_restaurant_details"
 ACTION_SHOW_BOOKING_SUMMARY = "action_show_booking_summary"
 ACTION_SHOW_MORE_RESTAURANT_OPTIONS = "action_show_more_restaurant_options"
-ACTION_SHOW_SELECTED_RESTAURANT_ASK_BOOKING_CONFIRMATION = "action_select_restaurant_ask_booking_confirmation"
+ACTION_SHOW_SELECTED_RESTAURANT_ASK_BOOKING_CONFIRMATION = "action_show_selected_restaurant_ask_booking_confirmation"
 
 ACTION_CONFIRM_BOOKING = "action_confirm_booking"
 

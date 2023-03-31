@@ -8,153 +8,139 @@ stories:
   # ----------------------------------------------- Restaurant Booking ----------------------------------------------- #
   # each of the below stories should start from and continue through utter_wanna_book
 
-  #7 directly book a restaurant by selecting from carousal
-  - story: User want to book restaurant directly
+  #6 Happy Path: bot ask user to select cuisine and then show restaurant carousal
+  - story: greet + bot introduce himself
     steps:
+      - intent: greet
+      - action: utter_greet
+      - action: utter_bot_intro
       - action: utter_wanna_book
       - intent: affirm
       - action: action_show_cuisines
       - intent: inform_cuisine
+      - slot_was_set:
+          - cuisine: [ "italian" ]
+      - action: action_show_restaurants
+
+  #7 Happy Path: directly book a restaurant by selecting from carousel
+  - story: User wants to book a restaurant directly
+    steps:
       - action: action_show_restaurants
       - intent: inform_booking_restaurant_id
       - slot_was_set:
           - restaurant_id: [ "rtid_121290" ]
-      - action: action_select_restaurant_ask_booking_confirmation
-      - intent: affirm # form
-      - action: utter_ask_num_people
-      - intent: inform_num_people
+      - action: action_show_selected_restaurant_ask_booking_confirmation
+      - intent: affirm
+      - action: booking_form
+      - active_loop: booking_form
       - slot_was_set:
-          - num_people: { "type": "any" }
-      - action: utter_ask_date
-      - intent: inform_date
-      - action: action_validate_date
-#      - action: action_date_form
-#      - active_loop: action_date_form
+          - num_people: 2
       - slot_was_set:
-          - date: { "type": "any" }
+          - date: 2023-06-06
       - active_loop: null
       - action: action_show_booking_summary
       - intent: affirm
       - action: action_confirm_booking
       - action: utter_thank_you
 
-  #8 deny to book after seeing booking details
-  - story: User denies to book restaurant directly after seeing booking details
-    steps:
-      - action: utter_wanna_book
-      - intent: affirm
-      - action: action_show_cuisines
-      - intent: inform_cuisine
-      - action: action_show_restaurants
-      - intent: inform_booking_restaurant_id
-      - slot_was_set:
-          - restaurant_id: [ "rtid_121290" ]
-      - action: action_select_restaurant_ask_booking_confirmation
-      - intent: affirm
-      - action: utter_ask_num_people
-      - intent: inform_num_people
-      - slot_was_set:
-          - num_people: [ 2 ]
-      - action: utter_ask_date
-      - intent: inform_date
-      - action: action_validate_date
-      - slot_was_set:
-          - date: [ "2023-04-01" ]
-      - action: action_show_booking_summary
-      - intent: deny
-      - action: utter_thank_you
-      - action: action_ask_anything_else
 
-  #9 deny to book after selection
-  - story: User denies to book restaurant directly after selection
-    steps:
-      - action: utter_wanna_book
-      - intent: affirm
-      - action: action_show_cuisines
-      - intent: inform_cuisine
-      - action: action_show_restaurants
-      - intent: inform_booking_restaurant_id
-      - slot_was_set:
-          - restaurant_id: [ "rtid_121290" ]
-      - action: action_select_restaurant_ask_booking_confirmation
-      - intent: deny
-      - action: utter_thank_you
-      - action: action_ask_anything_else
+    #  #8 Sad Path: deny to book after seeing booking details
+    #  - story: User denies to book restaurant directly after seeing booking details
+    #    steps:
+    #      - action: action_show_restaurants
+    #      - intent: inform_booking_restaurant_id
+    #      - slot_was_set:
+    #          - restaurant_id: [ "rtid_121290" ]
+    #      - action: action_show_selected_restaurant_ask_booking_confirmation
+    #      - intent: affirm
+    #      - action: utter_ask_num_people
+    #      - intent: inform_num_people
+    #      - slot_was_set:
+    #          - num_people: [ 2 ]
+    #      - action: utter_ask_date
+    #      - intent: inform_date
+    #      - action: action_validate_date
+    #      - slot_was_set:
+    #          - date: [ "2023-04-01" ]
+    #      - action: action_show_booking_summary
+    #      - intent: deny
+    #      - action: utter_thank_you
+    #      - action: action_ask_anything_else
+    #
+    #  #9 Sad Path: deny to book after selection
+    #  - story: User denies to book restaurant directly after selection
+    #    steps:
+    #      - action: action_show_restaurants
+    #      - intent: inform_booking_restaurant_id
+    #      - slot_was_set:
+    #          - restaurant_id: [ "rtid_121290" ]
+    #      - action: action_show_selected_restaurant_ask_booking_confirmation
+    #      - intent: deny
+    #      - action: utter_thank_you
+    #      - action: action_ask_anything_else
+    #
+    #  #10 Happy path for restaurant booking initiation
+    #  - story: greet and book restaurant after view details happy path
+    #    steps:
+    #      - action: action_show_restaurants
+    #      - intent: inform_view_details_restaurant_id
+    #      - slot_was_set:
+    #          - restaurant_id: [ "rtid_121290" ]
+    #      - action: action_show_selected_restaurant_details
+    #      - intent: affirm
+    #      - intent: inform_date
+    #      - action: action_validate_date
+    #      - slot_was_set:
+    #          - num_people: [ 2 ]
+    #      - slot_was_set:
+    #          - date: [ "2023-04-01" ]
+    #      - active_loop: null
+    #      - action: action_show_booking_summary
+    #      - intent: affirm
+    #      - action: action_confirm_booking
+    #      - action: utter_thank_you
+    #
+    #  #11 Sad Path: User denies booking after viewing booking summary (for view details path)
+    #  - story: User denies booking after viewing booking summary
+    #    steps:
+    #      - action: action_show_restaurants
+    #      - intent: inform_view_details_restaurant_id
+    #      - slot_was_set:
+    #          - restaurant_id: [ "rtid_121290" ]
+    #      - action: action_show_selected_restaurant_details
+    #      - intent: affirm
+    #      - action: utter_ask_num_people
+    #      - intent: inform_num_people
+    #      - slot_was_set:
+    #          - num_people: [ 2 ]
+    #      - action: utter_ask_date
+    #      #      - action: utter_preferred_date_format
+    #      - intent: inform_date
+    #      - action: action_validate_date
+    #      - slot_was_set:
+    #          - date: [ "2023-04-01" ]
+    #      - action: action_show_booking_summary
+    #      - intent: deny
+    #      - action: utter_thank_you
+    #      - action: action_ask_anything_else
+    #
+    #  #12 Sad Path: User denies after viewing restaurant details
+    #  - story: User denies after viewing restaurant details
+    #    steps:
+    #      - action: action_show_restaurants
+    #      - intent: inform_view_details_restaurant_id
+    #      - slot_was_set:
+    #          - restaurant_id: [ "rtid_121290" ]
+    #      - action: action_show_selected_restaurant_details
+    #      - intent: deny
+    #      - action: utter_thank_you
+    #      - action: action_ask_anything_else
 
-  #10 Happy path for restaurant booking initiation
-  - story: greet and book restaurant after view details happy path
-    steps:
-      - action: utter_wanna_book
-      - intent: affirm
-      - action: action_show_cuisines
-      - intent: inform_cuisine
-      - action: action_show_restaurants
-      - intent: inform_view_details_restaurant_id
-      - slot_was_set:
-          - restaurant_id: [ "rtid_121290" ]
-      - action: action_show_selected_restaurant_details
-      - intent: affirm
-      - intent: inform_date
-      - action: action_validate_date
-      - slot_was_set:
-          - num_people: [ 2 ]
-      - slot_was_set:
-          - date: [ "2023-04-01" ]
-      - active_loop: null
-      - action: action_show_booking_summary
-      - intent: affirm
-      - action: action_confirm_booking
-      - action: utter_thank_you
+    # Happy path for user wants to search restaurants by criteria they provide (basic and advance)
 
-  #11 User denies booking after viewing booking summary (for view details path)
-  - story: User denies booking after viewing booking summary
-    steps:
-      - action: utter_wanna_book
-      - intent: affirm
-      - action: action_show_cuisines
-      - intent: inform_cuisine
-      - action: action_show_restaurants
-      - intent: inform_view_details_restaurant_id
-      - slot_was_set:
-          - restaurant_id: [ "rtid_121290" ]
-      - action: action_show_selected_restaurant_details
-      - intent: affirm
-      - action: utter_ask_num_people
-      - intent: inform_num_people
-      - slot_was_set:
-          - num_people: [ 2 ]
-      - action: utter_ask_date
-      #      - action: utter_preferred_date_format
-      - intent: inform_date
-      - action: action_validate_date
-      - slot_was_set:
-          - date: [ "2023-04-01" ]
-      - action: action_show_booking_summary
-      - intent: deny
-      - action: utter_thank_you
-      - action: action_ask_anything_else
+    # ---------------------------------------------- Knowledge Base ------------------------------------------------ #
 
-  #12 User denies after viewing restaurant details
-  - story: User denies after viewing restaurant details
-    steps:
-      - action: utter_wanna_book
-      - intent: affirm
-      - action: action_show_cuisines
-      - intent: inform_cuisine
-      - action: action_show_restaurants
-      - intent: inform_view_details_restaurant_id
-      - slot_was_set:
-          - restaurant_id: [ "rtid_121290" ]
-      - action: action_show_selected_restaurant_details
-      - intent: deny
-      - action: utter_thank_you
-      - action: action_ask_anything_else
-
-  # Happy path for user wants to search restaurants by criteria they provide (basic and advance)
-
-  # ---------------------------------------------- Knowledge Base ------------------------------------------------ #
-
-  # ---------------------------------------------- Backup ------------------------------------------------------- #
+    # ---------------------------------------------- Backup ------------------------------------------------------- #
 
 #  - story: User want to book restaurant directly
 #    steps:
@@ -166,5 +152,5 @@ stories:
 #      - intent: inform_booking_restaurant_id
 #      - slot_was_set:
 #          - restaurant_id: [ "rtid_121290" ]
-#      - action: action_select_restaurant_ask_booking_confirmation
+#      - action: action_show_selected_restaurant_ask_booking_confirmation
 #      - intent: affirm # form

@@ -4,7 +4,7 @@ from typing import List, Dict, Union
 
 from actions.submodules.constants import *
 
-sys.path.append("/Users/kalpafernando/PycharmProjects/resbot/actions/submodules")
+sys.path.append("/actions/submodules")
 
 
 # ------------------------------------------------ Bot Front Chat Widget --------------------------------------------- #
