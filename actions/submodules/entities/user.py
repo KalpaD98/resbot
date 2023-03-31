@@ -1,4 +1,4 @@
-from actions.submodules.mock_data import users
+from actions.submodules.utils.mock_data_utils import users
 
 
 class User:

@@ -1,0 +1,396 @@
+## for search_restaurant
+## Change below training data to fit with PREPOST reviews
+##  Change to match with dataset
+#  - intent: request_restaurant
+#    examples: |
+#      - i'm looking for a place to eat
+#      - i'm looking for a place in the [north](location) of town
+#      - show me [chinese](cuisine) restaurants
+#      - show me a [mexican](cuisine) place in the [centre](location)
+#      - i am looking for an [indian](cuisine) spot
+#      - search for restaurants
+#      - anywhere in the [west](location)
+#      - [central](location) [indian](cuisine) restaurant
+#      - Find me some restaurants in [Mumbai](location)
+#      - Find me a restaurant
+#      - I'm hungry!
+#      - find a restaurant
+#      - can you suggest me some places to eat in [New Delhi](location)
+#      - list of restaurants in [chennai](location)
+#      - I want to grab lunch
+#      - I am searching for a dinner spot
+#      - anywhere near [18328](location)
+#      - I am looking a restaurant in [29432](location)
+#      - in [London](location)
+#      - [Lithuania](location)
+#      - Oh, sorry, in [Italy](location)
+#      - in [delhi](location)
+#      - In [Delhi](location)
+#      - I am looking for some restaurants in [Bombay]{"entity": "location", "value": "mumbai"}.
+#      - please help me to find restaurants in [pune](location)
+#      - I’m hungry. Looking out for some good [chinese](cuisine) restaurants in [chandigarh](location)
+#      - i am looking for an [italian](cuisine) restaurent in [delhi](location) please send the results to my email id [dfresf@ffmall.cdom](email_id)
+#      - find restaurents in [bombay]{"entity": "location", "value": "mumbai"} for [chinese](cuisine) cusine
+#      - look for restuarent in [delhi](location) and send them to my [id ghtki@ghesd.wer](email_id)
+#      - search [Amer]{"entity": "cuisine", "value": "american"}ican food joints, here is my id for the resu[lts qwerrt@asdf]{"entity": "email_id", "value": "qwerrt@asdf.zxc"}.zxc
+#      - find [Mexican]{"entity": "cuisine", "value": "mexican"} food outlets in [pune](location)
+#      - find [American]{"entity": "cuisine", "value": "american"} food outlets in [kolkata](location)
+#      - find [North Indian]{"entity": "cuisine", "value": "north indian"} food outlets in [chennai](location)
+#      - I’m hungry. Looking out for some good restaurants
+#      - help me with food options in my city
+#      - give me some good food options
+#      - [bengaluru](location)
+#      - [Ahmedabad](location)
+#      - its [Amritsar](location),
+#      - i would like to have [Amer]{"entity": "cuisine", "value": "american"}ican food
+#      - i wants [american](cuisine) dish
+#      - [Meerut](location)
+#      - I’ll prefer [Amer]{"entity": "cuisine", "value": "american"}ican
+#      - in [Thiruvananthapuram](location),
+#      - serve me [north indian](cuisine)
+#      - send results to my email id [ertsdfgdf@asded.csd.in](email_id) of [mexican](cuisine) restaurents in [Agra](location)
+#      - send some [American]{"entity": "cuisine", "value": "american"} restaurents to [oiuopiokj@sdfsd.asda.sd](email_id)
+#      - send a list of restaurents in [Kanpur](location) at [hunjm@asd.cas](email_id)
+#      - I am looking for a restaurant named Sukh Sagar in [Mumbai](location)
+#      - restaurants in [xyz](location)
+#      - near [ghatkopar](location)
+#      - find restaurants near me
+#      - restaurants near me
+#      - restaurants near [sion](location)
+#      - i am looking for an [indian](cuisine) spot called olaolaolaolaolaola
+#      - I am looking for [asian fusion](cuisine) food
+#      - [South Indian]{"entity": "cuisine", "value": "south indian"}
+#      - [North Indian]{"entity": "cuisine", "value": "north indian"}
+#      - [Italian]{"entity": "cuisine", "value": "italian"}
+#      - [Chinese]{"entity": "cuisine", "value": "chinese"}
+#      - [chinese](cuisine)
+#      - [Mexican]{"entity": "cuisine", "value": "mexican"} restaurants near me
+#      - I am looking for [mexican indian fusion](cuisine)
+#      - show me [chines](cuisine) restaurants in the [north](location)
+#      - find me some [indian](cuisine) restaurants in [bombay]{"entity": "location", "value": "mumbai"}
+#      - [mexican](cuisine) in [pune](location)
+#      - suggest me some [italian](cuisine) restaurants in [bangalore](location)
+#      - [mumbai](location)
+#      - [bangalore](location)
+#      - restaurants with budget [between 300 to 700](budget) for two people
+#      - restaurants with budget [between 300-700]{"entity": "budget", "value": "between 300 to 700"} for two people
+#      - [>700]{"entity": "budget", "value": "more than 700"}
+#      - [>700]{"entity": "budget", "value": "more than 700"} price range
+#      - [300-700]{"entity": "budget", "value": "between 300 to 700"}
+#      - [300-700]{"entity": "budget", "value": "between 300 to 700"} price range
+#      - [300 to 700]{"entity": "budget", "value": "between 300 to 700"}
+#      - [more than 700](budget)
+#      - [<300]{"entity": "budget", "value": "lesser than 300"}
+#      - I have a budget of [rs 700 and less]{"entity": "budget", "value": "between 300 to 700"}. find me such restaurants.
+#      - can you book a table in [rome](location) in a [moderate]{"entity": "budget", "value": "between 300 to 700"} price range with [british](cuisine) food for four people
+#      - find some [inexpensive]{"entity": "budget", "value": "lesser than 300"} [indian](cuisine) restaurants for me in [chennai](location)
+#      - find some [inexpensive]{"entity": "budget", "value": "lesser than 300"} [indian](cuisine) restaurants
+#      - show me some [expensive]{"entity": "budget", "value": "more than 700"} restaurants in [mumbai](location)
+#      - restaurants in [mumbai](location) [within rs 700]{"entity": "budget", "value": "between 300 to 700"}
+#      - show me some restaurants [within rs 300]{"entity": "budget", "value": "lesser than 300"}
+#      - show me some [indian](cuisine) restaurants [within rs 300]{"entity": "budget", "value": "lesser than 300"}
+#      - [italian](cuisine) restaurants [between rs 300 and 700]{"entity": "budget", "value": "between 300 to 700"}
+#      - restaurants [between rs 300 and 700]{"entity": "budget", "value": "between 300 to 700"}
+#      - find some [indian](cuisine) restaurants for me in [chennai](location) having budget [lesser than 300](budget)
+#      - find some [south indian](cuisine) restaurants for me in [bangalore](location) having budget [between rs 300 to 700]{"entity": "budget", "value": "between 300 to 700"}
+#      - find some [north indian](cuisine) restaurants for me having budget [between 300 to 700](budget)
+#      - I'm looking for some restaurants for me having budget [more than 700](budget)
+#      - show me some restaurants for me having budget [lesser than rs. 300]{"entity": "budget", "value": "lesser than 300"}
+
+#      - [bombay]{"entity": "location", "value": "mumbai"}
+#      - [baroda]{"entity": "location", "value": "vadodara"}
+#      - [trivandrum]{"entity": "location", "value": "thiruvananthapuram"}
+#      - [madras]{"entity": "location", "value": "chennai"}
+#      - [cochin]{"entity": "location", "value": "kochi"}
+#      - [calcutta]{"entity": "location", "value": "kolkata"}
+#      - [puducherry]{"entity": "location", "value": "pondicherry"}
+#      - [cawnpore]{"entity": "location", "value": "kanpur"}
+#      - [belagavi]{"entity": "location", "value": "belgaum"}
+#      - [indhur]{"entity": "location", "value": "indore"}
+#      - [poona]{"entity": "location", "value": "pune"}
+#      - [benares]{"entity": "location", "value": "varanasi"}
+#      - [waltair]{"entity": "location", "value": "visakhapatnam"}
+#      - [jubbulpore]{"entity": "location", "value": "jabalpur"}
+#      - [calicut]{"entity": "location", "value": "kozhikode"}
+#      - [gauhati]{"entity": "location", "value": "guwahati"}
+#      - [mysuru]{"entity": "location", "value": "mysore"}
+#      - [mangaluru]{"entity": "location", "value": "mangalore"}
+#      - [bengaluru]{"entity": "location", "value": "bangalore"}
+#      - [dilli]{"entity": "location", "value": "delhi"}
+#      - [new delhi]{"entity": "location", "value": "delhi"}
+#      - [less 300]{"entity": "budget", "value": "lesser than 300"}
+#      - [less than 300]{"entity": "budget", "value": "lesser than 300"}
+#      - [lower 300]{"entity": "budget", "value": "lesser than 300"}
+#      - [300 or less]{"entity": "budget", "value": "lesser than 300"}
+#      - [within 300]{"entity": "budget", "value": "lesser than 300"}
+#      - [within 700]{"entity": "budget", "value": "between 300 to 700"}
+#      - [bw 300 and 700]{"entity": "budget", "value": "between 300 to 700"}
+#      - [bw 300 & 700]{"entity": "budget", "value": "between 300 to 700"}
+#      - [btw 300-700]{"entity": "budget", "value": "between 300 to 700"}
+#      - [mt 700]{"entity": "budget", "value": "more than 700"}
+#      - [Pocket-Friendly]{"entity": "budget", "value": "lesser than 300"}
+#      - [Costliest]{"entity": "budget", "value": "more than 700"}
+#      - [within 300 to 700]{"entity": "budget", "value": "between 300 to 700"}
+#      - [cheap]{"entity": "budget", "value": "lesser than 300"}
+#      - [<700]{"entity": "budget", "value": "between 300 to 700"}
+#      - [mexican](cuisine)
+#      - [italian](cuisine)
+#      - [south indian](cuisine)
+#      - [north indian](cuisine)
+#      - [american](cuisine)
+#      - find me some restaurants in the range of [300 to 700]{"entity": "budget", "value": "between 300 to 700"} in [mysuru]{"entity": "location", "value": "mysore"}
+#      - [300]{"entity": "budget", "value": "lesser than 300"}
+#      - find me some restaurants in the range of [300]{"entity": "budget", "value": "lesser than 300"} in [mysuru]{"entity": "location", "value": "mysore"}
+#      - find me some restaurants in the range of [700]{"entity": "budget", "value": "more than 700"} in [mysuru]{"entity": "location", "value": "mysore"}
+#      - [700]{"entity": "budget", "value": "more than 700"}
+#
+  # change above & below to match with dataset EDA
+
+
+#  - intent: restaurant_type
+#    examples: |
+#      - I would like to visit an italian restaurant
+#      - A family restaurant
+#      - mexican
+#      - Indian
+#      - Chinese restaurant
+#      - any restaurant
+#      - I would like to visit a multicusine restaurant
+#      - restaurant with a bar
+#      - restaurant above 4 stars
+#      - restaurant in open area
+#      - kid-friendly restaurant
+#      - restaurant with great ambience
+#      - the highest rated restaurant
+#      - dinning with a view
+#      - restaurant on a terrace
+#      - fusion restaurant
+  # Change above
+
+  #### old stories ####
+
+  #version: "3.1"
+## stories/rules-stories-restaurant.yml has stories for the restaurant bot
+## Because rules do not generalize to unseen conversations, you should reserve them for single-turn conversation snippets,
+## and use stories to train on multi-turn conversations.
+#
+#stories:
+#
+#  # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+#  # --------------------------------------------------- Happy Paths ------------------------------------------------- #
+#  # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+#
+#  # Happy path for restaurant booking initiation
+#  - story: Greet and book restaurant happy path #10
+#    steps:
+#      #      - intent: greet
+#      #      - action: utter_greet # will connect from stories-greeting.yml story
+#      - action: utter_bot_intro
+#      - action: utter_wanna_book # -> pitch simple search and advance search
+#      - intent: affirm
+#      - action: action_show_cuisines # can break from this point inform cuisines or deny can come next
+#      - intent: inform_cuisine # if user does not want to select cuisine? (intent deny also include here)
+#      - action: action_show_restaurants
+#        # ----------- ----------- from here onwards few main things can happen ----------- ----------- #
+#
+#        # - user ask for details, ✅
+#        # wanna book ?
+#        # Yes ✅
+#        # No ✅ -> anything else with quick replies
+#
+#        # - directly wants to book a restaurant  ✅
+#        # wanna book ?
+#        # Yes ✅
+#        # No ✅ -> anything else with quick replies
+#
+#        # wants to check out more restaurants ✅ - rule added for this
+#
+#
+#  # Continuation from Happy path initiation -> Happy path for user ask for detail and book restaurant
+#  - story: Happy path book restaurant after view details  #11 Continuation from above story (#10)
+#    steps:
+#      - action: action_show_restaurants
+#      - intent: inform_view_details_restaurant_id
+#      - slot_was_set:
+#          - restaurant_id: [ "rtid_121290" ]
+#      - action: action_show_selected_restaurant_details
+#
+#  - story: User ask detail and book restaurant affirmation #11.1 # Continuation from above story (#11 - affirm)
+#    steps:
+#      - action: action_show_selected_restaurant_details
+#      - intent: affirm
+#      - action: utter_ask_num_people  # continued from #13
+#
+#
+#  - story: Continuation for user ask detail and deny #11.2 # Continuation from above story (#11 - deny)
+#    steps:
+#      - action: action_show_selected_restaurant_details
+#      - intent: deny
+#      - action: utter_thank_you
+#      - action: action_ask_anything_else #  build up story for continuation from search restaurant
+#
+#  # Happy path for user directly wants to book a restaurant selected from carousal
+#  - story: User want to book restaurant directly #12
+#    steps:
+#      - action: action_show_restaurants
+#      - intent: inform_booking_restaurant_id # book restaurant
+#      - slot_was_set:
+#          - restaurant_id: [ "rtid_121290" ]
+#      - action: action_select_restaurant_ask_booking_confirmation # updated the action a bit to case in this story
+#
+#
+#  - story: User directly book restaurant by affirming # 12.1 Continuation from above story (#12) - affirm
+#    steps:
+#      - action: action_select_restaurant_ask_booking_confirmation # updated the action a bit to case in this story
+#      - intent: affirm
+#      - action: utter_ask_num_people # continue from #13
+#
+#
+#  - story: Continuation for user directly want to book restaurant but deny at confirmation # 12.2 # Continuation from above story (#12)
+#    steps:
+#      - action: action_select_restaurant_ask_booking_confirmation
+#      - intent: deny
+#      - action: utter_thank_you
+#      - action: action_ask_anything_else
+#
+#  # Happy path user filling booking form
+#  - story: Continuation for filling basic booking form #13 Continuation from above stories (#11.1 and #12.1)
+#    steps:
+#      - action: utter_ask_num_people
+#      - intent: inform_num_people
+#      - slot_was_set:
+#          - num_people: [ 2 ]
+#      - action: utter_ask_date
+#      - action: utter_ask_date_prefer_format
+#      - intent: inform_date
+#      - action: action_validate_date
+#      - slot_was_set:
+#          - date: [ "2023-04-01" ]
+#      - action: action_show_booking_summary
+#      - intent: affirm # or mood great or emoji mood great intent (there is a problem in this story), dev to catch No # 13.1 -> deny
+#      - action: action_confirm_booking
+#      - action: utter_thank_you
+#
+#  # Happy path user confirm booking form
+#  - story: User affirm booking #13.1 Continuation from above stories (#13 - affirm)
+#    steps:
+#      - action: action_show_booking_summary
+#      - intent: affirm # or mood great or emoji mood great intent (there is a problem in this story), dev to catch No # 13.1 -> deny
+#      - action: action_confirm_booking
+#      - action: utter_thank_you
+#
+#  - story: User deny booking  #13.2 Continuation from above stories (#13 - deny)
+#    steps:
+#      - action: action_show_booking_summary
+#      - intent: deny
+#      # determine what to do next ->
+#      - action: action_confirm_booking
+#      - action: utter_thank_you
+#
+#    # Happy path for user wants to search restaurants by criteria they provide (basic and advance)
+#
+#    # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #  # # # # # # # # # # # # # # # # # # # # # # # #
+#    # ------------------------------------------------ Unhappy Paths ----------------------------------------------- #
+#    # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #  # # # # # # # # # # # # # # # # # # # # # # #
+#
+#
+#    # ---------------------------------------------- Knowledge Base -------------------------------------------------------- #
+#
+#
+#    # ---------------------------------------------- Backup ------------------------------------------------------- #
+#    # Happy path initiation
+#    # can use intent: sorry to roll back to previous story
+#
+#    #  - story: greet and book restaurant happy path
+#    #    steps:
+#    #      - intent: greet
+#    #      - action: utter_greet
+#    #      - action: utter_bot_challenge/who_are_you
+#    #      - action: utter_checkout_restaurants
+#    #      - intent: affirm
+#    #      - action: action_show_cuisines # can break from this point inform cuisines or deny can come next
+#    #      - intent: inform_cuisine # if user does not want to select cuisine? (intent deny also include here)
+#    #
+#    #      - action: action_show_restaurants
+#    #      # from here onwards few main things can happen
+#    #      # user ask for details,
+#    #      # check menu of restaurant,
+#    #      # directly wants to book a restaurant
+#    #      # wants to check out more restaurants,
+#    #      # search restaurants by criteria they provide
+#    #      - intent: inform_restaurant_id # change to view details of restaurant
+#    #      - slot_was_set:
+#    #          - restaurant_id: [ "rtid_121290" ]
+#    #      - action: action_show_selected_restaurant_details
+#    #      - intent: affirm
+#    #      - action: utter_ask_num_people
+#    #      - intent: inform_num_people
+#    #      - slot_was_set:
+#    #          - num_people: [ 2 ]
+#    #      - action: utter_ask_date
+#    #      - intent: inform_date
+#    #      - slot_was_set:
+#    #          - date: [ "2023-04-01" ]
+#    #      - action: action_show_booking_summary
+#    #      # - action: utter_ask_to_confirm_booking  # remove this line because previous action already asks for confirmation
+#    #      - intent: affirm # or mood great or emoji mood great intent (there is a problem in this story)
+#    #      - action: action_confirm_booking
+#    #      - action: utter_thank_you
+#    #      - action: utter_goodbye
+#
+#    # can use intent: sorry to roll back to previous story
+#
+#    # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+#    # ------------------------------------------------- Sub stories ----------------------------------------------- #
+#    # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+#
+#    # These stories are broken down into sub-stories to make them easier to understand when user interrupts the flow.
+#
+#    #  - story: display restaurant list
+#    #    steps:
+#    #      - action: utter_checkout_restaurants
+#    #      - intent: affirm
+#    #      - action: action_show_cuisines
+#    #      - intent: inform_cuisine
+#    #      - action: action_show_restaurants
+#    #
+#    #  - story: show restaurant list + filter by cuisine
+#    #    steps:
+#    #      - intent: request_cuisines
+#    #      - action: action_show_cuisines
+#    #      - intent: inform_cuisine
+#    #      - active_loop: cuisine_form
+#    #      - active_loop: null
+#    #      - slot_was_set:
+#    #          - cuisine: [ "Italian" ]
+#    #      - action: action_show_restaurants
+#    #
+#    #  - story: User selects a restaurant
+#    #    steps:
+#    #      - action: action_show_restaurants
+#    #      - intent: inform_restaurant_id
+#    #      - slot_was_set:
+#    #          - restaurant_id: [ "rtid_121290" ]
+#    #      - action: action_show_selected_restaurant_details
+#    #
+#    #  - story: Inform date and time
+#    #    steps:
+#    #      - action: utter_ask_date
+#    #      - intent: inform_date
+#    #      - slot_was_set:
+#    #          - date: [ "2020-01-01" ]
+#    #
+#    #  - story: Inform number of people
+#    #    steps:
+#    #      - action: utter_ask_num_people
+#    #      - intent: inform_num_people
+#    #      - slot_was_set:
+#    #          - num_people: [ "2" ]
+#    #
+#    #  - story: Confirm to book a restaurant
+#    #    steps:
+#    #      - slot_was_set:
+#    #          - restaurant_id: [ "rtid_12sda0" ]
+#    #      - action: action_show_booking_summary
+#    #      - action: utter_ask_to_confirm_booking
+#    #      - intent: affirm

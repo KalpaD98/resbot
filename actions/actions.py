@@ -3,20 +3,20 @@
 # https://rasa.com/docs/rasa/custom-actions
 
 import logging
-from typing import Any, Dict, List, Text
+from typing import Any, Dict, List, Text, Optional
 
 from rasa_sdk import Action, Tracker, FormValidationAction
 from rasa_sdk.events import FollowupAction, SlotSet, EventType
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.knowledge_base.storage import InMemoryKnowledgeBase
 
-from actions.submodules.constants import *
-from actions.submodules.mock_data import *
-from actions.submodules.object_utils import ObjectUtils
-from actions.submodules.response_generator import ResponseGenerator
-from actions.submodules.restaurant_utils import RestaurantUtils
-from actions.submodules.slot_validator import SlotValidators
+from actions.submodules.constants.constants import *
 from actions.submodules.entities.user import User
+from actions.submodules.utils.mock_data_utils import *
+from actions.submodules.utils.object_utils import ObjectUtils
+from actions.submodules.utils.response_generation_utils import ResponseGenerator
+from actions.submodules.utils.restaurant_response_generation_utils import RestaurantResponseGenerationUtils
+from actions.submodules.utils.slot_validation_utils import SlotValidators
 
 logger = logging.getLogger(__name__)
 
@@ -61,7 +61,7 @@ class ActionShowRestaurants(Action):
 
     # constructor
     # def __init__(self):
-    #     # load knowledge base with data from the given file
+    #     # load db_knowledge base with data from the given file
     #     kb = InMemoryKnowledgeBase("knowledge_base_data.json")
 
     def name(self) -> Text:
@@ -102,7 +102,7 @@ class ActionShowRestaurants(Action):
 
         dispatcher.utter_message(text=text_msg,
                                  attachment=ResponseGenerator.card_options_carousal(
-                                     RestaurantUtils.restaurant_list_to_carousal_object(rest_list)))
+                                     RestaurantResponseGenerationUtils.restaurant_list_to_carousal_object(rest_list)))
 
         return []
 
@@ -121,7 +121,7 @@ class ActionRequestMoreRestaurantOptions(Action):
 
         dispatcher.utter_message(text="Here are some more restaurants I found",
                                  attachment=ResponseGenerator.card_options_carousal(
-                                     RestaurantUtils.restaurant_list_to_carousal_object(rest_list)))
+                                     RestaurantResponseGenerationUtils.restaurant_list_to_carousal_object(rest_list)))
         if rest_list is None:
             dispatcher.utter_message(text="Sorry, I did not find any more restaurants.")
 
@@ -135,7 +135,7 @@ class ActionShowSelectedRestaurantDetails(Action):
     def name(self) -> Text:
         return ACTION_SHOW_SELECTED_RESTAURANT_DETAILS
 
-    # async run function to fetch restaurant data from the knowledge base
+    # async run function to fetch restaurant data from the db_knowledge base
 
     async def run(self, dispatcher: CollectingDispatcher,
                   tracker: Tracker,
@@ -149,7 +149,7 @@ class ActionShowSelectedRestaurantDetails(Action):
             dispatcher.utter_message(text="Cannot show restaurant details. Please select a restaurant first.")
             return []
 
-        # restaurant = await self.knowledge_base.get_object("restaurant", restaurant_id)
+        # restaurant = await self.db_knowledge.get_object("restaurant", restaurant_id)
 
         # Send the image to the user
         # dispatcher.utter_message(image=image_path)
@@ -239,8 +239,8 @@ class ActionShowBookingSummary(Action):
         # get restaurant id from the tracker
         # restaurant_id = tracker.get_slot("restaurant_id")
 
-        # get the restaurant data from the knowledge base
-        # restaurant = await self.knowledge_base.get_object("restaurant", restaurant_id)
+        # get the restaurant data from the db_knowledge base
+        # restaurant = await self.db_knowledge.get_object("restaurant", restaurant_id)
 
         # get the date from the tracker
         date = tracker.get_slot("date")
@@ -285,8 +285,8 @@ class ActionConfirmBooking(Action):
         restaurant_id = tracker.get_slot("restaurant_id")
         user_id = tracker.get_slot("user_id")
 
-        # get the restaurant data from the knowledge base
-        # restaurant = self.knowledge_base.get_object("restaurant", restaurant_id)
+        # get the restaurant data from the db_knowledge base
+        # restaurant = self.db_knowledge.get_object("restaurant", restaurant_id)
 
         # get the date from the tracker
         date = tracker.get_slot("date")
@@ -616,6 +616,108 @@ class ValidateRegistrationForm(FormValidationAction):
             return {"password": None}
 
 
+class ValidateLoginForm(FormValidationAction):
+    def name(self) -> Text:
+        return "validate_login_form"
+
+    async def validate_login_email(
+            self,
+            slot_value: Any,
+            dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any],
+    ) -> Dict[Text, Any]:
+        is_valid, email, error_message = SlotValidators.validate_email(slot_value)
+        if is_valid:
+            return {"login_email": email}
+        else:
+            dispatcher.utter_message(text=error_message)
+            return {"login_email": None}
+
+    async def validate_login_password(
+            self,
+            slot_value: Any,
+            dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any],
+    ) -> Dict[Text, Any]:
+        is_valid, password, error_message = SlotValidators.validate_password(slot_value)
+        if is_valid:
+            return {"login_password": password}
+        else:
+            dispatcher.utter_message(text=error_message)
+            return {"login_password": None}
+
+
+class ActionLoginUser(Action):
+    def name(self) -> Text:
+        return "action_login_user"
+
+    async def run(
+            self,
+            dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any],
+    ) -> List[Dict[Text, Any]]:
+        login_email = tracker.get_slot("login_email")
+        login_password = tracker.get_slot("login_password")
+
+        user = None
+        # user = user = find_user_by_email(login_email)
+        for u in users:
+            if u["email"] == login_email and u["password"] == login_password:
+                user = u
+                break
+
+        if user:
+            return [
+                SlotSet("user_name", user["name"]),
+                SlotSet("user_id", user["id"]),
+                SlotSet("user_email", user["email"])
+            ]
+        else:
+            dispatcher.utter_message(text="Email or password is incorrect.")
+            return [
+                SlotSet("user_name", None),
+                SlotSet("user_id", None),
+                SlotSet("user_email", None),
+                FollowupAction(ACTION_RETRY_LOGIN_OR_STOP)
+            ]
+
+
+class ActionRetryLoginOrStop(Action):
+    def name(self) -> Text:
+        return ACTION_RETRY_LOGIN_OR_STOP
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        quick_replies_with_payload = []
+
+        quick_reply_retry = {
+            TITLE: "Retry",
+            PAYLOAD: "/request_login_form"}
+
+        quick_reply_stop = {
+            TITLE: "Stop",
+            PAYLOAD: "/stop"}
+
+        quick_replies_with_payload.append(quick_reply_retry)
+        quick_replies_with_payload.append(quick_reply_stop)
+
+        dispatcher.utter_message(text="Would you like to retry logging in or stop?",
+                                 quick_replies=ResponseGenerator.quick_replies(quick_replies_with_payload, True))
+
+        return []
+
+
+# Add a function to find a user by email
+def find_user_by_email(email: str) -> Optional[User]:
+    # Implement the logic to find a user by email
+    # You can use your MongoDB database to search for the user
+    pass
+
+
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # --------------------------------------------- Knowledge Base Actions ---------------------------------------------- #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -625,7 +727,7 @@ class ValidateRegistrationForm(FormValidationAction):
 class ActionQueryKnowledgeBase(Action):
 
     def __init__(self):
-        # load knowledge base with data from the given file
+        # load db_knowledge base with data from the given file
 
         kb = InMemoryKnowledgeBase("knowledge_base_data.json")
 

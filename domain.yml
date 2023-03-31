@@ -26,7 +26,7 @@ intents:
   - emoji_affirm
   - emoji_deny
 
-  # ---------------------------------------------- restaurant-inform.yml -------------------------------------------- #
+  # ---------------------------------------------- nlu-restaurant-inform.yml -------------------------------------------- #
   - inform_cuisine                                        #
   - inform_restaurant_id                                  #
   - inform_booking_restaurant_id                          #
@@ -37,7 +37,7 @@ intents:
   - inform_location                                       #
   - inform_restaurant_name                                #
   - stop
-  # ----------------------------------------------------- user.yml --------------------------------------------------- #
+  # ----------------------------------------------------- nlu-rules-stories-user.yml --------------------------------------------------- #
   - request_user_registration_form
   - inform_user_name
   - inform_user_email
@@ -51,7 +51,7 @@ intents:
   - request_ambiance                                      #
   - request_booking_details                               #
 
-  # ---------------------------------------------- restaurant-search.yml -------------------------------------------- #
+  # ---------------------------------------------- nlu-restaurant-search.yml -------------------------------------------- #
   - search_restaurants                                    #
   - query_knowledge_base                                  #
 
@@ -163,22 +163,30 @@ slots:
     type: text
     influence_conversation: false
     mappings:
-      - type: from_entity
+      - type: from_text
         entity: user_name
 
   user_email:
     type: text
     influence_conversation: false
     mappings:
-      - type: from_entity
+      - type: from_text
         entity: user_email
 
   password:
     type: text
     influence_conversation: false
     mappings:
-      - type: from_entity
+      - type: from_text
         entity: password
+  # for login
+  login_email:
+    type: text
+    influence_conversation: false
+
+  login_password:
+    type: text
+    influence_conversation: false
 
   # --------------------------------------- Knowledge base query related slots --------------------------------------- #
   object_type:
@@ -229,6 +237,7 @@ slots:
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 forms:
+
   booking_form:
     required_slots:
       - num_people
@@ -240,12 +249,17 @@ forms:
       - password
       - user_email
 
+  login_form:
+    required_slots:
+    - login_email
+    - login_password
+
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # ---------------------------------------------------- Actions ------------------------------------------------------ #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 actions:
-  - action_query_knowledge_base                                 # query knowledge base
+  - action_query_knowledge_base                                 # query db_knowledge base
   - action_show_cuisines                                        # show cuisines
   - action_show_restaurants                                     # show restaurants (will filter by cuisine if provided)
   - action_show_more_restaurant_options                         # show more restaurant options
@@ -256,6 +270,7 @@ actions:
   - action_show_selected_restaurant_ask_booking_confirmation    # ask booking confirmation for the selected restaurant
 
   - action_ask_anything_else                                    # ask anything else with quick replies
+  - action_retry_login_or_stop
 
   # -------------------------------------------- Slot Validation Actions --------------------------------------------- #
   - action_validate_cuisine
@@ -265,7 +280,6 @@ actions:
   - action_validate_time
   - action_validate_user_id
   - action_validate_booking_reference_id
-
   - action_save_user_and_complete_registration
 
   # -------------------------------------------- Form Validation Actions --------------------------------------------- #
@@ -380,13 +394,23 @@ responses:
     - text: Good Bye. See you later!
 
   utter_ask_user_name:
-    - text: Enter an username
+    - text: May i know your name? (first name is sufficient)
   utter_ask_user_email:
-    - text: Enter your email address
+    - text: Enter your email address.
   utter_ask_password:
     - text: Please create a password.
+  utter_ask_confirm_password:
+    - text: Please confirm your password by entering it again.
   utter_registration_successful:
-    - text: Registration successful! we automatically logged you in {user_name}
+    - text: Registration successful! we automatically logged you {user_name}
+
+# user login
+  utter_ask_login_email:
+    - text: Please enter your email address.
+  utter_ask_login_password:
+    - text: Please enter your password.
+  utter_login_success:
+    - text: You have successfully logged in. Welcome back!
 
   # ----------------------------------------------- Retrieval Intents ------------------------------------------------ #
   utter_bot_challenge/what_can_you_do:

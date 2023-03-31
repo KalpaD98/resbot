@@ -1,0 +1,75 @@
+version: "3.1"
+# nlu-restaurant-requests.yml has restaurant request examples for intents
+nlu:
+  # user requests from bot
+  #--------------------------------------------- Request --------------------------------------------------------------#
+  - intent: request_cuisines
+    examples: |
+      - what cuisines are available
+      - what meals are available ?
+      - what kind of foods are available
+      - suggest foods
+      - cuisines please
+      - show cuisines
+      - cuisines
+
+  - intent: request_restaurants
+    examples: |
+      - show me restaurants
+      - show restaurants 
+      - what restaurants are available
+      - show me the restaurants
+      - show me restaurants please
+      - restaurant recommendations
+      - display restaurants
+      - restaurants please
+
+  - intent: request_menu
+    examples: |
+      - what foods are available in this restaurant
+      - show me the foods they have
+      - i want to see their menu
+      - can i see their menu
+      - show me the menu
+      - menu please
+      - show menu
+
+  - intent: request_more_restaurant_options
+    examples: |
+      - anything else?
+      - any other places?
+      - can i have more recommendations
+      - can i see more restaurants
+      - more options
+      - more suggestions
+      - more places
+      - any other suggestions
+
+  - intent: request_booking_details
+    examples: |
+      - What's the status of my reservation
+      - What's the status of my booking
+      - show my booking details
+      - show my reservation details
+      - booking details
+      - reservation details
+      - booking details please
+      - reservation details pls
+
+  - intent: request_opening_hours
+    examples: |
+      - what are the opening hours
+      - what are the opening hours of [McDonalds](booking_place)
+
+  - intent: request_ambiance
+    examples: |
+      - what is the ambiance
+      - what is the atmosphere
+      - tell me about the ambiance
+      - tell me about the atmosphere
+      - what is the atmosphere like
+      - what is the ambiance like
+      - what is the atmosphere like in the restaurant
+      - what is the ambiance like in the restaurant
+      - what is the atmosphere like in the place
+      - what is the ambiance like in the place

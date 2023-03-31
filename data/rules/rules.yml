@@ -54,7 +54,7 @@ rules:
     # Forms: Both activating and submitting a form will often follow a fixed path. You can also write rules to handle unexpected input during a form.
 
     # Experimental
-    #  - rule: query knowledge base
+    #  - rule: query db_knowledge base
     #    steps:
     #      - intent: query_knowledge_base
     #      - action: action_query_knowledge_base
