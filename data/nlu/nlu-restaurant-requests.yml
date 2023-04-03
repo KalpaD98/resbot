@@ -59,7 +59,7 @@ nlu:
   - intent: request_opening_hours
     examples: |
       - what are the opening hours
-      - what are the opening hours of [McDonalds](booking_place)
+      - what are the opening hours of [McDonalds](restaurant_name)
 
   - intent: request_ambiance
     examples: |

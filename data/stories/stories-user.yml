@@ -1,8 +1,8 @@
 version: "3.1"
-# stories/nlu-rules-stories-user.yml has user related stories for the bot
+# stories/stories-user.yml has user related stories for the bot
 
 stories:
-  #
+
   - story: User wants to register
     steps:
       - intent: request_user_registration_form
@@ -10,6 +10,25 @@ stories:
       - active_loop: registration_form
       - active_loop: null
       - action: action_save_user_and_complete_registration
+
+  - story: activate login form
+    steps:
+      - intent: request_login_form
+      - action: login_form
+      - active_loop: login_form
+
+  - story: submit login form
+    steps:
+      - action: login_form
+      - active_loop: null
+      - slot_was_set:
+          - requested_slot: null
+      - action: action_login_user
+      - slot_was_set:
+          - user_name: null
+          - user_id: null
+          - user_email: null
+      - action: utter_login_success
 
 
   - story: User wants to log in
@@ -19,3 +38,8 @@ stories:
       - active_loop: login_form
       - active_loop: null
       - action: action_login_user
+      - slot_was_set:
+          - user_name: null
+          - user_id: null
+          - user_email: null
+      - action: utter_login_success

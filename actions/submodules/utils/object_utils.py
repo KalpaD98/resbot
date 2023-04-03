@@ -1,7 +1,8 @@
+import datetime
 import random
 import sys
 
-from actions.submodules.constants import *
+from actions.submodules.constants.constants import *
 
 sys.path.append("/actions/submodules")
 
@@ -39,3 +40,23 @@ class ObjectUtils:
     def get_random_sentence(object_name, sentences):
         random_sentence = random.choice(sentences)
         return random_sentence.format(object_name)
+
+    # bookings related
+    @staticmethod
+    def filter_and_format_bookings(bookings):
+        today = datetime.date.today()
+        filtered_bookings = []
+
+        for booking in bookings:
+            booking_date = datetime.datetime.strptime(booking["booking_date"], "%Y-%m-%d").date()
+            if booking_date >= today:
+                days_remaining = (booking_date - today).days
+                booking["days_remaining"] = days_remaining
+                filtered_bookings.append(booking)
+
+        return filtered_bookings
+
+    # print '*' in a line when the number of stars given
+    @staticmethod
+    def star_print(stars):
+        print("*" * stars)

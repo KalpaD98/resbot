@@ -2,12 +2,10 @@ import logging
 import sys
 from typing import List, Dict, Union
 
-from actions.submodules.constants import *
+from actions.submodules.constants.constants import *
 
 sys.path.append("/actions/submodules")
 
-
-# ------------------------------------------------ Bot Front Chat Widget --------------------------------------------- #
 
 class ResponseGenerator:
 

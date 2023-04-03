@@ -1,4 +1,4 @@
-version: "3.1" # stories-greeting.yml has general stories for the restaurant bot
+version: "3.1" # stories-greeting.yml has greeting and continuation to booking stories for the restaurant bot
 
 stories:
   # --------------------------------- Greet and push towards book restaurant happy path -------------------------------- #

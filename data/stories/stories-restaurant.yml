@@ -1,7 +1,5 @@
 version: "3.1"
-# stories/rules-stories-restaurant.yml has stories for the restaurant bot
-# Because rules do not generalize to unseen conversations, you should reserve them for single-turn conversation snippets,
-# and use stories to train on multi-turn conversations.
+# stories/stories-restaurant.yml has stories for the restaurant bot
 
 stories:
 

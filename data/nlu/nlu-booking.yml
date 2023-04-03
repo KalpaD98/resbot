@@ -1,0 +1,54 @@
+version: "3.1" # nlu-booking.yml: NLU training data for booking related intents
+
+nlu:
+
+  - intent: view_past_bookings
+    examples: |
+      - show me my past reservations
+      - what were my previous bookings
+      - can you display my past bookings
+      - show me my past bookings
+
+  - intent: view_upcoming_bookings
+    examples: |
+      - show me my upcoming reservations
+      - what are my future bookings
+      - can you display my upcoming bookings
+      - show me my upcoming bookings
+
+  - intent: view_all_bookings
+    examples: |
+      - show me all my bookings
+      - show me all my reservations
+      - can you display all my bookings
+
+  - intent: user_wants_to_cancel_booking
+    examples: |
+      - I want to cancel my booking
+      - Cancel my booking
+      - I need to cancel a reservation
+      - Can you help me cancel a booking?
+      - Cancel a reservation for me
+
+  - intent: user_wants_to_change_booking_date
+    examples: |
+      - I want to change my reservation date
+      - Can I change the date of my booking?
+      - I need to reschedule my booking
+      - I'd like to change the date for my reservation
+      - How do I change the date of my reservation?
+      - Is it possible to modify the reservation date?
+      - Can you help me change the date of my booking?
+      - I want to move my booking to another day
+      - I need to change my restaurant reservation date
+      - I'd like to reschedule my reservation to a different date
+
+  - intent: inform_cancel_booking_id
+    examples: |
+      - cancel booking [bid_oi203](cancel_booking_id)
+      - cancel [bid_oi203](cancel_booking_id)
+
+  - intent: inform_change_date_booking_id
+    examples: |
+      - change date of booking [bid_oi203](cancel_booking_id)
+      - change date of [bid_oi203](cancel_booking_id)

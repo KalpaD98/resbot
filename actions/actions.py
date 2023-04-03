@@ -12,6 +12,7 @@ from rasa_sdk.knowledge_base.storage import InMemoryKnowledgeBase
 
 from actions.submodules.constants.constants import *
 from actions.submodules.entities.user import User
+from actions.submodules.persistance.bookings import get_user_bookings
 from actions.submodules.utils.mock_data_utils import *
 from actions.submodules.utils.object_utils import ObjectUtils
 from actions.submodules.utils.response_generation_utils import ResponseGenerator
@@ -359,9 +360,448 @@ class ActionCompleteRegistration(Action):
         users.append(user)
 
         # Optionally, send a confirmation message to the user
-        dispatcher.utter_message(text="Registration complete! Your details have been saved.")
+        dispatcher.utter_message(text="Congratulations on completing your registration!")
+
+        # utter the details of the user
+        dispatcher.utter_message(text="Your details are as follows:")
+        dispatcher.utter_message(text="Name: " + user_name)
+        dispatcher.utter_message(text="Email: " + user_email)
+        dispatcher.utter_message(text="Password: " + ObjectUtils.star_print(len(password)))
 
         return []
+
+
+class ActionLoginUser(Action):
+    def name(self) -> Text:
+        return "action_login_user"
+
+    async def run(
+            self,
+            dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any],
+    ) -> List[Dict[Text, Any]]:
+        login_email = tracker.get_slot("login_email")
+        login_password = tracker.get_slot("login_password")
+
+        user = None
+        # user = user = find_user_by_email(login_email)
+        for u in users:
+            if u["email"] == login_email and u["password"] == login_password:
+                user = u
+                break
+
+        if user:
+            return [
+                SlotSet("user_name", user["name"]),
+                SlotSet("user_id", user["id"]),
+                SlotSet("user_email", user["email"])
+            ]
+        else:
+            dispatcher.utter_message(text="Email or password is incorrect.")
+            return [
+                SlotSet("user_name", None),
+                SlotSet("user_id", None),
+                SlotSet("user_email", None),
+                FollowupAction(ACTION_RETRY_LOGIN_OR_STOP)
+            ]
+
+
+class ActionRetryLoginOrStop(Action):
+    def name(self) -> Text:
+        return ACTION_RETRY_LOGIN_OR_STOP
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        quick_replies_with_payload = []
+
+        quick_reply_retry = {
+            TITLE: "Retry",
+            PAYLOAD: "/request_login_form"}
+
+        quick_reply_stop = {
+            TITLE: "Stop",
+            PAYLOAD: "/stop"}
+
+        quick_replies_with_payload.append(quick_reply_retry)
+        quick_replies_with_payload.append(quick_reply_stop)
+
+        dispatcher.utter_message(text="Would you like to retry logging in or stop?",
+                                 quick_replies=ResponseGenerator.quick_replies(quick_replies_with_payload, True))
+
+        return []
+
+
+# booking related
+class ActionShowUserBookings(Action):
+    def name(self) -> Text:
+        return "action_show_user_bookings"
+
+    async def run(self, dispatcher: CollectingDispatcher,
+                  tracker: Tracker,
+                  domain: Dict[Text, Any],
+                  booking_type: str) -> List[Dict[Text, Any]]:
+        user_id = tracker.get_slot("user_id")
+        user_bookings = get_user_bookings(user_id, booking_type)
+
+        # Prepare carousel items
+        carousel_items = []
+        for booking in user_bookings:
+            carousel_item = {
+                "title": booking["restaurant_name"],
+                "subtitle": f"Booking Date: {booking['booking_date']}",
+                "image_url": booking["restaurant_image"],
+                "buttons": [
+                    {
+                        "title": "Cancel Booking",
+                        "type": "postback",
+                        "payload": f"/inform_cancel_booking_id{{\"cancel_booking_id\": \"{booking['booking_id']}\"}}"
+                    },
+                    {
+                        "title": "Change Date",
+                        "type": "postback",
+                        "payload": f"/inform_change_date_booking_id{{\"change_booking_date_id\": \"{booking['booking_id']}\"}}"
+                    }
+                ]
+            }
+            carousel_items.append(carousel_item)
+
+        # Send carousel to the user using your custom response generator
+        dispatcher.utter_message(
+            attachment=ResponseGenerator.card_options_carousal(carousel_items)
+        )
+
+        return []
+
+
+class ActionShowPastBookings(ActionShowUserBookings):
+    def name(self) -> Text:
+        return "action_show_past_bookings"
+
+    async def run(self, dispatcher: CollectingDispatcher,
+                  tracker: Tracker,
+                  domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        return await super().run(dispatcher, tracker, domain, booking_type="past")
+
+
+class ActionShowUpcomingBookings(ActionShowUserBookings):
+    def name(self) -> Text:
+        return "action_show_upcoming_bookings"
+
+    async def run(self, dispatcher: CollectingDispatcher,
+                  tracker: Tracker,
+                  domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        return await super().run(dispatcher, tracker, domain, booking_type="upcoming")
+
+
+class ActionShowNewBookingDetails(Action):
+
+    def name(self) -> Text:
+        return "action_show_new_booking_details"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        booking_id = tracker.get_slot("booking_id")
+        date = tracker.get_slot("date")
+
+        # Mock booking details
+        booking_details = {
+            'booking_id': 'bid_123',
+            'restaurant_name': 'The Fancy Restaurant',
+            'date': '2023-03-30',
+            # 'time': '19:00',
+            'num_people': 4
+        }
+
+        if booking_details is not None:
+            # Update the booking date in the booking_details
+            booking_details['date'] = date
+
+            # Format the message to show the updated booking details
+            message = f"Here are the updated booking details:\n\n"
+            message += f"Booking ID: {booking_details['booking_id']}\n"
+            message += f"Restaurant: {booking_details['restaurant_name']}\n"
+            message += f"Date: {booking_details['date']}\n"
+            # message += f"Time: {booking_details['time']}\n"
+            message += f"Number of people: {booking_details['num_people']}\n"
+
+            dispatcher.utter_message(text=message)
+            dispatcher.utter_message(text="would you like to confirm the change?")
+            dispatcher.utter_message(quickreplies=ResponseGenerator.quick_replies([QR_YES, QR_NO]))
+        else:
+            dispatcher.utter_message(text="Sorry, I couldn't find the booking details.")
+
+        return []
+
+
+class ActionChangeBookingDate(Action):
+    def name(self) -> Text:
+        return "action_change_booking_date"
+
+    async def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[
+        Dict[Text, Any]]:
+        booking_id = tracker.get_slot("booking_id")
+        new_date = tracker.get_slot("date")
+
+        # Update the booking date in system here.
+        # call  API to update database.
+
+        # Send a confirmation message to the user
+        dispatcher.utter_message(text=f"Your booking with ID {booking_id} has been successfully updated to {new_date}.")
+        return [SlotSet("date", None)]
+
+
+class ActionAskCancelBookingConfirmation(Action):
+    def name(self) -> Text:
+        return "action_ask_cancel_booking_confirmation"
+
+    async def run(self, dispatcher: CollectingDispatcher,
+                  tracker: Tracker,
+                  domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        cancel_booking_id = tracker.get_slot("cancel_booking_id")
+
+        # Fetch booking information from the database using cancel_booking_id (customize this part)
+        booking = {
+            "booking_id": "bid_123",
+            "restaurant_name": "Restaurant A",
+            "booking_date": "2023-06-10",
+            "num_people": 4
+        }
+
+        message = f"Are you sure you want to cancel the booking for {booking['restaurant_name']} on {booking['booking_date']} for {booking['num_people']} people? This action cannot be undone."
+
+        dispatcher.utter_message(text=message)
+
+        return []
+
+
+class ActionCancelBooking(Action):
+    def name(self) -> Text:
+        return "action_cancel_booking"
+
+    async def run(self, dispatcher: CollectingDispatcher,
+                  tracker: Tracker,
+                  domain: Dict[Text, Any]) -> List[EventType]:
+        cancel_booking_id = tracker.get_slot("cancel_booking_id")
+
+        # Fetch booking information from the database using cancel_booking_id (customize this part)
+        booking = {
+            "booking_id": "bid_123",
+            "restaurant_name": "Restaurant A",
+            "booking_date": "2023-06-10",
+            "num_people": 4
+        }
+
+        # Cancel the booking in the database using cancel_booking_id (customize this part)
+        # Add a comment to indicate where the database operation should be done
+        # For example: Cancel booking in the database using cancel_booking_id
+
+        message = f"Your booking at {booking['restaurant_name']} on {booking['booking_date']} for {booking['num_people']} people has been successfully canceled."
+
+        # Clear the cancel_booking_id slot
+        return [SlotSet("cancel_booking_id", None), dispatcher.utter_message(text=message)]
+
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# --------------------------------------------- Form Validation Actions --------------------------------------------- #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+class ValidateRegistrationForm(FormValidationAction):
+    def name(self) -> Text:
+        return "validate_registration_form"
+
+    async def validate_name(
+            self,
+            value: Text,
+            dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any],
+    ) -> Dict[Text, Any]:
+        is_valid, name_value, message = SlotValidators.validate_user_name(value)
+        if is_valid:
+            return {"name": name_value}
+        else:
+            dispatcher.utter_message(text=message)
+            return {"name": None}
+
+    async def validate_email(
+            self,
+            value: Text,
+            dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any],
+    ) -> Dict[Text, Any]:
+        is_valid, email_value, message = SlotValidators.validate_email(value)
+        if is_valid:
+            return {"email": email_value}
+        else:
+            dispatcher.utter_message(text=message)
+            return {"email": None}
+
+    async def validate_password(
+            self,
+            value: Text,
+            dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any],
+    ) -> Dict[Text, Any]:
+        is_valid, password_value, message = SlotValidators.validate_password(value)
+        if is_valid:
+            return {"password": password_value}
+        else:
+            dispatcher.utter_message(text=message)
+            return {"password": None}
+
+
+class ValidateLoginForm(FormValidationAction):
+    def name(self) -> Text:
+        return "validate_login_form"
+
+    async def validate_login_email(
+            self,
+            slot_value: Any,
+            dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any],
+    ) -> Dict[Text, Any]:
+        is_valid, email, error_message = SlotValidators.validate_email(slot_value)
+        if is_valid:
+            return {"login_email": email}
+        else:
+            dispatcher.utter_message(text=error_message)
+            return {"login_email": None}
+
+    async def validate_login_password(
+            self,
+            slot_value: Any,
+            dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any],
+    ) -> Dict[Text, Any]:
+        is_valid, password, error_message = SlotValidators.validate_password(slot_value)
+        if is_valid:
+            return {"login_password": password}
+        else:
+            dispatcher.utter_message(text=error_message)
+            return {"login_password": None}
+
+
+class BookingForm(FormValidationAction):
+    def name(self) -> Text:
+        return "validate_booking_form"
+
+    async def required_slots(
+            self,
+            slots_mapped_in_domain: List[Text],
+            dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any],
+    ) -> List[Text]:
+        return ["num_people", "date"]
+
+    async def validate_num_people(
+            self,
+            value: Text,
+            dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any],
+    ) -> Dict[Text, Any]:
+        is_valid, message = SlotValidators.validate_num_people(value)
+        if is_valid:
+            return {"num_people": value}
+        else:
+            dispatcher.utter_message(text=message)
+            return {"num_people": None}
+
+    async def validate_date(
+            self,
+            value: Text,
+            dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any],
+    ) -> Dict[Text, Any]:
+        is_valid, date_value, message = SlotValidators.validate_date(value)
+        if is_valid:
+            return {"date": date_value}
+        else:
+            dispatcher.utter_message(text=message)
+            return {"date": None}
+
+
+class ChangeBookingDateForm(FormValidationAction):
+    def name(self) -> Text:
+        return "validate_change_booking_date_form"
+
+    @staticmethod
+    def required_slots(tracker: Tracker) -> List[Text]:
+        return ["date"]
+
+    def validate_date(self, value: Text, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> \
+            Dict[Text, Any]:
+        is_valid, new_date, error_message = SlotValidators.validate_date(value)
+        if not is_valid:
+            dispatcher.utter_message(text=error_message)
+            return {"date": None}
+        else:
+            return {"date": new_date}
+
+
+# Add a function to find a user by email
+def find_user_by_email(email: str) -> Optional[User]:
+    # Implement the logic to find a user by email
+    # You can use your MongoDB database to search for the user
+    pass
+
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# --------------------------------------------- Knowledge Base Actions ---------------------------------------------- #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+
+# action to show top restaurants based on user preferences and the given cuisine (or without specific cuisine).
+class ActionQueryKnowledgeBase(Action):
+
+    def __init__(self):
+        # load db_knowledge base with data from the given file
+
+        kb = InMemoryKnowledgeBase("knowledge_base_data.json")
+
+        # # overwrite the representation function of the restaurant object
+        # # by default the representation function is just the name of the object
+        #
+        # kb.set_representation_function_of_object(
+        #     "restaurant", lambda obj: obj["name"] + "(" + obj["cuisine"] + ")"
+        # )
+        #
+        # super().__init__(kb)
+
+    def name(self) -> Text:
+        return ACTION_QUERY_KNOWLEDGE_BASE
+
+    async def run(self, dispatcher: CollectingDispatcher,
+                  tracker: Tracker,
+                  domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        return []
+
+
+# print all slot values from Tracker
+def print_slots(tracker: Tracker):  # -> List[Dict[Text, Any]]:
+    print()
+    print("Slots with values:")
+    empty_slots = []
+
+    for slot in tracker.slots:
+        value = tracker.get_slot(slot)
+        if value is not None:
+            print(slot, ":", value)
+        else:
+            empty_slots.append(slot)
+
+    print("\nEmpty slots: ", ", ".join(empty_slots))
+    print()
 
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -521,249 +961,6 @@ class ActionValidateBookingReferenceId(Action):
         else:
             dispatcher.utter_message(text=message)
             return [SlotSet(BOOKING_REFERENCE_ID, None)]
-
-
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-# --------------------------------------------- Form Validation Actions --------------------------------------------- #
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-
-class BookingForm(FormValidationAction):
-    def name(self) -> Text:
-        return "validate_booking_form"
-
-    async def required_slots(
-            self,
-            slots_mapped_in_domain: List[Text],
-            dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: Dict[Text, Any],
-    ) -> List[Text]:
-        return ["num_people", "date"]
-
-    async def validate_num_people(
-            self,
-            value: Text,
-            dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: Dict[Text, Any],
-    ) -> Dict[Text, Any]:
-        is_valid, message = SlotValidators.validate_num_people(value)
-        if is_valid:
-            return {"num_people": value}
-        else:
-            dispatcher.utter_message(text=message)
-            return {"num_people": None}
-
-    async def validate_date(
-            self,
-            value: Text,
-            dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: Dict[Text, Any],
-    ) -> Dict[Text, Any]:
-        is_valid, date_value, message = SlotValidators.validate_date(value)
-        if is_valid:
-            return {"date": date_value}
-        else:
-            dispatcher.utter_message(text=message)
-            return {"date": None}
-
-
-class ValidateRegistrationForm(FormValidationAction):
-    def name(self) -> Text:
-        return "validate_registration_form"
-
-    async def validate_name(
-            self,
-            value: Text,
-            dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: Dict[Text, Any],
-    ) -> Dict[Text, Any]:
-        is_valid, name_value, message = SlotValidators.validate_user_name(value)
-        if is_valid:
-            return {"name": name_value}
-        else:
-            dispatcher.utter_message(text=message)
-            return {"name": None}
-
-    async def validate_email(
-            self,
-            value: Text,
-            dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: Dict[Text, Any],
-    ) -> Dict[Text, Any]:
-        is_valid, email_value, message = SlotValidators.validate_email(value)
-        if is_valid:
-            return {"email": email_value}
-        else:
-            dispatcher.utter_message(text=message)
-            return {"email": None}
-
-    async def validate_password(
-            self,
-            value: Text,
-            dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: Dict[Text, Any],
-    ) -> Dict[Text, Any]:
-        is_valid, password_value, message = SlotValidators.validate_password(value)
-        if is_valid:
-            return {"password": password_value}
-        else:
-            dispatcher.utter_message(text=message)
-            return {"password": None}
-
-
-class ValidateLoginForm(FormValidationAction):
-    def name(self) -> Text:
-        return "validate_login_form"
-
-    async def validate_login_email(
-            self,
-            slot_value: Any,
-            dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: Dict[Text, Any],
-    ) -> Dict[Text, Any]:
-        is_valid, email, error_message = SlotValidators.validate_email(slot_value)
-        if is_valid:
-            return {"login_email": email}
-        else:
-            dispatcher.utter_message(text=error_message)
-            return {"login_email": None}
-
-    async def validate_login_password(
-            self,
-            slot_value: Any,
-            dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: Dict[Text, Any],
-    ) -> Dict[Text, Any]:
-        is_valid, password, error_message = SlotValidators.validate_password(slot_value)
-        if is_valid:
-            return {"login_password": password}
-        else:
-            dispatcher.utter_message(text=error_message)
-            return {"login_password": None}
-
-
-class ActionLoginUser(Action):
-    def name(self) -> Text:
-        return "action_login_user"
-
-    async def run(
-            self,
-            dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: Dict[Text, Any],
-    ) -> List[Dict[Text, Any]]:
-        login_email = tracker.get_slot("login_email")
-        login_password = tracker.get_slot("login_password")
-
-        user = None
-        # user = user = find_user_by_email(login_email)
-        for u in users:
-            if u["email"] == login_email and u["password"] == login_password:
-                user = u
-                break
-
-        if user:
-            return [
-                SlotSet("user_name", user["name"]),
-                SlotSet("user_id", user["id"]),
-                SlotSet("user_email", user["email"])
-            ]
-        else:
-            dispatcher.utter_message(text="Email or password is incorrect.")
-            return [
-                SlotSet("user_name", None),
-                SlotSet("user_id", None),
-                SlotSet("user_email", None),
-                FollowupAction(ACTION_RETRY_LOGIN_OR_STOP)
-            ]
-
-
-class ActionRetryLoginOrStop(Action):
-    def name(self) -> Text:
-        return ACTION_RETRY_LOGIN_OR_STOP
-
-    def run(self, dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        quick_replies_with_payload = []
-
-        quick_reply_retry = {
-            TITLE: "Retry",
-            PAYLOAD: "/request_login_form"}
-
-        quick_reply_stop = {
-            TITLE: "Stop",
-            PAYLOAD: "/stop"}
-
-        quick_replies_with_payload.append(quick_reply_retry)
-        quick_replies_with_payload.append(quick_reply_stop)
-
-        dispatcher.utter_message(text="Would you like to retry logging in or stop?",
-                                 quick_replies=ResponseGenerator.quick_replies(quick_replies_with_payload, True))
-
-        return []
-
-
-# Add a function to find a user by email
-def find_user_by_email(email: str) -> Optional[User]:
-    # Implement the logic to find a user by email
-    # You can use your MongoDB database to search for the user
-    pass
-
-
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-# --------------------------------------------- Knowledge Base Actions ---------------------------------------------- #
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-
-
-# action to show top restaurants based on user preferences and the given cuisine (or without specific cuisine).
-class ActionQueryKnowledgeBase(Action):
-
-    def __init__(self):
-        # load db_knowledge base with data from the given file
-
-        kb = InMemoryKnowledgeBase("knowledge_base_data.json")
-
-        # # overwrite the representation function of the restaurant object
-        # # by default the representation function is just the name of the object
-        #
-        # kb.set_representation_function_of_object(
-        #     "restaurant", lambda obj: obj["name"] + "(" + obj["cuisine"] + ")"
-        # )
-        #
-        # super().__init__(kb)
-
-    def name(self) -> Text:
-        return ACTION_QUERY_KNOWLEDGE_BASE
-
-    async def run(self, dispatcher: CollectingDispatcher,
-                  tracker: Tracker,
-                  domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        return []
-
-
-# print all slot values from Tracker
-def print_slots(tracker: Tracker):  # -> List[Dict[Text, Any]]:
-    print()
-    print("Slots with values:")
-    empty_slots = []
-
-    for slot in tracker.slots:
-        value = tracker.get_slot(slot)
-        if value is not None:
-            print(slot, ":", value)
-        else:
-            empty_slots.append(slot)
-
-    print("\nEmpty slots: ", ", ".join(empty_slots))
-    print()
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # ------------------------------------------------- Commented Code -------------------------------------------------- #

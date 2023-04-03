@@ -37,11 +37,14 @@ intents:
   - inform_location                                       #
   - inform_restaurant_name                                #
   - stop
-  # ----------------------------------------------------- nlu-rules-stories-user.yml --------------------------------------------------- #
+
+  # ----------------------------------------------------- nlu-user.yml --------------------------------------------------- #
   - request_user_registration_form
+  - request_login_form
   - inform_user_name
   - inform_user_email
   - inform_password
+
   # ----------------------------------------------- restaurant-request ---------------------------------------------- #
   - request_restaurants                                   #
   - request_cuisines                                      #
@@ -50,6 +53,15 @@ intents:
   - request_opening_hours                                 #
   - request_ambiance                                      #
   - request_booking_details                               #
+
+  # ---------------------------------------------- nlu-booking.yml -------------------------------------------- #
+  - view_past_bookings
+  - view_upcoming_bookings
+  - view_all_bookings
+  - user_wants_to_cancel_booking
+  - user_wants_to_change_booking_date
+  - inform_cancel_booking_id
+  - inform_change_date_booking_id
 
   # ---------------------------------------------- nlu-restaurant-search.yml -------------------------------------------- #
   - search_restaurants                                    #
@@ -78,14 +90,18 @@ entities:
   - cuisine
   - city
 
+  - booking_id
   - num_people
   - date
   - time
+
+  - cancel_booking_id
 
   - user_id
   - user_name
   - user_email
   - password
+
   - preferences
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -120,6 +136,13 @@ slots:
       - type: from_entity
         entity: selected_restaurant
 
+  booking_id:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: booking_id
+
   num_people:
     type: text
     influence_conversation: false
@@ -148,6 +171,13 @@ slots:
         intent:
           - inform_time
           - search_restaurants
+
+  cancel_booking_id:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: cancel_booking_id
 
 
   # --------------------------------------- user registration related slots --------------------------------------- #
@@ -183,10 +213,16 @@ slots:
   login_email:
     type: text
     influence_conversation: false
+    mappings:
+      - type: from_text
+        entity: user_email
 
   login_password:
     type: text
     influence_conversation: false
+    mappings:
+      - type: from_text
+        entity: password
 
   # --------------------------------------- Knowledge base query related slots --------------------------------------- #
   object_type:
@@ -243,6 +279,10 @@ forms:
       - num_people
       - date
 
+  change_booking_date_form:
+    required_slots:
+      - date
+
   registration_form:
     required_slots:
       - user_name
@@ -251,8 +291,8 @@ forms:
 
   login_form:
     required_slots:
-    - login_email
-    - login_password
+      - login_email
+      - login_password
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # ---------------------------------------------------- Actions ------------------------------------------------------ #
@@ -284,8 +324,21 @@ actions:
 
   # -------------------------------------------- Form Validation Actions --------------------------------------------- #
 
-  - validate_booking_form
   - validate_registration_form
+  - validate_booking_form
+  - validate_change_booking_date_form
+  # --------------------------------------------  ---------------------------------------#
+  - action_login_user
+
+  - action_show_past_bookings
+  - action_show_upcoming_bookings
+  - action_show_all_bookings
+  - action_show_user_bookings_carousel
+  - action_change_booking_date
+  - action_show_new_booking_details
+  - action_ask_cancel_booking_confirmation
+  - action_ask_cancel_another_booking
+  - action_cancel_booking
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # ------------------------------------------- Responses: Bot Utterances --------------------------------------------- #
@@ -361,7 +414,7 @@ responses:
     - text: Eating something might help 😃
 
   utter_thank_you:
-    - text: Thank you for using our service.
+    - text: "Thank you for using our service. If you need any assistance in the future, feel free to ask."
 
   utter_welcome:
     - text: You're welcome!
@@ -404,7 +457,7 @@ responses:
   utter_registration_successful:
     - text: Registration successful! we automatically logged you {user_name}
 
-# user login
+  # user login
   utter_ask_login_email:
     - text: Please enter your email address.
   utter_ask_login_password:
@@ -412,7 +465,22 @@ responses:
   utter_login_success:
     - text: You have successfully logged in. Welcome back!
 
-  # ----------------------------------------------- Retrieval Intents ------------------------------------------------ #
+    # booking related
+
+  utter_ask_cancel_booking_confirmation:
+    - text: "Are you sure you want to cFancel the booking at {restaurant_name} on {booking_date} for {num_people} people? This action cannot be undone."
+
+  utter_ask_cancel_another_booking:
+    - text: "Do you want to cancel another booking?"
+
+  # change booking date
+  utter_ask_new_booking_date:
+    - text: "What is the new date for the booking?"
+
+  utter_ask_change_another_booking:
+    - text: "Do you want to change another booking?"
+
+  # ------------------------------------------ Retrieval Intent Responses --------------------------------------------- #
   utter_bot_challenge/what_can_you_do:
     - text: I can help you book a restaurant 🍴.
     - text: I can help you find restaurants and book a table 🍽️.

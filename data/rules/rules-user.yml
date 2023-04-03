@@ -1,8 +1,6 @@
 version: "3.1"
-# rules/nlu-rules-stories-user.yml has rules for the bot.
+# rules/rules-user.yml has rules for the bot.
 rules:
-
-  # ------------------------------------------------------ Form Rules ------------------------------------------------ #
 
   - rule: activate registration form
     steps:
@@ -22,21 +20,23 @@ rules:
 
   # login
 
-  - rule: activate login form
-    steps:
-      - intent: request_login_form
-      - action: login_form
-      - active_loop: login_form
+#  - rule: activate login form
+#    steps:
+#      - intent: request_login_form
+#      - action: login_form
+#      - active_loop: login_form
 
-  - rule: submit login form
-    condition:
-      - active_loop: login_form
-    steps:
-      - action: login_form
-      - active_loop: null
-      - slot_was_set:
-          - requested_slot: null
-      - action: action_login_user
-      - slot_was_set:
-          - user_name: null
-          - user_id: null
+#  - rule: submit login form
+#    condition:
+#      - active_loop: login_form
+#    steps:
+#      - action: login_form
+#      - active_loop: null
+#      - slot_was_set:
+#          - requested_slot: null
+#      - action: action_login_user
+#      - slot_was_set:
+#          - user_name: null
+#          - user_id: null
+#          - user_email: null
+#      - action: utter_login_success
