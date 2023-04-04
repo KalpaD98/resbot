@@ -2,7 +2,7 @@ import json
 import logging
 import sys
 
-sys.path.append("/actions/submodules")
+sys.path.append("/all_actions/submodules")
 
 
 # ----  -----  -----  -----  -----  ----- JSON Related object utils -----  -----  -----  -----  -----  ---- #

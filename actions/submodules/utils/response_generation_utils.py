@@ -4,7 +4,7 @@ from typing import List, Dict, Union
 
 from actions.submodules.constants.constants import *
 
-sys.path.append("/actions/submodules")
+sys.path.append("/all_actions/submodules")
 
 
 class ResponseGenerator:

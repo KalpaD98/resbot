@@ -5,7 +5,7 @@ from SPARQLWrapper import SPARQLWrapper, JSON
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 
-sys.path.append("/actions/submodules")
+sys.path.append("/all_actions/submodules")
 
 
 # db_knowledge graph connection

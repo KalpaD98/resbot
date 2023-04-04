@@ -1,5 +1,5 @@
 # domain.yml is the file where you define the domain of your assistant.
-# This includes the intents, entities, slots, templates, actions, and forms your assistant uses.
+# This includes the intents, entities, slots, templates, all_actions, and forms your assistant uses.
 
 version: "3.1"
 

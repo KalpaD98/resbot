@@ -21,7 +21,7 @@ def save_restaurant(restaurant: Restaurant) -> None:
 def save_booking(booking: Booking) -> None:
     db.bookings.insert_one(booking.__dict__)
 
-# ---------- add below to actions for saving data to database ----------
+# ---------- add below to all_actions for saving data to database ----------
 #
 # from database import save_user, save_restaurant, save_booking
 #
@@ -87,7 +87,7 @@ def save_booking(booking: Booking) -> None:
 
 # domain.yml
 #
-# actions:
+# all_actions:
 #   - action_save_booking
 
 # rules.yml or stories.yml

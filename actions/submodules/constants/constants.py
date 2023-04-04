@@ -30,7 +30,7 @@ ACTION_VALIDATE_BOOKING_REFERENCE_ID = "action_validate_booking_reference_id"
 ACTION_RETRY_LOGIN_OR_STOP = "action_retry_login_or_stop"
 
 
-# Form validation actions
+# Form validation all_actions
 
 VALIDATE_RESTAURANT_BOOKING_FORM = "validate_restaurant_booking_form"
 VALIDATE_RESTAURANT_SEARCH_FORM = "validate_restaurant_search_form"
