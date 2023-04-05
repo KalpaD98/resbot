@@ -18,11 +18,8 @@ pipeline:
 
   - name: RegexFeaturizer
   - name: RegexEntityExtractor
-    entities:
-      - restaurant_id
-      - user_email
-      - booking_id
     case_sensitive: False
+    use_word_boundaries: True
     use_lookup_tables: True
     use_regexes: True
 

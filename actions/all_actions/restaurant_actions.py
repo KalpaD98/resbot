@@ -1,6 +1,9 @@
 from actions.all_actions.common_imports import *
 
-
+# Constants
+ACTION_SHOW_CUISINES = "action_show_cuisines"
+ACTION_SHOW_RESTAURANTS = "action_show_restaurants"
+ACTION_SHOW_MORE_RESTAURANT_OPTIONS = "action_show_more_restaurant_options"
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # ----------------------------------------------- Restaurant Actions ------------------------------------------------ #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #

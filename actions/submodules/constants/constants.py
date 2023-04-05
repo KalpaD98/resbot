@@ -1,41 +1,6 @@
 # constant.py contains all the constants used in the project
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-# ------------------------------------------------ Action Constants ------------------------------------------------- #
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-
-ACTION_DEFAULT_FALLBACK_NAME = "action_default_fallback"
-
-ACTION_SHOW_CUISINES = "action_show_cuisines"
-ACTION_SHOW_RESTAURANTS = "action_show_restaurants"
-ACTION_SHOW_SELECTED_RESTAURANT_DETAILS = "action_show_selected_restaurant_details"
-ACTION_SHOW_BOOKING_SUMMARY = "action_show_booking_summary"
-ACTION_SHOW_MORE_RESTAURANT_OPTIONS = "action_show_more_restaurant_options"
-ACTION_SHOW_SELECTED_RESTAURANT_ASK_BOOKING_CONFIRMATION = "action_show_selected_restaurant_ask_booking_confirmation"
-
-ACTION_CONFIRM_BOOKING = "action_confirm_booking"
-
-ACTION_ASK_ANYTHING_ELSE = "action_ask_anything_else"
-
-ACTION_QUERY_KNOWLEDGE_BASE = "action_query_knowledge_base"
-
-ACTION_VALIDATE_DATE = "action_validate_date"
-ACTION_VALIDATE_USER_ID = "action_validate_user_id"
-ACTION_VALIDATE_RESTAURANT_ID = "action_validate_restaurant_id"
-ACTION_VALIDATE_CUISINE = "action_validate_cuisine"
-ACTION_VALIDATE_NUM_PEOPLE = "action_validate_num_people"
-ACTION_VALIDATE_TIME = "action_validate_time"
-ACTION_VALIDATE_BOOKING_REFERENCE_ID = "action_validate_booking_reference_id"
-
-ACTION_RETRY_LOGIN_OR_STOP = "action_retry_login_or_stop"
-
-
-# Form validation all_actions
-
-VALIDATE_RESTAURANT_BOOKING_FORM = "validate_restaurant_booking_form"
-VALIDATE_RESTAURANT_SEARCH_FORM = "validate_restaurant_search_form"
-
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # ------------------------------------------ Response Generator Constants ------------------------------------------- #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 

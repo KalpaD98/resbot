@@ -16,6 +16,10 @@ from actions.all_actions.slot_validation_actions import *
 # noinspection PyUnresolvedReferences
 from actions.all_actions.user_actions import *
 
+# CONSTANTS
+ACTION_ASK_ANYTHING_ELSE = "action_ask_anything_else"
+ACTION_DEFAULT_FALLBACK_NAME = "action_default_fallback"
+
 
 # anything else with quick replies
 class ActionAnythingElse(Action):

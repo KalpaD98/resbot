@@ -102,7 +102,7 @@ nlu:
       - can you display my past bookings
       - show me my past bookings
 
-  - intent: user_wants_to_change_booking_date
+  - intent: user_wants_to_change_restaurant_booking_date
     examples: |
       - I want to change my reservation date
       - Can I change the date of my booking?

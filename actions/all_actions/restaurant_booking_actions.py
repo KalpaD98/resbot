@@ -1,5 +1,11 @@
 from actions.all_actions.common_imports import *
 
+# constants
+ACTION_SHOW_SELECTED_RESTAURANT_DETAILS = "action_show_selected_restaurant_details"
+ACTION_SHOW_SELECTED_RESTAURANT_ASK_BOOKING_CONFIRMATION = "action_show_selected_restaurant_ask_booking_confirmation"
+ACTION_SHOW_BOOKING_SUMMARY = "action_show_booking_summary"
+ACTION_CONFIRM_BOOKING = "action_confirm_booking"
+
 
 # action_show_selected_restaurant_ask_booking_confirmation.
 class ActionBookSelectedRestaurant(Action):
@@ -242,7 +248,7 @@ class ActionShowUpcomingBookings(ActionShowUserBookings):
 
 class ActionChangeBookingDate(Action):
     def name(self) -> Text:
-        return "action_change_booking_date"
+        return "action_change_restaurant_booking_date"
 
     async def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[
         Dict[Text, Any]]:
@@ -343,6 +349,7 @@ class ActionAskCancelBookingConfirmation(Action):
             "num_people": 4
         }
 
+        # change formatting of below message
         message = f"Are you sure you want to cancel the booking for {booking['restaurant_name']} on {booking['booking_date']} for {booking['num_people']} people? This action cannot be undone."
 
         dispatcher.utter_message(text=message)

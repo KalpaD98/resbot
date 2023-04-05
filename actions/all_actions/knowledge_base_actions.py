@@ -1,7 +1,9 @@
 from actions.all_actions.common_imports import *
 
-
 # from rasa_sdk.knowledge_base.storage import InMemoryKnowledgeBase
+
+# CONSTANTS
+ACTION_QUERY_KNOWLEDGE_BASE = "action_query_knowledge_base"
 
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #

@@ -44,7 +44,7 @@ intents:
   - view_all_bookings
   - view_upcoming_bookings
   - view_past_bookings
-  - user_wants_to_change_booking_date
+  - user_wants_to_change_restaurant_booking_date
   - inform_change_date_booking_id
   - user_wants_to_change_booking_num_people
   - inform_change_num_people_booking_id
@@ -290,12 +290,12 @@ slots:
 
 forms:
 
-  booking_form:
+  restaurant_booking_form:
     required_slots:
       - num_people
       - date
 
-  change_booking_date_form:
+  change_restaurant_booking_date_form:
     required_slots:
       - date
 
@@ -341,8 +341,8 @@ actions:
   # -------------------------------------------- Form Validation Actions --------------------------------------------- #
 
   - validate_registration_form
-  - validate_booking_form
-  - validate_change_booking_date_form
+  - validate_restaurant_booking_form
+  - validate_change_restaurant_booking_date_form
   # --------------------------------------------  ---------------------------------------#
   - action_login_user
 
@@ -350,7 +350,7 @@ actions:
   - action_show_upcoming_bookings
   - action_show_all_bookings
   - action_show_user_bookings_carousel
-  - action_change_booking_date
+  - action_change_restaurant_booking_date
   - action_show_new_booking_details
   - action_ask_cancel_booking_confirmation
   - action_ask_cancel_another_booking

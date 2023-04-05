@@ -1,5 +1,12 @@
 from actions.all_actions.common_imports import *
 
+VALIDATE_RESTAURANT_BOOKING_FORM = "validate_restaurant_booking_form"
+VALIDATE_REGISTRATION_FORM = "validate_registration_form"
+VALIDATE_LOGIN_FORM = "validate_login_form"
+VALIDATE_CHANGE_RESTAURANT_BOOKING_DATE_FORM = "validate_change_restaurant_booking_date_form"
+
+
+# VALIDATE_RESTAURANT_SEARCH_FORM = "validate_restaurant_search_form"
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # --------------------------------------------- Form Validation Actions --------------------------------------------- #
@@ -7,7 +14,7 @@ from actions.all_actions.common_imports import *
 
 class ValidateRegistrationForm(FormValidationAction):
     def name(self) -> Text:
-        return "validate_registration_form"
+        return VALIDATE_REGISTRATION_FORM
 
     async def validate_name(
             self,
@@ -54,7 +61,7 @@ class ValidateRegistrationForm(FormValidationAction):
 
 class ValidateLoginForm(FormValidationAction):
     def name(self) -> Text:
-        return "validate_login_form"
+        return VALIDATE_LOGIN_FORM
 
     async def validate_user_email(
             self,
@@ -85,9 +92,9 @@ class ValidateLoginForm(FormValidationAction):
             return {"user_password": None}
 
 
-class BookingForm(FormValidationAction):
+class RestaurantBookingForm(FormValidationAction):
     def name(self) -> Text:
-        return "validate_booking_form"
+        return VALIDATE_RESTAURANT_BOOKING_FORM
 
     async def required_slots(
             self,
@@ -127,9 +134,9 @@ class BookingForm(FormValidationAction):
             return {"date": None}
 
 
-class ChangeBookingDateForm(FormValidationAction):
+class ChangeRestaurantBookingDateForm(FormValidationAction):
     def name(self) -> Text:
-        return "validate_change_booking_date_form"
+        return VALIDATE_CHANGE_RESTAURANT_BOOKING_DATE_FORM
 
     @staticmethod
     def required_slots(tracker: Tracker) -> List[Text]:

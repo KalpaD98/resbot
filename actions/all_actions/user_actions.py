@@ -1,5 +1,11 @@
 from actions.all_actions.common_imports import *
 
+# CONSTANTS
+ACTION_SAVE_USER_AND_COMPLETE_REGISTRATION = "action_save_user_and_complete_registration"
+ACTION_RETRY_LOGIN_OR_STOP = "action_retry_login_or_stop"
+ACTION_LOGIN_USER = "action_login_user"
+ACTION_LOGOUT = "action_logout"
+
 
 class ActionCompleteRegistration(Action):
 
@@ -12,6 +18,13 @@ class ActionCompleteRegistration(Action):
             tracker: Tracker,
             domain: Dict[Text, Any],
     ) -> List[Dict[Text, Any]]:
+        # check of user with mail already exists
+
+        # set slots to None
+
+        # if yes, utter: "User with this email already exists. Please try again with a different email."
+
+        # if no, save user and utter: "Congratulations on completing your registration!"
         user_name = tracker.get_slot("user_name")
         user_email = tracker.get_slot("user_email")
         user_password = tracker.get_slot("user_password")
@@ -19,6 +32,8 @@ class ActionCompleteRegistration(Action):
         # Create a UserDetails object and add it to the users list
         user = User(user_name, user_email, user_password)
         users.append(user)
+
+        # log user in (set slots)
 
         # Optionally, send a confirmation message to the user
         dispatcher.utter_message(text="Congratulations on completing your registration!")
