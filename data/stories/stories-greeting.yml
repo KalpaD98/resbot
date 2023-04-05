@@ -1,25 +1,41 @@
 version: "3.1" # stories-greeting.yml has greeting and continuation to booking stories for the restaurant bot
 
 stories:
-  # --------------------------------- Greet and push towards book restaurant happy path -------------------------------- #
 
+  # -------------------------------- Greet and push towards book restaurant happy path ------------------------------- #
 
-  - story: greet + bot introduce himself + user denies to check restaurant #1
+  - story: Greeting and bot introduction
     steps:
       - intent: greet
       - action: utter_greet
       - action: utter_bot_intro
       - action: utter_wanna_book
+      - checkpoint: greet_and_intro_checkpoint
+
+  - story: User affirms to check restaurant
+    steps:
+      - checkpoint: greet_and_intro_checkpoint
+      - intent: affirm
+      - action: action_show_restaurants
+
+  - story: User denies to check restaurant
+    steps:
+      - checkpoint: greet_and_intro_checkpoint
       - intent: deny
       - action: utter_thank_you
+      - action: action_ask_anything_else
 
-  - story: greet + bot introduce himself + user request restaurant #2
+  - story: User request restaurant after greet and intro
     steps:
-      - intent: greet
-      - action: utter_greet
-      - action: utter_bot_intro
-      - action: utter_wanna_book
-      - intent: request_restaurants # or search_restaurants -> add later
+      - checkpoint: greet_and_intro_checkpoint
+      - intent: request_restaurants
+      - action: action_show_restaurants
+
+  # no checkpoints for below ones
+
+  - story: User request restaurant directly
+    steps:
+      - intent: request_restaurants
       - action: action_show_restaurants
 
   # --------------------------------------------------- User Mood check ---------------------------------------------- #

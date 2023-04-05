@@ -332,6 +332,8 @@ stories:
       - intent: deny
       - action: utter_thank_you
 
+# ------------------------------------------ Removed stories ------------------------------------------ #
+
 #  - story: User wants to change the booking date (not logged in)
 #    steps:
 #      - intent: user_wants_to_change_booking_date

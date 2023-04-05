@@ -5,6 +5,7 @@ ACTION_SAVE_USER_AND_COMPLETE_REGISTRATION = "action_save_user_and_complete_regi
 ACTION_RETRY_LOGIN_OR_STOP = "action_retry_login_or_stop"
 ACTION_LOGIN_USER = "action_login_user"
 ACTION_LOGOUT = "action_logout"
+ACTION_SHOW_LOGIN_SIGNUP_QUICK_REPLY = "action_show_login_signup_quick_replies"
 
 
 class ActionCompleteRegistration(Action):
@@ -112,9 +113,40 @@ class ActionRetryLoginOrStop(Action):
         return []
 
 
+class ActionShowLoginSignupQuickReplies(Action):
+    def name(self) -> Text:
+        return ACTION_SHOW_LOGIN_SIGNUP_QUICK_REPLY
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        # Define quick replies
+        quick_replies_list = [
+            {
+                TITLE: "I'm a registered user",
+                PAYLOAD: "/request_login_form"
+            },
+            {
+                TITLE: "I'm not registered yet",
+                PAYLOAD: "/request_user_registration_form"
+            },
+            {
+                TITLE: "Bye",
+                PAYLOAD: "/stop"
+            }
+        ]
+
+        # Generate quick replies using the ResponseGenerator class
+        quick_replies = ResponseGenerator.quick_replies(quick_replies_list, with_payload=True)
+
+        dispatcher.utter_message(text="Please choose an option", quick_replies=quick_replies)
+
+        return []
+
+
 class ActionLogout(Action):
     def name(self) -> Text:
-        return "action_logout"
+        return ACTION_LOGOUT
 
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         return [
