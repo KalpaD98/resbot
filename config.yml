@@ -18,6 +18,10 @@ pipeline:
 
   - name: RegexFeaturizer
   - name: RegexEntityExtractor
+    entities:
+      - restaurant_id
+      - user_email
+      - booking_id
     case_sensitive: False
     use_lookup_tables: True
     use_regexes: True
@@ -25,7 +29,7 @@ pipeline:
   - name: SpacyFeaturizer
   - name: LexicalSyntacticFeaturizer
   - name: CountVectorsFeaturizer # one hot encoding
-  - name: CountVectorsFeaturizer # char level
+  - name: CountVectorsFeaturizer # char level n-grams
     analyzer: char_wb
     min_ngram: 1
     max_ngram: 4

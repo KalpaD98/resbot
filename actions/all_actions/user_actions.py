@@ -14,10 +14,10 @@ class ActionCompleteRegistration(Action):
     ) -> List[Dict[Text, Any]]:
         user_name = tracker.get_slot("user_name")
         user_email = tracker.get_slot("user_email")
-        password = tracker.get_slot("password")
+        user_password = tracker.get_slot("user_password")
 
         # Create a UserDetails object and add it to the users list
-        user = User(user_name, user_email, password)
+        user = User(user_name, user_email, user_password)
         users.append(user)
 
         # Optionally, send a confirmation message to the user
@@ -27,7 +27,7 @@ class ActionCompleteRegistration(Action):
         dispatcher.utter_message(text="Your details are as follows:")
         dispatcher.utter_message(text="Name: " + user_name)
         dispatcher.utter_message(text="Email: " + user_email)
-        dispatcher.utter_message(text="Password: " + ObjectUtils.star_print(len(password)))
+        dispatcher.utter_message(text="Password: " + ObjectUtils.star_print(len(user_password)))
 
         return []
 
@@ -105,6 +105,7 @@ class ActionLogout(Action):
         return [
             SlotSet("logged_user", None),
             SlotSet("user_name", None),
+            SlotSet("user_id", None),
             SlotSet("user_email", None),
             SlotSet("password", None),
         ]

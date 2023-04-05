@@ -19,13 +19,12 @@ rules:
       - action: action_save_user_and_complete_registration
 
 # ---------------------------------------------------------------------------------------------------------------------#
-
+#
 #  - rule: activate login form
 #    steps:
-#      - intent: request_login_form
 #      - action: login_form
 #      - active_loop: login_form
-
+#
 #  - rule: submit login form
 #    condition:
 #      - active_loop: login_form

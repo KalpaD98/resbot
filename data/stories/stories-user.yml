@@ -26,7 +26,6 @@ stories:
           - user_email: null
       - action: utter_login_success
 
-# below can be rules instead of stories
   - story: activate login form
     steps:
       - intent: request_login_form
@@ -46,3 +45,5 @@ stories:
           - user_id: null
           - user_email: null
       - action: utter_login_success
+
+# above two can be rules instead of stories (added but had issues)

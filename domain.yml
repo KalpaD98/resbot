@@ -104,6 +104,7 @@ entities:
   - city
 
   # Booking
+  - selected_booking
   - booking_id
   - num_people
   - date
@@ -125,6 +126,7 @@ entities:
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 slots:
+
   cuisine:
     type: text
     mappings:
@@ -144,7 +146,6 @@ slots:
           - inform_restaurant_id
           - inform_booking_restaurant_id
           - inform_view_details_restaurant_id
-
   selected_restaurant:
     type: any
     influence_conversation: false
@@ -152,13 +153,18 @@ slots:
       - type: from_entity
         entity: selected_restaurant
 
+  selected_booking:
+    type: any
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: selected_booking
   booking_id:
     type: text
     influence_conversation: false
     mappings:
       - type: from_entity
         entity: booking_id
-
   num_people:
     type: text
     influence_conversation: false
@@ -167,7 +173,6 @@ slots:
         entity: num_people
         intent:
           - inform_num_people
-
   date:
     type: text
     influence_conversation: false
@@ -177,7 +182,6 @@ slots:
         intent:
           - inform_date
           - search_restaurants
-
   time:
     type: text
     influence_conversation: false
@@ -187,7 +191,6 @@ slots:
         intent:
           - inform_time
           - search_restaurants
-
   cancel_booking_id:
     type: text
     influence_conversation: false
@@ -360,74 +363,40 @@ actions:
 responses:
 
   utter_greet:
-    - text: Hey!
     - text: Hi!
+    - text: Hey!
     - text: Hello!
     - text: Hi 😃 there!
-    - text: Hey there!
     - text: Hello there 😀
 
   utter_please_rephrase:
     - text: I'm sorry, I couldn't understand that. Could you rephrase it?
-    - text: I'm sorry, I didn't get that. Could you rephrase it?
     - text: Sorry I didn't get that. Can you rephrase?
     - text: Sorry, I'm not sure I understand. Can you rephrase?
-    - text: Can you please rephrase? I did not got that.
 
   utter_greet_again:
     - text: Hi there again!
     - text: Hello again!
-    - text: Hi again!
 
   utter_mood_great_feedback:
     - text: Cool! 😎
     - text: Nice to hear 😃 that
-    - text: Thankful to hear that
     - text: Happy to hear 😊
 
   utter_mood_unhappy_feedback:
     - text: Sorry to hear that, maybe having something will make you feel better.
-    - text: Sorry to hear that, Are you in the mood of having something to eat?
     - text: Hmm, eating something might help you feel better.
-
-  # restaurant and booking related responses. [utter_ask_<slot_name>] for slot filling
-
-  utter_ask_date:
-    - text: When would you like to make the booking? A future date (tomorrow or later) in the format [YYYY/MM/DD] is preferred
-    - text: Please let me know the date for the booking  A future date (tomorrow or later) in the format [YYYY/MM/DD] is preferred
-    - text: What date do you have in mind for the booking?  A future date (tomorrow or later) in the format [YYYY/MM/DD] is preferred
-
-  #  utter_preferred_date_format:
-  #    - text: A future date (tomorrow or later) in the format [DD-MM-YYYY] is preferred
-
-  utter_ask_num_people:
-    - text: May I know the number of people for the booking?
-    - text: For how many people are you planing to make the reservation?
-
-  # user related responses
-
-  utter_ask_registered_user:
-    - text: Are you a registered user?
-    - text: Are you a registered user?
-    - text: Are you a returning customer?
-    - text: Did you create an account with us previously?
-    - text: Have you signed up with us in the past?
-    - text: Do you have an existing account with us?
-
 
   utter_emoji_great_feedback:
     - text: 😊
     - text: 😄
-    - text: 😃
 
   utter_emoji_mood_unhappy_feedback:
     - text: Eating something might help 🤗
     - text: Eating something might help 😊
-    - text: Eating something might help 😄
-    - text: Eating something might help 😃
 
   utter_thank_you:
-    - text: "Thank you for using our service. If you need any assistance in the future, feel free to ask."
+    - text: Thank you for using our service. If you need any assistance in the future, feel free to ask.
 
   utter_welcome:
     - text: You're welcome!
@@ -450,22 +419,27 @@ responses:
   utter_wanna_book:
     - text: Would you like to reserve a table at a fantastic restaurant? 🍽️
 
+  utter_bye_see_you_later:
+    - text: Good Bye. See you later!
+
   utter_processing_the_request: # change data a bit
     - text: Let me check
     - text: Sure!
     - text: I'll see what I can find out.
     - text: I'll check and get back to you.
 
-  utter_bye_see_you_later:
-    - text: Good Bye. See you later!
 
+  # user related responses
+
+  utter_ask_registered_user:
+    - text: Are you a registered user?
   utter_ask_user_name:
     - text: May i know your name? (first name is sufficient)
   utter_ask_user_email:
     - text: Enter your email address.
-  utter_ask_password:
+  utter_ask_user_password:
     - text: Please create a password.
-  utter_ask_confirm_password:
+  utter_ask_confirm_password: # implement if required
     - text: Please confirm your password by entering it again.
   utter_registration_successful:
     - text: Registration successful! we automatically logged you {user_name}
@@ -473,10 +447,26 @@ responses:
   utter_login_success:
     - text: You have successfully logged in. Welcome back!
 
-    # booking related
+  utter_login_to_continue:
+    - text: Please login to continue. # throw quick replies for login and signup ("I don't have an account")
 
-  utter_ask_cancel_booking_confirmation:
-    - text: "Are you sure you want to cFancel the booking at {restaurant_name} on {booking_date} for {num_people} people? This action cannot be undone."
+  # booking related
+
+  # restaurant and booking related responses. [utter_ask_<slot_name>] for slot filling
+
+  utter_ask_date:
+    - text: When would you like to make the booking? A future date (tomorrow or later) in the format [YYYY/MM/DD] is preferred
+    - text: What date do you have in mind for the booking?  A future date (tomorrow or later) in the format [YYYY/MM/DD] is preferred
+
+  #  utter_preferred_date_format:
+  #    - text: A future date (tomorrow or later) in the format [DD-MM-YYYY] is preferred
+
+  utter_ask_num_people:
+    - text: May I know the number of people for the booking?
+    - text: For how many people are you planing to make the reservation?
+
+  utter_ask_cancel_booking_confirmation: # change according to the data
+    - text: "Are you sure you want to cancel the booking at {restaurant['name']} on {selected_booking['date']} for {num_people} people? This action cannot be undone."
 
   utter_ask_cancel_another_booking:
     - text: "Do you want to cancel another booking?"
@@ -488,32 +478,23 @@ responses:
   utter_ask_change_another_booking:
     - text: "Do you want to change another booking?"
 
-  # ------------------------------------------ Retrieval Intent Responses --------------------------------------------- #
+  # ------------------------------------------ Retrieval Intent Responses -------------------------------------------- #
   utter_bot_challenge/what_can_you_do:
     - text: I can help you book a restaurant 🍴.
     - text: I can help you find restaurants and book a table 🍽️.
-    - text: I can help you find restaurants and book a table 🧂.
-    - text: I can help you find restaurants and book a table 🍽️.
-    - text: I can help you find restaurants and book a table 🍴.
 
   utter_out_of_scope/out_of_functionality:
     - text: Sorry, I can't handle that request 🥲. I can help you book a restaurant 😃.
     - text: Sorry, I can't do that 😢. I can help you book a restaurant 😃.
     - text: Sorry, I can't help you with that 🥹. I can help you book a restaurant 😃.
-    - text: Sorry, I am not able to help you with that. I can help you book a restaurant 😃.
-    - text: Sorry, I am not able to help you with that. I can help you book a restaurant 😃.
-    - text: Sorry, I am not able to help you with that. I can help you book a restaurant 😃.
 
   utter_bot_challenge/bot:
     - text: I am ResBot, powered by Rasa.
     - text: I am ResBot, a bot powered by Rasa.
-    - text: I am ResBot, a bot built using Rasa.
 
   utter_bot_challenge/who_are_you:
     - text: I am ResBot, I can recommend restaurants and help you make a reservation 🍴.
-    - text: I am ResBot, I can help you find restaurants  and make a booking 🧂.
     - text: I am ResBot, I can help you find restaurants and book a table 🍽️.
-    - text: I am ResBot, an AI-powered chatbot here to help you with your restaurant booking needs.
 
   utter_out_of_scope/food:
     - text: I understand you want to order food, but i'm afraid i can't handle that skill yet 😢.
@@ -523,8 +504,8 @@ responses:
 
 # -------------------------------------------------------------------------------------------------------------------- #
 
-config:
-  store_entities_as_slots: true
+# config:
+#  store_entities_as_slots: true
 
 session_config:
   session_expiration_time: 60
