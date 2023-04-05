@@ -11,6 +11,22 @@ stories:
       - active_loop: null
       - action: action_save_user_and_complete_registration
 
+
+  - story: User wants to log in
+    steps:
+      - intent: request_login_form
+      - action: login_form
+      - active_loop: login_form
+      - active_loop: null
+      - action: action_login_user
+      - slot_was_set:
+          - logged_user: null
+          - user_name: null
+          - user_id: null
+          - user_email: null
+      - action: utter_login_success
+
+# below can be rules instead of stories
   - story: activate login form
     steps:
       - intent: request_login_form
@@ -25,21 +41,7 @@ stories:
           - requested_slot: null
       - action: action_login_user
       - slot_was_set:
-          - user: null
-          - user_name: null
-          - user_id: null
-          - user_email: null
-      - action: utter_login_success
-
-
-  - story: User wants to log in
-    steps:
-      - intent: request_login_form
-      - action: login_form
-      - active_loop: login_form
-      - active_loop: null
-      - action: action_login_user
-      - slot_was_set:
+          - logged_user: null
           - user_name: null
           - user_id: null
           - user_email: null
