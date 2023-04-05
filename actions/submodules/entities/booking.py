@@ -11,8 +11,8 @@ class Booking:
             self,
             user: User,
             restaurant: Restaurant,
-            date: str,
             num_people: int,
+            date: str,
             time: str = None,
             created_date_time: datetime.datetime = None,
     ):
@@ -20,9 +20,9 @@ class Booking:
         self.id = f"bid_{Booking.booking_count}"
         self.user = user
         self.restaurant = restaurant
+        self.num_people = num_people
         self.date = date
         self.time = time
-        self.num_people = num_people
         self.created_date_time = created_date_time or datetime.datetime.now()
 
     def __repr__(self) -> str:

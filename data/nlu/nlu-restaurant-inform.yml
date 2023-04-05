@@ -1,56 +1,28 @@
 version: "3.1" # nlu-restaurant-inform.yml is a file where you define your NLU training data.
 nlu:
-  # User inform  bot
-  - intent: inform_cuisine
-    examples: |
-      - [Mexican](cuisine)
-      - I would like to have [Italian](cuisine)
-      - I want [Thai](cuisine) food
-      - [Korean](cuisine) restaurants
-      - [Chinese](cuisine) food
-      - I want to order some [Mexican](cuisine) food
-      - [Italian](cuisine) restaurant
-      - I'm in the mood for [Thai](cuisine) food tonight
-      - [Japanese](cuisine) please
-      - I'm looking for a [Vietnam](cuisine) restaurant
-      - looking for a [Vietnam](cuisine) restaurant
-      - I'm in the mood for something different. How about [Korean](cuisine) food?
-      - craving for [Mexican](cuisine) food
-      - craving for some [Italian](cuisine) food
-      - [Any](cuisine) cuisine
-      - whatever [Any](cuisine) cuisine 
-      - [Any](cuisine) thing
-      - [Multi](cuisine) cuisine
 
   - intent: inform_location
     examples: |
       - [north](location)
       - [south](location)
+
+  - intent: inform_city
+    examples: |
+      - [brooklyn](city)
+      - [manhattan](city)]
+      - [queens](city)
       - recommend a restaurant in [new york](location)
 
-  - intent: inform_num_people
+  - intent: inform_state
     examples: |
-      - [2](num_people)
-      - around [4](num_people)
-      - around [4](num_people) people
-      - [4](num_people) people
-      - [5](num_people) people are joining
-      - [10](num_people) people
-      - [4] pax
-      - for [ten](num_people) people
-      - [2](num_people) people
-      - for [three](num_people) people
-      - just [one](num_people) person
-      - book for [seven](num_people) people
-      - [2](num_people) please
-      - [2](num_people)
-      - [3](num_people)
-      - about [four](num_people) people
-      - [nine](num_people) people
-      - sorry make it for [four](num_people) people
-      - no make it for [four](num_people) people
-      - no just [2](num_people) people
-  # how to catch only me, me and my wife (girlfriend), me and my friends, me and my family, me wife and the kids, my family
+      - [new york](state)
+      - [new jersey](state)
+      - [california](state)
+      - [texas](state)
+      - [florida](state)
+      - [illinois](state)
+      - in [new york](state)
+      - from [new york](state)
 
   - intent: inform_restaurant_name
     examples: |
@@ -79,69 +51,25 @@ nlu:
       - [Papa Murphy's](restaurant)
       - [Papa Gino's](restaurant)
 
-  - intent: inform_restaurant_id
-    examples: |
-      - [rtid_290239](restaurant_id)
-      - [rtid_121293](restaurant_id)
-      - [rtid_122284](restaurant_id)
-      - [rtid_121391](restaurant_id)
-
-  - intent: inform_booking_restaurant_id
-    examples: |
-      - book [rtid_290239](restaurant_id)
-      - book restaurant [rtid_121293](restaurant_id)
-
-  - intent: inform_view_details_restaurant_id
-    examples: |
-      - view details [rtid_290239](restaurant_id)
-      - view details of restaurant [rtid_121293](restaurant_id)
-
-  # find a way to extract date from descriptions apart from duckling server
-  - intent: inform_date
-    examples: |
-      - [2023-04-01](date)
-      - [2023 01 01](date)
-      - [2023-02-05](date)
-      - [2024/01/01](date)
-      - Can I make a reservation for [tomorrow](date)?
-      - What availability do you have for [Sunday](date)?
-      - I need to reserve a table for [next Friday](date).
-      - Can you tell me what times you have available on [Wednesday](date)?
-      - I want to make a reservation for [this Thursday](date).
-      - Do you have any tables available at [next Monday](date)?
-
-  #      - Can I reserve a table for [2](num_people) people on Friday, [February 4th](date)?
-  #      - I'd like to make a reservation for [3](num_people) people on Sunday, [January 30th](date)
-  #      - I want to book a table for [2](num_people) people at [tonight](date).
-  #      - I'm looking to book a table for [4](num_people) on [Saturday](date).
-
-  - intent: inform_time
-    examples: |
-      - [7 pm](time)
-      - [10:30 am](time)
-      - [12:00 p.m.](time)
-      - [12:00 pm](time)
-
-
-  #  - intent: query_knowledge_base
-  #    examples: |
-  #      - I am looking for a [French](cuisine) restaurant in the [new york](location) area
-
-  #  - intent: inform_restaurant_type
-  #    examples: |
-  #      - I would like to visit an italian restaurant
-  #      - A family restaurant
-  #      - mexican
-  #      - Indian
-  #      - Chinese restaurant
-  #      - any restaurant
-  #      - I would like to visit a multicusine restaurant
-  #      - restaurant with a bar
-  #      - restaurant above 4 stars
-  #      - restaurant in open area
-  #      - kid-friendly restaurant
-  #      - restaurant with great ambience
-  #      - the highest rated restaurant
-  #      - dinning with a view
-  #      - restaurant on a terrace
-  #      - fusion restaurant
+#  - intent: inform_restaurant_type
+#    examples: |
+#      - I would like to visit an italian restaurant
+#      - A family restaurant
+#      - mexican
+#      - Indian
+#      - Chinese restaurant
+#      - any restaurant
+#      - I would like to visit a multicusine restaurant
+#      - restaurant with a bar
+#      - restaurant above 4 stars
+#      - restaurant in open area
+#      - kid-friendly restaurant
+#      - restaurant with great ambience
+#      - the highest rated restaurant
+#      - dinning with a view
+#      - restaurant on a terrace
+#      - fusion restaurant
+#
+#  - intent: inform_restaurant_food_type
+#    examples: |
+#      - I like to have pizza

@@ -44,7 +44,7 @@ stories:
       - action: utter_emoji_great_feedback
       - action: utter_wanna_book
 
-  - story: after greet + mood unhappy emoji + ask checkout restaurant #6
+  - story: after greet + mood unhappy emoji + ask checkout restaurant #6 -> continue from stories-restaurant-booking.yml
     steps:
       - intent: emoji_mood_unhappy
       - action: utter_emoji_mood_unhappy_feedback

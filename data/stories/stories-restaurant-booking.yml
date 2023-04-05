@@ -1,8 +1,131 @@
-version: "3.1" # stories-booking.yml has general stories for the booking
+version: "3.1" # stories-restaurant-booking.yml has general stories for the booking
 
 stories:
 
-  - story: User wants to view past bookings
+  # ----------------------------------------------- Restaurant Booking ----------------------------------------------- #
+
+  - story: greet + bot introduce himself #6 Happy Path: bot ask user to select cuisine then show restaurant carousal
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - action: utter_bot_intro
+      - action: utter_wanna_book
+      - intent: affirm
+      - action: action_show_cuisines
+      - intent: inform_cuisine
+      - slot_was_set:
+          - cuisine: [ "italian" ]
+      - action: action_show_restaurants
+
+  # all below stories starts from action_show_restaurants
+
+  - story: User wants to book a restaurant directly #7 Happy Path
+    steps:
+      - action: action_show_restaurants
+      - intent: inform_booking_restaurant_id
+      - slot_was_set:
+          - restaurant_id: [ "rid_121290" ]
+      - action: action_show_selected_restaurant_ask_booking_confirmation
+      - intent: affirm
+      - action: booking_form
+      - active_loop: booking_form
+      - slot_was_set:
+          - num_people: 2
+      - slot_was_set:
+          - date: 2023-06-06
+      - active_loop: null
+      - action: action_show_booking_summary
+      - intent: affirm
+      - action: action_confirm_booking
+      - action: utter_thank_you
+
+
+  - story: User denies to book restaurant directly after seeing booking details #8 Sad Path
+    steps:
+      - action: action_show_restaurants
+      - intent: inform_booking_restaurant_id
+      - slot_was_set:
+          - restaurant_id: [ "rid_121290" ]
+      - action: action_show_selected_restaurant_ask_booking_confirmation
+      - intent: affirm
+      - action: booking_form
+      - active_loop: booking_form
+      - slot_was_set:
+          - num_people: 2
+      - slot_was_set:
+          - date: 2023-06-06
+      - active_loop: null
+      - action: action_show_booking_summary
+      - intent: deny
+      - action: utter_thank_you
+      - action: action_ask_anything_else
+
+  - story: User denies to book restaurant after direct selection #9 Sad Path
+    steps:
+      - action: action_show_restaurants
+      - intent: inform_booking_restaurant_id
+      - slot_was_set:
+          - restaurant_id: [ "rid_121290" ]
+      - action: action_show_selected_restaurant_ask_booking_confirmation
+      - intent: deny
+      - action: utter_thank_you
+      - action: action_ask_anything_else
+
+  - story: greet and book restaurant after view details happy path  #10 Happy path
+    steps:
+      - action: action_show_restaurants
+      - intent: inform_view_details_restaurant_id
+      - slot_was_set:
+          - restaurant_id: [ "rid_121290" ]
+      - action: action_show_selected_restaurant_details
+      - intent: affirm
+      - action: booking_form
+      - active_loop: booking_form
+      - slot_was_set:
+          - num_people: 2
+      - slot_was_set:
+          - date: 2023-06-06
+      - active_loop: null
+      - action: action_show_booking_summary
+      - intent: affirm
+      - action: action_confirm_booking
+      - action: utter_thank_you
+
+
+  - story: User denies booking after viewing booking summary #11 Sad Path
+    steps:
+      - action: action_show_restaurants
+      - intent: inform_view_details_restaurant_id
+      - slot_was_set:
+          - restaurant_id: [ "rid_121290" ]
+      - action: action_show_selected_restaurant_details
+      - intent: affirm
+      - action: booking_form
+      - active_loop: booking_form
+      - slot_was_set:
+          - num_people: 2
+      - slot_was_set:
+          - date: 2023-06-06
+      - active_loop: null
+      - action: action_show_booking_summary
+      - intent: deny
+      - action: utter_thank_you
+      - action: action_ask_anything_else
+
+  - story: User denies after viewing restaurant details #12 Sad Path
+    steps:
+      - action: action_show_restaurants
+      - intent: inform_view_details_restaurant_id
+      - slot_was_set:
+          - restaurant_id: [ "rid_121290" ]
+      - action: action_show_selected_restaurant_details
+      - intent: deny
+      - action: utter_thank_you
+      - action: action_ask_anything_else
+
+  # ------------------------------------------------- Cancel Booking ------------------------------------------------- #
+  # below stories need to check if user is logged in or not
+  - story: User wants to view past bookings #13
     steps:
       - intent: view_past_bookings
       - action: action_show_past_bookings
@@ -137,7 +260,6 @@ stories:
       - action: utter_ask_change_another_booking
       - intent: affirm
       - action: action_show_upcoming_bookings
-
 
   - story: Show user bookings carousel and handle change date - deny to change and deny to change another
     steps:

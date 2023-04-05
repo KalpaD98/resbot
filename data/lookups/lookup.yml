@@ -35,7 +35,7 @@ nlu:
   
 
   # Examples only >> Change to fit the dataset ->  use a separate file (check docs)
-  - lookup: restaurant
+  - lookup: restaurant_name
     examples: |
       - Danke
       - Taco Bell

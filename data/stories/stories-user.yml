@@ -25,6 +25,7 @@ stories:
           - requested_slot: null
       - action: action_login_user
       - slot_was_set:
+          - user: null
           - user_name: null
           - user_id: null
           - user_email: null

@@ -50,18 +50,18 @@ class JSONUtil:
 
     @staticmethod
     def remove_duplicate_dictionaries_on_restaurant_id(alist):
-        rtid = "id"
+        rid = "id"
 
         memo = set()
         res = []
         for sub in alist:
 
             # testing for already present value
-            if sub[rtid] not in memo:
+            if sub[rid] not in memo:
                 res.append(sub)
 
                 # adding in memo if new value
-                memo.add(sub[rtid])
+                memo.add(sub[rid])
 
         # printing result
         # print("The filtered list : " + str(res))

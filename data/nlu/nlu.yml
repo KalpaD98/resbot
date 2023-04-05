@@ -1,5 +1,5 @@
-version: "3.1"
-# nlu.yml is a file where you define your NLU training data.
+version: "3.1" # nlu.yml is a file where you define your NLU training data.
+
 nlu:
   - intent: greet
     examples: |
@@ -233,6 +233,10 @@ nlu:
 
   - intent: stop
     examples: |
+      - stop
+      - stop go back
+      - shut up
+      - shutup
       - ok then you cant help me
       - that was shit, you're not helping
       - you can't help me
@@ -241,43 +245,29 @@ nlu:
       - ok i guess you can't help me
       - that's not what i want
       - ok, but that doesnt help me
+      - that doesnt help me
       - this is leading to nothing
       - this conversation is not really helpful
       - you cannot help me with what I want
       - I think you cant help me
       - hm i don't think you can do what i want
-      - stop
-      - stop go back
-      - do you get anything?
-      - and that's it?
-      - nothing else?
-
-  - regex: greet
-    examples: |
-      - hey[^\s]*
 
   - regex: restaurant_id
     examples: |
-      - ^rtid_[^\s]+$
+      - ^rid_[^\s]+$
 
   - regex: user_id
     examples: |
       - ^uid_[^\s]+$
 
-  - regex: booking_reference_id
+  - regex: booking_id
     examples: |
-      - ^brid_[^\s]+$
+      - ^bid_[^\s]+$
 
-  - regex: email
+  - regex: greet
+    examples: |
+      - hey[^\s]*
+
+  - regex: user_email
     examples: |
       - \b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b
-      
-
-  - lookup: cuisine
-    examples: |
-      - italian
-      - japanese
-      - chinese
-      - any cuisine
-      - thai
-      - indian

@@ -11,7 +11,7 @@ version: "3.1"
 
 intents:
 
-  # ----------------------------------------------------- Basic ----------------------------------------------------- #
+  # ---------------------------------------------------- nlu.yml ----------------------------------------------------- #
   - greet
   - mood_unhappy
   - mood_great
@@ -19,58 +19,69 @@ intents:
   - affirm
   - deny
   - thank_you
-  - bot_challenge
+  - stop
   - emoji_mood_great
   - emoji_mood_unhappy
   - emoji_goodbye
   - emoji_affirm
   - emoji_deny
 
-  # ---------------------------------------------- nlu-restaurant-inform.yml -------------------------------------------- #
-  - inform_cuisine                                        #
-  - inform_restaurant_id                                  #
-  - inform_booking_restaurant_id                          #
-  - inform_view_details_restaurant_id                     #
-  - inform_num_people                                     #
-  - inform_date                                           #
-  - inform_time                                           #
-  - inform_location                                       #
-  - inform_restaurant_name                                #
-  - stop
+  # ---------------------------------------------------- cuisine.yml ------------------------------------------------- #
+  - request_cuisines
+  - inform_cuisine
 
-  # ----------------------------------------------------- nlu-user.yml --------------------------------------------------- #
-  - request_user_registration_form
-  - request_login_form
-  - inform_user_name
-  - inform_user_email
-  - inform_password
+  # ------------------------------------------ nlu-query-knowledge-base.yml ------------------------------------------ #
+  - query_knowledge_base
 
-  # ----------------------------------------------- restaurant-request ---------------------------------------------- #
-  - request_restaurants                                   #
-  - request_cuisines                                      #
-  - request_more_restaurant_options                       #
-  - request_menu                                          #
-  - request_opening_hours                                 #
-  - request_ambiance                                      #
-  - request_booking_details                               #
-
-  # ---------------------------------------------- nlu-booking.yml -------------------------------------------- #
-  - view_past_bookings
-  - view_upcoming_bookings
+  # --------------------------------------------- nlu-restaurant-booking.yml ----------------------------------------- #
+  - inform_num_people
+  - inform_date
+  - inform_time
+  - request_booking_details
+  - inform_restaurant_id
+  - inform_view_details_restaurant_id
+  - inform_booking_restaurant_id
   - view_all_bookings
-  - user_wants_to_cancel_booking
+  - view_upcoming_bookings
+  - view_past_bookings
   - user_wants_to_change_booking_date
-  - inform_cancel_booking_id
   - inform_change_date_booking_id
+  - user_wants_to_change_booking_num_people
+  - inform_change_num_people_booking_id
+  - user_wants_to_cancel_booking
+  - inform_cancel_booking_id
 
-  # ---------------------------------------------- nlu-restaurant-search.yml -------------------------------------------- #
-  - search_restaurants                                    #
-  - query_knowledge_base                                  #
+  # -------------------------------------------- nlu-restaurant-inform.yml  ----------------------------------------- #
+  - inform_location
+  - inform_city
+  - inform_state
+  - inform_restaurant_name
 
-  # ------------------------------------------------- multi intents ------------------------------------------------- #
+  # ---------------------------------------- nlu-restaurant-multi-intents.yml ---------------------------------------- #
   - search_restaurant + inform_opening_hours
   - search_restaurant + inform_location
   - search_restaurant + inform_date + inform_time + inform_num_people
+
+  # -------------------------------------------- nlu-restaurant-requests.yml ----------------------------------------- #
+  - request_restaurants
+  - request_menu
+  - request_more_restaurant_options
+  - request_opening_hours
+  - request_ambiance
+  # ---------------------------------------------- nlu-restaurant-search.yml ----------------------------------------- #
+  - want_to_search_restaurants
+  - search_restaurants
+  # ------------------------------------ nlu-small-talk-and-out-of-scope.yml ----------------------------------------- #
+
+  # No need to add retrieval intents
+
+  # -------------------------------------------------- nlu-user.yml -------------------------------------------------- #
+  - request_user_registration_form
+  - request_login_form
+  - logout
+  - inform_user_name
+  - inform_user_email
+  - inform_user_password
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # ---------------------------------------------------- Entities ----------------------------------------------------- #
@@ -81,15 +92,18 @@ entities:
   - mention
   - attribute
 
+  # Restaurant
   - selected_restaurant
   - restaurant_name
   - restaurant_id
   - opening_hours
+  - cuisine
+
   - price_range
   - ambiance
-  - cuisine
   - city
 
+  # Booking
   - booking_id
   - num_people
   - date
@@ -97,10 +111,12 @@ entities:
 
   - cancel_booking_id
 
+  # User
+  - logged_user
   - user_id
   - user_name
   - user_email
-  - password
+  - user_password
 
   - preferences
 
@@ -178,53 +194,50 @@ slots:
     mappings:
       - type: from_entity
         entity: cancel_booking_id
+        intent:
+          - inform_cancel_booking_id
 
+  # ----------------------------------------------- user related slots ----------------------------------------------- #
 
-  # --------------------------------------- user registration related slots --------------------------------------- #
-
+  logged_user:
+    type: any
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: logged_user
   user_id:
     type: text
     influence_conversation: false
     mappings:
       - type: from_entity
         entity: user_id
-
   user_name:
     type: text
     influence_conversation: false
     mappings:
       - type: from_text
         entity: user_name
-
+        intent:
+          - inform_user_name
   user_email:
     type: text
     influence_conversation: false
     mappings:
       - type: from_text
         entity: user_email
-
-  password:
+        intent:
+          - inform_user_email
+  user_password:
     type: text
     influence_conversation: false
     mappings:
       - type: from_text
-        entity: password
-  # for login
-  login_email:
-    type: text
-    influence_conversation: false
-    mappings:
-      - type: from_text
-        entity: user_email
-
-  login_password:
-    type: text
-    influence_conversation: false
-    mappings:
-      - type: from_text
-        entity: password
+        entity: user_password
+        intent:
+          - inform_user_password
 
   # --------------------------------------- Knowledge base query related slots --------------------------------------- #
+
   object_type:
     type: text
     influence_conversation: false
@@ -286,13 +299,13 @@ forms:
   registration_form:
     required_slots:
       - user_name
-      - password
+      - user_password
       - user_email
 
   login_form:
     required_slots:
-      - login_email
-      - login_password
+      - user_email
+      - user_password
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # ---------------------------------------------------- Actions ------------------------------------------------------ #
@@ -457,11 +470,6 @@ responses:
   utter_registration_successful:
     - text: Registration successful! we automatically logged you {user_name}
 
-  # user login
-  utter_ask_login_email:
-    - text: Please enter your email address.
-  utter_ask_login_password:
-    - text: Please enter your password.
   utter_login_success:
     - text: You have successfully logged in. Welcome back!
 

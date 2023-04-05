@@ -2,12 +2,19 @@
 # See this guide on how to implement these action:
 # https://rasa.com/docs/rasa/custom-actions
 
-from actions.submodules.all_actions.booking_actions import *
-from actions.submodules.all_actions.form_validation_actions import *
-from actions.submodules.all_actions.knowledge_base_actions import *
-from actions.submodules.all_actions.restaurant_actions import *
-from actions.submodules.all_actions.slot_validation_actions import *
-from actions.submodules.all_actions.user_actions import *
+
+# noinspection PyUnresolvedReferences
+from actions.all_actions.form_validation_actions import *
+# noinspection PyUnresolvedReferences
+from actions.all_actions.knowledge_base_actions import *
+# noinspection PyUnresolvedReferences
+from actions.all_actions.restaurant_actions import *
+# noinspection PyUnresolvedReferences
+from actions.all_actions.restaurant_booking_actions import *
+# noinspection PyUnresolvedReferences
+from actions.all_actions.slot_validation_actions import *
+# noinspection PyUnresolvedReferences
+from actions.all_actions.user_actions import *
 
 
 # anything else with quick replies
@@ -40,3 +47,18 @@ class ActionAnythingElse(Action):
         dispatcher.utter_message(text="Is there anything else I can help you with?",
                                  quick_replies=ResponseGenerator.quick_replies(quick_replies_with_payload, True))
         return []
+
+######################################################## backup ########################################################
+#
+# # noinspection PyUnresolvedReferences
+# from actions.all_actions.form_validation_actions import *
+# # noinspection PyUnresolvedReferences
+# from actions.all_actions.knowledge_base_actions import *
+# # noinspection PyUnresolvedReferences
+# from actions.all_actions.restaurant_actions import *
+# # noinspection PyUnresolvedReferences
+# from actions.all_actions.restaurant_booking_actions import *
+# # noinspection PyUnresolvedReferences
+# from actions.all_actions.slot_validation_actions import *
+# # noinspection PyUnresolvedReferences
+# from actions.all_actions.user_actions import *

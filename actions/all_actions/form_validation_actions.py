@@ -1,4 +1,4 @@
-from actions.submodules.all_actions.common_imports import *
+from actions.all_actions.common_imports import *
 
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -56,7 +56,7 @@ class ValidateLoginForm(FormValidationAction):
     def name(self) -> Text:
         return "validate_login_form"
 
-    async def validate_login_email(
+    async def validate_user_email(
             self,
             slot_value: Any,
             dispatcher: CollectingDispatcher,
@@ -65,12 +65,12 @@ class ValidateLoginForm(FormValidationAction):
     ) -> Dict[Text, Any]:
         is_valid, email, error_message = SlotValidators.validate_email(slot_value)
         if is_valid:
-            return {"login_email": email}
+            return {"user_email": email}
         else:
             dispatcher.utter_message(text=error_message)
-            return {"login_email": None}
+            return {"user_email": None}
 
-    async def validate_login_password(
+    async def validate_user_password(
             self,
             slot_value: Any,
             dispatcher: CollectingDispatcher,
@@ -79,10 +79,10 @@ class ValidateLoginForm(FormValidationAction):
     ) -> Dict[Text, Any]:
         is_valid, password, error_message = SlotValidators.validate_password(slot_value)
         if is_valid:
-            return {"login_password": password}
+            return {"user_password": password}
         else:
             dispatcher.utter_message(text=error_message)
-            return {"login_password": None}
+            return {"user_password": None}
 
 
 class BookingForm(FormValidationAction):

@@ -27,10 +27,10 @@ class SlotValidators:
 
     @staticmethod
     def validate_restaurant_id(restaurant_id: str) -> Tuple[bool, str]:
-        if restaurant_id.startswith("rtid"):
+        if restaurant_id.startswith("rid"):
             return True, ""
         else:
-            return False, "Restaurant ID should start with 'rtid'. Please provide a valid restaurant ID."
+            return False, "Restaurant ID should start with 'rid'. Please provide a valid restaurant ID."
 
     @staticmethod
     def validate_num_people(num_people: str) -> Tuple[bool, str]:

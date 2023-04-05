@@ -3,7 +3,7 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 
-from actions.submodules.all_actions.common_imports import *
+from actions.all_actions.common_imports import *
 
 
 class ActionValidateRestaurantId(Action):

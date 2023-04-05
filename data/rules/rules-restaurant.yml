@@ -1,10 +1,6 @@
-version: "3.1"
-# rules.yml has rules for the bot. Rules can be useful when implementing: #https://rasa.com/docs/rasa/rules#rules
+version: "3.1" # rules.yml has restaurant related rules
+
 rules:
-  - rule: when user ask to display cuisines show quick replies
-    steps:
-      - intent: request_cuisines
-      - action: action_show_cuisines
 
   - rule: when user request restaurant display restaurants carousal
     steps:
@@ -15,23 +11,3 @@ rules:
     steps:
       - intent: request_more_restaurant_options
       - action: action_show_more_restaurant_options
-
-  # ------------------------------------------------------ Form Rules ------------------------------------------------ #
-
-  - rule: activate booking form
-    steps:
-      - action: action_show_selected_restaurant_ask_booking_confirmation
-      - intent: affirm
-      - action: booking_form
-      - active_loop: booking_form
-
-  - rule: submit booking form
-    condition:
-      - active_loop: booking_form
-    steps:
-      - action: booking_form
-      - active_loop: null
-      - slot_was_set:
-          - requested_slot: null
-      - action: action_show_booking_summary
-

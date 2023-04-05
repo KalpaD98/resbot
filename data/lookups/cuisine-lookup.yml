@@ -1,0 +1,55 @@
+version: "3.1" # cuisine-lookup.yml
+
+nlu:
+  - lookup: cuisine
+    examples: |
+      - Ethiopian
+      - Moroccan
+      - South African
+      - Mediterranean
+      - Greek
+      - Spanish
+      - Turkish
+      - Lebanese
+      - Indian
+      - Pakistani
+      - Bangladeshi
+      - Nepalese
+      - Sri Lankan
+      - Japanese
+      - Korean
+      - Chinese
+      - Vietnamese
+      - Thai
+      - Filipino
+      - Indonesian
+      - Malaysian
+      - Singaporean
+      - Mexican
+      - Peruvian
+      - Argentinian
+      - Brazilian
+      - Venezuelan
+      - American
+      - Canadian
+      - French
+      - Italian
+      - German
+      - Austrian
+      - Swiss
+      - Polish
+      - Hungarian
+      - Russian
+      - Ukrainian
+      - Nordic
+      - Swedish
+      - Norwegian
+      - Finnish
+      - Danish
+      - Icelandic
+      - British
+      - Irish
+      - Scottish
+      - Welsh
+      - Australian
+      - New Zealand

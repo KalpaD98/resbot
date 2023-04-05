@@ -1,0 +1,8 @@
+version: "3.1"  # rules-cuisine.yml has cuisine related rules
+
+rules:
+
+  - rule: when user ask to display cuisines show quick replies
+    steps:
+      - intent: request_cuisines
+      - action: action_show_cuisines

@@ -1,4 +1,4 @@
-from actions.submodules.all_actions.common_imports import *
+from actions.all_actions.common_imports import *
 
 
 # action_show_selected_restaurant_ask_booking_confirmation.
@@ -45,6 +45,53 @@ class ActionBookSelectedRestaurant(Action):
         return [SlotSet(SELECTED_RESTAURANT, restaurant)]
         # if no
         # Clear the slots related to restaurant selection
+
+
+# action_show_selected_restaurant_details.
+# This function will fetch data of the selected restaurant and send it in the message.
+# This will include a small description about the restaurant, its address and opening hours.
+class ActionShowSelectedRestaurantDetails(Action):
+    def name(self) -> Text:
+        return ACTION_SHOW_SELECTED_RESTAURANT_DETAILS
+
+    # async run function to fetch restaurant data from the db_knowledge base
+
+    async def run(self, dispatcher: CollectingDispatcher,
+                  tracker: Tracker,
+                  domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        print_slots(tracker)
+
+        # get the restaurant id from the tracker
+        restaurant_id = tracker.get_slot("restaurant_id")
+
+        if restaurant_id is None:
+            dispatcher.utter_message(text="Cannot show restaurant details. Please select a restaurant first.")
+            return []
+
+        # restaurant = await self.db_knowledge.get_object("restaurant", restaurant_id)
+
+        # Send the image to the user
+        # dispatcher.utter_message(image=image_path)
+
+        # get the restaurant details by passing the id
+        restaurant = ObjectUtils.find_by_id(restaurant_id, rest_list)
+        logging.info(restaurant)
+
+        # send the message back to the user
+
+        dispatcher.utter_message(image=restaurant[IMAGE_URL])
+        dispatcher.utter_message(
+            text=restaurant[NAME] + " mainly serves " + restaurant[CUISINE] + " food and its located at "
+                                                                              "" + restaurant[ADDRESS])
+        dispatcher.utter_message(text="Their opening hours are, ")
+        dispatcher.utter_message(text="Mon - Fri: " + restaurant[OPENING_HOURS][MON_TO_FRI])
+        dispatcher.utter_message(text="Sat - Sun: " + restaurant[OPENING_HOURS][SAT_SUN])
+
+        dispatcher.utter_message(
+            text=ObjectUtils.get_random_sentence(restaurant[NAME], UTTER_SENTENCE_LIST_FOR_ASKING_TO_MAKE_RESERVATION),
+            quick_replies=ResponseGenerator.quick_replies([QR_YES, QR_NO]))
+
+        return [SlotSet("selected_restaurant", restaurant), SlotSet("restaurant_id", restaurant_id)]
 
 
 # action_show_booking_summary.

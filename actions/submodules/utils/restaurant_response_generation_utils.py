@@ -30,7 +30,7 @@ class RestaurantResponseGenerationUtils:
             button2 = SUBCOMPONENT_BUTTON_PAYLOAD.copy()
             button2[TITLE] = "Book Table"
             button2[PAYLOAD] = "/inform_booking_restaurant_id{\"restaurant_id\":\"" + restaurant.get(ID) + "\"}"
-            # book table intent has not been added yet, example: book rtid_s3wjdsud3, book restaurant rtid_s3wjdsud3
+            # book table intent has not been added yet, example: book rid_s3wjdsud3, book restaurant rid_s3wjdsud3
 
             button3 = SUBCOMPONENT_BUTTON_PAYLOAD.copy()
             button3[TITLE] = "View Details"

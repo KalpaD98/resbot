@@ -1,0 +1,144 @@
+version: "3.1" # nlu-booking.yml: NLU training data for booking related intents
+
+nlu:
+  # booking flow
+
+  - intent: inform_num_people
+    examples: |
+      - [2](num_people)
+      - around [4](num_people)
+      - around [4](num_people) people
+      - [4](num_people) people
+      - [5](num_people) people are joining
+      - [10](num_people) people
+      - [4] pax
+      - for [ten](num_people) people
+      - [2](num_people) people
+      - for [three](num_people) people
+      - just [one](num_people) person
+      - book for [seven](num_people) people
+      - [2](num_people) please
+      - [2](num_people)
+      - [3](num_people)
+      - about [four](num_people) people
+      - [nine](num_people) people
+      - sorry make it for [four](num_people) people
+      - no make it for [four](num_people) people
+      - no just [2](num_people) people
+      - sorry only [5](num_people) people
+
+  - intent: inform_date # find a way to extract date from descriptions apart from duckling server
+    examples: |
+      - [2023-04-01](date)
+      - [2023 01 01](date)
+      - [2023-02-05](date)
+      - [2024/01/01](date)
+      - Can I make a reservation for [tomorrow](date)?
+      - What availability do you have for [Sunday](date)?
+      - I need to reserve a table for [next Friday](date).
+      - Can you tell me what times you have available on [Wednesday](date)?
+      - I want to make a reservation for [this Thursday](date).
+      - Do you have any tables available at [next Monday](date)?
+  #      - Can I reserve a table for [2](num_people) people on Friday, [February 4th](date)?
+  #      - I'd like to make a reservation for [3](num_people) people on Sunday, [January 30th](date)
+  #      - I want to book a table for [2](num_people) people at [tonight](date).
+  #      - I'm looking to book a table for [4](num_people) on [Saturday](date).
+
+  - intent: inform_time
+    examples: |
+      - [7 pm](time)
+      - [10:30 am](time)
+      - [12:00 p.m.](time)
+      - [12:00 pm](time)
+
+  - intent: request_booking_details
+    examples: |
+      - What's the status of my reservation
+      - What's the status of my booking
+      - show my booking details
+      - show my reservation details
+      - booking details
+      - reservation details
+      - booking details please
+      - reservation details pls
+    # how to catch only me, me and my wife (girlfriend), me and my friends, me and my family,
+    # me wife and the kids, my family
+
+  - intent: inform_restaurant_id
+    examples: |
+      - [rid_290239](restaurant_id)
+      - [rid_121293](restaurant_id)
+      - restaurant_id is [rid_122284](restaurant_id)
+      - restaurant_id: [rid_121391](restaurant_id)
+
+  - intent: inform_view_details_restaurant_id
+    examples: |
+      - view details [rid_290239](restaurant_id)
+      - view details of restaurant [rid_121293](restaurant_id)
+
+  - intent: inform_booking_restaurant_id
+    examples: |
+      - book [rid_290239](restaurant_id)
+      - book restaurant [rid_121293](restaurant_id)
+
+
+  - intent: view_all_bookings
+    examples: |
+      - show me all my bookings
+      - show me all my reservations
+      - can you display all my bookings
+
+  - intent: view_upcoming_bookings
+    examples: |
+      - show me my upcoming reservations
+      - what are my future bookings
+      - can you display my upcoming bookings
+      - show me my upcoming bookings
+
+  - intent: view_past_bookings
+    examples: |
+      - show me my past reservations
+      - what were my previous bookings
+      - can you display my past bookings
+      - show me my past bookings
+
+  - intent: user_wants_to_change_booking_date
+    examples: |
+      - I want to change my reservation date
+      - Can I change the date of my booking?
+      - I need to reschedule my booking
+      - I'd like to change the date for my reservation
+      - How do I change the date of my reservation?
+      - Is it possible to modify the reservation date?
+      - Can you help me change the date of my booking?
+      - I want to move my booking to another day
+      - I need to change my restaurant reservation date
+      - I'd like to reschedule my reservation to a different date
+
+  - intent: inform_change_date_booking_id
+    examples: |
+      - change date of booking [bid_oi203](booking_id)
+      - change date of [bid_oi203](booking_id)
+
+  - intent: user_wants_to_change_booking_num_people
+    examples: |
+      - I want to change the number of people in my reservation
+      - Can I change the number of people in my booking?
+
+  - intent: inform_change_num_people_booking_id
+    examples: |
+      - change number of people in booking [bid_oi203](booking_id)
+      - change num_people in [bid_oi203](booking_id)
+
+  - intent: user_wants_to_cancel_booking
+    examples: |
+      - I want to cancel my booking
+      - Cancel my booking
+      - I need to cancel a reservation
+      - Can you help me cancel a booking?
+      - Cancel a reservation for me
+
+  - intent: inform_cancel_booking_id
+    examples: |
+      - cancel booking [bid_oi203](cancel_booking_id)
+      - cancel [bid_oi203](cancel_booking_id)

@@ -1,4 +1,4 @@
-from actions.submodules.all_actions.common_imports import *
+from actions.all_actions.common_imports import *
 
 
 class ActionCompleteRegistration(Action):
@@ -42,25 +42,28 @@ class ActionLoginUser(Action):
             tracker: Tracker,
             domain: Dict[Text, Any],
     ) -> List[Dict[Text, Any]]:
-        login_email = tracker.get_slot("login_email")
-        login_password = tracker.get_slot("login_password")
+        login_email = tracker.get_slot("user_email")
+        login_password = tracker.get_slot("user_password")
 
         user = None
-        # user = user = find_user_by_email(login_email)
+        # user = user = find_user_by_email(email)
         for u in users:
-            if u["email"] == login_email and u["password"] == login_password:
-                user = u
-                break
+            if u["email"] == login_email:
+                if u["password"] == login_password:
+                    user = u
+                    break
 
         if user:
             return [
+                SlotSet("logged_user", user),
                 SlotSet("user_name", user["name"]),
                 SlotSet("user_id", user["id"]),
-                SlotSet("user_email", user["email"])
+                SlotSet("user_email", user["email"]),
             ]
         else:
             dispatcher.utter_message(text="Email or password is incorrect.")
             return [
+                SlotSet("logged_user", None),
                 SlotSet("user_name", None),
                 SlotSet("user_id", None),
                 SlotSet("user_email", None),
@@ -78,17 +81,30 @@ class ActionRetryLoginOrStop(Action):
         quick_replies_with_payload = []
 
         quick_reply_retry = {
-            TITLE: "Retry",
+            TITLE: "Yes",
             PAYLOAD: "/request_login_form"}
 
         quick_reply_stop = {
-            TITLE: "Stop",
+            TITLE: "No",
             PAYLOAD: "/stop"}
 
         quick_replies_with_payload.append(quick_reply_retry)
         quick_replies_with_payload.append(quick_reply_stop)
 
-        dispatcher.utter_message(text="Would you like to retry logging in or stop?",
+        dispatcher.utter_message(text="Would you like to retry logging in?",
                                  quick_replies=ResponseGenerator.quick_replies(quick_replies_with_payload, True))
 
         return []
+
+
+class ActionLogout(Action):
+    def name(self) -> Text:
+        return "action_logout"
+
+    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        return [
+            SlotSet("logged_user", None),
+            SlotSet("user_name", None),
+            SlotSet("user_email", None),
+            SlotSet("password", None),
+        ]

@@ -1,25 +1,25 @@
 class Restaurant:
     def __init__(
-        self,
-        name: str,
-        image_url: str,
-        home_page: str,
-        id: str,
-        ratings: str,
-        cuisine: str,
-        telephone: str,
-        menu_url: str,
-        address: str,
-        opening_hours: dict,
+            self,
+            id: str,
+            name: str,
+            ratings: str,
+            cuisine: str,
+            menu_url: str,
+            image_url: str,
+            home_page_url: str,
+            telephone: str,
+            address: str,
+            opening_hours: dict,
     ):
-        self.name = name
-        self.image_url = image_url
-        self.home_page = home_page
         self.id = id
+        self.name = name
         self.ratings = ratings
         self.cuisine = cuisine
-        self.telephone = telephone
         self.menu_url = menu_url
+        self.image_url = image_url
+        self.home_page = home_page_url
+        self.telephone = telephone
         self.address = address
         self.opening_hours = opening_hours
 

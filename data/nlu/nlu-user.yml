@@ -17,42 +17,53 @@ nlu:
       - Sign me in
       - I want to sign in
 
-#  - intent: inform_user_name
-#    examples: |
-#      - username: [john_doe](user_name)
-#      - username = [john_doe](user_name)
-#      - My username is [john_doe](user_name)
-#      - [jane_smith](user_name) is my user name
-#      - I go by [mike88](user_name)
-#      - Please use [sarah_123](user_name) as my username
-#      - My user name is [susan](user_name)
-#      - You can call me [bobby](user_name)
-#      - [john_doe](user_name) is my preferred username
-#      - I want to use [jane_smith](user_name) as my username
-#
-#  - intent: inform_email
-#    examples: |
-#      - email: [john.doe@example.com](user_email)
-#      - email = [john.doe@example.com](user_email)
-#      - My email is [john.doe@example.com](user_email)
-#      - Please use [jane.smith@example.com](user_email) for my email
-#      - My email address is [mike88@example.com](user_email)
-#      - You can reach me at [sarah_123@example.com](user_email)
-#      - My email is [susan@example.com](user_email)
-#      - Please contact me at [bobby@example.com](user_email)
-#      - [john.doe@example.com](user_email) is my email address
-#      - I want to use [jane.smith@example.com](user_email) as my email
-#
-#  - intent: inform_password
-#    examples: |
-#      - [pass](password)
-#      - password: [1234](password)
-#      - password = [johndoe](password)
-#      - My password is [pass](password)
-#      - Use [supersecret](password) as my password
-#      - [helloworld](password) is my password
-#      - I want to set my password to [abc123](password)
-#      - My password should be [password123](password)
-#      - Please set my password to [qwerty](password)
-#      - I want to use [testpass](password) as my password
-#      - My chosen password is [securepass](password)
+  # logout
+  - intent: logout
+    examples: |
+      - I want to log out
+      - Log me out
+      - Sign me out
+      - I want to sign out
+
+  - intent: inform_user_name
+    examples: |
+      - kalpa[user_name]
+      - username: [dileepa](user_name)
+      - username = [chethiya](user_name)
+      - My name is [upeksha](user_name)
+      - [sagara](user_name) is my user name
+      - I go by [mike88](user_name)
+      - Please use [sarah_123](user_name) as my username
+      - My user name is [susan](user_name)
+      - You can call me [bobby](user_name)
+      - [john_doe](user_name) is my preferred username
+      - I want to use [jane_smith](user_name) as my username
+
+  - intent: inform_user_email
+    examples: |
+      - [kalpa@gmail.com](user_email)
+      - email: [chethiya@gmail.com](user_email)
+      - email = [dileepa@gmail.com](user_email)
+      - My email is [upekshag@uom.lk](user_email)
+      - Please use [sagara@yahoo.com](user_email) for my email
+      - My email address is [mike88@example.com](user_email)
+      - You can reach me at [sarah_123@example.com](user_email)
+      - My email is [susan@example.com](user_email)
+      - Please contact me at [bobby@example.com](user_email)
+      - [john.doe@example.com](user_email) is my email address
+      - I want to use [jane.smith@example.com](user_email) as my email
+
+  - intent: inform_user_password
+    examples: |
+      - [pass](password)
+      - [1234](password)
+      - password: [1234](password)
+      - password = [johndoe](password)
+      - My password is [pass](password)
+      - Use [supersecret](password) as my password
+      - [helloworld](password) is my password
+      - I want to set my password to [abc123](password)
+      - My password should be [password123](password)
+      - Please set my password to [qwerty](password)
+      - I want to use [testpass](password) as my password
+      - My chosen password is [securepass](password)

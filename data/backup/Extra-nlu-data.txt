@@ -212,7 +212,7 @@
 #      - action: action_show_restaurants
 #      - intent: inform_view_details_restaurant_id
 #      - slot_was_set:
-#          - restaurant_id: [ "rtid_121290" ]
+#          - restaurant_id: [ "rid_121290" ]
 #      - action: action_show_selected_restaurant_details
 #
 #  - story: User ask detail and book restaurant affirmation #11.1 # Continuation from above story (#11 - affirm)
@@ -235,7 +235,7 @@
 #      - action: action_show_restaurants
 #      - intent: inform_booking_restaurant_id # book restaurant
 #      - slot_was_set:
-#          - restaurant_id: [ "rtid_121290" ]
+#          - restaurant_id: [ "rid_121290" ]
 #      - action: action_select_restaurant_ask_booking_confirmation # updated the action a bit to case in this story
 #
 #
@@ -320,7 +320,7 @@
 #    #      # search restaurants by criteria they provide
 #    #      - intent: inform_restaurant_id # change to view details of restaurant
 #    #      - slot_was_set:
-#    #          - restaurant_id: [ "rtid_121290" ]
+#    #          - restaurant_id: [ "rid_121290" ]
 #    #      - action: action_show_selected_restaurant_details
 #    #      - intent: affirm
 #    #      - action: utter_ask_num_people
@@ -370,7 +370,7 @@
 #    #      - action: action_show_restaurants
 #    #      - intent: inform_restaurant_id
 #    #      - slot_was_set:
-#    #          - restaurant_id: [ "rtid_121290" ]
+#    #          - restaurant_id: [ "rid_121290" ]
 #    #      - action: action_show_selected_restaurant_details
 #    #
 #    #  - story: Inform date and time
@@ -390,7 +390,7 @@
 #    #  - story: Confirm to book a restaurant
 #    #    steps:
 #    #      - slot_was_set:
-#    #          - restaurant_id: [ "rtid_12sda0" ]
+#    #          - restaurant_id: [ "rid_12sda0" ]
 #    #      - action: action_show_booking_summary
 #    #      - action: utter_ask_to_confirm_booking
 #    #      - intent: affirm

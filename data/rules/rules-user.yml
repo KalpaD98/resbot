@@ -18,7 +18,7 @@ rules:
           - requested_slot: null
       - action: action_save_user_and_complete_registration
 
-  # login
+# ---------------------------------------------------------------------------------------------------------------------#
 
 #  - rule: activate login form
 #    steps:

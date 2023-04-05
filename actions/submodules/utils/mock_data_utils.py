@@ -1,10 +1,5 @@
 # ----- Data Structure ----- #
-"""
 
-restaurant: {id, name, image_url, cuisine, ratings, telephone, menu_url, address, opening_hours, any_other_attributes }
-user: {id, name, preferences}
-
-"""
 import json
 
 # ----- -------------- ----- #
@@ -12,10 +7,10 @@ import json
 json_restaurant_list = """
 [
    {
-      "id":"rtid_1232JHKJ",
+      "id":"rid_1232JHKJ",
       "name":"Taco Bell",
       "image_url":"https://b.zmtcdn.com/data/pictures/1/18602861/bd2825ec26c21ebdc945edb7df3b0d99.jpg",
-      "home_page":"https://www.tacobell.com/",
+      "home_page_url":"https://www.tacobell.com/",
       "cuisine":"Mexican",
       "ratings":"4.5",
       "telephone":"(123) 456-7890",
@@ -27,10 +22,10 @@ json_restaurant_list = """
       }
    },
    {
-      "id":"rtid_4567SJKL",
+      "id":"rid_4567SJKL",
       "name":"Danke",
       "image_url":"https://lh3.googleusercontent.com/p/AF1QipOs5oyEh2eqR1wHmLuL7WPvdkiqPjyJJdHEeCyI=w600-h0",
-      "home_page":"https://www.danke.com/",
+      "home_page_url":"https://www.danke.com/",
       "cuisine":"Italian",
       "ratings":"4.5",
       "telephone":"(123) 456-7890",
@@ -42,10 +37,10 @@ json_restaurant_list = """
       }
    },
    {
-      "id":"rtid_1234ABCD",
+      "id":"rid_1234ABCD",
       "name":"Lụa Restaurant",
       "image_url":"https://www.collinsdictionary.com/images/full/restaurant_135621509.jpg",
-      "home_page":"https://www.lua.com/",
+      "home_page_url":"https://www.lua.com/",
       "ratings":"4.5",
       "cuisine":"Vietnamese",
       "telephone":"(123) 456-7890",
@@ -57,10 +52,10 @@ json_restaurant_list = """
       }
    },
    {
-      "id":"rtid_4567HTKL",
+      "id":"rid_4567HTKL",
       "name":"Thai King",
       "image_url":"https://upload.wikimedia.org/wikipedia/commons/6/62/Barbieri_-_ViaSophia25668.jpg",
-      "home_page":"https://www.thaiking.com/",
+      "home_page_url":"https://www.thaiking.com/",
       "ratings":"3.5",
       "cuisine":"Thai",
       "telephone":"(123) 456-7890",
@@ -74,8 +69,8 @@ json_restaurant_list = """
    {
       "name":"Marubi Ramen",
       "image_url":"https://b.zmtcdn.com/data/pictures/4/18902194/e92e2a3d4b5c6e25fd4211d06b9a909e.jpg",
-      "home_page":"https://www.marubiramen.com/",
-      "id":"rtid_1234JRJK",
+      "home_page_url":"https://www.marubiramen.com/",
+      "id":"rid_1234JRJK",
       "ratings":"4.0",
       "cuisine":"Japanese",
       "telephone":"(123) 456-7890",
@@ -89,8 +84,8 @@ json_restaurant_list = """
    {
       "name":"Gong Gan",
       "image_url":"https://b.zmtcdn.com/data/pictures/3/17871363/c53db6ba261c3e2d4db1afc47ec3eeb0.jpg",
-      "home_page":"https://www.gonggan.com/",
-      "id":"rtid_4567HJKL",
+      "home_page_url":"https://www.gonggan.com/",
+      "id":"rid_4567HJKL",
       "ratings":"3.0",
       "cuisine":"Korean",
       "telephone":"(123) 456-7890",
@@ -107,10 +102,12 @@ rest_list = json.loads(json_restaurant_list)
 
 users = [
     {"id": "uid_0", "name": "Alice", "email": "alice@gmail.com", "password": "1234"},
-    {"id": "uid_1", "name": "Bob", "email": "bob@gmail.com", "password": "5678"},
+    {"id": "uid_1", "name": "Bob", "email": "bob@yahoo.com", "password": "5678"},
     {"id": "uid_2", "name": "Carol", "email": "carol@gmail.com", "password": "9876"},
     {"id": "uid_3", "name": "David", "email": "david@gmail.com", "password": "4321"},
-    {"id": "uid_4", "name": "Eva", "email": "eva@gmail.com", "password": "2468"}
+    {"id": "uid_4", "name": "Eva", "email": "eva@gmail.com", "password": "2468"},
+    {"id": "uid_5", "name": "Kalpa", "email": "kalpa@uom.com", "password": "1234"},
+    {"id": "uid_6", "name": "Eva", "email": "eva@gmail.com", "password": "2468"}
 ]
 
 # add these later
