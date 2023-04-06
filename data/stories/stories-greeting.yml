@@ -22,70 +22,72 @@ stories:
     steps:
       - action: utter_wanna_book
       - intent: request_restaurants
-      - slot_was_set:
-          - user_id: uid_123
+#      - slot_was_set:
+#          - user_id: uid_123
       - action: action_show_cuisines
-      - intent: inform_cuisines
+      - intent: inform_cuisine
 
   - story: User affirms to check restaurant - logged in #3
     steps:
       - action: utter_wanna_book
       - intent: affirm
-      - slot_was_set:
-          - user_id: uid_123
+#      - slot_was_set:
+#          - user_id: uid_123
       - action: action_show_cuisines
-      - intent: inform_cuisines
+      - intent: inform_cuisine
 
-  - story: User affirms to check restaurant - not logged in #4
-    steps:
-      - action: utter_wanna_book
-      - intent: affirm
-      - slot_was_set:
-          - user_id: null
-      - action: action_ask_registered_and_show_login_signup_quick_replies # continue from #6,7,8
+  # Commented below stories for testing above and fix the bugs
 
-  - story: User request restaurant after greet and intro - not logged in #5
-    steps:
-      - action: utter_wanna_book
-      - intent: request_restaurants
-      - slot_was_set:
-          - user_id: null
-      - action: action_ask_registered_and_show_login_signup_quick_replies # continue from #6,7,8
-
-  - story: User not logged in - request_login_form ( A registered user ) #6
-    steps:
-      - action: action_ask_registered_and_show_login_signup_quick_replies
-      - intent: request_login_form
-      - action: login_form
-      - active_loop: login_form
-      - active_loop: null
-      - slot_was_set:
-          - requested_slot: null
-      - action: action_login_user
-      - slot_was_set:
-          - user_name: null
-          - user_id: null
-          - user_email: null
-      - action: utter_login_success
-      - action: action_show_cuisines
-      - intent: inform_cuisines
-
-  - story: User not logged in - request_user_registration_form (A New user) #7
-    steps:
-      - action: action_ask_registered_and_show_login_signup_quick_replies
-      - intent: request_user_registration_form
-      - action: registration_form
-      - active_loop: registration_form
-      - active_loop: null
-      - slot_was_set:
-          - requested_slot: null
-      - action: action_save_user_and_complete_registration
-      - slot_was_set:
-          - user_name: null
-          - user_id: null
-          - user_email: null
-      - action: action_show_cuisines
-      - intent: inform_cuisines
+  #  - story: User affirms to check restaurant - not logged in #4
+  #    steps:
+  #      - action: utter_wanna_book
+  #      - intent: affirm
+  #      - slot_was_set:
+  #          - user_id: null
+  #      - action: action_ask_registered_and_show_login_signup_quick_replies # continue from #6,7,8
+  #
+  #  - story: User request restaurant after greet and intro - not logged in #5
+  #    steps:
+  #      - action: utter_wanna_book
+  #      - intent: request_restaurants
+  #      - slot_was_set:
+  #          - user_id: null
+  #      - action: action_ask_registered_and_show_login_signup_quick_replies # continue from #6,7,8
+  #
+  #  - story: User not logged in - request_login_form ( A registered user ) #6
+  #    steps:
+  #      - action: action_ask_registered_and_show_login_signup_quick_replies
+  #      - intent: request_login_form
+  #      - action: login_form
+  #      - active_loop: login_form
+  #      - active_loop: null
+  #      - slot_was_set:
+  #          - requested_slot: null
+  #      - action: action_login_user
+  #      - slot_was_set:
+  #          - user_name: null
+  #          - user_id: null
+  #          - user_email: null
+  #      - action: utter_login_success
+  #      - action: action_show_cuisines
+  #      - intent: inform_cuisine
+  #
+  #  - story: User not logged in - request_user_registration_form (A New user) #7
+  #    steps:
+  #      - action: action_ask_registered_and_show_login_signup_quick_replies
+  #      - intent: request_user_registration_form
+  #      - action: registration_form
+  #      - active_loop: registration_form
+  #      - active_loop: null
+  #      - slot_was_set:
+  #          - requested_slot: null
+  #      - action: action_save_user_and_complete_registration
+  #      - slot_was_set:
+  #          - user_name: null
+  #          - user_id: null
+  #          - user_email: null
+  #      - action: action_show_cuisines
+  #      - intent: inform_cuisine
 
   - story: User not logged in - stop (Unhappy path) #8
     steps:

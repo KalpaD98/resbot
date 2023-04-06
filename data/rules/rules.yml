@@ -27,11 +27,10 @@ rules:
       - intent: thank_you
       - action: utter_welcome
 
-#  - rule: when user say stop reply see you later
-#    steps:
-#      - intent: stop
-#      - action: utter_bye_see_you_later
-
+  - rule: when user say stop reply see you later
+    steps:
+      - intent: stop
+      - action: utter_bye_see_you_later
 
 
     # ------------------------------------------------- Commented Rules -------------------------------------------------#

@@ -2,12 +2,9 @@ version: "3.1" # rules.yml has restaurant related rules
 
 rules:
 
-#  - rule: when user request restaurant display restaurants carousal
-#    steps:
-#      - intent: request_restaurants
-#      - action: action_show_restaurants
-
   - rule: when user request restaurant display restaurants carousal
     steps:
       - intent: request_more_restaurant_options
+#      - slot_was_set:
+#          - user_id: uid_123
       - action: action_show_more_restaurant_options

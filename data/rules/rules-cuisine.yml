@@ -4,5 +4,5 @@ rules:
 
   - rule: when user ask to display cuisines show quick replies
     steps:
-      - intent: request_cuisines
+      - intent: request_cuisines # later add user auth
       - action: action_show_cuisines

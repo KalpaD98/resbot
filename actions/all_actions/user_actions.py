@@ -43,14 +43,14 @@ class ActionCompleteRegistration(Action):
         dispatcher.utter_message(text="Your details are as follows:")
         dispatcher.utter_message(text="Name: " + user_name)
         dispatcher.utter_message(text="Email: " + user_email)
-        dispatcher.utter_message(text="Password: " + ObjectUtils.star_print(len(user_password)))
+        # dispatcher.utter_message(text="Password: " + ObjectUtils.star_print(len(user_password)))
 
         return []
 
 
 class ActionLoginUser(Action):
     def name(self) -> Text:
-        return "action_login_user"
+        return ACTION_LOGIN_USER
 
     async def run(
             self,

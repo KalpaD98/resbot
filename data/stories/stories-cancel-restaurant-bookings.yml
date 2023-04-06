@@ -2,68 +2,71 @@ version: "3.1" # stories-cancel-restaurant-booking.yml general stories for cance
 
 stories:
 
-  - story: User wants to cancel a booking (not logged in)
-    steps:
-      - intent: user_wants_to_cancel_booking
-      - slot_was_set:
-          - user_id: null
-      - action: login_form
-      - active_loop: login_form
-      - active_loop: null
-      - slot_was_set:
-          - requested_slot: null
-      - action: action_login_user
-      - slot_was_set:
-          - user_name: null
-          - user_id: uid_123
-          - user_email: null
-      - action: utter_login_success
-      - action: action_show_upcoming_bookings
+#  # users are logged in
+#  - story: User wants to cancel a booking (logged in)
+#    steps:
+#      - intent: user_wants_to_cancel_booking
+#      - slot_was_set:
+#          - user_id: uid_123
+#      - action: action_show_upcoming_bookings
 
-  - story: User wants to cancel a booking (logged in)
-    steps:
-      - intent: user_wants_to_cancel_booking
-      - slot_was_set:
-          - user_id: uid_123
-      - action: action_show_upcoming_bookings
+  # not logged in case -> [this file seems to be fine] like the stories-change-restaurant-bookings.yml
 
-  - story: Show user bookings carousel and handle cancellation # Continue from above two stories
-    steps:
-      - slot_was_set:
-          - user_id: uid_123
-      - action: action_show_upcoming_bookings
-      - intent: inform_cancel_booking_id
-      - slot_was_set:
-          - cancel_booking_id: bid_123
-      - action: action_ask_cancel_booking_confirmation
-      - intent: affirm
-      - action: action_cancel_booking
-      - action: utter_thank_you
-
-  - story: User wants to cancel another booking (deny cancel to current booking)
-    steps:
-      - slot_was_set:
-          - user_id: uid_123
-      - action: action_show_upcoming_bookings
-      - intent: inform_cancel_booking_id
-      - slot_was_set:
-          - cancel_booking_id: bid_123
-      - action: action_ask_cancel_booking_confirmation
-      - intent: deny
-      - action: action_ask_cancel_another_booking
-      - intent: affirm
-      - action: action_show_upcoming_bookings
-
-  - story: User does not want to cancel another booking
-    steps:
-      - slot_was_set:
-          - user_id: uid_123
-      - action: action_show_upcoming_bookings
-      - intent: inform_cancel_booking_id
-      - slot_was_set:
-          - cancel_booking_id: bid_123
-      - action: action_ask_cancel_booking_confirmation
-      - intent: deny
-      - action: action_ask_cancel_another_booking
-      - intent: deny
-      - action: utter_thank_you
+#  - story: User wants to cancel a booking (not logged in)
+#    steps:
+#      - intent: user_wants_to_cancel_booking
+#      - slot_was_set:
+#          - user_id: null
+#      - action: login_form
+#      - active_loop: login_form
+#      - active_loop: null
+#      - slot_was_set:
+#          - requested_slot: null
+#      - action: action_login_user
+#      - slot_was_set:
+#          - user_name: null
+#          - user_id: null
+#          - user_email: null
+#      - action: utter_login_success
+#      - action: action_show_upcoming_bookings
+#
+#  - story: Show user bookings carousel and handle cancellation # Continue from above two stories
+#    steps:
+#      - slot_was_set:
+#          - user_id: uid_123
+#      - action: action_show_upcoming_bookings
+#      - intent: inform_cancel_booking_id
+#      - slot_was_set:
+#          - cancel_booking_id: bid_123
+#      - action: action_ask_cancel_booking_confirmation
+#      - intent: affirm
+#      - action: action_cancel_booking
+#      - action: utter_thank_you
+#
+#  - story: User wants to cancel another booking (deny cancel to current booking)
+#    steps:
+#      - slot_was_set:
+#          - user_id: uid_123
+#      - action: action_show_upcoming_bookings
+#      - intent: inform_cancel_booking_id
+#      - slot_was_set:
+#          - cancel_booking_id: bid_123
+#      - action: action_ask_cancel_booking_confirmation
+#      - intent: deny
+#      - action: action_ask_cancel_another_booking
+#      - intent: affirm
+#      - action: action_show_upcoming_bookings
+#
+#  - story: User does not want to cancel another booking
+#    steps:
+#      - slot_was_set:
+#          - user_id: uid_123
+#      - action: action_show_upcoming_bookings
+#      - intent: inform_cancel_booking_id
+#      - slot_was_set:
+#          - cancel_booking_id: bid_123
+#      - action: action_ask_cancel_booking_confirmation
+#      - intent: deny
+#      - action: action_ask_cancel_another_booking
+#      - intent: deny
+#      - action: utter_thank_you

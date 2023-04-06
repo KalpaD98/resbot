@@ -1,97 +1,102 @@
-version: "3.1" # stories-restaurant-booking.yml has general stories for the booking
+version: "3.1" # stories-view-restaurant-booking.yml has stories for user viewing their bookings
+
+# currently only logged in cases are handled
 
 stories:
+#  # view all bookings
+#  - story: User wants to view all bookings (logged in)
+#    steps:
+#      - intent: view_all_bookings
+#      - slot_was_set:
+#          - user_id: uid_123
+#      - action: action_show_all_bookings
+#
+#  # view upcoming bookings
+#  - story: User wants to view upcoming bookings (logged in)
+#    steps:
+#      - intent: view_upcoming_bookings
+#      - slot_was_set:
+#          - user_id: uid_123
+#      - action: action_show_upcoming_bookings
+#
+#  # view past bookings
+#  - story: User wants to view past bookings (logged in)
+#    steps:
+#      - intent: view_past_bookings
+#      - slot_was_set:
+#          - user_id: uid_123
+#      - action: action_show_past_bookings
 
-  # view all restaurant bookings
-  # view past restaurant bookings
-  # view upcoming restaurant bookings
 
-  - story: User wants to view past bookings (logged in)
-    steps:
-      - intent: view_past_bookings
-      - slot_was_set:
-          - user_id: uid_123
-      - action: action_show_past_bookings
+# cases where user is not logged in
 
-  - story: User wants to view past bookings (not logged in)
-    steps:
-      - intent: view_past_bookings
-      - slot_was_set:
-          - user_id: null
-      - action: login_form
-      - active_loop: null
-      - slot_was_set:
-          - requested_slot: null
-      - action: action_login_user
-      - slot_was_set:
-          - user_name: null
-          - user_id: null
-          - user_email: null
-      - action: utter_login_success
-      - action: action_show_past_bookings
-
-  - story: User wants to view upcoming bookings (logged in)
-    steps:
-      - intent: view_upcoming_bookings
-      - slot_was_set:
-          - user_id: uid_123
-      - action: action_show_upcoming_bookings
-
-  - story: User wants to view upcoming bookings (not logged in)
-    steps:
-      - intent: view_upcoming_bookings
-      - slot_was_set:
-          - user_id: null
-      - action: login_form
-      - active_loop: null
-      - slot_was_set:
-          - requested_slot: null
-      - action: action_login_user
-      - slot_was_set:
-          - user_name: null
-          - user_id: null
-          - user_email: null
-      - action: utter_login_success
-      - action: action_show_upcoming_bookings
-
-  - story: User wants to view all bookings (logged in)
-    steps:
-      - intent: view_all_bookings
-      - slot_was_set:
-          - user_id: uid_123
-      - action: action_show_all_bookings
-
-  - story: User wants to view all bookings (not logged in)
-    steps:
-      - intent: view_all_bookings
-      - slot_was_set:
-          - user_id: null
-      - action: login_form
-      - active_loop: null
-      - slot_was_set:
-          - requested_slot: null
-      - action: action_login_user
-      - slot_was_set:
-          - user_name: null
-          - user_id: null
-          - user_email: null
-      - action: utter_login_success
-      - action: action_show_all_bookings
-
-  - story: User wants to cancel a booking (not logged in)
-    steps:
-      - intent: user_wants_to_cancel_booking
-      - slot_was_set:
-          - user_id: null
-      - action: login_form
-      - active_loop: null
-      - slot_was_set:
-          - requested_slot: null
-      - action: action_login_user
-      - slot_was_set:
-          - user_name: null
-          - user_id: null
-          - user_email: null
-      - action: utter_login_success
-      - action: action_show_upcoming_bookings
-      - intent: inform_cancel_booking_id
+#  - story: User wants to view past bookings (not logged in)
+#    steps:
+#      - intent: view_past_bookings
+#      - slot_was_set:
+#          - user_id: null
+#      - action: login_form
+#      - active_loop: login_form
+#      - checkpoint: login_completed_for_past_bookings
+#
+#  - story: Submit login form for past bookings
+#    steps:
+#      - checkpoint: login_completed_for_past_bookings
+#      - action: login_form
+#      - active_loop: null
+#      - slot_was_set:
+#          - requested_slot: null
+#      - action: action_login_user
+#      - slot_was_set:
+#          - user_name: null
+#          - user_id: null
+#          - user_email: null
+#      - action: action_show_past_bookings
+#
+#
+#  - story: User wants to view upcoming bookings (not logged in)
+#    steps:
+#      - intent: view_upcoming_bookings
+#      - slot_was_set:
+#          - user_id: null
+#      - action: login_form
+#      - active_loop: login_form
+#
+#  - story: Submit login form for upcoming bookings
+#    condition:
+#      - slot_was_set:
+#          - user_id: null
+#    steps:
+#      - action: login_form
+#      - active_loop: null
+#      - slot_was_set:
+#          - requested_slot: null
+#      - action: action_login_user
+#      - slot_was_set:
+#          - user_id: uid_123
+#      - action: action_show_upcoming_bookings
+#
+#
+#
+#  - story: User wants to view all bookings (not logged in)
+#    steps:
+#      - intent: view_all_bookings
+#      - slot_was_set:
+#          - user_id: null
+#      - action: login_form
+#      - active_loop: login_form
+#      - checkpoint: login_completed_for_all_bookings
+#
+#  - story: Submit login form for all bookings
+#    steps:
+#      - checkpoint: login_completed_for_all_bookings
+#      - action: login_form
+#      - active_loop: null
+#      - slot_was_set:
+#          - requested_slot: null
+#      - action: action_login_user
+#      - slot_was_set:
+#          - user_name: null
+#          - user_id: null
+#          - user_email: null
+#      - action: action_show_all_bookings

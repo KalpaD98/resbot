@@ -3,14 +3,14 @@ rules:
 
   - rule: activate booking form
     steps:
-      - action: booking_form
-      - active_loop: booking_form
+      - action: restaurant_booking_form
+      - active_loop: restaurant_booking_form
 
   - rule: submit booking form
     condition:
-      - active_loop: booking_form
+      - active_loop: restaurant_booking_form
     steps:
-      - action: booking_form
+      - action: restaurant_booking_form
       - active_loop: null
       - slot_was_set:
           - requested_slot: null

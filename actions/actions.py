@@ -38,7 +38,7 @@ class ActionAnythingElse(Action):
 
         quick_reply_no = {
             TITLE: "No thanks",
-            PAYLOAD: "/stop"}
+            PAYLOAD: "/goodbye"}
 
         quick_reply_search_restaurant = {
             TITLE: QR_SEARCH_RESTAURANTS,
