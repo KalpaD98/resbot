@@ -5,13 +5,13 @@ ACTION_SAVE_USER_AND_COMPLETE_REGISTRATION = "action_save_user_and_complete_regi
 ACTION_RETRY_LOGIN_OR_STOP = "action_retry_login_or_stop"
 ACTION_LOGIN_USER = "action_login_user"
 ACTION_LOGOUT = "action_logout"
-ACTION_SHOW_LOGIN_SIGNUP_QUICK_REPLY = "action_show_login_signup_quick_replies"
+ACTION_ASK_REGISTERED_AND_SHOW_LOGIN_SIGNUP_QUICK_REPLIES = "action_ask_registered_and_show_login_signup_quick_replies"
 
 
 class ActionCompleteRegistration(Action):
 
     def name(self) -> Text:
-        return "action_save_user_and_complete_registration"
+        return ACTION_SAVE_USER_AND_COMPLETE_REGISTRATION
 
     async def run(
             self,
@@ -70,6 +70,7 @@ class ActionLoginUser(Action):
                     break
 
         if user:
+            dispatcher.utter_message(template="utter_login_success")
             return [
                 SlotSet("logged_user", user),
                 SlotSet("user_name", user["name"]),
@@ -113,9 +114,9 @@ class ActionRetryLoginOrStop(Action):
         return []
 
 
-class ActionShowLoginSignupQuickReplies(Action):
+class ActionAskRegisteredAndShowLoginSignupQuickReplies(Action):
     def name(self) -> Text:
-        return ACTION_SHOW_LOGIN_SIGNUP_QUICK_REPLY
+        return ACTION_ASK_REGISTERED_AND_SHOW_LOGIN_SIGNUP_QUICK_REPLIES
 
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
@@ -123,11 +124,11 @@ class ActionShowLoginSignupQuickReplies(Action):
         # Define quick replies
         quick_replies_list = [
             {
-                TITLE: "I'm a registered user",
+                TITLE: "Yes",
                 PAYLOAD: "/request_login_form"
             },
             {
-                TITLE: "I'm not registered yet",
+                TITLE: "No",
                 PAYLOAD: "/request_user_registration_form"
             },
             {
@@ -138,8 +139,8 @@ class ActionShowLoginSignupQuickReplies(Action):
 
         # Generate quick replies using the ResponseGenerator class
         quick_replies = ResponseGenerator.quick_replies(quick_replies_list, with_payload=True)
-
-        dispatcher.utter_message(text="Please choose an option", quick_replies=quick_replies)
+        dispatcher.utter_message(text="To continue you must be logged.")
+        dispatcher.utter_message(text="Are you a registered user ?", quick_replies=quick_replies)
 
         return []
 

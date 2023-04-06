@@ -4,39 +4,95 @@ stories:
 
   # -------------------------------- Greet and push towards book restaurant happy path ------------------------------- #
 
-  - story: Greeting and bot introduction
+  - story: Greeting and bot introduction #1
     steps:
       - intent: greet
       - action: utter_greet
       - action: utter_bot_intro
       - action: utter_wanna_book
-      - checkpoint: greet_and_intro_checkpoint
 
-  - story: User affirms to check restaurant
+  - story: User denies to check restaurant #2
     steps:
-      - checkpoint: greet_and_intro_checkpoint
-      - intent: affirm
-      - action: action_show_restaurants
-
-  - story: User denies to check restaurant
-    steps:
-      - checkpoint: greet_and_intro_checkpoint
+      - action: utter_wanna_book
       - intent: deny
       - action: utter_thank_you
       - action: action_ask_anything_else
 
-  - story: User request restaurant after greet and intro
+  - story: User request restaurant after greet and intro -  logged in #3
     steps:
-      - checkpoint: greet_and_intro_checkpoint
+      - action: utter_wanna_book
       - intent: request_restaurants
-      - action: action_show_restaurants
+      - slot_was_set:
+          - user_id: uid_123
+      - action: action_show_cuisines
+      - intent: inform_cuisines
 
-  # no checkpoints for below ones
-
-  - story: User request restaurant directly
+  - story: User affirms to check restaurant - logged in #3
     steps:
+      - action: utter_wanna_book
+      - intent: affirm
+      - slot_was_set:
+          - user_id: uid_123
+      - action: action_show_cuisines
+      - intent: inform_cuisines
+
+  - story: User affirms to check restaurant - not logged in #4
+    steps:
+      - action: utter_wanna_book
+      - intent: affirm
+      - slot_was_set:
+          - user_id: null
+      - action: action_ask_registered_and_show_login_signup_quick_replies # continue from #6,7,8
+
+  - story: User request restaurant after greet and intro - not logged in #5
+    steps:
+      - action: utter_wanna_book
       - intent: request_restaurants
-      - action: action_show_restaurants
+      - slot_was_set:
+          - user_id: null
+      - action: action_ask_registered_and_show_login_signup_quick_replies # continue from #6,7,8
+
+  - story: User not logged in - request_login_form ( A registered user ) #6
+    steps:
+      - action: action_ask_registered_and_show_login_signup_quick_replies
+      - intent: request_login_form
+      - action: login_form
+      - active_loop: login_form
+      - active_loop: null
+      - slot_was_set:
+          - requested_slot: null
+      - action: action_login_user
+      - slot_was_set:
+          - user_name: null
+          - user_id: null
+          - user_email: null
+      - action: utter_login_success
+      - action: action_show_cuisines
+      - intent: inform_cuisines
+
+  - story: User not logged in - request_user_registration_form (A New user) #7
+    steps:
+      - action: action_ask_registered_and_show_login_signup_quick_replies
+      - intent: request_user_registration_form
+      - action: registration_form
+      - active_loop: registration_form
+      - active_loop: null
+      - slot_was_set:
+          - requested_slot: null
+      - action: action_save_user_and_complete_registration
+      - slot_was_set:
+          - user_name: null
+          - user_id: null
+          - user_email: null
+      - action: action_show_cuisines
+      - intent: inform_cuisines
+
+  - story: User not logged in - stop (Unhappy path) #8
+    steps:
+      - action: action_ask_registered_and_show_login_signup_quick_replies
+      - intent: stop
+      - action: utter_bye_see_you_later
+      - action: action_ask_anything_else # check -> replies and make more stories
 
   # --------------------------------------------------- User Mood check ---------------------------------------------- #
 
@@ -65,12 +121,3 @@ stories:
       - intent: emoji_mood_unhappy
       - action: utter_emoji_mood_unhappy_feedback
       - action: utter_wanna_book
-
-    # ------------------------------------------------- Removed ---------------------------------------------- #
-
-    #  - story: when user greet continuously #3
-    #    steps:
-    #      - action: utter_wanna_book
-    #      - intent: greet
-    #      - action: utter_greet_again
-    #      - action: utter_wanna_book

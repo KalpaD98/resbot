@@ -8,15 +8,15 @@ rules:
       - action: registration_form
       - active_loop: registration_form
 
-  - rule: submit registration form
-    condition:
-      - active_loop: registration_form
-    steps:
-      - action: registration_form
-      - active_loop: null
-      - slot_was_set:
-          - requested_slot: null
-      - action: action_save_user_and_complete_registration
+#  - rule: submit registration form
+#    condition:
+#      - active_loop: registration_form
+#    steps:
+#      - action: registration_form
+#      - active_loop: null
+#      - slot_was_set:
+#          - requested_slot: null
+#      - action: action_save_user_and_complete_registration
 
 # ---------------------------------------------------------------------------------------------------------------------#
 #

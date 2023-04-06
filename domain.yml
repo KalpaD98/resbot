@@ -73,8 +73,8 @@ intents:
   - search_restaurants
   # ------------------------------------ nlu-small-talk-and-out-of-scope.yml ----------------------------------------- #
 
-  # No need to add retrieval intents
-
+  # No need to add retrieval intents?
+  - bot_challenge
   # -------------------------------------------------- nlu-user.yml -------------------------------------------------- #
   - request_user_registration_form
   - request_login_form
@@ -327,6 +327,8 @@ actions:
 
   - action_ask_anything_else                                    # ask anything else with quick replies
   - action_retry_login_or_stop
+
+  - action_ask_registered_and_show_login_signup_quick_replies
 
   # -------------------------------------------- Slot Validation Actions --------------------------------------------- #
   - action_validate_cuisine

@@ -2,10 +2,10 @@ version: "3.1" # rules.yml has restaurant related rules
 
 rules:
 
-  - rule: when user request restaurant display restaurants carousal
-    steps:
-      - intent: request_restaurants
-      - action: action_show_restaurants
+#  - rule: when user request restaurant display restaurants carousal
+#    steps:
+#      - intent: request_restaurants
+#      - action: action_show_restaurants
 
   - rule: when user request restaurant display restaurants carousal
     steps:
