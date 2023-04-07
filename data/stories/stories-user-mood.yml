@@ -1,0 +1,31 @@
+version: "3.1" # stories-user-mood.yml has greeting and continuation to booking stories for the restaurant bot
+
+stories:
+
+  # --------------------------------------------------- User Mood check ---------------------------------------------- #
+
+#  - story: after greet + mood great + ask checkout restaurant #3
+#    steps:
+#      - intent: mood_great
+#      - action: utter_mood_great_feedback
+#      - action: utter_wanna_book
+#
+#  - story: after greet + mood unhappy + ask checkout restaurant #4
+#    steps:
+#      - intent: mood_unhappy
+#      - action: utter_mood_unhappy_feedback
+#      - action: utter_wanna_book
+#
+#  # ---------------------------------------------------- emojis ------------------------------------------------------ #
+#
+#  - story: after greet + mood great emoji + ask checkout restaurant #5
+#    steps:
+#      - intent: emoji_mood_great
+#      - action: utter_emoji_great_feedback
+#      - action: utter_wanna_book
+#
+#  - story: after greet + mood unhappy emoji + ask checkout restaurant #6 -> continue from stories-restaurant-booking.yml
+#    steps:
+#      - intent: emoji_mood_unhappy
+#      - action: utter_emoji_mood_unhappy_feedback
+#      - action: utter_wanna_book

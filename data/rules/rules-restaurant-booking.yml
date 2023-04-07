@@ -1,12 +1,12 @@
 version: "3.1" # rules-booking.yml
 rules:
 
-  - rule: activate booking form
+  - rule: activate restaurant booking form
     steps:
       - action: restaurant_booking_form
       - active_loop: restaurant_booking_form
 
-  - rule: submit booking form
+  - rule: submit restaurant booking form
     condition:
       - active_loop: restaurant_booking_form
     steps:
@@ -15,3 +15,23 @@ rules:
       - slot_was_set:
           - requested_slot: null
       - action: action_show_booking_summary
+
+  - rule: Confirm booking after directly clicking book
+    condition:
+      - slot_was_set:
+          - restaurant_id: 'rid_121290'
+    steps:
+      - action: action_show_selected_restaurant_ask_booking_confirmation
+      - intent: affirm
+      - action: restaurant_booking_form
+      - active_loop: restaurant_booking_form
+
+  - rule: Confirm booking after view details and book
+    condition:
+      - slot_was_set:
+          - restaurant_id: 'rid_121290'
+    steps:
+      - action: action_show_selected_restaurant_details
+      - intent: affirm
+      - action: restaurant_booking_form
+      - active_loop: restaurant_booking_form

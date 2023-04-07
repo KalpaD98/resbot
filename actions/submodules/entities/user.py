@@ -1,12 +1,11 @@
-from actions.submodules.utils.mock_data_utils import users
+import random
+import string
 
 
 class User:
-    user_count = len(users)
 
     def __init__(self, name: str, email: str, password: str):
-        User.user_count += 1
-        self.id = f"uid_{User.user_count}"
+        self.id = f"uid_{User.generate_random_string()}"
         self.name = name
         self.email = email
         self.password = password
@@ -16,3 +15,7 @@ class User:
 
     def __str__(self) -> str:
         return f"User ID: {self.id}, Name: {self.name}, Email: {self.email}"
+
+    @staticmethod
+    def generate_random_string(length=8):
+        return ''.join(random.choices(string.ascii_letters + string.digits, k=length))

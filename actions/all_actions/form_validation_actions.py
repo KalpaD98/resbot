@@ -11,12 +11,11 @@ VALIDATE_CHANGE_RESTAURANT_BOOKING_DATE_FORM = "validate_change_restaurant_booki
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # --------------------------------------------- Form Validation Actions --------------------------------------------- #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-
 class ValidateRegistrationForm(FormValidationAction):
     def name(self) -> Text:
         return VALIDATE_REGISTRATION_FORM
 
-    async def validate_name(
+    async def validate_user_name(
             self,
             value: Text,
             dispatcher: CollectingDispatcher,
@@ -25,10 +24,10 @@ class ValidateRegistrationForm(FormValidationAction):
     ) -> Dict[Text, Any]:
         is_valid, name_value, message = SlotValidators.validate_user_name(value)
         if is_valid:
-            return {"name": name_value}
+            return {"user_name": name_value.capitalize()}
         else:
             dispatcher.utter_message(text=message)
-            return {"name": None}
+            return {"user_name": None}
 
     async def validate_email(
             self,
@@ -39,10 +38,10 @@ class ValidateRegistrationForm(FormValidationAction):
     ) -> Dict[Text, Any]:
         is_valid, email_value, message = SlotValidators.validate_email(value)
         if is_valid:
-            return {"email": email_value}
+            return {"user_email": email_value}
         else:
             dispatcher.utter_message(text=message)
-            return {"email": None}
+            return {"user_email": None}
 
     async def validate_password(
             self,
@@ -53,10 +52,10 @@ class ValidateRegistrationForm(FormValidationAction):
     ) -> Dict[Text, Any]:
         is_valid, password_value, message = SlotValidators.validate_password(value)
         if is_valid:
-            return {"password": password_value}
+            return {"user_password": password_value}
         else:
             dispatcher.utter_message(text=message)
-            return {"password": None}
+            return {"user_password": None}
 
 
 class ValidateLoginForm(FormValidationAction):
@@ -71,8 +70,18 @@ class ValidateLoginForm(FormValidationAction):
             domain: Dict[Text, Any],
     ) -> Dict[Text, Any]:
         is_valid, email, error_message = SlotValidators.validate_email(slot_value)
+        user_exists = False
+        # check if user exists with given mail
+
         if is_valid:
-            return {"user_email": email}
+            # check there is a user with this email. if yes then return the email.
+            user_exists = find_user_by_email() is not None
+            # if no utter no user registered then utter register -> followup with registration form
+            if not user_exists:
+                dispatcher.utter_message(text="No user registered with this email. Please register first.")
+                return {"user_email": None}
+
+            return {"user_email": email.strip()}
         else:
             dispatcher.utter_message(text=error_message)
             return {"user_email": None}
@@ -86,7 +95,15 @@ class ValidateLoginForm(FormValidationAction):
     ) -> Dict[Text, Any]:
         is_valid, password, error_message = SlotValidators.validate_password(slot_value)
         if is_valid:
-            return {"user_password": password}
+            # check if the password is correct for the user with the given email
+            email = tracker.get_slot("user_email")
+            user = find_user_by_email(email)
+            if user is not None:
+                if user.password != password:
+                    dispatcher.utter_message(text="Incorrect password. Please try again.")
+                    return {"user_password": None}
+
+            return {"logged_user": user}
         else:
             dispatcher.utter_message(text=error_message)
             return {"user_password": None}
@@ -154,6 +171,11 @@ class ChangeRestaurantBookingDateForm(FormValidationAction):
 
 # Add a function to find a user by email
 def find_user_by_email(email: str) -> Optional[User]:
-    # Implement the logic to find a user by email
-    # You can use your MongoDB database to search for the user
-    pass
+    # iterate through all users and find the user with the given email
+
+    # if found return the user
+    for user in users:
+        if user.email == email:
+            return user
+    # if not found return None
+    return None

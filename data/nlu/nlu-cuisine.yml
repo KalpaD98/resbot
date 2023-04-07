@@ -12,13 +12,13 @@ nlu:
 
   - intent: inform_cuisine
     examples: |
-      - [Mexican](cuisine)
+      - [mexican](cuisine)
       - I would like to have [Italian](cuisine)
       - I want [Thai](cuisine) food
       - [Korean](cuisine) restaurants
       - [Chinese](cuisine) food
       - I want to order some [Mexican](cuisine) food
-      - [Italian](cuisine) restaurant
+      - [italian](cuisine) restaurant
       - I'm in the mood for [Thai](cuisine) food tonight
       - [Japanese](cuisine) please
       - I'm looking for a [Vietnam](cuisine) restaurant

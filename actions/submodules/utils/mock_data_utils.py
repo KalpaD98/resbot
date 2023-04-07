@@ -2,6 +2,8 @@
 
 import json
 
+from actions.submodules.entities.user import User
+
 # ----- -------------- ----- #
 
 json_restaurant_list = """
@@ -101,13 +103,13 @@ json_restaurant_list = """
 rest_list = json.loads(json_restaurant_list)
 
 users = [
-    {"id": "uid_0", "name": "Alice", "email": "alice@gmail.com", "password": "1234"},
-    {"id": "uid_1", "name": "Bob", "email": "bob@yahoo.com", "password": "5678"},
-    {"id": "uid_2", "name": "Carol", "email": "carol@gmail.com", "password": "9876"},
-    {"id": "uid_3", "name": "David", "email": "david@gmail.com", "password": "4321"},
-    {"id": "uid_4", "name": "Eva", "email": "eva@gmail.com", "password": "2468"},
-    {"id": "uid_5", "name": "Kalpa", "email": "kalpa@uom.com", "password": "1234"},
-    {"id": "uid_6", "name": "Eva", "email": "eva@gmail.com", "password": "2468"}
+    User("Alice", "alice@gmail.com", "1234"),
+    User("Bob", "bob@yahoo.com", "5678"),
+    User("Carol", "carol@gmail.com", "9876"),
+    User("David", "david@gmail.com", "4321"),
+    User("Eva", "eva@gmail.com", "2468"),
+    User("Kalpa", "kalpa@uom.com", "1234"),
+    User("Eva", "eva@gmail.com", "2468")
 ]
 
 # add these later

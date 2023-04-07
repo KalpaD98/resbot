@@ -60,13 +60,15 @@ class SlotValidators:
 
     @staticmethod
     def validate_user_name(user_name: str) -> Tuple[bool, str, str]:
-        if user_name and len(user_name) >= 3:
+        user_name = user_name.strip()
+        if len(user_name) >= 3:
             return True, user_name, ""
         else:
             return False, "", "Please provide a username with at least 3 characters."
 
     @staticmethod
     def validate_email(email: str) -> Tuple[bool, str, str]:
+        email = email.strip()
         if email:
             email_regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
             if re.match(email_regex, email):
@@ -78,7 +80,8 @@ class SlotValidators:
 
     @staticmethod
     def validate_password(password: str) -> Tuple[bool, str, str]:
-        if password and len(password) >= 4:
+        password = password.strip()
+        if len(password) >= 4:
             return True, password, ""
         else:
             return False, "", "Please provide a password with at least 4 characters."

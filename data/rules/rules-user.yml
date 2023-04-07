@@ -20,9 +20,12 @@ rules:
 
   # ------------------------------------------------------ Login ------------------------------------------------------ #
   #
-  - rule: activate login form
+  - rule: activate login form if not logged in
+    condition:
+      - slot_was_set:
+          - logged_user: null
     steps:
-      - intent: request_user_login_form
+      - intent: request_login_form
       - action: login_form
       - active_loop: login_form
 

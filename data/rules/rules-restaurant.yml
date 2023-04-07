@@ -2,7 +2,7 @@ version: "3.1" # rules.yml has restaurant related rules
 
 rules:
 
-  - rule: when user request restaurant display restaurants carousal
+  - rule: when user request restaurant display restaurants carousal #1 ✅
     steps:
       - intent: request_more_restaurant_options
 #      - slot_was_set:

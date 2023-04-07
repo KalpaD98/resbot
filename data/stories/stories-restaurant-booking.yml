@@ -2,142 +2,78 @@ version: "3.1" # stories-restaurant-booking.yml has general stories for the book
 
 stories:
 
-  # all below stories starts from action_show_cuisines. continue from greeting stories
+  # all below stories starts from
+  #      - slot_was_set:
+  #          - user_id: uid_123
 
   - story: User wants to book a restaurant directly #1 Happy Path
     steps:
-#      - slot_was_set:
-#          - user_id: uid_123
-      - action: action_show_cuisines
+      - checkpoint: checkpoint_cuisine_selection # continue from #3,4 (greeting)
       - intent: inform_cuisine
       - slot_was_set:
-          - cuisine: chinese
+          - cuisine: 'italian'
       - action: action_show_restaurants
+      - checkpoint: checkpoint_restaurant_list_displayed
+
+  - story: User inform cuisine and view restaurants carousal #2 Sad Path
+    steps:
+      - checkpoint: checkpoint_cuisine_selection
+      - intent: inform_cuisine
+      - slot_was_set:
+          - cuisine: 'chinese'
+      - action: action_show_restaurants
+      - checkpoint: checkpoint_restaurant_list_displayed
+
+  - story: User want to book restaurant by directly clicking book #3 Happy Path
+    steps:
+      - checkpoint: checkpoint_restaurant_list_displayed
       - intent: inform_booking_restaurant_id
       - slot_was_set:
-          - restaurant_id: rid_121290
+          - restaurant_id: 'rid_121290'
       - action: action_show_selected_restaurant_ask_booking_confirmation
-      - intent: affirm
+      - checkpoint: checkpoint_ask_to_book_or_not # after this ask book or not
+
+
+  - story: User want to view restaurant details before booking #4 Happy path
+    steps:
+      - checkpoint: checkpoint_restaurant_list_displayed
+      - intent: inform_view_details_restaurant_id
+      - slot_was_set:
+          - restaurant_id: 'rid_121290'
+      - action: action_show_selected_restaurant_details
+      - checkpoint: checkpoint_ask_to_book_or_not # after this ask book or not
+
+  - story: User denies after viewing restaurant details or book directly #6 Sad Path
+    steps:
+      - checkpoint: checkpoint_ask_to_book_or_not
+      - intent: deny # dont book
+      - action: utter_thank_you
+      - action: action_ask_anything_else
+
+  - story: User fills restaurant booking form after affirm to continue booking #5 Sad Path
+    steps:
+      - checkpoint: checkpoint_ask_to_book_or_not
+      - intent: affirm # book
       - action: restaurant_booking_form
       - active_loop: restaurant_booking_form
       - slot_was_set:
-          - num_people: 2
+          - num_people: '2'
       - slot_was_set:
           - date: 2023-06-06
       - active_loop: null
       - action: action_show_booking_summary
-      - intent: affirm
+      - checkpoint: checkpoint_booking_summary # ask to confirm booking or deny
+
+  - story: User affirm to book after viewing booking summary
+    steps:
+      - checkpoint: checkpoint_booking_summary
+      - intent: affirm # confirm booking
       - action: action_confirm_booking
       - action: utter_thank_you
 
-  - story: User denies to book restaurant directly after seeing booking details #2 Sad Path
+  - story: User deny to book after viewing booking summary
     steps:
-#      - slot_was_set:
-#          - user_id: uid_123
-      - action: action_show_cuisines
-      - intent: inform_cuisine
-      - slot_was_set:
-          - cuisine: chinese
-      - action: action_show_restaurants
-      - intent: inform_booking_restaurant_id
-      - slot_was_set:
-          - restaurant_id: rid_121290
-      - action: action_show_selected_restaurant_ask_booking_confirmation
-      - intent: affirm
-      - action: restaurant_booking_form
-      - active_loop: restaurant_booking_form
-      - slot_was_set:
-          - num_people: 2
-      - slot_was_set:
-          - date: 2023-06-06
-      - active_loop: null
-      - action: action_show_booking_summary
-      - intent: deny
-      - action: utter_thank_you
-      - action: action_ask_anything_else
-
-  - story: User denies to book restaurant after direct selection #3 Sad Path
-    steps:
-#      - slot_was_set:
-#          - user_id: uid_123
-      - action: action_show_cuisines
-      - intent: inform_cuisine
-      - slot_was_set:
-          - cuisine: chinese
-      - action: action_show_restaurants
-      - intent: inform_booking_restaurant_id
-      - slot_was_set:
-          - restaurant_id: rid_121290
-      - action: action_show_selected_restaurant_ask_booking_confirmation
-      - intent: deny
-      - action: utter_thank_you
-      - action: action_ask_anything_else
-
-  - story: Book restaurant after view details happy path #4 Happy path
-    steps:
-#      - slot_was_set:
-#          - user_id: uid_123
-      - action: action_show_cuisines
-      - intent: inform_cuisine
-      - slot_was_set:
-          - cuisine: chinese
-      - action: action_show_restaurants
-      - intent: inform_view_details_restaurant_id
-      - slot_was_set:
-          - restaurant_id: rid_121290
-      - action: action_show_selected_restaurant_details
-      - intent: affirm
-      - action: restaurant_booking_form
-      - active_loop: restaurant_booking_form
-      - slot_was_set:
-          - num_people: 2
-      - slot_was_set:
-          - date: 2023-06-06
-      - active_loop: null
-      - action: action_show_booking_summary
-      - intent: affirm
-      - action: action_confirm_booking
-      - action: utter_thank_you
-
-  - story: User denies booking after viewing booking summary #5 Sad Path
-    steps:
-#      - slot_was_set:
-#          - user_id: uid_123
-      - action: action_show_cuisines
-      - intent: inform_cuisine
-      - slot_was_set:
-          - cuisine: chinese
-      - action: action_show_restaurants
-      - intent: inform_view_details_restaurant_id
-      - slot_was_set:
-          - restaurant_id: rid_121290
-      - action: action_show_selected_restaurant_details
-      - intent: affirm
-      - action: restaurant_booking_form
-      - active_loop: restaurant_booking_form
-      - slot_was_set:
-          - num_people: 2
-      - slot_was_set:
-          - date: 2023-06-06
-      - active_loop: null
-      - action: action_show_booking_summary
-      - intent: deny
-      - action: utter_thank_you
-      - action: action_ask_anything_else
-
-  - story: User denies after viewing restaurant details #6 Sad Path
-    steps:
-#      - slot_was_set:
-#          - user_id: uid_123
-      - action: action_show_cuisines
-      - intent: inform_cuisine
-      - slot_was_set:
-          - cuisine: chinese
-      - action: action_show_restaurants
-      - intent: inform_view_details_restaurant_id
-      - slot_was_set:
-          - restaurant_id: rid_121290
-      - action: action_show_selected_restaurant_details
-      - intent: deny
+      - checkpoint: checkpoint_booking_summary
+      - intent: deny # deny booking
       - action: utter_thank_you
       - action: action_ask_anything_else

@@ -14,6 +14,8 @@ nlu:
       - restaurant recommendations
       - display restaurants
       - restaurants please
+      - i want to book another one
+      - show rest
 
   - intent: request_menu
     examples: |
@@ -35,6 +37,7 @@ nlu:
       - more suggestions
       - more places
       - any other suggestions
+      - more restaurants
 
   - intent: request_opening_hours
     examples: |

@@ -6,19 +6,22 @@ nlu:
   - intent: inform_num_people
     examples: |
       - [2](num_people)
+      - [3](num_people) peeps
+      - about [4](num_people) people
+      - about [4](num_people) peeps
       - around [4](num_people)
       - around [4](num_people) people
       - [4](num_people) people
       - [5](num_people) people are joining
       - [10](num_people) people
-      - [4] pax
+      - [4](num_people) pax
+      - [4](num_people) peeps
       - for [ten](num_people) people
       - [2](num_people) people
       - for [three](num_people) people
       - just [one](num_people) person
       - book for [seven](num_people) people
       - [2](num_people) please
-      - [2](num_people)
       - [3](num_people)
       - about [four](num_people) people
       - [nine](num_people) people
@@ -26,6 +29,21 @@ nlu:
       - no make it for [four](num_people) people
       - no just [2](num_people) people
       - sorry only [5](num_people) people
+      - [1](num_people)
+      - [2](num_people)
+      - [3](num_people)
+      - [4](num_people)
+      - [5](num_people)
+      - [6](num_people)
+      - [7](num_people)
+      - [8](num_people)
+      - [9](num_people)
+      - [10](num_people)
+      - [20](num_people)
+      - [30](num_people)
+      - [40](num_people)
+      - [50](num_people)
+      - [100](num_people)
 
   - intent: inform_date # find a way to extract date from descriptions apart from duckling server
     examples: |

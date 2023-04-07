@@ -180,9 +180,11 @@ class ActionConfirmBooking(Action):
 
         # send the message to the user
         dispatcher.utter_message(text=message)
-        dispatcher.utter_message(text="Your booking reference id is: brid_1FK2H1G3")
-
-        return []
+        # add a real id
+        dispatcher.utter_message(text="Your booking id is: brid_1FK2H1G3")
+        # clear slots num_people, date, time, restaurant_id, selected_restaurant
+        return [SlotSet(CUISINE, None), SlotSet(NUM_PEOPLE, None), SlotSet(DATE, None),
+                SlotSet(TIME, None), SlotSet(RESTAURANT_ID, None), SlotSet(SELECTED_RESTAURANT, None)]
 
 
 class ActionShowUserBookings(Action):

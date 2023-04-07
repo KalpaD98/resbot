@@ -1,0 +1,15 @@
+version: "3.1" # names-lookup.yml
+
+nlu:
+  - lookup: user_email
+    examples: |
+      - kalpa@gmail.com
+      - Kalpa@uom.com
+      - chethiya@gmail
+      - dileepa@yahoo.com
+      - upeksha@uom.lk
+      - sagara@uom.lk
+      - nipuni.21@microsoft.com
+      - chamalka@uom.lk
+      - chathura@gmail.com
+      - chathuranga@hotmail.com

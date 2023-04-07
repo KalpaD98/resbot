@@ -201,7 +201,6 @@ slots:
           - inform_cancel_booking_id
 
   # ----------------------------------------------- user related slots ----------------------------------------------- #
-
   logged_user:
     type: any
     influence_conversation: false
@@ -218,24 +217,27 @@ slots:
     type: text
     influence_conversation: false
     mappings:
-      - type: from_text
+      - type: from_entity
         entity: user_name
+      - type: from_text
         intent:
           - inform_user_name
   user_email:
     type: text
     influence_conversation: false
     mappings:
-      - type: from_text
+      - type: from_entity
         entity: user_email
+      - type: from_text
         intent:
           - inform_user_email
   user_password:
     type: text
     influence_conversation: false
     mappings:
-      - type: from_text
+      - type: from_entity
         entity: user_password
+      - type: from_text
         intent:
           - inform_user_password
 
@@ -302,8 +304,8 @@ forms:
   registration_form:
     required_slots:
       - user_name
-      - user_password
       - user_email
+      - user_password
 
   login_form:
     required_slots:
@@ -347,6 +349,7 @@ actions:
   - validate_change_restaurant_booking_date_form
   # --------------------------------------------  ---------------------------------------#
   - action_login_user
+#  - action_check_user_logged_in
 
   - action_show_past_bookings
   - action_show_upcoming_bookings
@@ -435,22 +438,25 @@ responses:
 
   utter_ask_registered_user:
     - text: Are you a registered user?
+
   utter_ask_user_name:
     - text: May i know your name? (first name is sufficient)
   utter_ask_user_email:
     - text: Enter your email address.
   utter_ask_user_password:
-    - text: Please create a password.
-  utter_ask_confirm_password: # implement if required
-    - text: Please confirm your password by entering it again.
+    - text: Enter password.
+
   utter_registration_successful:
     - text: Registration successful! we automatically logged you {user_name}
-
   utter_login_success:
     - text: You have successfully logged in. Welcome back!
 
   utter_login_to_continue:
-    - text: Please login to continue. # throw quick replies for login and signup ("I don't have an account")
+    - text: Please login to continue.
+    # throw quick replies for login and signup ("I don't have an account")
+
+  utter_already_logged_in:
+    - text: You are already logged in.
 
   # booking related
 

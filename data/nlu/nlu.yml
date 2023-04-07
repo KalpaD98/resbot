@@ -271,3 +271,7 @@ nlu:
   - regex: user_email
     examples: |
       - \b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b
+
+  - regex: num_people
+    examples: |
+      - \b\d+\b

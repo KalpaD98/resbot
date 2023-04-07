@@ -6,6 +6,7 @@ ACTION_RETRY_LOGIN_OR_STOP = "action_retry_login_or_stop"
 ACTION_LOGIN_USER = "action_login_user"
 ACTION_LOGOUT = "action_logout"
 ACTION_ASK_REGISTERED_AND_SHOW_LOGIN_SIGNUP_QUICK_REPLIES = "action_ask_registered_and_show_login_signup_quick_replies"
+ACTION_CHECK_USER_LOGGED_IN = "action_check_user_logged_in"
 
 
 class ActionCompleteRegistration(Action):
@@ -45,7 +46,7 @@ class ActionCompleteRegistration(Action):
         dispatcher.utter_message(text="Email: " + user_email)
         # dispatcher.utter_message(text="Password: " + ObjectUtils.star_print(len(user_password)))
 
-        return []
+        return [FollowupAction(ACTION_LOGIN_USER)]
 
 
 class ActionLoginUser(Action):
@@ -64,8 +65,8 @@ class ActionLoginUser(Action):
         user = None
         # user = user = find_user_by_email(email)
         for u in users:
-            if u["email"] == login_email:
-                if u["password"] == login_password:
+            if u.email == login_email:
+                if u.password == login_password:
                     user = u
                     break
 
@@ -156,4 +157,23 @@ class ActionLogout(Action):
             SlotSet("user_id", None),
             SlotSet("user_email", None),
             SlotSet("password", None),
+            SlotSet("prevent_login_form", False)
         ]
+
+########################################### Commented Actions ###########################################
+# class ActionCheckUserLoggedIn(Action):
+#     def name(self) -> Text:
+#         return ACTION_CHECK_USER_LOGGED_IN
+#
+#     async def run(
+#             self,
+#             dispatcher: CollectingDispatcher,
+#             tracker: Tracker,
+#             domain: Dict[Text, Any],
+#     ) -> List[Dict[Text, Any]]:
+#         logged_user = tracker.get_slot("logged_user")
+#         if logged_user:
+#             dispatcher.utter_message(template="utter_already_logged_in")
+#             return [SlotSet("prevent_login_form", True)]
+#         else:
+#             return [SlotSet("prevent_login_form", False)]
