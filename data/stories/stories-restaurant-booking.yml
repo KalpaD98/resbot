@@ -2,10 +2,6 @@ version: "3.1" # stories-restaurant-booking.yml has general stories for the book
 
 stories:
 
-  # all below stories starts from
-  #      - slot_was_set:
-  #          - user_id: uid_123
-
   - story: User wants to book a restaurant directly #1 Happy Path
     steps:
       - checkpoint: checkpoint_cuisine_selection # continue from #3,4 (greeting)
@@ -77,3 +73,7 @@ stories:
       - intent: deny # deny booking
       - action: utter_thank_you
       - action: action_ask_anything_else
+
+  # all below stories starts from
+  #      - slot_was_set:
+  #          - user_id: uid_123
