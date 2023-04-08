@@ -11,7 +11,7 @@ class ObjectUtils:
     @staticmethod
     def find_by_id(item_id, item_list):
         for item in item_list:
-            if item[ID] == item_id:
+            if item['id'] == item_id:
                 return item
 
     @staticmethod

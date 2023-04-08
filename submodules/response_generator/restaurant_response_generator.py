@@ -1,4 +1,3 @@
-from database.models.restaurant import Restaurant
 from submodules.response_generator.constants import *
 
 
@@ -11,32 +10,28 @@ class RestaurantResponseGenerator:
         # Add data to the carousel card
         for restaurant in restaurant_list:
             carousal_object = SUBCOMPONENT_CARD.copy()
-            carousal_object[TITLE] = restaurant.get(Restaurant.NAME)
-            carousal_object[IMAGE_URL] = restaurant.get(Restaurant.IMAGE_URL)
-            carousal_object[SUBTITLE] = restaurant.get(Restaurant.CUISINE) + " |  ⭐️ " + str(
-                restaurant.get(Restaurant.RATINGS))
+            carousal_object[TITLE] = restaurant.name
+            carousal_object[IMAGE_URL] = restaurant.image_url
+            carousal_object[SUBTITLE] = restaurant.cuisine + " |  ⭐️ " + str(restaurant.ratings)
 
             default_action_payload = SUBCOMPONENT_DEFAULT_ACTION_PAYLOAD.copy()
             # determine a default action for the card later
-            default_action_payload[PAYLOAD] = restaurant.get(
-                Restaurant.ID)
+            default_action_payload[PAYLOAD] = restaurant.id
 
             buttons = []
 
             button1 = SUBCOMPONENT_BUTTON_URL.copy()
             button1[TITLE] = "Check Menu"
-            button1[URL] = restaurant.get(Restaurant.MENU_URL)  # later replace this with restaurant menu url
+            button1[URL] = restaurant.menu_url  # later replace this with restaurant menu url
 
             button2 = SUBCOMPONENT_BUTTON_PAYLOAD.copy()
             button2[TITLE] = "Book Table"
-            button2[PAYLOAD] = "/inform_booking_restaurant_id{\"restaurant_id\":\"" + restaurant.get(
-                Restaurant.ID) + "\"}"
+            button2[PAYLOAD] = "/inform_booking_restaurant_id{\"restaurant_id\":\"" + restaurant.id + "\"}"
             # book table intent has not been added yet, example: book rid_s3wjdsud3, book restaurant rid_s3wjdsud3
 
             button3 = SUBCOMPONENT_BUTTON_PAYLOAD.copy()
             button3[TITLE] = "View Details"
-            button3[PAYLOAD] = "/inform_view_details_restaurant_id{\"restaurant_id\":\"" + restaurant.get(
-                Restaurant.ID) + "\"}"
+            button3[PAYLOAD] = "/inform_view_details_restaurant_id{\"restaurant_id\":\"" + restaurant.id + "\"}"
 
             buttons.append(button1)
             buttons.append(button3)

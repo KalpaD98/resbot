@@ -60,6 +60,7 @@ class ActionShowRestaurants(Action):
         cuisine = tracker.get_slot("cuisine")
 
         # if cuisine is 'Any Cuisine' then don't filter by cuisine
+        # using synonyms for any cuisine unify its value to 'any cuisine'
 
         # if cuisine is null ask if user wants to filter by cuisine
         if cuisine is None:
@@ -67,29 +68,25 @@ class ActionShowRestaurants(Action):
         else:
             logging.info("Cuisine: " + cuisine)
 
-        # if yes then ask for cuisine (utter_ask_cuisine)
-
-        # if no then send http request to recommendation engine to get top 10 restaurants for the user
-
         # send http request to recommendation engine to get top 10 restaurants for the user
-
-        # every restaurant must have a 'name', 'image' (URL), id, ratings (1 - 5) and cuisine.
 
         # get restaurant data into an array
 
-        # using synonyms for any cuisine unify its value to 'any cuisine'
+        # Instantiate the restaurant repository
 
-        # hard coded restaurant data
+        # Get the restaurant list from the database
         if (cuisine == 'any cuisine') or cuisine is None:
             text_msg = f"I've found some great restaurants for you to try out!"
+            restaurants_list = restaurant_repo.get_all_restaurants(limit=10)
         else:
             text_msg = f"I've found some great {cuisine.lower()} restaurants for you to try out!"
-
-        # get the restaurant list from recommendation engine
+            # TODO : uncomment get restaurants by cuisine
+            restaurants_list = restaurant_repo.get_all_restaurants(limit=10)
+            # restaurants_list = restaurant_repo.get_restaurants_by_cuisine(cuisine, limit=10)
 
         dispatcher.utter_message(text=text_msg,
                                  attachment=ResponseGenerator.card_options_carousal(
-                                     RestaurantResponseGenerator.restaurant_list_to_carousal_object(rest_list)))
+                                     RestaurantResponseGenerator.restaurant_list_to_carousal_object(restaurants_list)))
 
         return []
 

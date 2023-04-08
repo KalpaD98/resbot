@@ -3,13 +3,18 @@ import logging
 from typing import Any, Dict, List, Text, Optional
 
 # noinspection PyUnresolvedReferences
-from database.entities import User
-# noinspection PyUnresolvedReferences
 from rasa_sdk import Action, Tracker, FormValidationAction
 # noinspection PyUnresolvedReferences
 from rasa_sdk.events import FollowupAction, SlotSet, EventType
 # noinspection PyUnresolvedReferences
 from rasa_sdk.executor import CollectingDispatcher
+
+# noinspection PyUnresolvedReferences
+from database.models.booking import Booking
+# noinspection PyUnresolvedReferences
+from database.models.restaurant import Restaurant
+# noinspection PyUnresolvedReferences
+from database.models.user import User
 
 # database imports
 from database.repositories.booking_repository import BookingRepository
