@@ -1,4 +1,5 @@
-from actions.all_actions.common_imports import *
+from actions.all_actions.common_imports_for_actions import *
+from database.models.restaurant import Restaurant
 
 # constants
 ACTION_SHOW_SELECTED_RESTAURANT_DETAILS = "action_show_selected_restaurant_details"
@@ -15,7 +16,7 @@ class ActionBookSelectedRestaurant(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        print_slots(tracker)
+        print_all_slots(tracker)
 
         # get the restaurant id from the tracker
         restaurant_id = tracker.get_slot("restaurant_id")
@@ -42,7 +43,7 @@ class ActionBookSelectedRestaurant(Action):
         y_n_quick_replies_with_payload.append(quick_reply_yes)
         y_n_quick_replies_with_payload.append(quick_reply_no)
         # send the message back to the user
-        dispatcher.utter_message(text="You selected " + restaurant[NAME])
+        dispatcher.utter_message(text="You selected " + restaurant[Restaurant.NAME])
         # add multiple messages for each below
         # dispatcher.utter_message(text="<small description>, <address>, <Opening hours [weekend,weekdays]>")
         dispatcher.utter_message(text="Would you like to proceed with the booking?",
@@ -65,7 +66,7 @@ class ActionShowSelectedRestaurantDetails(Action):
     async def run(self, dispatcher: CollectingDispatcher,
                   tracker: Tracker,
                   domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        print_slots(tracker)
+        print_all_slots(tracker)
 
         # get the restaurant id from the tracker
         restaurant_id = tracker.get_slot("restaurant_id")
@@ -87,14 +88,16 @@ class ActionShowSelectedRestaurantDetails(Action):
 
         dispatcher.utter_message(image=restaurant[IMAGE_URL])
         dispatcher.utter_message(
-            text=restaurant[NAME] + " mainly serves " + restaurant[CUISINE] + " food and its located at "
-                                                                              "" + restaurant[ADDRESS])
+            text=restaurant[Restaurant.NAME] + " mainly serves " + restaurant[CUISINE] + " food and its located at "
+                                                                                         "" + restaurant[
+                     Restaurant.ADDRESS])
         dispatcher.utter_message(text="Their opening hours are, ")
-        dispatcher.utter_message(text="Mon - Fri: " + restaurant[OPENING_HOURS][MON_TO_FRI])
-        dispatcher.utter_message(text="Sat - Sun: " + restaurant[OPENING_HOURS][SAT_SUN])
+        dispatcher.utter_message(text="Mon - Fri: " + restaurant[Restaurant.OPENING_HOURS][Restaurant.MON_TO_FRI])
+        dispatcher.utter_message(text="Sat - Sun: " + restaurant[Restaurant.OPENING_HOURS][Restaurant.SAT_SUN])
 
         dispatcher.utter_message(
-            text=ObjectUtils.get_random_sentence(restaurant[NAME], UTTER_SENTENCE_LIST_FOR_ASKING_TO_MAKE_RESERVATION),
+            text=ObjectUtils.get_random_sentence(restaurant[Restaurant.NAME],
+                                                 UTTER_SENTENCE_LIST_FOR_ASKING_TO_MAKE_RESERVATION),
             quick_replies=ResponseGenerator.quick_replies([QR_YES, QR_NO]))
 
         return [SlotSet("selected_restaurant", restaurant), SlotSet("restaurant_id", restaurant_id)]
@@ -113,7 +116,7 @@ class ActionShowBookingSummary(Action):
     async def run(self, dispatcher: CollectingDispatcher,
                   tracker: Tracker,
                   domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        print_slots(tracker)
+        print_all_slots(tracker)
 
         # get restaurant id from the tracker
         # restaurant_id = tracker.get_slot("restaurant_id")
@@ -127,7 +130,7 @@ class ActionShowBookingSummary(Action):
         restaurant = tracker.get_slot(SELECTED_RESTAURANT)
         # send the message to the user
         dispatcher.utter_message(
-            text="Your booking summary for " + restaurant[NAME] + " is as follows:")
+            text="Your booking summary for " + restaurant[Restaurant.NAME] + " is as follows:")
         # generate the booking summary
         dispatcher.utter_message(text="Number of people: " + tracker.get_slot(NUM_PEOPLE))
         dispatcher.utter_message(text="Date: " + date)
@@ -158,7 +161,7 @@ class ActionConfirmBooking(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        print_slots(tracker)
+        print_all_slots(tracker)
 
         # get the restaurant id from the tracker
         restaurant_id = tracker.get_slot("restaurant_id")
@@ -175,7 +178,8 @@ class ActionConfirmBooking(Action):
         selected_restaurant = tracker.get_slot(SELECTED_RESTAURANT)
 
         # generate the booking summary
-        message = "Your booking for " + selected_restaurant[NAME] + " located at " + selected_restaurant[ADDRESS] + \
+        message = "Your booking for " + selected_restaurant[Restaurant.NAME] + " located at " \
+                  + selected_restaurant[Restaurant.ADDRESS] + \
                   " on " + date + " has been confirmed"
 
         # send the message to the user
@@ -195,10 +199,20 @@ class ActionShowUserBookings(Action):
                   tracker: Tracker,
                   domain: Dict[Text, Any],
                   booking_type: str) -> List[Dict[Text, Any]]:
-        user_id = tracker.get_slot("user_id")
-        user_bookings = get_user_bookings(user_id, booking_type)
 
-        # Prepare carousel items
+        # can use slot user instead of user_id
+        user_id = tracker.get_slot("user_id")
+        # TODO: get user bookings from database
+        user_bookings = ["get_user_bookings(user_id, booking_type)"]
+
+        # check if bookings exist
+
+        # if no bookings exist
+        if len(user_bookings) == 0:
+            dispatcher.utter_message(text="You have no bookings")
+            return []
+
+        # Prepare carousel items / TODO: refactor this to booking response generator
         carousel_items = []
         for booking in user_bookings:
             carousel_item = {
@@ -352,7 +366,8 @@ class ActionAskCancelBookingConfirmation(Action):
         }
 
         # change formatting of below message
-        message = f"Are you sure you want to cancel the booking for {booking['restaurant_name']} on {booking['booking_date']} for {booking['num_people']} people? This action cannot be undone."
+        message = f"Are you sure you want to cancel the booking for {booking['restaurant_name']} on " \
+                  f"{booking['booking_date']} for {booking['num_people']} people? This action cannot be undone."
 
         dispatcher.utter_message(text=message)
 

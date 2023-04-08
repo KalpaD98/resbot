@@ -3,34 +3,47 @@ import logging
 from typing import Any, Dict, List, Text, Optional
 
 # noinspection PyUnresolvedReferences
+from database.entities import User
+# noinspection PyUnresolvedReferences
 from rasa_sdk import Action, Tracker, FormValidationAction
 # noinspection PyUnresolvedReferences
 from rasa_sdk.events import FollowupAction, SlotSet, EventType
 # noinspection PyUnresolvedReferences
 from rasa_sdk.executor import CollectingDispatcher
 
+# database imports
+from database.repositories.booking_repository import BookingRepository
+from database.repositories.restaurant_repository import RestaurantRepository
+from database.repositories.user_repository import UserRepository
 # noinspection PyUnresolvedReferences
-from actions.submodules.constants.constants import *
+from submodules.constants.constants import *
 # noinspection PyUnresolvedReferences
-from actions.submodules.entities.user import User
+from submodules.constants.slot_constants import *
 # noinspection PyUnresolvedReferences
-from actions.submodules.persistance.bookings import get_user_bookings
+from submodules.constants.utterance_constants import *
 # noinspection PyUnresolvedReferences
-from actions.submodules.utils.mock_data_utils import *
+from submodules.response_generator.constants import *
 # noinspection PyUnresolvedReferences
-from actions.submodules.utils.object_utils import ObjectUtils
+from submodules.response_generator.response_generator import ResponseGenerator
 # noinspection PyUnresolvedReferences
-from actions.submodules.utils.response_generation_utils import ResponseGenerator
+from submodules.response_generator.restaurant_response_generator import RestaurantResponseGenerator
 # noinspection PyUnresolvedReferences
-from actions.submodules.utils.restaurant_response_generation_utils import RestaurantResponseGenerationUtils
+from submodules.utils.mock_data_utils import *
 # noinspection PyUnresolvedReferences
-from actions.submodules.utils.slot_validation_utils import SlotValidators
+from submodules.utils.object_utils import ObjectUtils
+# noinspection PyUnresolvedReferences
+from submodules.utils.slot_validation_utils import SlotValidators
 
 logger = logging.getLogger(__name__)
 
+# initializing repositories
+user_repo = UserRepository()
+restaurant_repo = RestaurantRepository()
+booking_repo = BookingRepository()
+
 
 # print all slot values from Tracker
-def print_slots(tracker: Tracker):  # -> List[Dict[Text, Any]]:
+def print_all_slots(tracker: Tracker):  # -> List[Dict[Text, Any]]:
     print()
     print("Slots with values:")
     empty_slots = []

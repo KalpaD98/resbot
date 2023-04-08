@@ -1,4 +1,4 @@
-from actions.all_actions.common_imports import *
+from actions.all_actions.common_imports_for_actions import *
 
 VALIDATE_RESTAURANT_BOOKING_FORM = "validate_restaurant_booking_form"
 VALIDATE_REGISTRATION_FORM = "validate_registration_form"

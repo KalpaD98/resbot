@@ -1,4 +1,4 @@
-from actions.all_actions.common_imports import *
+from actions.all_actions.common_imports_for_actions import *
 
 # CONSTANTS
 ACTION_SAVE_USER_AND_COMPLETE_REGISTRATION = "action_save_user_and_complete_registration"

@@ -1,10 +1,7 @@
 import logging
-import sys
 from typing import List, Dict, Union
 
-from actions.submodules.constants.constants import *
-
-sys.path.append("/all_actions/submodules")
+from submodules.response_generator.constants import *
 
 
 class ResponseGenerator:

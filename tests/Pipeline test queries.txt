@@ -1,3 +1,17 @@
+Sample queries
+
+what restaurants can you recommend ?
+list some restaurants
+
+config   default pipeline
+config-0 += spacy
+spacy+=
+config-1 += BERT
+config-2 += roBERTa
+config-3 += GPT-2
+config-3 += GPT-3 (need to check possibility)
++ spacy
+
 mkdir gridresults
 
 #   test code format

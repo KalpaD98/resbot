@@ -2,7 +2,7 @@
 
 import json
 
-from actions.submodules.entities.user import User
+from database.models.user import User
 
 # ----- -------------- ----- #
 

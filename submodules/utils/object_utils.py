@@ -2,7 +2,7 @@ import datetime
 import random
 import sys
 
-from actions.submodules.constants.constants import *
+from submodules.constants.constants import *
 
 sys.path.append("/all_actions/submodules")
 

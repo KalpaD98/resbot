@@ -1,4 +1,4 @@
-from actions.all_actions.common_imports import *
+from actions.all_actions.common_imports_for_actions import *
 
 # Constants
 ACTION_SHOW_CUISINES = "action_show_cuisines"
@@ -77,6 +77,8 @@ class ActionShowRestaurants(Action):
 
         # get restaurant data into an array
 
+        # using synonyms for any cuisine unify its value to 'any cuisine'
+
         # hard coded restaurant data
         if (cuisine == 'any cuisine') or cuisine is None:
             text_msg = f"I've found some great restaurants for you to try out!"
@@ -87,7 +89,7 @@ class ActionShowRestaurants(Action):
 
         dispatcher.utter_message(text=text_msg,
                                  attachment=ResponseGenerator.card_options_carousal(
-                                     RestaurantResponseGenerationUtils.restaurant_list_to_carousal_object(rest_list)))
+                                     RestaurantResponseGenerator.restaurant_list_to_carousal_object(rest_list)))
 
         return []
 
@@ -102,11 +104,11 @@ class ActionRequestMoreRestaurantOptions(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        print_slots(tracker)
+        print_all_slots(tracker)
 
         dispatcher.utter_message(text="Here are some more restaurants I found",
                                  attachment=ResponseGenerator.card_options_carousal(
-                                     RestaurantResponseGenerationUtils.restaurant_list_to_carousal_object(rest_list)))
+                                     RestaurantResponseGenerator.restaurant_list_to_carousal_object(rest_list)))
         if rest_list is None:
             dispatcher.utter_message(text="Sorry, I did not find any more restaurants.")
 

@@ -1,4 +1,4 @@
-from actions.all_actions.common_imports import *
+from actions.all_actions.common_imports_for_actions import *
 
 # from rasa_sdk.knowledge_base.storage import InMemoryKnowledgeBase
 

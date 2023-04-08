@@ -2,17 +2,17 @@
 # --------------------------------------------- Slot Validation Actions --------------------------------------------- #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
-# CONSTANTS
 
+from actions.all_actions.common_imports_for_actions import *
+
+# CONSTANTS
 ACTION_VALIDATE_DATE = "action_validate_date"
 ACTION_VALIDATE_USER_ID = "action_validate_user_id"
 ACTION_VALIDATE_RESTAURANT_ID = "action_validate_restaurant_id"
 ACTION_VALIDATE_CUISINE = "action_validate_cuisine"
 ACTION_VALIDATE_NUM_PEOPLE = "action_validate_num_people"
 ACTION_VALIDATE_TIME = "action_validate_time"
-ACTION_VALIDATE_BOOKING_REFERENCE_ID = "action_validate_booking_reference_id"
-
-from actions.all_actions.common_imports import *
+ACTION_VALIDATE_BOOKING_ID = "action_validate_booking_id"
 
 
 class ActionValidateRestaurantId(Action):
@@ -151,7 +151,7 @@ class ActionValidateCuisine(Action):
 
 class ActionValidateBookingReferenceId(Action):
     def name(self) -> Text:
-        return "action_validate_booking_reference_id"
+        return ACTION_VALIDATE_BOOKING_ID
 
     async def run(
             self,
@@ -160,11 +160,11 @@ class ActionValidateBookingReferenceId(Action):
             domain: Dict[Text, Any]
     ) -> List[Dict[Text, Any]]:
 
-        booking_reference_id = tracker.get_slot(BOOKING_REFERENCE_ID)
+        booking_reference_id = tracker.get_slot(BOOKING_ID)
         is_valid, message = SlotValidators.validate_booking_reference_id(booking_reference_id)
 
         if is_valid:
-            return [SlotSet(BOOKING_REFERENCE_ID, booking_reference_id)]
+            return [SlotSet(BOOKING_ID, booking_reference_id)]
         else:
             dispatcher.utter_message(text=message)
-            return [SlotSet(BOOKING_REFERENCE_ID, None)]
+            return [SlotSet(BOOKING_ID, None)]
