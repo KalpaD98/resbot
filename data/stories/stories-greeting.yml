@@ -22,6 +22,7 @@ stories:
     steps:
       - checkpoint: checkpoint_wanna_book_restaurant
       - intent: affirm # from this point tell user to log or signup
+      - action: action_check_user_id
       - action: action_show_cuisines
       - checkpoint: checkpoint_cuisine_selection
 
@@ -29,5 +30,6 @@ stories:
     steps:
       - checkpoint: checkpoint_wanna_book_restaurant
       - intent: request_restaurants
+      - action: action_check_user_id
       - action: action_show_cuisines
       - checkpoint: checkpoint_cuisine_selection

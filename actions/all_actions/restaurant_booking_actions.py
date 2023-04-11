@@ -147,16 +147,24 @@ class ActionConfirmBooking(Action):
         print_all_slots(tracker)
 
         # get the date from the tracker
-        date = tracker.get_slot("date")
-        if date is None:
-            logging.info("Date not set")
+        num_people = tracker.get_slot(NUM_PEOPLE)
+        date = tracker.get_slot(DATE)
+        time = tracker.get_slot(TIME)
+        user_id = tracker.get_slot(USER_ID)
+
+        if date is None or time is None or num_people is None:
+            logging.error("Some values are missing in the booking confirmation")
+            return []
+
+        if user_id is None:
+            logging.error("User id is missing in the booking confirmation")
+            return []
 
         selected_restaurant = tracker.get_slot(SELECTED_RESTAURANT)
 
-        restaurant_id = tracker.get_slot("restaurant_id")
-        user_id = "uid_khbi2h3rh2i3u4"
+        restaurant_id = selected_restaurant[Restaurant.ID]
 
-        booking = Booking(user_id, restaurant_id, date, tracker.get_slot(NUM_PEOPLE))
+        booking = Booking(user_id, restaurant_id, num_people, date, time)
         booking_repo.insert_booking(booking)
 
         # send a booking_summary_message to the user
