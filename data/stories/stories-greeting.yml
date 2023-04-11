@@ -29,7 +29,7 @@ stories:
   - story: User request restaurant after greet and intro - logged in #4
     steps:
       - checkpoint: checkpoint_wanna_book_restaurant
-      - intent: request_restaurants
+      - intent: request_restaurants # from this point tell user to log or signup
       - action: action_check_user_id
       - action: action_show_cuisines
       - checkpoint: checkpoint_cuisine_selection
