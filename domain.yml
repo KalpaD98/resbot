@@ -358,7 +358,7 @@ actions:
   - validate_change_restaurant_booking_date_form
   # --------------------------------------------  ---------------------------------------#
   - action_login_user
-  #  - action_check_user_logged_in
+  - action_check_user_id
 
   - action_show_past_bookings
   - action_show_upcoming_bookings

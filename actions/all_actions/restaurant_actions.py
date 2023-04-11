@@ -36,9 +36,9 @@ class ActionShowCuisines(Action):
         # Generate quick replies with Response Generator
         quick_replies_cuisines = ResponseGenerator.quick_replies(cuisines_with_entity_payload, with_payload=True)
 
-        dispatcher.utter_message(text="Please choose a cuisine", quick_replies=quick_replies_cuisines)
+        dispatcher.utter_message(text="Choose or type a cuisine", quick_replies=quick_replies_cuisines)
 
-        return [SlotSet("restaurant_offset", 0)]
+        return []
 
 
 # action to show top restaurants based on user preferences and the given cuisine (or without specific cuisine).
@@ -89,7 +89,7 @@ class ActionShowRestaurants(Action):
         dispatcher.utter_message(
             quick_replies=ResponseGenerator.quick_replies(quick_reply_request_more_restaurant, True))
 
-        return []
+        return [SlotSet("restaurant_offset", 0)]
 
 
 # TODO: action_request_more_restaurant_options.

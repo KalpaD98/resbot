@@ -152,7 +152,7 @@ class ActionConfirmBooking(Action):
         time = tracker.get_slot(TIME)
         user_id = tracker.get_slot(USER_ID)
 
-        if date is None or time is None or num_people is None:
+        if date is None or num_people is None:
             logging.error("Some values are missing in the booking confirmation")
             return []
 

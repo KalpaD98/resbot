@@ -5,6 +5,8 @@ from typing import Tuple
 
 from dateutil import parser
 
+from submodules.database.repositories.user_repository import UserRepository
+
 
 class SlotValidators:
     @staticmethod
@@ -72,6 +74,11 @@ class SlotValidators:
         if email:
             email_regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
             if re.match(email_regex, email):
+                # check if email is already registered
+                user_repository = UserRepository()
+                user = user_repository.find_user_by_email(email)
+                if user:
+                    return False, "", "This email is already registered. Please provide a different email."
                 return True, email, ""
             else:
                 return False, "", "Please provide a valid email address."
@@ -103,7 +110,7 @@ class SlotValidators:
 
     @staticmethod
     def validate_booking_reference_id(booking_reference_id: str) -> Tuple[bool, str]:
-        if booking_reference_id.startswith("brid"):
+        if booking_reference_id.startswith("bid_"):
             return True, ""
         else:
-            return False, "Please provide a valid booking reference ID (e.g., 'bid_1234')."
+            return False, "Please select a valid booking."
