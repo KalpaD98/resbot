@@ -111,7 +111,7 @@ class ActionCheckUserId(Action):
             return [FollowupAction(ACTION_ASK_REGISTERED_AND_SHOW_LOGIN_SIGNUP_QUICK_REPLIES)]
         else:
             # Proceed with the restaurant search
-            return [FollowupAction("action_show_cuisines")]
+            return [FollowupAction(ACTION_SHOW_CUISINES)]
 
 
 class ActionRetryLoginOrStop(Action):
@@ -184,21 +184,3 @@ class ActionLogout(Action):
             SlotSet("password", None),
             SlotSet("prevent_login_form", False)
         ]
-
-########################################### Commented Actions ###########################################
-# class ActionCheckUserLoggedIn(Action):
-#     def name(self) -> Text:
-#         return ACTION_CHECK_USER_LOGGED_IN
-#
-#     async def run(
-#             self,
-#             dispatcher: CollectingDispatcher,
-#             tracker: Tracker,
-#             domain: Dict[Text, Any],
-#     ) -> List[Dict[Text, Any]]:
-#         logged_user = tracker.get_slot("logged_user")
-#         if logged_user:
-#             dispatcher.utter_message(template="utter_already_logged_in")
-#             return [SlotSet("prevent_login_form", True)]
-#         else:
-#             return [SlotSet("prevent_login_form", False)]
