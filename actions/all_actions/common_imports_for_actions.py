@@ -10,16 +10,16 @@ from rasa_sdk.events import FollowupAction, SlotSet, EventType
 from rasa_sdk.executor import CollectingDispatcher
 
 # noinspection PyUnresolvedReferences
-from database.models.booking import Booking
+from submodules.database.models.booking import Booking
 # noinspection PyUnresolvedReferences
-from database.models.restaurant import Restaurant
+from submodules.database.models.restaurant import Restaurant
 # noinspection PyUnresolvedReferences
-from database.models.user import User
+from submodules.database.models.user import User
 
 # database imports
-from database.repositories.booking_repository import BookingRepository
-from database.repositories.restaurant_repository import RestaurantRepository
-from database.repositories.user_repository import UserRepository
+from submodules.database.repositories.booking_repository import BookingRepository
+from submodules.database.repositories.restaurant_repository import RestaurantRepository
+from submodules.database.repositories.user_repository import UserRepository
 # noinspection PyUnresolvedReferences
 from submodules.constants.constants import *
 # noinspection PyUnresolvedReferences
@@ -27,11 +27,11 @@ from submodules.constants.slot_constants import *
 # noinspection PyUnresolvedReferences
 from submodules.constants.utterance_constants import *
 # noinspection PyUnresolvedReferences
-from submodules.response_generator.constants import *
+from actions.all_actions.helper_functions.response_generator.response_generator import ResponseGenerator
 # noinspection PyUnresolvedReferences
-from submodules.response_generator.response_generator import ResponseGenerator
+from actions.all_actions.helper_functions.response_generator.constants import *
 # noinspection PyUnresolvedReferences
-from submodules.response_generator.restaurant_response_generator import RestaurantResponseGenerator
+from actions.all_actions.helper_functions.response_generator.restaurant_response_generator import RestaurantResponseGenerator
 # noinspection PyUnresolvedReferences
 from submodules.utils.mock_data_utils import *
 # noinspection PyUnresolvedReferences

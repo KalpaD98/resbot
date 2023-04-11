@@ -21,7 +21,7 @@ class ActionShowCuisines(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         # get top 10 personalised cuisines for a particular user from the recommendation engine or most popular
         # (frequent)
-        cuisines = ['italian', 'mexican', 'vietnamese', 'thai', 'japanese', 'korean']
+        cuisines = restaurant_repo.get_unique_cuisines()
 
         cuisines.append('any cuisine')  # generate synonyms for 'Any' cuisine
 
@@ -38,16 +38,11 @@ class ActionShowCuisines(Action):
 
         dispatcher.utter_message(text="Please choose a cuisine", quick_replies=quick_replies_cuisines)
 
-        return []
+        return [SlotSet("restaurant_offset", 0)]
 
 
 # action to show top restaurants based on user preferences and the given cuisine (or without specific cuisine).
 class ActionShowRestaurants(Action):
-
-    # constructor
-    # def __init__(self):
-    #     # load db_knowledge base with data from the given file
-    #     kb = InMemoryKnowledgeBase("knowledge_base_data.json")
 
     def name(self) -> Text:
         return ACTION_SHOW_RESTAURANTS
@@ -57,7 +52,7 @@ class ActionShowRestaurants(Action):
                   domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
         # get cuisine from the tracker
-        cuisine = tracker.get_slot("cuisine")
+        cuisine = tracker.get_slot(CUISINE)
 
         # if cuisine is 'Any Cuisine' then don't filter by cuisine
         # using synonyms for any cuisine unify its value to 'any cuisine'
@@ -70,23 +65,29 @@ class ActionShowRestaurants(Action):
 
         # send http request to recommendation engine to get top 10 restaurants for the user
 
-        # get restaurant data into an array
-
-        # Instantiate the restaurant repository
-
-        # Get the restaurant list from the database
         if (cuisine == 'any cuisine') or cuisine is None:
             text_msg = f"I've found some great restaurants for you to try out!"
             restaurants_list = restaurant_repo.get_all_restaurants(limit=10)
         else:
             text_msg = f"I've found some great {cuisine.lower()} restaurants for you to try out!"
-            # TODO : uncomment get restaurants by cuisine
+            # Get the restaurant list from the database into an array
             restaurants_list = restaurant_repo.get_all_restaurants(limit=10)
+            # TODO : uncomment get restaurants by cuisine
             # restaurants_list = restaurant_repo.get_restaurants_by_cuisine(cuisine, limit=10)
 
         dispatcher.utter_message(text=text_msg,
                                  attachment=ResponseGenerator.card_options_carousal(
                                      RestaurantResponseGenerator.restaurant_list_to_carousal_object(restaurants_list)))
+        quick_reply_request_more_restaurant = []
+
+        quick_reply = {
+            TITLE: "Show more restaurants",
+            PAYLOAD: "/request_more_restaurant_options"}
+
+        quick_reply_request_more_restaurant.append(quick_reply)
+
+        dispatcher.utter_message(
+            quick_replies=ResponseGenerator.quick_replies(quick_reply_request_more_restaurant, True))
 
         return []
 
@@ -101,15 +102,38 @@ class ActionRequestMoreRestaurantOptions(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        global restaurant_list
         print_all_slots(tracker)
 
-        dispatcher.utter_message(text="Here are some more restaurants I found",
-                                 attachment=ResponseGenerator.card_options_carousal(
-                                     RestaurantResponseGenerator.restaurant_list_to_carousal_object(rest_list)))
-        if rest_list is None:
+        # Get the current offset from the slot
+        current_offset = tracker.get_slot("restaurant_offset")
+
+        # Increase the offset by 10 (or the limit you're using)
+        new_offset = current_offset + 10
+
+        # Get the cuisine from the tracker
+        cuisine = tracker.get_slot("cuisine")
+
+        # Fetch the next set of restaurants using the new offset
+        if (cuisine == 'any cuisine') or cuisine is None:
+            restaurant_list = restaurant_repo.get_all_restaurants(limit=10, offset=new_offset)
+        else:
+            restaurants_list = restaurant_repo.get_all_restaurants(limit=10, offset=new_offset)
+            # TODO : uncomment get restaurants by cuisine
+            # restaurant_list = restaurant_repo.get_restaurants_by_cuisine(cuisine, limit=10, offset=new_offset)
+
+        # Check if any more restaurants were found
+        if restaurant_list:
+            dispatcher.utter_message(text="Here are some more restaurants I found",
+                                     attachment=ResponseGenerator.card_options_carousal(
+                                         RestaurantResponseGenerator.restaurant_list_to_carousal_object(
+                                             restaurant_list)))
+        else:
             dispatcher.utter_message(text="Sorry, I did not find any more restaurants.")
 
-        return []
+        # Update the restaurant_offset slot with the new offset value
+        return [SlotSet("restaurant_offset", new_offset)]
 
 # Action search restaurants
 # Action search more restaurants

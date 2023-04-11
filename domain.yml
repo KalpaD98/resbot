@@ -94,6 +94,7 @@ entities:
 
   # Restaurant
   - selected_restaurant
+  - restaurant_offset
   - restaurant_name
   - restaurant_id
   - opening_hours
@@ -146,12 +147,20 @@ slots:
           - inform_restaurant_id
           - inform_booking_restaurant_id
           - inform_view_details_restaurant_id
+
   selected_restaurant:
     type: any
     influence_conversation: false
     mappings:
       - type: from_entity
         entity: selected_restaurant
+
+  restaurant_offset:
+    type: any
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: restaurant_offset
 
   selected_booking:
     type: any
@@ -349,7 +358,7 @@ actions:
   - validate_change_restaurant_booking_date_form
   # --------------------------------------------  ---------------------------------------#
   - action_login_user
-#  - action_check_user_logged_in
+  #  - action_check_user_logged_in
 
   - action_show_past_bookings
   - action_show_upcoming_bookings

@@ -1,5 +1,5 @@
-from database.connectors.mongo_connector import db
-from database.models.restaurant import Restaurant
+from submodules.database.connectors.mongo_connector import db
+from submodules.database.models.restaurant import Restaurant
 
 
 class RestaurantRepository:
@@ -29,6 +29,17 @@ class RestaurantRepository:
     def get_unique_cuisines(self, limit: int = 10, offset: int = 0):
         pipeline = [
             {"$group": {"_id": "$cuisine"}},
+            {"$skip": offset},
+            {"$limit": limit}
+        ]
+        results = self.collection.aggregate(pipeline)
+        cuisines = [doc['_id'] for doc in results]
+        return cuisines
+
+    def get_unique_cuisines_ordered(self, limit: int = 10, offset: int = 0):
+        pipeline = [
+            {"$group": {"_id": "$cuisine", "count": {"$sum": 1}}},
+            {"$sort": {"count": -1}},
             {"$skip": offset},
             {"$limit": limit}
         ]

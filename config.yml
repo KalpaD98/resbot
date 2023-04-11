@@ -35,7 +35,7 @@ pipeline:
     epochs: 100
     constrain_similarities: true
 
-  - name: external_utils.extractors.DateparserEntityExtractor # remove when duckling is on
+  - name: submodules.external_utils.extractors.DateparserEntityExtractor # remove when duckling is on
     languages: [ "en" ]
     prefer_dates_from: "future"
     relative_base: "2023-03-01"

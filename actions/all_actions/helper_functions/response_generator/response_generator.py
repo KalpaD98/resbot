@@ -1,7 +1,7 @@
 import logging
 from typing import List, Dict, Union
 
-from submodules.response_generator.constants import *
+from actions.all_actions.helper_functions.response_generator.constants import *
 
 
 class ResponseGenerator:

@@ -7,6 +7,7 @@ ACTION_LOGIN_USER = "action_login_user"
 ACTION_LOGOUT = "action_logout"
 ACTION_ASK_REGISTERED_AND_SHOW_LOGIN_SIGNUP_QUICK_REPLIES = "action_ask_registered_and_show_login_signup_quick_replies"
 ACTION_CHECK_USER_LOGGED_IN = "action_check_user_logged_in"
+ACTION_SHOW_CUISINES = "action_show_cuisines"
 
 
 class ActionCompleteRegistration(Action):
@@ -27,9 +28,9 @@ class ActionCompleteRegistration(Action):
         # if yes, utter: "User with this email already exists. Please try again with a different email."
 
         # if no, save user and utter: "Congratulations on completing your registration!"
-        user_name = tracker.get_slot("user_name")
-        user_email = tracker.get_slot("user_email")
-        user_password = tracker.get_slot("user_password")
+        user_name = tracker.get_slot(USER_NAME)
+        user_email = tracker.get_slot(USER_EMAIL)
+        user_password = tracker.get_slot(USER_PASSWORD)
 
         # Create a UserDetails object and add it to the users list
         user = User(user_name, user_email, user_password)
@@ -46,7 +47,7 @@ class ActionCompleteRegistration(Action):
         dispatcher.utter_message(text="Email: " + user_email)
         # dispatcher.utter_message(text="Password: " + ObjectUtils.star_print(len(user_password)))
 
-        return [FollowupAction(ACTION_LOGIN_USER)]
+        return [FollowupAction(ACTION_LOGIN_USER), FollowupAction(ACTION_SHOW_CUISINES)]
 
 
 class ActionLoginUser(Action):
@@ -59,8 +60,8 @@ class ActionLoginUser(Action):
             tracker: Tracker,
             domain: Dict[Text, Any],
     ) -> List[Dict[Text, Any]]:
-        login_email = tracker.get_slot("user_email")
-        login_password = tracker.get_slot("user_password")
+        login_email = tracker.get_slot(USER_EMAIL)
+        login_password = tracker.get_slot(USER_PASSWORD)
 
         user = None
         # user = user = find_user_by_email(email)
@@ -72,11 +73,14 @@ class ActionLoginUser(Action):
 
         if user:
             dispatcher.utter_message(template="utter_login_success")
+            dispatcher.utter_message(message="Select or type a cuisine to check out restaurants.")
+
             return [
                 SlotSet("logged_user", user),
-                SlotSet("user_name", user["name"]),
-                SlotSet("user_id", user["id"]),
-                SlotSet("user_email", user["email"]),
+                SlotSet("user_name", user[User.NAME]),
+                SlotSet("user_id", user[User.ID]),
+                SlotSet("user_email", user[User.EMAIL]),
+                FollowupAction(ACTION_SHOW_CUISINES)
             ]
         else:
             dispatcher.utter_message(text="Email or password is incorrect.")
@@ -87,6 +91,27 @@ class ActionLoginUser(Action):
                 SlotSet("user_email", None),
                 FollowupAction(ACTION_RETRY_LOGIN_OR_STOP)
             ]
+
+
+class ActionCheckUserId(Action):
+
+    def name(self) -> Text:
+        return "action_check_user_id"
+
+    async def run(self, dispatcher: CollectingDispatcher,
+                  tracker: Tracker,
+                  domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        user_id = tracker.get_slot("user_id")
+
+        if user_id is None:
+            # Prompt the user to log in or sign up
+            dispatcher.utter_message(text="Please log in or sign up to continue.")
+            # Trigger the action to show login/signup quick replies
+            return [FollowupAction(ACTION_ASK_REGISTERED_AND_SHOW_LOGIN_SIGNUP_QUICK_REPLIES)]
+        else:
+            # Proceed with the restaurant search
+            return [FollowupAction("action_show_cuisines")]
 
 
 class ActionRetryLoginOrStop(Action):

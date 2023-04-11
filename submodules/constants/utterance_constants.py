@@ -1,8 +1,3 @@
-
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-# ------------------------------------------ Utterance Templates Constants ------------------------------------------ #
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-
 UTTER_TEMPLATE__RESTAURANT_SUGGESTION = "It Seems you'll like "
 UTTER_TEMPLATE__RESTAURANT_SUGGESTION_NOT_FOUND = "your favor not found... I am afraid you said something invalid 😥"
 

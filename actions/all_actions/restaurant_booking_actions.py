@@ -1,5 +1,7 @@
 from actions.all_actions.common_imports_for_actions import *
-from database.models.restaurant import Restaurant
+
+from actions.all_actions.helper_functions.restaurant_helper import get_restaurant
+from submodules.database.models.restaurant import Restaurant
 
 # constants
 ACTION_SHOW_SELECTED_RESTAURANT_DETAILS = "action_show_selected_restaurant_details"
@@ -18,17 +20,12 @@ class ActionBookSelectedRestaurant(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         print_all_slots(tracker)
 
-        # get the restaurant id from the tracker
-        restaurant_id = tracker.get_slot("restaurant_id")
+        restaurant = get_restaurant(tracker, dispatcher)
 
-        if restaurant_id is None:
-            logging.info("Restaurant ID not set")
-            dispatcher.utter_message(text="Cannot show restaurant details. Please select a restaurant first.")
+        if restaurant is None:
             return []
 
-        # get the restaurant details by passing the id
-        restaurant = ObjectUtils.find_by_id(restaurant_id, rest_list)
-        # logging.info(restaurant)
+        logging.info(restaurant)
 
         y_n_quick_replies_with_payload = []
 
@@ -43,13 +40,13 @@ class ActionBookSelectedRestaurant(Action):
         y_n_quick_replies_with_payload.append(quick_reply_yes)
         y_n_quick_replies_with_payload.append(quick_reply_no)
         # send the message back to the user
-        dispatcher.utter_message(text="You selected " + restaurant[Restaurant.NAME])
+        dispatcher.utter_message(text="You selected " + restaurant.name)
         # add multiple messages for each below
         # dispatcher.utter_message(text="<small description>, <address>, <Opening hours [weekend,weekdays]>")
         dispatcher.utter_message(text="Would you like to proceed with the booking?",
                                  quick_replies=ResponseGenerator.quick_replies(y_n_quick_replies_with_payload, True))
         # if yes -> fill slot
-        return [SlotSet(SELECTED_RESTAURANT, restaurant)]
+        return [SlotSet(SELECTED_RESTAURANT, restaurant.to_dict())]
         # if no
         # Clear the slots related to restaurant selection
 
@@ -68,39 +65,25 @@ class ActionShowSelectedRestaurantDetails(Action):
                   domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         print_all_slots(tracker)
 
-        # get the restaurant id from the tracker
-        restaurant_id = tracker.get_slot("restaurant_id")
+        restaurant = get_restaurant(tracker, dispatcher)
 
-        if restaurant_id is None:
-            dispatcher.utter_message(text="Cannot show restaurant details. Please select a restaurant first.")
+        if restaurant is None:
             return []
 
-        # restaurant = await self.db_knowledge.get_object("restaurant", restaurant_id)
-
-        # Send the image to the user
-        # dispatcher.utter_message(image=image_path)
-
-        # get the restaurant details by passing the id
-        restaurant = ObjectUtils.find_by_id(restaurant_id, rest_list)
-        logging.info(restaurant)
-
-        # send the message back to the user
-
-        dispatcher.utter_message(image=restaurant[IMAGE_URL])
+        # send restaurant details to the user
+        dispatcher.utter_message(image=restaurant.image_url)
         dispatcher.utter_message(
-            text=restaurant[Restaurant.NAME] + " mainly serves " + restaurant[CUISINE] + " food and its located at "
-                                                                                         "" + restaurant[
-                     Restaurant.ADDRESS])
+            text=restaurant.name + " mainly serves " + restaurant.cuisine
+                 + " food and its located at " + restaurant.address)
         dispatcher.utter_message(text="Their opening hours are, ")
-        dispatcher.utter_message(text="Mon - Fri: " + restaurant[Restaurant.OPENING_HOURS][Restaurant.MON_TO_FRI])
-        dispatcher.utter_message(text="Sat - Sun: " + restaurant[Restaurant.OPENING_HOURS][Restaurant.SAT_SUN])
+        dispatcher.utter_message(text="Mon - Fri: " + restaurant.opening_hours[Restaurant.MON_TO_FRI])
+        dispatcher.utter_message(text="Sat - Sun: " + restaurant.opening_hours[Restaurant.SAT_SUN])
 
-        dispatcher.utter_message(
-            text=ObjectUtils.get_random_sentence(restaurant[Restaurant.NAME],
-                                                 UTTER_SENTENCE_LIST_FOR_ASKING_TO_MAKE_RESERVATION),
-            quick_replies=ResponseGenerator.quick_replies([QR_YES, QR_NO]))
+        dispatcher.utter_message(text=ObjectUtils.get_random_sentence(restaurant.name,
+                                                                      UTTER_SENTENCE_LIST_FOR_ASKING_TO_MAKE_RESERVATION),
+                                 quick_replies=ResponseGenerator.quick_replies([QR_YES, QR_NO]))
 
-        return [SlotSet("selected_restaurant", restaurant), SlotSet("restaurant_id", restaurant_id)]
+        return [SlotSet(SELECTED_RESTAURANT, restaurant.to_dict())]
 
 
 # action_show_booking_summary.
@@ -121,13 +104,12 @@ class ActionShowBookingSummary(Action):
         # get restaurant id from the tracker
         # restaurant_id = tracker.get_slot("restaurant_id")
 
-        # get the restaurant data from the db_knowledge base
-        # restaurant = await self.db_knowledge.get_object("restaurant", restaurant_id)
-
         # get the date from the tracker
         date = tracker.get_slot("date")
         time = tracker.get_slot("time")
+        # since already selected restaurant is stored in the tracker, we can get it from there
         restaurant = tracker.get_slot(SELECTED_RESTAURANT)
+
         # send the message to the user
         dispatcher.utter_message(
             text="Your booking summary for " + restaurant[Restaurant.NAME] + " is as follows:")
@@ -138,13 +120,14 @@ class ActionShowBookingSummary(Action):
             dispatcher.utter_message(text="Time: " + time)
 
         # ask to confirm the booking
-
-        # TODO: if no -> ask if they would like to book a table of another restaurant or exit
-
         dispatcher.utter_message(text="Would you like to confirm this booking?",
                                  quick_replies=ResponseGenerator.quick_replies([QR_YES, QR_NO]))
-        # "Please choose a cuisine",
-        # if yes
+
+        # TODO: if no -> ask if they would like to book a table of another restaurant or exit
+        # TODO: if no -> ask if they would like to change booking details or exit
+        # throw quick replies for above cases
+        # change details -> clear slots and throw booking form again
+        # exit -> clear slots and throw exit message, utter ask anything else QRs
         return []
         # if no clear restaurant  slots by far
 
@@ -163,13 +146,6 @@ class ActionConfirmBooking(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         print_all_slots(tracker)
 
-        # get the restaurant id from the tracker
-        restaurant_id = tracker.get_slot("restaurant_id")
-        user_id = tracker.get_slot("user_id")
-
-        # get the restaurant data from the db_knowledge base
-        # restaurant = self.db_knowledge.get_object("restaurant", restaurant_id)
-
         # get the date from the tracker
         date = tracker.get_slot("date")
         if date is None:
@@ -177,198 +153,21 @@ class ActionConfirmBooking(Action):
 
         selected_restaurant = tracker.get_slot(SELECTED_RESTAURANT)
 
-        # generate the booking summary
-        message = "Your booking for " + selected_restaurant[Restaurant.NAME] + " located at " \
-                  + selected_restaurant[Restaurant.ADDRESS] + \
-                  " on " + date + " has been confirmed"
+        restaurant_id = tracker.get_slot("restaurant_id")
+        user_id = "uid_khbi2h3rh2i3u4"
 
-        # send the message to the user
-        dispatcher.utter_message(text=message)
-        # add a real id
-        dispatcher.utter_message(text="Your booking id is: brid_1FK2H1G3")
+        booking = Booking(user_id, restaurant_id, date, tracker.get_slot(NUM_PEOPLE))
+        booking_repo.insert_booking(booking)
+
+        # send a booking_summary_message to the user
+        booking_summary_message = "Your booking for " + selected_restaurant[Restaurant.NAME] + " located at " \
+                                  + selected_restaurant[Restaurant.ADDRESS] + \
+                                  " on " + date + " has been confirmed"
+
+        dispatcher.utter_message(text=booking_summary_message)
+
+        dispatcher.utter_message(text="Your booking id is: " + str(booking.id))
+
         # clear slots num_people, date, time, restaurant_id, selected_restaurant
         return [SlotSet(CUISINE, None), SlotSet(NUM_PEOPLE, None), SlotSet(DATE, None),
                 SlotSet(TIME, None), SlotSet(RESTAURANT_ID, None), SlotSet(SELECTED_RESTAURANT, None)]
-
-
-class ActionShowUserBookings(Action):
-    def name(self) -> Text:
-        return "action_show_user_bookings"
-
-    async def run(self, dispatcher: CollectingDispatcher,
-                  tracker: Tracker,
-                  domain: Dict[Text, Any],
-                  booking_type: str) -> List[Dict[Text, Any]]:
-
-        # can use slot user instead of user_id
-        user_id = tracker.get_slot("user_id")
-        # TODO: get user bookings from database
-        user_bookings = ["get_user_bookings(user_id, booking_type)"]
-
-        # check if bookings exist
-
-        # if no bookings exist
-        if len(user_bookings) == 0:
-            dispatcher.utter_message(text="You have no bookings")
-            return []
-
-        # Prepare carousel items / TODO: refactor this to booking response generator
-        carousel_items = []
-        for booking in user_bookings:
-            carousel_item = {
-                "title": booking["restaurant_name"],
-                "subtitle": f"Booking Date: {booking['booking_date']}",
-                "image_url": booking["restaurant_image"],
-                "buttons": [
-                    {
-                        "title": "Cancel Booking",
-                        "type": "postback",
-                        "payload": f"/inform_cancel_booking_id{{\"cancel_booking_id\": \"{booking['booking_id']}\"}}"
-                    },
-                    {
-                        "title": "Change Date",
-                        "type": "postback",
-                        "payload": f"/inform_change_date_booking_id{{\"change_booking_date_id\": \"{booking['booking_id']}\"}}"
-                    }
-                ]
-            }
-            carousel_items.append(carousel_item)
-
-        # Send carousel to the user using your custom response generator
-        dispatcher.utter_message(
-            attachment=ResponseGenerator.card_options_carousal(carousel_items)
-        )
-
-        return []
-
-
-class ActionShowPastBookings(ActionShowUserBookings):
-    def name(self) -> Text:
-        return "action_show_past_bookings"
-
-    async def run(self, dispatcher: CollectingDispatcher,
-                  tracker: Tracker,
-                  domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        return await super().run(dispatcher, tracker, domain, booking_type="past")
-
-
-class ActionShowUpcomingBookings(ActionShowUserBookings):
-    def name(self) -> Text:
-        return "action_show_upcoming_bookings"
-
-    async def run(self, dispatcher: CollectingDispatcher,
-                  tracker: Tracker,
-                  domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        return await super().run(dispatcher, tracker, domain, booking_type="upcoming")
-
-
-class ActionChangeBookingDate(Action):
-    def name(self) -> Text:
-        return "action_change_restaurant_booking_date"
-
-    async def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[
-        Dict[Text, Any]]:
-        booking_id = tracker.get_slot("booking_id")
-        new_date = tracker.get_slot("date")
-
-        # Update the booking date in system here.
-        # call  API to update database.
-
-        # Send a confirmation message to the user
-        dispatcher.utter_message(text=f"Your booking with ID {booking_id} has been successfully updated to {new_date}.")
-        return [SlotSet("date", None)]
-
-
-class ActionShowNewBookingDetails(Action):
-
-    def name(self) -> Text:
-        return "action_show_new_booking_details"
-
-    def run(self, dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-
-        booking_id = tracker.get_slot("booking_id")
-        date = tracker.get_slot("date")
-
-        # Mock booking details
-        booking_details = {
-            'booking_id': 'bid_123',
-            'restaurant_name': 'The Fancy Restaurant',
-            'date': '2023-03-30',
-            # 'time': '19:00',
-            'num_people': 4
-        }
-
-        if booking_details is not None:
-            # Update the booking date in the booking_details
-            booking_details['date'] = date
-
-            # Format the message to show the updated booking details
-            message = f"Here are the updated booking details:\n\n"
-            message += f"Booking ID: {booking_details['booking_id']}\n"
-            message += f"Restaurant: {booking_details['restaurant_name']}\n"
-            message += f"Date: {booking_details['date']}\n"
-            # message += f"Time: {booking_details['time']}\n"
-            message += f"Number of people: {booking_details['num_people']}\n"
-
-            dispatcher.utter_message(text=message)
-            dispatcher.utter_message(text="would you like to confirm the change?")
-            dispatcher.utter_message(quickreplies=ResponseGenerator.quick_replies([QR_YES, QR_NO]))
-        else:
-            dispatcher.utter_message(text="Sorry, I couldn't find the booking details.")
-
-        return []
-
-
-class ActionCancelBooking(Action):
-    def name(self) -> Text:
-        return "action_cancel_booking"
-
-    async def run(self, dispatcher: CollectingDispatcher,
-                  tracker: Tracker,
-                  domain: Dict[Text, Any]) -> List[EventType]:
-        cancel_booking_id = tracker.get_slot("cancel_booking_id")
-
-        # Fetch booking information from the database using cancel_booking_id (customize this part)
-        booking = {
-            "booking_id": "bid_123",
-            "restaurant_name": "Restaurant A",
-            "booking_date": "2023-06-10",
-            "num_people": 4
-        }
-
-        # Cancel the booking in the database using cancel_booking_id (customize this part)
-        # Add a comment to indicate where the database operation should be done
-        # For example: Cancel booking in the database using cancel_booking_id
-
-        message = f"Your booking at {booking['restaurant_name']} on {booking['booking_date']} for {booking['num_people']} people has been successfully canceled."
-
-        # Clear the cancel_booking_id slot
-        return [SlotSet("cancel_booking_id", None), dispatcher.utter_message(text=message)]
-
-
-class ActionAskCancelBookingConfirmation(Action):
-    def name(self) -> Text:
-        return "action_ask_cancel_booking_confirmation"
-
-    async def run(self, dispatcher: CollectingDispatcher,
-                  tracker: Tracker,
-                  domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        cancel_booking_id = tracker.get_slot("cancel_booking_id")
-
-        # Fetch booking information from the database using cancel_booking_id (customize this part)
-        booking = {
-            "booking_id": "bid_123",
-            "restaurant_name": "Restaurant A",
-            "booking_date": "2023-06-10",
-            "num_people": 4
-        }
-
-        # change formatting of below message
-        message = f"Are you sure you want to cancel the booking for {booking['restaurant_name']} on " \
-                  f"{booking['booking_date']} for {booking['num_people']} people? This action cannot be undone."
-
-        dispatcher.utter_message(text=message)
-
-        return []

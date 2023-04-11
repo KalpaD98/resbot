@@ -2,19 +2,21 @@
 # See this guide on how to implement these action:
 # https://rasa.com/docs/rasa/custom-actions
 
-
+# ------ All other actions ------
 # noinspection PyUnresolvedReferences
-from actions.all_actions.form_validation_actions import *
+from actions.all_actions.form_validation_actions import *  # form validation actions
 # noinspection PyUnresolvedReferences
-from actions.all_actions.knowledge_base_actions import *
+from actions.all_actions.knowledge_base_actions import *  # knowledge base actions
 # noinspection PyUnresolvedReferences
-from actions.all_actions.restaurant_actions import *
+from actions.all_actions.restaurant_actions import *  # restaurant actions
 # noinspection PyUnresolvedReferences
-from actions.all_actions.restaurant_booking_actions import *
+from actions.all_actions.restaurant_booking_actions import *  # restaurant booking actions
 # noinspection PyUnresolvedReferences
-from actions.all_actions.slot_validation_actions import *
+from actions.all_actions.restaurant_booking_read_update_delete_actions import *  # restaurant booking read update delete
 # noinspection PyUnresolvedReferences
-from actions.all_actions.user_actions import *
+from actions.all_actions.slot_validation_actions import *  # slot validation actions
+# noinspection PyUnresolvedReferences
+from actions.all_actions.user_actions import *  # user actions
 
 # CONSTANTS
 ACTION_ASK_ANYTHING_ELSE = "action_ask_anything_else"
@@ -62,6 +64,8 @@ class ActionAnythingElse(Action):
 # from actions.all_actions.restaurant_actions import *
 # # noinspection PyUnresolvedReferences
 # from actions.all_actions.restaurant_booking_actions import *
+# # noinspection PyUnresolvedReferences
+# from actions.all_actions.restaurant_booking_read_update_delete import *
 # # noinspection PyUnresolvedReferences
 # from actions.all_actions.slot_validation_actions import *
 # # noinspection PyUnresolvedReferences
