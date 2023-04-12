@@ -34,10 +34,7 @@ stories:
       - slot_was_set:
           - is_authenticated: false
       - action: action_ask_registered_and_show_login_signup_quick_replies
-      - slot_was_set:
-          - is_authenticated: true
-      - action: action_show_cuisines
-      - checkpoint: checkpoint_cuisine_selection
+      - checkpoint: checkpoint_user_trying_to_login_or_signup
 
   - story: User request restaurant after greet and intro - logged in #4
     steps:
@@ -55,7 +52,4 @@ stories:
       - slot_was_set:
           - is_authenticated: false
       - action: action_ask_registered_and_show_login_signup_quick_replies
-      - slot_was_set:
-          - is_authenticated: true
-      - action: action_show_cuisines
-      - checkpoint: checkpoint_cuisine_selection
+      - checkpoint: checkpoint_user_trying_to_login_or_signup
