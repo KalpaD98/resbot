@@ -23,7 +23,7 @@ stories:
       - checkpoint: checkpoint_wanna_book_restaurant
       - intent: affirm
       - slot_was_set:
-          - is_authenticated: true
+          - is_authenticated: True
       - action: action_show_cuisines
       - checkpoint: checkpoint_cuisine_selection
 
@@ -41,7 +41,7 @@ stories:
       - checkpoint: checkpoint_wanna_book_restaurant
       - intent: request_restaurants
       - slot_was_set:
-          - is_authenticated: true
+          - is_authenticated: True
       - action: action_show_cuisines
       - checkpoint: checkpoint_cuisine_selection
 
@@ -53,3 +53,38 @@ stories:
           - is_authenticated: false
       - action: action_ask_registered_and_show_login_signup_quick_replies
       - checkpoint: checkpoint_user_trying_to_login_or_signup
+
+
+  - story: User logs in after being prompted
+    steps:
+      - checkpoint: checkpoint_user_trying_to_login_or_signup
+      - intent: request_login_form
+      - action: login_form
+      - active_loop: login_form
+      - action: login_form
+      - active_loop: null
+      - slot_was_set:
+          - requested_slot: null
+      - action: action_login_user
+      - action: action_show_cuisines
+      - checkpoint: checkpoint_cuisine_selection
+
+  - story: User registers and logs in after being prompted
+    steps:
+      - checkpoint: checkpoint_user_trying_to_login_or_signup
+      - intent: request_user_registration_form
+      - action: registration_form
+      - active_loop: registration_form
+      - action: registration_form
+      - active_loop: null
+      - slot_was_set:
+          - requested_slot: null
+      - action: action_save_user_and_complete_registration
+      - action: action_show_cuisines
+      - checkpoint: checkpoint_cuisine_selection
+
+  - story: User stops after being prompted to log in or sign up
+    steps:
+      - checkpoint: checkpoint_user_trying_to_login_or_signup
+      - intent: stop
+      - action: utter_bye_see_you_later

@@ -50,7 +50,7 @@ class ActionCompleteRegistration(Action):
         dispatcher.utter_message(text="Name: " + user.name)
         dispatcher.utter_message(text="Email: " + user.email)
         dispatcher.utter_message(text="You have been automatically logged in.")
-
+        # TODO: quick reply to continue conversation
         # dispatcher.utter_message(text="Password: " + ObjectUtils.star_print(len(user_password)))
 
         return [
@@ -93,6 +93,7 @@ class ActionLoginUser(Action):
         # authenticate the user
         if user.password == login_password:
             dispatcher.utter_message(response="utter_login_success")
+            #TODO: quick reply to continue conversation
             return [
                 SlotSet(LOGGED_USER, user.to_dict()),
                 SlotSet(USER_NAME, user.name),

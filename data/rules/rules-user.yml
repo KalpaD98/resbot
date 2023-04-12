@@ -4,37 +4,41 @@ rules:
   # check rasa docs for more
   - rule: activate registration form
     steps:
-      - intent: request_user_registration_form
-      - action: registration_form
-      - active_loop: registration_form
+    - intent: request_user_registration_form
+    - action: registration_form
+    - active_loop: registration_form
+    wait_for_user_input: false
 
   - rule: submit registration form
     condition:
       - active_loop: registration_form
     steps:
-      - action: registration_form
-      - active_loop: null
-      - slot_was_set:
-          - requested_slot: null
-      - action: action_save_user_and_complete_registration
+    - action: registration_form
+    - active_loop: null
+    - slot_was_set:
+        - requested_slot: null
+    - action: action_save_user_and_complete_registration
+    wait_for_user_input: false
 
   # ------------------------------------------------------ Login ------------------------------------------------------ #
   #
   - rule: activate login form if not logged in
     condition:
       - slot_was_set:
-          - logged_user: null
+          - is_authenticated: False
     steps:
-      - intent: request_login_form
-      - action: login_form
-      - active_loop: login_form
+    - intent: request_login_form
+    - action: login_form
+    - active_loop: login_form
+    wait_for_user_input: false
 
   - rule: submit login form
     condition:
       - active_loop: login_form
     steps:
-      - action: login_form
-      - active_loop: null
-      - slot_was_set:
-          - requested_slot: null
-      - action: action_login_user
+    - action: login_form
+    - active_loop: null
+    - slot_was_set:
+        - requested_slot: null
+    - action: action_login_user
+    wait_for_user_input: false
