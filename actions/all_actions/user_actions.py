@@ -8,6 +8,7 @@ ACTION_LOGOUT = "action_logout"
 ACTION_ASK_REGISTERED_AND_SHOW_LOGIN_SIGNUP_QUICK_REPLIES = "action_ask_registered_and_show_login_signup_quick_replies"
 ACTION_CHECK_USER_ID = "action_check_user_id"
 ACTION_SHOW_CUISINES = "action_show_cuisines"
+ACTION_ASK_WHAT_USER_WANTS = "action_ask_what_user_wants"
 
 
 class ActionCompleteRegistration(Action):
@@ -25,11 +26,11 @@ class ActionCompleteRegistration(Action):
 
         # set slots to None
 
+        # Create a User and save them in the database
         user_name = tracker.get_slot(USER_NAME)
         user_email = tracker.get_slot(USER_EMAIL)
         user_password = tracker.get_slot(USER_PASSWORD)
 
-        # Create a User and save them in the database
         user = User(user_name, user_email, user_password)
 
         user_id = user_repo.insert_user(user)
@@ -40,22 +41,26 @@ class ActionCompleteRegistration(Action):
             return [FollowupAction(ACTION_ASK_REGISTERED_AND_SHOW_LOGIN_SIGNUP_QUICK_REPLIES)]
 
         # Set user details in the tracker
-        SlotSet(LOGGED_USER, user)
-        SlotSet(USER_ID, user_id)
-        SlotSet(USER_NAME, user.name)
-        SlotSet(USER_EMAIL, user.email)
-        SlotSet(USER_PASSWORD, user.password)
 
         # Send a confirmation message to the user
-        dispatcher.utter_message(text="Congratulations on completing your registration " + user_name + "!")
+        dispatcher.utter_message(text="Congratulations on completing your registration " + user.name + "!")
 
         # utter the details of the user
         dispatcher.utter_message(text="Your details are as follows:")
-        dispatcher.utter_message(text="Name: " + user_name)
-        dispatcher.utter_message(text="Email: " + user_email)
+        dispatcher.utter_message(text="Name: " + user.name)
+        dispatcher.utter_message(text="Email: " + user.email)
+        dispatcher.utter_message(text="You have been automatically logged in.")
+
         # dispatcher.utter_message(text="Password: " + ObjectUtils.star_print(len(user_password)))
 
-        return [FollowupAction(ACTION_LOGIN_USER)]
+        return [
+            SlotSet(LOGGED_USER, user),
+            SlotSet(USER_ID, user_id),
+            SlotSet(USER_NAME, user.name),
+            SlotSet(USER_EMAIL, user.email),
+            SlotSet(USER_PASSWORD, user.password),
+            SlotSet(IS_AUTHENTICATED, True)
+        ]
 
 
 class ActionLoginUser(Action):
@@ -80,17 +85,21 @@ class ActionLoginUser(Action):
                 SlotSet(LOGGED_USER, None),
                 SlotSet(USER_NAME, None),
                 SlotSet(USER_ID, None),
-                SlotSet(USER_EMAIL, None)
+                SlotSet(USER_EMAIL, None),
+                SlotSet(USER_PASSWORD, None),
+                SlotSet(IS_AUTHENTICATED, False),
+                FollowupAction(ACTION_RETRY_LOGIN_OR_STOP)
             ]
-
+        # authenticate the user
         if user.password == login_password:
-            dispatcher.utter_message(template="utter_login_success")
+            dispatcher.utter_message(response="utter_login_success")
             return [
                 SlotSet(LOGGED_USER, user.to_dict()),
                 SlotSet(USER_NAME, user.name),
                 SlotSet(USER_ID, user.id),
                 SlotSet(USER_EMAIL, user.email),
-                FollowupAction(ACTION_SHOW_CUISINES)
+                SlotSet(USER_PASSWORD, user.password),
+                SlotSet(IS_AUTHENTICATED, True),
             ]
 
         else:
@@ -102,27 +111,6 @@ class ActionLoginUser(Action):
                 SlotSet(USER_EMAIL, None),
                 FollowupAction(ACTION_RETRY_LOGIN_OR_STOP)
             ]
-
-
-class ActionCheckUserId(Action):
-
-    def name(self) -> Text:
-        return ACTION_CHECK_USER_ID
-
-    async def run(self, dispatcher: CollectingDispatcher,
-                  tracker: Tracker,
-                  domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-
-        user_id = tracker.get_slot(USER_ID)
-
-        if user_id is None:
-            # Prompt the user to log in or sign up
-
-            # Trigger the action to show login/signup quick replies
-            return [FollowupAction(ACTION_ASK_REGISTERED_AND_SHOW_LOGIN_SIGNUP_QUICK_REPLIES)]
-        else:
-            # Proceed with the restaurant search
-            return [FollowupAction(ACTION_SHOW_CUISINES)]
 
 
 class ActionRetryLoginOrStop(Action):
@@ -192,5 +180,5 @@ class ActionLogout(Action):
             SlotSet("user_id", None),
             SlotSet("user_email", None),
             SlotSet("password", None),
-            SlotSet("prevent_login_form", False)
+            SlotSet(IS_AUTHENTICATED, False),
         ]

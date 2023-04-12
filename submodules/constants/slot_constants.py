@@ -5,6 +5,8 @@ CUISINE = "cuisine"
 
 SELECTED_RESTAURANT = "selected_restaurant"
 
+IS_AUTHENTICATED = "is_authenticated"
+
 # --------------------------------------------- Booking Related Constants# ------------------------------------------- #
 BOOKING_ID = "booking_id"
 NUM_PEOPLE = "num_people"

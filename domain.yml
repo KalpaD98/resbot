@@ -210,6 +210,14 @@ slots:
           - inform_cancel_booking_id
 
   # ----------------------------------------------- user related slots ----------------------------------------------- #
+
+  is_authenticated:
+    type: bool
+    influence_conversation: true
+    initial_value: false
+    mappings:
+      - type: custom
+
   logged_user:
     type: any
     influence_conversation: false
@@ -358,7 +366,7 @@ actions:
   - validate_change_restaurant_booking_date_form
   # --------------------------------------------  ---------------------------------------#
   - action_login_user
-  - action_check_user_id
+  - action_ask_what_user_wants
 
   - action_show_past_bookings
   - action_show_upcoming_bookings
