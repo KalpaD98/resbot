@@ -86,8 +86,9 @@ class ActionShowRestaurants(Action):
 
         quick_reply_request_more_restaurant.append(quick_reply)
 
-        dispatcher.utter_message(
-            quick_replies=ResponseGenerator.quick_replies(quick_reply_request_more_restaurant, True))
+        dispatcher.utter_message(text="",
+                                 quick_replies=ResponseGenerator.quick_replies(quick_reply_request_more_restaurant,
+                                                                               True))
 
         return [SlotSet("restaurant_offset", 0)]
 
