@@ -1,3 +1,16 @@
 version: "3.1" # nlu-booking.yml: NLU training data for booking related intents
 
 nlu:
+
+  - intent: user_wants_to_cancel_booking
+    examples: |
+      - I want to cancel my booking
+      - Cancel my booking
+      - I need to cancel a reservation
+      - Can you help me cancel a booking?
+      - Cancel a reservation for me
+
+  - intent: inform_cancel_booking_id
+    examples: |
+      - cancel booking [bid_oi203](cancel_booking_id)
+      - cancel [bid_oi203](cancel_booking_id)

@@ -51,6 +51,8 @@ intents:
   - user_wants_to_cancel_booking
   - inform_cancel_booking_id
 
+  - stop_restaurant_booking_form
+
   # -------------------------------------------- nlu-restaurant-inform.yml  ----------------------------------------- #
   - inform_location
   - inform_city
