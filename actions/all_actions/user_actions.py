@@ -92,8 +92,23 @@ class ActionLoginUser(Action):
             ]
         # authenticate the user
         if user.password == login_password:
-            dispatcher.utter_message(response="utter_login_success")
-            #TODO: quick reply to continue conversation
+
+            quick_replies_with_payload = []
+
+            quick_reply_request_restaurant = {
+                TITLE: "Checkout restaurants",
+                PAYLOAD: "/request_restaurants"}
+
+            quick_reply_search_restaurants = {
+                TITLE: "Search restaurants",
+                PAYLOAD: "/search_restaurants"}
+
+            quick_replies_with_payload.append(quick_reply_request_restaurant)
+            quick_replies_with_payload.append(quick_reply_search_restaurants)
+
+            dispatcher.utter_message(response="utter_login_success",
+                                     quick_replies=ResponseGenerator.quick_replies(quick_replies_with_payload, True))
+
             return [
                 SlotSet(LOGGED_USER, user.to_dict()),
                 SlotSet(USER_NAME, user.name),
@@ -156,10 +171,6 @@ class ActionAskRegisteredAndShowLoginSignupQuickReplies(Action):
             {
                 TITLE: "Register",
                 PAYLOAD: "/request_user_registration_form"
-            },
-            {
-                TITLE: "Bye",
-                PAYLOAD: "/stop"
             }
         ]
 

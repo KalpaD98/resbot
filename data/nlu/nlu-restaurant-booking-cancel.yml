@@ -1,0 +1,3 @@
+version: "3.1" # nlu-booking.yml: NLU training data for booking related intents
+
+nlu:

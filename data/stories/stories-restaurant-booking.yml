@@ -11,31 +11,21 @@ stories:
       - action: action_show_restaurants
       - checkpoint: checkpoint_restaurant_list_displayed
 
-  - story: User inform cuisine and view restaurants carousal #2 Sad Path
-    steps:
-      - checkpoint: checkpoint_cuisine_selection
-      - intent: inform_cuisine
-      - slot_was_set:
-          - cuisine: 'chinese'
-      - action: action_show_restaurants
-      - checkpoint: checkpoint_restaurant_list_displayed
-
   - story: User want to book restaurant by directly clicking book #3 Happy Path
     steps:
       - checkpoint: checkpoint_restaurant_list_displayed
       - intent: inform_booking_restaurant_id
       - slot_was_set:
-          - restaurant_id: 'rid_121290'
+          - restaurant_id: 'rid_6431ac87d5f9f6b0be596ac0'
       - action: action_show_selected_restaurant_ask_booking_confirmation
       - checkpoint: checkpoint_ask_to_book_or_not # after this ask book or not
-
 
   - story: User want to view restaurant details before booking #4 Happy path
     steps:
       - checkpoint: checkpoint_restaurant_list_displayed
       - intent: inform_view_details_restaurant_id
       - slot_was_set:
-          - restaurant_id: 'rid_121290'
+          - restaurant_id: 'rid_6431ac87d5f9f6b0be596ac0'
       - action: action_show_selected_restaurant_details
       - checkpoint: checkpoint_ask_to_book_or_not # after this ask book or not
 
@@ -43,10 +33,11 @@ stories:
     steps:
       - checkpoint: checkpoint_ask_to_book_or_not
       - intent: deny # dont book
+      - action: action_clear_restaurant_booking_slots
       - action: utter_thank_you
       - action: action_ask_anything_else
 
-  - story: User fills restaurant booking form after affirm to continue booking #5 Sad Path
+  - story: User fills restaurant booking form after affirm to continue booking #5 Happy Path
     steps:
       - checkpoint: checkpoint_ask_to_book_or_not
       - intent: affirm # book
@@ -71,9 +62,19 @@ stories:
     steps:
       - checkpoint: checkpoint_booking_summary
       - intent: deny # deny booking
+      - action: action_clear_restaurant_booking_slots
       - action: utter_thank_you
       - action: action_ask_anything_else
 
-  # all below stories starts from
-  #      - slot_was_set:
-  #          - user_id: uid_123
+  - story: Stop restaurant booking form filling
+    steps:
+      - checkpoint: checkpoint_ask_to_book_or_not
+      - intent: affirm
+      - action: restaurant_booking_form
+      - active_loop: restaurant_booking_form
+      - intent: stop_restaurant_booking_form
+      - action: action_deactivate_form
+      - active_loop: null
+      - slot_was_set:
+          - requested_slot: null
+      - action: utter_goodbye

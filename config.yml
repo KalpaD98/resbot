@@ -11,7 +11,7 @@ language: en
 pipeline:
   - name: SpacyNLP
     model: en_core_web_trf
-
+  - name: SpacyEntityExtractor
   - name: SpacyTokenizer
     intent_tokenization_flag: True # to use multi intents
     intent_split_symbol: "+"

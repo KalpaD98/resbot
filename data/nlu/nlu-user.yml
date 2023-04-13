@@ -8,6 +8,8 @@ nlu:
       - Create an account for me
       - Sign me up
       - I want to sign up
+      - register me
+      - register
 
   # login
   - intent: request_login_form
@@ -17,6 +19,7 @@ nlu:
       - Log me in
       - Sign me in
       - I want to sign in
+      - login
 
   # logout
   - intent: logout
@@ -25,6 +28,8 @@ nlu:
       - Log me out
       - Sign me out
       - I want to sign out
+      - logout
+      - log out
 
   - intent: inform_user_name
     examples: |

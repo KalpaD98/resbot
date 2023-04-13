@@ -3,6 +3,9 @@ version: "3.1"
 rules:
   # check rasa docs for more
   - rule: activate registration form
+    condition:
+      - slot_was_set:
+          - is_authenticated: False
     steps:
     - intent: request_user_registration_form
     - action: registration_form
@@ -42,3 +45,16 @@ rules:
         - requested_slot: null
     - action: action_login_user
     wait_for_user_input: false
+
+    # ------------------------------------------------------ Authentication ----------------------------------------#
+
+    # when user wants to log out log them out
+  - rule: logout user
+    condition:
+      - slot_was_set:
+          - is_authenticated: True
+    steps:
+    - action: action_logout
+    wait_for_user_input: false
+
+

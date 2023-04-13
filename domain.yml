@@ -158,6 +158,7 @@ slots:
   restaurant_offset:
     type: any
     influence_conversation: false
+    initial_value: 0
     mappings:
       - type: from_entity
         entity: restaurant_offset
@@ -340,6 +341,7 @@ actions:
   - action_show_more_restaurant_options                         # show more restaurant options
   - action_show_selected_restaurant_details                     # show selected restaurant details
   - action_show_booking_summary                                 # show booking summary
+  - action_clear_restaurant_booking_slots                       # clear restaurant booking slots
 
   - action_confirm_booking                                      # confirm booking
   - action_show_selected_restaurant_ask_booking_confirmation    # ask booking confirmation for the selected restaurant
@@ -366,6 +368,7 @@ actions:
   - validate_change_restaurant_booking_date_form
   # --------------------------------------------  ---------------------------------------#
   - action_login_user
+  - action_logout
   - action_ask_what_user_wants
 
   - action_show_past_bookings
@@ -535,101 +538,3 @@ responses:
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
-
-  # ----------------------------------------------- Removed Utterances ------------------------------------------------- #
-
-  #  utter_checkout_restaurants:
-  #    - text: Wanna checkout restaurants?
-  #    - text: Wanna checkout places to eat something ?
-  #    - text: Want to check out some restaurants?
-  #    - text: Interested in finding a restaurant to eat at?
-
-  # ------------------------------------------------- Removed Forms ---------------------------------------------------- #
-
-
-  # long forms
-  #  basic_restaurant_search_form:
-  #    ignored_intents:
-  #      - out_of_scope
-  #      - bot_challenge
-  #    required_slots:
-  #      - cuisine
-  #  #      - user_id
-  #
-  #  advance_restaurant_search_form:
-  #    ignored_intents:
-  #      - out_of_scope
-  #      - bot_challenge
-  #    required_slots:
-  #      - user_id
-  #      - cuisine
-  #      - city
-  #      - preferences                        # intent:preference, utter_ask_preference; What would you like to have ?
-  #
-  #  restaurant_booking_form:
-  #    ignored_intents:
-  #      - out_of_scope
-  #      - bot_challenge
-  #    required_slots:
-  #      - restaurant_id
-  #      - num_people
-  #      - date
-
-  #      - user_id # for now we don't need this
-
-  # future forms
-
-  # sign up form
-  # user_name
-
-  # short forms
-#
-#  user_id_form:
-#    ignored_intents:
-#      - out_of_scope
-#      - bot_challenge
-#    required_slots:
-#      - user_id
-#
-#  restaurant_id_form:
-#    ignored_intents:
-#      - out_of_scope
-#      - bot_challenge
-#      - inform_cuisine
-#    required_slots:
-#      - restaurant_id
-#
-#  cuisine_form:
-#    ignored_intents:
-#      - out_of_scope
-#      - bot_challenge
-#    required_slots:
-#      - cuisine
-#
-#  city_form:
-#    ignored_intents:
-#      - out_of_scope
-#      - bot_challenge
-#    required_slots:
-#      - city
-#
-#  preferences_form:
-#    ignored_intents:
-#      - out_of_scope
-#      - bot_challenge
-#    required_slots:
-#      - preferences
-#
-#  num_people_form:
-#    ignored_intents:
-#      - out_of_scope
-#      - bot_challenge
-#    required_slots:
-#      - num_people
-#
-#  date_form:
-#    ignored_intents:
-#      - out_of_scope
-#      - bot_challenge
-#    required_slots:
-#      - date

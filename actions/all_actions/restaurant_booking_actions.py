@@ -11,7 +11,7 @@ ACTION_CONFIRM_BOOKING = "action_confirm_booking"
 
 
 # action_show_selected_restaurant_ask_booking_confirmation.
-class ActionBookSelectedRestaurant(Action):
+class ActionShowSelectedRestaurantAskBookingConfirmation(Action):
     def name(self) -> Text:
         return ACTION_SHOW_SELECTED_RESTAURANT_ASK_BOOKING_CONFIRMATION
 
@@ -46,7 +46,8 @@ class ActionBookSelectedRestaurant(Action):
         dispatcher.utter_message(text="Would you like to proceed with the booking?",
                                  quick_replies=ResponseGenerator.quick_replies(y_n_quick_replies_with_payload, True))
         # if yes -> fill slot
-        return [SlotSet(SELECTED_RESTAURANT, restaurant.to_dict())]
+        return [SlotSet(NUM_PEOPLE, None), SlotSet(DATE, None), SlotSet(TIME, None),
+                SlotSet(SELECTED_RESTAURANT, restaurant.to_dict())]
         # if no
         # Clear the slots related to restaurant selection
 
@@ -83,10 +84,10 @@ class ActionShowSelectedRestaurantDetails(Action):
                                                                       UTTER_SENTENCE_LIST_FOR_ASKING_TO_MAKE_RESERVATION),
                                  quick_replies=ResponseGenerator.quick_replies([QR_YES, QR_NO]))
 
-        return [SlotSet(SELECTED_RESTAURANT, restaurant.to_dict())]
+        return [SlotSet(NUM_PEOPLE, None), SlotSet(DATE, None), SlotSet(TIME, None),
+                SlotSet(SELECTED_RESTAURANT, restaurant.to_dict())]
 
 
-# action_show_booking_summary.
 # This function is used to generate a booking summary and send it to the user as a message.
 class ActionShowBookingSummary(Action):
 
@@ -107,14 +108,16 @@ class ActionShowBookingSummary(Action):
         # get the date from the tracker
         date = tracker.get_slot("date")
         time = tracker.get_slot("time")
+        num_people = tracker.get_slot("num_people")
         # since already selected restaurant is stored in the tracker, we can get it from there
         restaurant = tracker.get_slot(SELECTED_RESTAURANT)
+        user = tracker.get_slot(LOGGED_USER)
 
         # send the message to the user
         dispatcher.utter_message(
-            text="Your booking summary for " + restaurant[Restaurant.NAME] + " is as follows:")
+            text="{user[User.NAME]} your booking summary for " + restaurant[Restaurant.NAME] + " is as follows:")
         # generate the booking summary
-        dispatcher.utter_message(text="Number of people: " + tracker.get_slot(NUM_PEOPLE))
+        dispatcher.utter_message(text="Number of people: " + num_people)
         dispatcher.utter_message(text="Date: " + date)
         if time is not None:
             dispatcher.utter_message(text="Time: " + time)

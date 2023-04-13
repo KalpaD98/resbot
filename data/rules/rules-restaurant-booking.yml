@@ -4,7 +4,7 @@ rules:
   - rule: Activate restaurant booking form  after view details and book
     condition:
       - slot_was_set:
-          - restaurant_id: 'rid_121290'
+          - restaurant_id: 'rid_6431ac87d5f9f6b0be596ac0'
     steps:
       - action: action_show_selected_restaurant_details
       - intent: affirm
@@ -14,7 +14,7 @@ rules:
   - rule: Activate restaurant booking form after directly clicking book
     condition:
       - slot_was_set:
-          - restaurant_id: 'rid_121290'
+          - restaurant_id: 'rid_6431ac87d5f9f6b0be596ac0'
     steps:
       - action: action_show_selected_restaurant_ask_booking_confirmation
       - intent: affirm
@@ -30,8 +30,3 @@ rules:
       - slot_was_set:
           - requested_slot: null
       - action: action_show_booking_summary
-
-#  - rule: activate restaurant booking form
-#    steps:
-#      - action: restaurant_booking_form
-#      - active_loop: restaurant_booking_form

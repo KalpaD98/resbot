@@ -87,4 +87,5 @@ stories:
     steps:
       - checkpoint: checkpoint_user_trying_to_login_or_signup
       - intent: stop
+      - action: action_clear_restaurant_booking_slots
       - action: utter_bye_see_you_later

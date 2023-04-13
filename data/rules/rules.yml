@@ -30,8 +30,8 @@ rules:
   - rule: when user say stop reply see you later #6 ✅
     steps:
       - intent: stop
+      - action: action_clear_restaurant_booking_slots
       - action: utter_bye_see_you_later
-
 
     # ------------------------------------------------- Commented Rules -------------------------------------------------#
 

@@ -254,15 +254,15 @@ nlu:
 
   - regex: restaurant_id
     examples: |
-      - ^rid_[^\s]+$
+      - rid_[0-9a-f]{24}
 
   - regex: user_id
     examples: |
-      - ^uid_[^\s]+$
+      - uid_[0-9a-f]{24}
 
   - regex: booking_id
     examples: |
-      - ^bid_[^\s]+$
+      - bid_[0-9a-f]{24}
 
   - regex: greet
     examples: |
@@ -270,8 +270,8 @@ nlu:
 
   - regex: user_email
     examples: |
-      - \b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b
+      - [A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}
 
   - regex: num_people
     examples: |
-      - \b\d+\b
+      - ^\d{1,2}$|^(100)$

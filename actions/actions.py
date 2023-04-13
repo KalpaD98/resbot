@@ -22,6 +22,7 @@ from actions.all_actions.user_actions import *  # user actions
 ACTION_ASK_ANYTHING_ELSE = "action_ask_anything_else"
 ACTION_ASK_WHAT_USER_WANTS = "action_ask_what_user_wants"
 ACTION_DEFAULT_FALLBACK_NAME = "action_default_fallback"
+ACTION_CLEAR_RESTAURANT_BOOKING_SLOTS = "action_clear_restaurant_booking_slots"
 
 
 # anything else with quick replies
@@ -86,3 +87,19 @@ class ActionAskWhatUserWants(Action):
         dispatcher.utter_message(text="What do you want to do?",
                                  quick_replies=ResponseGenerator.quick_replies(quick_replies_with_payload, True))
         return []
+
+
+# clear slots related to restaurant booking when user ask to stop booking
+class ActionClearRestaurantBookingSlots(Action):
+    def name(self) -> Text:
+        return ACTION_CLEAR_RESTAURANT_BOOKING_SLOTS
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        return [SlotSet(CUISINE, None),
+                SlotSet(RESTAURANT_ID, None),
+                SlotSet(SELECTED_RESTAURANT, None),
+                SlotSet(NUM_PEOPLE, None),
+                SlotSet(DATE, None),
+                SlotSet(TIME, None)]

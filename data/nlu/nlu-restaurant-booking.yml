@@ -160,3 +160,12 @@ nlu:
     examples: |
       - cancel booking [bid_oi203](cancel_booking_id)
       - cancel [bid_oi203](cancel_booking_id)
+
+  - intent: stop_restaurant_booking_form
+    examples: |
+      - stop
+      - I don't want to book
+      - I'll check out another restaurant
+      - I changed my mind
+      - cancel the booking
+      - I don't want to book anymore
