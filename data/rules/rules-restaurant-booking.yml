@@ -30,3 +30,17 @@ rules:
       - slot_was_set:
           - requested_slot: null
       - action: action_show_booking_summary
+
+# Note that this rule will only work for the restaurant_booking_form.
+# If you want to generalize it for all forms, you can create a separate rule for each form, or use the previous approach
+# of rejecting the slot value in the validation action.
+
+  - rule: Stop restaurant form
+    condition:
+      - active_loop: restaurant_booking_form
+    steps:
+      - intent: stop_restaurant_booking_form
+      - action: action_deactivate_form
+      - active_loop: null
+      - action: utter_goodbye
+

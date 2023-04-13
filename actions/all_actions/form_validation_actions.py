@@ -1,9 +1,12 @@
+from rasa_sdk.events import ActiveLoop
+
 from actions.all_actions.common_imports_for_actions import *
 
 VALIDATE_RESTAURANT_BOOKING_FORM = "validate_restaurant_booking_form"
 VALIDATE_REGISTRATION_FORM = "validate_registration_form"
 VALIDATE_LOGIN_FORM = "validate_login_form"
 VALIDATE_CHANGE_RESTAURANT_BOOKING_DATE_FORM = "validate_change_restaurant_booking_date_form"
+ACTION_DEACTIVATE_FORM = "action_deactivate_form"
 
 
 # VALIDATE_RESTAURANT_SEARCH_FORM = "validate_restaurant_search_form"
@@ -179,3 +182,11 @@ def find_user_by_email(email: str) -> Optional[User]:
             return user
     # if not found return None
     return None
+
+
+class ActionDeactivateForm(Action):
+    def name(self) -> Text:
+        return "action_deactivate_form"
+
+    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        return [ActiveLoop(None), SlotSet("requested_slot", None)]
