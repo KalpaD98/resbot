@@ -54,9 +54,6 @@ class ActionShowRestaurants(Action):
         # get cuisine from the tracker
         cuisine = tracker.get_slot(CUISINE)
 
-        # if cuisine is 'Any Cuisine' then don't filter by cuisine
-        # using synonyms for any cuisine unify its value to 'any cuisine'
-
         # if cuisine is null ask if user wants to filter by cuisine
         if cuisine is None:
             return [FollowupAction(ACTION_SHOW_CUISINES)]
@@ -78,13 +75,13 @@ class ActionShowRestaurants(Action):
         dispatcher.utter_message(text=text_msg,
                                  attachment=ResponseGenerator.card_options_carousal(
                                      RestaurantResponseGenerator.restaurant_list_to_carousal_object(restaurants_list)))
-        quick_reply_request_more_restaurant = []
-
-        quick_reply = {
-            TITLE: "Show more restaurants",
-            PAYLOAD: "/request_more_restaurant_options"}
-
-        quick_reply_request_more_restaurant.append(quick_reply)
+        # quick_reply_request_more_restaurant = []
+        #
+        # quick_reply = {
+        #     TITLE: "Show more restaurants",
+        #     PAYLOAD: "/request_more_restaurant_options"}
+        #
+        # quick_reply_request_more_restaurant.append(quick_reply)
 
         # dispatcher.utter_message(text=" ",
         #                          quick_replies=ResponseGenerator.quick_replies(quick_reply_request_more_restaurant,

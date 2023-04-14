@@ -57,10 +57,6 @@ nlu:
       - Can you tell me what times you have available on [Wednesday](date)?
       - I want to make a reservation for [this Thursday](date).
       - Do you have any tables available at [next Monday](date)?
-  #      - Can I reserve a table for [2](num_people) people on Friday, [February 4th](date)?
-  #      - I'd like to make a reservation for [3](num_people) people on Sunday, [January 30th](date)
-  #      - I want to book a table for [2](num_people) people at [tonight](date).
-  #      - I'm looking to book a table for [4](num_people) on [Saturday](date).
 
   - intent: inform_time
     examples: |
@@ -84,20 +80,20 @@ nlu:
 
   - intent: inform_restaurant_id
     examples: |
-      - [rid_290239](restaurant_id)
-      - [rid_121293](restaurant_id)
-      - restaurant_id is [rid_122284](restaurant_id)
-      - restaurant_id: [rid_121391](restaurant_id)
-
-  - intent: inform_view_details_restaurant_id
-    examples: |
-      - view details [rid_290239](restaurant_id)
-      - view details of restaurant [rid_121293](restaurant_id)
+      - [rid_6431ac87d5f9f6b0be596abb](restaurant_id)
+      - [rid_6431ac87d5f9f6b0be596ac0](restaurant_id)
+      - restaurant_id is [rid_6431ac87d5f9f6b0be596abd](restaurant_id)
+      - restaurant_id: [rid_6431ac87d5f9f6b0be596abf](restaurant_id)
 
   - intent: inform_booking_restaurant_id
     examples: |
-      - book [rid_290239](restaurant_id)
-      - book restaurant [rid_121293](restaurant_id)
+      - book [rid_6431ac87d5f9f6b0be596abc](restaurant_id)
+      - book restaurant [rid_6431ac87d5f9f6b0be596abc](restaurant_id)
+
+  - intent: inform_view_details_restaurant_id
+    examples: |
+      - view details [rid_6431ac87d5f9f6b0be596abd](restaurant_id)
+      - view details of restaurant [rid_6431ac87d5f9f6b0be596abb](restaurant_id)
 
   - intent: stop_restaurant_booking_form
     examples: |
@@ -107,3 +103,7 @@ nlu:
       - I changed my mind
       - cancel the booking
       - I don't want to book anymore
+      - cancel
+      - cancel this
+      - stop this
+      - stop booking

@@ -51,22 +51,7 @@ stories:
       - action: action_show_booking_summary
       - checkpoint: checkpoint_booking_summary # ask to confirm booking or deny
 
-  - story: User affirm to book after viewing booking summary
-    steps:
-      - checkpoint: checkpoint_booking_summary
-      - intent: affirm # confirm booking
-      - action: action_confirm_booking
-      - action: utter_thank_you
-
-  - story: User deny to book after viewing booking summary
-    steps:
-      - checkpoint: checkpoint_booking_summary
-      - intent: deny # deny booking
-      - action: action_clear_restaurant_booking_slots
-      - action: utter_thank_you
-      - action: action_ask_anything_else
-
-  - story: Stop restaurant booking form filling
+  - story: Stop restaurant booking form filling # Sad Path
     steps:
       - checkpoint: checkpoint_ask_to_book_or_not
       - intent: affirm
@@ -78,3 +63,37 @@ stories:
       - slot_was_set:
           - requested_slot: null
       - action: utter_goodbye
+
+  - story: User affirm to book after viewing booking summary
+    steps:
+      - checkpoint: checkpoint_booking_summary
+      - intent: affirm # confirm booking
+      - action: action_confirm_booking
+      - action: utter_thank_you
+      - checkpoint: checkpoint_after_booking_complete
+
+  - story: User deny to book after viewing booking summary
+    steps:
+      - checkpoint: checkpoint_booking_summary
+      - intent: deny # deny booking
+      - action: action_clear_restaurant_booking_slots
+      - action: utter_thank_you
+      - action: action_ask_anything_else
+
+  - story: after booking complete say bye  # happy Path
+    steps:
+      - checkpoint: checkpoint_after_booking_complete
+      - intent: affirm
+      - action: utter_goodbye
+
+  - story: Stop restaurant booking form
+    steps:
+      - action: restaurant_booking_form
+      - active_loop: restaurant_booking_form
+      - or:
+          - intent: stop
+          - intent: stop_restaurant_booking_form
+      - action: action_deactivate_form
+      - active_loop: null
+      - action: action_clear_restaurant_booking_slots
+      - action: action_ask_anything_else

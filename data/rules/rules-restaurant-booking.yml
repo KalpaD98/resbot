@@ -1,16 +1,17 @@
 version: "3.1" # rules-booking.yml
 rules:
-
-  - rule: Activate restaurant booking form  after view details and book
-    condition:
-      - slot_was_set:
-          - restaurant_id: 'rid_6431ac87d5f9f6b0be596ac0'
+  # to handle user clicking book or view details in the restaurant carousel
+  - rule: ask booking confirmation when user click book
     steps:
-      - action: action_show_selected_restaurant_details
-      - intent: affirm
-      - action: restaurant_booking_form
-      - active_loop: restaurant_booking_form
+      - intent: inform_booking_restaurant_id
+      - action: action_show_selected_restaurant_ask_booking_confirmation
 
+  - rule: ask booking confirmation when user ask for restaurant details
+    steps:
+      - intent: inform_view_details_restaurant_id
+      - action: action_show_selected_restaurant_details
+
+  # Below 2 rules are for activating the restaurant booking form.
   - rule: Activate restaurant booking form after directly clicking book
     condition:
       - slot_was_set:
@@ -20,6 +21,18 @@ rules:
       - intent: affirm
       - action: restaurant_booking_form
       - active_loop: restaurant_booking_form
+
+  - rule: Activate restaurant booking form after viewing details
+    condition:
+      - slot_was_set:
+          - restaurant_id: 'rid_6431ac87d5f9f6b0be596ac0'
+    steps:
+      - action: action_show_selected_restaurant_details
+      - intent: affirm
+      - action: restaurant_booking_form
+      - active_loop: restaurant_booking_form
+
+  # This rule is for submitting the booking form.
 
   - rule: Submit restaurant booking form
     condition:
@@ -31,16 +44,43 @@ rules:
           - requested_slot: null
       - action: action_show_booking_summary
 
-# Note that this rule will only work for the restaurant_booking_form.
-# If you want to generalize it for all forms, you can create a separate rule for each form, or use the previous approach
-# of rejecting the slot value in the validation action.
+  # Note: This rule will only work for the restaurant_booking_form #
+  # If you want to generalize it for all forms, you can create a separate rule for each form, or use the previous approach
+  # of rejecting the slot value in the validation action.
 
-  - rule: Stop restaurant form
-    condition:
-      - active_loop: restaurant_booking_form
-    steps:
-      - intent: stop_restaurant_booking_form
-      - action: action_deactivate_form
-      - active_loop: null
-      - action: utter_goodbye
+#  - rule: Stop restaurant form
+#    condition:
+#      - active_loop: restaurant_booking_form
+#    steps:
+#      - intent: stop_restaurant_booking_form
+#      - action: action_deactivate_form
+#      - active_loop: null
+#      - action: utter_goodbye
 
+#  - rule: Stop restaurant form when intent is stop
+#    condition:
+#      - active_loop: restaurant_booking_form
+#    steps:
+#      - intent: stop
+#      - action: action_deactivate_form
+#      - active_loop: null
+#      - action: utter_goodbye
+#      - action: action_ask_anything_else
+#
+#  - rule: Stop restaurant form when intent is to check more restaurants
+#    condition:
+#      - active_loop: restaurant_booking_form
+#    steps:
+#      - intent: request_more_restaurant_options
+#      - action: action_deactivate_form
+#      - active_loop: null
+#      - action: action_show_more_restaurant_options
+#
+#  - rule: Stop restaurant form when intent is to check restaurants
+#    condition:
+#      - active_loop: restaurant_booking_form
+#    steps:
+#      - intent: request_restaurants
+#      - action: action_deactivate_form
+#      - active_loop: null
+#      - action: action_show_restaurants

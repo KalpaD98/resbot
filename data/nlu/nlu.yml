@@ -61,25 +61,6 @@ nlu:
       - im ok
       - im fine thank you
 
-  - intent: emoji_mood_great
-    examples: |
-      - 😊
-      - I'm feeling 😊 today!
-      - 🥳
-      - 😄
-      - 😃
-      - 😀
-      - 😆
-      - 😇
-      - I'm feeling 😃 today!
-      - 😁
-      - 😎
-      - 🤩
-      - 😍
-      - 😻
-      - 😸
-      - I'm feeling 😁 today!
-
   - intent: mood_unhappy
     examples: |
       - my day was horrible
@@ -96,26 +77,10 @@ nlu:
       - extremly sad
       - so saad
       - so sad
-
-  - intent: emoji_mood_unhappy
-    examples: |
-      - sad 😢
-      - 😞
-      - 😔
-      - 😟
-      - 😭
-      - 😩
-      - 😢
-      - 😥
-      - 😫
-      - 😣
-      - 😿
-      - 😔
-      - 😢
-      - 😭
-      - crying 😢
-      - 😞
-      - 😟
+      - i feel sad
+      - i feel bad
+      - sad
+      - bad
 
   - intent: goodbye
     examples: |
@@ -135,15 +100,6 @@ nlu:
       - see you later
       - tata
       - have a great day  
-
-  - intent: emoji_goodbye
-    examples: |
-      - 👋
-      - ✌️
-      - ✋
-      - 😘
-      - 😙
-      - 😚
 
   - intent: affirm
     examples: |
@@ -181,11 +137,6 @@ nlu:
       - im in
       - i'm in
 
-  - intent: emoji_affirm
-    examples: |
-      - 👍
-      - 🙌
-      - 🫡
 
   - intent: deny
     examples: |
@@ -208,14 +159,6 @@ nlu:
       - hell no
       - dont
       - don't
-
-  - intent: emoji_deny
-    examples: |
-      - 👎
-      - 🙅‍♂️
-      - 🙅‍♀️
-      - 🙅
-      - 🚫
 
   - intent: thank_you
     examples: |
@@ -251,27 +194,3 @@ nlu:
       - you cannot help me with what I want
       - I think you cant help me
       - hm i don't think you can do what i want
-
-  - regex: restaurant_id
-    examples: |
-      - rid_[0-9a-f]{24}
-
-  - regex: user_id
-    examples: |
-      - uid_[0-9a-f]{24}
-
-  - regex: booking_id
-    examples: |
-      - bid_[0-9a-f]{24}
-
-  - regex: greet
-    examples: |
-      - hey[^\s]*
-
-  - regex: user_email
-    examples: |
-      - [A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}
-
-  - regex: num_people
-    examples: |
-      - ^\d{1,2}$|^(100)$

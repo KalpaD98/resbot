@@ -115,7 +115,7 @@ class ActionShowBookingSummary(Action):
 
         # send the message to the user
         dispatcher.utter_message(
-            text="{user[User.NAME]} your booking summary for " + restaurant[Restaurant.NAME] + " is as follows:")
+            text=user[User.NAME] + ", your booking summary for " + restaurant[Restaurant.NAME] + " is as follows:")
         # generate the booking summary
         dispatcher.utter_message(text="Number of people: " + num_people)
         dispatcher.utter_message(text="Date: " + date)

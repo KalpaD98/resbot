@@ -2,5 +2,11 @@ version: "3.1"
 # stories/stories-user.yml has user related stories for the bot
 
 stories:
+  # need to do testing
+  - story: When user says stop, reply see you later
+    steps:
+      - intent: stop
+      - action: action_clear_restaurant_booking_slots
+      - action: utter_bye_see_you_later
 
 # above two can be rules instead of stories (added but had issues)

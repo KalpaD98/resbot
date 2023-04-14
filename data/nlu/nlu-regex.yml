@@ -1,0 +1,27 @@
+version: "3.1" # nlu.yml is a file where you define your NLU training data.
+
+nlu:
+
+  - regex: restaurant_id
+    examples: |
+      - rid_[0-9a-zA-Z]{24}
+
+  - regex: user_id
+    examples: |
+      - uid_[0-9a-zA-Z]{24}
+
+  - regex: booking_id
+    examples: |
+      - bid_[0-9a-zA-Z]{24}
+
+  - regex: greet
+    examples: |
+      - hey[^\s]*
+
+  - regex: user_email
+    examples: |
+      - [A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}
+
+  - regex: num_people
+    examples: |
+      - ^\d{1,2}$|^(100)$

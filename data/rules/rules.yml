@@ -27,53 +27,8 @@ rules:
       - intent: thank_you
       - action: utter_welcome
 
-  - rule: when user say stop reply see you later #6 ✅
-    steps:
-      - intent: stop
-      - action: action_clear_restaurant_booking_slots
-      - action: utter_bye_see_you_later
-
-    # ------------------------------------------------- Commented Rules -------------------------------------------------#
-
-    #  - rule: when user want to search provide search options
-    #    steps:
-    #      - intent: want_to_search_restaurants
-    #      - action: 2 search modes
-
-
-    #  - rule: when user enter invalid date reply invalid date and wait for input
-    #    steps:
-    #      - action: action_validate_date
-    #      - intent: inform_date
-
-    # One-turn interactions: Some messages do not require any context to answer them. Rules are an easy way to map intents to  responses, specifying fixed answers to these messages.
-
-    # Fallback behavior: In combination with the FallbackClassifier, you can write rules to respond to low-confidence user messages with a certain fallback behavior.
-
-    # Forms: Both activating and submitting a form will often follow a fixed path. You can also write rules to handle unexpected input during a form.
-
-    # Experimental
-    #  - rule: query db_knowledge base
-    #    steps:
-    #      - intent: query_knowledge_base
-    #      - action: action_query_knowledge_base
-
-#  - rule: activate restaurant booking form
+#  - rule: when user say stop reply see you later #6 ✅
 #    steps:
-#      - action: action_select_restaurant_ask_booking_confirmation
-#      - intent: affirm
-#      - action: restaurant_booking_form
-#      - active_loop: restaurant_booking_form
-#
-#  - rule: submit restaurant booking form
-#    condition:
-#      - active_loop: restaurant_booking_form
-#    steps:
-#      - action: restaurant_booking_form
-#      - active_loop: null
-#      - slot_was_set:
-#          - requested_slot: null
-#      - action: action_show_booking_summary
-#      - intent: affirm
-#      - action: action_confirm_booking
-#      - action: utter_thank_you
+#      - intent: stop
+#      - action: action_clear_restaurant_booking_slots
+#      - action: utter_bye_see_you_later
