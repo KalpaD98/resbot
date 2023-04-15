@@ -28,7 +28,7 @@ class ActionShowBookingOptions(Action):
         }
 
         quick_reply_view_future_bookings = {
-            TITLE: "Future Bookings",
+            TITLE: "Upcoming Bookings",
             PAYLOAD: "/view_upcoming_bookings"
         }
 
@@ -36,7 +36,7 @@ class ActionShowBookingOptions(Action):
         quick_replies_with_payload.append(quick_reply_view_past_bookings)
         quick_replies_with_payload.append(quick_reply_view_future_bookings)
 
-        dispatcher.utter_message(text="Choose what you want to see:",
+        dispatcher.utter_message(text="Choose which bookings you want to view",
                                  quick_replies=ResponseGenerator.quick_replies(quick_replies_with_payload, True))
         return []
 
@@ -51,16 +51,15 @@ class ActionShowBookingsCarousal(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         # get list of user bookings from database sorted by date and filter by user_id
         user_id = tracker.get_slot(USER_ID)
-
-        # TODO: handle this
-        # if user_id is None:
-        #     dispatcher.utter_message(response="utter_login_to_continue")
-        #     return [FollowupAction(ACTION_LOGIN)]
-
+        print("user_id: ", user_id)
         user_bookings = booking_repo.get_bookings_by_user_id(user_id)
+        print("user_bookings: ", user_bookings)
+        if len(user_bookings) == 0:
+            dispatcher.utter_message(response="utter_no_bookings_found")
+            return []
 
         # Extract the list of unique restaurant IDs from the user bookings
-        unique_restaurant_ids = list(set([booking["restaurant_id"] for booking in user_bookings]))
+        unique_restaurant_ids = list(set([booking[RESTAURANT_ID] for booking in user_bookings]))
 
         # Fetch the corresponding restaurant data
         restaurant_data_dict = restaurant_repo.get_restaurants_by_ids(unique_restaurant_ids)
@@ -78,7 +77,7 @@ class ActionShowBookingsCarousal(Action):
 
 # actions.py
 
-class ActionShowPastBookingsCarousal(ActionShowBookingsCarousal):
+class ActionShowPastBookingsCarousal(Action):
     def name(self) -> Text:
         return ACTION_SHOW_PAST_BOOKINGS_CAROUSAL
 
@@ -88,7 +87,11 @@ class ActionShowPastBookingsCarousal(ActionShowBookingsCarousal):
         user_id = tracker.get_slot(USER_ID)
         user_bookings = booking_repo.get_past_bookings_by_user_id(user_id)
 
-        unique_restaurant_ids = list(set([booking["restaurant_id"] for booking in user_bookings]))
+        if len(user_bookings) == 0:
+            dispatcher.utter_message(response="utter_no_past_bookings_found")
+            return []
+
+        unique_restaurant_ids = list(set([booking[RESTAURANT_ID] for booking in user_bookings]))
         restaurant_data_dict = restaurant_repo.get_restaurants_by_ids(unique_restaurant_ids)
         carousel_items = BookingResponseGenerator.booking_list_to_carousal_object(user_bookings, restaurant_data_dict)
 
@@ -99,7 +102,7 @@ class ActionShowPastBookingsCarousal(ActionShowBookingsCarousal):
         return []
 
 
-class ActionShowFutureBookingsCarousal(ActionShowBookingsCarousal):
+class ActionShowFutureBookingsCarousal(Action):
     def name(self) -> Text:
         return ACTION_SHOW_FUTURE_BOOKINGS_CAROUSAL
 
@@ -109,7 +112,11 @@ class ActionShowFutureBookingsCarousal(ActionShowBookingsCarousal):
         user_id = tracker.get_slot(USER_ID)
         user_bookings = booking_repo.get_future_bookings_by_user_id(user_id)
 
-        unique_restaurant_ids = list(set([booking["restaurant_id"] for booking in user_bookings]))
+        if len(user_bookings) == 0:
+            dispatcher.utter_message(response="utter_no_future_bookings_found")
+            return []
+
+        unique_restaurant_ids = list(set([booking[RESTAURANT_ID] for booking in user_bookings]))
         restaurant_data_dict = restaurant_repo.get_restaurants_by_ids(unique_restaurant_ids)
         carousel_items = BookingResponseGenerator.booking_list_to_carousal_object(user_bookings, restaurant_data_dict)
 

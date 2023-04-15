@@ -57,6 +57,7 @@ rules:
       - slot_was_set:
           - is_authenticated: True
     steps:
+    - intent: logout
     - action: action_logout
     wait_for_user_input: false
 

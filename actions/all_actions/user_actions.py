@@ -92,7 +92,7 @@ class ActionLoginUser(Action):
             ]
         # authenticate the user
         if user.password == login_password:
-
+            print(user)
             quick_replies_with_payload = []
 
             quick_reply_request_restaurant = {

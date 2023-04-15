@@ -14,7 +14,7 @@ from actions.all_actions.restaurant_booking_actions import *  # restaurant booki
 # noinspection PyUnresolvedReferences
 from actions.all_actions.restaurant_booking_cancel_actions import *  # restaurant booking delete
 # noinspection PyUnresolvedReferences
-from actions.all_actions.restaurant_booking_view_actions import *  # restaurant booking read
+from actions.all_actions.restaurant_booking_carousal_actions import *  # restaurant booking read
 # noinspection PyUnresolvedReferences
 from actions.all_actions.restaurant_booking_change_actions import *  # restaurant booking update
 # noinspection PyUnresolvedReferences

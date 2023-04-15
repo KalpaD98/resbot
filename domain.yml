@@ -510,6 +510,15 @@ responses:
   utter_ask_change_another_booking:
     - text: "Do you want to change another booking?"
 
+  utter_no_bookings_found:
+    - text: "Sorry, there are no bookings found for you."
+
+  utter_no_past_bookings_found:
+    - text: "Sorry, there are no past bookings found for you."
+
+  utter_no_future_bookings_found:
+    - text: "Sorry, there are no upcoming bookings found for you."
+
   # ------------------------------------------ Retrieval Intent Responses -------------------------------------------- #
   utter_bot_challenge/what_can_you_do:
     - text: I can help you book a restaurant 🍴.
