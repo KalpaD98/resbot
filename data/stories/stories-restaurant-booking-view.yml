@@ -1,6 +1,18 @@
 version: "3.1"
 
 stories:
+
+  - story: User wants to view bookings (but not logged in)
+    steps:
+      - or:
+        - intent: view_bookings
+        - intent: view_all_bookings
+        - intent: view_upcoming_bookings
+        - intent: view_past_bookings
+      - slot_was_set:
+          - is_authenticated: False
+      - action: action_ask_registered_and_show_login_signup_quick_replies
+
   - story: User wants to view bookings (logged in)
     steps:
       - intent: view_bookings
@@ -28,46 +40,6 @@ stories:
       - slot_was_set:
           - is_authenticated: True
       - action: action_show_past_bookings_carousal
-
-  - story: User wants to view bookings (not logged in)
-    steps:
-      - intent: view_bookings
-      - slot_was_set:
-          - is_authenticated: False
-      - action: action_ask_registered_and_show_login_signup_quick_replies
-      - action: login_form
-      - active_loop: login_form
-
-  - story: Submit login form for bookings
-    steps:
-      - action: login_form
-      - active_loop: null
-      - slot_was_set:
-          - requested_slot: null
-      - action: action_login_user
-      - slot_was_set:
-          - is_authenticated: True
-
-  - story: Show past bookings after login
-    steps:
-      - intent: view_past_bookings
-      - slot_was_set:
-          - is_authenticated: True
-      - action: action_show_past_bookings_carousal
-
-  - story: Show upcoming bookings after login
-    steps:
-      - intent: view_upcoming_bookings
-      - slot_was_set:
-          - is_authenticated: True
-      - action: action_show_future_bookings_carousal
-
-  - story: Show all bookings after login
-    steps:
-      - intent: view_all_bookings
-      - slot_was_set:
-          - is_authenticated: True
-      - action: action_show_bookings_carousal
 
 
 #version: "3.1" # stories-view-restaurant-booking.yml has stories for user viewing their bookings
