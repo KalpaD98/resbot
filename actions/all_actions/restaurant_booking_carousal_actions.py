@@ -22,19 +22,19 @@ class ActionShowBookingOptions(Action):
             PAYLOAD: "/view_all_bookings"
         }
 
+        quick_reply_view_upcomming_bookings = {
+            TITLE: "Upcoming Bookings",
+            PAYLOAD: "/view_upcoming_bookings"
+        }
+
         quick_reply_view_past_bookings = {
             TITLE: "Past Bookings",
             PAYLOAD: "/view_past_bookings"
         }
 
-        quick_reply_view_future_bookings = {
-            TITLE: "Upcoming Bookings",
-            PAYLOAD: "/view_upcoming_bookings"
-        }
-
         quick_replies_with_payload.append(quick_reply_view_all_bookings)
+        quick_replies_with_payload.append(quick_reply_view_upcomming_bookings)
         quick_replies_with_payload.append(quick_reply_view_past_bookings)
-        quick_replies_with_payload.append(quick_reply_view_future_bookings)
 
         dispatcher.utter_message(text="Choose which bookings you want to view",
                                  quick_replies=ResponseGenerator.quick_replies(quick_replies_with_payload, True))
