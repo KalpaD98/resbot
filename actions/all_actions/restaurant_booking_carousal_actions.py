@@ -59,7 +59,7 @@ class ActionShowBookingsCarousal(Action):
             return []
 
         # Extract the list of unique restaurant IDs from the user bookings
-        unique_restaurant_ids = list(set([booking[RESTAURANT_ID] for booking in user_bookings]))
+        unique_restaurant_ids = list(set([booking.restaurant_id for booking in user_bookings]))
 
         # Fetch the corresponding restaurant data
         restaurant_data_dict = restaurant_repo.get_restaurants_by_ids(unique_restaurant_ids)
@@ -91,7 +91,7 @@ class ActionShowPastBookingsCarousal(Action):
             dispatcher.utter_message(response="utter_no_past_bookings_found")
             return []
 
-        unique_restaurant_ids = list(set([booking[RESTAURANT_ID] for booking in user_bookings]))
+        unique_restaurant_ids = list(set([booking.restaurant_id for booking in user_bookings]))
         restaurant_data_dict = restaurant_repo.get_restaurants_by_ids(unique_restaurant_ids)
         carousel_items = BookingResponseGenerator.booking_list_to_carousal_object(user_bookings, restaurant_data_dict)
 
@@ -116,7 +116,7 @@ class ActionShowFutureBookingsCarousal(Action):
             dispatcher.utter_message(response="utter_no_future_bookings_found")
             return []
 
-        unique_restaurant_ids = list(set([booking[RESTAURANT_ID] for booking in user_bookings]))
+        unique_restaurant_ids = list(set([booking.restaurant_id for booking in user_bookings]))
         restaurant_data_dict = restaurant_repo.get_restaurants_by_ids(unique_restaurant_ids)
         carousel_items = BookingResponseGenerator.booking_list_to_carousal_object(user_bookings, restaurant_data_dict)
 
