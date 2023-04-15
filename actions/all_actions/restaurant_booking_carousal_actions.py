@@ -5,12 +5,12 @@ from actions.all_actions.helper_functions.response_generator.booking_response_ge
 ACTION_SHOW_BOOKINGS_CAROUSAL = "action_show_bookings_carousal"
 ACTION_SHOW_FUTURE_BOOKINGS_CAROUSAL = "action_show_future_bookings_carousal"
 ACTION_SHOW_PAST_BOOKINGS_CAROUSAL = "action_show_past_bookings_carousal"
-ACTION_SHOW_BOOKING_OPTIONS = "action_show_booking_options"
+ACTION_SHOW_BOOKING_VIEW_OPTIONS = "action_show_booking_view_options"
 
 
 class ActionShowBookingOptions(Action):
     def name(self) -> Text:
-        return ACTION_SHOW_BOOKING_OPTIONS
+        return ACTION_SHOW_BOOKING_VIEW_OPTIONS
 
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,

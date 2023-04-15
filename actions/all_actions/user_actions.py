@@ -103,8 +103,13 @@ class ActionLoginUser(Action):
                 TITLE: "Search restaurants",
                 PAYLOAD: "/search_restaurants"}
 
+            quick_reply_view_bookings = {
+                TITLE: "View bookings",
+                PAYLOAD: "/view_bookings"}
+
             quick_replies_with_payload.append(quick_reply_request_restaurant)
             quick_replies_with_payload.append(quick_reply_search_restaurants)
+            quick_replies_with_payload.append(quick_reply_view_bookings)
 
             dispatcher.utter_message(response="utter_login_success",
                                      quick_replies=ResponseGenerator.quick_replies(quick_replies_with_payload, True))

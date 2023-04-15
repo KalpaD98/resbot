@@ -18,6 +18,12 @@ nlu:
       - view bookings
       - view reservations
       - show reservations
+      - can you show my bookings
+      - what reservations do I have
+      - list my bookings
+      - display my reservations
+      - can I see my bookings
+      - what bookings do I have
 
   - intent: view_all_bookings
     examples: |
@@ -27,6 +33,10 @@ nlu:
       - let me see all my bookings
       - what are all my bookings
       - all bookings
+      - can you show all my reservations
+      - display all my reservations
+      - let me see all my reservations
+      - what are my total bookings
 
   - intent: view_upcoming_bookings
     examples: |
@@ -37,6 +47,12 @@ nlu:
       - let me see my future bookings
       - what bookings do I have coming up
       - upcoming bookings
+      - what are my bookings in the future
+      - can you show my future reservations
+      - display my upcoming reservations
+      - let me see my upcoming reservations
+      - what reservations do I have coming up
+      - future bookings
 
   - intent: view_past_bookings
     examples: |
@@ -47,3 +63,9 @@ nlu:
       - let me see my previous bookings
       - what bookings have I had in the past
       - past bookings
+      - what are my bookings in the past
+      - can you show my previous reservations
+      - display my past reservations
+      - let me see my past reservations
+      - what reservations have I had before
+      - previous bookings

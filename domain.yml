@@ -380,7 +380,7 @@ actions:
   - action_cancel_booking
 
   # ------------------------------------- restaurant booking view actions ------------------------------------ #
-  - action_show_booking_options
+  - action_show_booking_view_options
   - action_show_bookings_carousal
   - action_show_future_bookings_carousal
   - action_show_past_bookings_carousal
