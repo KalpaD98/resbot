@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from submodules.database.connectors.mongo_connector import db
 
 from submodules.database.models.booking import Booking
@@ -24,6 +26,18 @@ class BookingRepository:
 
     def get_bookings_by_user_id(self, user_id: str, limit: int = 10):
         cursor = self.bookings_collection.find({"user.id": user_id}).limit(limit)
+        bookings = [Booking.from_dict(doc) for doc in cursor]
+        return bookings
+
+    def get_past_bookings_by_user_id(self, user_id: str):
+        current_date = datetime.now().date()
+        cursor = self.bookings_collection.find({"user_id": user_id, "date": {"$lte": current_date.isoformat()}}).sort("date", -1)
+        bookings = [Booking.from_dict(doc) for doc in cursor]
+        return bookings
+
+    def get_future_bookings_by_user_id(self, user_id: str):
+        current_date = datetime.now().date()
+        cursor = self.bookings_collection.find({"user_id": user_id, "date": {"$gt": current_date.isoformat()}}).sort("date", 1)
         bookings = [Booking.from_dict(doc) for doc in cursor]
         return bookings
 

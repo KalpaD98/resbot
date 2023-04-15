@@ -12,5 +12,5 @@ nlu:
 
   - intent: inform_cancel_booking_id
     examples: |
-      - cancel booking [bid_oi203](cancel_booking_id)
-      - cancel [bid_oi203](cancel_booking_id)
+      - cancel booking [bid_oi203](booking_id)
+      - cancel [bid_oi203](booking_id)

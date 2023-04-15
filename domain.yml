@@ -3,7 +3,7 @@
 
 version: "3.1"
 
-# NLU training dataF
+# NLU training data
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # ---------------------------------------------------- Intents ------------------------------------------------------ #
@@ -32,7 +32,7 @@ intents:
 
   # ------------------------------------------ nlu-query-knowledge-base.yml ------------------------------------------ #
   - query_knowledge_base
-
+  # Booking related intents
   # --------------------------------------------- nlu-restaurant-booking.yml ----------------------------------------- #
   - inform_num_people
   - inform_date
@@ -41,18 +41,20 @@ intents:
   - inform_restaurant_id
   - inform_view_details_restaurant_id
   - inform_booking_restaurant_id
-  - view_all_bookings
-  - view_upcoming_bookings
-  - view_past_bookings
   - user_wants_to_change_restaurant_booking_date
   - inform_change_date_booking_id
   - user_wants_to_change_booking_num_people
   - inform_change_num_people_booking_id
   - user_wants_to_cancel_booking
-  - inform_cancel_booking_id
+  - inform_cancel_booking_id # TODO: make changes
 
   - stop_restaurant_booking_form
 
+  # ---------------------------------------- nlu-restaurant-booking-view.yml ---------------------------------------- #
+  - view_bookings
+  - view_all_bookings
+  - view_upcoming_bookings
+  - view_past_bookings
   # -------------------------------------------- nlu-restaurant-inform.yml  ----------------------------------------- #
   - inform_location
   - inform_city
@@ -77,13 +79,19 @@ intents:
 
   # No need to add retrieval intents?
   - bot_challenge
+  - out_of_scope
+
+  # user related intents
   # -------------------------------------------------- nlu-user.yml -------------------------------------------------- #
   - request_user_registration_form
   - request_login_form
   - logout
+
   - inform_user_name
   - inform_user_email
   - inform_user_password
+
+  # ------------------------------------------------------------------------------------------------------------------ #
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # ---------------------------------------------------- Entities ----------------------------------------------------- #
@@ -112,8 +120,6 @@ entities:
   - num_people
   - date
   - time
-
-  - cancel_booking_id
 
   # User
   - logged_user
@@ -203,14 +209,7 @@ slots:
         intent:
           - inform_time
           - search_restaurants
-  cancel_booking_id:
-    type: text
-    influence_conversation: false
-    mappings:
-      - type: from_entity
-        entity: cancel_booking_id
-        intent:
-          - inform_cancel_booking_id
+
 
   # ----------------------------------------------- user related slots ----------------------------------------------- #
 
@@ -364,26 +363,27 @@ actions:
   - action_save_user_and_complete_registration
 
   # -------------------------------------------- Form Validation Actions --------------------------------------------- #
-
   - validate_registration_form
   - validate_restaurant_booking_form
   - validate_change_restaurant_booking_date_form
-  # --------------------------------------------  ---------------------------------------#
+  - action_deactivate_form
+
+  # -------------------------------------------- user actions ---------------------------------------#
   - action_login_user
   - action_logout
   - action_ask_what_user_wants
 
-  - action_show_past_bookings
-  - action_show_upcoming_bookings
-  - action_show_all_bookings
-  - action_show_user_bookings_carousel
   - action_change_restaurant_booking_date
   - action_show_new_booking_details
   - action_ask_cancel_booking_confirmation
   - action_ask_cancel_another_booking
   - action_cancel_booking
 
-  - action_deactivate_form
+  # ------------------------------------- restaurant booking view actions ------------------------------------ #
+  - action_show_booking_options
+  - action_show_bookings_carousal
+  - action_show_future_bookings_carousal
+  - action_show_past_bookings_carousal
 
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -478,7 +478,6 @@ responses:
 
   utter_login_to_continue:
     - text: Please login to continue.
-    # throw quick replies for login and signup ("I don't have an account")
 
   utter_already_logged_in:
     - text: You are already logged in.

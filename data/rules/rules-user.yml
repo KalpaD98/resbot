@@ -1,7 +1,7 @@
 version: "3.1"
 # rules/rules-user.yml has rules for the bot.
 rules:
-  # check rasa docs for more
+  # activate registration form if user is not authenticated
   - rule: activate registration form
     condition:
       - slot_was_set:
@@ -12,6 +12,7 @@ rules:
     - active_loop: registration_form
     wait_for_user_input: false
 
+  # submit registration form
   - rule: submit registration form
     condition:
       - active_loop: registration_form
@@ -24,7 +25,8 @@ rules:
     wait_for_user_input: false
 
   # ------------------------------------------------------ Login ------------------------------------------------------ #
-  #
+
+  # activate login form if user is not authenticated
   - rule: activate login form if not logged in
     condition:
       - slot_was_set:
@@ -35,6 +37,7 @@ rules:
     - active_loop: login_form
     wait_for_user_input: false
 
+  # submit login form
   - rule: submit login form
     condition:
       - active_loop: login_form
@@ -48,7 +51,7 @@ rules:
 
     # ------------------------------------------------------ Authentication ----------------------------------------#
 
-    # when user wants to log out log them out
+  # when user wants to log out log them out
   - rule: logout user
     condition:
       - slot_was_set:

@@ -1,12 +1,32 @@
 version: "3.1" # nlu-booking.yml: NLU training data for booking related intents
-
 nlu:
+  - intent: view_bookings
+    examples: |
+      - show me my bookings
+      - show me my reservations
+      - can you display my bookings
+      - show me my bookings
+      - let me see my bookings
+      - what are my bookings
+      - bookings
+      - show bookings
+      - i want to see my bookings
+      - i want to see my reservations
+      - i want to check my bookings
+      - i want to check my reservations
+      - i want to view my bookings
+      - view bookings
+      - view reservations
+      - show reservations
 
   - intent: view_all_bookings
     examples: |
       - show me all my bookings
       - show me all my reservations
       - can you display all my bookings
+      - let me see all my bookings
+      - what are all my bookings
+      - all bookings
 
   - intent: view_upcoming_bookings
     examples: |
@@ -14,6 +34,9 @@ nlu:
       - what are my future bookings
       - can you display my upcoming bookings
       - show me my upcoming bookings
+      - let me see my future bookings
+      - what bookings do I have coming up
+      - upcoming bookings
 
   - intent: view_past_bookings
     examples: |
@@ -21,3 +44,6 @@ nlu:
       - what were my previous bookings
       - can you display my past bookings
       - show me my past bookings
+      - let me see my previous bookings
+      - what bookings have I had in the past
+      - past bookings

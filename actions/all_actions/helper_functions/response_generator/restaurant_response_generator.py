@@ -42,5 +42,4 @@ class RestaurantResponseGenerator:
             # carousal_object[DEFAULT_ACTION] = default_action_payload # add a title for def action if possible
             carousal_objects.append(carousal_object)
 
-        print(carousal_objects)
         return carousal_objects

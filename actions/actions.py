@@ -12,7 +12,11 @@ from actions.all_actions.restaurant_actions import *  # restaurant actions
 # noinspection PyUnresolvedReferences
 from actions.all_actions.restaurant_booking_actions import *  # restaurant booking actions
 # noinspection PyUnresolvedReferences
-from actions.all_actions.restaurant_booking_read_update_delete_actions import *  # restaurant booking read update delete
+from actions.all_actions.restaurant_booking_cancel_actions import *  # restaurant booking delete
+# noinspection PyUnresolvedReferences
+from actions.all_actions.restaurant_booking_view_actions import *  # restaurant booking read
+# noinspection PyUnresolvedReferences
+from actions.all_actions.restaurant_booking_change_actions import *  # restaurant booking update
 # noinspection PyUnresolvedReferences
 from actions.all_actions.slot_validation_actions import *  # slot validation actions
 # noinspection PyUnresolvedReferences
@@ -69,7 +73,7 @@ class ActionAskWhatUserWants(Action):
         quick_replies_with_payload = []
 
         quick_reply_say_hi = {
-            TITLE: "Say Hi",
+            TITLE: "Hi",
             PAYLOAD: "/greet"}
 
         quick_reply_request_restaurants = {
