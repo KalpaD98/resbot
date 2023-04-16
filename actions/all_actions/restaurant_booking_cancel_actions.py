@@ -65,7 +65,8 @@ class ActionCancelBooking(Action):
             # Cancel the booking in the database using booking_id (customize this part)
             booking_repo.cancel_booking(booking_id)
 
-            message = f"Your booking at {restaurant.name} on {booking.date} for {booking.num_people} people has been successfully canceled."
+            message = f"Your booking at {restaurant.name} on {booking.date} for {booking.num_people} " \
+                      f"people has been successfully canceled."
 
             # Send the message to the user
             dispatcher.utter_message(text=message)
