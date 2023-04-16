@@ -40,7 +40,7 @@ class ActionShowBookingOptions(Action):
             dispatcher.utter_message(text="Choose which bookings you want to view",
                                      quick_replies=ResponseGenerator.quick_replies(quick_replies_with_payload, True))
         except Exception as e:
-            logger.error(f"An error occurred in action_show_booking_options: {e}")
+            logger.error(f"An error occurred in ActionShowBookingOptions: {e}")
             dispatcher.utter_message(text="An error occurred. Please try again later.")
 
         return []
@@ -72,7 +72,7 @@ class ActionShowBookingsCarousal(Action):
             dispatcher.utter_message(attachment=ResponseGenerator.card_options_carousal(carousel_items))
 
         except Exception as e:
-            logger.error(f"An error occurred in action_show_bookings_carousal: {e}")
+            logger.error(f"An error occurred in ActionShowBookingsCarousal: {e}")
             dispatcher.utter_message(text="An error occurred. Please try again later.")
 
         return []
@@ -103,7 +103,7 @@ class ActionShowPastBookingsCarousal(Action):
             dispatcher.utter_message(attachment=ResponseGenerator.card_options_carousal(carousel_items))
 
         except Exception as e:
-            logger.error(f"An error occurred in action_show_booking_options: {e}")
+            logger.error(f"An error occurred in ActionShowPastBookingsCarousal: {e}")
             dispatcher.utter_message(text="An error occurred. Please try again later.")
 
         return []
@@ -132,7 +132,7 @@ class ActionShowFutureBookingsCarousal(Action):
             dispatcher.utter_message(attachment=ResponseGenerator.card_options_carousal(carousel_items))
 
         except Exception as e:
-            logger.error(f"An error occurred in action_show_booking_options: {e}")
+            logger.error(f"An error occurred in ActionShowFutureBookingsCarousal: {e}")
             dispatcher.utter_message(text="An error occurred. Please try again later.")
 
         return []

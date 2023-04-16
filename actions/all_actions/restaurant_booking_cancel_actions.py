@@ -29,7 +29,7 @@ class ActionAskCancelBookingConfirmation(Action):
                 dispatcher.utter_message(text="Something went wrong. Please try again.")
 
         except Exception as e:
-            logger.error(f"An error occurred in action_ask_cancel_booking_confirmation: {e}")
+            logger.error(f"An error occurred in ActionAskCancelBookingConfirmation: {e}")
             dispatcher.utter_message(text="An error occurred. Please try again later.")
 
         return []
@@ -72,7 +72,7 @@ class ActionCancelBooking(Action):
             dispatcher.utter_message(text=message)
 
         except Exception as e:
-            logger.error(f"An error occurred in action_cancel_booking: {e}")
+            logger.error(f"An error occurred in ActionCancelBooking: {e}")
             dispatcher.utter_message(text="An error occurred. Please try again later.")
 
         # Clear the booking_id slot and return the event
