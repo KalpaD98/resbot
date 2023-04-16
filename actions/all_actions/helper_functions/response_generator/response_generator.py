@@ -55,3 +55,25 @@ class ResponseGenerator:
         carousel[PAYLOAD][ELEMENTS] = elements_list
 
         return carousel
+
+    @staticmethod
+    def quick_reply_yes_no_with_payload() -> List[Dict[str, str]]:
+        """
+        Generate quick replies for the chat widget with yes and no options.
+
+        :return: List of quick reply dictionaries containing title and payload
+        """
+        quick_replies_with_payload = []
+
+        quick_reply_yes = {
+            TITLE: "Yes",
+            PAYLOAD: "/affirm"}
+
+        quick_reply_no = {
+            TITLE: "No",
+            PAYLOAD: "/deny"}
+
+        quick_replies_with_payload.append(quick_reply_yes)
+        quick_replies_with_payload.append(quick_reply_no)
+
+        return ResponseGenerator.quick_replies(quick_replies_with_payload, with_payload=True)

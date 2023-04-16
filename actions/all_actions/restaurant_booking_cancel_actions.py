@@ -11,25 +11,20 @@ class ActionAskCancelBookingConfirmation(Action):
     async def run(self, dispatcher: CollectingDispatcher,
                   tracker: Tracker,
                   domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        cancel_booking_id = tracker.get_slot("cancel_booking_id")
+        # Get the booking_id from the slot
+        booking_id = tracker.get_slot("booking_id")
 
-        # Fetch booking information from the database using cancel_booking_id (customize this part)
-        booking = {
-            "booking_id": "bid_123",
-            "restaurant_name": "Restaurant A",
-            "booking_date": "2023-06-10",
-            "num_people": 4
-        }
+        # Fetch booking information from the database using booking_id (customize this part)
+        booking = booking_repo.find_booking_by_id(booking_id)
 
-        # change formatting of below message
-        message = f"Are you sure you want to cancel the booking for {booking['restaurant_name']} on " \
-                  f"{booking['booking_date']} for {booking['num_people']} people? This action cannot be undone."
+        restaurant = restaurant_repo.find_restaurant_by_id(booking.restaurant_id)
 
-        dispatcher.utter_message(text=message)
+        message = f"Are you sure you want to cancel the booking for {restaurant.name} on " \
+                  f"{booking.date} for {booking.num_people} people? This action cannot be undone."
+
+        dispatcher.utter_message(text=message, quick_replies=ResponseGenerator.quick_reply_yes_no_with_payload())
 
         return []
-
-
 class ActionCancelBooking(Action):
     def name(self) -> Text:
         return ACTION_CANCEL_BOOKING
@@ -37,21 +32,16 @@ class ActionCancelBooking(Action):
     async def run(self, dispatcher: CollectingDispatcher,
                   tracker: Tracker,
                   domain: Dict[Text, Any]) -> List[EventType]:
-        cancel_booking_id = tracker.get_slot("cancel_booking_id")
+        booking_id = tracker.get_slot("booking_id")
 
-        # Fetch booking information from the database using cancel_booking_id (customize this part)
-        booking = {
-            "booking_id": "bid_123",
-            "restaurant_name": "Restaurant A",
-            "booking_date": "2023-06-10",
-            "num_people": 4
-        }
+        # Fetch booking information from the database using booking_id (customize this part)
+        booking = booking_repo.find_booking_by_id(booking_id)
+        restaurant = restaurant_repo.find_restaurant_by_id(booking.restaurant_id)
 
-        # Cancel the booking in the database using cancel_booking_id (customize this part)
-        # Add a comment to indicate where the database operation should be done
-        # For example: Cancel booking in the database using cancel_booking_id
+        # Cancel the booking in the database using booking_id (customize this part)
+        booking_repo.cancel_booking(booking_id)
 
-        message = f"Your booking at {booking['restaurant_name']} on {booking['booking_date']} for {booking['num_people']} people has been successfully canceled."
+        message = f"Your booking at {restaurant.name} on {booking.date} for {booking.num_people} people has been successfully canceled."
 
-        # Clear the cancel_booking_id slot
-        return [SlotSet("cancel_booking_id", None), dispatcher.utter_message(text=message)]
+        # Clear the booking_id slot
+        return [SlotSet("booking_id", None), dispatcher.utter_message(text=message)]

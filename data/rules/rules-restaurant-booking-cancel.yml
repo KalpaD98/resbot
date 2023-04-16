@@ -1,0 +1,9 @@
+rules:
+  - rule: User wants to cancel a booking (logged in)
+    condition:
+      - slot_was_set:
+          - is_authenticated: True
+    steps:
+      - intent: user_wants_to_cancel_booking
+      - action: action_show_upcoming_bookings
+

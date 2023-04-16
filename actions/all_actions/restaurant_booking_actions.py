@@ -82,7 +82,7 @@ class ActionShowSelectedRestaurantDetails(Action):
 
         dispatcher.utter_message(text=ObjectUtils.get_random_sentence(restaurant.name,
                                                                       UTTER_SENTENCE_LIST_FOR_ASKING_TO_MAKE_RESERVATION),
-                                 quick_replies=ResponseGenerator.quick_replies([QR_YES, QR_NO]))
+                                 quick_replies=ResponseGenerator.quick_reply_yes_no_with_payload())
 
         return [SlotSet(NUM_PEOPLE, None), SlotSet(DATE, None), SlotSet(TIME, None),
                 SlotSet(SELECTED_RESTAURANT, restaurant.to_dict())]
