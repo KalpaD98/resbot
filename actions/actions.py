@@ -103,6 +103,7 @@ class ActionClearRestaurantBookingSlots(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         return [SlotSet(CUISINE, None),
                 SlotSet(RESTAURANT_ID, None),
+                SlotSet(BOOKING_ID, None),
                 SlotSet(SELECTED_RESTAURANT, None),
                 SlotSet(NUM_PEOPLE, None),
                 SlotSet(DATE, None),

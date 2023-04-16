@@ -9,8 +9,9 @@ nlu:
       - I need to cancel a reservation
       - Can you help me cancel a booking?
       - Cancel a reservation for me
+      - i want to cancel a booking
 
   - intent: inform_cancel_booking_id
     examples: |
-      - cancel booking [bid_oi203](booking_id)
-      - cancel [bid_oi203](booking_id)
+      - cancel booking [bid_6435a6e1bef00a88687f1823](booking_id)
+      - cancel [bid_6436555b937c8209a6a93609](booking_id)

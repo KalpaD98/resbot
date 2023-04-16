@@ -26,13 +26,13 @@ class BookingResponseGenerator:
             if booking_date > current_date:
                 button1 = SUBCOMPONENT_BUTTON_PAYLOAD.copy()
                 button1[TITLE] = "Cancel Booking"
-                button1[PAYLOAD] = f"/inform_cancel_booking_id{{\"cancel_booking_id\": \"{booking.id}\"}}"
+                button1[PAYLOAD] = f"/inform_cancel_booking_id{{\"booking_id\": \"{booking.id}\"}}"
                 buttons.append(button1)
 
                 button2 = SUBCOMPONENT_BUTTON_PAYLOAD.copy()
                 button2[TITLE] = "Change Date"
                 button2[
-                    PAYLOAD] = f"/inform_change_date_booking_id{{\"change_booking_date_id\": \"{booking.id}\"}}"
+                    PAYLOAD] = f"/inform_change_date_booking_id{{\"booking_id\": \"{booking.id}\"}}"
                 buttons.append(button2)
 
             carousel_object[BUTTONS] = buttons
