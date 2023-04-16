@@ -2,7 +2,7 @@ version: "3.1" # stories-restaurant-booking.yml has general stories for the book
 
 stories:
 
-#  # user is logged in
+  # user is logged in
 #
 #  - story: User wants to change the booking date (logged in)
 #    steps:
@@ -10,15 +10,14 @@ stories:
 #      - slot_was_set:
 #          - user_id: uid_123
 #      - checkpoint: check_logged_in
-
-  # make changes to upcoming restaurant bookings - not logged in cases | [this file seems to be fine] generalize this
-  # to other stories
-
+#
+#  # make changes to upcoming restaurant bookings - not logged in cases | [this file seems to be fine] generalize this to other stories
+#
 #  - story: User wants to change the booking date (not logged in)
 #    steps:
 #      - intent: user_wants_to_change_restaurant_booking_date
 #      - slot_was_set:
-#          - user_id: null
+#          - is_authenticated: False
 #      - action: login_form
 #      - active_loop: login_form
 #      - active_loop: null
@@ -31,7 +30,7 @@ stories:
 #          - user_email: null
 #      - action: utter_login_success
 #      - checkpoint: check_logged_in
-
+#
 #
 #  - story: Show user bookings carousel and handle change date - affirm to change
 #    steps:
