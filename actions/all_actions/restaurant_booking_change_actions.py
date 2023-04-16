@@ -56,7 +56,7 @@ class ActionShowNewBookingDetails(Action):
 
             dispatcher.utter_message(text=message)
             dispatcher.utter_message(text="would you like to confirm the change?")
-            dispatcher.utter_message(quickreplies=ResponseGenerator.quick_replies([QR_YES, QR_NO]))
+            dispatcher.utter_message(quickreplies=ResponseGenerator.quick_reply_yes_no_with_payload())
         else:
             dispatcher.utter_message(text="Sorry, I couldn't find the booking details.")
 

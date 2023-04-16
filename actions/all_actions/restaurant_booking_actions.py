@@ -27,24 +27,12 @@ class ActionShowSelectedRestaurantAskBookingConfirmation(Action):
 
         logging.info(restaurant)
 
-        y_n_quick_replies_with_payload = []
-
-        quick_reply_yes = {
-            TITLE: QR_YES,
-            PAYLOAD: "/affirm"}
-
-        quick_reply_no = {
-            TITLE: QR_NO,
-            PAYLOAD: "/deny"}
-
-        y_n_quick_replies_with_payload.append(quick_reply_yes)
-        y_n_quick_replies_with_payload.append(quick_reply_no)
         # send the message back to the user
         dispatcher.utter_message(text="You selected " + restaurant.name)
         # add multiple messages for each below
         # dispatcher.utter_message(text="<small description>, <address>, <Opening hours [weekend,weekdays]>")
         dispatcher.utter_message(text="Would you like to proceed with the booking?",
-                                 quick_replies=ResponseGenerator.quick_replies(y_n_quick_replies_with_payload, True))
+                                 quick_replies=ResponseGenerator.quick_reply_yes_no_with_payload())
         # if yes -> fill slot
         return [SlotSet(NUM_PEOPLE, None), SlotSet(DATE, None), SlotSet(TIME, None),
                 SlotSet(SELECTED_RESTAURANT, restaurant.to_dict())]
@@ -124,7 +112,7 @@ class ActionShowBookingSummary(Action):
 
         # ask to confirm the booking
         dispatcher.utter_message(text="Would you like to confirm this booking?",
-                                 quick_replies=ResponseGenerator.quick_replies([QR_YES, QR_NO]))
+                                 quick_replies=ResponseGenerator.quick_reply_yes_no_with_payload())
 
         # TODO: if no -> ask if they would like to book a table of another restaurant or exit
         # TODO: if no -> ask if they would like to change booking details or exit
