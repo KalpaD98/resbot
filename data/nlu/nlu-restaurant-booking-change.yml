@@ -1,6 +1,18 @@
 version: "3.1" # nlu-booking.yml: NLU training data for booking related intents
 
 nlu:
+  - intent: user_wants_to_change_restaurant_booking
+    examples: |
+      - i want to change my booking
+      - change my booking
+      - modify my reservation
+      - update my booking
+      - alter my reservation
+      - reschedule my booking
+      - I need to make changes to my booking
+      - I want to update my reservation details
+      - I'd like to make some changes to my booking
+      - Can I make changes to my existing reservation?
 
   - intent: user_wants_to_change_restaurant_booking_date
     examples: |
@@ -15,17 +27,12 @@ nlu:
       - I need to change my restaurant reservation date
       - I'd like to reschedule my reservation to a different date
 
-  - intent: inform_change_date_booking_id
-    examples: |
-      - change date of booking [bid_oi203](booking_id)
-      - change date of [bid_oi203](booking_id)
-
   - intent: user_wants_to_change_booking_num_people
     examples: |
       - I want to change the number of people in my reservation
       - Can I change the number of people in my booking?
 
-  - intent: inform_change_num_people_booking_id
+  - intent: inform_change_booking_id
     examples: |
-      - change number of people in booking [bid_oi203](booking_id)
-      - change num_people in [bid_oi203](booking_id)
+      - change booking [bid_6435a6e1bef00a88687f1823](booking_id)
+      - change [bid_6435a6e1bef00a88687f1ac4](booking_id)

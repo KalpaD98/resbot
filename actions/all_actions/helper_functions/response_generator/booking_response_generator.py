@@ -31,8 +31,7 @@ class BookingResponseGenerator:
 
                 button2 = SUBCOMPONENT_BUTTON_PAYLOAD.copy()
                 button2[TITLE] = "Change Date"
-                button2[
-                    PAYLOAD] = f"/inform_change_date_booking_id{{\"booking_id\": \"{booking.id}\"}}"
+                button2[PAYLOAD] = f"/inform_change_date_booking_id{{\"booking_id\": \"{booking.id}\"}}"
                 buttons.append(button2)
 
             carousel_object[BUTTONS] = buttons

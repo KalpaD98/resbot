@@ -2,83 +2,14 @@ version: "3.1" # stories-restaurant-booking.yml has general stories for the book
 
 stories:
 
-  # user is logged in
-#
-#  - story: User wants to change the booking date (logged in)
-#    steps:
-#      - intent: user_wants_to_change_restaurant_booking_date
-#      - slot_was_set:
-#          - user_id: uid_123
-#      - checkpoint: check_logged_in
-#
-#  # make changes to upcoming restaurant bookings - not logged in cases | [this file seems to be fine] generalize this to other stories
-#
-#  - story: User wants to change the booking date (not logged in)
-#    steps:
-#      - intent: user_wants_to_change_restaurant_booking_date
-#      - slot_was_set:
-#          - is_authenticated: False
-#      - action: login_form
-#      - active_loop: login_form
-#      - active_loop: null
-#      - slot_was_set:
-#          - requested_slot: null
-#      - action: action_login_user
-#      - slot_was_set:
-#          - user_name: null
-#          - user_id: null
-#          - user_email: null
-#      - action: utter_login_success
-#      - checkpoint: check_logged_in
-#
-#
-#  - story: Show user bookings carousel and handle change date - affirm to change
-#    steps:
-#      - checkpoint: check_logged_in
-#      - action: action_show_upcoming_bookings
-#      - intent: inform_change_date_booking_id
-#      - slot_was_set:
-#          - booking_id: bid_123
-#      - action: utter_ask_new_booking_date
-#      - intent: inform_date
-#      - slot_was_set:
-#          - date: 2023-04-01
-#      - action: action_show_new_booking_details
-#      - intent: affirm
-#      - action: action_change_restaurant_booking_date
-#      - action: utter_thank_you
-#
-#  - story: Show user bookings carousel and handle change date - deny to change
-#    steps:
-#      - checkpoint: check_logged_in
-#      - action: action_show_upcoming_bookings
-#      - intent: inform_change_date_booking_id
-#      - slot_was_set:
-#          - booking_id: bid_123
-#      - action: utter_ask_new_booking_date
-#      - intent: inform_date
-#      - slot_was_set:
-#          - date: 2023-04-01
-#      - action: action_show_new_booking_details
-#      - intent: deny
-#      - action: utter_ask_change_another_booking
-#      - intent: affirm
-#      - action: action_show_upcoming_bookings
-#      - intent: inform_change_date_booking_id
-#
-#  - story: Show user bookings carousel and handle change date - deny to change and deny to change another
-#    steps:
-#      - checkpoint: check_logged_in
-#      - action: action_show_upcoming_bookings
-#      - intent: inform_change_date_booking_id
-#      - slot_was_set:
-#          - booking_id: bid_123
-#      - action: utter_ask_new_booking_date
-#      - intent: inform_date
-#      - slot_was_set:
-#          - date: 2023-04-01
-#      - action: action_show_new_booking_details
-#      - intent: deny
-#      - action: utter_ask_change_another_booking
-#      - intent: deny
-#      - action: utter_thank_you
+  - story: User wants to change booking (but not logged in)
+    steps:
+      - or:
+        - intent: user_wants_to_change_restaurant_booking
+        - intent: user_wants_to_change_restaurant_booking_date
+        - intent: user_wants_to_change_booking_num_people
+        - intent: inform_change_booking_id
+      - slot_was_set:
+          - is_authenticated: False
+      - action: action_ask_registered_and_show_login_signup_quick_replies
+
