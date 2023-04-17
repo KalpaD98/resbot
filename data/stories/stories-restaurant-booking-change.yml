@@ -25,7 +25,7 @@ stories:
       - action: action_ask_what_user_want_to_change_in_booking
       - checkpoint: checkpoint_asking_user_to_select_what_to_change
 
-  - story: User wants to change booking date
+  - story: User wants to change booking date - successful
     steps:
       - checkpoint: checkpoint_asking_user_to_select_what_to_change
       - intent: user_wants_to_change_restaurant_booking_date
@@ -35,11 +35,37 @@ stories:
       - action: action_validate_and_compare_booking_changes_ask_confirmation_to_change
       - checkpoint: checkpoint_booking_change_confirmation
 
-  - story: User wants to change booking num_people
+  - story: User wants to change booking date - wrong date
+    steps:
+      - checkpoint: checkpoint_asking_user_to_select_what_to_change
+      - intent: user_wants_to_change_restaurant_booking_date
+      - action: utter_ask_date
+      - intent: inform_date
+      - action: action_validate_date
+      - action: action_ask_date_again
+      - intent: inform_date
+      - action: action_validate_date
+      - action: action_validate_and_compare_booking_changes_ask_confirmation_to_change
+      - checkpoint: checkpoint_booking_change_confirmation
+
+  - story: User wants to change booking num_people - successful
     steps:
       - checkpoint: checkpoint_asking_user_to_select_what_to_change
       - intent: user_wants_to_change_booking_num_people
       - action: utter_ask_num_people
+      - intent: inform_num_people
+      - action: action_validate_num_people
+      - action: action_validate_and_compare_booking_changes_ask_confirmation_to_change
+      - checkpoint: checkpoint_booking_change_confirmation
+
+  - story: User wants to change booking num_people - wrong value
+    steps:
+      - checkpoint: checkpoint_asking_user_to_select_what_to_change
+      - intent: user_wants_to_change_booking_num_people
+      - action: utter_ask_num_people
+      - intent: inform_num_people
+      - action: action_validate_num_people
+      - action: action_ask_num_people_again
       - intent: inform_num_people
       - action: action_validate_num_people
       - action: action_validate_and_compare_booking_changes_ask_confirmation_to_change

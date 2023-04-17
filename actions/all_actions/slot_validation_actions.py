@@ -41,19 +41,30 @@ class ActionValidateNumPeople(Action):
             return [SlotSet(NUM_PEOPLE, num_people)]
         else:
             dispatcher.utter_message(text=message)
-            return [SlotSet(NUM_PEOPLE, None)]
+            return [SlotSet(NUM_PEOPLE, None), FollowupAction("action_ask_num_people_again")]
 
 
-class ActionAskDate(Action):
+class ActionAskNumPeopleAgain(Action):
     def name(self) -> Text:
-        return "action_ask_date"
+        return "action_ask_num_people_again"
+
+    async def run(self, dispatcher: CollectingDispatcher,
+                  tracker: Tracker,
+                  domain: Dict[Text, Any]) -> List[EventType]:
+        dispatcher.utter_message(text="Please enter a valid number of people.")
+        return [SlotSet(NUM_PEOPLE, None)]
+
+
+class ActionAskDateAgain(Action):
+    def name(self) -> Text:
+        return "action_ask_date_again"
 
     async def run(
             self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]
     ) -> List[EventType]:
-        dispatcher.utter_message(text="Can you please provide the date again")
-        dispatcher.utter_message(text="you can enter the date in a format like dd/mm/yyyy or similar")
-        return []
+        dispatcher.utter_message(text="Can you please provide the date again?")
+        dispatcher.utter_message(text="You can enter the date in a format like dd/mm/yyyy or similar.")
+        return [SlotSet(DATE, None)]
 
 
 class ActionValidateDate(Action):
@@ -63,15 +74,14 @@ class ActionValidateDate(Action):
     async def run(
             self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]
     ) -> List[EventType]:
-        date_slot = "date"
-        date = tracker.get_slot(date_slot)
+        date = tracker.get_slot(DATE)
         is_valid, date_value, message = SlotValidators.validate_date(date)
 
         if is_valid:
-            return [SlotSet(date_slot, date_value)]
+            return [SlotSet(DATE, date_value)]
         else:
             dispatcher.utter_message(text=message)
-            return [SlotSet(date_slot, None), FollowupAction("action_ask_date")]
+            return [SlotSet(DATE, None), FollowupAction("action_ask_date_again")]
 
 
 class DateForm(FormValidationAction):
