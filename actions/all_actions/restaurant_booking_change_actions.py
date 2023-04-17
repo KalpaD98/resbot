@@ -1,7 +1,36 @@
 from actions.all_actions.common_imports_for_actions import *
+from actions.all_actions.helper_functions.response_generator.booking_response_generator import BookingResponseGenerator
 
 ACTION_CHANGE_RESTAURANT_BOOKING_DETAILS = "action_change_restaurant_booking_details"
 ACTION_SHOW_NEW_BOOKING_DETAILS = "action_show_new_booking_details"
+ACTION_SHOW_SELECTED_BOOKING_DETAILS = "action_show_selected_booking_details"
+
+
+class ActionShowCurrentBookingDetails(Action):
+    def name(self) -> Text:
+        return ACTION_SHOW_SELECTED_BOOKING_DETAILS
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        try:
+            booking_id = tracker.get_slot(BOOKING_ID)
+            booking = booking_repo.get_booking_by_id(booking_id)
+
+            if not booking:
+                dispatcher.utter_message(text="No booking found with the provided ID.")
+                return []
+
+            restaurant = restaurant_repo.get_restaurant_by_id(booking.restaurant_id)
+            booking_details_text = BookingResponseGenerator.generate_booking_details_text(booking, restaurant)
+
+            dispatcher.utter_message(text=booking_details_text)
+
+        except Exception as e:
+            logger.error(f"An error occurred in ActionShowCurrentBookingDetails: {e}")
+            dispatcher.utter_message(text="An error occurred. Please try again later.")
+
+        return []
 
 
 class ActionChangeBookingDetails(Action):

@@ -41,3 +41,19 @@ class BookingResponseGenerator:
             carousel_objects.append(carousel_object)
 
         return carousel_objects
+
+    @staticmethod
+    def generate_booking_details_text(booking, restaurant):
+        booking_details = (
+            f"Booking Details:\n\n"
+            f"Restaurant: {restaurant.name}\n"
+            f"Address: {restaurant.address}\n"
+            f"Date: {booking.date}\n"
+            f"Time: {booking.time if booking.time else 'Not specified'}\n"
+            f"Number of people: {booking.num_people}\n"
+        )
+
+        if booking.special_requests:
+            booking_details += f"Special requests: {booking.special_requests}\n"
+
+        return booking_details

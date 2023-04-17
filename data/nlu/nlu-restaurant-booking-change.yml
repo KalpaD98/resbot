@@ -29,8 +29,13 @@ nlu:
 
   - intent: user_wants_to_change_booking_num_people
     examples: |
-      - I want to change the number of people in my reservation
-      - Can I change the number of people in my booking?
+      - i want to change the number of people in my reservation
+      - can I change the number of people in my booking?
+
+  - intent: user_wants_to_change_both_restaurant_booking_date_and_num_people
+    examples: |
+      - i want to change the booking date and number of people 
+      - can i change both booking date and number of people
 
   - intent: inform_change_booking_id
     examples: |
