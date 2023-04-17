@@ -1,3 +1,5 @@
+version: "3.1" # rules-restaurant-booking-view.yml
+
 rules:
   - rule: User wants to view bookings (logged in)
     condition:

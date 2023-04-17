@@ -57,7 +57,9 @@ stories:
       - intent: affirm
       - action: restaurant_booking_form
       - active_loop: restaurant_booking_form
-      - intent: stop_restaurant_booking_form
+      - or:
+          - intent: stop
+          - intent: stop_restaurant_booking_form
       - action: action_deactivate_form
       - active_loop: null
       - slot_was_set:

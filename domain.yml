@@ -42,9 +42,7 @@ intents:
   - inform_view_details_restaurant_id
   - inform_booking_restaurant_id
   - user_wants_to_change_restaurant_booking_date
-  - inform_change_date_booking_id
   - user_wants_to_change_booking_num_people
-  - inform_change_num_people_booking_id
   - user_wants_to_cancel_booking
   - inform_cancel_booking_id # TODO: make changes
 
@@ -55,6 +53,11 @@ intents:
   - view_all_bookings
   - view_upcoming_bookings
   - view_past_bookings
+  # nlu-restaurant-booking-change.yml
+  - user_wants_to_change_restaurant_booking
+  - inform_change_booking_id
+  - user_wants_to_change_both_restaurant_booking_date_and_num_people
+
   # -------------------------------------------- nlu-restaurant-inform.yml  ----------------------------------------- #
   - inform_location
   - inform_city
@@ -356,7 +359,9 @@ actions:
   - action_validate_cuisine
   - action_validate_restaurant_id
   - action_validate_num_people
+  - action_ask_num_people_again
   - action_validate_date
+  - action_ask_date_again
   - action_validate_time
   - action_validate_user_id
   - action_validate_booking_reference_id
@@ -384,7 +389,11 @@ actions:
   - action_show_bookings_carousal
   - action_show_future_bookings_carousal
   - action_show_past_bookings_carousal
-
+  # ------------------------------------- restaurant booking change actions ------------------------------------ #
+  - action_ask_what_user_want_to_change_in_booking
+  - action_validate_and_compare_booking_changes_ask_confirmation_to_change
+  - action_change_restaurant_booking_details
+  - action_clear_booking_data_slots
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # ------------------------------------------- Responses: Bot Utterances --------------------------------------------- #
