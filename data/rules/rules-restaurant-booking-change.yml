@@ -1,0 +1,7 @@
+version: "3.1" # rules-restaurant-booking-change.yml
+
+rules:
+  - rule: Inform change booking ID and ask what user wants to change
+    steps:
+      - intent: inform_change_booking_id
+      - action: action_ask_what_user_want_to_change_in_booking

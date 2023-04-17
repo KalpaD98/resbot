@@ -519,6 +519,9 @@ responses:
   utter_no_future_bookings_found:
     - text: "Sorry, there are no upcoming bookings found for you."
 
+  utter_no_changes_made_to_booking:
+    - text: "No changes were made to your booking"
+
   # ------------------------------------------ Retrieval Intent Responses -------------------------------------------- #
   utter_bot_challenge/what_can_you_do:
     - text: I can help you book a restaurant 🍴.

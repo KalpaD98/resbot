@@ -57,3 +57,25 @@ class BookingResponseGenerator:
             booking_details += f"Special requests: {booking.special_requests}\n"
 
         return booking_details
+
+    @staticmethod
+    def generate_booking_comparison_text(old_booking, new_booking, restaurant):
+        comparison_text = "Here is a comparison of your booking details:\n\n"
+
+        if old_booking.date != new_booking.date:
+            comparison_text += f"Date: {old_booking.date} -> {new_booking.date}\n"
+
+        if old_booking.num_people != new_booking.num_people:
+            comparison_text += f"Number of people: {old_booking.num_people} -> {new_booking.num_people}\n"
+
+        comparison_text += (
+            f"\nRestaurant: {restaurant.name}\n"
+            f"Address: {restaurant.address}\n"
+            f"Time: {old_booking.time if old_booking.time else 'Not specified'}\n"
+        )
+
+        if old_booking.special_requests:
+            comparison_text += f"Special requests: {old_booking.special_requests}\n"
+
+        comparison_text += "\nDo you want to confirm these changes?"
+        return comparison_text

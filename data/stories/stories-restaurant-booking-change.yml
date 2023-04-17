@@ -1,45 +1,53 @@
 version: "3.1" # stories-restaurant-booking.yml has general stories for the booking
 
 stories:
-
   - story: User wants to change booking (but not logged in)
     steps:
       - or:
-        - intent: user_wants_to_change_restaurant_booking
-        - intent: user_wants_to_change_restaurant_booking_date
-        - intent: user_wants_to_change_booking_num_people
-        - intent: inform_change_booking_id
+          - intent: user_wants_to_change_restaurant_booking
+          - intent: user_wants_to_change_restaurant_booking_date
+          - intent: user_wants_to_change_booking_num_people
+          - intent: inform_change_booking_id
       - slot_was_set:
           - is_authenticated: False
       - action: action_ask_registered_and_show_login_signup_quick_replies
 
-  - story: User wants to change booking date (logged in)
+  - story: User wants to change booking (logged in)
     steps:
-      - checkpoint: checkpoint_change_booking_options
+      - or:
+          - intent: user_wants_to_change_restaurant_booking
+          - intent: user_wants_to_change_restaurant_booking_date
+          - intent: user_wants_to_change_booking_num_people
+      - slot_was_set:
+          - is_authenticated: True
+      - action: action_show_future_bookings_carousal
+      - intent: inform_change_booking_id
+      - action: action_ask_what_user_want_to_change_in_booking
+      - checkpoint: checkpoint_asking_user_to_select_what_to_change
+
+  - story: User wants to change booking date
+    steps:
+      - checkpoint: checkpoint_asking_user_to_select_what_to_change
       - intent: user_wants_to_change_restaurant_booking_date
-      - action: action_ask_date
+      - action: utter_ask_date
+      - intent: inform_date
       - action: action_validate_date
-      - checkpoint: checkpoint_confirm_changes
-      - intent: affirm
-      - action: action_change_restaurant_booking_date
-      - action: utter_thank_you
-      - action: action_ask_anything_else
+      - action: action_validate_and_compare_booking_changes_ask_confirmation_to_change
+      - checkpoint: checkpoint_booking_change_confirmation
 
-  - story: User wants to change booking num_people (logged in)
+  - story: User wants to change booking num_people
     steps:
-      - checkpoint: checkpoint_change_booking_options
+      - checkpoint: checkpoint_asking_user_to_select_what_to_change
       - intent: user_wants_to_change_booking_num_people
-      - action: action_ask_num_people
+      - action: utter_ask_num_people
+      - intent: inform_num_people
       - action: action_validate_num_people
-      - checkpoint: checkpoint_confirm_changes
-      - intent: affirm
-      - action: action_change_restaurant_booking_num_people
-      - action: utter_thank_you
-      - action: action_ask_anything_else
+      - action: action_validate_and_compare_booking_changes_ask_confirmation_to_change
+      - checkpoint: checkpoint_booking_change_confirmation
 
-  - story: User wants to change both booking date and num_people (logged in)
+  - story: User wants to change both booking date and num_people
     steps:
-      - checkpoint: checkpoint_change_booking_options
+      - checkpoint: checkpoint_asking_user_to_select_what_to_change
       - intent: user_wants_to_change_both_restaurant_booking_date_and_num_people
       - action: restaurant_booking_form
       - active_loop: restaurant_booking_form
@@ -48,22 +56,30 @@ stories:
       - slot_was_set:
           - date: 2023-06-08
       - active_loop: null
-      - action: action_validate_and_compare_booking_changes
-      - checkpoint: checkpoint_confirm_changes
+      - action: action_validate_and_compare_booking_changes_ask_confirmation_to_change
+      - checkpoint: checkpoint_booking_change_confirmation
+
+  - story: user affirm to change booking details
+    steps:
+      - checkpoint: checkpoint_booking_change_confirmation
       - intent: affirm
       - action: action_change_restaurant_booking_details
+      - checkpoint: checkpoint_after_booking_change_flow_completion
+
+  - story: User deny to change booking details
+    steps:
+      - checkpoint: checkpoint_booking_change_confirmation
+      - intent: deny
+      - action: utter_no_changes_made_to_booking
+      - checkpoint: checkpoint_after_booking_change_flow_completion
+
+  - story: Continuation after the booking change flow is completed
+    steps:
+      - checkpoint: checkpoint_after_booking_change_flow_completion
+      - action: action_clear_booking_data_slots
       - action: utter_thank_you
       - action: action_ask_anything_else
 
-#  - story: User wants to change booking (logged in)
-#    steps:
-#      - intent: user_wants_to_change_restaurant_booking
-#      - slot_was_set:
-#          - is_authenticated: True
-#
-#      - action: action_show_future_bookings_carousal
-#      - intent: inform_change_booking_id
-#      - action: action_show_selected_booking_details
 
       # here lets have a check point
       # possible other intents are
@@ -76,38 +92,3 @@ stories:
       # if no -> well handle it later
 
       # this is example stories for booking a restaurant from scratch
-
-
-
-
-
-#
-#  - story: User wants to change booking date (logged in)
-#    steps:
-#      - intent: user_wants_to_change_restaurant_booking_date
-#      - slot_was_set:
-#          - is_authenticated: True
-#      - action: action_show_future_bookings_carousal
-#      - intent: inform_change_booking_id
-#      - action: action_show_current_booking_details
-#      - action: action_ask_to_confirm_changes
-#      - intent: affirm
-#      - action: action_ask_new_date
-#      - intent: inform_new_date
-#      - action: action_change_booking_date
-#      - action: action_confirm_booking_changes
-#
-#  - story: User wants to change booking number of people (logged in)
-#    steps:
-#      - intent: user_wants_to_change_booking_num_people
-#      - slot_was_set:
-#          - is_authenticated: True
-#      - action: action_show_future_bookings_carousal
-#      - intent: inform_change_booking_id
-#      - action: action_show_current_booking_details
-#      - action: action_ask_to_confirm_changes
-#      - intent: affirm
-#      - action: action_ask_new_num_people
-#      - intent: inform_new_num_people
-#      - action: action_change_booking_num_people
-#      - action: action_confirm_booking_changes
