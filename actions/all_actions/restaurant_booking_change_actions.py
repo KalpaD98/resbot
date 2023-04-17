@@ -89,7 +89,7 @@ class ActionAskWhatUserWantToChangeInBooking(Action):
     ) -> List[EventType]:
         options = [
             {
-                TITLE: "Both date and number of people",
+                TITLE: "Date and Number of People",
                 PAYLOAD: "/user_wants_to_change_restaurant_booking",
             },
             {
@@ -166,4 +166,4 @@ class ActionClearBookingDataSlots(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        return [SlotSet("date", None), SlotSet("num_people", None)]
+        return [SlotSet(DATE, None), SlotSet(NUM_PEOPLE, None)]
