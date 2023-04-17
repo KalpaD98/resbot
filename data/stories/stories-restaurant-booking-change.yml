@@ -1,4 +1,4 @@
-version: "3.1" # stories-restaurant-booking.yml has general stories for the booking
+version: "3.1" # stories-restaurant-booking-change.yml has general stories for the booking
 
 stories:
   - story: User wants to change booking (but not logged in)
@@ -7,7 +7,6 @@ stories:
           - intent: user_wants_to_change_restaurant_booking
           - intent: user_wants_to_change_restaurant_booking_date
           - intent: user_wants_to_change_booking_num_people
-          - intent: inform_change_booking_id
       - slot_was_set:
           - is_authenticated: False
       - action: action_ask_registered_and_show_login_signup_quick_replies
@@ -82,7 +81,9 @@ stories:
       - slot_was_set:
           - date: 2023-06-08
       - active_loop: null
-      - action: action_validate_and_compare_booking_changes_ask_confirmation_to_change
+      - action: action_show_booking_summary # need to check: Not tested yet
+#      - action: action_validate_and_compare_booking_changes_ask_confirmation_to_change
+      # TODO: used a risky way to solve: do more testing
       - checkpoint: checkpoint_booking_change_confirmation
 
   - story: user affirm to change booking details

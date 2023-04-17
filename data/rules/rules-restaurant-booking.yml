@@ -1,4 +1,4 @@
-version: "3.1" # rules-booking.yml
+version: "3.1" # rules-restaurant-booking.yml
 rules:
   # to handle user clicking book or view details in the restaurant carousel
   - rule: ask booking confirmation when user click book

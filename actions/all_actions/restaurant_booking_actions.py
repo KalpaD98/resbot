@@ -113,6 +113,10 @@ class ActionShowBookingSummary(Action):
             restaurant = tracker.get_slot(SELECTED_RESTAURANT)
             user = tracker.get_slot(LOGGED_USER)
 
+            # for changing restaurant booking: do testing
+            if restaurant is None:
+                return [FollowupAction("action_validate_and_compare_booking_changes_ask_confirmation_to_change")]
+
             # send the message to the user
             dispatcher.utter_message(
                 text=user[User.NAME] + ", your booking summary for " + restaurant[Restaurant.NAME] + " is as follows:")
@@ -126,15 +130,14 @@ class ActionShowBookingSummary(Action):
             dispatcher.utter_message(text="Would you like to confirm this booking?",
                                      quick_replies=ResponseGenerator.quick_reply_yes_no_with_payload())
 
-            return []
+
         except Exception as e:
             # Log the error and inform the user
             logger.error(f"Error in ActionShowBookingSummary: {e}")
             dispatcher.utter_message(
                 text="Sorry, I encountered an error while showing the booking summary. Please try again.")
-            return []
 
-
+        return []
 
 
 # action_confirm_booking.
