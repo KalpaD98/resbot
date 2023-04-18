@@ -319,6 +319,10 @@ forms:
       - num_people
       - date
 
+  restaurant_booking_change_form:
+    required_slots:
+      - num_people
+      - date
   change_restaurant_booking_date_form:
     required_slots:
       - date

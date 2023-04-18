@@ -74,8 +74,8 @@ stories:
     steps:
       - checkpoint: checkpoint_asking_user_to_select_what_to_change
       - intent: user_wants_to_change_both_restaurant_booking_date_and_num_people
-      - action: restaurant_booking_form
-      - active_loop: restaurant_booking_form
+      - action: restaurant_booking_change_form
+      - active_loop: restaurant_booking_change_form
       - slot_was_set:
           - num_people: '4'
       - slot_was_set:
@@ -111,7 +111,7 @@ stories:
       # here lets have a check point
       # possible other intents are
       # user_wants_to_change_restaurant_booking_date, user_wants_to_change_booking_num_people, user_wants_to_change_both_restaurant_booking_date_and_num_people
-      # if they wants to change both we can throw the restaurant_booking_form and ask to fill both values
+      # if they wants to change both we can throw the restaurant_booking_change_form and ask to fill both values
       # after user fills this we can run an action to check the values again (some basic checking) for all 3 cases
       # then we give another action to make a comparison between previous and current booking values
       # in above action we ask are you sure to change this booking

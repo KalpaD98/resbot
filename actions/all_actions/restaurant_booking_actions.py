@@ -140,7 +140,6 @@ class ActionShowBookingSummary(Action):
         return []
 
 
-# action_confirm_booking.
 # This function is used to confirm the booking and send a message to the user based on their response.
 # run this function after confirming the booking.
 class ActionConfirmBooking(Action):
@@ -181,7 +180,7 @@ class ActionConfirmBooking(Action):
 
             dispatcher.utter_message(text=booking_summary_message)
 
-            dispatcher.utter_message(text="Your booking id is: " + str(booking.id))
+            # dispatcher.utter_message(text="Your booking id is: " + str(booking.id))
 
             # clear slots num_people, date, time, restaurant_id, selected_restaurant
             return [SlotSet(CUISINE, None), SlotSet(NUM_PEOPLE, None), SlotSet(DATE, None),

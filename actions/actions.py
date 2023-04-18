@@ -29,7 +29,6 @@ ACTION_DEFAULT_FALLBACK_NAME = "action_default_fallback"
 ACTION_CLEAR_RESTAURANT_BOOKING_SLOTS = "action_clear_restaurant_booking_slots"
 
 
-# anything else with quick replies
 class ActionAnythingElse(Action):
     def name(self) -> Text:
         return ACTION_ASK_ANYTHING_ELSE
@@ -37,24 +36,14 @@ class ActionAnythingElse(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        # quick replies for show more and search with payload
-        quick_replies_with_payload = []
-
-        quick_reply_show_more = {
-            TITLE: QR_SHOW_MORE_RESTAURANTS,
-            PAYLOAD: "/request_more_restaurant_options"}
-
-        quick_reply_no = {
-            TITLE: "No thanks",
-            PAYLOAD: "/goodbye"}
-
-        quick_reply_search_restaurant = {
-            TITLE: QR_SEARCH_RESTAURANTS,
-            PAYLOAD: "/want_to_search_restaurants"}
-
-        quick_replies_with_payload.append(quick_reply_show_more)
-        quick_replies_with_payload.append(quick_reply_search_restaurant)
-        quick_replies_with_payload.append(quick_reply_no)
+        quick_replies_with_payload = [
+            {"title": QR_SHOW_MORE_RESTAURANTS, "payload": "/request_more_restaurant_options"},
+            {"title": "No thanks", "payload": "/goodbye"},
+            {"title": QR_SEARCH_RESTAURANTS, "payload": "/want_to_search_restaurants"},
+            {"title": "Checkout restaurants", "payload": "/request_restaurants"},
+            {"title": "Search restaurants", "payload": "/search_restaurants"},
+            {"title": "View bookings", "payload": "/view_bookings"}
+        ]
 
         dispatcher.utter_message(text="Is there anything else I can help you with?",
                                  quick_replies=ResponseGenerator.quick_replies(quick_replies_with_payload, True))

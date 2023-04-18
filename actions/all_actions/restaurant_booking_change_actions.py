@@ -19,13 +19,13 @@ class ActionShowCurrentBookingDetails(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         try:
             booking_id = tracker.get_slot(BOOKING_ID)
-            booking = booking_repo.get_booking_by_id(booking_id)
+            booking = booking_repo.find_booking_by_id(booking_id)
 
             if not booking:
                 dispatcher.utter_message(text="No booking found with the provided ID.")
                 return []
 
-            restaurant = restaurant_repo.get_restaurant_by_id(booking.restaurant_id)
+            restaurant = restaurant_repo.find_restaurant_by_id(booking.restaurant_id)
             booking_details_text = BookingResponseGenerator.generate_booking_details_text(booking, restaurant)
 
             dispatcher.utter_message(text=booking_details_text)
@@ -48,7 +48,10 @@ class ActionChangeBookingDetails(Action):
             booking_id = tracker.get_slot(BOOKING_ID)
             new_date = tracker.get_slot(DATE)
             new_num_people = tracker.get_slot(NUM_PEOPLE)
-
+            if booking_id is None:
+                logging.error("Booking ID not found")
+                dispatcher.utter_message(text="Error occurred while fetching selected booking")
+                return [FollowupAction("action_show_future_bookings_carousal")]
             # Update the booking date and/or number of people in the system here.
             booking_updates = {}
             if new_date:
@@ -67,7 +70,7 @@ class ActionChangeBookingDetails(Action):
                     update_messages.append(f"updated number of people to {new_num_people}")
 
                 dispatcher.utter_message(
-                    text=f"Your booking with ID {booking_id} has been successfully {' and '.join(update_messages)}.")
+                    text=f"Your booking has been changed successfully {' and '.join(update_messages)}.")
 
                 return [SlotSet("date", None), SlotSet("num_people", None)]
             else:
@@ -120,12 +123,12 @@ class ActionValidateAndCompareBookingChanges(Action):
             new_num_people = tracker.get_slot(NUM_PEOPLE)
 
             # Fetch the current booking details
-            booking = booking_repo.get_booking_by_id(booking_id)
+            booking = booking_repo.find_booking_by_id(booking_id)
             if not booking:
                 dispatcher.utter_message(text="No booking found with the provided ID.")
                 return [FollowupAction("action_show_future_bookings_carousal")]
 
-            restaurant = restaurant_repo.get_restaurant_by_id(booking.restaurant_id)
+            restaurant = restaurant_repo.find_restaurant_by_id(booking.restaurant_id)
 
             # Check if any changes were made
             has_changes = False
