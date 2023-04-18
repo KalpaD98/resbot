@@ -6,7 +6,8 @@ stories:
       - or:
           - intent: user_wants_to_change_restaurant_booking
           - intent: user_wants_to_change_restaurant_booking_date
-          - intent: user_wants_to_change_booking_num_people
+          - intent: user_wants_to_change_restaurant_booking_num_people
+          - intent: user_wants_to_change_both_restaurant_booking_date_and_num_people
       - slot_was_set:
           - is_authenticated: False
       - action: action_ask_registered_and_show_login_signup_quick_replies
@@ -16,9 +17,12 @@ stories:
       - or:
           - intent: user_wants_to_change_restaurant_booking
           - intent: user_wants_to_change_restaurant_booking_date
-          - intent: user_wants_to_change_booking_num_people
+          - intent: user_wants_to_change_restaurant_booking_num_people
+          - intent: user_wants_to_change_both_restaurant_booking_date_and_num_people
       - slot_was_set:
           - is_authenticated: True
+      - slot_was_set:
+          - booking_id: null
       - action: action_show_future_bookings_carousal
       - intent: inform_change_booking_id
       - action: action_ask_what_user_want_to_change_in_booking
@@ -28,6 +32,8 @@ stories:
     steps:
       - checkpoint: checkpoint_asking_user_to_select_what_to_change
       - intent: user_wants_to_change_restaurant_booking_date
+      - slot_was_set:
+          - booking_id: 'bid_6436555b937c8209a6a93609'
       - action: utter_ask_date
       - intent: inform_date
       - action: action_validate_date
@@ -38,6 +44,8 @@ stories:
     steps:
       - checkpoint: checkpoint_asking_user_to_select_what_to_change
       - intent: user_wants_to_change_restaurant_booking_date
+      - slot_was_set:
+          - booking_id: 'bid_6436555b937c8209a6a93609'
       - action: utter_ask_date
       - intent: inform_date
       - action: action_validate_date
@@ -50,7 +58,9 @@ stories:
   - story: User wants to change booking num_people - successful
     steps:
       - checkpoint: checkpoint_asking_user_to_select_what_to_change
-      - intent: user_wants_to_change_booking_num_people
+      - intent: user_wants_to_change_restaurant_booking_num_people
+      - slot_was_set:
+          - booking_id: 'bid_6436555b937c8209a6a93609'
       - action: utter_ask_num_people
       - intent: inform_num_people
       - action: action_validate_num_people
@@ -60,7 +70,9 @@ stories:
   - story: User wants to change booking num_people - wrong value
     steps:
       - checkpoint: checkpoint_asking_user_to_select_what_to_change
-      - intent: user_wants_to_change_booking_num_people
+      - intent: user_wants_to_change_restaurant_booking_num_people
+      - slot_was_set:
+          - booking_id: 'bid_6436555b937c8209a6a93609'
       - action: utter_ask_num_people
       - intent: inform_num_people
       - action: action_validate_num_people
@@ -74,6 +86,8 @@ stories:
     steps:
       - checkpoint: checkpoint_asking_user_to_select_what_to_change
       - intent: user_wants_to_change_both_restaurant_booking_date_and_num_people
+      - slot_was_set:
+          - booking_id: 'bid_6436555b937c8209a6a93609'
       - action: restaurant_booking_change_form
       - active_loop: restaurant_booking_change_form
       - slot_was_set:
@@ -81,9 +95,7 @@ stories:
       - slot_was_set:
           - date: 2023-06-08
       - active_loop: null
-      - action: action_show_booking_summary # need to check: Not tested yet
-#      - action: action_validate_and_compare_booking_changes_ask_confirmation_to_change
-      # TODO: used a risky way to solve: do more testing
+      - action: action_validate_and_compare_booking_changes_ask_confirmation_to_change
       - checkpoint: checkpoint_booking_change_confirmation
 
   - story: user affirm to change booking details
@@ -110,7 +122,7 @@ stories:
 
       # here lets have a check point
       # possible other intents are
-      # user_wants_to_change_restaurant_booking_date, user_wants_to_change_booking_num_people, user_wants_to_change_both_restaurant_booking_date_and_num_people
+      # user_wants_to_change_restaurant_booking_date, user_wants_to_change_restaurant_booking_num_people, user_wants_to_change_both_restaurant_booking_date_and_num_people
       # if they wants to change both we can throw the restaurant_booking_change_form and ask to fill both values
       # after user fills this we can run an action to check the values again (some basic checking) for all 3 cases
       # then we give another action to make a comparison between previous and current booking values

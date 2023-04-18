@@ -14,7 +14,7 @@ class BookingResponseGenerator:
 
             restaurant = restaurant_data_dict[booking.restaurant_id]
 
-            carousel_object[TITLE] = "🍽️ at " + restaurant.name + "for " + number_to_word(booking.num_people)
+            carousel_object[TITLE] = "🍽️ at " + restaurant.name + " for " + booking.num_people
             carousel_object[IMAGE_URL] = restaurant.image_url
             carousel_object[SUBTITLE] = f"📅: {booking.date}"
 
@@ -58,12 +58,12 @@ class BookingResponseGenerator:
     def generate_booking_comparison_text(old_booking, new_booking, restaurant):
 
         comparison_text = "Here is a comparison of your booking details:\n\n"
-        comparison_text += f"Restaurant: {restaurant.name}\n"
-        comparison_text += f"Address: {restaurant.address}\n"
+        comparison_text += f"Restaurant: {restaurant.name}\n\n"
+        comparison_text += f"Address: {restaurant.address}\n\n"
         # f"Time: {old_booking.time if old_booking.time else 'Not specified'}\n"
 
         if old_booking.date != new_booking.date:
-            comparison_text += f"Date: {old_booking.date} -> {new_booking.date}\n"
+            comparison_text += f"Date: {old_booking.date} -> {new_booking.date}\n\n"
 
         if old_booking.num_people != new_booking.num_people:
             comparison_text += f"Number of people: {old_booking.num_people} -> {new_booking.num_people}\n"

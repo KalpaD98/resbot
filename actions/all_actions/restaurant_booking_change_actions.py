@@ -93,7 +93,7 @@ class ActionAskWhatUserWantToChangeInBooking(Action):
         options = [
             {
                 TITLE: "Date and Number of People",
-                PAYLOAD: "/user_wants_to_change_restaurant_booking",
+                PAYLOAD: "/user_wants_to_change_both_restaurant_booking_date_and_num_people",
             },
             {
                 TITLE: "Date",
@@ -101,7 +101,7 @@ class ActionAskWhatUserWantToChangeInBooking(Action):
             },
             {
                 TITLE: "Number of people",
-                PAYLOAD: "/user_wants_to_change_booking_num_people",
+                PAYLOAD: "/user_wants_to_change_restaurant_booking_num_people",
             },
         ]
 

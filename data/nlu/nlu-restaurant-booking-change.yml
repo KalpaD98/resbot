@@ -27,7 +27,7 @@ nlu:
       - I need to change my restaurant reservation date
       - I'd like to reschedule my reservation to a different date
 
-  - intent: user_wants_to_change_booking_num_people
+  - intent: user_wants_to_change_restaurant_booking_num_people
     examples: |
       - i want to change the number of people in my reservation
       - can I change the number of people in my booking?
@@ -36,6 +36,8 @@ nlu:
     examples: |
       - i want to change the booking date and number of people 
       - can i change both booking date and number of people
+      - both date and number of people
+      - both
 
   - intent: inform_change_booking_id
     examples: |

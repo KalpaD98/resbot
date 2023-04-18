@@ -42,7 +42,7 @@ intents:
   - inform_view_details_restaurant_id
   - inform_booking_restaurant_id
   - user_wants_to_change_restaurant_booking_date
-  - user_wants_to_change_booking_num_people
+  - user_wants_to_change_restaurant_booking_num_people
   - user_wants_to_cancel_booking
   - inform_cancel_booking_id # TODO: make changes
 
