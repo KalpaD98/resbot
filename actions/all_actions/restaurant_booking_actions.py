@@ -114,8 +114,8 @@ class ActionShowBookingSummary(Action):
             user = tracker.get_slot(LOGGED_USER)
 
             # for changing restaurant booking: do testing
-            # if restaurant is None:
-            #     return [FollowupAction("action_validate_and_compare_booking_changes_ask_confirmation_to_change")]
+            if restaurant is None:
+                return [FollowupAction("action_validate_and_compare_booking_changes_ask_confirmation_to_change")]
 
             # send the message to the user
             dispatcher.utter_message(

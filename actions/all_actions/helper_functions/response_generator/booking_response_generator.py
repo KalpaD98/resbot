@@ -14,11 +14,12 @@ class BookingResponseGenerator:
 
             restaurant = restaurant_data_dict[booking.restaurant_id]
 
-            carousel_object[TITLE] = "🍽️ at " + restaurant.name + " for " + booking.num_people
+            carousel_object[TITLE] = "🍽️ at " + restaurant.name + " for " + str(booking.num_people)
             carousel_object[IMAGE_URL] = restaurant.image_url
-            carousel_object[SUBTITLE] = f"📅: {booking.date}"
-
             booking_date = datetime.strptime(booking.date, "%Y-%m-%d").date()
+            formatted_date = booking_date.strftime("%Y/%m/%d")
+            carousel_object[SUBTITLE] = f"📅: {formatted_date}"
+
             current_date = datetime.now().date()
 
             buttons = []

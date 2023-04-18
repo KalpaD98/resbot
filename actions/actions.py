@@ -38,11 +38,11 @@ class ActionAnythingElse(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         quick_replies_with_payload = [
             # {"title": QR_SHOW_MORE_RESTAURANTS, "payload": "/request_more_restaurant_options"},
-            {"title": "No thanks", "payload": "/goodbye"},
             {"title": QR_SEARCH_RESTAURANTS, "payload": "/want_to_search_restaurants"},
             {"title": "Checkout restaurants", "payload": "/request_restaurants"},
             {"title": "Search restaurants", "payload": "/search_restaurants"},
-            {"title": "View bookings", "payload": "/view_bookings"}
+            {"title": "View bookings", "payload": "/view_bookings"},
+            {"title": "No thanks", "payload": "/goodbye"},
         ]
 
         dispatcher.utter_message(text="Is there anything else I can help you with?",

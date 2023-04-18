@@ -88,13 +88,14 @@ stories:
       - intent: user_wants_to_change_both_restaurant_booking_date_and_num_people
       - slot_was_set:
           - booking_id: 'bid_6436555b937c8209a6a93609'
-      - action: restaurant_booking_change_form
-      - active_loop: restaurant_booking_change_form
+      - action: restaurant_booking_form
+      - active_loop: restaurant_booking_form
       - slot_was_set:
           - num_people: '4'
       - slot_was_set:
           - date: 2023-06-08
       - active_loop: null
+      - action: action_show_booking_summary
       - action: action_validate_and_compare_booking_changes_ask_confirmation_to_change
       - checkpoint: checkpoint_booking_change_confirmation
 
@@ -123,7 +124,7 @@ stories:
       # here lets have a check point
       # possible other intents are
       # user_wants_to_change_restaurant_booking_date, user_wants_to_change_restaurant_booking_num_people, user_wants_to_change_both_restaurant_booking_date_and_num_people
-      # if they wants to change both we can throw the restaurant_booking_change_form and ask to fill both values
+      # if they wants to change both we can throw the restaurant_booking_form and ask to fill both values
       # after user fills this we can run an action to check the values again (some basic checking) for all 3 cases
       # then we give another action to make a comparison between previous and current booking values
       # in above action we ask are you sure to change this booking
