@@ -11,18 +11,13 @@ language: en
 pipeline:
   - name: SpacyNLP
     model: en_core_web_trf
+    case_sensitive: False
 
   - name: SpacyTokenizer
 #    intent_tokenization_flag: True # to use multi intents
 #    intent_split_symbol: "+"
 
   - name: RegexFeaturizer
-  - name: RegexEntityExtractor
-    case_sensitive: False
-    use_word_boundaries: True
-    use_lookup_tables: True
-    use_regexes: True
-
   - name: SpacyFeaturizer
   - name: LexicalSyntacticFeaturizer
   - name: CountVectorsFeaturizer # one hot encoding
@@ -31,6 +26,12 @@ pipeline:
     analyzer: char_wb
     min_ngram: 1
     max_ngram: 4
+
+  - name: RegexEntityExtractor
+    case_sensitive: False
+    use_word_boundaries: True
+    use_lookup_tables: True
+    use_regexes: True
 
   - name: SpacyEntityExtractor
     dimensions: ["PERSON"]

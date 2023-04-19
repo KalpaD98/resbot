@@ -30,10 +30,6 @@ stories:
   - action: utter_did_that_help  # predicted: action_listen
   - intent: deny
   - action: utter_goodbye  # predicted: utter_thank_you
-- story: say goodbye (./venv/lib/python3.9/site-packages/rasa/cli/initial_project/tests/test_stories.yml)
-  steps:
-  - intent: goodbye  # predicted: goodbye: bye[-](restaurant_name)bye!
-  - action: utter_goodbye
 - story: bot challenge (./venv/lib/python3.9/site-packages/rasa/cli/initial_project/tests/test_stories.yml)
   steps:
   - intent: bot_challenge
@@ -52,5 +48,5 @@ stories:
   - action: action_listen  # predicted: utter_bot_intro
   - intent: mood_great
   - action: utter_happy  # predicted: utter_mood_great_feedback
-  - intent: goodbye  # predicted: goodbye: bye[-](restaurant_name)bye!
+  - intent: goodbye
   - action: utter_goodbye

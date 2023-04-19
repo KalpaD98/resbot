@@ -33,12 +33,27 @@ nlu:
 
   - intent: inform_user_name
     examples: |
+      - [kalpa](user_name)
+      - [chethiya](user_name)
+      - [dileepa](user_name)
+      - [upeksha](user_name)
+      - [sagara](user_name)
+      - [chamalka](user_name)
+      
+      - [kalpa](PERSON)
+      - [chethiya](PERSON)
+      - [dileepa](PERSON)
+      - [upeksha](PERSON)
+      - [sagara](PERSON)
+      - [chamalka](PERSON)
+      
       - kalpa
       - chethiya
       - dileepa
       - upeksha
       - sagara
       - chamalka
+
   #      - [kalpa](user_name)
   #      - username: [dileepa](user_name)
   #      - username = [chethiya](user_name)

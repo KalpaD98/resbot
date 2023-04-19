@@ -14,7 +14,7 @@
         "entity": "cuisine",
         "start": 18,
         "end": 25,
-        "confidence_entity": 0.9997281432151794,
+        "confidence_entity": 0.9997641444206238,
         "value": "Vietnam",
         "extractor": "DIETClassifier"
       }
@@ -35,7 +35,7 @@
         "entity": "cuisine",
         "start": 14,
         "end": 21,
-        "confidence_entity": 0.9997405409812927,
+        "confidence_entity": 0.9997642636299133,
         "value": "Vietnam",
         "extractor": "DIETClassifier"
       }
@@ -63,7 +63,7 @@
         "entity": "cuisine",
         "start": 0,
         "end": 3,
-        "confidence_entity": 0.9963093400001526,
+        "confidence_entity": 0.9972500205039978,
         "value": "Any",
         "extractor": "DIETClassifier"
       }
@@ -91,7 +91,7 @@
         "entity": "cuisine",
         "start": 9,
         "end": 12,
-        "confidence_entity": 0.9847732782363892,
+        "confidence_entity": 0.9982379674911499,
         "value": "Any",
         "extractor": "DIETClassifier"
       }
@@ -112,7 +112,7 @@
         "entity": "cuisine",
         "start": 0,
         "end": 3,
-        "confidence_entity": 0.995036780834198,
+        "confidence_entity": 0.9976747632026672,
         "value": "Any",
         "extractor": "DIETClassifier"
       }
@@ -133,7 +133,7 @@
         "entity": "cuisine",
         "start": 0,
         "end": 5,
-        "confidence_entity": 0.9995455145835876,
+        "confidence_entity": 0.9994643330574036,
         "value": "Multi",
         "extractor": "DIETClassifier"
       }
@@ -181,7 +181,7 @@
         "entity": "cuisine",
         "start": 19,
         "end": 25,
-        "confidence_entity": 0.9994506239891052,
+        "confidence_entity": 0.9997451901435852,
         "value": "French",
         "extractor": "DIETClassifier"
       },
@@ -189,7 +189,7 @@
         "entity": "location",
         "start": 44,
         "end": 52,
-        "confidence_entity": 0.9895225167274475,
+        "confidence_entity": 0.9924737215042114,
         "value": "new york",
         "extractor": "DIETClassifier"
       }
@@ -210,7 +210,7 @@
         "entity": "object_type",
         "start": 5,
         "end": 16,
-        "confidence_entity": 0.9823254942893982,
+        "confidence_entity": 0.9946211576461792,
         "value": "restaurant",
         "extractor": "DIETClassifier",
         "processors": [
@@ -234,7 +234,7 @@
         "entity": "object_type",
         "start": 10,
         "end": 21,
-        "confidence_entity": 0.9919111132621765,
+        "confidence_entity": 0.9959151148796082,
         "value": "restaurant",
         "extractor": "DIETClassifier",
         "processors": [
@@ -258,7 +258,7 @@
         "entity": "object_type",
         "start": 18,
         "end": 29,
-        "confidence_entity": 0.9831010103225708,
+        "confidence_entity": 0.9935728311538696,
         "value": "restaurant",
         "extractor": "DIETClassifier",
         "processors": [
@@ -282,7 +282,7 @@
         "entity": "object_type",
         "start": 21,
         "end": 31,
-        "confidence_entity": 0.983430027961731,
+        "confidence_entity": 0.9947910308837891,
         "value": "restaurant",
         "extractor": "DIETClassifier"
       }
@@ -323,7 +323,7 @@
         "entity": "cuisine",
         "start": 5,
         "end": 11,
-        "confidence_entity": 0.9996904134750366,
+        "confidence_entity": 0.9997045397758484,
         "value": "German",
         "extractor": "DIETClassifier"
       },
@@ -331,7 +331,7 @@
         "entity": "object_type",
         "start": 12,
         "end": 23,
-        "confidence_entity": 0.9919041991233826,
+        "confidence_entity": 0.9957048296928406,
         "value": "restaurant",
         "extractor": "DIETClassifier",
         "processors": [
@@ -381,7 +381,7 @@
         "entity": "cuisine",
         "start": 16,
         "end": 23,
-        "confidence_entity": 0.9993813037872314,
+        "confidence_entity": 0.9996514320373535,
         "value": "mexican",
         "extractor": "DIETClassifier",
         "processors": [
@@ -392,7 +392,7 @@
         "entity": "object_type",
         "start": 24,
         "end": 35,
-        "confidence_entity": 0.9746940732002258,
+        "confidence_entity": 0.9944140911102295,
         "value": "restaurant",
         "extractor": "DIETClassifier",
         "processors": [
@@ -422,7 +422,7 @@
         "entity": "attribute",
         "start": 16,
         "end": 27,
-        "confidence_entity": 0.9953025579452515,
+        "confidence_entity": 0.994623064994812,
         "value": "price-range",
         "extractor": "DIETClassifier",
         "processors": [
@@ -433,7 +433,7 @@
         "entity": "mention",
         "start": 31,
         "end": 39,
-        "confidence_entity": 0.9805402159690857,
+        "confidence_entity": 0.9915366172790527,
         "value": "that one",
         "extractor": "DIETClassifier"
       }
@@ -460,7 +460,7 @@
         "entity": "attribute",
         "start": 5,
         "end": 12,
-        "confidence_entity": 0.9803189635276794,
+        "confidence_entity": 0.9897262454032898,
         "value": "cuisine",
         "extractor": "DIETClassifier"
       },
@@ -468,7 +468,7 @@
         "entity": "mention",
         "start": 16,
         "end": 18,
-        "confidence_entity": 0.9568170309066772,
+        "confidence_entity": 0.9715549945831299,
         "value": "it",
         "extractor": "DIETClassifier"
       }
@@ -495,7 +495,7 @@
         "entity": "attribute",
         "start": 17,
         "end": 24,
-        "confidence_entity": 0.9729524254798889,
+        "confidence_entity": 0.9907069206237793,
         "value": "cuisine",
         "extractor": "DIETClassifier"
       },
@@ -503,7 +503,7 @@
         "entity": "mention",
         "start": 29,
         "end": 37,
-        "confidence_entity": 0.9579217433929443,
+        "confidence_entity": 0.9723367691040039,
         "value": "LAST",
         "extractor": "DIETClassifier",
         "processors": [
@@ -533,7 +533,7 @@
         "entity": "restaurant",
         "start": 5,
         "end": 11,
-        "confidence_entity": 0.9725650548934937,
+        "confidence_entity": 0.9568187594413757,
         "value": "Donath",
         "extractor": "DIETClassifier"
       },
@@ -541,7 +541,7 @@
         "entity": "attribute",
         "start": 17,
         "end": 32,
-        "confidence_entity": 0.9936708211898804,
+        "confidence_entity": 0.9943865537643433,
         "value": "outside-seating",
         "extractor": "DIETClassifier",
         "processors": [
@@ -571,7 +571,7 @@
         "entity": "attribute",
         "start": 12,
         "end": 23,
-        "confidence_entity": 0.9959394931793213,
+        "confidence_entity": 0.9948678016662598,
         "value": "price-range",
         "extractor": "DIETClassifier",
         "processors": [
@@ -582,7 +582,7 @@
         "entity": "restaurant",
         "start": 27,
         "end": 49,
-        "confidence_entity": 0.9882760643959045,
+        "confidence_entity": 0.9841412901878357,
         "value": "Berlin Burrito Company",
         "extractor": "DIETClassifier"
       }
@@ -610,7 +610,7 @@
         "entity": "restaurant",
         "start": 13,
         "end": 24,
-        "confidence_entity": 0.8984307050704956,
+        "confidence_entity": 0.9001579284667969,
         "value": "I due forni",
         "extractor": "DIETClassifier"
       }
@@ -651,7 +651,7 @@
         "entity": "cuisine",
         "start": 21,
         "end": 31,
-        "confidence_entity": 0.9997506737709045,
+        "confidence_entity": 0.9996979236602783,
         "value": "Vietnamese",
         "extractor": "DIETClassifier"
       },
@@ -659,7 +659,7 @@
         "entity": "object_type",
         "start": 32,
         "end": 43,
-        "confidence_entity": 0.9671298861503601,
+        "confidence_entity": 0.9909756779670715,
         "value": "restaurant",
         "extractor": "DIETClassifier",
         "processors": [
@@ -709,7 +709,7 @@
         "entity": "cuisine",
         "start": 15,
         "end": 22,
-        "confidence_entity": 0.9984462857246399,
+        "confidence_entity": 0.9988942742347717,
         "value": "mexican",
         "extractor": "DIETClassifier",
         "processors": [
@@ -720,7 +720,7 @@
         "entity": "object_type",
         "start": 23,
         "end": 34,
-        "confidence_entity": 0.9784547686576843,
+        "confidence_entity": 0.9924915432929993,
         "value": "restaurant",
         "extractor": "DIETClassifier",
         "processors": [
@@ -764,7 +764,7 @@
         "entity": "cuisine",
         "start": 22,
         "end": 29,
-        "confidence_entity": 0.9997363686561584,
+        "confidence_entity": 0.9995954632759094,
         "value": "Italian",
         "extractor": "DIETClassifier"
       },
@@ -772,7 +772,7 @@
         "entity": "object_type",
         "start": 30,
         "end": 41,
-        "confidence_entity": 0.9470541477203369,
+        "confidence_entity": 0.9921959638595581,
         "value": "restaurant",
         "extractor": "DIETClassifier",
         "processors": [
@@ -802,7 +802,7 @@
         "entity": "attribute",
         "start": 20,
         "end": 31,
-        "confidence_entity": 0.9952595829963684,
+        "confidence_entity": 0.9939393997192383,
         "value": "price-range",
         "extractor": "DIETClassifier",
         "processors": [
@@ -813,7 +813,7 @@
         "entity": "mention",
         "start": 35,
         "end": 50,
-        "confidence_entity": 0.7110283374786377,
+        "confidence_entity": 0.8581680655479431,
         "value": "that restaurant",
         "extractor": "DIETClassifier"
       }
@@ -840,7 +840,7 @@
         "entity": "attribute",
         "start": 5,
         "end": 12,
-        "confidence_entity": 0.9825770258903503,
+        "confidence_entity": 0.9926717281341553,
         "value": "cuisine",
         "extractor": "DIETClassifier"
       },
@@ -848,7 +848,7 @@
         "entity": "mention",
         "start": 16,
         "end": 20,
-        "confidence_entity": 0.9734591245651245,
+        "confidence_entity": 0.9831680655479431,
         "value": "they",
         "extractor": "DIETClassifier"
       }
@@ -875,7 +875,7 @@
         "entity": "attribute",
         "start": 12,
         "end": 23,
-        "confidence_entity": 0.9960907101631165,
+        "confidence_entity": 0.9948909282684326,
         "value": "price-range",
         "extractor": "DIETClassifier",
         "processors": [
@@ -886,7 +886,7 @@
         "entity": "mention",
         "start": 27,
         "end": 37,
-        "confidence_entity": 0.9847989678382874,
+        "confidence_entity": 0.9914804697036743,
         "value": "that place",
         "extractor": "DIETClassifier"
       }
@@ -907,7 +907,7 @@
         "entity": "num_people",
         "start": 0,
         "end": 1,
-        "confidence_entity": 0.9995929598808289,
+        "confidence_entity": 0.9996742010116577,
         "value": "3",
         "extractor": "DIETClassifier"
       }
@@ -928,7 +928,7 @@
         "entity": "num_people",
         "start": 6,
         "end": 7,
-        "confidence_entity": 0.9996376037597656,
+        "confidence_entity": 0.9997766613960266,
         "value": "4",
         "extractor": "DIETClassifier"
       }
@@ -949,7 +949,7 @@
         "entity": "num_people",
         "start": 6,
         "end": 7,
-        "confidence_entity": 0.9997422099113464,
+        "confidence_entity": 0.9997971653938293,
         "value": "4",
         "extractor": "DIETClassifier"
       }
@@ -970,7 +970,7 @@
         "entity": "num_people",
         "start": 7,
         "end": 8,
-        "confidence_entity": 0.9995211362838745,
+        "confidence_entity": 0.9987823367118835,
         "value": "4",
         "extractor": "DIETClassifier"
       }
@@ -991,7 +991,7 @@
         "entity": "num_people",
         "start": 7,
         "end": 8,
-        "confidence_entity": 0.999687671661377,
+        "confidence_entity": 0.9997484087944031,
         "value": "4",
         "extractor": "DIETClassifier"
       }
@@ -1012,7 +1012,7 @@
         "entity": "num_people",
         "start": 0,
         "end": 1,
-        "confidence_entity": 0.9994988441467285,
+        "confidence_entity": 0.9996376037597656,
         "value": "4",
         "extractor": "DIETClassifier"
       }
@@ -1033,7 +1033,7 @@
         "entity": "num_people",
         "start": 0,
         "end": 1,
-        "confidence_entity": 0.9995238780975342,
+        "confidence_entity": 0.9994056224822998,
         "value": "5",
         "extractor": "DIETClassifier"
       }
@@ -1054,7 +1054,7 @@
         "entity": "num_people",
         "start": 0,
         "end": 2,
-        "confidence_entity": 0.9994988441467285,
+        "confidence_entity": 0.9996376037597656,
         "value": "10",
         "extractor": "DIETClassifier"
       }
@@ -1075,7 +1075,7 @@
         "entity": "num_people",
         "start": 0,
         "end": 1,
-        "confidence_entity": 0.9996185302734375,
+        "confidence_entity": 0.9995798468589783,
         "value": "4",
         "extractor": "DIETClassifier"
       }
@@ -1096,7 +1096,7 @@
         "entity": "num_people",
         "start": 0,
         "end": 1,
-        "confidence_entity": 0.9995929598808289,
+        "confidence_entity": 0.9996742010116577,
         "value": "4",
         "extractor": "DIETClassifier"
       }
@@ -1117,7 +1117,7 @@
         "entity": "num_people",
         "start": 4,
         "end": 7,
-        "confidence_entity": 0.9989540576934814,
+        "confidence_entity": 0.9998701810836792,
         "value": "ten",
         "extractor": "DIETClassifier"
       }
@@ -1138,7 +1138,7 @@
         "entity": "num_people",
         "start": 0,
         "end": 1,
-        "confidence_entity": 0.9994988441467285,
+        "confidence_entity": 0.9996376037597656,
         "value": "2",
         "extractor": "DIETClassifier"
       }
@@ -1159,7 +1159,7 @@
         "entity": "num_people",
         "start": 4,
         "end": 9,
-        "confidence_entity": 0.9991325736045837,
+        "confidence_entity": 0.9995681643486023,
         "value": "three",
         "extractor": "DIETClassifier"
       }
@@ -1180,7 +1180,7 @@
         "entity": "num_people",
         "start": 5,
         "end": 8,
-        "confidence_entity": 0.9947195053100586,
+        "confidence_entity": 0.9993595480918884,
         "value": "one",
         "extractor": "DIETClassifier"
       }
@@ -1201,7 +1201,7 @@
         "entity": "num_people",
         "start": 9,
         "end": 14,
-        "confidence_entity": 0.9993334412574768,
+        "confidence_entity": 0.9998359680175781,
         "value": "seven",
         "extractor": "DIETClassifier"
       }
@@ -1222,7 +1222,7 @@
         "entity": "num_people",
         "start": 0,
         "end": 1,
-        "confidence_entity": 0.9995161294937134,
+        "confidence_entity": 0.9989043474197388,
         "value": "2",
         "extractor": "DIETClassifier"
       }
@@ -1243,7 +1243,7 @@
         "entity": "num_people",
         "start": 6,
         "end": 10,
-        "confidence_entity": 0.9990050196647644,
+        "confidence_entity": 0.9998674392700195,
         "value": "four",
         "extractor": "DIETClassifier"
       }
@@ -1264,7 +1264,7 @@
         "entity": "num_people",
         "start": 0,
         "end": 4,
-        "confidence_entity": 0.9991532564163208,
+        "confidence_entity": 0.9998351335525513,
         "value": "nine",
         "extractor": "DIETClassifier"
       }
@@ -1285,7 +1285,7 @@
         "entity": "num_people",
         "start": 18,
         "end": 22,
-        "confidence_entity": 0.9988717436790466,
+        "confidence_entity": 0.9997826218605042,
         "value": "four",
         "extractor": "DIETClassifier"
       }
@@ -1306,7 +1306,7 @@
         "entity": "num_people",
         "start": 15,
         "end": 19,
-        "confidence_entity": 0.9992074370384216,
+        "confidence_entity": 0.9997857213020325,
         "value": "four",
         "extractor": "DIETClassifier"
       }
@@ -1327,7 +1327,7 @@
         "entity": "num_people",
         "start": 8,
         "end": 9,
-        "confidence_entity": 0.999616265296936,
+        "confidence_entity": 0.9997034668922424,
         "value": "2",
         "extractor": "DIETClassifier"
       }
@@ -1348,7 +1348,7 @@
         "entity": "num_people",
         "start": 11,
         "end": 12,
-        "confidence_entity": 0.9995989203453064,
+        "confidence_entity": 0.9997051358222961,
         "value": "5",
         "extractor": "DIETClassifier"
       }
@@ -1369,7 +1369,7 @@
         "entity": "date",
         "start": 0,
         "end": 10,
-        "confidence_entity": 0.9417563676834106,
+        "confidence_entity": 0.8586704730987549,
         "value": "2023-04-01",
         "extractor": "DIETClassifier"
       }
@@ -1390,7 +1390,7 @@
         "entity": "date",
         "start": 0,
         "end": 10,
-        "confidence_entity": 0.8609400987625122,
+        "confidence_entity": 0.6060051918029785,
         "value": "2023 01 01",
         "extractor": "DIETClassifier"
       }
@@ -1411,7 +1411,7 @@
         "entity": "date",
         "start": 0,
         "end": 10,
-        "confidence_entity": 0.9417563676834106,
+        "confidence_entity": 0.8586704730987549,
         "value": "2023-02-05",
         "extractor": "DIETClassifier"
       }
@@ -1432,7 +1432,7 @@
         "entity": "date",
         "start": 0,
         "end": 10,
-        "confidence_entity": 0.9951340556144714,
+        "confidence_entity": 0.9944135546684265,
         "value": "2024/01/01",
         "extractor": "DIETClassifier"
       }
@@ -1453,7 +1453,7 @@
         "entity": "date",
         "start": 29,
         "end": 37,
-        "confidence_entity": 0.9966933727264404,
+        "confidence_entity": 0.9979222416877747,
         "value": "tomorrow",
         "extractor": "DIETClassifier"
       }
@@ -1474,7 +1474,7 @@
         "entity": "date",
         "start": 34,
         "end": 40,
-        "confidence_entity": 0.9963942170143127,
+        "confidence_entity": 0.9975025057792664,
         "value": "Sunday",
         "extractor": "DIETClassifier"
       }
@@ -1495,7 +1495,7 @@
         "entity": "date",
         "start": 30,
         "end": 41,
-        "confidence_entity": 0.9943282008171082,
+        "confidence_entity": 0.9956300258636475,
         "value": "next Friday",
         "extractor": "DIETClassifier"
       }
@@ -1516,7 +1516,7 @@
         "entity": "date",
         "start": 49,
         "end": 58,
-        "confidence_entity": 0.9969826340675354,
+        "confidence_entity": 0.9980869293212891,
         "value": "Wednesday",
         "extractor": "DIETClassifier"
       }
@@ -1537,7 +1537,7 @@
         "entity": "date",
         "start": 33,
         "end": 46,
-        "confidence_entity": 0.9903302192687988,
+        "confidence_entity": 0.9866544604301453,
         "value": "this Thursday",
         "extractor": "DIETClassifier"
       }
@@ -1558,7 +1558,7 @@
         "entity": "date",
         "start": 36,
         "end": 47,
-        "confidence_entity": 0.9941639304161072,
+        "confidence_entity": 0.9960089921951294,
         "value": "next Monday",
         "extractor": "DIETClassifier"
       }
@@ -1579,7 +1579,7 @@
         "entity": "time",
         "start": 0,
         "end": 4,
-        "confidence_entity": 0.9776696562767029,
+        "confidence_entity": 0.9478916525840759,
         "value": "7 pm",
         "extractor": "DIETClassifier"
       }
@@ -1600,7 +1600,7 @@
         "entity": "time",
         "start": 0,
         "end": 8,
-        "confidence_entity": 0.9955689311027527,
+        "confidence_entity": 0.992915153503418,
         "value": "10:30 am",
         "extractor": "DIETClassifier"
       }
@@ -1621,7 +1621,7 @@
         "entity": "time",
         "start": 0,
         "end": 10,
-        "confidence_entity": 0.9971103668212891,
+        "confidence_entity": 0.9958712458610535,
         "value": "12:00 p.m.",
         "extractor": "DIETClassifier"
       }
@@ -1642,7 +1642,7 @@
         "entity": "time",
         "start": 0,
         "end": 8,
-        "confidence_entity": 0.9917961359024048,
+        "confidence_entity": 0.9922211766242981,
         "value": "12:00 pm",
         "extractor": "DIETClassifier"
       }
@@ -1663,7 +1663,7 @@
         "entity": "location",
         "start": 0,
         "end": 5,
-        "confidence_entity": 0.9984276294708252,
+        "confidence_entity": 0.9989957213401794,
         "value": "north",
         "extractor": "DIETClassifier"
       }
@@ -1684,7 +1684,7 @@
         "entity": "location",
         "start": 0,
         "end": 5,
-        "confidence_entity": 0.998711347579956,
+        "confidence_entity": 0.999397873878479,
         "value": "south",
         "extractor": "DIETClassifier"
       }
@@ -1705,7 +1705,7 @@
         "entity": "city",
         "start": 0,
         "end": 8,
-        "confidence_entity": 0.9971143007278442,
+        "confidence_entity": 0.9958117008209229,
         "value": "brooklyn",
         "extractor": "DIETClassifier"
       }
@@ -1726,7 +1726,7 @@
         "entity": "city",
         "start": 0,
         "end": 9,
-        "confidence_entity": 0.9968340992927551,
+        "confidence_entity": 0.9957350492477417,
         "value": "manhattan",
         "extractor": "DIETClassifier"
       }
@@ -1747,7 +1747,7 @@
         "entity": "city",
         "start": 0,
         "end": 6,
-        "confidence_entity": 0.9875725507736206,
+        "confidence_entity": 0.9886205792427063,
         "value": "queens",
         "extractor": "DIETClassifier"
       }
@@ -1775,7 +1775,7 @@
         "entity": "location",
         "start": 26,
         "end": 34,
-        "confidence_entity": 0.9799032807350159,
+        "confidence_entity": 0.9904114603996277,
         "value": "new york",
         "extractor": "DIETClassifier"
       }
@@ -1796,7 +1796,7 @@
         "entity": "restaurant_name",
         "start": 0,
         "end": 7,
-        "confidence_entity": 0.9973539113998413,
+        "confidence_entity": 0.9975427389144897,
         "value": "Wendy's",
         "extractor": "DIETClassifier"
       }
@@ -1817,7 +1817,7 @@
         "entity": "restaurant_name",
         "start": 0,
         "end": 13,
-        "confidence_entity": 0.9989144802093506,
+        "confidence_entity": 0.9991244673728943,
         "value": "Panda Express",
         "extractor": "DIETClassifier"
       }
@@ -1838,7 +1838,7 @@
         "entity": "restaurant_name",
         "start": 0,
         "end": 9,
-        "confidence_entity": 0.9970679879188538,
+        "confidence_entity": 0.9978894591331482,
         "value": "Starbucks",
         "extractor": "DIETClassifier"
       }
@@ -1859,7 +1859,7 @@
         "entity": "restaurant_name",
         "start": 0,
         "end": 14,
-        "confidence_entity": 0.9985382556915283,
+        "confidence_entity": 0.9979027509689331,
         "value": "Dunkin' Donuts",
         "extractor": "DIETClassifier"
       }
@@ -1900,7 +1900,7 @@
         "entity": "restaurant_name",
         "start": 0,
         "end": 22,
-        "confidence_entity": 0.9904550909996033,
+        "confidence_entity": 0.9826604723930359,
         "value": "Chipotle Mexican Grill",
         "extractor": "DIETClassifier"
       }
@@ -1921,7 +1921,7 @@
         "entity": "restaurant_name",
         "start": 0,
         "end": 11,
-        "confidence_entity": 0.9951830506324768,
+        "confidence_entity": 0.9940683841705322,
         "value": "Chick-fil-A",
         "extractor": "DIETClassifier"
       }
@@ -1942,7 +1942,7 @@
         "entity": "restaurant_name",
         "start": 0,
         "end": 15,
-        "confidence_entity": 0.9934770464897156,
+        "confidence_entity": 0.9867685437202454,
         "value": "Jack in the Box",
         "extractor": "DIETClassifier"
       }
@@ -1963,7 +1963,7 @@
         "entity": "restaurant_name",
         "start": 0,
         "end": 11,
-        "confidence_entity": 0.9869157075881958,
+        "confidence_entity": 0.9942558407783508,
         "value": "Dairy Queen",
         "extractor": "DIETClassifier"
       }
@@ -1991,7 +1991,7 @@
         "entity": "restaurant_name",
         "start": 0,
         "end": 25,
-        "confidence_entity": 0.9991301894187927,
+        "confidence_entity": 0.9985463619232178,
         "value": "Popeyes Louisiana Kitchen",
         "extractor": "DIETClassifier"
       }
@@ -2012,7 +2012,7 @@
         "entity": "restaurant_name",
         "start": 0,
         "end": 14,
-        "confidence_entity": 0.9948505759239197,
+        "confidence_entity": 0.9948575496673584,
         "value": "Sonic Drive-In",
         "extractor": "DIETClassifier"
       }
@@ -2033,7 +2033,7 @@
         "entity": "restaurant_name",
         "start": 0,
         "end": 14,
-        "confidence_entity": 0.9987194538116455,
+        "confidence_entity": 0.9990631937980652,
         "value": "Little Caesars",
         "extractor": "DIETClassifier"
       }
@@ -2054,7 +2054,7 @@
         "entity": "restaurant_name",
         "start": 0,
         "end": 11,
-        "confidence_entity": 0.997765302658081,
+        "confidence_entity": 0.9981222748756409,
         "value": "Papa John's",
         "extractor": "DIETClassifier"
       }
@@ -2075,7 +2075,7 @@
         "entity": "restaurant_name",
         "start": 0,
         "end": 9,
-        "confidence_entity": 0.9964485168457031,
+        "confidence_entity": 0.9986843466758728,
         "value": "Pizza Inn",
         "extractor": "DIETClassifier"
       }
@@ -2096,7 +2096,7 @@
         "entity": "restaurant_name",
         "start": 0,
         "end": 11,
-        "confidence_entity": 0.9961982369422913,
+        "confidence_entity": 0.9967407584190369,
         "value": "Pizza Ranch",
         "extractor": "DIETClassifier"
       }
@@ -2117,7 +2117,7 @@
         "entity": "restaurant_name",
         "start": 0,
         "end": 13,
-        "confidence_entity": 0.998624324798584,
+        "confidence_entity": 0.998023509979248,
         "value": "Papa Murphy's",
         "extractor": "DIETClassifier"
       }
@@ -2138,7 +2138,7 @@
         "entity": "restaurant_name",
         "start": 0,
         "end": 11,
-        "confidence_entity": 0.9981416463851929,
+        "confidence_entity": 0.9977152347564697,
         "value": "Papa Gino's",
         "extractor": "DIETClassifier"
       }
@@ -2159,7 +2159,7 @@
         "entity": "cuisine",
         "start": 43,
         "end": 49,
-        "confidence_entity": 0.9995133876800537,
+        "confidence_entity": 0.999535322189331,
         "value": "kosher",
         "extractor": "DIETClassifier"
       }
@@ -2180,7 +2180,7 @@
         "entity": "num_people",
         "start": 19,
         "end": 20,
-        "confidence_entity": 0.9985212683677673,
+        "confidence_entity": 0.9989870190620422,
         "value": "4",
         "extractor": "DIETClassifier"
       }
@@ -2201,7 +2201,7 @@
         "entity": "num_people",
         "start": 32,
         "end": 33,
-        "confidence_entity": 0.99931800365448,
+        "confidence_entity": 0.9991656541824341,
         "value": "5",
         "extractor": "DIETClassifier"
       }
@@ -2222,7 +2222,7 @@
         "entity": "num_people",
         "start": 33,
         "end": 34,
-        "confidence_entity": 0.9986976385116577,
+        "confidence_entity": 0.9987474679946899,
         "value": "2",
         "extractor": "DIETClassifier"
       }
@@ -2243,7 +2243,7 @@
         "entity": "num_people",
         "start": 20,
         "end": 21,
-        "confidence_entity": 0.9996142387390137,
+        "confidence_entity": 0.9996141195297241,
         "value": "7",
         "extractor": "DIETClassifier"
       }
@@ -2271,7 +2271,7 @@
         "entity": "location",
         "start": 34,
         "end": 42,
-        "confidence_entity": 0.9943331480026245,
+        "confidence_entity": 0.9966676831245422,
         "value": "New York",
         "extractor": "DIETClassifier"
       }
@@ -2292,7 +2292,7 @@
         "entity": "location",
         "start": 31,
         "end": 36,
-        "confidence_entity": 0.9991456270217896,
+        "confidence_entity": 0.9988201260566711,
         "value": "north",
         "extractor": "DIETClassifier"
       }
@@ -2333,7 +2333,7 @@
         "entity": "cuisine",
         "start": 8,
         "end": 15,
-        "confidence_entity": 0.9997765421867371,
+        "confidence_entity": 0.999797523021698,
         "value": "Chinese",
         "extractor": "DIETClassifier"
       },
@@ -2341,7 +2341,7 @@
         "entity": "location",
         "start": 31,
         "end": 44,
-        "confidence_entity": 0.9983129501342773,
+        "confidence_entity": 0.9987618923187256,
         "value": "San Francisco",
         "extractor": "DIETClassifier"
       }
@@ -2388,7 +2388,7 @@
         "entity": "cuisine",
         "start": 10,
         "end": 17,
-        "confidence_entity": 0.9956216216087341,
+        "confidence_entity": 0.9985972046852112,
         "value": "mexican",
         "extractor": "DIETClassifier",
         "processors": [
@@ -2399,7 +2399,7 @@
         "entity": "location",
         "start": 31,
         "end": 39,
-        "confidence_entity": 0.9993554949760437,
+        "confidence_entity": 0.9994068145751953,
         "value": "downtown",
         "extractor": "DIETClassifier"
       }
@@ -2440,7 +2440,7 @@
         "entity": "cuisine",
         "start": 20,
         "end": 26,
-        "confidence_entity": 0.999559223651886,
+        "confidence_entity": 0.9996639490127563,
         "value": "Indian",
         "extractor": "DIETClassifier"
       },
@@ -2448,7 +2448,7 @@
         "entity": "location",
         "start": 35,
         "end": 42,
-        "confidence_entity": 0.9994107484817505,
+        "confidence_entity": 0.9995964169502258,
         "value": "Chicago",
         "extractor": "DIETClassifier"
       }
@@ -2469,7 +2469,7 @@
         "entity": "location",
         "start": 26,
         "end": 37,
-        "confidence_entity": 0.9973300695419312,
+        "confidence_entity": 0.9990537762641907,
         "value": "Los Angeles",
         "extractor": "DIETClassifier"
       }
@@ -2490,7 +2490,7 @@
         "entity": "location",
         "start": 28,
         "end": 35,
-        "confidence_entity": 0.9992306232452393,
+        "confidence_entity": 0.9996658563613892,
         "value": "Houston",
         "extractor": "DIETClassifier"
       }
@@ -2511,7 +2511,7 @@
         "entity": "location",
         "start": 24,
         "end": 31,
-        "confidence_entity": 0.9992551207542419,
+        "confidence_entity": 0.9995909333229065,
         "value": "Seattle",
         "extractor": "DIETClassifier"
       }
@@ -2532,7 +2532,7 @@
         "entity": "location",
         "start": 14,
         "end": 19,
-        "confidence_entity": 0.9992076754570007,
+        "confidence_entity": 0.9990226030349731,
         "value": "Miami",
         "extractor": "DIETClassifier"
       }
@@ -2553,7 +2553,7 @@
         "entity": "location",
         "start": 21,
         "end": 33,
-        "confidence_entity": 0.9994237422943115,
+        "confidence_entity": 0.9996646642684937,
         "value": "Philadelphia",
         "extractor": "DIETClassifier"
       }
@@ -2574,7 +2574,7 @@
         "entity": "location",
         "start": 41,
         "end": 47,
-        "confidence_entity": 0.9991632699966431,
+        "confidence_entity": 0.9986366629600525,
         "value": "Boston",
         "extractor": "DIETClassifier"
       }
@@ -2595,7 +2595,7 @@
         "entity": "location",
         "start": 23,
         "end": 32,
-        "confidence_entity": 0.9947722554206848,
+        "confidence_entity": 0.9987040758132935,
         "value": "San Diego",
         "extractor": "DIETClassifier"
       }
@@ -2616,7 +2616,7 @@
         "entity": "location",
         "start": 24,
         "end": 33,
-        "confidence_entity": 0.9961667656898499,
+        "confidence_entity": 0.9978961944580078,
         "value": "Las Vegas",
         "extractor": "DIETClassifier"
       }
@@ -2637,7 +2637,7 @@
         "entity": "location",
         "start": 36,
         "end": 43,
-        "confidence_entity": 0.9994623064994812,
+        "confidence_entity": 0.9993550181388855,
         "value": "Orlando",
         "extractor": "DIETClassifier"
       }
@@ -2658,7 +2658,7 @@
         "entity": "location",
         "start": 14,
         "end": 19,
-        "confidence_entity": 0.9917770624160767,
+        "confidence_entity": 0.9939029216766357,
         "value": "18328",
         "extractor": "DIETClassifier"
       }
@@ -2679,7 +2679,7 @@
         "entity": "location",
         "start": 29,
         "end": 34,
-        "confidence_entity": 0.9805607795715332,
+        "confidence_entity": 0.9737163186073303,
         "value": "29432",
         "extractor": "DIETClassifier"
       }
@@ -2707,7 +2707,7 @@
         "entity": "location",
         "start": 3,
         "end": 11,
-        "confidence_entity": 0.9946151375770569,
+        "confidence_entity": 0.9967346787452698,
         "value": "New York",
         "extractor": "DIETClassifier"
       }
@@ -2728,7 +2728,7 @@
         "entity": "location",
         "start": 0,
         "end": 7,
-        "confidence_entity": 0.9986901879310608,
+        "confidence_entity": 0.9991814494132996,
         "value": "Chicago",
         "extractor": "DIETClassifier"
       }
@@ -2749,7 +2749,7 @@
         "entity": "location",
         "start": 14,
         "end": 25,
-        "confidence_entity": 0.9969335794448853,
+        "confidence_entity": 0.9992076754570007,
         "value": "Los Angeles",
         "extractor": "DIETClassifier"
       }
@@ -2770,7 +2770,7 @@
         "entity": "location",
         "start": 3,
         "end": 10,
-        "confidence_entity": 0.9993346333503723,
+        "confidence_entity": 0.9995813965797424,
         "value": "Houston",
         "extractor": "DIETClassifier"
       }
@@ -2791,7 +2791,7 @@
         "entity": "location",
         "start": 3,
         "end": 10,
-        "confidence_entity": 0.9992783665657043,
+        "confidence_entity": 0.9996148347854614,
         "value": "Seattle",
         "extractor": "DIETClassifier"
       }
@@ -2812,7 +2812,7 @@
         "entity": "location",
         "start": 37,
         "end": 50,
-        "confidence_entity": 0.9978785514831543,
+        "confidence_entity": 0.9982765913009644,
         "value": "San Francisco",
         "extractor": "DIETClassifier"
       }
@@ -2833,7 +2833,7 @@
         "entity": "location",
         "start": 38,
         "end": 45,
-        "confidence_entity": 0.9992965459823608,
+        "confidence_entity": 0.9994340538978577,
         "value": "Chicago",
         "extractor": "DIETClassifier"
       }
@@ -2874,7 +2874,7 @@
         "entity": "cuisine",
         "start": 38,
         "end": 45,
-        "confidence_entity": 0.9996139407157898,
+        "confidence_entity": 0.999677300453186,
         "value": "Chinese",
         "extractor": "DIETClassifier"
       },
@@ -2882,7 +2882,7 @@
         "entity": "location",
         "start": 61,
         "end": 72,
-        "confidence_entity": 0.9972184896469116,
+        "confidence_entity": 0.998880922794342,
         "value": "Los Angeles",
         "extractor": "DIETClassifier"
       }
@@ -2930,7 +2930,7 @@
         "entity": "location",
         "start": 20,
         "end": 28,
-        "confidence_entity": 0.9948707818984985,
+        "confidence_entity": 0.9967327117919922,
         "value": "New York",
         "extractor": "DIETClassifier"
       },
@@ -2938,9 +2938,381 @@
         "entity": "cuisine",
         "start": 33,
         "end": 40,
-        "confidence_entity": 0.9996463060379028,
+        "confidence_entity": 0.9997100234031677,
         "value": "Chinese",
         "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "kalpa",
+    "entities": [
+      {
+        "start": 0,
+        "end": 5,
+        "value": "kalpa",
+        "entity": "PERSON"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "user_name",
+        "start": 0,
+        "end": 5,
+        "value": "kalpa",
+        "extractor": "RegexEntityExtractor"
+      },
+      {
+        "entity": "user_name",
+        "start": 0,
+        "end": 5,
+        "confidence_entity": 0.45343276858329773,
+        "value": "kalpa",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "chethiya",
+    "entities": [
+      {
+        "start": 0,
+        "end": 8,
+        "value": "chethiya",
+        "entity": "PERSON"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "user_name",
+        "start": 0,
+        "end": 8,
+        "value": "chethiya",
+        "extractor": "RegexEntityExtractor"
+      },
+      {
+        "entity": "user_name",
+        "start": 0,
+        "end": 8,
+        "confidence_entity": 0.4242924451828003,
+        "value": "chethiya",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "dileepa",
+    "entities": [
+      {
+        "start": 0,
+        "end": 7,
+        "value": "dileepa",
+        "entity": "PERSON"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "user_name",
+        "start": 0,
+        "end": 7,
+        "value": "dileepa",
+        "extractor": "RegexEntityExtractor"
+      },
+      {
+        "entity": "user_name",
+        "start": 0,
+        "end": 7,
+        "confidence_entity": 0.47587692737579346,
+        "value": "dileepa",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "upeksha",
+    "entities": [
+      {
+        "start": 0,
+        "end": 7,
+        "value": "upeksha",
+        "entity": "PERSON"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "user_name",
+        "start": 0,
+        "end": 7,
+        "value": "upeksha",
+        "extractor": "RegexEntityExtractor"
+      },
+      {
+        "entity": "user_name",
+        "start": 0,
+        "end": 7,
+        "confidence_entity": 0.41920721530914307,
+        "value": "upeksha",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "sagara",
+    "entities": [
+      {
+        "start": 0,
+        "end": 6,
+        "value": "sagara",
+        "entity": "PERSON"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "user_name",
+        "start": 0,
+        "end": 6,
+        "value": "sagara",
+        "extractor": "RegexEntityExtractor"
+      },
+      {
+        "entity": "user_name",
+        "start": 0,
+        "end": 6,
+        "confidence_entity": 0.4528263509273529,
+        "value": "sagara",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "chamalka",
+    "entities": [
+      {
+        "start": 0,
+        "end": 8,
+        "value": "chamalka",
+        "entity": "PERSON"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "user_name",
+        "start": 0,
+        "end": 8,
+        "value": "chamalka",
+        "extractor": "RegexEntityExtractor"
+      },
+      {
+        "entity": "user_name",
+        "start": 0,
+        "end": 8,
+        "confidence_entity": 0.4498874545097351,
+        "value": "chamalka",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "kalpa",
+    "entities": [],
+    "predicted_entities": [
+      {
+        "entity": "user_name",
+        "start": 0,
+        "end": 5,
+        "value": "kalpa",
+        "extractor": "RegexEntityExtractor"
+      },
+      {
+        "entity": "user_name",
+        "start": 0,
+        "end": 5,
+        "confidence_entity": 0.45343276858329773,
+        "value": "kalpa",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "chethiya",
+    "entities": [],
+    "predicted_entities": [
+      {
+        "entity": "user_name",
+        "start": 0,
+        "end": 8,
+        "value": "chethiya",
+        "extractor": "RegexEntityExtractor"
+      },
+      {
+        "entity": "user_name",
+        "start": 0,
+        "end": 8,
+        "confidence_entity": 0.4242924451828003,
+        "value": "chethiya",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "dileepa",
+    "entities": [],
+    "predicted_entities": [
+      {
+        "entity": "user_name",
+        "start": 0,
+        "end": 7,
+        "value": "dileepa",
+        "extractor": "RegexEntityExtractor"
+      },
+      {
+        "entity": "user_name",
+        "start": 0,
+        "end": 7,
+        "confidence_entity": 0.47587692737579346,
+        "value": "dileepa",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "upeksha",
+    "entities": [],
+    "predicted_entities": [
+      {
+        "entity": "user_name",
+        "start": 0,
+        "end": 7,
+        "value": "upeksha",
+        "extractor": "RegexEntityExtractor"
+      },
+      {
+        "entity": "user_name",
+        "start": 0,
+        "end": 7,
+        "confidence_entity": 0.41920721530914307,
+        "value": "upeksha",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "sagara",
+    "entities": [],
+    "predicted_entities": [
+      {
+        "entity": "user_name",
+        "start": 0,
+        "end": 6,
+        "value": "sagara",
+        "extractor": "RegexEntityExtractor"
+      },
+      {
+        "entity": "user_name",
+        "start": 0,
+        "end": 6,
+        "confidence_entity": 0.4528263509273529,
+        "value": "sagara",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "chamalka",
+    "entities": [],
+    "predicted_entities": [
+      {
+        "entity": "user_name",
+        "start": 0,
+        "end": 8,
+        "value": "chamalka",
+        "extractor": "RegexEntityExtractor"
+      },
+      {
+        "entity": "user_name",
+        "start": 0,
+        "end": 8,
+        "confidence_entity": 0.4498874545097351,
+        "value": "chamalka",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "kalpa@gmail.com",
+    "entities": [],
+    "predicted_entities": [
+      {
+        "entity": "user_name",
+        "start": 0,
+        "end": 5,
+        "value": "kalpa",
+        "extractor": "RegexEntityExtractor"
+      }
+    ]
+  },
+  {
+    "text": "chethiya@gmail.com",
+    "entities": [],
+    "predicted_entities": [
+      {
+        "entity": "user_name",
+        "start": 0,
+        "end": 8,
+        "value": "chethiya",
+        "extractor": "RegexEntityExtractor"
+      }
+    ]
+  },
+  {
+    "text": "dileepa@gmail.com",
+    "entities": [],
+    "predicted_entities": [
+      {
+        "entity": "user_name",
+        "start": 0,
+        "end": 7,
+        "value": "dileepa",
+        "extractor": "RegexEntityExtractor"
+      }
+    ]
+  },
+  {
+    "text": "upeksha@gmail.com",
+    "entities": [],
+    "predicted_entities": [
+      {
+        "entity": "user_name",
+        "start": 0,
+        "end": 7,
+        "value": "upeksha",
+        "extractor": "RegexEntityExtractor"
+      }
+    ]
+  },
+  {
+    "text": "sagara@gmail.com",
+    "entities": [],
+    "predicted_entities": [
+      {
+        "entity": "user_name",
+        "start": 0,
+        "end": 6,
+        "value": "sagara",
+        "extractor": "RegexEntityExtractor"
+      }
+    ]
+  },
+  {
+    "text": "chamalka@gmail.com",
+    "entities": [],
+    "predicted_entities": [
+      {
+        "entity": "user_name",
+        "start": 0,
+        "end": 8,
+        "value": "chamalka",
+        "extractor": "RegexEntityExtractor"
       }
     ]
   },
@@ -2954,7 +3326,16 @@
         "entity": "password"
       }
     ],
-    "predicted_entities": []
+    "predicted_entities": [
+      {
+        "entity": "password",
+        "start": 0,
+        "end": 4,
+        "confidence_entity": 0.6578320860862732,
+        "value": "pass",
+        "extractor": "DIETClassifier"
+      }
+    ]
   },
   {
     "text": "1234",
@@ -2971,7 +3352,7 @@
         "entity": "password",
         "start": 0,
         "end": 4,
-        "confidence_entity": 0.39847761392593384,
+        "confidence_entity": 0.44467225670814514,
         "value": "1234",
         "extractor": "DIETClassifier"
       }
