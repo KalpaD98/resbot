@@ -1,0 +1,18 @@
+[
+  {
+    "text": "1234",
+    "intent": "inform_user_password",
+    "intent_prediction": {
+      "name": "inform_num_people",
+      "confidence": 0.6058602333068848
+    }
+  },
+  {
+    "text": "1234",
+    "intent": "inform_user_password",
+    "intent_prediction": {
+      "name": "inform_num_people",
+      "confidence": 0.6058602333068848
+    }
+  }
+]

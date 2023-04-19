@@ -1,0 +1,30 @@
+[
+  {
+    "text": "1234",
+    "entities": [],
+    "predicted_entities": [
+      {
+        "entity": "password",
+        "start": 0,
+        "end": 4,
+        "confidence_entity": 0.6715561747550964,
+        "value": "1234",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "pass",
+    "entities": [],
+    "predicted_entities": [
+      {
+        "entity": "password",
+        "start": 0,
+        "end": 4,
+        "confidence_entity": 0.5102943778038025,
+        "value": "pass",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  }
+]

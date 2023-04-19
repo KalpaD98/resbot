@@ -1,0 +1,146 @@
+{
+  "restaurant_id": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 8,
+    "confused_with": {}
+  },
+  "attribute": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1-score": 0.0,
+    "support": 13,
+    "confused_with": {}
+  },
+  "time": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1-score": 0.0,
+    "support": 8,
+    "confused_with": {}
+  },
+  "restaurant_name": {
+    "precision": 0.8125,
+    "recall": 0.22807017543859648,
+    "f1-score": 0.3561643835616438,
+    "support": 57,
+    "confused_with": {
+      "cuisine": 1
+    }
+  },
+  "date": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1-score": 0.0,
+    "support": 36,
+    "confused_with": {}
+  },
+  "opening_hours": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1-score": 0.0,
+    "support": 12,
+    "confused_with": {}
+  },
+  "object_type": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1-score": 0.0,
+    "support": 9,
+    "confused_with": {}
+  },
+  "restaurant": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1-score": 0.0,
+    "support": 7,
+    "confused_with": {
+      "restaurant_name": 3
+    }
+  },
+  "location": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1-score": 0.0,
+    "support": 48,
+    "confused_with": {
+      "state": 12
+    }
+  },
+  "num_people": {
+    "precision": 1.0,
+    "recall": 0.2830188679245283,
+    "f1-score": 0.4411764705882353,
+    "support": 53,
+    "confused_with": {}
+  },
+  "preferences": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1-score": 0.0,
+    "support": 1,
+    "confused_with": {}
+  },
+  "booking_id": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 4,
+    "confused_with": {}
+  },
+  "cuisine": {
+    "precision": 0.9347826086956522,
+    "recall": 0.86,
+    "f1-score": 0.8958333333333334,
+    "support": 50,
+    "confused_with": {}
+  },
+  "city": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1-score": 0.0,
+    "support": 3,
+    "confused_with": {}
+  },
+  "password": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1-score": 0.0,
+    "support": 2,
+    "confused_with": {}
+  },
+  "mention": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1-score": 0.0,
+    "support": 10,
+    "confused_with": {}
+  },
+  "state": {
+    "precision": 0.48,
+    "recall": 1.0,
+    "f1-score": 0.6486486486486487,
+    "support": 12,
+    "confused_with": {}
+  },
+  "micro avg": {
+    "precision": 0.8333333333333334,
+    "recall": 0.2852852852852853,
+    "f1-score": 0.42505592841163314,
+    "support": 333
+  },
+  "macro avg": {
+    "precision": 0.3074872122762149,
+    "recall": 0.2571228849037132,
+    "f1-score": 0.2554013433018742,
+    "support": 333
+  },
+  "weighted avg": {
+    "precision": 0.4919268181224703,
+    "recall": 0.2852852852852853,
+    "f1-score": 0.3251026223863082,
+    "support": 333
+  },
+  "accuracy": 0.9079401611047181
+}

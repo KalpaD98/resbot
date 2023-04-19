@@ -5,6 +5,11 @@ nlu:
     examples: |
       - I would like to search restaurants
       - can I filter restaurants
+      - I want to search for restaurants
+      - Can you help me find a restaurant?
+      - Can you recommend some restaurants?
+      - I'm looking for a place to eat
+      - Where can I find some good restaurants?
 
   - intent: search_restaurants
     examples: |
@@ -52,3 +57,40 @@ nlu:
       - Please help me to find restaurants in [Chicago](location)
       - I’m hungry. Looking out for some good [Chinese](cuisine) restaurants in [Los Angeles](location)
       - Find restaurants in [New York](location) for [Chinese](cuisine) cuisine
+    
+
+    # nlu-search-restaurant-multi-intents.yml has multi-intent examples
+
+#
+#  - intent: search_restaurant + inform_opening_hours
+#    examples: |
+#      - i need to find a restaurant that serves [chinese](cuisine) food and is [open now](opening_hours)
+#      - Can you recommend a restaurant that is open [late](opening_hours)?
+#      - I'm looking for a restaurant that is open [early](opening_hours)
+#      - Can you suggest a restaurant that is open [24 hours](opening_hours)?
+#
+#  - intent: search_restaurant + inform_location
+#    examples: |
+#      - i need to find a restaurant in [central park](location)
+#      - Can you recommend a restaurant that is open [brooklyn](location)?
+#      - I'm looking for a restaurant in [boston](location)
+#      - Can you suggest a restaurant in [New York city](location)?
+#
+#  - intent: search_restaurant + inform_date + inform_num_people
+#    examples: |
+#      - I need to find a restaurant that serves [chinese](cuisine) food and can accommodate [5](num_people) people on [Saturday](date)
+#      - Can you recommend a restaurant for [10](num_people) people on [June 15](date) that serves [italian](cuisine) cuisine?
+#      - I'm looking for a restaurant that can accommodate [2](num_people) people on [Sunday](date) and serves [mexican](cuisine) food
+#      - Find a restaurant that serves [thai](cuisine) cuisine and can accommodate [4](num_people) people on [Friday](date) night
+#      - I need a restaurant that serves [italian](cuisine) for [7](num_people) people on [July 2nd](date)
+#      - Please recommend a restaurant for [2](num_people) people on [Sunday](date) that serves [seafood](cuisine)
+#      - I'm looking for a [fancy](preferences) restaurant for [5](num_people) people on [Valentine's Day](date)
+#      - Can you find a restaurant for [8](num_people) people on [Christmas Eve](date) that serves [steak](cuisine)
+#
+#
+#  - intent: search_restaurant + inform_date + inform_time + inform_num_people
+#    examples: |
+#      - i need to find a restaurant that serves [chinese](cuisine) food and is [open now](opening_hours) for [5](num_people) people
+#      - Can you recommend a restaurant that is open [late](opening_hours) for [10](num_people) people?
+#      - I'm looking for a restaurant that is open [early](opening_hours) for [2](num_people) people
+#      - Can you suggest a restaurant that is open [24 hours](opening_hours) for [3](num_people) people?

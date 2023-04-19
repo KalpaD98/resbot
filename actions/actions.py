@@ -10,6 +10,8 @@ from actions.all_actions.knowledge_base_actions import *  # knowledge base actio
 # noinspection PyUnresolvedReferences
 from actions.all_actions.restaurant_actions import *  # restaurant actions
 # noinspection PyUnresolvedReferences
+from actions.all_actions.restaurant_search_actions import *  # restaurant search actions
+# noinspection PyUnresolvedReferences
 from actions.all_actions.restaurant_booking_actions import *  # restaurant booking actions
 # noinspection PyUnresolvedReferences
 from actions.all_actions.restaurant_booking_cancel_actions import *  # restaurant booking delete

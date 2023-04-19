@@ -11,10 +11,10 @@ language: en
 pipeline:
   - name: SpacyNLP
     model: en_core_web_trf
-  - name: SpacyEntityExtractor
+
   - name: SpacyTokenizer
-    intent_tokenization_flag: True # to use multi intents
-    intent_split_symbol: "+"
+#    intent_tokenization_flag: True # to use multi intents
+#    intent_split_symbol: "+"
 
   - name: RegexFeaturizer
   - name: RegexEntityExtractor
@@ -26,19 +26,23 @@ pipeline:
   - name: SpacyFeaturizer
   - name: LexicalSyntacticFeaturizer
   - name: CountVectorsFeaturizer # one hot encoding
+
   - name: CountVectorsFeaturizer # char level n-grams
     analyzer: char_wb
     min_ngram: 1
     max_ngram: 4
 
+  - name: SpacyEntityExtractor
+    dimensions: ["PERSON"]
+
   - name: DIETClassifier
     epochs: 100
     constrain_similarities: true
 
-  - name: submodules.external_utils.extractors.DateparserEntityExtractor # remove when duckling is on
-    languages: [ "en" ]
-    prefer_dates_from: "future"
-    relative_base: "2023-03-01"
+  #  - name: submodules.external_utils.extractors.DateparserEntityExtractor # remove when duckling is on
+  #    languages: [ "en" ]
+  #    prefer_dates_from: "future"
+  #    relative_base: "2023-03-01"
 
   #  - name: "DucklingEntityExtractor" # add in Windows environment
   #    url: "http://localhost:8000"
@@ -81,7 +85,40 @@ policies:
 
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-# --------------------------------------------------- Backup -------------------------------------------------------- #
+# ---------------------------------------------- Backup - 19 April -------------------------------------------------- #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# this is before specifying entity extractors for different entities (changed only pipeline)
+
+#pipeline:
+#  - name: SpacyNLP
+#    model: en_core_web_trf
+#  - name: SpacyEntityExtractor
+#  - name: SpacyTokenizer
+#    intent_tokenization_flag: True # to use multi intents
+#    intent_split_symbol: "+"
+#
+#  - name: RegexFeaturizer
+#  - name: RegexEntityExtractor
+#    case_sensitive: False
+#    use_word_boundaries: True
+#    use_lookup_tables: True
+#    use_regexes: True
+#
+#  - name: SpacyFeaturizer
+#  - name: LexicalSyntacticFeaturizer
+#  - name: CountVectorsFeaturizer # one hot encoding
+#  - name: CountVectorsFeaturizer # char level n-grams
+#    analyzer: char_wb
+#    min_ngram: 1
+#    max_ngram: 4
+#
+#  - name: DIETClassifier
+#    epochs: 100
+#    constrain_similarities: true
+
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# ------------------------------------------------ Backup - old ------------------------------------------------------ #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 

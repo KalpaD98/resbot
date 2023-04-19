@@ -25,3 +25,7 @@ nlu:
   - regex: num_people
     examples: |
       - ^\d{1,2}$|^(100)$
+
+  - regex: user_password
+    examples: |
+      - ^[^\s]{4,}$
