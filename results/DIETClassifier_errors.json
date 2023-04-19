@@ -1,5 +1,22 @@
 [
   {
+    "text": "Can you recommend some restaurants?",
+    "entities": [],
+    "predicted_entities": [
+      {
+        "entity": "object_type",
+        "start": 23,
+        "end": 34,
+        "confidence_entity": 0.5564145445823669,
+        "value": "restaurant",
+        "extractor": "DIETClassifier",
+        "processors": [
+          "EntitySynonymMapper"
+        ]
+      }
+    ]
+  },
+  {
     "text": "1234",
     "entities": [],
     "predicted_entities": [
@@ -7,7 +24,7 @@
         "entity": "password",
         "start": 0,
         "end": 4,
-        "confidence_entity": 0.6715561747550964,
+        "confidence_entity": 0.39847761392593384,
         "value": "1234",
         "extractor": "DIETClassifier"
       }
@@ -15,16 +32,14 @@
   },
   {
     "text": "pass",
-    "entities": [],
-    "predicted_entities": [
+    "entities": [
       {
-        "entity": "password",
         "start": 0,
         "end": 4,
-        "confidence_entity": 0.5102943778038025,
         "value": "pass",
-        "extractor": "DIETClassifier"
+        "entity": "password"
       }
-    ]
+    ],
+    "predicted_entities": []
   }
 ]

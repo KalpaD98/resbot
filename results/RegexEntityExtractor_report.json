@@ -1,16 +1,32 @@
 {
-  "restaurant_id": {
-    "precision": 1.0,
-    "recall": 1.0,
-    "f1-score": 1.0,
-    "support": 8,
-    "confused_with": {}
-  },
-  "attribute": {
+  "date": {
     "precision": 0.0,
     "recall": 0.0,
     "f1-score": 0.0,
-    "support": 13,
+    "support": 23,
+    "confused_with": {}
+  },
+  "restaurant_name": {
+    "precision": 0.8125,
+    "recall": 0.22807017543859648,
+    "f1-score": 0.3561643835616438,
+    "support": 57,
+    "confused_with": {
+      "state": 1
+    }
+  },
+  "cuisine": {
+    "precision": 0.9230769230769231,
+    "recall": 0.8780487804878049,
+    "f1-score": 0.9,
+    "support": 41,
+    "confused_with": {}
+  },
+  "mention": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1-score": 0.0,
+    "support": 10,
     "confused_with": {}
   },
   "time": {
@@ -20,27 +36,18 @@
     "support": 8,
     "confused_with": {}
   },
-  "restaurant_name": {
-    "precision": 0.8125,
-    "recall": 0.22807017543859648,
-    "f1-score": 0.3561643835616438,
-    "support": 57,
-    "confused_with": {
-      "cuisine": 1
-    }
-  },
-  "date": {
+  "city": {
     "precision": 0.0,
     "recall": 0.0,
     "f1-score": 0.0,
-    "support": 36,
+    "support": 3,
     "confused_with": {}
   },
-  "opening_hours": {
+  "attribute": {
     "precision": 0.0,
     "recall": 0.0,
     "f1-score": 0.0,
-    "support": 12,
+    "support": 13,
     "confused_with": {}
   },
   "object_type": {
@@ -48,6 +55,27 @@
     "recall": 0.0,
     "f1-score": 0.0,
     "support": 9,
+    "confused_with": {}
+  },
+  "booking_id": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 4,
+    "confused_with": {}
+  },
+  "password": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1-score": 0.0,
+    "support": 2,
+    "confused_with": {}
+  },
+  "state": {
+    "precision": 0.5217391304347826,
+    "recall": 1.0,
+    "f1-score": 0.6857142857142856,
+    "support": 12,
     "confused_with": {}
   },
   "restaurant": {
@@ -59,88 +87,46 @@
       "restaurant_name": 3
     }
   },
+  "restaurant_id": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 8,
+    "confused_with": {}
+  },
+  "num_people": {
+    "precision": 1.0,
+    "recall": 0.36585365853658536,
+    "f1-score": 0.5357142857142857,
+    "support": 41,
+    "confused_with": {}
+  },
   "location": {
     "precision": 0.0,
     "recall": 0.0,
     "f1-score": 0.0,
-    "support": 48,
+    "support": 41,
     "confused_with": {
-      "state": 12
+      "state": 10
     }
   },
-  "num_people": {
-    "precision": 1.0,
-    "recall": 0.2830188679245283,
-    "f1-score": 0.4411764705882353,
-    "support": 53,
-    "confused_with": {}
-  },
-  "preferences": {
-    "precision": 0.0,
-    "recall": 0.0,
-    "f1-score": 0.0,
-    "support": 1,
-    "confused_with": {}
-  },
-  "booking_id": {
-    "precision": 1.0,
-    "recall": 1.0,
-    "f1-score": 1.0,
-    "support": 4,
-    "confused_with": {}
-  },
-  "cuisine": {
-    "precision": 0.9347826086956522,
-    "recall": 0.86,
-    "f1-score": 0.8958333333333334,
-    "support": 50,
-    "confused_with": {}
-  },
-  "city": {
-    "precision": 0.0,
-    "recall": 0.0,
-    "f1-score": 0.0,
-    "support": 3,
-    "confused_with": {}
-  },
-  "password": {
-    "precision": 0.0,
-    "recall": 0.0,
-    "f1-score": 0.0,
-    "support": 2,
-    "confused_with": {}
-  },
-  "mention": {
-    "precision": 0.0,
-    "recall": 0.0,
-    "f1-score": 0.0,
-    "support": 10,
-    "confused_with": {}
-  },
-  "state": {
-    "precision": 0.48,
-    "recall": 1.0,
-    "f1-score": 0.6486486486486487,
-    "support": 12,
-    "confused_with": {}
-  },
   "micro avg": {
-    "precision": 0.8333333333333334,
-    "recall": 0.2852852852852853,
-    "f1-score": 0.42505592841163314,
-    "support": 333
+    "precision": 0.8380952380952381,
+    "recall": 0.3154121863799283,
+    "f1-score": 0.45833333333333326,
+    "support": 279
   },
   "macro avg": {
-    "precision": 0.3074872122762149,
-    "recall": 0.2571228849037132,
-    "f1-score": 0.2554013433018742,
-    "support": 333
+    "precision": 0.35048773690078044,
+    "recall": 0.2981315076308658,
+    "f1-score": 0.2985061969993477,
+    "support": 279
   },
   "weighted avg": {
-    "precision": 0.4919268181224703,
-    "recall": 0.2852852852852853,
-    "f1-score": 0.3251026223863082,
-    "support": 333
+    "precision": 0.514048471008499,
+    "recall": 0.3154121863799283,
+    "f1-score": 0.3562517096984618,
+    "support": 279
   },
-  "accuracy": 0.9079401611047181
+  "accuracy": 0.9178723404255319
 }

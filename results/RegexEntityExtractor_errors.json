@@ -14,7 +14,7 @@
         "entity": "cuisine",
         "start": 18,
         "end": 25,
-        "confidence_entity": 0.9996957778930664,
+        "confidence_entity": 0.9997281432151794,
         "value": "Vietnam",
         "extractor": "DIETClassifier"
       }
@@ -35,7 +35,7 @@
         "entity": "cuisine",
         "start": 14,
         "end": 21,
-        "confidence_entity": 0.9996517896652222,
+        "confidence_entity": 0.9997405409812927,
         "value": "Vietnam",
         "extractor": "DIETClassifier"
       }
@@ -63,7 +63,7 @@
         "entity": "cuisine",
         "start": 0,
         "end": 3,
-        "confidence_entity": 0.9984663724899292,
+        "confidence_entity": 0.9963093400001526,
         "value": "Any",
         "extractor": "DIETClassifier"
       }
@@ -91,7 +91,7 @@
         "entity": "cuisine",
         "start": 9,
         "end": 12,
-        "confidence_entity": 0.998801589012146,
+        "confidence_entity": 0.9847732782363892,
         "value": "Any",
         "extractor": "DIETClassifier"
       }
@@ -112,7 +112,7 @@
         "entity": "cuisine",
         "start": 0,
         "end": 3,
-        "confidence_entity": 0.9964777827262878,
+        "confidence_entity": 0.995036780834198,
         "value": "Any",
         "extractor": "DIETClassifier"
       }
@@ -133,7 +133,7 @@
         "entity": "cuisine",
         "start": 0,
         "end": 5,
-        "confidence_entity": 0.9996829032897949,
+        "confidence_entity": 0.9995455145835876,
         "value": "Multi",
         "extractor": "DIETClassifier"
       }
@@ -181,7 +181,7 @@
         "entity": "cuisine",
         "start": 19,
         "end": 25,
-        "confidence_entity": 0.999330997467041,
+        "confidence_entity": 0.9994506239891052,
         "value": "French",
         "extractor": "DIETClassifier"
       },
@@ -189,7 +189,7 @@
         "entity": "location",
         "start": 44,
         "end": 52,
-        "confidence_entity": 0.9906794428825378,
+        "confidence_entity": 0.9895225167274475,
         "value": "new york",
         "extractor": "DIETClassifier"
       }
@@ -210,7 +210,7 @@
         "entity": "object_type",
         "start": 5,
         "end": 16,
-        "confidence_entity": 0.9964428544044495,
+        "confidence_entity": 0.9823254942893982,
         "value": "restaurant",
         "extractor": "DIETClassifier",
         "processors": [
@@ -234,7 +234,7 @@
         "entity": "object_type",
         "start": 10,
         "end": 21,
-        "confidence_entity": 0.9969785213470459,
+        "confidence_entity": 0.9919111132621765,
         "value": "restaurant",
         "extractor": "DIETClassifier",
         "processors": [
@@ -258,7 +258,7 @@
         "entity": "object_type",
         "start": 18,
         "end": 29,
-        "confidence_entity": 0.9948539137840271,
+        "confidence_entity": 0.9831010103225708,
         "value": "restaurant",
         "extractor": "DIETClassifier",
         "processors": [
@@ -282,7 +282,7 @@
         "entity": "object_type",
         "start": 21,
         "end": 31,
-        "confidence_entity": 0.9925535321235657,
+        "confidence_entity": 0.983430027961731,
         "value": "restaurant",
         "extractor": "DIETClassifier"
       }
@@ -323,7 +323,7 @@
         "entity": "cuisine",
         "start": 5,
         "end": 11,
-        "confidence_entity": 0.9996019005775452,
+        "confidence_entity": 0.9996904134750366,
         "value": "German",
         "extractor": "DIETClassifier"
       },
@@ -331,7 +331,7 @@
         "entity": "object_type",
         "start": 12,
         "end": 23,
-        "confidence_entity": 0.9951279163360596,
+        "confidence_entity": 0.9919041991233826,
         "value": "restaurant",
         "extractor": "DIETClassifier",
         "processors": [
@@ -381,7 +381,7 @@
         "entity": "cuisine",
         "start": 16,
         "end": 23,
-        "confidence_entity": 0.9996846914291382,
+        "confidence_entity": 0.9993813037872314,
         "value": "mexican",
         "extractor": "DIETClassifier",
         "processors": [
@@ -392,7 +392,7 @@
         "entity": "object_type",
         "start": 24,
         "end": 35,
-        "confidence_entity": 0.9941439032554626,
+        "confidence_entity": 0.9746940732002258,
         "value": "restaurant",
         "extractor": "DIETClassifier",
         "processors": [
@@ -422,7 +422,7 @@
         "entity": "attribute",
         "start": 16,
         "end": 27,
-        "confidence_entity": 0.9947906732559204,
+        "confidence_entity": 0.9953025579452515,
         "value": "price-range",
         "extractor": "DIETClassifier",
         "processors": [
@@ -433,7 +433,7 @@
         "entity": "mention",
         "start": 31,
         "end": 39,
-        "confidence_entity": 0.9866542220115662,
+        "confidence_entity": 0.9805402159690857,
         "value": "that one",
         "extractor": "DIETClassifier"
       }
@@ -460,7 +460,7 @@
         "entity": "attribute",
         "start": 5,
         "end": 12,
-        "confidence_entity": 0.9928991794586182,
+        "confidence_entity": 0.9803189635276794,
         "value": "cuisine",
         "extractor": "DIETClassifier"
       },
@@ -468,7 +468,7 @@
         "entity": "mention",
         "start": 16,
         "end": 18,
-        "confidence_entity": 0.9793949723243713,
+        "confidence_entity": 0.9568170309066772,
         "value": "it",
         "extractor": "DIETClassifier"
       }
@@ -495,7 +495,7 @@
         "entity": "attribute",
         "start": 17,
         "end": 24,
-        "confidence_entity": 0.9924474954605103,
+        "confidence_entity": 0.9729524254798889,
         "value": "cuisine",
         "extractor": "DIETClassifier"
       },
@@ -503,7 +503,7 @@
         "entity": "mention",
         "start": 29,
         "end": 37,
-        "confidence_entity": 0.9683141112327576,
+        "confidence_entity": 0.9579217433929443,
         "value": "LAST",
         "extractor": "DIETClassifier",
         "processors": [
@@ -533,7 +533,7 @@
         "entity": "restaurant",
         "start": 5,
         "end": 11,
-        "confidence_entity": 0.9689021110534668,
+        "confidence_entity": 0.9725650548934937,
         "value": "Donath",
         "extractor": "DIETClassifier"
       },
@@ -541,7 +541,7 @@
         "entity": "attribute",
         "start": 17,
         "end": 32,
-        "confidence_entity": 0.9946138262748718,
+        "confidence_entity": 0.9936708211898804,
         "value": "outside-seating",
         "extractor": "DIETClassifier",
         "processors": [
@@ -571,7 +571,7 @@
         "entity": "attribute",
         "start": 12,
         "end": 23,
-        "confidence_entity": 0.9958679676055908,
+        "confidence_entity": 0.9959394931793213,
         "value": "price-range",
         "extractor": "DIETClassifier",
         "processors": [
@@ -582,7 +582,7 @@
         "entity": "restaurant",
         "start": 27,
         "end": 49,
-        "confidence_entity": 0.9824411273002625,
+        "confidence_entity": 0.9882760643959045,
         "value": "Berlin Burrito Company",
         "extractor": "DIETClassifier"
       }
@@ -610,7 +610,7 @@
         "entity": "restaurant",
         "start": 13,
         "end": 24,
-        "confidence_entity": 0.8971985578536987,
+        "confidence_entity": 0.8984307050704956,
         "value": "I due forni",
         "extractor": "DIETClassifier"
       }
@@ -651,7 +651,7 @@
         "entity": "cuisine",
         "start": 21,
         "end": 31,
-        "confidence_entity": 0.9996742010116577,
+        "confidence_entity": 0.9997506737709045,
         "value": "Vietnamese",
         "extractor": "DIETClassifier"
       },
@@ -659,7 +659,7 @@
         "entity": "object_type",
         "start": 32,
         "end": 43,
-        "confidence_entity": 0.9901680946350098,
+        "confidence_entity": 0.9671298861503601,
         "value": "restaurant",
         "extractor": "DIETClassifier",
         "processors": [
@@ -709,7 +709,7 @@
         "entity": "cuisine",
         "start": 15,
         "end": 22,
-        "confidence_entity": 0.9991552829742432,
+        "confidence_entity": 0.9984462857246399,
         "value": "mexican",
         "extractor": "DIETClassifier",
         "processors": [
@@ -720,7 +720,7 @@
         "entity": "object_type",
         "start": 23,
         "end": 34,
-        "confidence_entity": 0.9929733276367188,
+        "confidence_entity": 0.9784547686576843,
         "value": "restaurant",
         "extractor": "DIETClassifier",
         "processors": [
@@ -764,7 +764,7 @@
         "entity": "cuisine",
         "start": 22,
         "end": 29,
-        "confidence_entity": 0.9997298121452332,
+        "confidence_entity": 0.9997363686561584,
         "value": "Italian",
         "extractor": "DIETClassifier"
       },
@@ -772,7 +772,7 @@
         "entity": "object_type",
         "start": 30,
         "end": 41,
-        "confidence_entity": 0.9888032078742981,
+        "confidence_entity": 0.9470541477203369,
         "value": "restaurant",
         "extractor": "DIETClassifier",
         "processors": [
@@ -802,7 +802,7 @@
         "entity": "attribute",
         "start": 20,
         "end": 31,
-        "confidence_entity": 0.9938722848892212,
+        "confidence_entity": 0.9952595829963684,
         "value": "price-range",
         "extractor": "DIETClassifier",
         "processors": [
@@ -813,7 +813,7 @@
         "entity": "mention",
         "start": 35,
         "end": 50,
-        "confidence_entity": 0.8774856925010681,
+        "confidence_entity": 0.7110283374786377,
         "value": "that restaurant",
         "extractor": "DIETClassifier"
       }
@@ -840,7 +840,7 @@
         "entity": "attribute",
         "start": 5,
         "end": 12,
-        "confidence_entity": 0.9885976314544678,
+        "confidence_entity": 0.9825770258903503,
         "value": "cuisine",
         "extractor": "DIETClassifier"
       },
@@ -848,7 +848,7 @@
         "entity": "mention",
         "start": 16,
         "end": 20,
-        "confidence_entity": 0.9676582217216492,
+        "confidence_entity": 0.9734591245651245,
         "value": "they",
         "extractor": "DIETClassifier"
       }
@@ -875,7 +875,7 @@
         "entity": "attribute",
         "start": 12,
         "end": 23,
-        "confidence_entity": 0.9960552453994751,
+        "confidence_entity": 0.9960907101631165,
         "value": "price-range",
         "extractor": "DIETClassifier",
         "processors": [
@@ -886,7 +886,7 @@
         "entity": "mention",
         "start": 27,
         "end": 37,
-        "confidence_entity": 0.9898579716682434,
+        "confidence_entity": 0.9847989678382874,
         "value": "that place",
         "extractor": "DIETClassifier"
       }
@@ -907,7 +907,7 @@
         "entity": "num_people",
         "start": 0,
         "end": 1,
-        "confidence_entity": 0.9997153878211975,
+        "confidence_entity": 0.9995929598808289,
         "value": "3",
         "extractor": "DIETClassifier"
       }
@@ -928,7 +928,7 @@
         "entity": "num_people",
         "start": 6,
         "end": 7,
-        "confidence_entity": 0.9996224641799927,
+        "confidence_entity": 0.9996376037597656,
         "value": "4",
         "extractor": "DIETClassifier"
       }
@@ -949,7 +949,7 @@
         "entity": "num_people",
         "start": 6,
         "end": 7,
-        "confidence_entity": 0.999688982963562,
+        "confidence_entity": 0.9997422099113464,
         "value": "4",
         "extractor": "DIETClassifier"
       }
@@ -970,7 +970,7 @@
         "entity": "num_people",
         "start": 7,
         "end": 8,
-        "confidence_entity": 0.9991629123687744,
+        "confidence_entity": 0.9995211362838745,
         "value": "4",
         "extractor": "DIETClassifier"
       }
@@ -991,7 +991,7 @@
         "entity": "num_people",
         "start": 7,
         "end": 8,
-        "confidence_entity": 0.9996644258499146,
+        "confidence_entity": 0.999687671661377,
         "value": "4",
         "extractor": "DIETClassifier"
       }
@@ -1012,7 +1012,7 @@
         "entity": "num_people",
         "start": 0,
         "end": 1,
-        "confidence_entity": 0.9996474981307983,
+        "confidence_entity": 0.9994988441467285,
         "value": "4",
         "extractor": "DIETClassifier"
       }
@@ -1033,7 +1033,7 @@
         "entity": "num_people",
         "start": 0,
         "end": 1,
-        "confidence_entity": 0.9996770620346069,
+        "confidence_entity": 0.9995238780975342,
         "value": "5",
         "extractor": "DIETClassifier"
       }
@@ -1054,7 +1054,7 @@
         "entity": "num_people",
         "start": 0,
         "end": 2,
-        "confidence_entity": 0.9996474981307983,
+        "confidence_entity": 0.9994988441467285,
         "value": "10",
         "extractor": "DIETClassifier"
       }
@@ -1075,7 +1075,7 @@
         "entity": "num_people",
         "start": 0,
         "end": 1,
-        "confidence_entity": 0.999674916267395,
+        "confidence_entity": 0.9996185302734375,
         "value": "4",
         "extractor": "DIETClassifier"
       }
@@ -1096,7 +1096,7 @@
         "entity": "num_people",
         "start": 0,
         "end": 1,
-        "confidence_entity": 0.9997153878211975,
+        "confidence_entity": 0.9995929598808289,
         "value": "4",
         "extractor": "DIETClassifier"
       }
@@ -1117,7 +1117,7 @@
         "entity": "num_people",
         "start": 4,
         "end": 7,
-        "confidence_entity": 0.9996453523635864,
+        "confidence_entity": 0.9989540576934814,
         "value": "ten",
         "extractor": "DIETClassifier"
       }
@@ -1138,7 +1138,7 @@
         "entity": "num_people",
         "start": 0,
         "end": 1,
-        "confidence_entity": 0.9996474981307983,
+        "confidence_entity": 0.9994988441467285,
         "value": "2",
         "extractor": "DIETClassifier"
       }
@@ -1159,7 +1159,7 @@
         "entity": "num_people",
         "start": 4,
         "end": 9,
-        "confidence_entity": 0.9994063377380371,
+        "confidence_entity": 0.9991325736045837,
         "value": "three",
         "extractor": "DIETClassifier"
       }
@@ -1180,7 +1180,7 @@
         "entity": "num_people",
         "start": 5,
         "end": 8,
-        "confidence_entity": 0.9989352822303772,
+        "confidence_entity": 0.9947195053100586,
         "value": "one",
         "extractor": "DIETClassifier"
       }
@@ -1201,7 +1201,7 @@
         "entity": "num_people",
         "start": 9,
         "end": 14,
-        "confidence_entity": 0.9997801184654236,
+        "confidence_entity": 0.9993334412574768,
         "value": "seven",
         "extractor": "DIETClassifier"
       }
@@ -1222,7 +1222,7 @@
         "entity": "num_people",
         "start": 0,
         "end": 1,
-        "confidence_entity": 0.9995067119598389,
+        "confidence_entity": 0.9995161294937134,
         "value": "2",
         "extractor": "DIETClassifier"
       }
@@ -1243,7 +1243,7 @@
         "entity": "num_people",
         "start": 6,
         "end": 10,
-        "confidence_entity": 0.9996957778930664,
+        "confidence_entity": 0.9990050196647644,
         "value": "four",
         "extractor": "DIETClassifier"
       }
@@ -1264,7 +1264,7 @@
         "entity": "num_people",
         "start": 0,
         "end": 4,
-        "confidence_entity": 0.9995328187942505,
+        "confidence_entity": 0.9991532564163208,
         "value": "nine",
         "extractor": "DIETClassifier"
       }
@@ -1285,7 +1285,7 @@
         "entity": "num_people",
         "start": 18,
         "end": 22,
-        "confidence_entity": 0.999710738658905,
+        "confidence_entity": 0.9988717436790466,
         "value": "four",
         "extractor": "DIETClassifier"
       }
@@ -1306,7 +1306,7 @@
         "entity": "num_people",
         "start": 15,
         "end": 19,
-        "confidence_entity": 0.9996918439865112,
+        "confidence_entity": 0.9992074370384216,
         "value": "four",
         "extractor": "DIETClassifier"
       }
@@ -1327,7 +1327,7 @@
         "entity": "num_people",
         "start": 8,
         "end": 9,
-        "confidence_entity": 0.9996803998947144,
+        "confidence_entity": 0.999616265296936,
         "value": "2",
         "extractor": "DIETClassifier"
       }
@@ -1348,7 +1348,7 @@
         "entity": "num_people",
         "start": 11,
         "end": 12,
-        "confidence_entity": 0.999714195728302,
+        "confidence_entity": 0.9995989203453064,
         "value": "5",
         "extractor": "DIETClassifier"
       }
@@ -1369,7 +1369,7 @@
         "entity": "date",
         "start": 0,
         "end": 10,
-        "confidence_entity": 0.9477604627609253,
+        "confidence_entity": 0.9417563676834106,
         "value": "2023-04-01",
         "extractor": "DIETClassifier"
       }
@@ -1390,7 +1390,7 @@
         "entity": "date",
         "start": 0,
         "end": 10,
-        "confidence_entity": 0.8135946989059448,
+        "confidence_entity": 0.8609400987625122,
         "value": "2023 01 01",
         "extractor": "DIETClassifier"
       }
@@ -1411,7 +1411,7 @@
         "entity": "date",
         "start": 0,
         "end": 10,
-        "confidence_entity": 0.9477604627609253,
+        "confidence_entity": 0.9417563676834106,
         "value": "2023-02-05",
         "extractor": "DIETClassifier"
       }
@@ -1432,7 +1432,7 @@
         "entity": "date",
         "start": 0,
         "end": 10,
-        "confidence_entity": 0.9962843060493469,
+        "confidence_entity": 0.9951340556144714,
         "value": "2024/01/01",
         "extractor": "DIETClassifier"
       }
@@ -1453,7 +1453,7 @@
         "entity": "date",
         "start": 29,
         "end": 37,
-        "confidence_entity": 0.9985645413398743,
+        "confidence_entity": 0.9966933727264404,
         "value": "tomorrow",
         "extractor": "DIETClassifier"
       }
@@ -1474,7 +1474,7 @@
         "entity": "date",
         "start": 34,
         "end": 40,
-        "confidence_entity": 0.9987335801124573,
+        "confidence_entity": 0.9963942170143127,
         "value": "Sunday",
         "extractor": "DIETClassifier"
       }
@@ -1495,7 +1495,7 @@
         "entity": "date",
         "start": 30,
         "end": 41,
-        "confidence_entity": 0.8985802531242371,
+        "confidence_entity": 0.9943282008171082,
         "value": "next Friday",
         "extractor": "DIETClassifier"
       }
@@ -1516,7 +1516,7 @@
         "entity": "date",
         "start": 49,
         "end": 58,
-        "confidence_entity": 0.9979931116104126,
+        "confidence_entity": 0.9969826340675354,
         "value": "Wednesday",
         "extractor": "DIETClassifier"
       }
@@ -1537,7 +1537,7 @@
         "entity": "date",
         "start": 33,
         "end": 46,
-        "confidence_entity": 0.9936556816101074,
+        "confidence_entity": 0.9903302192687988,
         "value": "this Thursday",
         "extractor": "DIETClassifier"
       }
@@ -1558,7 +1558,7 @@
         "entity": "date",
         "start": 36,
         "end": 47,
-        "confidence_entity": 0.996605634689331,
+        "confidence_entity": 0.9941639304161072,
         "value": "next Monday",
         "extractor": "DIETClassifier"
       }
@@ -1579,7 +1579,7 @@
         "entity": "time",
         "start": 0,
         "end": 4,
-        "confidence_entity": 0.9759292006492615,
+        "confidence_entity": 0.9776696562767029,
         "value": "7 pm",
         "extractor": "DIETClassifier"
       }
@@ -1600,7 +1600,7 @@
         "entity": "time",
         "start": 0,
         "end": 8,
-        "confidence_entity": 0.9919677376747131,
+        "confidence_entity": 0.9955689311027527,
         "value": "10:30 am",
         "extractor": "DIETClassifier"
       }
@@ -1621,7 +1621,7 @@
         "entity": "time",
         "start": 0,
         "end": 10,
-        "confidence_entity": 0.9970435500144958,
+        "confidence_entity": 0.9971103668212891,
         "value": "12:00 p.m.",
         "extractor": "DIETClassifier"
       }
@@ -1642,7 +1642,7 @@
         "entity": "time",
         "start": 0,
         "end": 8,
-        "confidence_entity": 0.9911761283874512,
+        "confidence_entity": 0.9917961359024048,
         "value": "12:00 pm",
         "extractor": "DIETClassifier"
       }
@@ -1663,7 +1663,7 @@
         "entity": "location",
         "start": 0,
         "end": 5,
-        "confidence_entity": 0.9978712797164917,
+        "confidence_entity": 0.9984276294708252,
         "value": "north",
         "extractor": "DIETClassifier"
       }
@@ -1684,7 +1684,7 @@
         "entity": "location",
         "start": 0,
         "end": 5,
-        "confidence_entity": 0.9974886178970337,
+        "confidence_entity": 0.998711347579956,
         "value": "south",
         "extractor": "DIETClassifier"
       }
@@ -1705,7 +1705,7 @@
         "entity": "city",
         "start": 0,
         "end": 8,
-        "confidence_entity": 0.9842586517333984,
+        "confidence_entity": 0.9971143007278442,
         "value": "brooklyn",
         "extractor": "DIETClassifier"
       }
@@ -1726,7 +1726,7 @@
         "entity": "city",
         "start": 0,
         "end": 9,
-        "confidence_entity": 0.9963756203651428,
+        "confidence_entity": 0.9968340992927551,
         "value": "manhattan",
         "extractor": "DIETClassifier"
       }
@@ -1747,7 +1747,7 @@
         "entity": "city",
         "start": 0,
         "end": 6,
-        "confidence_entity": 0.9893516898155212,
+        "confidence_entity": 0.9875725507736206,
         "value": "queens",
         "extractor": "DIETClassifier"
       }
@@ -1775,7 +1775,7 @@
         "entity": "location",
         "start": 26,
         "end": 34,
-        "confidence_entity": 0.9631360769271851,
+        "confidence_entity": 0.9799032807350159,
         "value": "new york",
         "extractor": "DIETClassifier"
       }
@@ -1796,7 +1796,7 @@
         "entity": "restaurant_name",
         "start": 0,
         "end": 7,
-        "confidence_entity": 0.9961081147193909,
+        "confidence_entity": 0.9973539113998413,
         "value": "Wendy's",
         "extractor": "DIETClassifier"
       }
@@ -1817,7 +1817,7 @@
         "entity": "restaurant_name",
         "start": 0,
         "end": 13,
-        "confidence_entity": 0.99905925989151,
+        "confidence_entity": 0.9989144802093506,
         "value": "Panda Express",
         "extractor": "DIETClassifier"
       }
@@ -1838,7 +1838,7 @@
         "entity": "restaurant_name",
         "start": 0,
         "end": 9,
-        "confidence_entity": 0.9969821572303772,
+        "confidence_entity": 0.9970679879188538,
         "value": "Starbucks",
         "extractor": "DIETClassifier"
       }
@@ -1859,7 +1859,7 @@
         "entity": "restaurant_name",
         "start": 0,
         "end": 14,
-        "confidence_entity": 0.9986670017242432,
+        "confidence_entity": 0.9985382556915283,
         "value": "Dunkin' Donuts",
         "extractor": "DIETClassifier"
       }
@@ -1900,7 +1900,7 @@
         "entity": "restaurant_name",
         "start": 0,
         "end": 22,
-        "confidence_entity": 0.9831015467643738,
+        "confidence_entity": 0.9904550909996033,
         "value": "Chipotle Mexican Grill",
         "extractor": "DIETClassifier"
       }
@@ -1921,7 +1921,7 @@
         "entity": "restaurant_name",
         "start": 0,
         "end": 11,
-        "confidence_entity": 0.9948746562004089,
+        "confidence_entity": 0.9951830506324768,
         "value": "Chick-fil-A",
         "extractor": "DIETClassifier"
       }
@@ -1942,7 +1942,7 @@
         "entity": "restaurant_name",
         "start": 0,
         "end": 15,
-        "confidence_entity": 0.9888424873352051,
+        "confidence_entity": 0.9934770464897156,
         "value": "Jack in the Box",
         "extractor": "DIETClassifier"
       }
@@ -1963,7 +1963,7 @@
         "entity": "restaurant_name",
         "start": 0,
         "end": 11,
-        "confidence_entity": 0.9943591952323914,
+        "confidence_entity": 0.9869157075881958,
         "value": "Dairy Queen",
         "extractor": "DIETClassifier"
       }
@@ -1991,7 +1991,7 @@
         "entity": "restaurant_name",
         "start": 0,
         "end": 25,
-        "confidence_entity": 0.9990721940994263,
+        "confidence_entity": 0.9991301894187927,
         "value": "Popeyes Louisiana Kitchen",
         "extractor": "DIETClassifier"
       }
@@ -2012,7 +2012,7 @@
         "entity": "restaurant_name",
         "start": 0,
         "end": 14,
-        "confidence_entity": 0.9954516291618347,
+        "confidence_entity": 0.9948505759239197,
         "value": "Sonic Drive-In",
         "extractor": "DIETClassifier"
       }
@@ -2033,7 +2033,7 @@
         "entity": "restaurant_name",
         "start": 0,
         "end": 14,
-        "confidence_entity": 0.9991908669471741,
+        "confidence_entity": 0.9987194538116455,
         "value": "Little Caesars",
         "extractor": "DIETClassifier"
       }
@@ -2054,7 +2054,7 @@
         "entity": "restaurant_name",
         "start": 0,
         "end": 11,
-        "confidence_entity": 0.9974470138549805,
+        "confidence_entity": 0.997765302658081,
         "value": "Papa John's",
         "extractor": "DIETClassifier"
       }
@@ -2075,7 +2075,7 @@
         "entity": "restaurant_name",
         "start": 0,
         "end": 9,
-        "confidence_entity": 0.9989696741104126,
+        "confidence_entity": 0.9964485168457031,
         "value": "Pizza Inn",
         "extractor": "DIETClassifier"
       }
@@ -2096,7 +2096,7 @@
         "entity": "restaurant_name",
         "start": 0,
         "end": 11,
-        "confidence_entity": 0.9973414540290833,
+        "confidence_entity": 0.9961982369422913,
         "value": "Pizza Ranch",
         "extractor": "DIETClassifier"
       }
@@ -2117,7 +2117,7 @@
         "entity": "restaurant_name",
         "start": 0,
         "end": 13,
-        "confidence_entity": 0.9981743097305298,
+        "confidence_entity": 0.998624324798584,
         "value": "Papa Murphy's",
         "extractor": "DIETClassifier"
       }
@@ -2138,7 +2138,7 @@
         "entity": "restaurant_name",
         "start": 0,
         "end": 11,
-        "confidence_entity": 0.9973323345184326,
+        "confidence_entity": 0.9981416463851929,
         "value": "Papa Gino's",
         "extractor": "DIETClassifier"
       }
@@ -2159,7 +2159,7 @@
         "entity": "cuisine",
         "start": 43,
         "end": 49,
-        "confidence_entity": 0.9993139505386353,
+        "confidence_entity": 0.9995133876800537,
         "value": "kosher",
         "extractor": "DIETClassifier"
       }
@@ -2180,7 +2180,7 @@
         "entity": "num_people",
         "start": 19,
         "end": 20,
-        "confidence_entity": 0.9992659687995911,
+        "confidence_entity": 0.9985212683677673,
         "value": "4",
         "extractor": "DIETClassifier"
       }
@@ -2201,7 +2201,7 @@
         "entity": "num_people",
         "start": 32,
         "end": 33,
-        "confidence_entity": 0.9995131492614746,
+        "confidence_entity": 0.99931800365448,
         "value": "5",
         "extractor": "DIETClassifier"
       }
@@ -2222,7 +2222,7 @@
         "entity": "num_people",
         "start": 33,
         "end": 34,
-        "confidence_entity": 0.9988523721694946,
+        "confidence_entity": 0.9986976385116577,
         "value": "2",
         "extractor": "DIETClassifier"
       }
@@ -2243,7 +2243,7 @@
         "entity": "num_people",
         "start": 20,
         "end": 21,
-        "confidence_entity": 0.999774158000946,
+        "confidence_entity": 0.9996142387390137,
         "value": "7",
         "extractor": "DIETClassifier"
       }
@@ -2271,7 +2271,7 @@
         "entity": "location",
         "start": 34,
         "end": 42,
-        "confidence_entity": 0.9829719662666321,
+        "confidence_entity": 0.9943331480026245,
         "value": "New York",
         "extractor": "DIETClassifier"
       }
@@ -2292,7 +2292,7 @@
         "entity": "location",
         "start": 31,
         "end": 36,
-        "confidence_entity": 0.9986236095428467,
+        "confidence_entity": 0.9991456270217896,
         "value": "north",
         "extractor": "DIETClassifier"
       }
@@ -2333,7 +2333,7 @@
         "entity": "cuisine",
         "start": 8,
         "end": 15,
-        "confidence_entity": 0.9997997879981995,
+        "confidence_entity": 0.9997765421867371,
         "value": "Chinese",
         "extractor": "DIETClassifier"
       },
@@ -2341,7 +2341,7 @@
         "entity": "location",
         "start": 31,
         "end": 44,
-        "confidence_entity": 0.9984490871429443,
+        "confidence_entity": 0.9983129501342773,
         "value": "San Francisco",
         "extractor": "DIETClassifier"
       }
@@ -2388,7 +2388,7 @@
         "entity": "cuisine",
         "start": 10,
         "end": 17,
-        "confidence_entity": 0.9984251260757446,
+        "confidence_entity": 0.9956216216087341,
         "value": "mexican",
         "extractor": "DIETClassifier",
         "processors": [
@@ -2399,7 +2399,7 @@
         "entity": "location",
         "start": 31,
         "end": 39,
-        "confidence_entity": 0.9987249970436096,
+        "confidence_entity": 0.9993554949760437,
         "value": "downtown",
         "extractor": "DIETClassifier"
       }
@@ -2440,7 +2440,7 @@
         "entity": "cuisine",
         "start": 20,
         "end": 26,
-        "confidence_entity": 0.998813271522522,
+        "confidence_entity": 0.999559223651886,
         "value": "Indian",
         "extractor": "DIETClassifier"
       },
@@ -2448,7 +2448,7 @@
         "entity": "location",
         "start": 35,
         "end": 42,
-        "confidence_entity": 0.9995599389076233,
+        "confidence_entity": 0.9994107484817505,
         "value": "Chicago",
         "extractor": "DIETClassifier"
       }
@@ -2469,7 +2469,7 @@
         "entity": "location",
         "start": 26,
         "end": 37,
-        "confidence_entity": 0.9988478422164917,
+        "confidence_entity": 0.9973300695419312,
         "value": "Los Angeles",
         "extractor": "DIETClassifier"
       }
@@ -2490,7 +2490,7 @@
         "entity": "location",
         "start": 28,
         "end": 35,
-        "confidence_entity": 0.9995524287223816,
+        "confidence_entity": 0.9992306232452393,
         "value": "Houston",
         "extractor": "DIETClassifier"
       }
@@ -2511,7 +2511,7 @@
         "entity": "location",
         "start": 24,
         "end": 31,
-        "confidence_entity": 0.9995042085647583,
+        "confidence_entity": 0.9992551207542419,
         "value": "Seattle",
         "extractor": "DIETClassifier"
       }
@@ -2532,7 +2532,7 @@
         "entity": "location",
         "start": 14,
         "end": 19,
-        "confidence_entity": 0.9993916749954224,
+        "confidence_entity": 0.9992076754570007,
         "value": "Miami",
         "extractor": "DIETClassifier"
       }
@@ -2553,7 +2553,7 @@
         "entity": "location",
         "start": 21,
         "end": 33,
-        "confidence_entity": 0.9996703863143921,
+        "confidence_entity": 0.9994237422943115,
         "value": "Philadelphia",
         "extractor": "DIETClassifier"
       }
@@ -2574,7 +2574,7 @@
         "entity": "location",
         "start": 41,
         "end": 47,
-        "confidence_entity": 0.9992035031318665,
+        "confidence_entity": 0.9991632699966431,
         "value": "Boston",
         "extractor": "DIETClassifier"
       }
@@ -2595,7 +2595,7 @@
         "entity": "location",
         "start": 23,
         "end": 32,
-        "confidence_entity": 0.996379554271698,
+        "confidence_entity": 0.9947722554206848,
         "value": "San Diego",
         "extractor": "DIETClassifier"
       }
@@ -2616,7 +2616,7 @@
         "entity": "location",
         "start": 24,
         "end": 33,
-        "confidence_entity": 0.9978316426277161,
+        "confidence_entity": 0.9961667656898499,
         "value": "Las Vegas",
         "extractor": "DIETClassifier"
       }
@@ -2637,7 +2637,7 @@
         "entity": "location",
         "start": 36,
         "end": 43,
-        "confidence_entity": 0.9994933605194092,
+        "confidence_entity": 0.9994623064994812,
         "value": "Orlando",
         "extractor": "DIETClassifier"
       }
@@ -2658,7 +2658,7 @@
         "entity": "location",
         "start": 14,
         "end": 19,
-        "confidence_entity": 0.989261269569397,
+        "confidence_entity": 0.9917770624160767,
         "value": "18328",
         "extractor": "DIETClassifier"
       }
@@ -2679,7 +2679,7 @@
         "entity": "location",
         "start": 29,
         "end": 34,
-        "confidence_entity": 0.9612371325492859,
+        "confidence_entity": 0.9805607795715332,
         "value": "29432",
         "extractor": "DIETClassifier"
       }
@@ -2707,7 +2707,7 @@
         "entity": "location",
         "start": 3,
         "end": 11,
-        "confidence_entity": 0.9608538746833801,
+        "confidence_entity": 0.9946151375770569,
         "value": "New York",
         "extractor": "DIETClassifier"
       }
@@ -2728,7 +2728,7 @@
         "entity": "location",
         "start": 0,
         "end": 7,
-        "confidence_entity": 0.9980929493904114,
+        "confidence_entity": 0.9986901879310608,
         "value": "Chicago",
         "extractor": "DIETClassifier"
       }
@@ -2749,7 +2749,7 @@
         "entity": "location",
         "start": 14,
         "end": 25,
-        "confidence_entity": 0.9983178377151489,
+        "confidence_entity": 0.9969335794448853,
         "value": "Los Angeles",
         "extractor": "DIETClassifier"
       }
@@ -2770,7 +2770,7 @@
         "entity": "location",
         "start": 3,
         "end": 10,
-        "confidence_entity": 0.9988552331924438,
+        "confidence_entity": 0.9993346333503723,
         "value": "Houston",
         "extractor": "DIETClassifier"
       }
@@ -2791,7 +2791,7 @@
         "entity": "location",
         "start": 3,
         "end": 10,
-        "confidence_entity": 0.9986578226089478,
+        "confidence_entity": 0.9992783665657043,
         "value": "Seattle",
         "extractor": "DIETClassifier"
       }
@@ -2812,7 +2812,7 @@
         "entity": "location",
         "start": 37,
         "end": 50,
-        "confidence_entity": 0.9984937906265259,
+        "confidence_entity": 0.9978785514831543,
         "value": "San Francisco",
         "extractor": "DIETClassifier"
       }
@@ -2833,7 +2833,7 @@
         "entity": "location",
         "start": 38,
         "end": 45,
-        "confidence_entity": 0.9994468092918396,
+        "confidence_entity": 0.9992965459823608,
         "value": "Chicago",
         "extractor": "DIETClassifier"
       }
@@ -2874,7 +2874,7 @@
         "entity": "cuisine",
         "start": 38,
         "end": 45,
-        "confidence_entity": 0.9996845722198486,
+        "confidence_entity": 0.9996139407157898,
         "value": "Chinese",
         "extractor": "DIETClassifier"
       },
@@ -2882,7 +2882,7 @@
         "entity": "location",
         "start": 61,
         "end": 72,
-        "confidence_entity": 0.9979715943336487,
+        "confidence_entity": 0.9972184896469116,
         "value": "Los Angeles",
         "extractor": "DIETClassifier"
       }
@@ -2930,7 +2930,7 @@
         "entity": "location",
         "start": 20,
         "end": 28,
-        "confidence_entity": 0.9728814363479614,
+        "confidence_entity": 0.9948707818984985,
         "value": "New York",
         "extractor": "DIETClassifier"
       },
@@ -2938,850 +2938,8 @@
         "entity": "cuisine",
         "start": 33,
         "end": 40,
-        "confidence_entity": 0.9997450709342957,
+        "confidence_entity": 0.9996463060379028,
         "value": "Chinese",
-        "extractor": "DIETClassifier"
-      }
-    ]
-  },
-  {
-    "text": "i need to find a restaurant that serves chinese food and is open now",
-    "entities": [
-      {
-        "start": 40,
-        "end": 47,
-        "value": "chinese",
-        "entity": "cuisine"
-      },
-      {
-        "start": 60,
-        "end": 68,
-        "value": "open now",
-        "entity": "opening_hours"
-      }
-    ],
-    "predicted_entities": [
-      {
-        "entity": "cuisine",
-        "start": 40,
-        "end": 47,
-        "value": "chinese",
-        "extractor": "RegexEntityExtractor"
-      },
-      {
-        "entity": "cuisine",
-        "start": 40,
-        "end": 47,
-        "value": "chinese",
-        "extractor": "RegexEntityExtractor"
-      },
-      {
-        "entity": "cuisine",
-        "start": 40,
-        "end": 47,
-        "confidence_entity": 0.9997264742851257,
-        "value": "chinese",
-        "extractor": "DIETClassifier"
-      },
-      {
-        "entity": "opening_hours",
-        "start": 60,
-        "end": 68,
-        "confidence_entity": 0.9928836822509766,
-        "value": "open now",
-        "extractor": "DIETClassifier"
-      }
-    ]
-  },
-  {
-    "text": "Can you recommend a restaurant that is open late?",
-    "entities": [
-      {
-        "start": 44,
-        "end": 48,
-        "value": "late",
-        "entity": "opening_hours"
-      }
-    ],
-    "predicted_entities": [
-      {
-        "entity": "opening_hours",
-        "start": 44,
-        "end": 48,
-        "confidence_entity": 0.9974127411842346,
-        "value": "late",
-        "extractor": "DIETClassifier"
-      }
-    ]
-  },
-  {
-    "text": "I'm looking for a restaurant that is open early",
-    "entities": [
-      {
-        "start": 42,
-        "end": 47,
-        "value": "early",
-        "entity": "opening_hours"
-      }
-    ],
-    "predicted_entities": [
-      {
-        "entity": "opening_hours",
-        "start": 42,
-        "end": 47,
-        "confidence_entity": 0.9969491362571716,
-        "value": "early",
-        "extractor": "DIETClassifier"
-      }
-    ]
-  },
-  {
-    "text": "Can you suggest a restaurant that is open 24 hours?",
-    "entities": [
-      {
-        "start": 42,
-        "end": 50,
-        "value": "24 hours",
-        "entity": "opening_hours"
-      }
-    ],
-    "predicted_entities": [
-      {
-        "entity": "opening_hours",
-        "start": 42,
-        "end": 50,
-        "confidence_entity": 0.9399357438087463,
-        "value": "24 hours",
-        "extractor": "DIETClassifier"
-      }
-    ]
-  },
-  {
-    "text": "i need to find a restaurant in central park",
-    "entities": [
-      {
-        "start": 31,
-        "end": 43,
-        "value": "central park",
-        "entity": "location"
-      }
-    ],
-    "predicted_entities": [
-      {
-        "entity": "location",
-        "start": 31,
-        "end": 43,
-        "confidence_entity": 0.9986625909805298,
-        "value": "central park",
-        "extractor": "DIETClassifier"
-      }
-    ]
-  },
-  {
-    "text": "Can you recommend a restaurant that is open brooklyn?",
-    "entities": [
-      {
-        "start": 44,
-        "end": 52,
-        "value": "brooklyn",
-        "entity": "location"
-      }
-    ],
-    "predicted_entities": [
-      {
-        "entity": "location",
-        "start": 44,
-        "end": 52,
-        "confidence_entity": 0.9911558628082275,
-        "value": "brooklyn",
-        "extractor": "DIETClassifier"
-      }
-    ]
-  },
-  {
-    "text": "I'm looking for a restaurant in boston",
-    "entities": [
-      {
-        "start": 32,
-        "end": 38,
-        "value": "boston",
-        "entity": "location"
-      }
-    ],
-    "predicted_entities": [
-      {
-        "entity": "location",
-        "start": 32,
-        "end": 38,
-        "confidence_entity": 0.9996750354766846,
-        "value": "boston",
-        "extractor": "DIETClassifier"
-      }
-    ]
-  },
-  {
-    "text": "Can you suggest a restaurant in New York city?",
-    "entities": [
-      {
-        "start": 32,
-        "end": 45,
-        "value": "New York city",
-        "entity": "location"
-      }
-    ],
-    "predicted_entities": [
-      {
-        "entity": "state",
-        "start": 32,
-        "end": 40,
-        "value": "New York",
-        "extractor": "RegexEntityExtractor"
-      },
-      {
-        "entity": "location",
-        "start": 32,
-        "end": 45,
-        "confidence_entity": 0.6732817888259888,
-        "value": "New York city",
-        "extractor": "DIETClassifier"
-      }
-    ]
-  },
-  {
-    "text": "I need to find a restaurant that serves chinese food and can accommodate 5 people on Saturday",
-    "entities": [
-      {
-        "start": 40,
-        "end": 47,
-        "value": "chinese",
-        "entity": "cuisine"
-      },
-      {
-        "start": 73,
-        "end": 74,
-        "value": "5",
-        "entity": "num_people"
-      },
-      {
-        "start": 85,
-        "end": 93,
-        "value": "Saturday",
-        "entity": "date"
-      }
-    ],
-    "predicted_entities": [
-      {
-        "entity": "cuisine",
-        "start": 40,
-        "end": 47,
-        "value": "chinese",
-        "extractor": "RegexEntityExtractor"
-      },
-      {
-        "entity": "cuisine",
-        "start": 40,
-        "end": 47,
-        "value": "chinese",
-        "extractor": "RegexEntityExtractor"
-      },
-      {
-        "entity": "cuisine",
-        "start": 40,
-        "end": 47,
-        "confidence_entity": 0.9996535778045654,
-        "value": "chinese",
-        "extractor": "DIETClassifier"
-      },
-      {
-        "entity": "num_people",
-        "start": 73,
-        "end": 74,
-        "confidence_entity": 0.999645471572876,
-        "value": "5",
-        "extractor": "DIETClassifier"
-      },
-      {
-        "entity": "date",
-        "start": 85,
-        "end": 93,
-        "confidence_entity": 0.998561680316925,
-        "value": "Saturday",
-        "extractor": "DIETClassifier"
-      }
-    ]
-  },
-  {
-    "text": "Can you recommend a restaurant for 10 people on June 15 that serves italian cuisine?",
-    "entities": [
-      {
-        "start": 35,
-        "end": 37,
-        "value": "10",
-        "entity": "num_people"
-      },
-      {
-        "start": 48,
-        "end": 55,
-        "value": "June 15",
-        "entity": "date"
-      },
-      {
-        "start": 68,
-        "end": 75,
-        "value": "italian",
-        "entity": "cuisine"
-      }
-    ],
-    "predicted_entities": [
-      {
-        "entity": "cuisine",
-        "start": 68,
-        "end": 75,
-        "value": "italian",
-        "extractor": "RegexEntityExtractor"
-      },
-      {
-        "entity": "cuisine",
-        "start": 68,
-        "end": 75,
-        "value": "italian",
-        "extractor": "RegexEntityExtractor"
-      },
-      {
-        "entity": "num_people",
-        "start": 35,
-        "end": 37,
-        "confidence_entity": 0.9721763134002686,
-        "value": "10",
-        "extractor": "DIETClassifier"
-      },
-      {
-        "entity": "date",
-        "start": 48,
-        "end": 55,
-        "confidence_entity": 0.9324604272842407,
-        "value": "June 15",
-        "extractor": "DIETClassifier"
-      },
-      {
-        "entity": "cuisine",
-        "start": 68,
-        "end": 75,
-        "confidence_entity": 0.999424934387207,
-        "value": "italian",
-        "extractor": "DIETClassifier"
-      }
-    ]
-  },
-  {
-    "text": "I'm looking for a restaurant that can accommodate 2 people on Sunday and serves mexican food",
-    "entities": [
-      {
-        "start": 50,
-        "end": 51,
-        "value": "2",
-        "entity": "num_people"
-      },
-      {
-        "start": 62,
-        "end": 68,
-        "value": "Sunday",
-        "entity": "date"
-      },
-      {
-        "start": 80,
-        "end": 87,
-        "value": "mexican",
-        "entity": "cuisine"
-      }
-    ],
-    "predicted_entities": [
-      {
-        "entity": "cuisine",
-        "start": 80,
-        "end": 87,
-        "value": "mexican",
-        "extractor": "RegexEntityExtractor",
-        "processors": [
-          "EntitySynonymMapper"
-        ]
-      },
-      {
-        "entity": "cuisine",
-        "start": 80,
-        "end": 87,
-        "value": "mexican",
-        "extractor": "RegexEntityExtractor",
-        "processors": [
-          "EntitySynonymMapper"
-        ]
-      },
-      {
-        "entity": "num_people",
-        "start": 50,
-        "end": 51,
-        "confidence_entity": 0.999530553817749,
-        "value": "2",
-        "extractor": "DIETClassifier"
-      },
-      {
-        "entity": "date",
-        "start": 62,
-        "end": 68,
-        "confidence_entity": 0.9980111122131348,
-        "value": "Sunday",
-        "extractor": "DIETClassifier"
-      },
-      {
-        "entity": "cuisine",
-        "start": 80,
-        "end": 87,
-        "confidence_entity": 0.997062623500824,
-        "value": "mexican",
-        "extractor": "DIETClassifier",
-        "processors": [
-          "EntitySynonymMapper"
-        ]
-      }
-    ]
-  },
-  {
-    "text": "Find a restaurant that serves thai cuisine and can accommodate 4 people on Friday night",
-    "entities": [
-      {
-        "start": 30,
-        "end": 34,
-        "value": "thai",
-        "entity": "cuisine"
-      },
-      {
-        "start": 63,
-        "end": 64,
-        "value": "4",
-        "entity": "num_people"
-      },
-      {
-        "start": 75,
-        "end": 81,
-        "value": "Friday",
-        "entity": "date"
-      }
-    ],
-    "predicted_entities": [
-      {
-        "entity": "cuisine",
-        "start": 30,
-        "end": 34,
-        "value": "thai",
-        "extractor": "RegexEntityExtractor"
-      },
-      {
-        "entity": "cuisine",
-        "start": 30,
-        "end": 34,
-        "value": "thai",
-        "extractor": "RegexEntityExtractor"
-      },
-      {
-        "entity": "cuisine",
-        "start": 30,
-        "end": 34,
-        "confidence_entity": 0.999081015586853,
-        "value": "thai",
-        "extractor": "DIETClassifier"
-      },
-      {
-        "entity": "num_people",
-        "start": 63,
-        "end": 64,
-        "confidence_entity": 0.9994686245918274,
-        "value": "4",
-        "extractor": "DIETClassifier"
-      },
-      {
-        "entity": "date",
-        "start": 75,
-        "end": 81,
-        "confidence_entity": 0.9697856307029724,
-        "value": "Friday",
-        "extractor": "DIETClassifier"
-      }
-    ]
-  },
-  {
-    "text": "I need a restaurant that serves italian for 7 people on July 2nd",
-    "entities": [
-      {
-        "start": 32,
-        "end": 39,
-        "value": "italian",
-        "entity": "cuisine"
-      },
-      {
-        "start": 44,
-        "end": 45,
-        "value": "7",
-        "entity": "num_people"
-      },
-      {
-        "start": 56,
-        "end": 64,
-        "value": "July 2nd",
-        "entity": "date"
-      }
-    ],
-    "predicted_entities": [
-      {
-        "entity": "cuisine",
-        "start": 32,
-        "end": 39,
-        "value": "italian",
-        "extractor": "RegexEntityExtractor"
-      },
-      {
-        "entity": "cuisine",
-        "start": 32,
-        "end": 39,
-        "value": "italian",
-        "extractor": "RegexEntityExtractor"
-      },
-      {
-        "entity": "cuisine",
-        "start": 32,
-        "end": 39,
-        "confidence_entity": 0.99962317943573,
-        "value": "italian",
-        "extractor": "DIETClassifier"
-      },
-      {
-        "entity": "num_people",
-        "start": 44,
-        "end": 45,
-        "confidence_entity": 0.9994188547134399,
-        "value": "7",
-        "extractor": "DIETClassifier"
-      },
-      {
-        "entity": "date",
-        "start": 56,
-        "end": 64,
-        "confidence_entity": 0.9965873956680298,
-        "value": "July 2nd",
-        "extractor": "DIETClassifier"
-      }
-    ]
-  },
-  {
-    "text": "Please recommend a restaurant for 2 people on Sunday that serves seafood",
-    "entities": [
-      {
-        "start": 34,
-        "end": 35,
-        "value": "2",
-        "entity": "num_people"
-      },
-      {
-        "start": 46,
-        "end": 52,
-        "value": "Sunday",
-        "entity": "date"
-      },
-      {
-        "start": 65,
-        "end": 72,
-        "value": "seafood",
-        "entity": "cuisine"
-      }
-    ],
-    "predicted_entities": [
-      {
-        "entity": "num_people",
-        "start": 34,
-        "end": 35,
-        "confidence_entity": 0.9997695088386536,
-        "value": "2",
-        "extractor": "DIETClassifier"
-      },
-      {
-        "entity": "date",
-        "start": 46,
-        "end": 52,
-        "confidence_entity": 0.9986078143119812,
-        "value": "Sunday",
-        "extractor": "DIETClassifier"
-      },
-      {
-        "entity": "cuisine",
-        "start": 65,
-        "end": 72,
-        "confidence_entity": 0.9993834495544434,
-        "value": "seafood",
-        "extractor": "DIETClassifier"
-      }
-    ]
-  },
-  {
-    "text": "I'm looking for a fancy restaurant for 5 people on Valentine's Day",
-    "entities": [
-      {
-        "start": 18,
-        "end": 23,
-        "value": "fancy",
-        "entity": "preferences"
-      },
-      {
-        "start": 39,
-        "end": 40,
-        "value": "5",
-        "entity": "num_people"
-      },
-      {
-        "start": 51,
-        "end": 66,
-        "value": "Valentine's Day",
-        "entity": "date"
-      }
-    ],
-    "predicted_entities": [
-      {
-        "entity": "preferences",
-        "start": 18,
-        "end": 23,
-        "confidence_entity": 0.9713982939720154,
-        "value": "fancy",
-        "extractor": "DIETClassifier"
-      },
-      {
-        "entity": "num_people",
-        "start": 39,
-        "end": 40,
-        "confidence_entity": 0.9974053502082825,
-        "value": "5",
-        "extractor": "DIETClassifier"
-      },
-      {
-        "entity": "date",
-        "start": 51,
-        "end": 66,
-        "confidence_entity": 0.985398530960083,
-        "value": "Valentine's Day",
-        "extractor": "DIETClassifier"
-      }
-    ]
-  },
-  {
-    "text": "Can you find a restaurant for 8 people on Christmas Eve that serves steak",
-    "entities": [
-      {
-        "start": 30,
-        "end": 31,
-        "value": "8",
-        "entity": "num_people"
-      },
-      {
-        "start": 42,
-        "end": 55,
-        "value": "Christmas Eve",
-        "entity": "date"
-      },
-      {
-        "start": 68,
-        "end": 73,
-        "value": "steak",
-        "entity": "cuisine"
-      }
-    ],
-    "predicted_entities": [
-      {
-        "entity": "num_people",
-        "start": 30,
-        "end": 31,
-        "confidence_entity": 0.9996646642684937,
-        "value": "8",
-        "extractor": "DIETClassifier"
-      },
-      {
-        "entity": "date",
-        "start": 42,
-        "end": 55,
-        "confidence_entity": 0.9978256821632385,
-        "value": "Christmas Eve",
-        "extractor": "DIETClassifier"
-      },
-      {
-        "entity": "cuisine",
-        "start": 68,
-        "end": 73,
-        "confidence_entity": 0.9994505047798157,
-        "value": "steak",
-        "extractor": "DIETClassifier"
-      }
-    ]
-  },
-  {
-    "text": "i need to find a restaurant that serves chinese food and is open now for 5 people",
-    "entities": [
-      {
-        "start": 40,
-        "end": 47,
-        "value": "chinese",
-        "entity": "cuisine"
-      },
-      {
-        "start": 60,
-        "end": 68,
-        "value": "open now",
-        "entity": "opening_hours"
-      },
-      {
-        "start": 73,
-        "end": 74,
-        "value": "5",
-        "entity": "num_people"
-      }
-    ],
-    "predicted_entities": [
-      {
-        "entity": "cuisine",
-        "start": 40,
-        "end": 47,
-        "value": "chinese",
-        "extractor": "RegexEntityExtractor"
-      },
-      {
-        "entity": "cuisine",
-        "start": 40,
-        "end": 47,
-        "value": "chinese",
-        "extractor": "RegexEntityExtractor"
-      },
-      {
-        "entity": "cuisine",
-        "start": 40,
-        "end": 47,
-        "confidence_entity": 0.9996585845947266,
-        "value": "chinese",
-        "extractor": "DIETClassifier"
-      },
-      {
-        "entity": "opening_hours",
-        "start": 60,
-        "end": 68,
-        "confidence_entity": 0.9776620268821716,
-        "value": "open now",
-        "extractor": "DIETClassifier"
-      },
-      {
-        "entity": "num_people",
-        "start": 73,
-        "end": 74,
-        "confidence_entity": 0.9994064569473267,
-        "value": "5",
-        "extractor": "DIETClassifier"
-      }
-    ]
-  },
-  {
-    "text": "Can you recommend a restaurant that is open late for 10 people?",
-    "entities": [
-      {
-        "start": 44,
-        "end": 48,
-        "value": "late",
-        "entity": "opening_hours"
-      },
-      {
-        "start": 53,
-        "end": 55,
-        "value": "10",
-        "entity": "num_people"
-      }
-    ],
-    "predicted_entities": [
-      {
-        "entity": "opening_hours",
-        "start": 44,
-        "end": 48,
-        "confidence_entity": 0.994920551776886,
-        "value": "late",
-        "extractor": "DIETClassifier"
-      },
-      {
-        "entity": "num_people",
-        "start": 53,
-        "end": 55,
-        "confidence_entity": 0.9981175661087036,
-        "value": "10",
-        "extractor": "DIETClassifier"
-      }
-    ]
-  },
-  {
-    "text": "I'm looking for a restaurant that is open early for 2 people",
-    "entities": [
-      {
-        "start": 42,
-        "end": 47,
-        "value": "early",
-        "entity": "opening_hours"
-      },
-      {
-        "start": 52,
-        "end": 53,
-        "value": "2",
-        "entity": "num_people"
-      }
-    ],
-    "predicted_entities": [
-      {
-        "entity": "opening_hours",
-        "start": 42,
-        "end": 47,
-        "confidence_entity": 0.9962788224220276,
-        "value": "early",
-        "extractor": "DIETClassifier"
-      },
-      {
-        "entity": "num_people",
-        "start": 52,
-        "end": 53,
-        "confidence_entity": 0.9986604452133179,
-        "value": "2",
-        "extractor": "DIETClassifier"
-      }
-    ]
-  },
-  {
-    "text": "Can you suggest a restaurant that is open 24 hours for 3 people?",
-    "entities": [
-      {
-        "start": 42,
-        "end": 50,
-        "value": "24 hours",
-        "entity": "opening_hours"
-      },
-      {
-        "start": 55,
-        "end": 56,
-        "value": "3",
-        "entity": "num_people"
-      }
-    ],
-    "predicted_entities": [
-      {
-        "entity": "opening_hours",
-        "start": 42,
-        "end": 50,
-        "confidence_entity": 0.7132865786552429,
-        "value": "24 hours",
-        "extractor": "DIETClassifier"
-      },
-      {
-        "entity": "num_people",
-        "start": 55,
-        "end": 56,
-        "confidence_entity": 0.9152743816375732,
-        "value": "3",
         "extractor": "DIETClassifier"
       }
     ]
@@ -3796,16 +2954,7 @@
         "entity": "password"
       }
     ],
-    "predicted_entities": [
-      {
-        "entity": "password",
-        "start": 0,
-        "end": 4,
-        "confidence_entity": 0.5102943778038025,
-        "value": "pass",
-        "extractor": "DIETClassifier"
-      }
-    ]
+    "predicted_entities": []
   },
   {
     "text": "1234",
@@ -3822,7 +2971,7 @@
         "entity": "password",
         "start": 0,
         "end": 4,
-        "confidence_entity": 0.6715561747550964,
+        "confidence_entity": 0.39847761392593384,
         "value": "1234",
         "extractor": "DIETClassifier"
       }

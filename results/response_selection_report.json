@@ -1,19 +1,12 @@
 {
-  "out_of_scope/out_of_functionality": {
+  "bot_challenge/who_are_you": {
     "precision": 1.0,
     "recall": 1.0,
     "f1-score": 1.0,
-    "support": 6,
+    "support": 4,
     "confused_with": {}
   },
   "out_of_scope/hotel": {
-    "precision": 1.0,
-    "recall": 1.0,
-    "f1-score": 1.0,
-    "support": 6,
-    "confused_with": {}
-  },
-  "out_of_scope/food": {
     "precision": 1.0,
     "recall": 1.0,
     "f1-score": 1.0,
@@ -27,18 +20,25 @@
     "support": 2,
     "confused_with": {}
   },
-  "bot_challenge/who_are_you": {
+  "bot_challenge/bot": {
     "precision": 1.0,
     "recall": 1.0,
     "f1-score": 1.0,
     "support": 4,
     "confused_with": {}
   },
-  "bot_challenge/bot": {
+  "out_of_scope/food": {
     "precision": 1.0,
     "recall": 1.0,
     "f1-score": 1.0,
-    "support": 4,
+    "support": 6,
+    "confused_with": {}
+  },
+  "out_of_scope/out_of_functionality": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 6,
     "confused_with": {}
   },
   "accuracy": 1.0,

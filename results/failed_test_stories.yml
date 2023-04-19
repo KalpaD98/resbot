@@ -1,21 +1,5 @@
 version: "3.1"
 stories:
-- story: happy path 1 (./venv/lib/python3.9/site-packages/rasa/cli/initial_project/tests/test_stories.yml)
-  steps:
-  - intent: greet
-  - action: utter_greet
-  - action: action_listen  # predicted: utter_bot_intro
-  - intent: mood_great
-  - action: utter_happy  # predicted: utter_emoji_mood_unhappy_feedback
-- story: happy path 2 (./venv/lib/python3.9/site-packages/rasa/cli/initial_project/tests/test_stories.yml)
-  steps:
-  - intent: greet
-  - action: utter_greet
-  - action: action_listen  # predicted: utter_bot_intro
-  - intent: mood_great
-  - action: utter_happy  # predicted: utter_emoji_mood_unhappy_feedback
-  - intent: goodbye  # predicted: goodbye: bye[-](restaurant_name)bye!
-  - action: utter_goodbye
 - story: sad path 1 (./venv/lib/python3.9/site-packages/rasa/cli/initial_project/tests/test_stories.yml)
   steps:
   - intent: greet
@@ -54,3 +38,19 @@ stories:
   steps:
   - intent: bot_challenge
   - action: utter_iamabot  # predicted: utter_bot_challenge/bot
+- story: happy path 1 (./tests/test_stories.yml)
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: action_listen  # predicted: utter_bot_intro
+  - intent: mood_great
+  - action: utter_happy  # predicted: utter_mood_great_feedback
+- story: happy path 2 (./tests/test_stories.yml)
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: action_listen  # predicted: utter_bot_intro
+  - intent: mood_great
+  - action: utter_happy  # predicted: utter_mood_great_feedback
+  - intent: goodbye  # predicted: goodbye: bye[-](restaurant_name)bye!
+  - action: utter_goodbye

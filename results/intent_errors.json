@@ -1,10 +1,10 @@
 [
   {
-    "text": "1234",
-    "intent": "inform_user_password",
+    "text": "Can you recommend some restaurants?",
+    "intent": "want_to_search_restaurants",
     "intent_prediction": {
-      "name": "inform_num_people",
-      "confidence": 0.6058602333068848
+      "name": "query_knowledge_base",
+      "confidence": 0.46380797028541565
     }
   },
   {
@@ -12,7 +12,15 @@
     "intent": "inform_user_password",
     "intent_prediction": {
       "name": "inform_num_people",
-      "confidence": 0.6058602333068848
+      "confidence": 0.810258686542511
+    }
+  },
+  {
+    "text": "1234",
+    "intent": "inform_user_password",
+    "intent_prediction": {
+      "name": "inform_num_people",
+      "confidence": 0.810258686542511
     }
   }
 ]

@@ -17,6 +17,12 @@ nlu:
       - i want to book another one
       - show rest
       - book restaurant
+      - can i check restaurants 
+      - show some restaurants
+      - restaurants please
+      - restuarants
+      - restaurants
+      - show me some restaurants
 
   - intent: request_menu
     examples: |

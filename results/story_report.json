@@ -1,20 +1,14 @@
 {
-  "utter_cheer_up": {
-    "precision": 0.0,
-    "recall": 0.0,
-    "f1-score": 0.0,
-    "support": 3
+  "greet": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 5
   },
   "goodbye": {
     "precision": 1.0,
     "recall": 1.0,
     "f1-score": 1.0,
-    "support": 2
-  },
-  "None": {
-    "precision": 0.0,
-    "recall": 0.0,
-    "f1-score": 0.0,
     "support": 2
   },
   "utter_iamabot": {
@@ -23,17 +17,17 @@
     "f1-score": 0.0,
     "support": 1
   },
-  "mood_great": {
+  "deny": {
     "precision": 1.0,
     "recall": 1.0,
     "f1-score": 1.0,
     "support": 2
   },
-  "mood_unhappy": {
+  "bot_challenge": {
     "precision": 1.0,
     "recall": 1.0,
     "f1-score": 1.0,
-    "support": 3
+    "support": 1
   },
   "utter_happy": {
     "precision": 0.0,
@@ -41,11 +35,23 @@
     "f1-score": 0.0,
     "support": 3
   },
-  "affirm": {
+  "mood_great": {
     "precision": 1.0,
     "recall": 1.0,
     "f1-score": 1.0,
-    "support": 1
+    "support": 2
+  },
+  "utter_cheer_up": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1-score": 0.0,
+    "support": 3
+  },
+  "None": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1-score": 0.0,
+    "support": 2
   },
   "utter_goodbye": {
     "precision": 1.0,
@@ -53,25 +59,7 @@
     "f1-score": 0.6666666666666666,
     "support": 4
   },
-  "deny": {
-    "precision": 1.0,
-    "recall": 1.0,
-    "f1-score": 1.0,
-    "support": 2
-  },
-  "utter_did_that_help": {
-    "precision": 0.0,
-    "recall": 0.0,
-    "f1-score": 0.0,
-    "support": 3
-  },
-  "greet": {
-    "precision": 1.0,
-    "recall": 1.0,
-    "f1-score": 1.0,
-    "support": 5
-  },
-  "bot_challenge": {
+  "affirm": {
     "precision": 1.0,
     "recall": 1.0,
     "f1-score": 1.0,
@@ -82,6 +70,18 @@
     "recall": 0.6875,
     "f1-score": 0.7333333333333334,
     "support": 16
+  },
+  "utter_did_that_help": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1-score": 0.0,
+    "support": 3
+  },
+  "mood_unhappy": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 3
   },
   "utter_greet": {
     "precision": 1.0,
@@ -96,7 +96,7 @@
     "support": 53
   },
   "macro avg": {
-    "precision": 0.6523809523809524,
+    "precision": 0.6523809523809523,
     "recall": 0.6125,
     "f1-score": 0.6266666666666667,
     "support": 53
