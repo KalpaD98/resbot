@@ -1,7 +1,7 @@
 from actions.all_actions.common_imports_for_actions import *
 
 from actions.all_actions.helper_functions.restaurant_helper import get_restaurant
-from submodules.database.models.restaurant import Restaurant
+from submodules.database.data_models.restaurant import Restaurant
 
 # constants
 ACTION_SHOW_SELECTED_RESTAURANT_DETAILS = "action_show_selected_restaurant_details"

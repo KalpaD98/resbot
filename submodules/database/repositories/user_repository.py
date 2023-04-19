@@ -1,6 +1,6 @@
 from submodules.database.connectors.mongo_connector import db
 
-from submodules.database.models.user import User
+from submodules.database.data_models.user import User
 
 
 class UserRepository:

@@ -1,7 +1,7 @@
 from typing import List, Dict
 
 from submodules.database.connectors.mongo_connector import db
-from submodules.database.models.restaurant import Restaurant
+from submodules.database.data_models.restaurant import Restaurant
 
 
 class RestaurantRepository:

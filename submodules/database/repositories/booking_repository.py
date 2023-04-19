@@ -2,7 +2,7 @@ from datetime import datetime
 
 from submodules.database.connectors.mongo_connector import db
 
-from submodules.database.models.booking import Booking
+from submodules.database.data_models.booking import Booking
 
 
 class BookingRepository:

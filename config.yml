@@ -14,8 +14,8 @@ pipeline:
     case_sensitive: False
 
   - name: SpacyTokenizer
-#    intent_tokenization_flag: True # to use multi intents
-#    intent_split_symbol: "+"
+    intent_tokenization_flag: True # to use multi intents
+    intent_split_symbol: "+"
 
   - name: RegexFeaturizer
   - name: SpacyFeaturizer

@@ -2,7 +2,7 @@
 
 import json
 
-from submodules.database.models.user import User
+from submodules.database.data_models.user import User
 
 # ----- -------------- ----- #
 

@@ -10,11 +10,11 @@ from rasa_sdk.events import FollowupAction, SlotSet, EventType
 from rasa_sdk.executor import CollectingDispatcher
 
 # noinspection PyUnresolvedReferences
-from submodules.database.models.booking import Booking
+from submodules.database.data_models.booking import Booking
 # noinspection PyUnresolvedReferences
-from submodules.database.models.restaurant import Restaurant
+from submodules.database.data_models.restaurant import Restaurant
 # noinspection PyUnresolvedReferences
-from submodules.database.models.user import User
+from submodules.database.data_models.user import User
 
 # database imports
 from submodules.database.repositories.booking_repository import BookingRepository
@@ -76,11 +76,11 @@ def print_all_slots(tracker: Tracker):  # -> List[Dict[Text, Any]]:
 # from rasa_sdk.executor import CollectingDispatcher
 #
 # # noinspection PyUnresolvedReferences
-# from submodules.database.models.booking import Booking
+# from submodules.database.data_models.booking import Booking
 # # noinspection PyUnresolvedReferences
-# from submodules.database.models.restaurant import Restaurant
+# from submodules.database.data_models.restaurant import Restaurant
 # # noinspection PyUnresolvedReferences
-# from submodules.database.models.user import User
+# from submodules.database.data_models.user import User
 #
 # # database imports
 # from submodules.database.repositories.booking_repository import BookingRepository
