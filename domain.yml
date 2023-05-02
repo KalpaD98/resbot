@@ -321,18 +321,18 @@ forms:
       - num_people
       - date
 
-#  restaurant_booking_change_form:
-#    required_slots:
-#      - num_people
-#      - date
+  #  restaurant_booking_change_form:
+  #    required_slots:
+  #      - num_people
+  #      - date
 
-#  change_restaurant_booking_date_form:
-#    required_slots:
-#      - date
+  #  change_restaurant_booking_date_form:
+  #    required_slots:
+  #      - date
 
-#  change_restaurant_booking_num_people_form:
-#    required_slots:
-#      - num_people
+  #  change_restaurant_booking_num_people_form:
+  #    required_slots:
+  #      - num_people
 
   registration_form:
     required_slots:
@@ -384,8 +384,8 @@ actions:
   - validate_change_restaurant_booking_date_form
   - validate_restaurant_booking_change_form
 
-#  - validate_change_restaurant_booking_date_form
-#  - validate_change_restaurant_booking_num_people_form
+  #  - validate_change_restaurant_booking_date_form
+  #  - validate_change_restaurant_booking_num_people_form
 
   - action_deactivate_form
 
@@ -546,6 +546,11 @@ responses:
 
   utter_no_changes_made_to_booking:
     - text: "No changes were made to your booking"
+
+  # --- user preferences asking
+
+  utter_ask_favorite_cuisines:
+    - text: "What are your favorite cuisines? You can provide multiple cuisines, like Italian, Chinese, Indian, or Mexican."
 
   # ------------------------------------------ Retrieval Intent Responses -------------------------------------------- #
   utter_bot_challenge/what_can_you_do:

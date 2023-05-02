@@ -1,0 +1,9 @@
+version: "3.1" # nlu-user-preferences.yml
+
+nlu:
+  - intent: provide_cuisines
+    examples: |
+      - I like [Italian](cuisine) and [Mexican](cuisine) food
+      - I prefer [Chinese](cuisine), [Japanese](cuisine), and [Thai](cuisine) dishes
+      - My favorite cuisines are [Indian](cuisine) and [Greek](cuisine)
+      - [Chinese](cuisine), [Japanese](cuisine), and [Thai](cuisine)

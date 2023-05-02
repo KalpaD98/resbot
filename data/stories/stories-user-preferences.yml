@@ -1,0 +1,8 @@
+version: "3.1" # stories-user-preferences.yml has stories for the restaurant bot to ask user about their preferences
+
+stories:
+  - story: ask user about favorite cuisines
+    steps:
+      - action: utter_ask_favorite_cuisines
+      - intent: provide_cuisines
+      - action: action_update_favorite_cuisines
