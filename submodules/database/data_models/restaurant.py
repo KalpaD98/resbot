@@ -22,6 +22,7 @@ class Restaurant:
     CATEGORIES = "categories"
     MON_TO_FRI = "Mon - Fri"
     SAT_SUN = "Sat, Sun"
+    REVIEW_COUNT = "review_count"
 
     def __init__(
             self,
@@ -40,6 +41,7 @@ class Restaurant:
             longitude: Optional[float] = None,
             categories: Optional[List[str]] = None,
             business_id: Optional[str] = None,
+            review_count: Optional[int] = None,
             id=None,
     ):
         self.id = f"rid_{ObjectId()}" if id is None else id
@@ -58,6 +60,7 @@ class Restaurant:
         self.longitude = longitude
         self.opening_hours = opening_hours
         self.categories = categories
+        self.review_count = review_count
 
     def __repr__(self) -> str:
         return f"Restaurant(id='{self.id}', name='{self.name}', cuisine='{self.cuisine}')"
@@ -82,7 +85,8 @@ class Restaurant:
             self.LATITUDE: self.latitude,
             self.LONGITUDE: self.longitude,
             self.OPENING_HOURS: self.opening_hours,
-            self.CATEGORIES: self.categories
+            self.CATEGORIES: self.categories,
+            self.REVIEW_COUNT: self.review_count
         }
 
     @classmethod
@@ -103,5 +107,6 @@ class Restaurant:
             opening_hours=data[cls.OPENING_HOURS],
             categories=data[cls.CATEGORIES],
             business_id=data[cls.BUSINESS_ID],  # Pass the business_id attribute
-            id=data[cls.ID]  # Pass the id attribute
+            id=data[cls.ID],  # Pass the id attribute
+            review_count=data[cls.REVIEW_COUNT],
         )
