@@ -21,8 +21,15 @@ from actions.all_actions.restaurant_booking_carousal_actions import *  # restaur
 from actions.all_actions.restaurant_booking_change_actions import *  # restaurant booking update
 # noinspection PyUnresolvedReferences
 from actions.all_actions.slot_validation_actions import *  # slot validation actions
+
+# User related actions
 # noinspection PyUnresolvedReferences
 from actions.all_actions.user_actions import *  # user actions
+# noinspection PyUnresolvedReferences
+from actions.all_actions.user_preference_action import *  # user preference actions
+
+# noinspection PyUnresolvedReferences
+from actions.all_actions.bot_response_actions import *  # bot response actions
 
 # CONSTANTS
 ACTION_ASK_ANYTHING_ELSE = "action_ask_anything_else"

@@ -3,7 +3,7 @@ stories:
 - story: sad path 1 (./venv/lib/python3.9/site-packages/rasa/cli/initial_project/tests/test_stories.yml)
   steps:
   - intent: greet
-  - action: utter_greet
+  - action: action_utter_greet
   - action: action_listen  # predicted: utter_bot_intro
   - intent: mood_unhappy
   - action: utter_cheer_up  # predicted: utter_mood_unhappy_feedback
@@ -13,7 +13,7 @@ stories:
 - story: sad path 2 (./venv/lib/python3.9/site-packages/rasa/cli/initial_project/tests/test_stories.yml)
   steps:
   - intent: greet
-  - action: utter_greet
+  - action: action_utter_greet
   - action: action_listen  # predicted: utter_bot_intro
   - intent: mood_unhappy
   - action: utter_cheer_up  # predicted: utter_mood_unhappy_feedback
@@ -23,7 +23,7 @@ stories:
 - story: sad path 3 (./venv/lib/python3.9/site-packages/rasa/cli/initial_project/tests/test_stories.yml)
   steps:
   - intent: greet
-  - action: utter_greet
+  - action: action_utter_greet
   - action: action_listen  # predicted: utter_bot_intro
   - intent: mood_unhappy
   - action: utter_cheer_up  # predicted: utter_mood_unhappy_feedback
@@ -37,14 +37,14 @@ stories:
 - story: happy path 1 (./tests/test_stories.yml)
   steps:
   - intent: greet
-  - action: utter_greet
+  - action: action_utter_greet
   - action: action_listen  # predicted: utter_bot_intro
   - intent: mood_great
   - action: utter_happy  # predicted: utter_mood_great_feedback
 - story: happy path 2 (./tests/test_stories.yml)
   steps:
   - intent: greet
-  - action: utter_greet
+  - action: action_utter_greet
   - action: action_listen  # predicted: utter_bot_intro
   - intent: mood_great
   - action: utter_happy  # predicted: utter_mood_great_feedback

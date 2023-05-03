@@ -1,10 +1,6 @@
-from typing import Any, Text, Dict, List
-
-from rasa_sdk import Action, Tracker
-from rasa_sdk.executor import CollectingDispatcher
+from actions.all_actions.common_imports_for_actions import *
 
 
-# add to main actions.py and import commons
 class ActionUpdateFavoriteCuisines(Action):
 
     def name(self) -> Text:

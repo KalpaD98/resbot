@@ -94,6 +94,9 @@ intents:
   - inform_user_email
   - inform_user_password
 
+  # ------------------------------------------------- nlu-user-preferences.yml -------------------------------------- #
+  - inform_favorite_cuisines
+
   # ------------------------------------------------------------------------------------------------------------------ #
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -167,7 +170,7 @@ slots:
         entity: selected_restaurant
 
   restaurant_offset:
-    type: any
+    type: float
     influence_conversation: false
     initial_value: 0
     mappings:
@@ -264,6 +267,13 @@ slots:
       - type: from_text
         intent:
           - inform_user_password
+  # --------------------------------- response related slots  --------------------------------- #
+
+  language:
+    type: text
+    initial_value: en
+    mappings:
+    - type: custom
 
   # --------------------------------------- Knowledge base query related slots --------------------------------------- #
 
@@ -410,6 +420,11 @@ actions:
   - action_validate_and_compare_booking_changes_ask_confirmation_to_change
   - action_change_restaurant_booking_details
   - action_clear_booking_data_slots
+  # ------------------------------------- user preference actions ------------------------------------ #
+  - action_update_favorite_cuisines
+  # ------------------------------------------------ Response actions ----------------------------------------------- #
+  - action_utter_greet
+
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # ------------------------------------------- Responses: Bot Utterances --------------------------------------------- #
@@ -417,12 +432,12 @@ actions:
 
 responses:
 
-  utter_greet:
-    - text: Hi!
-    - text: Hey!
-    - text: Hello!
-    - text: Hi 😃 there!
-    - text: Hello there 😀
+#  utter_greet:
+#    - text: Hi!
+#    - text: Hey!
+#    - text: Hello!
+#    - text: Hi 😃 there!
+#    - text: Hello there 😀
 
   utter_please_rephrase:
     - text: I'm sorry, I couldn't understand that. Could you rephrase it?
@@ -523,34 +538,34 @@ responses:
     - text: For how many people are you planing to make the reservation?
 
   utter_ask_cancel_booking_confirmation: # change according to the data
-    - text: "Are you sure you want to cancel the booking at {restaurant['name']} on {selected_booking['date']} for {num_people} people? This action cannot be undone."
+    - text: Are you sure you want to cancel the booking at {restaurant['name']} on {selected_booking['date']} for {num_people} people? This action cannot be undone.
 
   utter_ask_cancel_another_booking:
-    - text: "Do you want to cancel another booking?"
+    - text: Do you want to cancel another booking?
 
   # change booking date
   utter_ask_new_booking_date:
-    - text: "What is the new date for the booking?"
+    - text: What is the new date for the booking?
 
   utter_ask_change_another_booking:
-    - text: "Do you want to change another booking?"
+    - text: Do you want to change another booking?
 
   utter_no_bookings_found:
-    - text: "Sorry, there are no bookings found for you."
+    - text: Sorry, there are no bookings found for you.
 
   utter_no_past_bookings_found:
-    - text: "Sorry, there are no past bookings found for you."
+    - text: Sorry, there are no past bookings found for you.
 
   utter_no_future_bookings_found:
-    - text: "Sorry, there are no upcoming bookings found for you."
+    - text: Sorry, there are no upcoming bookings found for you.
 
   utter_no_changes_made_to_booking:
-    - text: "No changes were made to your booking"
+    - text: No changes were made to your booking
 
   # --- user preferences asking
 
   utter_ask_favorite_cuisines:
-    - text: "What are your favorite cuisines? You can provide multiple cuisines, like Italian, Chinese, Indian, or Mexican."
+    - text: What are your favorite cuisines? You can provide multiple cuisines, like Italian, Chinese, Indian, or Mexican.
 
   # ------------------------------------------ Retrieval Intent Responses -------------------------------------------- #
   utter_bot_challenge/what_can_you_do:

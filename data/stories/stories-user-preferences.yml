@@ -4,5 +4,5 @@ stories:
   - story: ask user about favorite cuisines
     steps:
       - action: utter_ask_favorite_cuisines
-      - intent: provide_cuisines
+      - intent: inform_favorite_cuisines
       - action: action_update_favorite_cuisines
