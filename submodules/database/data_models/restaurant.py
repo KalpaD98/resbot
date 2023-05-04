@@ -29,20 +29,20 @@ class Restaurant:
             name: str,
             ratings: str,
             cuisine: str,
-            menu_url: str,
-            image_url: str,
-            home_page_url: str,
             address: str,
             opening_hours: dict,
-            city: Optional[str] = None,
-            state: Optional[str] = None,
-            postal_code: Optional[str] = None,
-            latitude: Optional[float] = None,
-            longitude: Optional[float] = None,
-            categories: Optional[List[str]] = None,
-            business_id: Optional[str] = None,
-            review_count: Optional[int] = None,
+            city: str,
+            state: str,
+            postal_code: str,
+            latitude: float,
+            longitude: float,
+            categories: List[str],
+            business_id: str,
+            review_count: int,
             id=None,
+            menu_url: Optional[str] = None,
+            image_url: Optional[str] = None,
+            home_page_url: Optional[str] = None,
     ):
         self.id = f"rid_{ObjectId()}" if id is None else id
         self.business_id = business_id
@@ -51,7 +51,7 @@ class Restaurant:
         self.cuisine = cuisine
         self.menu_url = menu_url
         self.image_url = image_url
-        self.home_page = home_page_url
+        self.home_page_url = home_page_url
         self.address = address
         self.city = city
         self.state = state
@@ -77,7 +77,7 @@ class Restaurant:
             self.CUISINE: self.cuisine,
             self.MENU_URL: self.menu_url,
             self.IMAGE_URL: self.image_url,
-            self.HOME_PAGE_URL: self.home_page,
+            self.HOME_PAGE_URL: self.home_page_url,
             self.ADDRESS: self.address,
             self.CITY: self.city,
             self.STATE: self.state,
@@ -95,9 +95,6 @@ class Restaurant:
             name=data[cls.NAME],
             ratings=data[cls.RATINGS],
             cuisine=data[cls.CUISINE],
-            menu_url=data[cls.MENU_URL],
-            image_url=data[cls.IMAGE_URL],
-            home_page_url=data[cls.HOME_PAGE_URL],
             address=data[cls.ADDRESS],
             city=data[cls.CITY],
             state=data[cls.STATE],
@@ -106,7 +103,10 @@ class Restaurant:
             longitude=data[cls.LONGITUDE],
             opening_hours=data[cls.OPENING_HOURS],
             categories=data[cls.CATEGORIES],
-            business_id=data[cls.BUSINESS_ID],  # Pass the business_id attribute
-            id=data[cls.ID],  # Pass the id attribute
+            business_id=data[cls.BUSINESS_ID],
+            id=data[cls.ID],
             review_count=data[cls.REVIEW_COUNT],
+            menu_url=data.get(cls.MENU_URL),  # Use get() to handle missing values
+            image_url=data.get(cls.IMAGE_URL),
+            home_page_url=data.get(cls.HOME_PAGE_URL)
         )

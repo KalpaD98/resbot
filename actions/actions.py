@@ -2,6 +2,8 @@
 # See this guide on how to implement these action:
 # https://rasa.com/docs/rasa/custom-actions
 
+# noinspection PyUnresolvedReferences
+from actions.all_actions.bot_response_actions import *  # bot response actions
 # ------ All other actions ------
 # noinspection PyUnresolvedReferences
 from actions.all_actions.form_validation_actions import *  # form validation actions
@@ -9,8 +11,6 @@ from actions.all_actions.form_validation_actions import *  # form validation act
 from actions.all_actions.knowledge_base_actions import *  # knowledge base actions
 # noinspection PyUnresolvedReferences
 from actions.all_actions.restaurant_actions import *  # restaurant actions
-# noinspection PyUnresolvedReferences
-from actions.all_actions.restaurant_search_actions import *  # restaurant search actions
 # noinspection PyUnresolvedReferences
 from actions.all_actions.restaurant_booking_actions import *  # restaurant booking actions
 # noinspection PyUnresolvedReferences
@@ -20,16 +20,14 @@ from actions.all_actions.restaurant_booking_carousal_actions import *  # restaur
 # noinspection PyUnresolvedReferences
 from actions.all_actions.restaurant_booking_change_actions import *  # restaurant booking update
 # noinspection PyUnresolvedReferences
+from actions.all_actions.restaurant_search_actions import *  # restaurant search actions
+# noinspection PyUnresolvedReferences
 from actions.all_actions.slot_validation_actions import *  # slot validation actions
-
 # User related actions
 # noinspection PyUnresolvedReferences
 from actions.all_actions.user_actions import *  # user actions
 # noinspection PyUnresolvedReferences
 from actions.all_actions.user_preference_action import *  # user preference actions
-
-# noinspection PyUnresolvedReferences
-from actions.all_actions.bot_response_actions import *  # bot response actions
 
 # CONSTANTS
 ACTION_ASK_ANYTHING_ELSE = "action_ask_anything_else"
@@ -45,17 +43,23 @@ class ActionAnythingElse(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        quick_replies_with_payload = [
-            # {"title": QR_SHOW_MORE_RESTAURANTS, "payload": "/request_more_restaurant_options"},
-            {"title": QR_SEARCH_RESTAURANTS, "payload": "/want_to_search_restaurants"},
+        english_quick_replies_with_payload = [
+            {"title": "Search restaurants", "payload": "/want_to_search_restaurants"},
             {"title": "Checkout restaurants", "payload": "/request_restaurants"},
             {"title": "Search restaurants", "payload": "/search_restaurants"},
             {"title": "View bookings", "payload": "/view_bookings"},
             {"title": "No thanks", "payload": "/goodbye"},
         ]
 
-        dispatcher.utter_message(text="Is there anything else I can help you with?",
-                                 quick_replies=ResponseGenerator.quick_replies(quick_replies_with_payload, True))
+        english_text = "Is there anything else I can help you with?"
+
+        final_quick_replies_with_payload = english_quick_replies_with_payload
+        final_text = english_text
+
+        # if user is not using english handle it
+
+        dispatcher.utter_message(text=final_text,
+                                 quick_replies=ResponseGenerator.quick_replies(final_quick_replies_with_payload, True))
         return []
 
 
@@ -68,26 +72,27 @@ class ActionAskWhatUserWants(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         # quick replies for show more and search with payload
-        quick_replies_with_payload = []
+        english_quick_replies_with_payload = [
+            {
+                TITLE: QR_HI,
+                PAYLOAD: "/greet"},
+            {
+                TITLE: QR_SHOW_MORE_RESTAURANTS,
+                PAYLOAD: "/request_restaurants"},
+            {
+                TITLE: QR_SEARCH_RESTAURANTS,
+                PAYLOAD: "/want_to_search_restaurants"}
+        ]
 
-        quick_reply_say_hi = {
-            TITLE: "Hi",
-            PAYLOAD: "/greet"}
+        english_text = "What do you want to do?"
 
-        quick_reply_request_restaurants = {
-            TITLE: QR_SHOW_MORE_RESTAURANTS,
-            PAYLOAD: "/request_restaurants"}
+        final_quick_replies_with_payload = english_quick_replies_with_payload
+        final_text = english_text
 
-        quick_reply_search_restaurant = {
-            TITLE: QR_SEARCH_RESTAURANTS,
-            PAYLOAD: "/want_to_search_restaurants"}
+        # if user is not using english handle it
 
-        quick_replies_with_payload.append(quick_reply_say_hi)
-        quick_replies_with_payload.append(quick_reply_request_restaurants)
-        quick_replies_with_payload.append(quick_reply_search_restaurant)
-
-        dispatcher.utter_message(text="What do you want to do?",
-                                 quick_replies=ResponseGenerator.quick_replies(quick_replies_with_payload, True))
+        dispatcher.utter_message(text=final_text,
+                                 quick_replies=ResponseGenerator.quick_replies(final_quick_replies_with_payload, True))
         return []
 
 

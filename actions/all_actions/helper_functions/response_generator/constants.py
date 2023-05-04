@@ -40,11 +40,15 @@ SUBCOMPONENT_BUTTON_URL = {TITLE: "", TYPE: WEB_URL, URL: ""}
 
 SUBCOMPONENT_BUTTON_PAYLOAD = {TITLE: "", TYPE: POST_BACK, PAYLOAD: ""}
 
-#    ----- ----- ----- ----- ----- ----- ----- Quick Replies ----- ----- ----- ----- ----- ----- ----- ----- -----    #
+#    ----- ----- ----- ----- ----- ----- ----- Quick Replies English ----- ----- ----- ----- ----- ----- ----- -----   #
 
 QR_YES = "Yes"
 QR_NO = "No"
+
+QR_HI = "Hi"
+
 QR_STOP = "Stop"
+
 QR_SHOW_MORE_RESTAURANTS = "Show more restaurants"
 QR_SEARCH_RESTAURANTS = "Search restaurants"
 
