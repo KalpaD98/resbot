@@ -34,9 +34,9 @@ class RestaurantResponseGenerator:
             button3[PAYLOAD] = "/inform_view_details_restaurant_id{\"restaurant_id\":\"" + restaurant.id + "\"}"
 
             if language == SIN:
-                button1[TITLE] = "Menu එක"
+                button1[TITLE] = "මෙනුව පෙන්වන්න"
                 button2[TITLE] = "Book කරන්න"
-                button3[TITLE] = "තවත් විස්තර කියන්න"
+                button3[TITLE] = "තව විස්තර කියන්න"
 
             buttons.append(button1)
             buttons.append(button3)
