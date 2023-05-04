@@ -56,7 +56,7 @@ rules:
 #      - intent: stop_restaurant_booking_form
 #      - action: action_deactivate_form
 #      - active_loop: null
-#      - action: utter_goodbye
+#      - action: action_utter_goodbye
 
 #  - rule: Stop restaurant form when intent is stop
 #    condition:
@@ -65,7 +65,7 @@ rules:
 #      - intent: stop
 #      - action: action_deactivate_form
 #      - active_loop: null
-#      - action: utter_goodbye
+#      - action: action_utter_goodbye
 #      - action: action_ask_anything_else
 #
 #  - rule: Stop restaurant form when intent is to check more restaurants

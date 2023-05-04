@@ -61,7 +61,7 @@ class ActionShowBookingsCarousal(Action):
             user_bookings = booking_repo.get_bookings_by_user_id(user_id)
 
             if len(user_bookings) == 0:
-                dispatcher.utter_message(response="utter_no_bookings_found")
+                dispatcher.utter_message(text="Sorry, there are no bookings found for you.")
                 return []
 
             unique_restaurant_ids = list(set([booking.restaurant_id for booking in user_bookings]))
@@ -92,7 +92,7 @@ class ActionShowPastBookingsCarousal(Action):
             user_bookings = booking_repo.get_past_bookings_by_user_id(user_id)
 
             if len(user_bookings) == 0:
-                dispatcher.utter_message(response="utter_no_past_bookings_found")
+                dispatcher.utter_message(text="Sorry, there are no past bookings found for you.")
                 return []
 
             unique_restaurant_ids = list(set([booking.restaurant_id for booking in user_bookings]))
@@ -121,7 +121,7 @@ class ActionShowFutureBookingsCarousal(Action):
             user_bookings = booking_repo.get_future_bookings_by_user_id(user_id)
 
             if len(user_bookings) == 0:
-                dispatcher.utter_message(response="utter_no_future_bookings_found")
+                dispatcher.utter_message(text="Sorry, there are no upcoming bookings found for you.")
                 return []
 
             unique_restaurant_ids = list(set([booking.restaurant_id for booking in user_bookings]))

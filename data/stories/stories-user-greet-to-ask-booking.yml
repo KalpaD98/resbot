@@ -7,15 +7,15 @@ stories:
     steps:
       - intent: greet
       - action: action_utter_greet
-      - action: utter_bot_intro
-      - action: utter_wanna_book
+      - action: action_utter_bot_intro
+      - action: action_utter_wanna_book
       - checkpoint: checkpoint_wanna_book_restaurant
 
   - story: User denies to check restaurant #2 user denies to check restaurant
     steps:
       - checkpoint: checkpoint_wanna_book_restaurant
       - intent: deny
-      - action: utter_thank_you
+      - action: action_utter_thank_you
       - action: action_ask_anything_else
 
   - story: User affirms to check restaurant - logged in #3
@@ -88,4 +88,4 @@ stories:
       - checkpoint: checkpoint_user_trying_to_login_or_signup
       - intent: stop
       - action: action_clear_restaurant_booking_slots
-      - action: utter_bye_see_you_later
+      - action: action_utter_bye_see_you_later

@@ -103,7 +103,7 @@ class ActionLoginUser(Action):
                     {"title": "View bookings", "payload": "/view_bookings"}
                 ]
 
-                dispatcher.utter_message(response="utter_login_success",
+                dispatcher.utter_message(text="You have successfully logged in. Welcome back!",
                                          quick_replies=ResponseGenerator.quick_replies(quick_replies_with_payload,
                                                                                        True))
 

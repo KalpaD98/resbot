@@ -1,5 +1,5 @@
 {
-  "utter_goodbye": {
+  "action_utter_goodbye": {
     "precision": 1.0,
     "recall": 0.5,
     "f1-score": 0.6666666666666666,

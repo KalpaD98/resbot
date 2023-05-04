@@ -185,8 +185,8 @@
 #    steps:
 #      #      - intent: greet
 #      #      - action: utter_greet # will connect from stories-greeting.yml story
-#      - action: utter_bot_intro
-#      - action: utter_wanna_book # -> pitch simple search and advance search
+#      - action: action_utter_bot_intro
+#      - action: action_utter_wanna_book # -> pitch simple search and advance search
 #      - intent: affirm
 #      - action: action_show_cuisines # can break from this point inform cuisines or deny can come next
 #      - intent: inform_cuisine # if user does not want to select cuisine? (intent deny also include here)
@@ -219,14 +219,14 @@
 #    steps:
 #      - action: action_show_selected_restaurant_details
 #      - intent: affirm
-#      - action: utter_ask_num_people  # continued from #13
+#      - action: action_ask_num_people  # continued from #13
 #
 #
 #  - story: Continuation for user ask detail and deny #11.2 # Continuation from above story (#11 - deny)
 #    steps:
 #      - action: action_show_selected_restaurant_details
 #      - intent: deny
-#      - action: utter_thank_you
+#      - action: action_utter_thank_you
 #      - action: action_ask_anything_else #  build up story for continuation from search restaurant
 #
 #  # Happy path for user directly wants to book a restaurant selected from carousal
@@ -243,24 +243,24 @@
 #    steps:
 #      - action: action_select_restaurant_ask_booking_confirmation # updated the action a bit to case in this story
 #      - intent: affirm
-#      - action: utter_ask_num_people # continue from #13
+#      - action: action_ask_num_people # continue from #13
 #
 #
 #  - story: Continuation for user directly want to book restaurant but deny at confirmation # 12.2 # Continuation from above story (#12)
 #    steps:
 #      - action: action_select_restaurant_ask_booking_confirmation
 #      - intent: deny
-#      - action: utter_thank_you
+#      - action: action_utter_thank_you
 #      - action: action_ask_anything_else
 #
 #  # Happy path user filling booking form
 #  - story: Continuation for filling basic booking form #13 Continuation from above stories (#11.1 and #12.1)
 #    steps:
-#      - action: utter_ask_num_people
+#      - action: action_ask_num_people
 #      - intent: inform_num_people
 #      - slot_was_set:
 #          - num_people: [ 2 ]
-#      - action: utter_ask_date
+#      - action: action_ask_date
 #      - action: utter_ask_date_prefer_format
 #      - intent: inform_date
 #      - action: action_validate_date
@@ -269,7 +269,7 @@
 #      - action: action_show_booking_summary
 #      - intent: affirm # or mood great or emoji mood great intent (there is a problem in this story), dev to catch No # 13.1 -> deny
 #      - action: action_confirm_booking
-#      - action: utter_thank_you
+#      - action: action_utter_thank_you
 #
 #  # Happy path user confirm booking form
 #  - story: User affirm booking #13.1 Continuation from above stories (#13 - affirm)
@@ -277,7 +277,7 @@
 #      - action: action_show_booking_summary
 #      - intent: affirm # or mood great or emoji mood great intent (there is a problem in this story), dev to catch No # 13.1 -> deny
 #      - action: action_confirm_booking
-#      - action: utter_thank_you
+#      - action: action_utter_thank_you
 #
 #  - story: User deny booking  #13.2 Continuation from above stories (#13 - deny)
 #    steps:
@@ -285,7 +285,7 @@
 #      - intent: deny
 #      # determine what to do next ->
 #      - action: action_confirm_booking
-#      - action: utter_thank_you
+#      - action: action_utter_thank_you
 #
 #    # Happy path for user wants to search restaurants by criteria they provide (basic and advance)
 #
@@ -323,11 +323,11 @@
 #    #          - restaurant_id: [ "rid_121290" ]
 #    #      - action: action_show_selected_restaurant_details
 #    #      - intent: affirm
-#    #      - action: utter_ask_num_people
+#    #      - action: action_ask_num_people
 #    #      - intent: inform_num_people
 #    #      - slot_was_set:
 #    #          - num_people: [ 2 ]
-#    #      - action: utter_ask_date
+#    #      - action: action_ask_date
 #    #      - intent: inform_date
 #    #      - slot_was_set:
 #    #          - date: [ "2023-04-01" ]
@@ -335,8 +335,8 @@
 #    #      # - action: utter_ask_to_confirm_booking  # remove this line because previous action already asks for confirmation
 #    #      - intent: affirm # or mood great or emoji mood great intent (there is a problem in this story)
 #    #      - action: action_confirm_booking
-#    #      - action: utter_thank_you
-#    #      - action: utter_goodbye
+#    #      - action: action_utter_thank_you
+#    #      - action: action_utter_goodbye
 #
 #    # can use intent: sorry to roll back to previous story
 #
@@ -375,14 +375,14 @@
 #    #
 #    #  - story: Inform date and time
 #    #    steps:
-#    #      - action: utter_ask_date
+#    #      - action: action_ask_date
 #    #      - intent: inform_date
 #    #      - slot_was_set:
 #    #          - date: [ "2020-01-01" ]
 #    #
 #    #  - story: Inform number of people
 #    #    steps:
-#    #      - action: utter_ask_num_people
+#    #      - action: action_ask_num_people
 #    #      - intent: inform_num_people
 #    #      - slot_was_set:
 #    #          - num_people: [ "2" ]

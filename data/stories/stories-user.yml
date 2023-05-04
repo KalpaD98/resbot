@@ -7,6 +7,6 @@ stories:
     steps:
       - intent: stop
       - action: action_clear_restaurant_booking_slots
-      - action: utter_bye_see_you_later
+      - action: action_utter_bye_see_you_later
 
 # above two can be rules instead of stories (added but had issues)

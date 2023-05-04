@@ -34,7 +34,7 @@ stories:
       - checkpoint: checkpoint_ask_to_book_or_not
       - intent: deny # dont book
       - action: action_clear_restaurant_booking_slots
-      - action: utter_thank_you
+      - action: action_utter_thank_you
       - action: action_ask_anything_else
 
   - story: User fills restaurant booking form after affirm to continue booking #5 Happy Path
@@ -64,14 +64,14 @@ stories:
       - active_loop: null
       - slot_was_set:
           - requested_slot: null
-      - action: utter_goodbye
+      - action: action_utter_goodbye
 
   - story: User affirm to book after viewing booking summary
     steps:
       - checkpoint: checkpoint_booking_summary
       - intent: affirm # confirm booking
       - action: action_confirm_booking
-      - action: utter_thank_you
+      - action: action_utter_thank_you
       - checkpoint: checkpoint_after_booking_complete
 
   - story: User deny to book after viewing booking summary
@@ -79,14 +79,14 @@ stories:
       - checkpoint: checkpoint_booking_summary
       - intent: deny # deny booking
       - action: action_clear_restaurant_booking_slots
-      - action: utter_thank_you
+      - action: action_utter_thank_you
       - action: action_ask_anything_else
 
   - story: after booking complete say bye  # happy Path
     steps:
       - checkpoint: checkpoint_after_booking_complete
       - intent: affirm
-      - action: utter_goodbye
+      - action: action_utter_goodbye
 
   - story: Stop restaurant booking form
     steps:

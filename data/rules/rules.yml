@@ -15,20 +15,20 @@ rules:
   - rule: Ask the user to rephrase whenever they send a message with low NLU confidence #3 ✅
     steps:
       - intent: nlu_fallback
-      - action: utter_please_rephrase
+      - action: action_utter_please_rephrase
 
   - rule: say goodbye whenever user says goodbye #4 ✅
     steps:
       - intent: goodbye
-      - action: utter_goodbye
+      - action: action_utter_goodbye
 
   - rule: when user say thank you reply welcome #5 ✅
     steps:
       - intent: thank_you
-      - action: utter_welcome
+      - action: action_utter_welcome
 
 #  - rule: when user say stop reply see you later #6 ✅
 #    steps:
 #      - intent: stop
 #      - action: action_clear_restaurant_booking_slots
-#      - action: utter_bye_see_you_later
+#      - action: action_utter_bye_see_you_later

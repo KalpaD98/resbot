@@ -273,7 +273,7 @@ slots:
     type: text
     initial_value: en
     mappings:
-    - type: custom
+      - type: custom
 
   # --------------------------------------- Knowledge base query related slots --------------------------------------- #
 
@@ -325,24 +325,22 @@ slots:
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 forms:
+  # restaurant related forms
 
   restaurant_booking_form:
     required_slots:
       - num_people
       - date
 
-  #  restaurant_booking_change_form:
-  #    required_slots:
-  #      - num_people
-  #      - date
+  change_restaurant_booking_date_form:
+    required_slots:
+      - date
 
-  #  change_restaurant_booking_date_form:
-  #    required_slots:
-  #      - date
+  change_restaurant_booking_num_people_form:
+    required_slots:
+      - num_people
 
-  #  change_restaurant_booking_num_people_form:
-  #    required_slots:
-  #      - num_people
+  # user related forms
 
   registration_form:
     required_slots:
@@ -424,6 +422,42 @@ actions:
   - action_update_favorite_cuisines
   # ------------------------------------------------ Response actions ----------------------------------------------- #
   - action_utter_greet
+  - action_utter_please_rephrase
+  - action_utter_greet_again
+  - action_utter_mood_great_feedback
+  - action_utter_mood_unhappy_feedback
+  - action_utter_emoji_great_feedback
+  - action_utter_emoji_mood_unhappy_feedback
+  - action_utter_thank_you
+  - action_utter_welcome
+  - action_utter_goodbye
+  - action_utter_bot_intro
+  - action_utter_wanna_book
+  - action_utter_bye_see_you_later
+  - action_utter_processing_the_request
+  - action_utter_ask_registered_user
+
+  - action_ask_user_name
+  - action_ask_user_email
+  - action_ask_user_password
+
+  - action_utter_registration_successful
+  - action_utter_login_success
+  - action_utter_login_to_continue
+  - action_utter_already_logged_in
+
+  - action_ask_date
+  - action_ask_num_people
+
+  - action_utter_ask_cancel_booking_confirmation
+  - action_utter_ask_cancel_another_booking
+  - action_utter_ask_new_booking_date
+  - action_utter_ask_change_another_booking
+  - action_utter_no_bookings_found
+  - action_utter_no_past_bookings_found
+  - action_utter_no_future_bookings_found
+  - action_utter_no_changes_made_to_booking
+  - action_utter_ask_favorite_cuisines
 
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -431,141 +465,6 @@ actions:
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 responses:
-
-#  utter_greet:
-#    - text: Hi!
-#    - text: Hey!
-#    - text: Hello!
-#    - text: Hi 😃 there!
-#    - text: Hello there 😀
-
-  utter_please_rephrase:
-    - text: I'm sorry, I couldn't understand that. Could you rephrase it?
-    - text: Sorry I didn't get that. Can you rephrase?
-    - text: Sorry, I'm not sure I understand. Can you rephrase?
-
-  utter_greet_again:
-    - text: Hi there again!
-    - text: Hello again!
-
-  utter_mood_great_feedback:
-    - text: Cool! 😎
-    - text: Nice to hear 😃 that
-    - text: Happy to hear 😊
-
-  utter_mood_unhappy_feedback:
-    - text: Sorry to hear that, maybe having something will make you feel better.
-    - text: Hmm, eating something might help you feel better.
-
-  utter_emoji_great_feedback:
-    - text: 😊
-    - text: 😄
-
-  utter_emoji_mood_unhappy_feedback:
-    - text: Eating something might help 🤗
-    - text: Eating something might help 😊
-
-  utter_thank_you:
-    - text: Thank you for using our service. If you need any assistance in the future, feel free to ask.
-
-  utter_welcome:
-    - text: You're welcome!
-    - text: No problem!
-    - text: Happy to help!
-    - text: My pleasure!
-    - text: Anytime!
-    - text: Always happy to help!
-
-  utter_goodbye:
-    - text: Bye
-    - text: Goodbye
-    - text: Farewell
-    - text: See you later
-
-  utter_bot_intro:
-    - text: I'm ResBot! 🍴, I can recommend amazing restaurants and make reservations seamless for you 🌟.
-    - text: I'm ResBot, your dining assistant. I help find ideal restaurants and make reservations for you 🌟.
-
-  utter_wanna_book:
-    - text: Would you like to reserve a table at a fantastic restaurant? 🍽️
-
-  utter_bye_see_you_later:
-    - text: Good Bye. See you later!
-
-  utter_processing_the_request: # change data a bit
-    - text: Let me check
-    - text: Sure!
-    - text: I'll see what I can find out.
-    - text: I'll check and get back to you.
-
-
-  # user related responses
-
-  utter_ask_registered_user:
-    - text: Are you a registered user?
-
-  utter_ask_user_name:
-    - text: May i know your name? (first name is sufficient)
-  utter_ask_user_email:
-    - text: Enter your email address.
-  utter_ask_user_password:
-    - text: Enter password.
-
-  utter_registration_successful:
-    - text: Registration successful! we automatically logged you {user_name}
-  utter_login_success:
-    - text: You have successfully logged in. Welcome back!
-
-  utter_login_to_continue:
-    - text: Please login to continue.
-
-  utter_already_logged_in:
-    - text: You are already logged in.
-
-  # booking related
-
-  # restaurant and booking related responses. [utter_ask_<slot_name>] for slot filling
-
-  utter_ask_date:
-    - text: When would you like to make the booking? A future date (tomorrow or later) in the format [YYYY/MM/DD] is preferred
-    - text: What date do you have in mind for the booking?  A future date (tomorrow or later) in the format [YYYY/MM/DD] is preferred
-
-  #  utter_preferred_date_format:
-  #    - text: A future date (tomorrow or later) in the format [DD-MM-YYYY] is preferred
-
-  utter_ask_num_people:
-    - text: May I know the number of people for the booking?
-    - text: For how many people are you planing to make the reservation?
-
-  utter_ask_cancel_booking_confirmation: # change according to the data
-    - text: Are you sure you want to cancel the booking at {restaurant['name']} on {selected_booking['date']} for {num_people} people? This action cannot be undone.
-
-  utter_ask_cancel_another_booking:
-    - text: Do you want to cancel another booking?
-
-  # change booking date
-  utter_ask_new_booking_date:
-    - text: What is the new date for the booking?
-
-  utter_ask_change_another_booking:
-    - text: Do you want to change another booking?
-
-  utter_no_bookings_found:
-    - text: Sorry, there are no bookings found for you.
-
-  utter_no_past_bookings_found:
-    - text: Sorry, there are no past bookings found for you.
-
-  utter_no_future_bookings_found:
-    - text: Sorry, there are no upcoming bookings found for you.
-
-  utter_no_changes_made_to_booking:
-    - text: No changes were made to your booking
-
-  # --- user preferences asking
-
-  utter_ask_favorite_cuisines:
-    - text: What are your favorite cuisines? You can provide multiple cuisines, like Italian, Chinese, Indian, or Mexican.
 
   # ------------------------------------------ Retrieval Intent Responses -------------------------------------------- #
   utter_bot_challenge/what_can_you_do:

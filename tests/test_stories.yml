@@ -25,7 +25,7 @@ stories:
 #      - user: |
 #          bye-bye!
 #        intent: goodbye
-#      - action: utter_goodbye
+#      - action: action_utter_goodbye
 #
 #  - story: sad path 1
 #    steps:
@@ -57,7 +57,7 @@ stories:
 #      - user: |
 #          not really
 #        intent: deny
-#      - action: utter_goodbye
+#      - action: action_utter_goodbye
 #
 #  - story: sad path 3
 #    steps:
@@ -73,14 +73,14 @@ stories:
 #      - user: |
 #          no
 #        intent: deny
-#      - action: utter_goodbye
+#      - action: action_utter_goodbye
 #
 #  - story: say goodbye
 #    steps:
 #      - user: |
 #          bye-bye!
 #        intent: goodbye
-#      - action: utter_goodbye
+#      - action: action_utter_goodbye
 #
 #  - story: bot challenge
 #    steps:

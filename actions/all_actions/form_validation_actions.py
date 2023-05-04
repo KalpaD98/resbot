@@ -16,6 +16,8 @@ VALIDATE_CHANGE_RESTAURANT_BOOKING_NUM_PEOPLE_FORM = "validate_change_restaurant
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # --------------------------------------------- Form Validation Actions --------------------------------------------- #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+# ------------------------------------------------ User Related Forms ------------------------------------------------ #
 class ValidateRegistrationForm(FormValidationAction):
     def name(self) -> Text:
         return VALIDATE_REGISTRATION_FORM
@@ -114,6 +116,8 @@ class ValidateLoginForm(FormValidationAction):
             return {"user_password": None}
 
 
+# --------------------------------------------- Restaurant Booking Forms --------------------------------------------- #
+
 class RestaurantBookingForm(FormValidationAction):
     def name(self) -> Text:
         return VALIDATE_RESTAURANT_BOOKING_FORM
@@ -156,81 +160,65 @@ class RestaurantBookingForm(FormValidationAction):
             return {"date": None}
 
 
+class ChangeRestaurantBookingDateForm(FormValidationAction):
+    def name(self) -> Text:
+        return VALIDATE_CHANGE_RESTAURANT_BOOKING_DATE_FORM
+
+    async def required_slots(
+            self,
+            slots_mapped_in_domain: List[Text],
+            dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any],
+    ) -> List[Text]:
+        return ["date"]
+
+    async def validate_date(
+            self,
+            value: Text,
+            dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any],
+    ) -> Dict[Text, Any]:
+        is_valid, date_value, message = SlotValidators.validate_date(value)
+        if is_valid:
+            return {"date": date_value}
+        else:
+            dispatcher.utter_message(text=message)
+            return {"date": None}
+
+
+class ChangeRestaurantBookingNumPeopleForm(FormValidationAction):
+    def name(self) -> Text:
+        return VALIDATE_CHANGE_RESTAURANT_BOOKING_NUM_PEOPLE_FORM
+
+    async def required_slots(
+            self,
+            slots_mapped_in_domain: List[Text],
+            dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any],
+    ) -> List[Text]:
+        return ["num_people"]
+
+    async def validate_num_people(
+            self,
+            value: Text,
+            dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any],
+    ) -> Dict[Text, Any]:
+        is_valid, message = SlotValidators.validate_num_people(value)
+        if is_valid:
+            return {"num_people": value}
+        else:
+            dispatcher.utter_message(text=message)
+            return {"num_people": None}
+
+
 class ActionDeactivateForm(Action):
     def name(self) -> Text:
         return "action_deactivate_form"
 
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         return [ActiveLoop(None), SlotSet("requested_slot", None)]
-
-# Commented code
-
-#
-# class RestaurantBookingChangeForm(BaseRestaurantBookingForm):
-#     def name(self) -> Text:
-#         return VALIDATE_RESTAURANT_BOOKING_CHANGE_FORM
-#
-#     async def required_slots(
-#             self,
-#             slots_mapped_in_domain: List[Text],
-#             dispatcher: CollectingDispatcher,
-#             tracker: Tracker,
-#             domain: Dict[Text, Any],
-#     ) -> List[Text]:
-#         return ["num_people", "date"]
-#
-#
-# class ChangeRestaurantBookingDateFormValidation(FormValidationAction):
-#     def name(self) -> Text:
-#         return VALIDATE_CHANGE_RESTAURANT_BOOKING_DATE_FORM
-#
-#     async def required_slots(
-#             self,
-#             slots_mapped_in_domain: List[Text],
-#             dispatcher: CollectingDispatcher,
-#             tracker: Tracker,
-#             domain: Dict[Text, Any],
-#     ) -> List[Text]:
-#         return ["date"]
-#
-#     async def validate_date(
-#             self,
-#             value: Text,
-#             dispatcher: CollectingDispatcher,
-#             tracker: Tracker,
-#             domain: Dict[Text, Any],
-#     ) -> Dict[Text, Any]:
-#         is_valid, date_value, message = SlotValidators.validate_date(value)
-#         if is_valid:
-#             return {"date": date_value}
-#         else:
-#             dispatcher.utter_message(text=message)
-#             return {"date": None}
-#
-#
-# class ChangeRestaurantBookingNumPeopleFormValidation(FormValidationAction):
-#     def name(self) -> Text:
-#         return VALIDATE_CHANGE_RESTAURANT_BOOKING_NUM_PEOPLE_FORM
-#
-#     async def required_slots(
-#             self,
-#             slots_mapped_in_domain: List[Text],
-#             dispatcher: CollectingDispatcher,
-#             tracker: Tracker,
-#             domain: Dict[Text, Any],
-#     ) -> List[Text]:
-#         return ["num_people"]
-#
-#     async def validate_num_people(
-#             self,
-#             value: Text,
-#             dispatcher: CollectingDispatcher,
-#             tracker: Tracker,
-#             domain: Dict[Text, Any],
-#     ) -> Dict[Text, Any]:
-#         is_valid, message = SlotValidators.validate_num_people(value)
-#         if is_valid:
-#             return {"num_people": value}
-#         else:
-#             dispatcher.utter_message(text=message)
-#             return {"num_people": None}
