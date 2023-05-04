@@ -50,6 +50,7 @@ QR_HI = "Hi"
 QR_STOP = "Stop"
 
 QR_SHOW_MORE_RESTAURANTS = "Show more restaurants"
+QR_BROWSE_RESTAURANTS = "Browse Restaurants"
 QR_SEARCH_RESTAURANTS = "Search restaurants"
 
 LANGUAGE = "language"

@@ -58,7 +58,7 @@ class ResponseGenerator:
         return carousel
 
     @staticmethod
-    def quick_reply_yes_no_with_payload(language='en') -> List[Dict[str, str]]:
+    def quick_reply_yes_no_with_payload(language=EN) -> List[Dict[str, str]]:
         """
         Generate quick replies for the chat widget with yes and no options.
 
@@ -75,7 +75,7 @@ class ResponseGenerator:
             }
         ]
 
-        if language == 'sin':
+        if language == SIN:
             quick_replies_with_payload = [
                 {
                     TITLE: "ඔව්",
@@ -90,7 +90,7 @@ class ResponseGenerator:
         return ResponseGenerator.quick_replies(quick_replies_with_payload, with_payload=True)
 
     @staticmethod
-    def language_related_response_selection(language: str = "en",
+    def language_related_response_selection(language: str = EN,
                                             english_text: str = "",
                                             english_quick_replies: list = None,
                                             sinhala_text: str = "",
@@ -105,7 +105,7 @@ class ResponseGenerator:
         :param sinhala_quick_replies: Sinhala quick replies. Default is None.
         :return: English text, English quick replies, Sinhala text, Sinhala quick replies
         """
-        if language == "sin":
+        if language == SIN:
             return sinhala_text, sinhala_quick_replies
         else:
             return english_text, english_quick_replies

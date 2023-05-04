@@ -47,8 +47,8 @@ class ActionAnythingElse(Action):
         sinhala_text = "ඔබට උදව් අවශ්යයි වෙනත් යමක් තිබේද?"
 
         english_quick_replies_with_payload = [
-            {"title": "Search restaurants", "payload": "/want_to_search_restaurants"},
-            {"title": "Checkout restaurants", "payload": "/request_restaurants"},
+            {"title": QR_SEARCH_RESTAURANTS, "payload": "/want_to_search_restaurants"},
+            {"title": QR_BROWSE_RESTAURANTS, "payload": "/request_restaurants"},
             {"title": "View bookings", "payload": "/view_bookings"},
             {"title": "No thanks", "payload": "/goodbye"},
         ]
@@ -89,7 +89,7 @@ class ActionAskWhatUserWants(Action):
                 TITLE: QR_HI,
                 PAYLOAD: "/greet"},
             {
-                TITLE: QR_SHOW_MORE_RESTAURANTS,
+                TITLE: QR_BROWSE_RESTAURANTS,
                 PAYLOAD: "/request_restaurants"},
             {
                 TITLE: QR_SEARCH_RESTAURANTS,
