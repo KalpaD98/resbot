@@ -52,4 +52,6 @@ QR_STOP = "Stop"
 QR_SHOW_MORE_RESTAURANTS = "Show more restaurants"
 QR_SEARCH_RESTAURANTS = "Search restaurants"
 
+LANGUAGE = "language"
+
 # ------- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ------ #

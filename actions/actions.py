@@ -43,20 +43,30 @@ class ActionAnythingElse(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        english_text = "Is there anything else I can help you with?"
+        sinhala_text = "ඔබට උදව් අවශ්යයි වෙනත් යමක් තිබේද?"
+
         english_quick_replies_with_payload = [
             {"title": "Search restaurants", "payload": "/want_to_search_restaurants"},
             {"title": "Checkout restaurants", "payload": "/request_restaurants"},
-            {"title": "Search restaurants", "payload": "/search_restaurants"},
             {"title": "View bookings", "payload": "/view_bookings"},
             {"title": "No thanks", "payload": "/goodbye"},
         ]
 
-        english_text = "Is there anything else I can help you with?"
+        sinhala_quick_replies_with_payload = [
+            {"title": "ආපනශාලා සොයන්න", "payload": "/want_to_search_restaurants"},
+            {"title": "ආපනශාලා පෙන්වන්න", "payload": "/request_restaurants"},
+            {"title": "Bookings පෙන්වන්න", "payload": "/view_bookings"},
+            {"title": "නැත ස්තුතියි", "payload": "/goodbye"},
+        ]
 
-        final_quick_replies_with_payload = english_quick_replies_with_payload
-        final_text = english_text
-
-        # if user is not using english handle it
+        final_text, final_quick_replies_with_payload = \
+            ResponseGenerator.language_related_response_selection(
+                tracker.get_slot(LANGUAGE),
+                english_text,
+                english_quick_replies_with_payload,
+                sinhala_text,
+                sinhala_quick_replies_with_payload)
 
         dispatcher.utter_message(text=final_text,
                                  quick_replies=ResponseGenerator.quick_replies(final_quick_replies_with_payload, True))
@@ -71,7 +81,9 @@ class ActionAskWhatUserWants(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        # quick replies for show more and search with payload
+        english_text = "What do you want to do?"
+        sinhala_text = "ඔබට අවශ්ය සේවාව කුමක් ද?"
+
         english_quick_replies_with_payload = [
             {
                 TITLE: QR_HI,
@@ -84,12 +96,25 @@ class ActionAskWhatUserWants(Action):
                 PAYLOAD: "/want_to_search_restaurants"}
         ]
 
-        english_text = "What do you want to do?"
+        sinhala_quick_replies_with_payload = [
+            {
+                TITLE: QR_HI,
+                PAYLOAD: "/greet"},
+            {
+                TITLE: "ආපනශාලා පෙන්වන්න",
+                PAYLOAD: "/request_restaurants"},
+            {
+                TITLE: "ආපනශාලා සොයන්න",
+                PAYLOAD: "/want_to_search_restaurants"}
+        ]
 
-        final_quick_replies_with_payload = english_quick_replies_with_payload
-        final_text = english_text
-
-        # if user is not using english handle it
+        final_text, final_quick_replies_with_payload = \
+            ResponseGenerator.language_related_response_selection(
+                tracker.get_slot(LANGUAGE),
+                english_text,
+                english_quick_replies_with_payload,
+                sinhala_text,
+                sinhala_quick_replies_with_payload)
 
         dispatcher.utter_message(text=final_text,
                                  quick_replies=ResponseGenerator.quick_replies(final_quick_replies_with_payload, True))

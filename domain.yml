@@ -270,7 +270,10 @@ slots:
   # --------------------------------- response related slots  --------------------------------- #
 
   language:
-    type: text
+    type: categorical
+    values:
+      - en
+      - sin
     initial_value: en
     mappings:
       - type: custom

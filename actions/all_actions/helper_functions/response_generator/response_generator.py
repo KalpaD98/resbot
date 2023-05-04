@@ -77,3 +77,24 @@ class ResponseGenerator:
         quick_replies_with_payload.append(quick_reply_no)
 
         return ResponseGenerator.quick_replies(quick_replies_with_payload, with_payload=True)
+
+    @staticmethod
+    def language_related_response_selection(language: str = "en",
+                                            english_text: str = "",
+                                            english_quick_replies: list = None,
+                                            sinhala_text: str = "",
+                                            sinhala_quick_replies: list = None) -> tuple:
+        """
+        Select the language related response.
+
+        :param language: Language of the user. Default is 'en'.
+        :param english_text: English text. Default is an empty string.
+        :param english_quick_replies: English quick replies. Default is None.
+        :param sinhala_text: Sinhala text. Default is an empty string.
+        :param sinhala_quick_replies: Sinhala quick replies. Default is None.
+        :return: English text, English quick replies, Sinhala text, Sinhala quick replies
+        """
+        if language == "sin":
+            return sinhala_text, sinhala_quick_replies
+        else:
+            return english_text, english_quick_replies
