@@ -9,6 +9,7 @@ class ResponseGenerator:
     @staticmethod
     def quick_replies(quick_replies_list: List[Union[str, Dict[str, str]]], with_payload: bool = False) -> List[
         Dict[str, str]]:
+
         """
         Generate quick replies for the chat widget.
 
@@ -57,24 +58,34 @@ class ResponseGenerator:
         return carousel
 
     @staticmethod
-    def quick_reply_yes_no_with_payload() -> List[Dict[str, str]]:
+    def quick_reply_yes_no_with_payload(language='en') -> List[Dict[str, str]]:
         """
         Generate quick replies for the chat widget with yes and no options.
 
         :return: List of quick reply dictionaries containing title and payload
         """
-        quick_replies_with_payload = []
+        quick_replies_with_payload = [
+            {
+                TITLE: "Yes",
+                PAYLOAD: "/affirm"
+            },
+            {
+                TITLE: "No",
+                PAYLOAD: "/deny"
+            }
+        ]
 
-        quick_reply_yes = {
-            TITLE: "Yes",
-            PAYLOAD: "/affirm"}
-
-        quick_reply_no = {
-            TITLE: "No",
-            PAYLOAD: "/deny"}
-
-        quick_replies_with_payload.append(quick_reply_yes)
-        quick_replies_with_payload.append(quick_reply_no)
+        if language == 'sin':
+            quick_replies_with_payload = [
+                {
+                    TITLE: "ඔව්",
+                    PAYLOAD: "/affirm"
+                },
+                {
+                    TITLE: "නැත",
+                    PAYLOAD: "/deny"
+                }
+            ]
 
         return ResponseGenerator.quick_replies(quick_replies_with_payload, with_payload=True)
 
