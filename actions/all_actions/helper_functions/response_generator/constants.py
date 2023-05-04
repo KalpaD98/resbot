@@ -55,3 +55,5 @@ QR_SEARCH_RESTAURANTS = "Search restaurants"
 LANGUAGE = "language"
 
 # ------- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ------ #
+SIN = "sin"
+EN = "en"
