@@ -82,7 +82,7 @@ class ResponseGenerator:
                     PAYLOAD: "/affirm"
                 },
                 {
-                    TITLE: "නැත",
+                    TITLE: "නැ",
                     PAYLOAD: "/deny"
                 }
             ]

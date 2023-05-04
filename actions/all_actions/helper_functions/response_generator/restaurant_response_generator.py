@@ -3,7 +3,7 @@ from actions.all_actions.helper_functions.response_generator.constants import *
 
 class RestaurantResponseGenerator:
     @staticmethod
-    def restaurant_list_to_carousal_object(restaurant_list):
+    def restaurant_list_to_carousal_object(restaurant_list, language=EN):
         # Generate restaurant cards with Response Generator
         carousal_objects = []
 
@@ -32,6 +32,11 @@ class RestaurantResponseGenerator:
             button3 = SUBCOMPONENT_BUTTON_PAYLOAD.copy()
             button3[TITLE] = "View Details"
             button3[PAYLOAD] = "/inform_view_details_restaurant_id{\"restaurant_id\":\"" + restaurant.id + "\"}"
+
+            if language == SIN:
+                button1[TITLE] = "Menu එක"
+                button2[TITLE] = "Book කරන්න"
+                button3[TITLE] = "තවත් විස්තර කියන්න"
 
             buttons.append(button1)
             buttons.append(button3)
