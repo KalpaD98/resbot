@@ -328,23 +328,36 @@ slots:
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 forms:
-  # restaurant related forms
+  # restaurant booking related forms
+
+
+  change_restaurant_booking_form:
+    required_slots:
+      - booking_id
+      - user_id
+      - date
+      - num_people
 
   restaurant_booking_form:
     required_slots:
+      - restaurant_id
+      - user_id
       - num_people
       - date
 
   change_restaurant_booking_date_form:
     required_slots:
+      - booking_id
+      - user_id
       - date
 
   change_restaurant_booking_num_people_form:
     required_slots:
+      - booking_id
+      - user_id
       - num_people
 
   # user related forms
-
   registration_form:
     required_slots:
       - user_name
@@ -391,12 +404,12 @@ actions:
 
   # -------------------------------------------- Form Validation Actions --------------------------------------------- #
   - validate_registration_form
-  - validate_restaurant_booking_form
-  - validate_change_restaurant_booking_date_form
-  - validate_restaurant_booking_change_form
 
-  #  - validate_change_restaurant_booking_date_form
-  #  - validate_change_restaurant_booking_num_people_form
+  - validate_restaurant_booking_form
+
+  - validate_change_restaurant_booking_form
+  - validate_change_restaurant_booking_date_form
+  - validate_change_restaurant_booking_num_people_form
 
   - action_deactivate_form
 

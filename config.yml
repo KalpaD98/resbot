@@ -76,7 +76,7 @@ policies:
   #    enable_fallback_prediction: True
 
   - name: UnexpecTEDIntentPolicy
-    max_history: 16
+    max_history: 8
     epochs: 100
 
   - name: TEDPolicy

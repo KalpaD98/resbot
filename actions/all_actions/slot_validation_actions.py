@@ -166,7 +166,7 @@ class ActionValidateBookingReferenceId(Action):
     ) -> List[Dict[Text, Any]]:
 
         booking_reference_id = tracker.get_slot(BOOKING_ID)
-        is_valid, message = SlotValidators.validate_booking_reference_id(booking_reference_id)
+        is_valid, message = SlotValidators.validate_booking_id(booking_reference_id)
 
         if is_valid:
             return [SlotSet(BOOKING_ID, booking_reference_id)]

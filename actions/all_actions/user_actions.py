@@ -139,15 +139,46 @@ class ActionRetryLoginOrStop(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         try:
+            english_message = "Would you like to retry logging in?"
+            sinhala_message = "ඔබට නැවත Log වීමට උත්සාහ කරන්න අවශ්‍යද?"
 
-            dispatcher.utter_message(text="Would you like to retry logging in?",
-                                     quick_replies=ResponseGenerator.quick_reply_yes_no_with_payload())
+            quick_replies_english = [
+                {
+                    TITLE: "Login",
+                    PAYLOAD: "/request_login_form"
+                },
+                {
+                    TITLE: "Register",
+                    PAYLOAD: "/request_user_registration_form"
+                }
+            ]
 
-            return []
+            quick_replies_sinhala = [
+                {
+                    TITLE: "නැවත Log වීම",
+                    PAYLOAD: "/request_login_form"
+                },
+                {
+                    TITLE: "මා නව පරිශීලකයෙකි",
+                    PAYLOAD: "/request_user_registration_form"
+                }
+            ]
+
+            final_message = english_message
+            final_quick_replies = quick_replies_english
+
+            if tracker.get_slot(LANGUAGE) == "sin":
+                final_message = sinhala_message
+                final_quick_replies = quick_replies_sinhala
+
+            dispatcher.utter_message(text=final_message,
+                                     quick_replies=ResponseGenerator.quick_replies(final_quick_replies, True))
+
         except Exception as e:
             logger.error(f"An error occurred in action_retry_login_or_stop: {e}")
             dispatcher.utter_message(text="An error occurred. Please try again later.")
-            return []
+
+        return []
 
 
 class ActionAskRegisteredAndShowLoginSignupQuickReplies(Action):

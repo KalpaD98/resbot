@@ -64,6 +64,7 @@ class ResponseGenerator:
 
         :return: List of quick reply dictionaries containing title and payload
         """
+
         quick_replies_with_payload = [
             {
                 TITLE: "Yes",

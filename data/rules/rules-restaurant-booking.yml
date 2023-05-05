@@ -43,7 +43,7 @@ rules:
       - slot_was_set:
           - requested_slot: null
       - action: action_show_booking_summary
-    wait_for_user_input: false
+#    wait_for_user_input: false # cause some issue trying to fix
 
   # Note: This rule will only work for the restaurant_booking_form #
   # If you want to generalize it for all forms, you can create a separate rule for each form, or use the previous approach

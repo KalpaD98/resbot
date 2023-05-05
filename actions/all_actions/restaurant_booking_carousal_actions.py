@@ -69,6 +69,14 @@ class ActionShowBookingsCarousal(Action):
             carousel_items = BookingResponseGenerator.booking_list_to_carousal_object(user_bookings,
                                                                                       restaurant_data_dict)
 
+            english_message = "Here's all your restaurant bookings"
+            sinhala_message = "ඔබේ වෙන් කිරීම් මෙන්න"
+            final_message = english_message
+
+            if tracker.get_slot(LANGUAGE) == SIN:
+                final_message = sinhala_message
+
+            dispatcher.utter_message(text=final_message)
             dispatcher.utter_message(attachment=ResponseGenerator.card_options_carousal(carousel_items))
 
         except Exception as e:

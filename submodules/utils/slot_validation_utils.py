@@ -109,7 +109,7 @@ class SlotValidators:
                                   "12-hour format (e.g., '2:30 PM' or '6:15 AM')."
 
     @staticmethod
-    def validate_booking_reference_id(booking_reference_id: str) -> Tuple[bool, str]:
+    def validate_booking_id(booking_reference_id: str) -> Tuple[bool, str]:
         if booking_reference_id.startswith("bid_"):
             return True, ""
         else:
