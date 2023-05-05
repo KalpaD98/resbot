@@ -12,7 +12,7 @@ class RestaurantResponseGenerator:
             carousal_object = SUBCOMPONENT_CARD.copy()
             carousal_object[TITLE] = restaurant.name
             carousal_object[IMAGE_URL] = restaurant.image_url
-            carousal_object[SUBTITLE] = restaurant.cuisine + " |  ⭐️ " + str(restaurant.ratings)
+            carousal_object[SUBTITLE] = restaurant.cuisine.capitalize() + " |  ⭐️ " + str(restaurant.ratings)
 
             default_action_payload = SUBCOMPONENT_DEFAULT_ACTION_PAYLOAD.copy()
             # determine a default action for the card later

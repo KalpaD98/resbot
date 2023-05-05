@@ -11,7 +11,7 @@ class UtterGreet(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         english_messages = ["Hi!", "Hey!", "Hello!", "Hi 😃 there!", "Hello there 😀"]
-        choose_and_send_message(english_messages)
+        choose_and_send_message(dispatcher, english_messages)
 
         return []
 
@@ -463,6 +463,6 @@ class ActionUtterAskRegisteredUser(Action):  # not used in any story
         return []
 
 
-def choose_and_send_message(dispatcher, messages):
-    message = random.choice(messages)
+def choose_and_send_message(dispatcher, english_messages, language=EN):
+    message = random.choice(english_messages)
     dispatcher.utter_message(text=message)

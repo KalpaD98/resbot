@@ -73,9 +73,11 @@ class ActionShowSelectedRestaurantDetails(Action):
             dispatcher.utter_message(text="Mon - Fri: " + restaurant.opening_hours[Restaurant.MON_TO_FRI])
             dispatcher.utter_message(text="Sat - Sun: " + restaurant.opening_hours[Restaurant.SAT_SUN])
 
-            dispatcher.utter_message(text=ObjectUtils.get_random_sentence(restaurant.name,
-                                                                          UTTER_SENTENCE_LIST_FOR_ASKING_TO_MAKE_RESERVATION),
-                                     quick_replies=ResponseGenerator.quick_reply_yes_no_with_payload())
+            dispatcher.utter_message(text=ObjectUtils.get_random_sentence(
+                restaurant.name,
+                UTTER_SENTENCE_LIST_FOR_ASKING_TO_MAKE_RESERVATION),
+
+                quick_replies=ResponseGenerator.quick_reply_yes_no_with_payload())
 
             return [SlotSet(NUM_PEOPLE, None), SlotSet(DATE, None), SlotSet(TIME, None),
                     SlotSet(SELECTED_RESTAURANT, restaurant.to_dict())]

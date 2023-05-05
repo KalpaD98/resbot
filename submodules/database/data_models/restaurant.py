@@ -1,3 +1,4 @@
+import json
 from typing import List, Optional
 
 from bson.objectid import ObjectId
@@ -91,6 +92,16 @@ class Restaurant:
 
     @classmethod
     def from_dict(cls, data):
+
+        opening_hours = data[cls.OPENING_HOURS]
+        categories = data[cls.CATEGORIES]
+
+        if isinstance(opening_hours, str):
+            opening_hours = json.loads(opening_hours)
+
+        if isinstance(categories, str):
+            categories = json.loads(categories)
+
         return cls(
             name=data[cls.NAME],
             ratings=data[cls.RATINGS],
@@ -101,8 +112,8 @@ class Restaurant:
             postal_code=data[cls.POSTAL_CODE],
             latitude=data[cls.LATITUDE],
             longitude=data[cls.LONGITUDE],
-            opening_hours=data[cls.OPENING_HOURS],
-            categories=data[cls.CATEGORIES],
+            opening_hours=opening_hours,
+            categories=categories,
             business_id=data[cls.BUSINESS_ID],
             id=data[cls.ID],
             review_count=data[cls.REVIEW_COUNT],
