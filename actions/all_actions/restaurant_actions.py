@@ -117,7 +117,7 @@ class ActionRequestMoreRestaurantOptions(Action):
             if (cuisine == 'any cuisine') or cuisine is None:
                 restaurant_list = restaurant_repo.get_all_restaurants(limit=10, offset=new_offset)
             else:
-                restaurant_list = restaurant_repo.get_restaurants_by_cuisine(cuisine, limit=10, offset=new_offset)
+                restaurant_list = restaurant_repo.get_restaurants_filter_by_cuisine(cuisine, limit=10, offset=new_offset)
 
             # Check if any more restaurants were found
             if restaurant_list:
