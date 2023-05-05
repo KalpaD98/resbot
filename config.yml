@@ -27,11 +27,11 @@ pipeline:
     min_ngram: 1
     max_ngram: 4
 
-  - name: RegexEntityExtractor
-    case_sensitive: False
-    use_word_boundaries: True
-    use_lookup_tables: True
-    use_regexes: True
+#  - name: RegexEntityExtractor
+#    case_sensitive: False
+#    use_word_boundaries: True
+#    use_lookup_tables: True
+#    use_regexes: True
 
   - name: SpacyEntityExtractor
     dimensions: ["PERSON"]
