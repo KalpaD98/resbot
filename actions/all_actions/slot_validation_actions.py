@@ -62,8 +62,16 @@ class ActionAskDateAgain(Action):
     async def run(
             self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]
     ) -> List[EventType]:
-        dispatcher.utter_message(text="Can you please provide the date again?")
-        dispatcher.utter_message(text="You can enter the date in a format like dd/mm/yyyy or similar.")
+
+        language = tracker.get_slot(LANGUAGE)
+
+        message = "Can you please provide the date again?" + "\n\n" + \
+                  "You can enter the date in a format like dd/mm/yyyy or similar."
+        if language == SIN:
+            message = "කරුණාකර දිනය නැවත ඇතුලත් කරන්න." + "\n\n" + \
+                      "dd/mm/yyyy හෝ සමාන ආකෘතියකින් ඔබට දිනය ඇතුළත් කළ හැකිය."
+
+        dispatcher.utter_message(text=message)
         return [SlotSet(DATE, None)]
 
 
