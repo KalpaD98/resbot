@@ -4,8 +4,9 @@ ACTION_SEARCH_AND_SHOW_RESTAURANTS = "action_search_and_show_restaurants"
 ACTION_CONFIRM_SEARCH_PARAMETERS = "action_confirm_search_parameters"
 
 
-# TODO: implement this PROPERLY
 class ActionSearchAndShowRestaurants(Action):
+
+    # TODO: implement this PROPERLY
 
     def name(self) -> Text:
         return ACTION_SEARCH_AND_SHOW_RESTAURANTS
@@ -33,21 +34,22 @@ class ActionSearchAndShowRestaurants(Action):
             )
 
             if len(restaurants_list) == 0:
-                dispatcher.utter_message(
-                    text="No restaurants found matching your criteria. "
-                         "Please try again with different search parameters.")
+                message = "No restaurants found matching your criteria. \n\n" + \
+                          "Please try again with different search parameters."
+                if language == SIN:
+                    message = "ඔබගේ සෙවුම් අනුව restaurants නැත. \n\n" + \
+                              "කරුණාකර වෙනත් සෙවුම්මක් කිරීමට උත්සාහ කරන්න."
+                dispatcher.utter_message(text=message)
                 # have a follow-up action to change the parameters
                 return []
 
             text_msg = "I've found some restaurants based on your search criteria:"
+            if language == SIN:
+                text_msg = "ඔබගේ සෙවුම් අනුව මෙම restaurants සොයාගත්තේය:"
             dispatcher.utter_message(
                 text=text_msg,
                 attachment=ResponseGenerator.card_options_carousal(
-                    RestaurantResponseGenerator.restaurant_list_to_carousal_object(
-                        restaurants_list
-                    )
-                )
-            )
+                    RestaurantResponseGenerator.restaurant_list_to_carousal_object(restaurants_list)))
 
             return [SlotSet("restaurant_offset", 0)]
 
@@ -97,6 +99,8 @@ class ActionConfirmSearchParameters(Action):
 
             text_msg = f"Here are the search parameters you've entered:\n\n{search_parameters_text}\n\n" \
                        f"Do you want to search for restaurants with these parameters?"
+
+            # TODO : add sinhala language support
 
             dispatcher.utter_message(text=text_msg,
                                      quick_replies=ResponseGenerator.quick_reply_yes_no_with_payload())
