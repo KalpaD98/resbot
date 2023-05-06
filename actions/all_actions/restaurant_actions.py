@@ -35,8 +35,13 @@ class ActionShowCuisines(Action):
 
             # Generate quick replies with Response Generator
             quick_replies_cuisines = ResponseGenerator.quick_replies(cuisines_with_entity_payload, with_payload=True)
+            language = tracker.get_slot(LANGUAGE)
 
-            dispatcher.utter_message(text="Choose or type a cuisine", quick_replies=quick_replies_cuisines)
+            message = "Choose or type a cuisine"
+            if language == SIN:
+                message = "ආහාර පිසීමක් (cuisine) එකක් තෝරන්න හෝ type කරන්න"
+
+            dispatcher.utter_message(text=message, quick_replies=quick_replies_cuisines)
 
         except Exception as e:
             logging.error(f"Error in ActionShowCuisines: {e}")
@@ -66,20 +71,28 @@ class ActionShowRestaurants(Action):
 
             # send http request to recommendation engine to get top 10 restaurants for the user
 
+            language = tracker.get_slot(LANGUAGE)
+
             if (cuisine == 'any cuisine') or cuisine is None:
-                text_msg = f"I've found some great restaurants for you to try out!"
+                message = "I've found some great restaurants for you to try out!"
+                if language == SIN:
+                    message = "ඔබට try කර බැලීම සදහා විශිෂ්ට අවන්හල් කිහිපයක්!"
+
                 restaurants_list = restaurant_repo.get_all_restaurants(limit=10)
             else:
-                text_msg = f"I've found some great {cuisine.lower()} restaurants for you to try out!"
+                message = f"I've found some great {cuisine.lower()} restaurants for you to try out!"
+                if language == SIN:
+                    message = f"ඔබට try කර බැලීම සදහා විශිෂ්ට {cuisine.lower()} අවන්හල් කිහිපයක්!"
                 # Get the restaurant list from the database into an array
-                restaurants_list = restaurant_repo.get_all_restaurants(limit=10)
+
                 # TODO : uncomment get restaurants by cuisine
                 # restaurants_list = restaurant_repo.get_restaurants_by_cuisine(cuisine, limit=10)
+                restaurants_list = restaurant_repo.get_all_restaurants(limit=10)
 
-            dispatcher.utter_message(text=text_msg,
+            dispatcher.utter_message(text=message,
                                      attachment=ResponseGenerator.card_options_carousal(
-                                         RestaurantResponseGenerator.restaurant_list_to_carousal_object(
-                                             restaurants_list)))
+                                         RestaurantResponseGenerator.
+                                         restaurant_list_to_carousal_object(restaurants_list)))
             # consider adding view more option
             return [SlotSet("restaurant_offset", 0)]
 
@@ -117,16 +130,25 @@ class ActionRequestMoreRestaurantOptions(Action):
             if (cuisine == 'any cuisine') or cuisine is None:
                 restaurant_list = restaurant_repo.get_all_restaurants(limit=10, offset=new_offset)
             else:
-                restaurant_list = restaurant_repo.get_restaurants_filter_by_cuisine(cuisine, limit=10, offset=new_offset)
+                restaurant_list = restaurant_repo.get_restaurants_filter_by_cuisine(cuisine, limit=10,
+                                                                                    offset=new_offset)
+            language = tracker.get_slot(LANGUAGE)
+
+            message = "Here are some more restaurants I found"
+            if language == SIN:
+                message = "තවත් ආපනශාලා කිහිපයක් මෙන්න"
 
             # Check if any more restaurants were found
             if restaurant_list:
-                dispatcher.utter_message(text="Here are some more restaurants I found",
+                dispatcher.utter_message(text=message,
                                          attachment=ResponseGenerator.card_options_carousal(
                                              RestaurantResponseGenerator.restaurant_list_to_carousal_object(
                                                  restaurant_list)))
             else:
-                dispatcher.utter_message(text="Sorry, I did not find any more restaurants.")
+                message = "Sorry, I did not find any more restaurants."
+                if language == SIN:
+                    message = "කණගාටුයි, මට තවත් restaurants කිසිවක් සොයා ගත නොහැකි විය."
+                dispatcher.utter_message(text=message)
 
             # Update the restaurant_offset slot with the new offset value
             return [SlotSet("restaurant_offset", new_offset)]
