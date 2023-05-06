@@ -17,28 +17,34 @@ class ActionShowBookingOptions(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         try:
             language = tracker.get_slot(LANGUAGE)
-            quick_replies_with_payload = []
 
-            quick_reply_view_all_bookings = {
-                TITLE: "All Bookings",
+            quick_replies_with_payload = [{
+                TITLE: "All bookings",
                 PAYLOAD: "/view_all_bookings"
-            }
-
-            quick_reply_view_upcomming_bookings = {
-                TITLE: "Upcoming Bookings",
+            }, {
+                TITLE: "Upcoming bookings",
                 PAYLOAD: "/view_upcoming_bookings"
-            }
-
-            quick_reply_view_past_bookings = {
-                TITLE: "Past Bookings",
+            }, {
+                TITLE: "Past bookings",
                 PAYLOAD: "/view_past_bookings"
-            }
+            }, ]
 
-            quick_replies_with_payload.append(quick_reply_view_all_bookings)
-            quick_replies_with_payload.append(quick_reply_view_upcomming_bookings)
-            quick_replies_with_payload.append(quick_reply_view_past_bookings)
+            message = "Choose which bookings you want to view"
 
-            dispatcher.utter_message(text="Choose which bookings you want to view",
+            if language == SIN:
+                message = "ඔබට බැලීමට අවශය bookings මොනවාද?"
+                quick_replies_with_payload = [{
+                    TITLE: "සියලුම bookings",
+                    PAYLOAD: "/view_all_bookings"
+                }, {
+                    TITLE: "ඉදිරියෙදි එන bookings",
+                    PAYLOAD: "/view_upcoming_bookings"
+                }, {
+                    TITLE: "පසුගිය bookings",
+                    PAYLOAD: "/view_past_bookings"
+                }, ]
+
+            dispatcher.utter_message(text=message,
                                      quick_replies=ResponseGenerator.quick_replies(quick_replies_with_payload, True))
         except Exception as e:
             logger.error(f"An error occurred in ActionShowBookingOptions: {e}")
@@ -73,10 +79,9 @@ class ActionShowBookingsCarousal(Action):
                                                                                       restaurant_data_dict)
 
             message = "Here's all your restaurant bookings"
-            sinhala_message = "ඔබේ වෙන් කිරීම් මෙන්න"
 
             if tracker.get_slot(LANGUAGE) == SIN:
-                message = sinhala_message
+                message = "ඔබේ වෙන් කිරීම් මෙන්න"
 
             dispatcher.utter_message(text=message)
             dispatcher.utter_message(attachment=ResponseGenerator.card_options_carousal(carousel_items))
@@ -103,15 +108,21 @@ class ActionShowPastBookingsCarousal(Action):
             language = tracker.get_slot(LANGUAGE)
 
             if len(user_bookings) == 0:
-                dispatcher.utter_message(text="Sorry, there are no past bookings found for you.")
+                message = "Sorry, there are no past bookings found for you."
+                if language == SIN:
+                    message = "කණගාටුයි, ඔබට පසුගිය bookings නැත"
+                dispatcher.utter_message(text=message)
                 return []
 
             unique_restaurant_ids = list(set([booking.restaurant_id for booking in user_bookings]))
             restaurant_data_dict = restaurant_repo.get_restaurants_by_ids(unique_restaurant_ids)
             carousel_items = BookingResponseGenerator.booking_list_to_carousal_object(user_bookings,
                                                                                       restaurant_data_dict)
+            message = "Here's all your past restaurant bookings"
+            if language == SIN:
+                message = "ඔබගේ පසුගිය bookings මෙන්න"
 
-            dispatcher.utter_message(attachment=ResponseGenerator.card_options_carousal(carousel_items))
+            dispatcher.utter_message(text=message,attachment=ResponseGenerator.card_options_carousal(carousel_items))
 
         except Exception as e:
             logger.error(f"An error occurred in ActionShowPastBookingsCarousal: {e}")
@@ -133,7 +144,10 @@ class ActionShowFutureBookingsCarousal(Action):
             language = tracker.get_slot(LANGUAGE)
 
             if len(user_bookings) == 0:
-                dispatcher.utter_message(text="Sorry, there are no upcoming bookings found for you.")
+                message = "Sorry, there are no upcoming bookings found for you."
+                if language == SIN:
+                    message = "ඔබට ඉදිරියෙදි එන bookings නැත"
+                dispatcher.utter_message(text=message)
                 return []
 
             unique_restaurant_ids = list(set([booking.restaurant_id for booking in user_bookings]))
