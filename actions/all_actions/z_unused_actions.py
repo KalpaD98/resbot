@@ -1,9 +1,5 @@
+## Executes the fallback action and goes back to the previous state of the dialogue
 
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-# ------------------------------------------------- Commented Code -------------------------------------------------- #
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-
-# Executes the fallback action and goes back to the previous state of the dialogue
 # class ActionDefaultFallback(Action):
 #     def name(self) -> Text:
 #         return ACTION_DEFAULT_FALLBACK_NAME

@@ -29,6 +29,8 @@ class ActionCompleteRegistration(Action):
 
             existing_user = user_repo.get_user_by_email(user_email)
 
+            language = tracker.get_slot(LANGUAGE)
+
             if existing_user:
                 dispatcher.utter_message(text="This email is already registered. Please log in.")
                 return [FollowupAction(ACTION_ASK_REGISTERED_AND_SHOW_LOGIN_SIGNUP_QUICK_REPLIES)]
@@ -77,11 +79,14 @@ class ActionLoginUser(Action):
             tracker: Tracker,
             domain: Dict[Text, Any],
     ) -> List[Dict[Text, Any]]:
+
         try:
             login_email = tracker.get_slot(USER_EMAIL)
             login_password = tracker.get_slot(USER_PASSWORD)
 
             user = user_repo.find_user_by_email(login_email)
+
+            language = tracker.get_slot(LANGUAGE)
 
             if user is None:
                 dispatcher.utter_message(
@@ -167,7 +172,8 @@ class ActionRetryLoginOrStop(Action):
             final_message = english_message
             final_quick_replies = quick_replies_english
 
-            if tracker.get_slot(LANGUAGE) == "sin":
+            language = tracker.get_slot(LANGUAGE)
+            if language == SIN:
                 final_message = sinhala_message
                 final_quick_replies = quick_replies_sinhala
 
@@ -189,6 +195,8 @@ class ActionAskRegisteredAndShowLoginSignupQuickReplies(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         try:
+            language = tracker.get_slot(LANGUAGE)
+
             # Define quick replies
             quick_replies_list = [
                 {

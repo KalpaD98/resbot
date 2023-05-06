@@ -14,6 +14,9 @@ class ActionAskCancelBookingConfirmation(Action):
         try:
             # Get the booking_id from the slot
             booking_id = tracker.get_slot("booking_id")
+            # lang
+            language = tracker.get_slot(LANGUAGE)
+
             if booking_id:
                 # Fetch booking information from the database using booking_id
                 booking = booking_repo.find_booking_by_id(booking_id)
@@ -42,9 +45,10 @@ class ActionCancelBooking(Action):
     async def run(self, dispatcher: CollectingDispatcher,
                   tracker: Tracker,
                   domain: Dict[Text, Any]) -> List[EventType]:
-        booking_id = tracker.get_slot("booking_id")
 
         try:
+            language = tracker.get_slot(LANGUAGE)
+            booking_id = tracker.get_slot("booking_id")
             if booking_id is None:
                 dispatcher.utter_message(text="No booking ID found. Please try again.")
                 return []

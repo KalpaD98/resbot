@@ -26,7 +26,8 @@ class ActionShowSelectedRestaurantAskBookingConfirmation(Action):
             if restaurant is None:
                 return []
 
-            logging.info(restaurant)
+            # lang
+            language = tracker.get_slot(LANGUAGE)
 
             # send the message back to the user
             dispatcher.utter_message(text="You selected " + restaurant.name)
@@ -63,6 +64,9 @@ class ActionShowSelectedRestaurantDetails(Action):
 
             if restaurant is None:
                 return []
+
+            # lang
+            language = tracker.get_slot(LANGUAGE)
 
             # send restaurant details to the user
             dispatcher.utter_message(image=restaurant.image_url)
@@ -107,13 +111,15 @@ class ActionShowBookingSummary(Action):
         try:
             print_all_slots(tracker)
 
-            # get the date from the tracker
+            # get the date, time and num_people from the tracker
             date = tracker.get_slot("date")
             time = tracker.get_slot("time")
             num_people = tracker.get_slot("num_people")
             # since already selected restaurant is stored in the tracker, we can get it from there
             restaurant = tracker.get_slot(SELECTED_RESTAURANT)
             user = tracker.get_slot(LOGGED_USER)
+
+            language = tracker.get_slot(LANGUAGE)
 
             # for changing restaurant booking: do testing
             if restaurant is None:
@@ -159,6 +165,7 @@ class ActionConfirmBooking(Action):
             date = tracker.get_slot(DATE)
             time = tracker.get_slot(TIME)
             user_id = tracker.get_slot(USER_ID)
+            language = tracker.get_slot(LANGUAGE)
 
             if date is None or num_people is None:
                 logging.error("Some values are missing in the booking confirmation")
