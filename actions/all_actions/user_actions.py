@@ -32,21 +32,35 @@ class ActionCompleteRegistration(Action):
             language = tracker.get_slot(LANGUAGE)
 
             if existing_user:
-                dispatcher.utter_message(text="This email is already registered. Please log in.")
+                message = "This email is already registered. Please log in."
+                if language == SIN:
+                    message = "මෙම email දැනටමත් ලියාපදිංචි වී ඇත. Please log in."
+                dispatcher.utter_message(text=message)
                 return [FollowupAction(ACTION_ASK_REGISTERED_AND_SHOW_LOGIN_SIGNUP_QUICK_REPLIES)]
 
             user = User(user_name, user_email, user_password)
             user_id = user_repo.insert_user(user)
 
             if user_id is None:
-                dispatcher.utter_message(text="Registration failed. Please try again.")
+                message = "Registration failed. Please try again."
+                if language == SIN:
+                    message = "ලියාපදිංචි වීම අසාර්ථකයි. කරුණාකර නැවත උත්සාහ කරන්න."
+                dispatcher.utter_message(text=message)
                 return [FollowupAction(ACTION_ASK_REGISTERED_AND_SHOW_LOGIN_SIGNUP_QUICK_REPLIES)]
 
-            dispatcher.utter_message(text=f"Congratulations on completing your registration, {user.name}!")
-            dispatcher.utter_message(text="Your details are as follows:")
-            dispatcher.utter_message(text=f"Name: {user.name}")
-            dispatcher.utter_message(text=f"Email: {user.email}")
-            dispatcher.utter_message(text="You have been automatically logged in.")
+            success_message = f"Congratulations on completing your registration, {user.name}!\n\n" \
+                              f"Your details are as follows:\n\n" \
+                              f"Name: {user.name}\n\n" \
+                              f"Email: {user.email}\n\n" \
+                              "You have been automatically logged in."
+            if language == SIN:
+                success_message = f"{user.name}, ඔබගේ ලියාපදිංචි කිරීම සම්පූර්ණය!\n\n" \
+                                  f"ඔබගේ විස්තර පහත සඳහන් වේ:\n\n" \
+                                  f"නම: {user.name}\n\n" \
+                                  f"Email ලිපිනය: {user.email}\n\n" \
+                                  "ඔබට ස්වයංක්රීයව log වී ඇත."
+
+            dispatcher.utter_message(text=success_message)
 
             return [
                 SlotSet(LOGGED_USER, user),
@@ -87,10 +101,12 @@ class ActionLoginUser(Action):
             user = user_repo.find_user_by_email(login_email)
 
             language = tracker.get_slot(LANGUAGE)
-
+            message = "User with the email provided does not exist. Please try again with a different email."
+            if language == SIN:
+                message = "email ලිපිනයයෙන් පරිශීලකයෙක් නැත. කරුණාකර වෙනත් email ලිපිනයක් භාවිතා කරන්න."
             if user is None:
                 dispatcher.utter_message(
-                    text="User with the email provided does not exist. Please try again with a different email.")
+                    text=message)
                 return [
                     SlotSet(LOGGED_USER, None),
                     SlotSet(USER_NAME, None),
@@ -102,15 +118,26 @@ class ActionLoginUser(Action):
                 ]
 
             if user.password == login_password:
+
                 quick_replies_with_payload = [
                     {"title": "Checkout restaurants", "payload": "/request_restaurants"},
                     {"title": "Search restaurants", "payload": "/search_restaurants"},
                     {"title": "View bookings", "payload": "/view_bookings"}
                 ]
+                message = "You have successfully logged in. Welcome back!"
 
-                dispatcher.utter_message(text="You have successfully logged in. Welcome back!",
-                                         quick_replies=ResponseGenerator.quick_replies(quick_replies_with_payload,
-                                                                                       True))
+                if language == SIN:
+                    message = "ඔබ සාර්ථකව log වීය. ආයුබෝවන් 🙏"
+
+                    quick_replies_with_payload = [
+                        {"title": "Restaurants පෙන්වන්න", "payload": "/request_restaurants"},
+                        {"title": "Restaurants සොයන්න", "payload": "/search_restaurants"},
+                        {"title": "Bookings පෙන්වන්න", "payload": "/view_bookings"}
+                    ]
+
+                dispatcher.utter_message(text=message,
+                                         quick_replies=ResponseGenerator
+                                         .quick_replies(quick_replies_with_payload, True))
 
                 return [
                     SlotSet(LOGGED_USER, user.to_dict()),
@@ -122,7 +149,10 @@ class ActionLoginUser(Action):
                 ]
 
             else:
-                dispatcher.utter_message(text="Incorrect password.")
+                message = "Incorrect password."
+                if language == SIN:
+                    message = "මුරපදය වැරදියි."
+                dispatcher.utter_message(text=message)
                 return [
                     SlotSet(LOGGED_USER, None),
                     SlotSet(USER_NAME, None),
@@ -144,10 +174,8 @@ class ActionRetryLoginOrStop(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         try:
-            english_message = "Would you like to retry logging in?"
-            sinhala_message = "ඔබට නැවත Log වීමට උත්සාහ කරන්න අවශ්‍යද?"
-
-            quick_replies_english = [
+            message = "Would you like to retry logging in?"
+            quick_replies = [
                 {
                     TITLE: "Login",
                     PAYLOAD: "/request_login_form"
@@ -158,27 +186,22 @@ class ActionRetryLoginOrStop(Action):
                 }
             ]
 
-            quick_replies_sinhala = [
-                {
-                    TITLE: "නැවත Log වීම",
-                    PAYLOAD: "/request_login_form"
-                },
-                {
-                    TITLE: "මා නව පරිශීලකයෙකි",
-                    PAYLOAD: "/request_user_registration_form"
-                }
-            ]
-
-            final_message = english_message
-            final_quick_replies = quick_replies_english
-
             language = tracker.get_slot(LANGUAGE)
             if language == SIN:
-                final_message = sinhala_message
-                final_quick_replies = quick_replies_sinhala
+                message = "ඔබට නැවත Log වීමට උත්සාහ කරන්න අවශ්‍යද?"
+                quick_replies = [
+                    {
+                        TITLE: "නැවත Log වීම",
+                        PAYLOAD: "/request_login_form"
+                    },
+                    {
+                        TITLE: "මා නව පරිශීලකයෙකි",
+                        PAYLOAD: "/request_user_registration_form"
+                    }
+                ]
 
-            dispatcher.utter_message(text=final_message,
-                                     quick_replies=ResponseGenerator.quick_replies(final_quick_replies, True))
+            dispatcher.utter_message(text=message,
+                                     quick_replies=ResponseGenerator.quick_replies(quick_replies, True))
 
         except Exception as e:
             logger.error(f"An error occurred in action_retry_login_or_stop: {e}")
@@ -197,6 +220,8 @@ class ActionAskRegisteredAndShowLoginSignupQuickReplies(Action):
         try:
             language = tracker.get_slot(LANGUAGE)
 
+            message = "Please log in or sign up to continue."
+
             # Define quick replies
             quick_replies_list = [
                 {
@@ -209,9 +234,23 @@ class ActionAskRegisteredAndShowLoginSignupQuickReplies(Action):
                 }
             ]
 
+            if language == SIN:
+                message = "කරුණාකර ලොගින් වීම් හෝ ලියාපදිංචි වන්න."
+
+                quick_replies_list = [
+                    {
+                        TITLE: "ලොගින් වීම",
+                        PAYLOAD: "/request_login_form"
+                    },
+                    {
+                        TITLE: "ලියාපදිංචි වීම",
+                        PAYLOAD: "/request_user_registration_form"
+                    }
+                ]
+
             # Generate quick replies using the ResponseGenerator class
             quick_replies = ResponseGenerator.quick_replies(quick_replies_list, with_payload=True)
-            dispatcher.utter_message(text="Please log in or sign up to continue.", quick_replies=quick_replies)
+            dispatcher.utter_message(text=message, quick_replies=quick_replies)
 
         except Exception as e:
             logger.error(f"An error occurred in action_ask_registered_and_show_login_signup_quick_replies: {e}")
