@@ -23,7 +23,10 @@ class ActionShowCurrentBookingDetails(Action):
             language = tracker.get_slot(LANGUAGE)
 
             if not booking:
-                dispatcher.utter_message(text="No booking found with the provided ID.")
+                message = "No booking found with the provided ID."
+                if language == SIN:
+                    message = "ලබා දුන් ID සමග booking නොමැත."
+                dispatcher.utter_message(text=message)
                 return []
 
             restaurant = restaurant_repo.find_restaurant_by_id(booking.restaurant_id)
@@ -53,8 +56,12 @@ class ActionChangeBookingDetails(Action):
 
             if booking_id is None:
                 logging.error("Booking ID not found")
-                dispatcher.utter_message(text="Error occurred while fetching selected booking")
+                message = "Error occurred while fetching selected booking"
+                if language == SIN:
+                    message = "තෝරාගත් booking එක ලබා ගැනීමේදී දෝෂයක් සිදු වී ඇත"
+                dispatcher.utter_message(text=message)
                 return [FollowupAction("action_show_future_bookings_carousal")]
+
             # Update the booking date and/or number of people in the system here.
             booking_updates = {}
             if new_date:
@@ -68,16 +75,29 @@ class ActionChangeBookingDetails(Action):
                 # Send a confirmation message to the user
                 update_messages = []
                 if new_date:
-                    update_messages.append(f"updated date to {new_date}")
+                    message = f"updated date to {new_date}"
+                    if language == SIN:
+                        message = f"දිනය {new_date}ට යාවත්කාලීන කර ඇත"
+                    update_messages.append(message)
                 if new_num_people:
-                    update_messages.append(f"updated number of people to {new_num_people}")
+                    message = f"updated number of people to {new_num_people}"
+                    if language == SIN:
+                        message = f"පුද්ගලයාගේ ගණන {new_num_people}ට යාවත්කාලීන කර ඇත"
+                    update_messages.append(message)
 
+                final_update_message = f"Your booking has been changed successfully {' and '.join(update_messages)}."
+
+                if language == SIN:
+                    final_update_message = f"ඔබගේ booking එක සාර්ථකව වෙනස් කර ඇත {' '.join(update_messages)}."
                 dispatcher.utter_message(
-                    text=f"Your booking has been changed successfully {' and '.join(update_messages)}.")
+                    text=final_update_message)
 
                 return [SlotSet("date", None), SlotSet("num_people", None)]
             else:
-                dispatcher.utter_message(text="No changes were made to your booking.")
+                message = "No changes were made to your booking."
+                if language == SIN:
+                    message = "ඔබගේ booking එකට කිසිදු වෙනසක් සිදු කරේ නැත."
+                dispatcher.utter_message(text=message)
 
         except Exception as e:
             logger.error(f"An error occurred in ActionChangeBookingDetails: {e}")
@@ -109,9 +129,27 @@ class ActionAskWhatUserWantToChangeInBooking(Action):
                 PAYLOAD: "/user_wants_to_change_restaurant_booking_num_people",
             },
         ]
+        message = "What would you like to change?"
+
+        if language == SIN:
+            message = "ඔබ වෙනස් කිරීමට කැමති බලාපොරොත්තු වන්නෙ කුමක්ද?"
+            options = [
+                {
+                    TITLE: "දිනය සහ පුද්ගලයාගේ ගණන",
+                    PAYLOAD: "/user_wants_to_change_both_restaurant_booking_date_and_num_people",
+                },
+                {
+                    TITLE: "දිනය පමනයි",
+                    PAYLOAD: "/user_wants_to_change_restaurant_booking_date",
+                },
+                {
+                    TITLE: "පුද්ගලයාගේ ගණන පමනයි",
+                    PAYLOAD: "/user_wants_to_change_restaurant_booking_num_people",
+                },
+            ]
 
         quick_replies = ResponseGenerator.quick_replies(options, with_payload=True)
-        dispatcher.utter_message(text="What would you like to change?", quick_replies=quick_replies)
+        dispatcher.utter_message(text=message, quick_replies=quick_replies)
         return []
 
 
@@ -131,7 +169,10 @@ class ActionValidateAndCompareBookingChanges(Action):
             # Fetch the current booking details
             booking = booking_repo.find_booking_by_id(booking_id)
             if not booking:
-                dispatcher.utter_message(text="No booking found with the provided ID.")
+                message = "No booking found with the provided ID."
+                if language == SIN:
+                    message = "ලබා දී ඇති ID හරහා කිසිදු booking එකක් නැත."
+                dispatcher.utter_message(text=message)
                 return [FollowupAction("action_show_future_bookings_carousal")]
 
             restaurant = restaurant_repo.find_restaurant_by_id(booking.restaurant_id)
@@ -151,14 +192,18 @@ class ActionValidateAndCompareBookingChanges(Action):
                 comparison_text = BookingResponseGenerator.generate_booking_comparison_text(
                     old_booking=booking,
                     new_booking=updated_booking,
-                    restaurant=restaurant
+                    restaurant=restaurant,
+                    language=language
                 )
 
                 # Ask for user confirmation
                 dispatcher.utter_message(text=comparison_text)
+                message = "Do you want to confirm these changes?"
+                if language == SIN:
+                    message = "මෙම වෙනස්කම් තහවුරු කරන්නේද?"
                 dispatcher.utter_message(
-                    text="Do you want to confirm these changes?",
-                    quick_replies=ResponseGenerator.quick_reply_yes_no_with_payload()
+                    text="message",
+                    quick_replies=ResponseGenerator.quick_reply_yes_no_with_payload(language=language)
                 )
 
         except Exception as e:
