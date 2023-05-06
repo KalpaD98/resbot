@@ -18,7 +18,7 @@ class ActionValidateRestaurantId(Action):
             self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]
     ) -> List[EventType]:
         restaurant_id = tracker.get_slot(RESTAURANT_ID)
-        is_valid, message = SlotValidators.validate_restaurant_id(restaurant_id)
+        is_valid, message = SlotValidators.validate_restaurant_id(restaurant_id, tracker)
 
         if is_valid:
             return [SlotSet(RESTAURANT_ID, restaurant_id)]
@@ -35,7 +35,7 @@ class ActionValidateNumPeople(Action):
             self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]
     ) -> List[EventType]:
         num_people = tracker.get_slot(NUM_PEOPLE)
-        is_valid, message = SlotValidators.validate_num_people(num_people)
+        is_valid, message = SlotValidators.validate_num_people(num_people, tracker)
 
         if is_valid:
             return [SlotSet(NUM_PEOPLE, num_people)]
@@ -75,7 +75,7 @@ class ActionValidateDate(Action):
             self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]
     ) -> List[EventType]:
         date = tracker.get_slot(DATE)
-        is_valid, date_value, message = SlotValidators.validate_date(date)
+        is_valid, date_value, message = SlotValidators.validate_date(date, tracker)
 
         if is_valid:
             return [SlotSet(DATE, date_value)]
@@ -95,7 +95,7 @@ class DateForm(FormValidationAction):
             tracker: Tracker,
             domain: Dict[Text, Any],
     ) -> Dict[Text, Any]:
-        is_valid, date_value, message = SlotValidators.validate_date(value)
+        is_valid, date_value, message = SlotValidators.validate_date(value, tracker)
         if is_valid:
             return {"date": date_value}
         else:
@@ -111,7 +111,7 @@ class ActionValidateTime(Action):
             self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]
     ) -> List[EventType]:
         time = tracker.get_slot(TIME)
-        is_valid, time_value, message = SlotValidators.validate_time(time)
+        is_valid, time_value, message = SlotValidators.validate_time(time, tracker)
 
         if is_valid:
             return [SlotSet(TIME, time_value)]
@@ -128,7 +128,7 @@ class ActionValidateUserId(Action):
             self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]
     ) -> List[EventType]:
         user_id = tracker.get_slot(USER_ID)
-        is_valid, message = SlotValidators.validate_user_id(user_id)
+        is_valid, message = SlotValidators.validate_user_id(user_id, tracker)
 
         if is_valid:
             return [SlotSet(USER_ID, user_id)]
@@ -145,7 +145,7 @@ class ActionValidateCuisine(Action):
             self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]
     ) -> List[EventType]:
         cuisine = tracker.get_slot(CUISINE)
-        is_valid, message = SlotValidators.validate_cuisine(cuisine)
+        is_valid, message = SlotValidators.validate_cuisine(cuisine, tracker)
 
         if is_valid:
             return [SlotSet(CUISINE, cuisine)]
@@ -165,11 +165,11 @@ class ActionValidateBookingReferenceId(Action):
             domain: Dict[Text, Any]
     ) -> List[Dict[Text, Any]]:
 
-        booking_reference_id = tracker.get_slot(BOOKING_ID)
-        is_valid, message = SlotValidators.validate_booking_id(booking_reference_id)
+        value = tracker.get_slot(BOOKING_ID)
+        is_valid, message = SlotValidators.validate_booking_id(value, tracker)
 
         if is_valid:
-            return [SlotSet(BOOKING_ID, booking_reference_id)]
+            return [SlotSet(BOOKING_ID, value)]
         else:
             dispatcher.utter_message(text=message)
             return [SlotSet(BOOKING_ID, None)]

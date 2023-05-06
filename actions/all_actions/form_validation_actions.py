@@ -29,7 +29,7 @@ class ValidateRegistrationForm(FormValidationAction):
             tracker: Tracker,
             domain: Dict[Text, Any],
     ) -> Dict[Text, Any]:
-        is_valid, name_value, message = SlotValidators.validate_user_name(value)
+        is_valid, name_value, message = SlotValidators.validate_user_name(value, tracker)
         if is_valid:
             return {"user_name": name_value.capitalize()}
         else:
@@ -43,7 +43,7 @@ class ValidateRegistrationForm(FormValidationAction):
             tracker: Tracker,
             domain: Dict[Text, Any],
     ) -> Dict[Text, Any]:
-        is_valid, email_value, message = SlotValidators.validate_email(value)
+        is_valid, email_value, message = SlotValidators.validate_email(value, tracker)
         if is_valid:
             return {"user_email": email_value}
         else:
@@ -57,7 +57,7 @@ class ValidateRegistrationForm(FormValidationAction):
             tracker: Tracker,
             domain: Dict[Text, Any],
     ) -> Dict[Text, Any]:
-        is_valid, password_value, message = SlotValidators.validate_password(value)
+        is_valid, password_value, message = SlotValidators.validate_password(value, tracker)
         if is_valid:
             return {"user_password": password_value}
         else:
@@ -76,7 +76,7 @@ class ValidateLoginForm(FormValidationAction):
             tracker: Tracker,
             domain: Dict[Text, Any],
     ) -> Dict[Text, Any]:
-        is_valid, email, error_message = SlotValidators.validate_email(slot_value)
+        is_valid, email, error_message = SlotValidators.validate_email(slot_value, tracker)
         user_exists = False
         # check if user exists with given mail
 
@@ -106,7 +106,7 @@ class ValidateLoginForm(FormValidationAction):
             tracker: Tracker,
             domain: Dict[Text, Any],
     ) -> Dict[Text, Any]:
-        is_valid, password, error_message = SlotValidators.validate_password(slot_value)
+        is_valid, password, error_message = SlotValidators.validate_password(slot_value, tracker)
         if is_valid:
             # check if the password is correct for the user with the given email
             email = tracker.get_slot("user_email")
@@ -155,7 +155,7 @@ class RestaurantBookingForm(FormValidationAction):
             tracker: Tracker,
             domain: Dict[Text, Any],
     ) -> Dict[Text, Any]:
-        is_valid, message = SlotValidators.validate_restaurant_id(value)
+        is_valid, message = SlotValidators.validate_restaurant_id(value, tracker)
         if is_valid:
             return {"restaurant_id": value}
         else:
@@ -169,7 +169,7 @@ class RestaurantBookingForm(FormValidationAction):
             tracker: Tracker,
             domain: Dict[Text, Any],
     ) -> Dict[Text, Any]:
-        is_valid, message = SlotValidators.validate_user_id(value)
+        is_valid, message = SlotValidators.validate_user_id(value, tracker)
         if is_valid:
             return {"user_id": value}
         else:
@@ -185,7 +185,7 @@ class RestaurantBookingForm(FormValidationAction):
             tracker: Tracker,
             domain: Dict[Text, Any],
     ) -> Dict[Text, Any]:
-        is_valid, message = SlotValidators.validate_num_people(value)
+        is_valid, message = SlotValidators.validate_num_people(value, tracker)
         if is_valid:
             return {"num_people": value}
         else:
@@ -199,7 +199,7 @@ class RestaurantBookingForm(FormValidationAction):
             tracker: Tracker,
             domain: Dict[Text, Any],
     ) -> Dict[Text, Any]:
-        is_valid, date_value, message = SlotValidators.validate_date(value)
+        is_valid, date_value, message = SlotValidators.validate_date(value, tracker)
         if is_valid:
             return {"date": date_value}
         else:
@@ -230,7 +230,7 @@ class ChangeRestaurantBookingFormValidation(FormValidationAction):
             tracker: Tracker,
             domain: Dict[Text, Any],
     ) -> Dict[Text, Any]:
-        is_valid, message = SlotValidators.validate_booking_id(value)
+        is_valid, message = SlotValidators.validate_booking_id(value, tracker)
         if is_valid:
             return {"booking_id": value}
         else:
@@ -244,7 +244,7 @@ class ChangeRestaurantBookingFormValidation(FormValidationAction):
             tracker: Tracker,
             domain: Dict[Text, Any],
     ) -> Dict[Text, Any]:
-        is_valid, message = SlotValidators.validate_user_id(value)
+        is_valid, message = SlotValidators.validate_user_id(value, tracker)
         if is_valid:
             return {"user_id": value}
         else:
@@ -260,7 +260,7 @@ class ChangeRestaurantBookingFormValidation(FormValidationAction):
             tracker: Tracker,
             domain: Dict[Text, Any],
     ) -> Dict[Text, Any]:
-        is_valid, message = SlotValidators.validate_num_people(value)
+        is_valid, message = SlotValidators.validate_num_people(value, tracker)
         if is_valid:
             return {"num_people": value}
         else:
@@ -274,7 +274,7 @@ class ChangeRestaurantBookingFormValidation(FormValidationAction):
             tracker: Tracker,
             domain: Dict[Text, Any],
     ) -> Dict[Text, Any]:
-        is_valid, date_value, message = SlotValidators.validate_date(value)
+        is_valid, date_value, message = SlotValidators.validate_date(value, tracker)
         if is_valid:
             return {"date": date_value}
         else:
@@ -302,7 +302,7 @@ class ChangeRestaurantBookingDateForm(FormValidationAction):
             tracker: Tracker,
             domain: Dict[Text, Any],
     ) -> Dict[Text, Any]:
-        is_valid, date_value, message = SlotValidators.validate_date(value)
+        is_valid, date_value, message = SlotValidators.validate_date(value, tracker)
         if is_valid:
             return {"date": date_value}
         else:
@@ -330,7 +330,7 @@ class ChangeRestaurantBookingNumPeopleForm(FormValidationAction):
             tracker: Tracker,
             domain: Dict[Text, Any],
     ) -> Dict[Text, Any]:
-        is_valid, message = SlotValidators.validate_num_people(value)
+        is_valid, message = SlotValidators.validate_num_people(value, tracker)
         if is_valid:
             return {"num_people": value}
         else:

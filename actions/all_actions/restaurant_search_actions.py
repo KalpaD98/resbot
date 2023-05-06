@@ -34,7 +34,7 @@ class ActionSearchAndShowRestaurants(Action):
                 dispatcher.utter_message(
                     text="No restaurants found matching your criteria. "
                          "Please try again with different search parameters.")
-                # have a follow up action to change the parameters
+                # have a follow-up action to change the parameters
                 return []
 
             text_msg = "I've found some restaurants based on your search criteria:"

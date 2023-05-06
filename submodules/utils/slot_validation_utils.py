@@ -4,18 +4,26 @@ from datetime import datetime, timedelta
 from typing import Tuple
 
 from dateutil import parser
+from rasa_sdk import Tracker
 
+from actions.all_actions.helper_functions.response_generator.constants import LANGUAGE, SIN
 from submodules.database.repositories.user_repository import UserRepository
 
 
 class SlotValidators:
     @staticmethod
-    def validate_date(date_entity: str) -> (bool, str, str):
+    def validate_date(date_entity: str, tracker: Tracker) -> (bool, str, str):
+
+        language = tracker.get_slot(LANGUAGE)
+
         if date_entity:
             try:
                 date_obj = parser.parse(date_entity).date()
             except ValueError:
-                return False, "", "I couldn't understand the date you provided. It seems to be invalid."
+                message = "I couldn't understand the date you provided. It seems to be invalid."
+                if language == SIN:
+                    message = "ඔබ ලබා දුන් දිනය වැරදි. කරුණාකර නිවැරදි දිනයක් ලබා දෙන්න."
+                return False, "", message
 
             today = datetime.now().date()
             tomorrow = today + timedelta(days=1)
@@ -23,19 +31,27 @@ class SlotValidators:
             if date_obj >= tomorrow:
                 return True, date_obj.isoformat(), ""
             else:
-                return False, "", "Please provide a date that is tomorrow or later."
+                message = "Please provide a date that is tomorrow or later."
+                if language == SIN:
+                    message = "කරුණාකර හෙට හෝ හෙටට පසු දිනයක් ලබා දෙන්න."
+                return False, "", message
         else:
-            return False, "", "I couldn't understand the date you provided. It seems to be invalid."
+            message = "I couldn't understand the date you provided. It seems to be invalid."
+            if language == SIN:
+                message = "ඔබ ලබා දුන් දිනය වැරදි. කරුණාකර නිවැරදි දිනයක් ලබා දෙන්න."
+            return False, "", message
 
     @staticmethod
-    def validate_restaurant_id(restaurant_id: str) -> Tuple[bool, str]:
+    def validate_restaurant_id(restaurant_id: str, tracker: Tracker) -> Tuple[bool, str]:
+        language = tracker.get_slot(LANGUAGE)
         if restaurant_id.startswith("rid"):
             return True, ""
         else:
             return False, "Restaurant ID should start with 'rid'. Please provide a valid restaurant ID."
 
     @staticmethod
-    def validate_num_people(num_people: str) -> Tuple[bool, str]:
+    def validate_num_people(num_people: str, tracker: Tracker) -> Tuple[bool, str]:
+        language = tracker.get_slot(LANGUAGE)
         try:
             num = int(num_people)
             if num > 0:
@@ -46,7 +62,8 @@ class SlotValidators:
             return False, "Please provide a valid number for the number of people."
 
     @staticmethod
-    def validate_cuisine(cuisine: str) -> Tuple[bool, str]:
+    def validate_cuisine(cuisine: str, tracker: Tracker) -> Tuple[bool, str]:
+        language = tracker.get_slot(LANGUAGE)
         supported_cuisines = ["Italian", "Chinese", "Indian", "Mexican", "Japanese"]
         if cuisine.lower() in [c.lower() for c in supported_cuisines]:
             return True, ""
@@ -54,14 +71,16 @@ class SlotValidators:
             return False, f"Please provide a valid cuisine type. Supported cuisines are: {', '.join(supported_cuisines)}."
 
     @staticmethod
-    def validate_user_id(user_id: str) -> Tuple[bool, str]:
+    def validate_user_id(user_id: str, tracker: Tracker) -> Tuple[bool, str]:
+        language = tracker.get_slot(LANGUAGE)
         if user_id.startswith("uid"):
             return True, ""
         else:
             return False, "User ID should start with 'uid'. Please provide a valid user ID."
 
     @staticmethod
-    def validate_user_name(user_name: str) -> Tuple[bool, str, str]:
+    def validate_user_name(user_name: str, tracker: Tracker) -> Tuple[bool, str, str]:
+        language = tracker.get_slot(LANGUAGE)
         user_name = user_name.strip()
         if len(user_name) >= 3:
             return True, user_name, ""
@@ -69,7 +88,8 @@ class SlotValidators:
             return False, "", "Please provide a username with at least 3 characters."
 
     @staticmethod
-    def validate_email(email: str) -> Tuple[bool, str, str]:
+    def validate_email(email: str, tracker: Tracker) -> Tuple[bool, str, str]:
+        language = tracker.get_slot(LANGUAGE)
         email = email.strip()
         if email:
             email_regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
@@ -86,7 +106,8 @@ class SlotValidators:
             return False, "", "Please provide a valid email address."
 
     @staticmethod
-    def validate_password(password: str) -> Tuple[bool, str, str]:
+    def validate_password(password: str, tracker: Tracker) -> Tuple[bool, str, str]:
+        language = tracker.get_slot(LANGUAGE)
         password = password.strip()
         if len(password) >= 4:
             return True, password, ""
@@ -94,7 +115,8 @@ class SlotValidators:
             return False, "", "Please provide a password with at least 4 characters."
 
     @staticmethod
-    def validate_time(time: str) -> Tuple[bool, str, str]:
+    def validate_time(time: str, tracker: Tracker) -> Tuple[bool, str, str]:
+        language = tracker.get_slot(LANGUAGE)
         try:
             time_obj = datetime.datetime.strptime(time, "%H:%M")
             formatted_time = time_obj.strftime("%H:%M")
@@ -109,7 +131,8 @@ class SlotValidators:
                                   "12-hour format (e.g., '2:30 PM' or '6:15 AM')."
 
     @staticmethod
-    def validate_booking_id(booking_reference_id: str) -> Tuple[bool, str]:
+    def validate_booking_id(booking_reference_id: str, tracker: Tracker) -> Tuple[bool, str]:
+        language = tracker.get_slot(LANGUAGE)
         if booking_reference_id.startswith("bid_"):
             return True, ""
         else:
