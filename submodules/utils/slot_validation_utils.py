@@ -47,7 +47,10 @@ class SlotValidators:
         if restaurant_id.startswith("rid"):
             return True, ""
         else:
-            return False, "Restaurant ID should start with 'rid'. Please provide a valid restaurant ID."
+            message = "Restaurant ID should start with 'rid'. Please provide a valid restaurant ID."
+            if language == SIN:
+                message = "Restaurant ID 'rid' සඳහා ආරම්භ කිරීම අවශ්‍ය වේ. කරුණාකර නිවැරදි Restaurant ID ලබා දෙන්න."
+            return False, message
 
     @staticmethod
     def validate_num_people(num_people: str, tracker: Tracker) -> Tuple[bool, str]:
@@ -57,9 +60,15 @@ class SlotValidators:
             if num > 0:
                 return True, ""
             else:
-                return False, "The number of people should be greater than 0. Please provide a valid number."
+                message = "The number of people should be greater than 0. Please provide a valid number."
+                if language == SIN:
+                    message = "පුද්ගලයාගේ ගණන 0 වඩා වැඩි විය යුතුය. කරුණාකර නිවැරදි ගණනක් ලබා දෙන්න."
+                return False, message
         except ValueError:
-            return False, "Please provide a valid number for the number of people."
+            message = "Please provide a valid number for the number of people."
+            if language == SIN:
+                message = "කරුණාකර පුද්ගලයාගේ ගණන සඳහා නිවැරදි අංකයක් ලබා දෙන්න."
+            return False, message
 
     @staticmethod
     def validate_cuisine(cuisine: str, tracker: Tracker) -> Tuple[bool, str]:
@@ -68,7 +77,10 @@ class SlotValidators:
         if cuisine.lower() in [c.lower() for c in supported_cuisines]:
             return True, ""
         else:
-            return False, f"Please provide a valid cuisine type. Supported cuisines are: {', '.join(supported_cuisines)}."
+            message = f"Please provide a valid cuisine type. Supported cuisines are: {', '.join(supported_cuisines)}."
+            if language == SIN:
+                message = f"කරුණාකර නිවැරදි ආහාර වර්ගයක් ලබා දෙන්න. ආහාර වර්ග පහත ලැයිස්තුවෙන් ලබා දෙන්න: {', '.join(supported_cuisines)}."
+            return False, message
 
     @staticmethod
     def validate_user_id(user_id: str, tracker: Tracker) -> Tuple[bool, str]:
@@ -76,7 +88,10 @@ class SlotValidators:
         if user_id.startswith("uid"):
             return True, ""
         else:
-            return False, "User ID should start with 'uid'. Please provide a valid user ID."
+            message = "User ID should start with 'uid'. Please provide a valid user ID."
+            if language == SIN:
+                message = "User ID සඳහා 'uid' ආරම්භ කිරීම අවශ්‍ය වේ. කරුණාකර නිවැරදි User ID ලබා දෙන්න."
+            return False, message
 
     @staticmethod
     def validate_user_name(user_name: str, tracker: Tracker) -> Tuple[bool, str, str]:
@@ -85,7 +100,10 @@ class SlotValidators:
         if len(user_name) >= 3:
             return True, user_name, ""
         else:
-            return False, "", "Please provide a username with at least 3 characters."
+            message = "Please provide a username with at least 3 characters."
+            if language == SIN:
+                message = "username සදහා අවම අකුරු 3ක් වත් අඩංගු විය යුතුයි."
+            return False, "", message
 
     @staticmethod
     def validate_email(email: str, tracker: Tracker) -> Tuple[bool, str, str]:
@@ -98,12 +116,21 @@ class SlotValidators:
                 user_repository = UserRepository()
                 user = user_repository.find_user_by_email(email)
                 if user:
-                    return False, "", "This email is already registered. Please provide a different email."
+                    message = "This email is already registered. Please provide a different email."
+                    if language == SIN:
+                        message = "මෙම email ලිපිනය දැනටමත් ලියාපදිංචි වී ඇත. කරුණාකර වෙනත් email ලිපිනයක් ලබා දෙන්න."
+                    return False, "", message
                 return True, email, ""
             else:
-                return False, "", "Please provide a valid email address."
+                message = "Please provide a valid email address."
+                if language == SIN:
+                    message = "කරුණාකර නිවැරදි email ලිපිනයක් ලබා දෙන්න."
+                return False, "", message
         else:
-            return False, "", "Please provide a valid email address."
+            message = "Please provide a valid email address."
+            if language == SIN:
+                message = "කරුණාකර නිවැරදි email ලිපිනයක් ලබා දෙන්න."
+            return False, "", message
 
     @staticmethod
     def validate_password(password: str, tracker: Tracker) -> Tuple[bool, str, str]:
@@ -112,7 +139,10 @@ class SlotValidators:
         if len(password) >= 4:
             return True, password, ""
         else:
-            return False, "", "Please provide a password with at least 4 characters."
+            message = "Please provide a password with at least 4 characters."
+            if language == SIN:
+                message = "කරුණාකර අවම අකුරු 4ක් වත් අඩංගු password එකක් ඇතුලත් කරන්න."
+            return False, "", message
 
     @staticmethod
     def validate_time(time: str, tracker: Tracker) -> Tuple[bool, str, str]:
@@ -127,8 +157,12 @@ class SlotValidators:
                 formatted_time = time_obj.strftime("%H:%M")
                 return True, formatted_time, ""
             except ValueError:
-                return False, "", "Please provide a valid time in either 24-hour format (e.g., '14:30' or '06:15') or " \
-                                  "12-hour format (e.g., '2:30 PM' or '6:15 AM')."
+                message = "Please provide a valid time in either 24-hour format (e.g., '14:30' or '06:15') or " \
+                          "12-hour format (e.g., '2:30 PM' or '6:15 AM')."
+                if language == SIN:
+                    message = "කරුණාකර වලංගු කාලයක් පැය 24 ආකෘතියෙන් ලබා දෙන්න (උදා: '14:30' හෝ '06:15') හෝ " \
+                              "පැය-12 ආකෘතිය (උදා: 'ප.ව. 2:30' හෝ 'පෙ.ව. 6:15')."
+                return False, "", message
 
     @staticmethod
     def validate_booking_id(booking_reference_id: str, tracker: Tracker) -> Tuple[bool, str]:
@@ -136,4 +170,7 @@ class SlotValidators:
         if booking_reference_id.startswith("bid_"):
             return True, ""
         else:
-            return False, "Please select a valid booking."
+            message = "Please select a valid booking."
+            if language == SIN:
+                message = "කරුණාකර වලංගු වෙන් කිරීමක් තෝරන්න."
+            return False, message
