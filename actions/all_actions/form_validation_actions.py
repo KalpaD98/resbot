@@ -85,7 +85,13 @@ class ValidateLoginForm(FormValidationAction):
             user_exists = user_repo.find_user_by_email(email) is not None
             # if no utter no user registered then utter register -> followup with registration form
             if not user_exists:
-                dispatcher.utter_message(text="No user registered with this email. Please register first.")
+                language = tracker.get_slot(LANGUAGE)
+                message = "No user registered with this email. Please register first."
+
+                if language == SIN:
+                    message = "මෙම email එකට අයත් පරිශීලකයෙක් නොමැත. කරුණාකර ලියාපදිංචි වන්න."
+
+                dispatcher.utter_message(text=message)
                 return {"user_email": None}
 
             return {"user_email": email}
@@ -107,7 +113,12 @@ class ValidateLoginForm(FormValidationAction):
             user = user_repo.find_user_by_email(email)
             if user is not None:
                 if user.password != password:
-                    dispatcher.utter_message(text="Incorrect password. Please try again.")
+                    language = tracker.get_slot(LANGUAGE)
+                    message = "Incorrect password. Please try again."
+
+                    if language == SIN:
+                        message = "අවලංගු මුරපදයකි. නැවත උත්සාහ කරන්න."
+                    dispatcher.utter_message(text=message)
                     return {"user_password": None}
 
             return {"logged_user": user}
