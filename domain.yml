@@ -272,8 +272,8 @@ slots:
   language:
     type: categorical
     values:
-      - en
-      - sin
+      - en # english
+      - si # sinhala
     initial_value: en
     mappings:
       - type: custom

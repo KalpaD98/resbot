@@ -30,11 +30,14 @@ class ActionShowSelectedRestaurantAskBookingConfirmation(Action):
             language = tracker.get_slot(LANGUAGE)
 
             # send the message back to the user
-            dispatcher.utter_message(text="You selected " + restaurant.name)
-            # add multiple messages for each below
-            # dispatcher.utter_message(text="<small description>, <address>, <Opening hours [weekend,weekdays]>")
-            dispatcher.utter_message(text="Would you like to proceed with the booking?",
-                                     quick_replies=ResponseGenerator.quick_reply_yes_no_with_payload())
+            message = "You selected " + restaurant.name + '\n\n' + "Would you like to proceed with the booking?"
+
+            if language == SIN:
+                message = "ඔබ " + restaurant.name + '\n\n' + " හී table එකක් වෙන් කරවාගන්න කැමතිද?"
+
+            dispatcher.utter_message(text=message,
+                                     quick_replies=ResponseGenerator.
+                                     quick_reply_yes_no_with_payload())
             # if yes -> fill slot else remove prev slots
             return [SlotSet(NUM_PEOPLE, None), SlotSet(DATE, None), SlotSet(TIME, None),
                     SlotSet(SELECTED_RESTAURANT, restaurant.to_dict())]
@@ -70,18 +73,20 @@ class ActionShowSelectedRestaurantDetails(Action):
 
             # send restaurant details to the user
             dispatcher.utter_message(image=restaurant.image_url)
-            dispatcher.utter_message(
-                text=restaurant.name + " mainly serves " + restaurant.cuisine
-                     + " food and its located at " + restaurant.address)
-            dispatcher.utter_message(text="Their opening hours are, ")
-            dispatcher.utter_message(text="Mon - Fri: " + restaurant.opening_hours[Restaurant.MON_TO_FRI])
-            dispatcher.utter_message(text="Sat - Sun: " + restaurant.opening_hours[Restaurant.SAT_SUN])
+
+            message = f"{restaurant.name} mainly serves {restaurant.cuisine} food and is located at " \
+                      f"{restaurant.address}." \
+                      f"\n\nTheir opening hours are:" \
+                      f"\n\nMon - Fri: {restaurant.opening_hours[Restaurant.MON_TO_FRI]}" \
+                      f"\n\nSat - Sun: {restaurant.opening_hours[Restaurant.SAT_SUN]}"
+            dispatcher.utter_message(text=message)
 
             dispatcher.utter_message(text=ObjectUtils.get_random_sentence(
                 restaurant.name,
-                UTTER_SENTENCE_LIST_FOR_ASKING_TO_MAKE_RESERVATION),
+                UTTER_SENTENCE_LIST_FOR_ASKING_TO_MAKE_RESERVATION if language == EN
+                else UTTER_SENTENCE_LIST_FOR_ASKING_TO_MAKE_RESERVATION_SIN),
 
-                quick_replies=ResponseGenerator.quick_reply_yes_no_with_payload())
+                quick_replies=ResponseGenerator.quick_reply_yes_no_with_payload(language))
 
             return [SlotSet(NUM_PEOPLE, None), SlotSet(DATE, None), SlotSet(TIME, None),
                     SlotSet(SELECTED_RESTAURANT, restaurant.to_dict())]
@@ -126,18 +131,30 @@ class ActionShowBookingSummary(Action):
                 return [FollowupAction("action_validate_and_compare_booking_changes_ask_confirmation_to_change")]
 
             # send the message to the user
-            dispatcher.utter_message(
-                text=user[User.NAME] + ", your booking summary for " + restaurant[Restaurant.NAME] + " is as follows:")
-            # generate the booking summary
-            dispatcher.utter_message(text="Number of people: " + num_people)
-            dispatcher.utter_message(text="Date: " + date)
-            if time is not None:
-                dispatcher.utter_message(text="Time: " + time)
+
+            details_message = f"{user[User.NAME]}, your booking summary for {restaurant[Restaurant.NAME]} " \
+                              f"is as follows:" \
+                              f"\n\nNumber of people: {num_people}" \
+                              f"\n\nDate: {date}"
+            details_message += f"\n\nTime: {time}" if time else ""
+
+            message = "Would you like to confirm this booking?"
+
+            if language == SIN:
+                details_message = f"{user[User.NAME]}, {restaurant[Restaurant.NAME]} සඳහා ඔබේ booking සාරාංශය " \
+                                  f" පහත පරිදි වේ:" \
+                                  f"\n\nපුද්ගලයින් ගණන: {num_people}" \
+                                  f"\n\nදිනය: {date}"
+                details_message += f"\n\nවේලාව: {time}" if time else ""
+
+                message = "ඔබට මෙම booking එක තහවුරු කිරීමට අවශ්‍යද?"
+
+            dispatcher.utter_message(text=details_message)
 
             # ask to confirm the booking
-            dispatcher.utter_message(text="Would you like to confirm this booking?",
-                                     quick_replies=ResponseGenerator.quick_reply_yes_no_with_payload())
 
+            dispatcher.utter_message(text=message,
+                                     quick_replies=ResponseGenerator.quick_reply_yes_no_with_payload(language))
 
         except Exception as e:
             # Log the error and inform the user
@@ -186,6 +203,11 @@ class ActionConfirmBooking(Action):
             booking_summary_message = "Your booking for " + selected_restaurant[Restaurant.NAME] + " located at " \
                                       + selected_restaurant[Restaurant.ADDRESS] + \
                                       " on " + date + " has been confirmed"
+
+            if language == SIN:
+                booking_summary_message = "ඔබේ " + selected_restaurant[Restaurant.NAME] + " හි ඇති " \
+                                          + selected_restaurant[Restaurant.ADDRESS] + \
+                                          " booking එක" + date + " දිනයට තහවුරු කර ඇත"
 
             dispatcher.utter_message(text=booking_summary_message)
 

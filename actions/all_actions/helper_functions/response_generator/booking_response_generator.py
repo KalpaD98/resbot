@@ -30,12 +30,12 @@ class BookingResponseGenerator:
 
             if booking_date > current_date:
                 button1 = SUBCOMPONENT_BUTTON_PAYLOAD.copy()
-                button1[TITLE] = ("Booking එක අවලංගු කරන්න" if language == "sin" else "Cancel Booking")
+                button1[TITLE] = ("Booking එක අවලංගු කරන්න" if language == SIN else "Cancel Booking")
                 button1[PAYLOAD] = f"/inform_cancel_booking_id{{\"booking_id\": \"{booking.id}\"}}"
                 buttons.append(button1)
 
                 button2 = SUBCOMPONENT_BUTTON_PAYLOAD.copy()
-                button2[TITLE] = ("Booking එක වෙනස් කරන්න" if language == "sin" else "Change Booking")
+                button2[TITLE] = ("Booking එක වෙනස් කරන්න" if language == SIN else "Change Booking")
                 button2[PAYLOAD] = f"/inform_change_booking_id{{\"booking_id\": \"{booking.id}\"}}"
                 buttons.append(button2)
 
