@@ -7,7 +7,6 @@ class ActionUpdateFavoriteCuisines(Action):
         return "action_update_favorite_cuisines"
 
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-
         cuisines = tracker.get_slot('cuisine')
 
         # Update the user's favorite_cuisines list by adding the extracted cuisines
@@ -16,6 +15,10 @@ class ActionUpdateFavoriteCuisines(Action):
         language = tracker.get_slot(LANGUAGE)
 
         # Send a response to the user
-        dispatcher.utter_message(text=f"Great! I have updated your favorite cuisines with: {', '.join(cuisines)}")
+        message = f"Great! I have updated your favorite cuisines with: {', '.join(cuisines)}"
+        if language == SIN:
+            message = f" ඔබගේ ප්‍රියතම cusines යාවත්කාලීන කරන ලදී: {', '.join(cuisines)}"
+
+        dispatcher.utter_message(text=message)
 
         return []

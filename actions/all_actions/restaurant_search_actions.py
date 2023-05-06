@@ -4,6 +4,7 @@ ACTION_SEARCH_AND_SHOW_RESTAURANTS = "action_search_and_show_restaurants"
 ACTION_CONFIRM_SEARCH_PARAMETERS = "action_confirm_search_parameters"
 
 
+# TODO: implement this PROPERLY
 class ActionSearchAndShowRestaurants(Action):
 
     def name(self) -> Text:
