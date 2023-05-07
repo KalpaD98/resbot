@@ -267,7 +267,7 @@ slots:
       - type: from_text
         intent:
           - inform_user_password
-  # --------------------------------- response related slots  --------------------------------- #
+  # -------------------------------------------- response related slots  -------------------------------------------- #
 
   language:
     type: categorical
@@ -436,6 +436,8 @@ actions:
   - action_clear_booking_data_slots
   # ------------------------------------- user preference actions ------------------------------------ #
   - action_update_favorite_cuisines
+  # ------------------------------------ language detection and processing actions ----------------------------------- #
+  - action_detect_language
   # ------------------------------------------------ Response actions ----------------------------------------------- #
   - action_utter_greet
   - action_utter_please_rephrase
