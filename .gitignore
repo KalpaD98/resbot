@@ -192,3 +192,6 @@ actions/__pycache__/
 models/
 utils/resources
 gridresults/
+
+# other
+lid.176.bin
