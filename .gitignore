@@ -194,4 +194,4 @@ utils/resources
 gridresults/
 
 # other
-lid.176.bin
+submodules/custom_components/external_models

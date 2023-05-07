@@ -22,3 +22,4 @@ Run action server
 ```
 rasa run actions --cors "*" --debug
 ```
+

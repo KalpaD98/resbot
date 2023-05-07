@@ -1,9 +1,5 @@
-import warnings
-from typing import Tuple
-
-import fasttext
-
 from actions.all_actions.common_imports_for_actions import *
+from submodules.custom_components.language_detector import LanguageDetector
 
 ACTION_DETECT_LANGUAGE = "action_detect_language"
 
@@ -21,7 +17,7 @@ class ActionDetectLanguage(Action):
         user_message = tracker.latest_message.get('text')
 
         # Detect the language of the user message
-        detected_languages = detect_languages(user_message)
+        detected_languages = LanguageDetector.detect_languages(user_message)
 
         # Set the language slot based on the detected languages
         language = 'en'  # Default to English
@@ -31,15 +27,3 @@ class ActionDetectLanguage(Action):
                 break
 
         return [SlotSet(LANGUAGE, language)]
-
-
-# Suppress the warning message
-with warnings.catch_warnings():
-    warnings.simplefilter("ignore")
-    model = fasttext.load_model("lid.176.bin")
-
-
-def detect_languages(text: str, k: int = 2) -> List[Tuple[str, float]]:
-    labels, probs = model.predict(text, k=k)
-    detected_languages = [(label[-2:], prob) for label, prob in zip(labels, probs)]
-    return detected_languages
