@@ -118,20 +118,19 @@ class ActionLoginUser(Action):
                 ]
 
             if user.password == login_password:
-
+                message = "You have successfully logged in. Welcome back!"
                 quick_replies_with_payload = [
-                    {"title": "Checkout restaurants", "payload": "/request_restaurants"},
+                    {"title": "Browse restaurants", "payload": "/request_restaurants"},
                     {"title": "Search restaurants", "payload": "/search_restaurants"},
                     {"title": "View bookings", "payload": "/view_bookings"}
                 ]
-                message = "You have successfully logged in. Welcome back!"
 
                 if language == SIN:
                     message = "ඔබ සාර්ථකව log වීය. ආයුබෝවන් 🙏"
 
                     quick_replies_with_payload = [
-                        {"title": "Restaurants පෙන්වන්න", "payload": "/request_restaurants"},
-                        {"title": "Restaurants සොයන්න", "payload": "/search_restaurants"},
+                        {"title": "අවන්හල් පෙන්වන්න", "payload": "/request_restaurants"},
+                        {"title": "අවන්හල් සොයන්න", "payload": "/search_restaurants"},
                         {"title": "Bookings පෙන්වන්න", "payload": "/view_bookings"}
                     ]
 

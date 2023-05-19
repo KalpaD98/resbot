@@ -9,24 +9,27 @@ nlu:
       - cuisines please
       - show cuisines
       - cuisines
+      - cuisines please
 
   - intent: inform_cuisine
     examples: |
       - [mexican](cuisine)
-      - I would like to have [Italian](cuisine)
+      - I would like to have [italian](cuisine)
       - I want [Thai](cuisine) food
-      - [Korean](cuisine) restaurants
-      - [Chinese](cuisine) food
-      - I want to order some [Mexican](cuisine) food
+      - [korean](cuisine) restaurants
+      - [chinese](cuisine) food
+      - I want to order some [mexican](cuisine) food
       - [italian](cuisine) restaurant
-      - I'm in the mood for [Thai](cuisine) food tonight
-      - [Japanese](cuisine) please
-      - I'm looking for a [Vietnam](cuisine) restaurant
-      - looking for a [Vietnam](cuisine) restaurant
-      - I'm in the mood for something different. How about [Korean](cuisine) food?
-      - craving for [Mexican](cuisine) food
-      - craving for some [Italian](cuisine) food
-      - [Any](cuisine) cuisine
+      - I'm in the mood for [thai](cuisine) food tonight
+      - [japanese](cuisine) please
+      - I'm looking for a [vietnam](cuisine) restaurant
+      - looking for a [vietnam](cuisine) restaurant
+      - I'm in the mood for something different. How about [korean](cuisine) food?
+      - craving for [mexican](cuisine) food
+      - craving for some [italian](cuisine) food
+      - [any](cuisine) cuisine
       - whatever [Any](cuisine) cuisine 
-      - [Any](cuisine) thing
-      - [Multi](cuisine) cuisine
+      - [any](cuisine) thing
+      - [multi](cuisine) cuisine
+      - show [american](cuisine) restaurants
+      - I want [korean](cuisine) food

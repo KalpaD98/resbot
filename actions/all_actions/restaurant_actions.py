@@ -72,22 +72,26 @@ class ActionShowRestaurants(Action):
             # send http request to recommendation engine to get top 10 restaurants for the user
 
             language = tracker.get_slot(LANGUAGE)
+            restaurants_list = []
+
+            if len(restaurants_list) == 0:
+                message = f"Sorry, I couldn't find {cuisine} restaurants for you to try out!"
+                if language == SIN:
+                    message = f"කණගාටුයි, {cuisine} අවන්හල් හමු නොවීය!"
+
+                dispatcher.utter_message(text=message)
+                return [SlotSet("restaurant_offset", 0), FollowupAction(ACTION_SHOW_CUISINES)]
 
             if (cuisine == 'any cuisine') or cuisine is None:
                 message = "I've found some great restaurants for you to try out!"
                 if language == SIN:
                     message = "ඔබට try කර බැලීම සදහා විශිෂ්ට අවන්හල් කිහිපයක්!"
-
                 restaurants_list = restaurant_repo.get_all_restaurants(limit=10)
             else:
                 message = f"I've found some great {cuisine.lower()} restaurants for you to try out!"
                 if language == SIN:
                     message = f"ඔබට try කර බැලීම සදහා විශිෂ්ට {cuisine.lower()} අවන්හල් කිහිපයක්!"
-                # Get the restaurant list from the database into an array
-
-                # TODO : uncomment get restaurants by cuisine
-                # restaurants_list = restaurant_repo.get_restaurants_by_cuisine(cuisine, limit=10)
-                restaurants_list = restaurant_repo.get_all_restaurants(limit=10)
+                restaurants_list = restaurant_repo.get_restaurants_by_cuisine(cuisine, limit=10)
 
             dispatcher.utter_message(text=message,
                                      attachment=ResponseGenerator.card_options_carousal(

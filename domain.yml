@@ -484,6 +484,13 @@ actions:
 
 responses:
 
+  my_custom_fallback_template:
+    - text: "Sorry, I didn't get that. Can you rephrase?"
+    - text: "I didn't get that. Can you rephrase?"
+
+  my_custom_fallback_template_sin:
+    - text: "සමාවෙන්න, මට ඒක තේරුණේ නැහැ. ඔබට නැවත නැවත ලියන්න පුළුවන්ද?"
+    - text: "මට ඒක තේරුනේ නෑ. ඔබට නැවත නැවත ලියන්න පුළුවන්ද?"
   # ------------------------------------------ Retrieval Intent Responses -------------------------------------------- #
   utter_bot_challenge/what_can_you_do:
     - text: I can help you book a restaurant 🍴.
