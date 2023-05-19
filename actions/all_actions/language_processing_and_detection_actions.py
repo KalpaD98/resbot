@@ -1,5 +1,5 @@
 from actions.all_actions.common_imports_for_actions import *
-from submodules.custom_components.language_detector import LanguageDetector
+from submodules.custom_components.language_detection.language_detector import LanguageDetector
 
 ACTION_DETECT_LANGUAGE = "action_detect_language"
 
