@@ -9,23 +9,23 @@ language: en
 #- Avoid using `tokenizers` before the fork if possible
 
 pipeline:
-  - name: SpacyNLP
-    model: en_core_web_trf
-    case_sensitive: False
+- name: SpacyNLP
+  model: en_core_web_trf
+  case_sensitive: false
 
-  - name: SpacyTokenizer
-    intent_tokenization_flag: True # to use multi intents
-    intent_split_symbol: "+"
+- name: SpacyTokenizer
+  intent_tokenization_flag: true   # to use multi intents
+  intent_split_symbol: "+"
 
-  - name: RegexFeaturizer
-  - name: SpacyFeaturizer
-  - name: LexicalSyntacticFeaturizer
-  - name: CountVectorsFeaturizer # one hot encoding
+- name: RegexFeaturizer
+- name: SpacyFeaturizer
+- name: LexicalSyntacticFeaturizer
+- name: CountVectorsFeaturizer   # one hot encoding
 
-  - name: CountVectorsFeaturizer # char level n-grams
-    analyzer: char_wb
-    min_ngram: 1
-    max_ngram: 4
+- name: CountVectorsFeaturizer   # char level n-grams
+  analyzer: char_wb
+  min_ngram: 1
+  max_ngram: 4
 
 #  - name: RegexEntityExtractor
 #    case_sensitive: False
@@ -33,12 +33,12 @@ pipeline:
 #    use_lookup_tables: True
 #    use_regexes: True
 
-  - name: SpacyEntityExtractor
-    dimensions: ["PERSON"]
+- name: SpacyEntityExtractor
+  dimensions: ["PERSON"]
 
-  - name: DIETClassifier
-    epochs: 100
-    constrain_similarities: true
+- name: DIETClassifier
+  epochs: 100
+  constrain_similarities: true
 
   #  - name: submodules.external_utils.extractors.DateparserEntityExtractor # remove when duckling is on
   #    languages: [ "en" ]
@@ -49,14 +49,14 @@ pipeline:
   #    url: "http://localhost:8000"
   #    dimensions: [ "time", "number", "amount-of-money", "distance" ] # modify as per requirements
 
-  - name: EntitySynonymMapper
-  - name: ResponseSelector
-    epochs: 100
-    constrain_similarities: true
+- name: EntitySynonymMapper
+- name: ResponseSelector
+  epochs: 100
+  constrain_similarities: true
 
-  - name: FallbackClassifier
-    threshold: 0.6
-    ambiguity_threshold: 0.1
+- name: FallbackClassifier
+  threshold: 0.6
+  ambiguity_threshold: 0.1
 
 # ------------ Dialog Management ---------- #
 # Configuration for Rasa Core.
@@ -66,8 +66,8 @@ policies:
   # If No configuration for policies was provided. The following default policies were used to train your model.
   # If you'd like to customize them, uncomment and adjust the policies.
   # See https://rasa.com/docs/rasa/policies for more information.
-  - name: MemoizationPolicy
-  - name: RulePolicy
+- name: MemoizationPolicy
+- name: RulePolicy
     # Confidence threshold for the `core_fallback_action_name` to apply.
     # The action will apply if no other action was predicted with
     # a confidence >= core_fallback_threshold
@@ -75,14 +75,14 @@ policies:
   #    core_fallback_action_name: "action_default_fallback"
   #    enable_fallback_prediction: True
 
-  - name: UnexpecTEDIntentPolicy
-    max_history: 8
-    epochs: 100
+- name: UnexpecTEDIntentPolicy
+  max_history: 8
+  epochs: 100
 
-  - name: TEDPolicy
-    max_history: 16
-    epochs: 100
-    constrain_similarities: true
+- name: TEDPolicy
+  max_history: 16
+  epochs: 100
+  constrain_similarities: true
 
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -188,3 +188,4 @@ policies:
 #  - name: FallbackClassifier # added
 #    threshold: 0.6
 #    ambiguity_threshold: 0.1
+assistant_id: 20230519-113500-tall-honey

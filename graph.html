@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Rasa Core Visualisation</title>
+    <script src="https://dagrejs.github.io/project/dagre-d3/latest/dagre-d3.min.js"></script>
+    <script src="https://dagrejs.github.io/project/dagre/latest/dagre.min.js"></script>
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <script src="https://dagrejs.github.io/project/graphlib-dot/v0.6.3/graphlib-dot.js"></script>
+</head>
+<body>
+<div id="errormsg" style="color: #b00"></div>
+<svg>
+    <style id="graph-style">
+        .node.invisible > rect {
+            display: none;
+        }
+
+        .node.start > rect {
+            fill: #7f7;
+            rx: 30;
+            ry: 18;
+        }
+
+        .node.end > rect {
+            fill: #f77;
+            rx: 30;
+            ry: 18;
+        }
+
+        .node:not(.active) > rect, .node:not(.active) > .label {
+            opacity: 0.4;
+        }
+
+        .edgePath:not(.active) path {
+            opacity: 0.4;
+        }
+
+        .node.ellipsis > rect {
+            fill: #CCC;
+        }
+
+        .node.intent > rect {
+            fill: #7ff;
+        }
+
+        .node.dashed > rect {
+            stroke-dasharray: 5;
+        }
+
+        text {
+            font-weight: 300;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serf, serif;
+            font-size: 14px;
+            color: #1f1d1d;
+        }
+
+        .node rect {
+            stroke: #444;
+            fill: #fff;
+            stroke-width: 1.5px;
+        }
+
+        .edgePath path {
+            stroke: #333;
+            stroke-width: 1.5px;
+        }
+
+        svg {
+            position: fixed;
+            top: 10px;
+            left: 0;
+            height: 100%;
+            width: 100%
+        }
+    </style>
+    <g></g>
+</svg>
+<script>
+
+  function serveGraph() {
+    let oldInputGraphValue;
+
+    const url = 'visualization.dot';
+    const refreshInterval = 500;
+
+    // trigger a refresh by fetching an updated graph
+    setInterval(function () {
+      fetch(url).then(r => r.text()).then(dot => {
+        document.getElementById('errormsg').innerHTML = '';
+        if (oldInputGraphValue === dot) return;
+
+        oldInputGraphValue = dot;
+        drawGraph(dot);
+      }).catch(err => {
+        document.getElementById('errormsg').innerHTML =
+          'Failed to update plot. (' + err.message + ')';
+      });
+    }, refreshInterval);
+  }
+
+  function drawGraph(graph) {
+    let g = graphlibDot.read(graph);
+    // Set margins, if not present
+    if (!g.graph().hasOwnProperty("marginx") &&
+      !g.graph().hasOwnProperty("marginy")) {
+      g.graph().marginx = 20;
+      g.graph().marginy = 20;
+    }
+    g.graph().transition = function (selection) {
+      return selection.transition().duration(300);
+    };
+    // Render the graph into svg g
+    d3.select("svg g").call(render, g);
+  }
+  // Set up zoom support
+  const svg = d3.select("svg"),
+    inner = d3.select("svg g"),
+    zoom = d3.zoom().on("zoom", function () {
+      inner.attr("transform", d3.event.transform);
+    });
+  svg.call(zoom);
+
+  // Create and configure the renderer
+  const render = dagreD3.render();
+
+  let isClient = false;
+  isClient = true;
+
+  if (isClient) {
+    // Mark all nodes and their edges as active
+    cssRules = document.getElementById('graph-style').sheet.cssRules;
+    cssRules[3].style.opacity = 1;
+    cssRules[4].style.opacity = 1;
+
+    let graph;
+    graph = `digraph  {
+0 [class="start active", fillcolor=green, fontsize=12, label=START, style=filled];
+"-1" [class=end, fillcolor=red, fontsize=12, label=END, style=filled];
+1 [class="", fontsize=12, label=action_ask_registered_and_show_login_signup_quick_replies];
+2 [class="", fontsize=12, label=action_show_future_bookings_carousal];
+3 [class="", fontsize=12, label=action_ask_cancel_booking_confirmation];
+4 [class="", fontsize=12, label=action_cancel_booking];
+5 [class="", fontsize=12, label=action_clear_restaurant_booking_slots];
+6 [class="", fontsize=12, label=action_ask_anything_else];
+15 [class="", fontsize=12, label=action_show_future_bookings_carousal];
+16 [class="", fontsize=12, label=action_ask_what_user_want_to_change_in_booking];
+17 [class="", fontsize=12, label=change_restaurant_booking_date_form];
+18 [class="", fontsize=12, label=action_validate_and_compare_booking_changes_ask_confirmation_to_change];
+19 [class="", fontsize=12, label=action_change_restaurant_booking_details];
+20 [class="", fontsize=12, label=action_clear_booking_data_slots];
+21 [class="", fontsize=12, label=action_utter_thank_you];
+49 [class="", fontsize=12, label=change_restaurant_booking_num_people_form];
+81 [class="", fontsize=12, label=change_restaurant_booking_form];
+82 [class="", fontsize=12, label=action_show_booking_summary];
+119 [class="", fontsize=12, label=action_utter_no_future_bookings_found];
+219 [class="", fontsize=12, label=action_show_booking_view_options];
+220 [class="", fontsize=12, label=restaurant_booking_form];
+221 [class="", fontsize=12, label=action_deactivate_form];
+228 [class="", fontsize=12, label=action_utter_greet];
+229 [class="", fontsize=12, label=action_utter_bot_intro];
+230 [class="", fontsize=12, label=action_utter_wanna_book];
+231 [class="", fontsize=12, label=action_ask_registered_and_show_login_signup_quick_replies];
+232 [class="", fontsize=12, label=action_clear_restaurant_booking_slots];
+233 [class="", fontsize=12, label=action_utter_bye_see_you_later];
+234 [class="", fontsize=12, label=action_utter_mood_great_feedback];
+239 [class="", fontsize=12, label=action_utter_mood_unhappy_feedback];
+244 [class="", fontsize=12, label=action_utter_emoji_great_feedback];
+249 [class="", fontsize=12, label=action_utter_emoji_mood_unhappy_feedback];
+283 [class="", fontsize=12, label=action_show_cuisines];
+284 [class="", fontsize=12, label=action_show_restaurants];
+285 [class="", fontsize=12, label=action_show_selected_restaurant_details];
+288 [class="", fontsize=12, label=action_utter_goodbye];
+325 [class="", fontsize=12, label=registration_form];
+327 [class="", fontsize=12, label=action_save_user_and_complete_registration];
+447 [class="", fontsize=12, label=login_form];
+449 [class="", fontsize=12, label=action_login_user];
+611 [class="", fontsize=12, label=action_show_selected_restaurant_ask_booking_confirmation];
+1590 [class="", fontsize=12, label=restaurant_booking_form];
+1591 [class="", fontsize=12, label=action_show_booking_summary];
+1592 [class="", fontsize=12, label=action_clear_restaurant_booking_slots];
+2364 [class="", fontsize=12, label=action_confirm_booking];
+2365 [class="", fontsize=12, label=action_utter_thank_you];
+3801 [class="", fontsize=12, label=action_utter_ask_favorite_cuisines];
+3802 [class="", fontsize=12, label=action_update_favorite_cuisines];
+3805 [class="", fontsize=12, label="..."];
+3806 [class="", fontsize=12, label=action_show_selected_restaurant_ask_booking_confirmation];
+3807 [class="", fontsize=12, label=restaurant_booking_form];
+3809 [class="", fontsize=12, label=action_show_selected_restaurant_details];
+3815 [class="", fontsize=12, label=action_show_more_restaurant_options];
+3817 [class="", fontsize=12, label=registration_form];
+3818 [class="", fontsize=12, label="..."];
+3820 [class="", fontsize=12, label=registration_form];
+3821 [class="", fontsize=12, label=action_save_user_and_complete_registration];
+3824 [class="", fontsize=12, label=login_form];
+3827 [class="", fontsize=12, label=login_form];
+3828 [class="", fontsize=12, label=action_login_user];
+3831 [class="", fontsize=12, label=action_logout];
+3834 [class="", fontsize=12, label=utter_bot_challenge];
+3836 [class="", fontsize=12, label=action_show_cuisines];
+3838 [class="", fontsize=12, label=utter_out_of_scope];
+3840 [class="", fontsize=12, label=action_utter_please_rephrase];
+3844 [class="", fontsize=12, label=action_utter_welcome];
+3846 [class="", fontsize=12, label=action_show_future_bookings_carousal];
+3848 [class="", fontsize=12, label=action_ask_what_user_want_to_change_in_booking];
+3852 [class="", fontsize=12, label=action_show_bookings_carousal];
+3856 [class="", fontsize=12, label=action_show_past_bookings_carousal];
+3858 [class="", fontsize=12, label=action_show_selected_restaurant_ask_booking_confirmation];
+3860 [class="", fontsize=12, label=action_show_selected_restaurant_details];
+3861 [class=intent, fillcolor=lightblue, label="i want to cancel a booking", shape=rect, style=filled];
+3862 [class=intent, fillcolor=lightblue, label="Can I make changes to my existing reservation?", shape=rect, style=filled];
+3863 [class=intent, fillcolor=lightblue, label="Can you help me change the date of my booking?", shape=rect, style=filled];
+3864 [class=intent, fillcolor=lightblue, label="i want to change the number of people in my reservation", shape=rect, style=filled];
+3865 [class=intent, fillcolor=lightblue, label="both date and number of people", shape=rect, style=filled];
+3866 [class=intent, fillcolor=lightblue, label="show bookings", shape=rect, style=filled];
+3867 [class=intent, fillcolor=lightblue, label="what are my total bookings", shape=rect, style=filled];
+3868 [class=intent, fillcolor=lightblue, label="what are my bookings in the future", shape=rect, style=filled];
+3869 [class=intent, fillcolor=lightblue, label="previous bookings", shape=rect, style=filled];
+3870 [class=intent, fillcolor=lightblue, label="I want to cancel my booking", shape=rect, style=filled];
+3871 [class=intent, fillcolor=lightblue, label="I need to make changes to my booking", shape=rect, style=filled];
+3872 [class=intent, fillcolor=lightblue, label="I need to reschedule my booking", shape=rect, style=filled];
+3873 [class=intent, fillcolor=lightblue, label="can I change the number of people in my booking?", shape=rect, style=filled];
+3874 [class=intent, fillcolor=lightblue, label="i want to change the booking date and number of people", shape=rect, style=filled];
+3875 [class=intent, fillcolor=lightblue, label="show bookings", shape=rect, style=filled];
+3876 [class=intent, fillcolor=lightblue, label=Bonjour, shape=rect, style=filled];
+3877 [class=intent, fillcolor=lightblue, label=amazing, shape=rect, style=filled];
+3878 [class=intent, fillcolor=lightblue, label="I'm so sad", shape=rect, style=filled];
+3879 [class=intent, fillcolor=lightblue, label="😍", shape=rect, style=filled];
+3880 [class=intent, fillcolor=lightblue, label="😭", shape=rect, style=filled];
+3881 [class=intent, fillcolor=lightblue, label="hm i don't think you can do what i want", shape=rect, style=filled];
+3882 [class=intent, fillcolor=lightblue, label="cancel bid_6436555b937c8209a6a93609", shape=rect, style=filled];
+3883 [class=intent, fillcolor=lightblue, label="yes please", shape=rect, style=filled];
+3884 [class=intent, fillcolor=lightblue, label="don't like that", shape=rect, style=filled];
+3885 [class=intent, fillcolor=lightblue, label="change booking bid_6435a6e1bef00a88687f1823", shape=rect, style=filled];
+3886 [class=intent, fillcolor=lightblue, label="I need to reschedule my booking", shape=rect, style=filled];
+3887 [class=intent, fillcolor=lightblue, label="can I change the number of people in my booking?", shape=rect, style=filled];
+3888 [class=intent, fillcolor=lightblue, label=both, shape=rect, style=filled];
+3889 [class=intent, fillcolor=lightblue, label=yep, shape=rect, style=filled];
+3890 [class=intent, fillcolor=lightblue, label=negative, shape=rect, style=filled];
+3891 [class=intent, fillcolor=lightblue, label="stop go back", shape=rect, style=filled];
+3892 [class=intent, fillcolor=lightblue, label="cancel the booking", shape=rect, style=filled];
+3893 [class=intent, fillcolor=lightblue, label="show me the restaurants", shape=rect, style=filled];
+3894 [class=intent, fillcolor=lightblue, label=yup, shape=rect, style=filled];
+3895 [class=intent, fillcolor=lightblue, label="what restaurants are available", shape=rect, style=filled];
+3896 [class=intent, fillcolor=lightblue, label="great choice", shape=rect, style=filled];
+3897 [class=intent, fillcolor=lightblue, label=never, shape=rect, style=filled];
+3898 [class=intent, fillcolor=lightblue, label="this is leading to nothing", shape=rect, style=filled];
+3899 [class=intent, fillcolor=lightblue, label=register, shape=rect, style=filled];
+3900 [class=intent, fillcolor=lightblue, label=login, shape=rect, style=filled];
+3901 [class=intent, fillcolor=lightblue, label=mexican, shape=rect, style=filled];
+3902 [class=intent, fillcolor=lightblue, label="view details of restaurant rid_6431ac87d5f9f6b0be596abb", shape=rect, style=filled];
+3903 [class=intent, fillcolor=lightblue, label="book restaurant rid_6431ac87d5f9f6b0be596abc", shape=rect, style=filled];
+3904 [class=intent, fillcolor=lightblue, label=y, shape=rect, style=filled];
+3905 [class=intent, fillcolor=lightblue, label=yeah, shape=rect, style=filled];
+3906 [class=intent, fillcolor=lightblue, label=na, shape=rect, style=filled];
+3907 [class=intent, fillcolor=lightblue, label="of course", shape=rect, style=filled];
+3908 [class=intent, fillcolor=lightblue, label=indeed, shape=rect, style=filled];
+3909 [class=intent, fillcolor=lightblue, label="no need", shape=rect, style=filled];
+3910 [class=intent, fillcolor=lightblue, label=n, shape=rect, style=filled];
+3911 [class=intent, fillcolor=lightblue, label="sounds ok", shape=rect, style=filled];
+3912 [class=intent, fillcolor=lightblue, label="yeah sure", shape=rect, style=filled];
+3913 [class=intent, fillcolor=lightblue, label="My favorite cuisines are Indian and Greek", shape=rect, style=filled];
+3914 [class=intent, fillcolor=lightblue, label="can i see more restaurants", shape=rect, style=filled];
+3915 [class=intent, fillcolor=lightblue, label="Create an account for me", shape=rect, style=filled];
+3916 [class=intent, fillcolor=lightblue, label=login, shape=rect, style=filled];
+3917 [class=intent, fillcolor=lightblue, label="Sign me out", shape=rect, style=filled];
+3918 [class=intent, fillcolor=lightblue, label="am I talking to a bot?", shape=rect, style=filled];
+3919 [class=intent, fillcolor=lightblue, label="what cuisines are available", shape=rect, style=filled];
+3920 [class=intent, fillcolor=lightblue, label="can i book a hotel room", shape=rect, style=filled];
+3921 [class=intent, fillcolor=lightblue, label="/nlu_fallback", shape=rect, style=filled];
+3922 [class=intent, fillcolor=lightblue, label="I am going", shape=rect, style=filled];
+3923 [class=intent, fillcolor=lightblue, label=thams, shape=rect, style=filled];
+3924 [class=intent, fillcolor=lightblue, label="I want to cancel my booking", shape=rect, style=filled];
+3925 [class=intent, fillcolor=lightblue, label="upcoming bookings", shape=rect, style=filled];
+3926 [class=intent, fillcolor=lightblue, label="change bid_6435a6e1bef00a88687f1ac4", shape=rect, style=filled];
+3927 [class=intent, fillcolor=lightblue, label=bookings, shape=rect, style=filled];
+3928 [class=intent, fillcolor=lightblue, label="what are all my bookings", shape=rect, style=filled];
+3929 [class=intent, fillcolor=lightblue, label="past bookings", shape=rect, style=filled];
+3930 [class=intent, fillcolor=lightblue, label="book restaurant rid_6431ac87d5f9f6b0be596abc", shape=rect, style=filled];
+3931 [class=intent, fillcolor=lightblue, label="view details rid_6431ac87d5f9f6b0be596abd", shape=rect, style=filled];
+3932 [class=intent, fillcolor=lightblue, label="of course", shape=rect, style=filled];
+3933 [class=intent, fillcolor=lightblue, label="hell ya", shape=rect, style=filled];
+0 -> 220  [class="", key=NONE, label=""];
+0 -> 3801  [class="", key=NONE, label=""];
+0 -> 3805  [class="", key=NONE, label=""];
+0 -> 3861  [class="", key=0];
+0 -> 3862  [class="", key=0];
+0 -> 3863  [class="", key=0];
+0 -> 3864  [class="", key=0];
+0 -> 3865  [class="", key=0];
+0 -> 3866  [class="", key=0];
+0 -> 3867  [class="", key=0];
+0 -> 3868  [class="", key=0];
+0 -> 3869  [class="", key=0];
+0 -> 3870  [class="", key=0];
+0 -> 3871  [class="", key=0];
+0 -> 3872  [class="", key=0];
+0 -> 3873  [class="", key=0];
+0 -> 3874  [class="", key=0];
+0 -> 3875  [class="", key=0];
+0 -> 3876  [class="", key=0];
+0 -> 3877  [class="", key=0];
+0 -> 3878  [class="", key=0];
+0 -> 3879  [class="", key=0];
+0 -> 3880  [class="", key=0];
+0 -> 3881  [class="", key=0];
+1 -> "-1"  [class="", key=NONE, label=""];
+2 -> 3882  [class="", key=0];
+3 -> 3883  [class="", key=0];
+3 -> 3884  [class="", key=0];
+4 -> 5  [class="", key=NONE, label=""];
+5 -> 6  [class="", key=NONE, label=""];
+6 -> "-1"  [class="", key=NONE, label=""];
+15 -> 3885  [class="", key=0];
+16 -> 3886  [class="", key=0];
+16 -> 3887  [class="", key=0];
+16 -> 3888  [class="", key=0];
+17 -> 18  [class="", key=NONE, label=""];
+18 -> 3889  [class="", key=0];
+18 -> 3890  [class="", key=0];
+19 -> 20  [class="", key=NONE, label=""];
+20 -> 21  [class="", key=NONE, label=""];
+21 -> 6  [class="", key=NONE, label=""];
+49 -> 18  [class="", key=NONE, label=""];
+81 -> 82  [class="", key=NONE, label=""];
+82 -> 18  [class="", key=NONE, label=""];
+119 -> 20  [class="", key=NONE, label=""];
+219 -> "-1"  [class="", key=NONE, label=""];
+220 -> 3891  [class="", key=0];
+220 -> 3892  [class="", key=0];
+221 -> 5  [class="", key=NONE, label=""];
+221 -> 288  [class="", key=NONE, label=""];
+228 -> 229  [class="", key=NONE, label=""];
+229 -> 230  [class="", key=NONE, label=""];
+230 -> 3893  [class="", key=0];
+230 -> 3894  [class="", key=0];
+230 -> 3895  [class="", key=0];
+230 -> 3896  [class="", key=0];
+230 -> 3897  [class="", key=0];
+231 -> 3898  [class="", key=0];
+231 -> 3899  [class="", key=0];
+231 -> 3900  [class="", key=0];
+232 -> 233  [class="", key=NONE, label=""];
+233 -> "-1"  [class="", key=NONE, label=""];
+234 -> 230  [class="", key=NONE, label=""];
+239 -> 230  [class="", key=NONE, label=""];
+244 -> 230  [class="", key=NONE, label=""];
+249 -> 230  [class="", key=NONE, label=""];
+283 -> 3901  [class="", key=0];
+284 -> 3902  [class="", key=0];
+284 -> 3903  [class="", key=0];
+285 -> 3904  [class="", key=0];
+285 -> 3905  [class="", key=0];
+285 -> 3906  [class="", key=0];
+288 -> "-1"  [class="", key=NONE, label=""];
+325 -> 327  [class="", key=NONE, label=""];
+325 -> 325  [class="", key=NONE, label=""];
+327 -> 283  [class="", key=NONE, label=""];
+447 -> 449  [class="", key=NONE, label=""];
+447 -> 447  [class="", key=NONE, label=""];
+449 -> 283  [class="", key=NONE, label=""];
+611 -> 3907  [class="", key=0];
+611 -> 3908  [class="", key=0];
+611 -> 3909  [class="", key=0];
+1590 -> 1591  [class="", key=NONE, label=""];
+1591 -> "-1"  [class="", key=NONE, label=""];
+1591 -> 3910  [class="", key=0];
+1591 -> 3911  [class="", key=0];
+1592 -> 21  [class="", key=NONE, label=""];
+2364 -> 2365  [class="", key=NONE, label=""];
+2365 -> 3912  [class="", key=0];
+3801 -> 3913  [class="", key=0];
+3802 -> "-1"  [class="", key=NONE, label=""];
+3805 -> 3806  [class="", key=NONE, label=""];
+3805 -> 3809  [class="", key=NONE, label=""];
+3805 -> 1590  [class="", key=NONE, label=""];
+3805 -> 3820  [class="", key=NONE, label=""];
+3805 -> 3827  [class="", key=NONE, label=""];
+3805 -> 3914  [class="", key=0];
+3805 -> 3915  [class="", key=0];
+3805 -> 3916  [class="", key=0];
+3805 -> 3917  [class="", key=0];
+3805 -> 3918  [class="", key=0];
+3805 -> 3919  [class="", key=0];
+3805 -> 3920  [class="", key=0];
+3805 -> 3921  [class="", key=0];
+3805 -> 3922  [class="", key=0];
+3805 -> 3923  [class="", key=0];
+3805 -> 3924  [class="", key=0];
+3805 -> 3925  [class="", key=0];
+3805 -> 3926  [class="", key=0];
+3805 -> 3927  [class="", key=0];
+3805 -> 3928  [class="", key=0];
+3805 -> 3929  [class="", key=0];
+3805 -> 3930  [class="", key=0];
+3805 -> 3931  [class="", key=0];
+3806 -> 3932  [class="", key=0];
+3807 -> "-1"  [class="", key=NONE, label=""];
+3809 -> 3933  [class="", key=0];
+3815 -> "-1"  [class="", key=NONE, label=""];
+3817 -> 3818  [class="", key=NONE, label=""];
+3818 -> "-1"  [class="", key=NONE, label=""];
+3820 -> 3821  [class="", key=NONE, label=""];
+3821 -> 3818  [class="", key=NONE, label=""];
+3824 -> 3818  [class="", key=NONE, label=""];
+3827 -> 3828  [class="", key=NONE, label=""];
+3828 -> 3818  [class="", key=NONE, label=""];
+3831 -> 3818  [class="", key=NONE, label=""];
+3834 -> "-1"  [class="", key=NONE, label=""];
+3836 -> "-1"  [class="", key=NONE, label=""];
+3838 -> "-1"  [class="", key=NONE, label=""];
+3840 -> "-1"  [class="", key=NONE, label=""];
+3844 -> "-1"  [class="", key=NONE, label=""];
+3846 -> "-1"  [class="", key=NONE, label=""];
+3848 -> "-1"  [class="", key=NONE, label=""];
+3852 -> "-1"  [class="", key=NONE, label=""];
+3856 -> "-1"  [class="", key=NONE, label=""];
+3858 -> "-1"  [class="", key=NONE, label=""];
+3860 -> "-1"  [class="", key=NONE, label=""];
+3861 -> 1  [class="", key=0];
+3862 -> 1  [class="", key=0];
+3863 -> 1  [class="", key=0];
+3864 -> 1  [class="", key=0];
+3865 -> 1  [class="", key=0];
+3866 -> 1  [class="", key=0];
+3867 -> 1  [class="", key=0];
+3868 -> 1  [class="", key=0];
+3869 -> 1  [class="", key=0];
+3870 -> 2  [class="", key=0];
+3871 -> 15  [class="", key=0];
+3872 -> 15  [class="", key=0];
+3873 -> 15  [class="", key=0];
+3874 -> 15  [class="", key=0];
+3875 -> 219  [class="", key=0];
+3876 -> 228  [class="", key=0];
+3877 -> 234  [class="", key=0];
+3878 -> 239  [class="", key=0];
+3879 -> 244  [class="", key=0];
+3880 -> 249  [class="", key=0];
+3881 -> 232  [class="", key=0];
+3882 -> 3  [class="", key=0];
+3883 -> 4  [class="", key=0];
+3884 -> 5  [class="", key=0];
+3885 -> 16  [class="", key=0];
+3886 -> 17  [class="", key=0];
+3887 -> 49  [class="", key=0];
+3888 -> 81  [class="", key=0];
+3889 -> 19  [class="", key=0];
+3890 -> 119  [class="", key=0];
+3891 -> 221  [class="", key=0];
+3892 -> 221  [class="", key=0];
+3893 -> 231  [class="", key=0];
+3894 -> 231  [class="", key=0];
+3895 -> 283  [class="", key=0];
+3896 -> 283  [class="", key=0];
+3897 -> 21  [class="", key=0];
+3898 -> 232  [class="", key=0];
+3899 -> 325  [class="", key=0];
+3900 -> 447  [class="", key=0];
+3901 -> 284  [class="", key=0];
+3902 -> 285  [class="", key=0];
+3903 -> 611  [class="", key=0];
+3904 -> 220  [class="", key=0];
+3905 -> 1590  [class="", key=0];
+3906 -> 1592  [class="", key=0];
+3907 -> 220  [class="", key=0];
+3908 -> 1590  [class="", key=0];
+3909 -> 1592  [class="", key=0];
+3910 -> 1592  [class="", key=0];
+3911 -> 2364  [class="", key=0];
+3912 -> 288  [class="", key=0];
+3913 -> 3802  [class="", key=0];
+3914 -> 3815  [class="", key=0];
+3915 -> 3817  [class="", key=0];
+3916 -> 3824  [class="", key=0];
+3917 -> 3831  [class="", key=0];
+3918 -> 3834  [class="", key=0];
+3919 -> 3836  [class="", key=0];
+3920 -> 3838  [class="", key=0];
+3921 -> 3840  [class="", key=0];
+3922 -> 288  [class="", key=0];
+3923 -> 3844  [class="", key=0];
+3924 -> 3846  [class="", key=0];
+3925 -> 3846  [class="", key=0];
+3926 -> 3848  [class="", key=0];
+3927 -> 219  [class="", key=0];
+3928 -> 3852  [class="", key=0];
+3929 -> 3856  [class="", key=0];
+3930 -> 3858  [class="", key=0];
+3931 -> 3860  [class="", key=0];
+3932 -> 3807  [class="", key=0];
+3933 -> 3807  [class="", key=0];
+}
+`;
+    drawGraph(graph);
+  } else {
+    serveGraph();
+  }
+
+
+</script>
+</body>
+</html>

@@ -32,7 +32,7 @@ intents:
 
   # ------------------------------------------ nlu-query-knowledge-base.yml ------------------------------------------ #
   - query_knowledge_base
-  # Booking related intents
+
   # --------------------------------------------- nlu-restaurant-booking.yml ----------------------------------------- #
   - inform_num_people
   - inform_date
