@@ -1,1 +1,11 @@
-rasa python-dateutil word2number dateparser pymongo fasttext flashtext bpemb gensim pandas spacy
+rasa
+python-dateutil
+word2number
+dateparser
+pymongo
+fasttext
+flashtext
+bpemb
+gensim
+pandas
+spacy
