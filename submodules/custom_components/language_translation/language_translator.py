@@ -1,6 +1,6 @@
 from typing import Any, Text, Dict, List
 
-from google.cloud import translate
+from googletrans import Translator
 from rasa.engine.graph import ExecutionContext, GraphComponent
 from rasa.engine.storage.resource import Resource
 from rasa.engine.storage.storage import ModelStorage
@@ -30,51 +30,39 @@ class LanguageHandler(GraphComponent):
         self._execution_context = execution_context
         self._model_storage = model_storage
         self._resource = resource
-        self._client = translate.TranslationServiceClient()
-        self._parent = f"projects/{self._config['project_id']}/locations/{self._config['location']}"
 
     def process(self, messages: List[Message]) -> List[Message]:
         for message in messages:
             text = message.get('text')
 
-            # language detection request
-            detected_languages = self._client.detect_language(
-                request={
-                    "parent": self._parent,
-                    "content": text,
-                    "mime_type": "text/plain",
-                }
-            )
-
-            detected_language = detected_languages.languages[0]
-
-            # translating to french when necessary
-            if detected_language.language_code == 'si':
-                response = self._client.translate_text(
-                    request={
-                        "parent": self._parent,
-                        "contents": [text],
-                        "mime_type": "text/plain",
-                        "source_language_code": "si",
-                        "target_language_code": "en-US",
-                    }
-                )
-
-                # changing the input message's text after translation
-                message.set('text', response.translations[0].translated_text)
-
             # modified to add language entity
 
             detected_languages = LanguageDetector.detect_languages(text)
-            detected_language = detected_languages[0]
-            language = detected_language.language_code
-            confidence = detected_language.confidence
+
+            # Set the language slot based on the detected languages
+            language = 'en'  # Default to English
+
+            probability = 1
+
+            for lang, prob in detected_languages:
+                if lang == 'si':
+                    language = 'si'
+                    probability = prob
+                    translator = Translator()
+                    # translate to english
+                    translated_text = translator.translate(text, src='si', dest='en')
+
+                    # changing the input message's text after translation
+                    message.set('text', translated_text)
+                    break
+
+            # modification end
 
             # setting a language entity, so it can be used by custom actions
 
             entity = {
                 'value': language,
-                'confidence': confidence,
+                'confidence': probability,
                 'entity': 'language',
                 'extractor': 'LanguageHandler'
             }
@@ -105,4 +93,3 @@ class LanguageHandler(GraphComponent):
             execution_context: ExecutionContext,
     ) -> 'LanguageHandler':
         return cls(config, model_storage, resource, execution_context)
-
