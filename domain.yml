@@ -271,6 +271,7 @@ slots:
 
   language:
     type: categorical
+    auto_fill: true
     values:
       - en # english
       - si # sinhala
@@ -517,8 +518,8 @@ responses:
 
 # -------------------------------------------------------------------------------------------------------------------- #
 
-# config:
-#  store_entities_as_slots: true
+config:
+  store_entities_as_slots: true
 
 session_config:
   session_expiration_time: 60

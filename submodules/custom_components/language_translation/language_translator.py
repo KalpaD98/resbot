@@ -66,23 +66,15 @@ class LanguageHandler(GraphComponent):
             # modified to add language entity
 
             detected_languages = LanguageDetector.detect_languages(text)
-
-            # Set the language slot based on the detected languages
-            language = 'en'  # Default to English
-            probability = 0
-            for lang, prob in detected_languages:
-                if lang == 'si':
-                    language = 'si'
-                    probability = prob
-                    break
-
-            # modification end
+            detected_language = detected_languages[0]
+            language = detected_language.language_code
+            confidence = detected_language.confidence
 
             # setting a language entity, so it can be used by custom actions
 
             entity = {
                 'value': language,
-                'confidence': probability,
+                'confidence': confidence,
                 'entity': 'language',
                 'extractor': 'LanguageHandler'
             }
@@ -114,13 +106,3 @@ class LanguageHandler(GraphComponent):
     ) -> 'LanguageHandler':
         return cls(config, model_storage, resource, execution_context)
 
-# modified below from line 63 onwards
-#
-# # setting a language entity, so it can be used by custom actions
-#
-# entity = {
-#     'value': detected_language.language_code,
-#     'confidence': detected_language.confidence,
-#     'entity': 'language',
-#     'extractor': 'LanguageHandler'
-# }
