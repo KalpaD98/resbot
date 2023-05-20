@@ -63,7 +63,7 @@ class ActionAskDateAgain(Action):
             self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]
     ) -> List[EventType]:
 
-        language = tracker.get_slot(LANGUAGE)
+        language = LanguageSelector.get_language(tracker)
 
         message = "Can you please provide the date again?" + "\n\n" + \
                   "You can enter the date in a format like dd/mm/yyyy or similar."

@@ -35,7 +35,7 @@ class ActionShowCuisines(Action):
 
             # Generate quick replies with Response Generator
             quick_replies_cuisines = ResponseGenerator.quick_replies(cuisines_with_entity_payload, with_payload=True)
-            language = tracker.get_slot(LANGUAGE)
+            language = LanguageSelector.get_language(tracker)
 
             message = "Choose or type a cuisine"
             if language == SIN:
@@ -71,7 +71,7 @@ class ActionShowRestaurants(Action):
 
             # send http request to recommendation engine to get top 10 restaurants for the user
 
-            language = tracker.get_slot(LANGUAGE)
+            language = LanguageSelector.get_language(tracker)
             restaurants_list = []
 
             if (cuisine == 'any cuisine') or cuisine is None:
@@ -136,7 +136,7 @@ class ActionRequestMoreRestaurantOptions(Action):
             else:
                 restaurant_list = restaurant_repo.get_restaurants_filter_by_cuisine(cuisine, limit=10,
                                                                                     offset=new_offset)
-            language = tracker.get_slot(LANGUAGE)
+            language = LanguageSelector.get_language(tracker)
 
             message = "Here are some more restaurants I found"
             if language == SIN:

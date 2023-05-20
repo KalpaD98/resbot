@@ -20,7 +20,7 @@ class ActionShowCurrentBookingDetails(Action):
         try:
             booking_id = tracker.get_slot(BOOKING_ID)
             booking = booking_repo.find_booking_by_id(booking_id)
-            language = tracker.get_slot(LANGUAGE)
+            language = LanguageSelector.get_language(tracker)
 
             if not booking:
                 message = "No booking found with the provided ID."
@@ -52,7 +52,7 @@ class ActionChangeBookingDetails(Action):
             booking_id = tracker.get_slot(BOOKING_ID)
             new_date = tracker.get_slot(DATE)
             new_num_people = tracker.get_slot(NUM_PEOPLE)
-            language = tracker.get_slot(LANGUAGE)
+            language = LanguageSelector.get_language(tracker)
 
             if booking_id is None:
                 logging.error("Booking ID not found")
@@ -113,7 +113,7 @@ class ActionAskWhatUserWantToChangeInBooking(Action):
     def run(
             self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]
     ) -> List[EventType]:
-        language = tracker.get_slot(LANGUAGE)
+        language = LanguageSelector.get_language(tracker)
 
         options = [
             {
@@ -164,7 +164,7 @@ class ActionValidateAndCompareBookingChanges(Action):
             booking_id = tracker.get_slot(BOOKING_ID)
             new_date = tracker.get_slot(DATE)
             new_num_people = tracker.get_slot(NUM_PEOPLE)
-            language = tracker.get_slot(LANGUAGE)
+            language = LanguageSelector.get_language(tracker)
 
             # Fetch the current booking details
             booking = booking_repo.find_booking_by_id(booking_id)

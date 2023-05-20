@@ -51,7 +51,7 @@ class ActionDefaultFallback(Action):
             tracker: Tracker,
             domain: Dict[Text, Any],
     ) -> List[Dict[Text, Any]]:
-        language = tracker.get_slot(LANGUAGE)
+        language = LanguageSelector.get_language(tracker)
         if language == SIN:
             dispatcher.utter_message(template="my_custom_fallback_template_sin")
         else:

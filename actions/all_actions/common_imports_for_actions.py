@@ -3,6 +3,9 @@ import logging
 from typing import Any, Dict, List, Text, Optional
 
 # noinspection PyUnresolvedReferences
+from actions.all_actions.helper_functions.language_detection_and_change_handler import LanguageSelector
+
+# noinspection PyUnresolvedReferences
 from rasa_sdk import Action, Tracker, FormValidationAction
 # noinspection PyUnresolvedReferences
 from rasa_sdk.events import FollowupAction, SlotSet, EventType

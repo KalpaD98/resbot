@@ -16,7 +16,7 @@ class ActionShowBookingOptions(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         try:
-            language = tracker.get_slot(LANGUAGE)
+            language = LanguageSelector.get_language(tracker)
 
             quick_replies_with_payload = [{
                 TITLE: "All bookings",
@@ -67,7 +67,7 @@ class ActionShowBookingsCarousal(Action):
 
             user_id = tracker.get_slot(USER_ID)
             user_bookings = booking_repo.get_bookings_by_user_id(user_id)
-            language = tracker.get_slot(LANGUAGE)
+            language = LanguageSelector.get_language(tracker)
 
             if len(user_bookings) == 0:
                 dispatcher.utter_message(text="Sorry, there are no bookings found for you.")
@@ -105,7 +105,7 @@ class ActionShowPastBookingsCarousal(Action):
         try:
             user_id = tracker.get_slot(USER_ID)
             user_bookings = booking_repo.get_past_bookings_by_user_id(user_id)
-            language = tracker.get_slot(LANGUAGE)
+            language = LanguageSelector.get_language(tracker)
 
             if len(user_bookings) == 0:
                 message = "Sorry, there are no past bookings found for you."
@@ -141,7 +141,7 @@ class ActionShowFutureBookingsCarousal(Action):
         try:
             user_id = tracker.get_slot(USER_ID)
             user_bookings = booking_repo.get_future_bookings_by_user_id(user_id)
-            language = tracker.get_slot(LANGUAGE)
+            language = LanguageSelector.get_language(tracker)
 
             if len(user_bookings) == 0:
                 message = "Sorry, there are no upcoming bookings found for you."

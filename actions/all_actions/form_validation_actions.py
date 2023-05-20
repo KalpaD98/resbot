@@ -2,6 +2,7 @@ from rasa_sdk.events import ActiveLoop
 
 from actions.all_actions.common_imports_for_actions import *
 
+
 VALIDATE_RESTAURANT_BOOKING_FORM = "validate_restaurant_booking_form"
 VALIDATE_REGISTRATION_FORM = "validate_registration_form"
 VALIDATE_LOGIN_FORM = "validate_login_form"
@@ -85,7 +86,7 @@ class ValidateLoginForm(FormValidationAction):
             user_exists = user_repo.find_user_by_email(email) is not None
             # if no utter no user registered then utter register -> followup with registration form
             if not user_exists:
-                language = tracker.get_slot(LANGUAGE)
+                language = LanguageSelector.get_language(tracker)
                 message = "No user registered with this email. Please register first."
 
                 if language == SIN:
@@ -113,7 +114,7 @@ class ValidateLoginForm(FormValidationAction):
             user = user_repo.find_user_by_email(email)
             if user is not None:
                 if user.password != password:
-                    language = tracker.get_slot(LANGUAGE)
+                    language = LanguageSelector.get_language(tracker)
                     message = "Incorrect password. Please try again."
 
                     if language == SIN:

@@ -21,7 +21,7 @@ class ActionSearchAndShowRestaurants(Action):
             food_type = tracker.get_slot(FOOD_TYPE)
             state = tracker.get_slot(STATE)
             city = tracker.get_slot(CITY)
-            language = tracker.get_slot(LANGUAGE)
+            language = LanguageSelector.get_language(tracker)
 
             # Send http request to recommendation engine or query database to get restaurants based on properties
             restaurants_list = restaurant_repo.search_restaurants(
@@ -85,7 +85,7 @@ class ActionConfirmSearchParameters(Action):
             food_type = tracker.get_slot(FOOD_TYPE)
             state = tracker.get_slot(STATE)
             city = tracker.get_slot(CITY)
-            language = tracker.get_slot(LANGUAGE)
+            language = LanguageSelector.get_language(tracker)
 
             search_parameters = [
                 f"Restaurant Name: {restaurant_name}",

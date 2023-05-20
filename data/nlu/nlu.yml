@@ -136,6 +136,7 @@ nlu:
       - sure
       - im in
       - i'm in
+      - all right
 
 
   - intent: deny

@@ -577,7 +577,7 @@ class ActionUtterAskRegisteredUser(Action):  # not used in any story
 
 
 def choose_and_send_message(dispatcher, english_messages, sinhala_messages, tracker):
-    language = tracker.get_slot(LANGUAGE)
+    language = LanguageSelector.get_language(tracker)
     if language == SIN:
         message = random.choice(sinhala_messages)
     else:

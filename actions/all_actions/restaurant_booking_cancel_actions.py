@@ -15,7 +15,7 @@ class ActionAskCancelBookingConfirmation(Action):
             # Get the booking_id from the slot
             booking_id = tracker.get_slot(BOOKING_ID)
             # lang
-            language = tracker.get_slot(LANGUAGE)
+            language = LanguageSelector.get_language(tracker)
 
             if booking_id:
                 # Fetch booking information from the database using booking_id
@@ -56,7 +56,7 @@ class ActionCancelBooking(Action):
                   domain: Dict[Text, Any]) -> List[EventType]:
 
         try:
-            language = tracker.get_slot(LANGUAGE)
+            language = LanguageSelector.get_language(tracker)
             booking_id = tracker.get_slot(BOOKING_ID)
 
             if booking_id is None:
