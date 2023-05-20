@@ -10,56 +10,56 @@ language: en
 
 pipeline:
 
-- name: SpacyNLP
-  model: en_core_web_trf
-  case_sensitive: false
+  - name: submodules.custom_components.language_translation.language_translator.LanguageHandler
 
-- name: submodules.custom_components.language_translation.LanguageHandler
+  - name: SpacyNLP
+    model: en_core_web_trf
+    case_sensitive: false
 
-- name: SpacyTokenizer
-  intent_tokenization_flag: true   # to use multi intents
-  intent_split_symbol: "+"
+  - name: SpacyTokenizer
+    intent_tokenization_flag: true   # to use multi intents
+    intent_split_symbol: "+"
 
-- name: RegexFeaturizer
-- name: SpacyFeaturizer
-- name: LexicalSyntacticFeaturizer
-- name: CountVectorsFeaturizer   # one hot encoding
+  - name: RegexFeaturizer
+  - name: SpacyFeaturizer
+  - name: LexicalSyntacticFeaturizer
+  - name: CountVectorsFeaturizer   # one hot encoding
 
-- name: CountVectorsFeaturizer   # char level n-grams
-  analyzer: char_wb
-  min_ngram: 1
-  max_ngram: 4
+  - name: CountVectorsFeaturizer   # char level n-grams
+    analyzer: char_wb
+    min_ngram: 1
+    max_ngram: 4
 
-#  - name: RegexEntityExtractor
-#    case_sensitive: False
-#    use_word_boundaries: True
-#    use_lookup_tables: True
-#    use_regexes: True
+  #  - name: RegexEntityExtractor
+  #    case_sensitive: False
+  #    use_word_boundaries: True
+  #    use_lookup_tables: True
+  #    use_regexes: True
 
-- name: SpacyEntityExtractor
-  dimensions: ["PERSON"]
+#  - name: SpacyEntityExtractor
+#    dimensions: [ "PERSON" ]
 
-- name: DIETClassifier
-  epochs: 100
-  constrain_similarities: true
+  - name: DIETClassifier
+    epochs: 100
+    constrain_similarities: true
 
-  #  - name: submodules.external_utils.extractors.DateparserEntityExtractor # remove when duckling is on
-  #    languages: [ "en" ]
-  #    prefer_dates_from: "future"
-  #    relative_base: "2023-03-01"
+    #  - name: submodules.external_utils.extractors.DateparserEntityExtractor # remove when duckling is on
+    #    languages: [ "en" ]
+    #    prefer_dates_from: "future"
+    #    relative_base: "2023-03-01"
 
-  #  - name: "DucklingEntityExtractor" # add in Windows environment
-  #    url: "http://localhost:8000"
-  #    dimensions: [ "time", "number", "amount-of-money", "distance" ] # modify as per requirements
+    #  - name: "DucklingEntityExtractor" # add in Windows environment
+    #    url: "http://localhost:8000"
+    #    dimensions: [ "time", "number", "amount-of-money", "distance" ] # modify as per requirements
 
-- name: EntitySynonymMapper
-- name: ResponseSelector
-  epochs: 100
-  constrain_similarities: true
+  - name: EntitySynonymMapper
+  - name: ResponseSelector
+    epochs: 100
+    constrain_similarities: true
 
-- name: FallbackClassifier
-  threshold: 0.5
-  ambiguity_threshold: 0.1
+  - name: FallbackClassifier
+    threshold: 0.5
+    ambiguity_threshold: 0.05
 
 # ------------ Dialog Management ---------- #
 # Configuration for Rasa Core.
@@ -69,20 +69,20 @@ policies:
   # If No configuration for policies was provided. The following default policies were used to train your model.
   # If you'd like to customize them, uncomment and adjust the policies.
   # See https://rasa.com/docs/rasa/policies for more information.
-- name: MemoizationPolicy
-- name: RulePolicy
-  core_fallback_threshold: 0.4
-  core_fallback_action_name: "action_default_fallback"
-  enable_fallback_prediction: True
+  - name: MemoizationPolicy
+  - name: RulePolicy
+#    core_fallback_threshold: 0.4
+#    core_fallback_action_name: "action_default_fallback"
+#    enable_fallback_prediction: True
 
-- name: UnexpecTEDIntentPolicy
-  max_history: 8
-  epochs: 100
+  - name: UnexpecTEDIntentPolicy
+    max_history: 8
+    epochs: 100
 
-- name: TEDPolicy
-  max_history: 12
-  epochs: 100
-  constrain_similarities: true
+  - name: TEDPolicy
+    max_history: 12
+    epochs: 100
+    constrain_similarities: true
 
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #

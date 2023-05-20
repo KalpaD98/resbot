@@ -107,6 +107,7 @@ entities:
   - object_type
   - mention
   - attribute
+  - language
 
   # Restaurant
   - selected_restaurant
@@ -271,13 +272,12 @@ slots:
 
   language:
     type: categorical
-    auto_fill: true
     values:
       - en # english
       - si # sinhala
-    initial_value: en
     mappings:
-      - type: custom
+      - type: from_entity
+        entity: language
 
   # --------------------------------------- Knowledge base query related slots --------------------------------------- #
 

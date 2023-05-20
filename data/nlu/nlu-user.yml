@@ -39,20 +39,12 @@ nlu:
       - [upeksha](user_name)
       - [sagara](user_name)
       - [chamalka](user_name)
-      
       - [kalpa](PERSON)
       - [chethiya](PERSON)
       - [dileepa](PERSON)
       - [upeksha](PERSON)
       - [sagara](PERSON)
       - [chamalka](PERSON)
-      
-      - kalpa
-      - chethiya
-      - dileepa
-      - upeksha
-      - sagara
-      - chamalka
 
   #      - [kalpa](user_name)
   #      - username: [dileepa](user_name)
