@@ -276,6 +276,7 @@ slots:
 
   language:
     type: categorical
+    initial_value: en
     values:
       - en # english
       - si # sinhala
@@ -285,6 +286,7 @@ slots:
 
   permanent_language:
     type: categorical
+    initial_value: en
     values:
       - en # english
       - si # sinhala
