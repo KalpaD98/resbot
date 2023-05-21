@@ -6,9 +6,8 @@ stories:
   - story: Greeting and bot introduction with checkpoint #1
     steps:
       - intent: greet
-      - action: action_utter_greet
-      - action: action_utter_bot_intro
-      - action: action_utter_wanna_book
+      - action: action_utter_greet_intro_wanna_book
+      - action: action_ask_language_preference
       - checkpoint: checkpoint_wanna_book_restaurant
 
   - story: User denies to check restaurant #2 user denies to check restaurant

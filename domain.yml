@@ -75,11 +75,12 @@ intents:
   - request_more_restaurant_options
   - request_opening_hours
   - request_ambiance
+
   # ---------------------------------------------- nlu-restaurant-search.yml ----------------------------------------- #
   - want_to_search_restaurants
   - search_restaurants
-  # ------------------------------------ nlu-small-talk-and-out-of-scope.yml ----------------------------------------- #
 
+  # ------------------------------------ nlu-small-talk-and-out-of-scope.yml ----------------------------------------- #
   # No need to add retrieval intents?
   - bot_challenge
   - out_of_scope
@@ -93,6 +94,9 @@ intents:
   - inform_user_name
   - inform_user_email
   - inform_user_password
+
+  # ----------------------------------------------- nlu-language.yml ----------------------------------------------- #
+  - inform_permanent_language
 
   # ------------------------------------------------- nlu-user-preferences.yml -------------------------------------- #
   - inform_favorite_cuisines
@@ -432,22 +436,29 @@ actions:
   - action_ask_cancel_another_booking
   - action_cancel_booking
 
-  # ------------------------------------- restaurant booking view actions ------------------------------------ #
+  # ----------------------------------------- restaurant booking view actions ---------------------------------------- #
   - action_show_booking_view_options
   - action_show_bookings_carousal
   - action_show_future_bookings_carousal
   - action_show_past_bookings_carousal
-  # ------------------------------------- restaurant booking change actions ------------------------------------ #
+
+  # ---------------------------------------- restaurant booking change actions --------------------------------------- #
   - action_ask_what_user_want_to_change_in_booking
   - action_validate_and_compare_booking_changes_ask_confirmation_to_change
   - action_change_restaurant_booking_details
   - action_clear_booking_data_slots
-  # ------------------------------------- user preference actions ------------------------------------ #
+
+  # --------------------------------------------- user preference actions -------------------------------------------- #
   - action_update_favorite_cuisines
+
   # ------------------------------------ language detection and processing actions ----------------------------------- #
   - action_detect_language
+  - action_ask_language_preference
+  - action_set_permanent_language
+
   # ------------------------------------------------ Response actions ----------------------------------------------- #
-  - action_utter_greet
+  - action_utter_greet_intro_wanna_book
+  - action_utter_wanna_book
   - action_utter_please_rephrase
   - action_utter_greet_again
   - action_utter_mood_great_feedback
@@ -457,8 +468,6 @@ actions:
   - action_utter_thank_you
   - action_utter_welcome
   - action_utter_goodbye
-  - action_utter_bot_intro
-  - action_utter_wanna_book
   - action_utter_bye_see_you_later
   - action_utter_processing_the_request
   - action_utter_ask_registered_user
@@ -484,7 +493,6 @@ actions:
   - action_utter_no_future_bookings_found
   - action_utter_no_changes_made_to_booking
   - action_utter_ask_favorite_cuisines
-
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # ------------------------------------------- Responses: Bot Utterances --------------------------------------------- #
