@@ -279,6 +279,13 @@ slots:
       - type: from_entity
         entity: language
 
+  permanent_language:
+    type: categorical
+    values:
+      - en # english
+      - si # sinhala
+    mappings:
+      - type: custom
   # --------------------------------------- Knowledge base query related slots --------------------------------------- #
 
   object_type:

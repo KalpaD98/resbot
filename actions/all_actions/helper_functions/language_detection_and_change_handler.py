@@ -5,5 +5,11 @@ class LanguageSelector:
 
     @staticmethod
     def get_language(tracker):
-        # add additional logic later
-        return tracker.get_slot(LANGUAGE)
+        # Check if permanent_language slot exists and is not None
+        permanent_language = tracker.get_slot('permanent_language')
+        if permanent_language:
+            return permanent_language
+
+        # If permanent_language slot doesn't exist or is None, return the language slot
+        else:
+            return tracker.get_slot(LANGUAGE)

@@ -1,0 +1,7 @@
+version: "3.1"  # rules-language.yml has language related rules
+
+rules:
+  - rule: whenever user asks to set permanent language change it  #1 ✅
+    steps:
+      - intent: inform_permanent_language
+      - action: action_set_permanent_language

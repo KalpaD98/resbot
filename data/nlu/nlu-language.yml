@@ -1,0 +1,21 @@
+version: "3.1" # nlu.yml is a file where you define your NLU training data.
+
+nlu:
+  - intent: inform_permanent_language
+    examples: |
+      - change language to [English](language)
+      - change language to [Sinhala](language)      
+      - change language to [en](language)
+      - change language to [si](language)
+      - Change the language to [Sinhala](language)
+      - Change the language to [English](language)
+      - change to [English](language)
+      - change to [Sinhala](language)
+      - chat in [English](language)
+      - chat in [Sinhala](language)
+      - shall we chat in [English](language)
+      - shall we chat in [Sinhala](language)
+      - can you speak [English](language)
+      - can you speak [Sinhala](language)
+      - can you speak in [English](language)
+      - can you speak in [Sinhala](language)
