@@ -62,17 +62,18 @@ class LanguageHandler(GraphComponent):
                     break
 
             # Set the language entity
-            entity = {
-                'value': language,
-                'confidence': probability,
-                'entity': 'language',
-                'extractor': 'LanguageHandler'
-            }
-            message.set("entities", [entity], add_to_output=True)
+            # removed below for bug fixing TODO: uncomment for further debugging and improvements
+            # entity = {
+            #     'value': language,
+            #     'confidence': probability,
+            #     'entity': 'language',
+            #     'extractor': 'LanguageHandler'
+            # }
+            # message.set("entities", [entity], add_to_output=True)
 
             # Update the message's text with the translated version
             message.set('text', text.lower(), add_to_output=True)
-            print(message.get('text'), message.get('entities'))
+            # print(message.get('text'), message.get('entities'))
 
         print("---------------------LanguageHandler Ended---------------------")
         return messages

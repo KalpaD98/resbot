@@ -85,7 +85,7 @@ class ActionSetPermanentLanguage(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
         # Get the language slot
-        language = tracker.get_slot('language').lower()
+        language = tracker.get_slot('permanent_language').lower()
 
         if language == 'si' or 'si' in language:
             language = 'si'

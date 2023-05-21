@@ -192,6 +192,7 @@ actions/__pycache__/
 models/
 
 gridresults/
+results/*
 
 # other
 submodules/custom_components/language_detection/lid.176.bin
