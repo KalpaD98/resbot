@@ -448,7 +448,7 @@ actions:
   # ------------------------------------ language detection and processing actions ----------------------------------- #
   - action_detect_language
   # ------------------------------------------------ Response actions ----------------------------------------------- #
-  - action_utter_greet
+  - action_utter_greet_and_intro
   - action_utter_please_rephrase
   - action_utter_greet_again
   - action_utter_mood_great_feedback
@@ -458,7 +458,6 @@ actions:
   - action_utter_thank_you
   - action_utter_welcome
   - action_utter_goodbye
-  - action_utter_bot_intro
   - action_utter_wanna_book
   - action_utter_bye_see_you_later
   - action_utter_processing_the_request
