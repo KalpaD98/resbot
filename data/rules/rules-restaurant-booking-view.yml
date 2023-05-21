@@ -4,7 +4,7 @@ rules:
   - rule: User wants to view bookings (logged in)
     condition:
       - slot_was_set:
-          - is_authenticated: True
+          - is_authenticated: true
     steps:
       - intent: view_bookings
       - action: action_show_booking_view_options
@@ -12,7 +12,7 @@ rules:
   - rule: User wants to view all bookings (logged in)
     condition:
       - slot_was_set:
-          - is_authenticated: True
+          - is_authenticated: true
     steps:
       - intent: view_all_bookings
       - action: action_show_bookings_carousal
@@ -20,7 +20,7 @@ rules:
   - rule: User wants to view upcoming bookings (logged in)
     condition:
       - slot_was_set:
-          - is_authenticated: True
+          - is_authenticated: true
     steps:
       - intent: view_upcoming_bookings
       - action: action_show_future_bookings_carousal
@@ -28,7 +28,7 @@ rules:
   - rule: User wants to view past bookings (logged in)
     condition:
       - slot_was_set:
-          - is_authenticated: True
+          - is_authenticated: true
     steps:
       - intent: view_past_bookings
       - action: action_show_past_bookings_carousal

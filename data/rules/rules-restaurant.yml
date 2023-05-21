@@ -6,3 +6,17 @@ rules:
     steps:
       - intent: request_more_restaurant_options
       - action: action_show_more_restaurant_options
+
+  #  - rule: when user request restaurants display cuisines carousal - login #1 ✅
+  #    steps:
+  #      - intent: request_restaurants
+  #      - slot_was_set:
+  #          - is_authenticated: true
+  #      - action: action_show_cuisines
+
+  #  - rule: when user request restaurants display cuisines carousal - not login #2 ✅
+  #    steps:
+  #      - intent: request_restaurants
+  #      - slot_was_set:
+  #          - is_authenticated: false
+  #      - action: action_ask_registered_and_show_login_signup_quick_replies

@@ -38,25 +38,24 @@ class ActionAskLanguagePreference(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-
         # Get current language preference from the slot
         current_language = LanguageSelector.get_language(tracker)
 
-        if current_language == EN:
-            message = "Language is currently set to english" \
-                      "\n\nWould you like to continue in English or switch to Sinhala?"
-            options = [
-                {
-                    TITLE: "Continue in English",
-                    PAYLOAD: "/inform_permanent_language{\"language\":\"" + 'en' + "\"}",
-                },
-                {
-                    TITLE: "සිංහලට මාරු වෙන්න",
-                    PAYLOAD: "/inform_permanent_language{\"language\":\"" + 'si' + "\"}",
-                }
-            ]
-        elif current_language == SIN:
-            message = "භාෂාව දැනට ඉංග්‍රීසි ලෙස සකසා ඇත" \
+        message = "Language is currently set to english, " \
+                  "would you like to continue in English or switch to Sinhala?"
+        options = [
+            {
+                TITLE: "Continue in English",
+                PAYLOAD: "/inform_permanent_language{\"language\":\"" + 'en' + "\"}",
+            },
+            {
+                TITLE: "සිංහලට මාරු වෙන්න",
+                PAYLOAD: "/inform_permanent_language{\"language\":\"" + 'si' + "\"}",
+            }
+        ]
+
+        if current_language == SIN:
+            message = "භාෂාව දැනට සිංහල ලෙස සකසා ඇත" \
                       "\n\nඔබ සිංහලෙන් ඉදිරියට යාමට කැමතිද නැතිනම් English භාෂාව සදහා මාරු වීමට කැමතිද?"
             options = [
                 {
@@ -68,8 +67,6 @@ class ActionAskLanguagePreference(Action):
                     PAYLOAD: "/inform_permanent_language{\"language\":\"" + 'en' + "\"}",
                 }
             ]
-        else:
-            message = "There seems to be an error with your language preference. Please try again later."
 
         quick_replies = ResponseGenerator.quick_replies(options, with_payload=True)
 
@@ -90,7 +87,7 @@ class ActionSetPermanentLanguage(Action):
         # Get the language slot
         language = tracker.get_slot('language').lower()
 
-        if language == 'si' or language.contains('si'):
+        if language == 'si' or 'si' in language:
             language = 'si'
             message = "භාෂාව සිංහලට මාරු කරන ලදී."
         else:

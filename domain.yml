@@ -457,7 +457,7 @@ actions:
   - action_set_permanent_language
 
   # ------------------------------------------------ Response actions ----------------------------------------------- #
-  - action_utter_greet_intro_wanna_book
+  - action_utter_greet_intro
   - action_utter_wanna_book
   - action_utter_please_rephrase
   - action_utter_greet_again
@@ -533,8 +533,8 @@ responses:
 
 # -------------------------------------------------------------------------------------------------------------------- #
 
-config:
-  store_entities_as_slots: true
+#config:
+#  store_entities_as_slots: true
 
 session_config:
   session_expiration_time: 60

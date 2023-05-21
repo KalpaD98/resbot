@@ -1,8 +1,7 @@
-rasa
 python-dateutil
 word2number
 dateparser
-pymongo
+pymongo==3.10.1
 fasttext
 flashtext
 bpemb
@@ -10,3 +9,4 @@ gensim
 pandas
 spacy
 googletrans==4.0.0-rc1
+websockets==10.0

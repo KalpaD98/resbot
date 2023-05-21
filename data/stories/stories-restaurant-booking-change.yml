@@ -9,7 +9,7 @@ stories:
           - intent: user_wants_to_change_restaurant_booking_num_people
           - intent: user_wants_to_change_both_restaurant_booking_date_and_num_people
       - slot_was_set:
-          - is_authenticated: False
+          - is_authenticated: false
       - action: action_ask_registered_and_show_login_signup_quick_replies
 
   - story: User wants to change booking (logged in)
@@ -20,7 +20,7 @@ stories:
           - intent: user_wants_to_change_restaurant_booking_num_people
           - intent: user_wants_to_change_both_restaurant_booking_date_and_num_people
       - slot_was_set:
-          - is_authenticated: True
+          - is_authenticated: true
       - slot_was_set:
           - booking_id: null
       - action: action_show_future_bookings_carousal

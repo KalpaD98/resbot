@@ -72,14 +72,14 @@ class ActionAnythingElse(Action):
         sinhala_text = "ඔබට අවශ්යයි වෙනත් යමක් තිබේද?"
 
         english_quick_replies_with_payload = [
-            {"title": QR_SEARCH_RESTAURANTS, "payload": "/want_to_search_restaurants"},
+            # {"title": QR_SEARCH_RESTAURANTS, "payload": "/want_to_search_restaurants"},
             {"title": QR_BROWSE_RESTAURANTS, "payload": "/request_restaurants"},
             {"title": "View bookings", "payload": "/view_bookings"},
             {"title": "No thanks", "payload": "/goodbye"},
         ]
 
         sinhala_quick_replies_with_payload = [
-            {"title": "ආපනශාලා සොයන්න", "payload": "/want_to_search_restaurants"},
+            # {"title": "ආපනශාලා සොයන්න", "payload": "/want_to_search_restaurants"},
             {"title": "ආපනශාලා පෙන්වන්න", "payload": "/request_restaurants"},
             {"title": "Bookings පෙන්වන්න", "payload": "/view_bookings"},
             {"title": "නැත ස්තුතියි", "payload": "/goodbye"},
@@ -116,9 +116,9 @@ class ActionAskWhatUserWants(Action):
             {
                 TITLE: QR_BROWSE_RESTAURANTS,
                 PAYLOAD: "/request_restaurants"},
-            {
-                TITLE: QR_SEARCH_RESTAURANTS,
-                PAYLOAD: "/want_to_search_restaurants"}
+            # {
+            #     TITLE: QR_SEARCH_RESTAURANTS,
+            #     PAYLOAD: "/want_to_search_restaurants"}
         ]
 
         sinhala_quick_replies_with_payload = [
@@ -128,9 +128,9 @@ class ActionAskWhatUserWants(Action):
             {
                 TITLE: "ආපනශාලා පෙන්වන්න",
                 PAYLOAD: "/request_restaurants"},
-            {
-                TITLE: "ආපනශාලා සොයන්න",
-                PAYLOAD: "/want_to_search_restaurants"}
+            # {
+            #     TITLE: "ආපනශාලා සොයන්න",
+            #     PAYLOAD: "/want_to_search_restaurants"}
         ]
 
         final_text, final_quick_replies_with_payload = \

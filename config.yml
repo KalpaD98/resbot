@@ -30,17 +30,17 @@ pipeline:
     min_ngram: 1
     max_ngram: 4
 
-  #  - name: RegexEntityExtractor
-  #    case_sensitive: False
-  #    use_word_boundaries: True
-  #    use_lookup_tables: True
-  #    use_regexes: True
+  - name: RegexEntityExtractor
+    case_sensitive: False
+    use_word_boundaries: True
+    use_lookup_tables: True
+    use_regexes: True
 
 #  - name: SpacyEntityExtractor
 #    dimensions: [ "PERSON" ]
 
   - name: DIETClassifier
-    epochs: 100
+    epochs: 200
     constrain_similarities: true
 
     #  - name: submodules.external_utils.extractors.DateparserEntityExtractor # remove when duckling is on
@@ -76,12 +76,12 @@ policies:
 #    enable_fallback_prediction: True
 
   - name: UnexpecTEDIntentPolicy
-    max_history: 8
-    epochs: 100
+    max_history: 20
+    epochs: 200
 
   - name: TEDPolicy
-    max_history: 12
-    epochs: 100
+    max_history: 20
+    epochs: 200
     constrain_similarities: true
 
 

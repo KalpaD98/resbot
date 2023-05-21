@@ -5,3 +5,4 @@ rules:
     steps:
       - intent: inform_permanent_language
       - action: action_set_permanent_language
+      - action: action_utter_wanna_book

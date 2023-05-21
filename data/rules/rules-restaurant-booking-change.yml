@@ -5,5 +5,5 @@ rules:
     steps:
       - intent: inform_change_booking_id
       - slot_was_set:
-          - is_authenticated: True
+          - is_authenticated: true
       - action: action_ask_what_user_want_to_change_in_booking

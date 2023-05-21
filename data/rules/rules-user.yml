@@ -5,7 +5,7 @@ rules:
   - rule: activate registration form
     condition:
       - slot_was_set:
-          - is_authenticated: False
+          - is_authenticated: false
     steps:
     - intent: request_user_registration_form
     - action: registration_form
@@ -30,7 +30,7 @@ rules:
   - rule: activate login form if not logged in
     condition:
       - slot_was_set:
-          - is_authenticated: False
+          - is_authenticated: false
     steps:
     - intent: request_login_form
     - action: login_form
@@ -55,7 +55,7 @@ rules:
   - rule: logout user
     condition:
       - slot_was_set:
-          - is_authenticated: True
+          - is_authenticated: true
     steps:
     - intent: logout
     - action: action_logout

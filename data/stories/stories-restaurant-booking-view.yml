@@ -10,12 +10,12 @@ stories:
         - intent: view_upcoming_bookings
         - intent: view_past_bookings
       - slot_was_set:
-          - is_authenticated: False
+          - is_authenticated: false
       - action: action_ask_registered_and_show_login_signup_quick_replies
 
   - story: User wants to view bookings (logged in)
     steps:
       - intent: view_bookings
       - slot_was_set:
-          - is_authenticated: True
+          - is_authenticated: true
       - action: action_show_booking_view_options

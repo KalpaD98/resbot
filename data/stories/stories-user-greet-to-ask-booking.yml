@@ -6,11 +6,14 @@ stories:
   - story: Greeting and bot introduction with checkpoint #1
     steps:
       - intent: greet
-      - action: action_utter_greet_intro_wanna_book
+      - action: action_utter_greet_intro
       - action: action_ask_language_preference
+      - intent: inform_permanent_language
+      - action: action_set_permanent_language
+      - action: action_utter_wanna_book
       - checkpoint: checkpoint_wanna_book_restaurant
 
-  - story: User denies to check restaurant #2 user denies to check restaurant
+  - story: User denies to check restaurant #2
     steps:
       - checkpoint: checkpoint_wanna_book_restaurant
       - intent: deny
@@ -22,7 +25,7 @@ stories:
       - checkpoint: checkpoint_wanna_book_restaurant
       - intent: affirm
       - slot_was_set:
-          - is_authenticated: True
+          - is_authenticated: true
       - action: action_show_cuisines
       - checkpoint: checkpoint_cuisine_selection
 
@@ -40,7 +43,7 @@ stories:
       - checkpoint: checkpoint_wanna_book_restaurant
       - intent: request_restaurants
       - slot_was_set:
-          - is_authenticated: True
+          - is_authenticated: true
       - action: action_show_cuisines
       - checkpoint: checkpoint_cuisine_selection
 
@@ -53,6 +56,8 @@ stories:
       - action: action_ask_registered_and_show_login_signup_quick_replies
       - checkpoint: checkpoint_user_trying_to_login_or_signup
 
+      - action: action_ask_registered_and_show_login_signup_quick_replies
+      - checkpoint: checkpoint_user_trying_to_login_or_signup
 
   - story: User logs in after being prompted
     steps:

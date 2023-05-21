@@ -2,8 +2,8 @@ from actions.all_actions.common_imports_for_actions import *
 
 # CONSTANTS
 ACTION_SAVE_USER_AND_COMPLETE_REGISTRATION = "action_save_user_and_complete_registration"
-ACTION_RETRY_LOGIN_OR_STOP = "action_retry_login_or_stop"
 ACTION_LOGIN_USER = "action_login_user"
+ACTION_RETRY_LOGIN_OR_STOP = "action_retry_login_or_stop"
 ACTION_LOGOUT = "action_logout"
 ACTION_ASK_REGISTERED_AND_SHOW_LOGIN_SIGNUP_QUICK_REPLIES = "action_ask_registered_and_show_login_signup_quick_replies"
 ACTION_CHECK_USER_ID = "action_check_user_id"
@@ -75,12 +75,12 @@ class ActionCompleteRegistration(Action):
             logger.error(f"An error occurred in action_complete_registration: {e}")
             dispatcher.utter_message(text="An error occurred. Please try again later.")
             return [
-                SlotSet(LOGGED_USER, None),
-                SlotSet(USER_ID, None),
-                SlotSet(USER_NAME, None),
-                SlotSet(USER_EMAIL, None),
-                SlotSet(USER_PASSWORD, None),
-                SlotSet(IS_AUTHENTICATED, False)]
+                SlotSet(LOGGED_USER),
+                SlotSet(USER_ID),
+                SlotSet(USER_NAME),
+                SlotSet(USER_EMAIL),
+                SlotSet(USER_PASSWORD),
+                SlotSet(IS_AUTHENTICATED)]
 
 
 class ActionLoginUser(Action):
@@ -102,19 +102,20 @@ class ActionLoginUser(Action):
 
             language = LanguageSelector.get_language(tracker)
             message = "User with the email provided does not exist. Please try again with a different email."
+
             if language == SIN:
                 message = "email ලිපිනයයෙන් පරිශීලකයෙක් නැත. කරුණාකර වෙනත් email ලිපිනයක් භාවිතා කරන්න."
+
             if user is None:
-                dispatcher.utter_message(
-                    text=message)
+                dispatcher.utter_message(text=message)
                 return [
-                    SlotSet(LOGGED_USER, None),
-                    SlotSet(USER_NAME, None),
-                    SlotSet(USER_ID, None),
-                    SlotSet(USER_EMAIL, None),
-                    SlotSet(USER_PASSWORD, None),
+                    SlotSet(LOGGED_USER),
+                    SlotSet(USER_NAME),
+                    SlotSet(USER_ID),
+                    SlotSet(USER_EMAIL),
+                    SlotSet(USER_PASSWORD),
                     SlotSet(IS_AUTHENTICATED, False),
-                    FollowupAction(ACTION_RETRY_LOGIN_OR_STOP)
+                    FollowupAction(ACTION_RETRY_LOGIN_OR_STOP),
                 ]
 
             if user.password == login_password:
@@ -138,27 +139,29 @@ class ActionLoginUser(Action):
                                          quick_replies=ResponseGenerator
                                          .quick_replies(quick_replies_with_payload, True))
 
-                return [
-                    SlotSet(LOGGED_USER, user.to_dict()),
-                    SlotSet(USER_NAME, user.name),
-                    SlotSet(USER_ID, user.id),
-                    SlotSet(USER_EMAIL, user.email),
-                    SlotSet(USER_PASSWORD, user.password),
-                    SlotSet(IS_AUTHENTICATED, True),
-                ]
+                print("Logged in successfully")
+                # print_all_slots(tracker)
 
+                return [SlotSet(LOGGED_USER, user.to_dict()),
+                        SlotSet(USER_NAME, user.name),
+                        SlotSet(USER_ID, user.id),
+                        SlotSet(USER_EMAIL, user.email),
+                        SlotSet(USER_PASSWORD, user.password),
+                        SlotSet("is_authenticated", True), ]
             else:
                 message = "Incorrect password."
                 if language == SIN:
                     message = "මුරපදය වැරදියි."
+
                 dispatcher.utter_message(text=message)
-                return [
-                    SlotSet(LOGGED_USER, None),
-                    SlotSet(USER_NAME, None),
-                    SlotSet(USER_ID, None),
-                    SlotSet(USER_EMAIL, None),
-                    FollowupAction(ACTION_RETRY_LOGIN_OR_STOP)
-                ]
+
+                return [SlotSet(LOGGED_USER, None),
+                        SlotSet(USER_NAME, None),
+                        SlotSet(USER_ID, None),
+                        SlotSet(USER_EMAIL, None),
+                        SlotSet(USER_PASSWORD, None),
+                        SlotSet(IS_AUTHENTICATED, False),
+                        FollowupAction(ACTION_RETRY_LOGIN_OR_STOP), ]
         except Exception as e:
             logger.error(f"An error occurred in action_login_user: {e}")
             dispatcher.utter_message(text="An error occurred. Please try again later.")
@@ -201,12 +204,11 @@ class ActionRetryLoginOrStop(Action):
 
             dispatcher.utter_message(text=message,
                                      quick_replies=ResponseGenerator.quick_replies(quick_replies, True))
-
+            return []
         except Exception as e:
             logger.error(f"An error occurred in action_retry_login_or_stop: {e}")
             dispatcher.utter_message(text="An error occurred. Please try again later.")
-
-        return []
+            return []
 
 
 class ActionAskRegisteredAndShowLoginSignupQuickReplies(Action):
@@ -251,11 +253,16 @@ class ActionAskRegisteredAndShowLoginSignupQuickReplies(Action):
             quick_replies = ResponseGenerator.quick_replies(quick_replies_list, with_payload=True)
             dispatcher.utter_message(text=message, quick_replies=quick_replies)
 
+            print("----action_ask_registered_and_show_login_signup_quick_replies----")
+            # print_all_slots(tracker)
+            print("-----------------------------------------------------------------")
+
+            return []
+
         except Exception as e:
             logger.error(f"An error occurred in action_ask_registered_and_show_login_signup_quick_replies: {e}")
             dispatcher.utter_message(text="An error occurred. Please try again later.")
-
-        return []
+            return []
 
 
 class ActionLogout(Action):
@@ -263,16 +270,11 @@ class ActionLogout(Action):
         return ACTION_LOGOUT
 
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        try:
-            return [
-                SlotSet("logged_user", None),
-                SlotSet("user_name", None),
-                SlotSet("user_id", None),
-                SlotSet("user_email", None),
-                SlotSet("password", None),
-                SlotSet(IS_AUTHENTICATED, False),
-            ]
-        except Exception as e:
-            logger.error(f"An error occurred in action_logout: {e}")
-            dispatcher.utter_message(text="An error occurred. Please try again later.")
-            return []
+        return [
+            SlotSet("logged_user", None),
+            SlotSet("user_name", None),
+            SlotSet("user_id", None),
+            SlotSet("user_email", None),
+            SlotSet("password", None),
+            SlotSet(IS_AUTHENTICATED, False),
+        ]

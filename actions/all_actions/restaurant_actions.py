@@ -61,7 +61,7 @@ class ActionShowRestaurants(Action):
                   domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         try:
             # get cuisine from the tracker
-            cuisine = tracker.get_slot(CUISINE)
+            cuisine = tracker.get_slot(CUISINE).lower()
 
             # if cuisine is null ask if user wants to filter by cuisine
             if cuisine is None:
@@ -74,7 +74,7 @@ class ActionShowRestaurants(Action):
             language = LanguageSelector.get_language(tracker)
             restaurants_list = []
 
-            if (cuisine == 'any cuisine') or cuisine is None:
+            if cuisine is None or 'any' in cuisine or 'whatever' in cuisine:
                 message = "I've found some great restaurants for you to try out!"
                 if language == SIN:
                     message = "ඔබට try කර බැලීම සදහා විශිෂ්ට අවන්හල් කිහිපයක්!"

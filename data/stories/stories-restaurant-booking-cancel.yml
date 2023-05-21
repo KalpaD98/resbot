@@ -6,14 +6,14 @@ stories:
     steps:
       - intent: user_wants_to_cancel_booking
       - slot_was_set:
-          - is_authenticated: False
+          - is_authenticated: false
       - action: action_ask_registered_and_show_login_signup_quick_replies
 
   - story: User wants to cancel a booking (logged in)
     steps:
       - intent: user_wants_to_cancel_booking
       - slot_was_set:
-          - is_authenticated: True
+          - is_authenticated: true
       - action: action_show_future_bookings_carousal
       - intent: inform_cancel_booking_id
       - action: action_ask_cancel_booking_confirmation
