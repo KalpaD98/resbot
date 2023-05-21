@@ -269,6 +269,15 @@ slots:
           - inform_user_password
   # -------------------------------------------- response related slots  -------------------------------------------- #
 
+  permanent_language:
+    type: categorical
+    initial_value: en
+    values:
+      - en # english
+      - si # sinhala
+    mappings:
+      - type: custom
+
   language:
     type: categorical
     values:
