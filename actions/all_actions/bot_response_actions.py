@@ -1,17 +1,65 @@
 import random
 
 from actions.all_actions.common_imports_for_actions import *
+from actions.all_actions.helper_functions.language_detection_and_change_handler import LanguageSelector
 
 
-class UtterGreet(Action):
+class ActionUtterGreetAndIntro(Action):
     def name(self) -> Text:
-        return "action_utter_greet"
+        return "action_utter_greet_and_intro"
 
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        english_messages = ["Hi!", "Hey!", "Hello!", "Hi 😃 there!", "Hello there 😀"]
-        sinhala_messages = ["හායි! 😃", "හෙලෝ!", "ආයුබෝවන් 😀"]
+        hi_message = random.choice(["Hi!", "Hey!", "Hello!", "Hi 😃 there!", "Hello there 😀"])
+        intro_message = random.choice(
+            [
+                "I'm ResBot! 🍴, I can recommend amazing restaurants and make reservations seamless for you 🌟.",
+                "I'm ResBot, your dining assistant. I help find ideal restaurants and make reservations for you 🌟."
+            ]
+        )
+
+        sinhala_hi_message = random.choice(["හායි! 😃", "හෙලෝ!", "ආයුබෝවන් 😀"])
+        sinhala_intro_message = random.choice(
+            [
+                "මම ResBot! 🍴, මට අවන්හල් නිර්දේශ කළ හැකි අතර ඔබට වෙන් කිරීම් මා හරහා සිදු කළ හැක.",
+                "මම ResBot, ඔබේ AI භෝජන සහකාර. මම ඔබට සුදුසු අවන්හල් සොයා ගැනීමට සහ ඔබ වෙනුවෙන් එය වෙන් කරවා ගැනීමට උදවු කරමි 🌟."
+            ]
+        )
+
+        is_authenticated = tracker.get_slot(IS_AUTHENTICATED)
+
+        if is_authenticated:
+            english_messages = hi_message
+            sinhala_messages = sinhala_hi_message
+        else:
+            english_messages = hi_message + "\n\n" + intro_message
+            sinhala_messages = sinhala_hi_message + "\n\n" + sinhala_intro_message
+
+        language = LanguageSelector.get_language(tracker)
+
+        if language == SIN:
+            dispatcher.utter_message(text=sinhala_messages)
+        else:
+            dispatcher.utter_message(text=english_messages)
+
+        return []
+
+
+class ActionUtterWannaBook(Action):
+    def name(self) -> Text:
+        return "action_utter_wanna_book"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        english_messages = [
+            "Would you like to reserve a table at a fantastic restaurant? 🍽️"
+        ]
+        sinhala_messages = [
+            "High quality ආපන ශාලාවක මේසයක් වෙන්කරවා ගැනීමට කැමතිද? 🍽️"
+        ]
+
         choose_and_send_message(dispatcher, english_messages, sinhala_messages, tracker)
 
         return []
@@ -175,49 +223,6 @@ class ActionUtterGoodbye(Action):
         english_messages = ["Bye", "Goodbye", "Farewell", "See you later"]
 
         sinhala_messages = ["ටටා බායි", "නැවත හමුවෙමු"]
-
-        choose_and_send_message(dispatcher, english_messages, sinhala_messages, tracker)
-
-        return []
-
-
-class ActionUtterBotIntro(Action):
-    def name(self) -> Text:
-        return "action_utter_bot_intro"
-
-    def run(self, dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        english_messages = [
-            "I'm ResBot! 🍴, I can recommend amazing restaurants and make reservations seamless for you 🌟.",
-            "I'm ResBot, your dining assistant. I help find ideal restaurants and make reservations for you 🌟."
-        ]
-
-        sinhala_messages = [
-            "මම ResBot! 🍴, මට අවන්හල් නිර්දේශ කළ හැකි අතර ඔබට වෙන් කිරීම් මා හරහා සිදු කළ "
-            "හැක.",
-            "මම ResBot, ඔබේ AI භෝජන සහකාර. මම ඔබට සුදුසු අවන්හල් සොයා ගැනීමට සහ ඔබ වෙනුවෙන් එය "
-            "වෙන් කරවා ගැනීමට උදවු කරමි 🌟."
-        ]
-
-        choose_and_send_message(dispatcher, english_messages, sinhala_messages, tracker)
-
-        return []
-
-
-class ActionUtterWannaBook(Action):
-    def name(self) -> Text:
-        return "action_utter_wanna_book"
-
-    def run(self, dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        english_messages = [
-            "Would you like to reserve a table at a fantastic restaurant? 🍽️"
-        ]
-        sinhala_messages = [
-            "High quality ආපන ශාලාවක මේසයක් වෙන්කරවා ගැනීමට කැමතිද? 🍽️"
-        ]
 
         choose_and_send_message(dispatcher, english_messages, sinhala_messages, tracker)
 

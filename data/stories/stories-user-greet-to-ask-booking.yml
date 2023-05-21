@@ -6,8 +6,7 @@ stories:
   - story: Greeting and bot introduction with checkpoint #1
     steps:
       - intent: greet
-      - action: action_utter_greet
-      - action: action_utter_bot_intro
+      - action: action_utter_greet_and_intro
       - action: action_utter_wanna_book
       - checkpoint: checkpoint_wanna_book_restaurant
 
