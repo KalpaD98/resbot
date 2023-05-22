@@ -33,7 +33,7 @@ pipeline:
 #    use_regexes: True
 
   - name: SpacyEntityExtractor
-    dimensions: [ "PERSON" ]
+    dimensions: ["PERSON"]
 
   - name: DIETClassifier
     epochs: 100
@@ -82,56 +82,3 @@ policies:
     max_history: 16
     epochs: 100
     constrain_similarities: true
-
-
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-# --------------------------------------------------- Backup  ------------------------------------------------------- #
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-
-#pipeline:
-#  # default pipeline
-#  # If No configuration for the NLU pipeline was provided. The following default pipeline was used to train your model.
-#  # If you'd like to customize it, uncomment and adjust the pipeline.
-#  # See https://rasa.com/docs/rasa/tuning-your-model for more information.
-#  # language model
-#  - name: SpacyNLP
-#    model: en_core_web_trf
-#  - name: SpacyTokenizer
-#    intent_tokenization_flag: True # to use multi intents
-#    intent_split_symbol: "+"
-#  - name: SpacyFeaturizer
-#  - name: RegexFeaturizer
-#  - name: LexicalSyntacticFeaturizer
-#  - name: CountVectorsFeaturizer # one hot encoding
-#  - name: CountVectorsFeaturizer # char level
-#    analyzer: char_wb
-#    min_ngram: 1
-#    max_ngram: 4
-#
-#  - name: DIETClassifier
-#    epochs: 100
-#  #    learning_rate: 0.001 #  learning rate hyperparameter (0.001 default)
-#  #    number_of_transformer_layers: 4 # number of transformer layers hyperparameter (2 default)
-#  #    transformer_size: 256 # transformer size hyperparameter (256 default)
-#  #    embedding_dimension: 20 # embedding dimension hyperparameter (20 default)
-#  #    number_of_attention_heads: 1 # number of attention heads hyperparameter (1 default)
-#  #    use_masked_language_model: true # to turn on __MASK__ token
-#  #    drop_rate: 0.25 # dropout rate hyperparameter (0.2 default)
-#  #    weight_sparsity: 0.7 # weight sparsity hyperparameter (0.8 default)
-#  #    batch_size: [ 64, 256 ] # batch size hyperparameter
-#  #    hidden_layers_sizes: # hidden layers sizes hyperparameter
-#  #      text: [ 256, 128 ] # 256 FF -> 128 FF
-#  #      text: [ 512, 128 ] # 512 FF -> 128 FF
-#  #
-#  - name: utils.extractors.DateparserEntityExtractor
-#    languages: [ "en" ]
-#    prefer_dates_from: "future"
-#    constrain_similarities: true
-#
-#  - name: EntitySynonymMapper
-#  - name: ResponseSelector
-#    epochs: 100
-#    constrain_similarities: true
-#  - name: FallbackClassifier # added
-#    threshold: 0.6
-#    ambiguity_threshold: 0.1

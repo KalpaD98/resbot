@@ -16,7 +16,7 @@ mkdir gridresults
 
 #   test code format
 -------------------------------------------------------
-rasa test nlu --config config.yml--cross-validation --runs 1 --folds 2--out gridresults/config-default
+rasa test nlu --config config.yml--cross-validation --runs 1 --folds 5 --out gridresults/config-default
 -------------------------------------------------------
 
 # 01: default + spacyNLP
