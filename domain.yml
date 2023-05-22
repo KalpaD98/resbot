@@ -281,7 +281,9 @@ slots:
       - en # english
       - si # sinhala
     mappings:
-      - type: custom
+      - type: from_entity
+        intent:
+          - inform_permanent_language
 
   language:
     type: categorical
@@ -290,7 +292,7 @@ slots:
       - si # sinhala
     initial_value: en
     mappings:
-      - type: custom
+      - type: from_entity
 
   # --------------------------------------- Knowledge base query related slots --------------------------------------- #
 

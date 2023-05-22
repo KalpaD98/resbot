@@ -190,6 +190,6 @@ fabric.properties
 .rasa/*
 actions/__pycache__/
 models/
-utils/resources
 gridresults/
 submodules/custom_components/language_detection/lid.176.bin
+submodules/custom_components/resources/*

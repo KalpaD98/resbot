@@ -2,7 +2,14 @@
 
 ## Instructions
 
-*Make sure you have set up the Rasa on your system or server.*
+Make sure you have set up the Rasa on your system or server.
+
+install dependencies
+
+```
+pip install -r requirements.txt
+```
+Make sure you have set up and installed mongodb on your device.
 
 ### Integration
 
