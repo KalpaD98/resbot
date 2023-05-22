@@ -74,8 +74,7 @@ class LanguageHandlerAndTranslator(GraphComponent):
             # Update the message's text with the translated version
             message.set('text', text.lower(), add_to_output=True)
 
-            print("translated message: " + message.get('text'),
-                  "entities extracted: " + message.get('entities'))
+            print("translated message: " + message.get('text'))
 
         print("---------------------LanguageHandler Ended---------------------")
         return messages

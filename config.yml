@@ -4,7 +4,7 @@ language: en
 
 pipeline: # ------- NLU
 
-  #  - name: submodules.custom_components.language_translation.language_translator_graph_component.LanguageHandlerAndTranslator
+  - name: submodules.custom_components.language_translation.language_translator_graph_component.LanguageHandlerAndTranslator
 
   - name: SpacyNLP
     model: en_core_web_trf
@@ -30,6 +30,8 @@ pipeline: # ------- NLU
   - name: DIETClassifier
     epochs: 100
     constrain_similarities: true
+
+  - name: submodules.custom_components.custom_intent_classifiers.zero_shot_gpt_intent_classifier_graph_component.ZeroShotGPTIntentClassifier
 
   - name: EntitySynonymMapper
   - name: ResponseSelector
