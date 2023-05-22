@@ -29,7 +29,7 @@ class ActionCompleteRegistration(Action):
 
             existing_user = user_repo.get_user_by_email(user_email)
 
-            language = tracker.get_slot(LANGUAGE)
+            language = LanguageSelector.get_language(tracker)
 
             if existing_user:
                 message = "This email is already registered. Please log in."
@@ -100,7 +100,7 @@ class ActionLoginUser(Action):
 
             user = user_repo.find_user_by_email(login_email)
 
-            language = tracker.get_slot(LANGUAGE)
+            language = LanguageSelector.get_language(tracker)
             message = "User with the email provided does not exist. Please try again with a different email."
             if language == SIN:
                 message = "email ලිපිනයයෙන් පරිශීලකයෙක් නැත. කරුණාකර වෙනත් email ලිපිනයක් භාවිතා කරන්න."
@@ -186,7 +186,7 @@ class ActionRetryLoginOrStop(Action):
                 }
             ]
 
-            language = tracker.get_slot(LANGUAGE)
+            language = LanguageSelector.get_language(tracker)
             if language == SIN:
                 message = "ඔබට නැවත Log වීමට උත්සාහ කරන්න අවශ්‍යද?"
                 quick_replies = [
@@ -218,7 +218,7 @@ class ActionAskRegisteredAndShowLoginSignupQuickReplies(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         try:
-            language = tracker.get_slot(LANGUAGE)
+            language = LanguageSelector.get_language(tracker)
 
             message = "Please log in or sign up to continue."
 

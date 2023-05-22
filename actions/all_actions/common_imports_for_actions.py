@@ -37,6 +37,9 @@ from submodules.utils.object_utils import ObjectUtils
 # noinspection PyUnresolvedReferences
 from submodules.utils.slot_validation_utils import SlotValidators
 
+# noinspection PyUnresolvedReferences
+from actions.all_actions.helper_functions.language_detection_and_change_handler import LanguageSelector
+
 logger = logging.getLogger(__name__)
 
 # initializing repositories

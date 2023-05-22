@@ -1,7 +1,6 @@
 import random
 
 from actions.all_actions.common_imports_for_actions import *
-from actions.all_actions.helper_functions.language_detection_and_change_handler import LanguageSelector
 
 
 class ActionUtterGreetAndIntro(Action):
@@ -582,7 +581,9 @@ class ActionUtterAskRegisteredUser(Action):  # not used in any story
 
 
 def choose_and_send_message(dispatcher, english_messages, sinhala_messages, tracker):
-    language = tracker.get_slot(LANGUAGE)
+
+    language = LanguageSelector.get_language(tracker)
+    
     if language == SIN:
         message = random.choice(sinhala_messages)
     else:

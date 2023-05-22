@@ -54,6 +54,7 @@ QR_BROWSE_RESTAURANTS = "Browse Restaurants"
 QR_SEARCH_RESTAURANTS = "Search restaurants"
 
 LANGUAGE = "language"
+PERMANENT_LANGUAGE = "permanent_language"
 
 # ------- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ------ #
 SIN = "si" # sinhala

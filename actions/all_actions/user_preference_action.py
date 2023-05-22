@@ -12,7 +12,7 @@ class ActionUpdateFavoriteCuisines(Action):
         # Update the user's favorite_cuisines list by adding the extracted cuisines
         # You can use the user's id to store and retrieve the favorite_cuisines list from your MongoDB database
 
-        language = tracker.get_slot(LANGUAGE)
+        language = LanguageSelector.get_language(tracker)
 
         # Send a response to the user
         message = f"Great! I have updated your favorite cuisines with: {', '.join(cuisines)}"

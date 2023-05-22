@@ -347,11 +347,9 @@ slots:
 forms:
   # restaurant booking related forms
 
-
   change_restaurant_booking_form:
     required_slots:
       - booking_id
-      - user_id
       - date
       - num_people
 

@@ -6,7 +6,8 @@ from typing import Tuple
 from dateutil import parser
 from rasa_sdk import Tracker
 
-from actions.all_actions.helper_functions.response_generator.constants import LANGUAGE, SIN
+from actions.all_actions.helper_functions.language_detection_and_change_handler import LanguageSelector
+from actions.all_actions.helper_functions.response_generator.constants import SIN
 from submodules.database.repositories.user_repository import UserRepository
 
 
@@ -14,7 +15,7 @@ class SlotValidators:
     @staticmethod
     def validate_date(date_entity: str, tracker: Tracker) -> (bool, str, str):
 
-        language = tracker.get_slot(LANGUAGE)
+        language = LanguageSelector.get_language(tracker)
 
         if date_entity:
             try:
@@ -43,7 +44,7 @@ class SlotValidators:
 
     @staticmethod
     def validate_restaurant_id(restaurant_id: str, tracker: Tracker) -> Tuple[bool, str]:
-        language = tracker.get_slot(LANGUAGE)
+        language = LanguageSelector.get_language(tracker)
         if restaurant_id.startswith("rid"):
             return True, ""
         else:
@@ -54,7 +55,7 @@ class SlotValidators:
 
     @staticmethod
     def validate_num_people(num_people: str, tracker: Tracker) -> Tuple[bool, str]:
-        language = tracker.get_slot(LANGUAGE)
+        language = LanguageSelector.get_language(tracker)
         try:
             num = int(num_people)
             if num > 0:
@@ -72,7 +73,7 @@ class SlotValidators:
 
     @staticmethod
     def validate_cuisine(cuisine: str, tracker: Tracker) -> Tuple[bool, str]:
-        language = tracker.get_slot(LANGUAGE)
+        language = LanguageSelector.get_language(tracker)
         supported_cuisines = ["Italian", "Chinese", "Indian", "Mexican", "Japanese"]
         if cuisine.lower() in [c.lower() for c in supported_cuisines]:
             return True, ""
@@ -84,7 +85,7 @@ class SlotValidators:
 
     @staticmethod
     def validate_user_id(user_id: str, tracker: Tracker) -> Tuple[bool, str]:
-        language = tracker.get_slot(LANGUAGE)
+        language = LanguageSelector.get_language(tracker)
         if user_id.startswith("uid"):
             return True, ""
         else:
@@ -95,7 +96,7 @@ class SlotValidators:
 
     @staticmethod
     def validate_user_name(user_name: str, tracker: Tracker) -> Tuple[bool, str, str]:
-        language = tracker.get_slot(LANGUAGE)
+        language = LanguageSelector.get_language(tracker)
         user_name = user_name.strip()
         if len(user_name) >= 3:
             return True, user_name, ""
@@ -107,7 +108,7 @@ class SlotValidators:
 
     @staticmethod
     def validate_email(email: str, tracker: Tracker) -> Tuple[bool, str, str]:
-        language = tracker.get_slot(LANGUAGE)
+        language = LanguageSelector.get_language(tracker)
         email = email.strip()
         if email:
             email_regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
@@ -134,7 +135,7 @@ class SlotValidators:
 
     @staticmethod
     def validate_password(password: str, tracker: Tracker) -> Tuple[bool, str, str]:
-        language = tracker.get_slot(LANGUAGE)
+        language = LanguageSelector.get_language(tracker)
         password = password.strip()
         if len(password) >= 4:
             return True, password, ""
@@ -146,7 +147,7 @@ class SlotValidators:
 
     @staticmethod
     def validate_time(time: str, tracker: Tracker) -> Tuple[bool, str, str]:
-        language = tracker.get_slot(LANGUAGE)
+        language = LanguageSelector.get_language(tracker)
         try:
             time_obj = datetime.datetime.strptime(time, "%H:%M")
             formatted_time = time_obj.strftime("%H:%M")
@@ -166,7 +167,7 @@ class SlotValidators:
 
     @staticmethod
     def validate_booking_id(booking_reference_id: str, tracker: Tracker) -> Tuple[bool, str]:
-        language = tracker.get_slot(LANGUAGE)
+        language = LanguageSelector.get_language(tracker)
         if booking_reference_id.startswith("bid_"):
             return True, ""
         else:
