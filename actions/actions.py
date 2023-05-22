@@ -1,6 +1,7 @@
 # Actions.py This files contains custom all_actions which can be used to run custom Python code.
 # See this guide on how to implement these action:
 # https://rasa.com/docs/rasa/custom-actions
+from rasa_sdk.events import UserUtteranceReverted
 
 # noinspection PyUnresolvedReferences
 from actions.all_actions.bot_response_actions import *  # bot response actions
@@ -32,7 +33,7 @@ from actions.all_actions.user_preference_action import *  # user preference acti
 # CONSTANTS
 ACTION_ASK_ANYTHING_ELSE = "action_ask_anything_else"
 ACTION_ASK_WHAT_USER_WANTS = "action_ask_what_user_wants"
-ACTION_DEFAULT_FALLBACK_NAME = "action_default_fallback"
+ACTION_DEFAULT_FALLBACK = "action_default_fallback"
 ACTION_CLEAR_RESTAURANT_BOOKING_SLOTS = "action_clear_restaurant_booking_slots"
 
 
@@ -136,3 +137,27 @@ class ActionClearRestaurantBookingSlots(Action):
                 SlotSet(NUM_PEOPLE, None),
                 SlotSet(DATE, None),
                 SlotSet(TIME, None)]
+
+
+class ActionDefaultFallback(Action):
+    """Executes the fallback action and
+    goes back to the previous state
+    of the dialogue"""
+
+    def name(self) -> Text:
+        return ACTION_DEFAULT_FALLBACK
+
+    async def run(
+            self,
+            dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any],
+    ) -> List[Dict[Text, Any]]:
+        language = LanguageSelector.get_language(tracker)
+        if language == SIN:
+            dispatcher.utter_message(template="my_custom_fallback_template_sin")
+        else:
+            dispatcher.utter_message(template="my_custom_fallback_template")
+
+        # Revert user message which led to fallback.
+        return [UserUtteranceReverted()]

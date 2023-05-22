@@ -78,7 +78,16 @@ class ActionShowSelectedRestaurantDetails(Action):
                       f"{restaurant.address}." \
                       f"\n\nTheir opening hours are:" \
                       f"\n\nMon - Fri: {restaurant.opening_hours[Restaurant.MON_TO_FRI]}" \
-                      f"\n\nSat - Sun: {restaurant.opening_hours[Restaurant.SAT_SUN]}"
+                      f"\n\nSat, Sun: {restaurant.opening_hours[Restaurant.SAT_SUN]}"
+
+            if language == SIN:
+                message = f"{restaurant.name} ප්රධාන වශයෙන් {restaurant.cuisine} ආහාර සදහා ප්‍රචලිත වේ." \
+                          f"\n\n එය පිහිටා ඇත්තෙ " \
+                          f"{restaurant.address} හීය" \
+                          f"\n\nඔවුන්ගේ විවෘත වේලාවන් වන්නේ:" \
+                          f"\n\nසඳු - සිකු: {restaurant.opening_hours[Restaurant.MON_TO_FRI]}" \
+                          f"\n\nසෙනසුරාදා, ඉරිදා: {restaurant.opening_hours[Restaurant.SAT_SUN]}"
+
             dispatcher.utter_message(text=message)
 
             dispatcher.utter_message(text=ObjectUtils.get_random_sentence(
