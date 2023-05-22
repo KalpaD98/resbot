@@ -33,8 +33,6 @@ from actions.all_actions.helper_functions.response_generator.constants import *
 # noinspection PyUnresolvedReferences
 from actions.all_actions.helper_functions.response_generator.restaurant_response_generator import RestaurantResponseGenerator
 # noinspection PyUnresolvedReferences
-from submodules.utils.mock_data_utils import *
-# noinspection PyUnresolvedReferences
 from submodules.utils.object_utils import ObjectUtils
 # noinspection PyUnresolvedReferences
 from submodules.utils.slot_validation_utils import SlotValidators

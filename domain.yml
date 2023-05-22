@@ -275,24 +275,25 @@ slots:
   # -------------------------------------------- response related slots  -------------------------------------------- #
 
   permanent_language:
-    type: categorical
+    type: text
+    influence_conversation: false
     initial_value: en
-    values:
-      - en # english
-      - si # sinhala
     mappings:
       - type: from_entity
+        entity: permanent_language
         intent:
           - inform_permanent_language
 
   language:
     type: categorical
+    influence_conversation: false
     values:
       - en # english
       - si # sinhala
-    initial_value: en
     mappings:
       - type: from_entity
+        entity: language
+
 
   # --------------------------------------- Knowledge base query related slots --------------------------------------- #
 
