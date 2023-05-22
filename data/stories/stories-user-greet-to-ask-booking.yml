@@ -7,6 +7,8 @@ stories:
     steps:
       - intent: greet
       - action: action_utter_greet_and_intro
+      - action: action_ask_language_preference
+      - intent: inform_permanent_language
       - action: action_utter_wanna_book
       - checkpoint: checkpoint_wanna_book_restaurant
 

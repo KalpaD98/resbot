@@ -7,31 +7,6 @@ ACTION_SET_PERMANENT_LANGUAGE = "action_set_permanent_language"
 ACTION_ASK_LANGUAGE_PREFERENCE = "action_ask_language_preference"
 
 
-class ActionDetectLanguage(Action):
-
-    def name(self) -> Text:
-        return ACTION_DETECT_LANGUAGE
-
-    def run(self, dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-
-        # Get the latest message from the user
-        user_message = tracker.latest_message.get('text')
-
-        # Detect the language of the user message
-        detected_languages = LanguageDetector.detect_languages(user_message)
-
-        # Set the language slot based on the detected languages
-        language = 'en'  # Default to English
-        for lang, prob in detected_languages:
-            if lang == 'si':
-                language = 'si'
-                break
-
-        return [SlotSet(LANGUAGE, language)]
-
-
 class ActionAskLanguagePreference(Action):
     def name(self) -> Text:
         return ACTION_ASK_LANGUAGE_PREFERENCE
@@ -47,11 +22,11 @@ class ActionAskLanguagePreference(Action):
         options = [
             {
                 TITLE: "Continue in English",
-                PAYLOAD: "/inform_permanent_language{\"language\":\"" + 'en' + "\"}",
+                PAYLOAD: "/inform_permanent_language{\"permanent_language\":\"" + 'en' + "\"}",
             },
             {
                 TITLE: "සිංහලට මාරු වෙන්න",
-                PAYLOAD: "/inform_permanent_language{\"language\":\"" + 'si' + "\"}",
+                PAYLOAD: "/inform_permanent_language{\"permanent_language\":\"" + 'si' + "\"}",
             }
         ]
 
@@ -61,11 +36,11 @@ class ActionAskLanguagePreference(Action):
             options = [
                 {
                     TITLE: "සිංහලෙන් continue කරන්න",
-                    PAYLOAD: "/inform_permanent_language{\"language\":\"" + 'si' + "\"}",
+                    PAYLOAD: "/inform_permanent_language{\"permanent_language\":\"" + 'si' + "\"}",
                 },
                 {
                     TITLE: "Change to english",
-                    PAYLOAD: "/inform_permanent_language{\"language\":\"" + 'en' + "\"}",
+                    PAYLOAD: "/inform_permanent_language{\"permanent_language\":\"" + 'en' + "\"}",
                 }
             ]
 
@@ -99,3 +74,28 @@ class ActionSetPermanentLanguage(Action):
 
         # Set the permanent_language slot to the value of language slot
         return [SlotSet('permanent_language', language)]
+
+
+class ActionDetectLanguage(Action):
+
+    def name(self) -> Text:
+        return ACTION_DETECT_LANGUAGE
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        # Get the latest message from the user
+        user_message = tracker.latest_message.get('text')
+
+        # Detect the language of the user message
+        detected_languages = LanguageDetector.detect_languages(user_message)
+
+        # Set the language slot based on the detected languages
+        language = 'en'  # Default to English
+        for lang, prob in detected_languages:
+            if lang == 'si':
+                language = 'si'
+                break
+
+        return [SlotSet(LANGUAGE, language)]

@@ -97,6 +97,9 @@ intents:
   # ------------------------------------------------- nlu-user-preferences.yml -------------------------------------- #
   - inform_favorite_cuisines
 
+  # ------------------------------------------------- nlu-language.yml --------------------------------------------- #
+  - inform_permanent_language
+
   # ------------------------------------------------------------------------------------------------------------------ #
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -447,6 +450,8 @@ actions:
   - action_update_favorite_cuisines
   # ------------------------------------ language detection and processing actions ----------------------------------- #
   - action_detect_language
+  - action_ask_language_preference
+  - action_set_permanent_language
   # ------------------------------------------------ Response actions ----------------------------------------------- #
   - action_utter_greet_and_intro
   - action_utter_please_rephrase
