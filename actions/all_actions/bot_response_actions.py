@@ -56,7 +56,7 @@ class ActionUtterWannaBook(Action):
             "Would you like to reserve a table at a fantastic restaurant? 🍽️"
         ]
         sinhala_messages = [
-            "High quality ආපන ශාලාවක මේසයක් වෙන්කරවා ගැනීමට කැමතිද? 🍽️"
+            "ඔබට ගැලපෙන ආපන ශාලාවක මේසයක් වෙන්කරවා ගැනීමට කැමතිද? 🍽️"
         ]
 
         choose_and_send_message(dispatcher, english_messages, sinhala_messages, tracker)
@@ -307,11 +307,11 @@ class ActionUtterAskDate(Action):
         ]
         sinhala_messages = [
             "ඔබ වෙන්කරවා ගැනීමට කැමති කවදාද? අනාගත දිනයක් (හෙට හෝ පසුව) "
-            "[YYYY/MM/DD] ආකෘතියෙන් වඩාත් කැමති වේ"
+            "[YYYY/MM/DD] ආකෘතියෙන් ලබා දෙන්න"
             ,
 
             "ඔබට වෙන්කරවා ගැනීම සඳහා ඇති දිනය කුමක්ද? අනාගත දිනයක් (හෙට හෝ පසුව)"
-            "[YYYY/MM/DD] ආකෘතියෙන් වඩාත් කැමති වේ"
+            "[YYYY/MM/DD] ආකෘතියෙන් ලබා දෙන්න"
         ]
 
         choose_and_send_message(dispatcher, english_messages, sinhala_messages, tracker)
@@ -331,8 +331,8 @@ class ActionUtterAskNumPeople(Action):
             "For how many people are you planing to make the reservation?"
         ]
         sinhala_messages = [
-            "වෙන්කරවා ගැනීම සඳහා පුද්ගලයින් ගණන මට දැනගත හැකිද?",
-            "ඔබ කොපමණ පිරිසක් සඳහා වෙන්කරවා ගැනීමට සැලසුම් කරනවාද?"
+            "Booking එක සඳහා සහභාගිකයින් ගණන කීයද?",
+            "කොපමණ පිරිසක් සඳහා booking එක වෙන්කරවා ගැනීමට බලාපොරොත්තු වන්නේ?"
         ]
 
         choose_and_send_message(dispatcher, english_messages, sinhala_messages, tracker)
@@ -581,9 +581,8 @@ class ActionUtterAskRegisteredUser(Action):  # not used in any story
 
 
 def choose_and_send_message(dispatcher, english_messages, sinhala_messages, tracker):
-
     language = LanguageSelector.get_language(tracker)
-    
+
     if language == SIN:
         message = random.choice(sinhala_messages)
     else:

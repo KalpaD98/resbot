@@ -16,7 +16,7 @@ from submodules.custom_components.language_detection.language_detector import La
     [DefaultV1Recipe.ComponentType.ENTITY_EXTRACTOR, DefaultV1Recipe.ComponentType.MESSAGE_FEATURIZER],
     is_trainable=False
 )
-class LanguageHandler(GraphComponent):
+class LanguageHandlerAndTranslator(GraphComponent):
     """A new GraphComponent for language handling."""
 
     @staticmethod
@@ -89,7 +89,7 @@ class LanguageHandler(GraphComponent):
             model_storage: ModelStorage,
             resource: Resource,
             execution_context: ExecutionContext
-    ) -> 'LanguageHandler':
+    ) -> 'LanguageHandlerAndTranslator':
         return cls(config, model_storage, resource, execution_context)
 
     def persist(self) -> None:
@@ -103,5 +103,5 @@ class LanguageHandler(GraphComponent):
             model_storage: ModelStorage,
             resource: Resource,
             execution_context: ExecutionContext,
-    ) -> 'LanguageHandler':
+    ) -> 'LanguageHandlerAndTranslator':
         return cls(config, model_storage, resource, execution_context)

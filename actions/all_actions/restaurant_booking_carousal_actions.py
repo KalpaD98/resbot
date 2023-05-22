@@ -80,7 +80,7 @@ class ActionShowBookingsCarousal(Action):
 
             message = "Here's all your restaurant bookings"
 
-            if tracker.get_slot(LANGUAGE) == SIN:
+            if LanguageSelector.get_language(tracker) == SIN:
                 message = "ඔබේ වෙන් කිරීම් මෙන්න"
 
             dispatcher.utter_message(text=message)

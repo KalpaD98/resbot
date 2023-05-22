@@ -63,7 +63,7 @@ class ActionAnythingElse(Action):
 
         final_text, final_quick_replies_with_payload = \
             ResponseGenerator.language_related_response_selection(
-                tracker.get_slot(LANGUAGE),
+                LanguageSelector.get_language(tracker),
                 english_text,
                 english_quick_replies_with_payload,
                 sinhala_text,
@@ -111,7 +111,7 @@ class ActionAskWhatUserWants(Action):
 
         final_text, final_quick_replies_with_payload = \
             ResponseGenerator.language_related_response_selection(
-                tracker.get_slot(LANGUAGE),
+                LanguageSelector.get_language(tracker),
                 english_text,
                 english_quick_replies_with_payload,
                 sinhala_text,
