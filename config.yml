@@ -6,7 +6,7 @@ language: en #- Avoid using `tokenizers` before the fork if possible
 
 pipeline:
 
-  - name: submodules.custom_components.language_translation.language_translator_graph_component.LanguageHandlerAndTranslator
+#  - name: submodules.custom_components.language_translation.language_translator_graph_component.LanguageHandlerAndTranslator
 
   - name: SpacyNLP
     model: en_core_web_trf
