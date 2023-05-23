@@ -72,10 +72,26 @@ class ZeroShotGPTIntentClassifier(GraphComponent):
     def _get_training_data(training_data: TrainingData) -> Tuple[List[Text], List[Text]]:
         """Preprocess the training data. Retrieve the text messages and their corresponding intents."""
         print("Getting training data for ZeroShotGPTIntentClassifier")
-        messages = [example.get(TEXT) for example in training_data.training_examples if example.get(TEXT)]
-        print("messages: ", messages[:3])
-        intents = [example.get(INTENT) for example in training_data.training_examples if example.get(INTENT)]
-        print("intents: ", intents[:3])
+
+        intent_counts = {}  # Dictionary to keep track of the counts of each intent
+        messages = []
+        intents = []
+
+        for example in training_data.training_examples:
+            message = example.get(TEXT)
+            intent = example.get(INTENT)
+
+            if message and intent:  # If both the message and the intent exist
+                if intent not in intent_counts:  # If this intent was not encountered before
+                    intent_counts[intent] = 1  # Initialize the count
+                else:
+                    intent_counts[intent] += 1  # Increment the count
+
+                # If the count for this intent is less than or equal to 2, add the message and intent to their lists
+                if intent_counts[intent] <= 2:
+                    messages.append(message)
+                    intents.append(intent)
+
         return messages, intents
 
     def train(self, training_data: TrainingData) -> Resource:
@@ -98,9 +114,6 @@ class ZeroShotGPTIntentClassifier(GraphComponent):
         with self._model_storage.write_to(self._resource) as model_dir:
             dump(self.clf, model_dir / f"{self.name}.joblib")
             print("Persisted ZeroShotGPTIntentClassifier")
-        # with self._model_storage.write_to(self._resource) as directory_path:
-        #     json.dump(intents, open(directory_path / "gpt_intents.json", "w"))
-        #     print("Persisted ZeroShotGPTIntentClassifier")
 
     @classmethod
     def load(
@@ -113,12 +126,6 @@ class ZeroShotGPTIntentClassifier(GraphComponent):
     ) -> GraphComponent:
         print("Loading ZeroShotGPTIntentClassifier")
         try:
-            # with model_storage.read_from(resource) as directory_path:
-            #     intents = json.load(open(directory_path / "gpt_intents.json", "r"))
-            #     component = cls(config, execution_context.node_name, model_storage, resource)
-            #     component.clf.fit(None, intents)
-            #     print("Loaded ZeroShotGPTIntentClassifier")
-            #     return component
             with model_storage.read_from(resource) as model_dir:
                 classifier = load(model_dir / f"{resource.name}.joblib")
                 component = cls(
