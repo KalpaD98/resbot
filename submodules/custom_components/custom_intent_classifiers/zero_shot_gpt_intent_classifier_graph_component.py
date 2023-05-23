@@ -1,13 +1,12 @@
 import json
 import os
-from typing import Dict, Text, Any, List, Tuple, Type
+from typing import Dict, Text, Any, List, Type, Tuple
 
 from dotenv import load_dotenv
 from rasa.engine.graph import GraphComponent, ExecutionContext
 from rasa.engine.recipes.default_recipe import DefaultV1Recipe
 from rasa.engine.storage.resource import Resource
 from rasa.engine.storage.storage import ModelStorage
-from rasa.nlu.classifiers.classifier import IntentClassifier
 from rasa.shared.nlu.constants import INTENT, TEXT
 from rasa.shared.nlu.training_data.message import Message
 from rasa.shared.nlu.training_data.training_data import TrainingData
@@ -20,7 +19,7 @@ load_dotenv()
 @DefaultV1Recipe.register(
     DefaultV1Recipe.ComponentType.INTENT_CLASSIFIER, is_trainable=True
 )
-class ZeroShotGPTIntentClassifier(IntentClassifier, GraphComponent):
+class ZeroShotGPTIntentClassifier(GraphComponent):
     @classmethod
     def required_components(cls) -> List[Type]:
         return []
@@ -28,7 +27,7 @@ class ZeroShotGPTIntentClassifier(IntentClassifier, GraphComponent):
     @classmethod
     def required_packages(cls) -> List[Text]:
         """Any extra python dependencies required for this component to run."""
-        return ["skllm"]
+        return []
 
     @staticmethod
     def get_default_config() -> Dict[Text, Any]:
@@ -83,38 +82,50 @@ class ZeroShotGPTIntentClassifier(IntentClassifier, GraphComponent):
                 print("Loaded ZeroShotGPTIntentClassifier")
                 return component
         except ValueError:
-            print("No data found for the given resource")
+            print("Failed to load: No data found for the given resource")
+            # TODO: In this case can get data from training and add here
             return cls(config, execution_context.node_name, model_storage, resource)
 
     def _get_training_data(self, training_data: TrainingData) -> Tuple[List[Text], List[Text]]:
-        """Retrieve the text messages and their corresponding intents."""
+        """Preprocess the training data. Retrieve the text messages and their corresponding intents."""
         print("Getting training data for ZeroShotGPTIntentClassifier")
         messages = [example.get(TEXT) for example in training_data.training_examples if example.get(TEXT)]
-        print("messages: ", messages)
+        print("messages: ", messages[:5])
         intents = [example.get(INTENT) for example in training_data.training_examples if example.get(INTENT)]
-        print("intents: ", intents)
+        print("intents: ", intents[:5])
         return messages, intents
 
-    def process_training_data(self, training_data: TrainingData) -> None:
-        """Preprocess the training data."""
-        print("Processing training data for ZeroShotGPTIntentClassifier")
+    def train(self, training_data: TrainingData) -> Resource:
+
+        print("Training ZeroShotGPTIntentClassifier")
         messages, intents = self._get_training_data(training_data)
         self.clf.fit(messages, intents)
+
+        return self._resource
+
+    def persist(self, intents: List[Text]) -> None:
+        """Persist the intents into model storage."""
+        print("Persist ZeroShotGPTIntentClassifier")
+        with self._model_storage.write_to(self._resource) as directory_path:
+            json.dump(intents, open(directory_path / "gpt_intents.json", "w"))
+            print("Persisted ZeroShotGPTIntentClassifier")
 
     def process(self, messages: List[Message]) -> List[Message]:
         """Process the list of messages."""
         print("Processing ZeroShotGPTIntentClassifier")
+        dummy_text = "dummy text"
         for message in messages:
             text = message.get(TEXT)
             if text:
-                prediction = self.clf.predict([text])
-                if prediction:
-                    message.set(INTENT, {"name": prediction[0], "confidence": 1.0})
-
+                try:
+                    # Adding dummy text to bypass the error
+                    prediction = self.clf.predict([text, dummy_text])
+                    print("prediction by gpt: ", prediction)
+                    if prediction and prediction[0]:  # Checking if prediction[0] is not an empty string
+                        # Set the intent of the message as the first prediction
+                        # TODO: Add confidence score and uncomment the line below
+                        # message.set(INTENT, {"name": prediction[0], "confidence": 0.5})
+                        print("prediction of few shot: ", prediction[0])
+                except Exception as e:
+                    print(f"Failed to predict intent for text '{text}': {str(e)}")
         return messages
-
-    def persist(self) -> None:
-        print("Persisting ZeroShotGPTIntentClassifier")
-        intents = self.clf.classes_.tolist()
-        with self._model_storage.write_to(self._resource) as directory_path:
-            json.dump(intents, open(directory_path / "gpt_intents.json", "w"))
