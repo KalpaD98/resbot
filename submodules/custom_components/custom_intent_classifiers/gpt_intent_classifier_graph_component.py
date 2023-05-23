@@ -1,6 +1,6 @@
 import logging
 import os
-from typing import Dict, Text, Any, List, Type, Tuple
+from typing import Dict, Text, Any, List, Type, Tuple, Optional
 
 from dotenv import load_dotenv
 from joblib import dump, load
@@ -21,7 +21,7 @@ logger = logging.getLogger(__name__)
 @DefaultV1Recipe.register(
     DefaultV1Recipe.ComponentType.INTENT_CLASSIFIER, is_trainable=True
 )
-class ZeroShotGPTIntentClassifier(GraphComponent):
+class FewShotGPTIntentClassifier(GraphComponent):
     @classmethod
     def required_components(cls) -> List[Type]:
         return []
@@ -41,7 +41,7 @@ class ZeroShotGPTIntentClassifier(GraphComponent):
         pass
 
     def __init__(self, config: Dict[Text, Any], name: Text, model_storage: ModelStorage, resource: Resource) -> None:
-        print("init ZeroShotGPTIntentClassifier")
+        print("init FewShotGPTIntentClassifier")
         self.name = name
 
         # Fetch the OpenAI key and organization from environment variables
@@ -71,9 +71,9 @@ class ZeroShotGPTIntentClassifier(GraphComponent):
     @staticmethod
     def _get_training_data(training_data: TrainingData) -> Tuple[List[Text], List[Text]]:
         """Preprocess the training data. Retrieve the text messages and their corresponding intents."""
-        print("Getting training data for ZeroShotGPTIntentClassifier")
+        print("Getting training data for FewShotGPTIntentClassifier")
 
-        intent_counts = {}  # Dictionary to keep track of the counts of each intent
+        intent_counts = {}
         messages = []
         intents = []
 
@@ -81,13 +81,12 @@ class ZeroShotGPTIntentClassifier(GraphComponent):
             message = example.get(TEXT)
             intent = example.get(INTENT)
 
-            if message and intent:  # If both the message and the intent exist
-                if intent not in intent_counts:  # If this intent was not encountered before
-                    intent_counts[intent] = 1  # Initialize the count
+            if message and intent:
+                if intent not in intent_counts:
+                    intent_counts[intent] = 1
                 else:
-                    intent_counts[intent] += 1  # Increment the count
+                    intent_counts[intent] += 1
 
-                # If the count for this intent is less than or equal to 2, add the message and intent to their lists
                 if intent_counts[intent] <= 2:
                     messages.append(message)
                     intents.append(intent)
@@ -96,7 +95,7 @@ class ZeroShotGPTIntentClassifier(GraphComponent):
 
     def train(self, training_data: TrainingData) -> Resource:
 
-        print("Training ZeroShotGPTIntentClassifier")
+        print("Training FewShotGPTIntentClassifier")
         messages, intents = self._get_training_data(training_data)
         if len(messages) == 0:
             logger.debug(
@@ -104,16 +103,41 @@ class ZeroShotGPTIntentClassifier(GraphComponent):
                 f"Skipping training of the classifier."
             )
         self.clf.fit(messages, intents)
-        print("Trained ZeroShotGPTIntentClassifier")
+        print("Trained FewShotGPTIntentClassifier")
         self.persist()
         return self._resource
 
     def persist(self) -> None:
         """Persist the intents into model storage."""
-        print("Persisting ZeroShotGPTIntentClassifier")
+        print("Persisting FewShotGPTIntentClassifier")
         with self._model_storage.write_to(self._resource) as model_dir:
             dump(self.clf, model_dir / f"{self.name}.joblib")
-            print("Persisted ZeroShotGPTIntentClassifier")
+            print("Persisted FewShotGPTIntentClassifier")
+
+    # # load the model from storage (without training after loading)
+    # @classmethod
+    # def load(
+    #         cls,
+    #         config: Dict[Text, Any],
+    #         model_storage: ModelStorage,
+    #         resource: Resource,
+    #         execution_context: ExecutionContext,
+    #         **kwargs: Any,
+    # ) -> GraphComponent:
+    #     print("Loading FewShotGPTIntentClassifier")
+    #     try:
+    #         with model_storage.read_from(resource) as model_dir:
+    #             classifier = load(model_dir / f"{resource.name}.joblib")
+    #             component = cls(
+    #                 config, execution_context.node_name, model_storage, resource
+    #             )
+    #             component.clf = classifier
+    #             print("Loaded FewShotGPTIntentClassifier")
+    #             return component
+    #     except ValueError:
+    #         print("Failed to load: No data found for the given resource")
+    #         # TODO: In this case can get data from training and add here
+    #         return cls(config, execution_context.node_name, model_storage, resource)
 
     @classmethod
     def load(
@@ -122,9 +146,16 @@ class ZeroShotGPTIntentClassifier(GraphComponent):
             model_storage: ModelStorage,
             resource: Resource,
             execution_context: ExecutionContext,
+            training_data: Optional[TrainingData] = None,
             **kwargs: Any,
     ) -> GraphComponent:
-        print("Loading ZeroShotGPTIntentClassifier")
+        print("Loading FewShotGPTIntentClassifier")
+        openai_key = os.getenv("OPENAI_KEY")
+        openai_organization = os.getenv("OPENAI_ORGANIZATION")
+
+        # Set the OpenAI key and organization for SKLLMConfig
+        SKLLMConfig.set_openai_key(openai_key)
+        SKLLMConfig.set_openai_org(openai_organization)
         try:
             with model_storage.read_from(resource) as model_dir:
                 classifier = load(model_dir / f"{resource.name}.joblib")
@@ -132,16 +163,20 @@ class ZeroShotGPTIntentClassifier(GraphComponent):
                     config, execution_context.node_name, model_storage, resource
                 )
                 component.clf = classifier
-                print("Loaded ZeroShotGPTIntentClassifier")
+                print("Loaded FewShotGPTIntentClassifier")
+                if training_data:
+                    print("Training FewShotGPTIntentClassifier")
+                    messages, intents = component._get_training_data(training_data)
+                    component.clf.fit(messages, intents)
+                    print("Trained FewShotGPTIntentClassifier")
                 return component
         except ValueError:
             print("Failed to load: No data found for the given resource")
-            # TODO: In this case can get data from training and add here
             return cls(config, execution_context.node_name, model_storage, resource)
 
     def process(self, messages: List[Message]) -> List[Message]:
         """Process the list of messages."""
-        print("Processing ZeroShotGPTIntentClassifier")
+        print("Processing FewShotGPTIntentClassifier")
         dummy_text = "dummy text"
         for message in messages:
             text = message.get(TEXT)
