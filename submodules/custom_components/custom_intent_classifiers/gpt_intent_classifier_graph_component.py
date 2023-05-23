@@ -2,6 +2,7 @@ import logging
 import os
 from typing import Dict, Text, Any, List, Type, Tuple, Optional
 
+import pandas as pd
 from dotenv import load_dotenv
 from joblib import dump, load
 from rasa.engine.graph import GraphComponent, ExecutionContext
@@ -76,7 +77,7 @@ class FewShotGPTIntentClassifier(GraphComponent):
         intent_counts = {}
         messages = []
         intents = []
-
+        # TODO: remove obvious intents (which uses regex and stuff like that)
         for example in training_data.training_examples:
             message = example.get(TEXT)
             intent = example.get(INTENT)
@@ -93,10 +94,37 @@ class FewShotGPTIntentClassifier(GraphComponent):
 
         return messages, intents
 
+    @staticmethod
+    def _save_training_data_as_csv(training_data: TrainingData, file_name: Text) -> None:
+        """Preprocess the training data. Retrieve the text messages and their corresponding intents."""
+        print("Saving training data for FewShotGPTIntentClassifier to a CSV file")
+
+        intent_counts = {}
+        data = []
+
+        for example in training_data.training_examples:
+            message = example.get(TEXT)
+            intent = example.get(INTENT)
+
+            if message and intent:
+                if intent not in intent_counts:
+                    intent_counts[intent] = 1
+                else:
+                    intent_counts[intent] += 1
+
+                if intent_counts[intent] <= 4:
+                    data.append({"message": message, "intent": intent})
+
+        df = pd.DataFrame(data)
+
+        # Save DataFrame to CSV
+        df.to_csv(file_name, index=False)
+
     def train(self, training_data: TrainingData) -> Resource:
 
         print("Training FewShotGPTIntentClassifier")
         messages, intents = self._get_training_data(training_data)
+        # self._save_training_data_as_csv(training_data, "few_shot_gpt_intent_classifier_training_data.csv")
         if len(messages) == 0:
             logger.debug(
                 f"Cannot train '{self.__class__.__name__}'. No data was provided. "
@@ -105,6 +133,7 @@ class FewShotGPTIntentClassifier(GraphComponent):
         self.clf.fit(messages, intents)
         print("Trained FewShotGPTIntentClassifier")
         self.persist()
+
         return self._resource
 
     def persist(self) -> None:
