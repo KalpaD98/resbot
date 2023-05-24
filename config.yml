@@ -31,7 +31,7 @@ pipeline: # ------- NLU
     epochs: 100
     constrain_similarities: true
 
-#  - name: submodules.custom_components.intent_classifiers.gpt_intent_classifier_graph_component.FewShotGPTIntentClassifier
+  - name: submodules.custom_components.intent_classifiers.zero_shot_gpt_intent_classifier.ZeroShotGPTIntentClassifier
 
   - name: EntitySynonymMapper
   - name: ResponseSelector
