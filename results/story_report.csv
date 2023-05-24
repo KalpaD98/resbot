@@ -1,0 +1,8 @@
+"","Response","Precision","Recall","F1 Score","Number of occurrences"
+"🟡","action_listen","100.0%","68.8%","81.5%","16"
+"❌","utter_cheer_up","0.0%","0.0%","0.0%","3"
+"❌","utter_goodbye","0.0%","0.0%","0.0%","4"
+"❌","utter_greet","0.0%","0.0%","0.0%","5"
+"❌","utter_iamabot","0.0%","0.0%","0.0%","1"
+"❌","utter_happy","0.0%","0.0%","0.0%","3"
+"❌","utter_did_that_help","0.0%","0.0%","0.0%","3"

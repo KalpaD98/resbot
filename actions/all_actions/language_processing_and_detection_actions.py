@@ -1,6 +1,6 @@
 from actions.all_actions.common_imports_for_actions import *
 from actions.all_actions.helper_functions.language_detection_and_change_handler import LanguageSelector
-from submodules.custom_components.language_detection.language_detector import LanguageDetector
+from submodules.custom_components.language_handlers.language_detector import LanguageDetector
 
 ACTION_DETECT_LANGUAGE = "action_detect_language"
 ACTION_SET_PERMANENT_LANGUAGE = "action_set_permanent_language"

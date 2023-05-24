@@ -1,5 +1,89 @@
 [
   {
+    "text": "chethiya",
+    "entities": [
+      {
+        "start": 0,
+        "end": 8,
+        "value": "chethiya",
+        "entity": "user_name"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "PERSON",
+        "start": 0,
+        "end": 8,
+        "confidence_entity": 0.38196420669555664,
+        "value": "chethiya",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "upeksha",
+    "entities": [
+      {
+        "start": 0,
+        "end": 7,
+        "value": "upeksha",
+        "entity": "user_name"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "PERSON",
+        "start": 0,
+        "end": 7,
+        "confidence_entity": 0.38426488637924194,
+        "value": "upeksha",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "sagara",
+    "entities": [
+      {
+        "start": 0,
+        "end": 6,
+        "value": "sagara",
+        "entity": "user_name"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "PERSON",
+        "start": 0,
+        "end": 6,
+        "confidence_entity": 0.4170149266719818,
+        "value": "sagara",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "chamalka",
+    "entities": [
+      {
+        "start": 0,
+        "end": 8,
+        "value": "chamalka",
+        "entity": "user_name"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "PERSON",
+        "start": 0,
+        "end": 8,
+        "confidence_entity": 0.43186241388320923,
+        "value": "chamalka",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
     "text": "kalpa",
     "entities": [
       {
@@ -14,43 +98,8 @@
         "entity": "user_name",
         "start": 0,
         "end": 5,
+        "confidence_entity": 0.38977015018463135,
         "value": "kalpa",
-        "extractor": "RegexEntityExtractor"
-      },
-      {
-        "entity": "user_name",
-        "start": 0,
-        "end": 5,
-        "confidence_entity": 0.45343276858329773,
-        "value": "kalpa",
-        "extractor": "DIETClassifier"
-      }
-    ]
-  },
-  {
-    "text": "chethiya",
-    "entities": [
-      {
-        "start": 0,
-        "end": 8,
-        "value": "chethiya",
-        "entity": "PERSON"
-      }
-    ],
-    "predicted_entities": [
-      {
-        "entity": "user_name",
-        "start": 0,
-        "end": 8,
-        "value": "chethiya",
-        "extractor": "RegexEntityExtractor"
-      },
-      {
-        "entity": "user_name",
-        "start": 0,
-        "end": 8,
-        "confidence_entity": 0.4242924451828003,
-        "value": "chethiya",
         "extractor": "DIETClassifier"
       }
     ]
@@ -70,99 +119,8 @@
         "entity": "user_name",
         "start": 0,
         "end": 7,
+        "confidence_entity": 0.4017086327075958,
         "value": "dileepa",
-        "extractor": "RegexEntityExtractor"
-      },
-      {
-        "entity": "user_name",
-        "start": 0,
-        "end": 7,
-        "confidence_entity": 0.47587692737579346,
-        "value": "dileepa",
-        "extractor": "DIETClassifier"
-      }
-    ]
-  },
-  {
-    "text": "upeksha",
-    "entities": [
-      {
-        "start": 0,
-        "end": 7,
-        "value": "upeksha",
-        "entity": "PERSON"
-      }
-    ],
-    "predicted_entities": [
-      {
-        "entity": "user_name",
-        "start": 0,
-        "end": 7,
-        "value": "upeksha",
-        "extractor": "RegexEntityExtractor"
-      },
-      {
-        "entity": "user_name",
-        "start": 0,
-        "end": 7,
-        "confidence_entity": 0.41920721530914307,
-        "value": "upeksha",
-        "extractor": "DIETClassifier"
-      }
-    ]
-  },
-  {
-    "text": "sagara",
-    "entities": [
-      {
-        "start": 0,
-        "end": 6,
-        "value": "sagara",
-        "entity": "PERSON"
-      }
-    ],
-    "predicted_entities": [
-      {
-        "entity": "user_name",
-        "start": 0,
-        "end": 6,
-        "value": "sagara",
-        "extractor": "RegexEntityExtractor"
-      },
-      {
-        "entity": "user_name",
-        "start": 0,
-        "end": 6,
-        "confidence_entity": 0.4528263509273529,
-        "value": "sagara",
-        "extractor": "DIETClassifier"
-      }
-    ]
-  },
-  {
-    "text": "chamalka",
-    "entities": [
-      {
-        "start": 0,
-        "end": 8,
-        "value": "chamalka",
-        "entity": "PERSON"
-      }
-    ],
-    "predicted_entities": [
-      {
-        "entity": "user_name",
-        "start": 0,
-        "end": 8,
-        "value": "chamalka",
-        "extractor": "RegexEntityExtractor"
-      },
-      {
-        "entity": "user_name",
-        "start": 0,
-        "end": 8,
-        "confidence_entity": 0.4498874545097351,
-        "value": "chamalka",
         "extractor": "DIETClassifier"
       }
     ]
@@ -175,14 +133,7 @@
         "entity": "user_name",
         "start": 0,
         "end": 5,
-        "value": "kalpa",
-        "extractor": "RegexEntityExtractor"
-      },
-      {
-        "entity": "user_name",
-        "start": 0,
-        "end": 5,
-        "confidence_entity": 0.45343276858329773,
+        "confidence_entity": 0.38977015018463135,
         "value": "kalpa",
         "extractor": "DIETClassifier"
       }
@@ -193,17 +144,10 @@
     "entities": [],
     "predicted_entities": [
       {
-        "entity": "user_name",
+        "entity": "PERSON",
         "start": 0,
         "end": 8,
-        "value": "chethiya",
-        "extractor": "RegexEntityExtractor"
-      },
-      {
-        "entity": "user_name",
-        "start": 0,
-        "end": 8,
-        "confidence_entity": 0.4242924451828003,
+        "confidence_entity": 0.38196420669555664,
         "value": "chethiya",
         "extractor": "DIETClassifier"
       }
@@ -217,14 +161,7 @@
         "entity": "user_name",
         "start": 0,
         "end": 7,
-        "value": "dileepa",
-        "extractor": "RegexEntityExtractor"
-      },
-      {
-        "entity": "user_name",
-        "start": 0,
-        "end": 7,
-        "confidence_entity": 0.47587692737579346,
+        "confidence_entity": 0.4017086327075958,
         "value": "dileepa",
         "extractor": "DIETClassifier"
       }
@@ -235,17 +172,10 @@
     "entities": [],
     "predicted_entities": [
       {
-        "entity": "user_name",
+        "entity": "PERSON",
         "start": 0,
         "end": 7,
-        "value": "upeksha",
-        "extractor": "RegexEntityExtractor"
-      },
-      {
-        "entity": "user_name",
-        "start": 0,
-        "end": 7,
-        "confidence_entity": 0.41920721530914307,
+        "confidence_entity": 0.38426488637924194,
         "value": "upeksha",
         "extractor": "DIETClassifier"
       }
@@ -256,17 +186,10 @@
     "entities": [],
     "predicted_entities": [
       {
-        "entity": "user_name",
+        "entity": "PERSON",
         "start": 0,
         "end": 6,
-        "value": "sagara",
-        "extractor": "RegexEntityExtractor"
-      },
-      {
-        "entity": "user_name",
-        "start": 0,
-        "end": 6,
-        "confidence_entity": 0.4528263509273529,
+        "confidence_entity": 0.4170149266719818,
         "value": "sagara",
         "extractor": "DIETClassifier"
       }
@@ -277,17 +200,10 @@
     "entities": [],
     "predicted_entities": [
       {
-        "entity": "user_name",
+        "entity": "PERSON",
         "start": 0,
         "end": 8,
-        "value": "chamalka",
-        "extractor": "RegexEntityExtractor"
-      },
-      {
-        "entity": "user_name",
-        "start": 0,
-        "end": 8,
-        "confidence_entity": 0.4498874545097351,
+        "confidence_entity": 0.43186241388320923,
         "value": "chamalka",
         "extractor": "DIETClassifier"
       }
@@ -301,7 +217,7 @@
         "entity": "password",
         "start": 0,
         "end": 4,
-        "confidence_entity": 0.44467225670814514,
+        "confidence_entity": 0.5566127300262451,
         "value": "1234",
         "extractor": "DIETClassifier"
       }
@@ -315,7 +231,7 @@
         "entity": "password",
         "start": 0,
         "end": 4,
-        "confidence_entity": 0.6578320860862732,
+        "confidence_entity": 0.7757765054702759,
         "value": "pass",
         "extractor": "DIETClassifier"
       }

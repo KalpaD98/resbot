@@ -7,7 +7,7 @@ import fasttext
 class LanguageDetector:
     with warnings.catch_warnings():
         warnings.simplefilter("ignore")
-        model = fasttext.load_model("submodules/custom_components/language_detection/lid.176.bin")
+        model = fasttext.load_model("submodules/custom_components/language_handlers/models/lid.176.bin")
 
     @staticmethod
     def detect_languages(text: str, k: int = 2) -> List[Tuple[str, float]]:

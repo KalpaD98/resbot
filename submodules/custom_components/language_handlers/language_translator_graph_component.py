@@ -9,7 +9,7 @@ from rasa.shared.nlu.training_data.message import Message
 from rasa.shared.nlu.training_data.training_data import TrainingData
 
 from actions.all_actions.helper_functions.response_generator.constants import SIN
-from submodules.custom_components.language_detection.language_detector import LanguageDetector
+from submodules.custom_components.language_handlers.language_detector import LanguageDetector
 
 
 @DefaultV1Recipe.register(

@@ -206,7 +206,7 @@ class FewShotGPTIntentClassifier(GraphComponent):
     def process(self, messages: List[Message]) -> List[Message]:
         """Process the list of messages."""
         print("Processing FewShotGPTIntentClassifier")
-        dummy_text = "dummy text"
+        dummy_text = "dummy text"  # TODO: fix within the file
         for message in messages:
             text = message.get(TEXT)
             if text:
