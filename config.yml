@@ -6,27 +6,33 @@ pipeline: # ------- NLU
 
   - name: submodules.custom_components.language_handlers.language_translator_graph_component.LanguageHandlerAndTranslator
 
+    # Load Language model
   - name: SpacyNLP
     model: en_core_web_trf
     case_sensitive: False
 
+    # Tokenizer
   - name: SpacyTokenizer
     intent_tokenization_flag: True # to use multi intents
     intent_split_symbol: "+"
 
+    # Featurizers
   - name: RegexFeaturizer
   - name: SpacyFeaturizer
   - name: LexicalSyntacticFeaturizer
   - name: CountVectorsFeaturizer # one hot encoding
-
   - name: CountVectorsFeaturizer # char level n-grams
     analyzer: char_wb
     min_ngram: 1
     max_ngram: 4
 
+  - name: submodules.custom_components.featurizers.gpt_vectorized_featurizer.GPTVectorFeaturizer
+
+    # Entity Extractor
   - name: SpacyEntityExtractor
     dimensions: [ "PERSON" ]
 
+    # Intent and Entity Extractor
   - name: DIETClassifier
     epochs: 100
     constrain_similarities: true
@@ -55,94 +61,3 @@ policies: # ------- Dialog Management
     max_history: 16
     epochs: 100
     constrain_similarities: true
-
-  # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-  # --------------------------------------------------- Backup  ------------------------------------------------------- #
-  # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-  # https://rasa.com/docs/rasa/model-configuration/
-  # Removed
-  #- Avoid using `tokenizers` before the fork if possible
-  # pipeline:
-
-  #  - name: RegexEntityExtractor
-  #    case_sensitive: False
-  #    use_word_boundaries: True
-  #    use_lookup_tables: True
-  #    use_regexes: True
-
-  #  - name: submodules.external_utils.extractors.DateparserEntityExtractor # remove when duckling is on
-  #    languages: [ "en" ]
-  #    prefer_dates_from: "future"
-  #    relative_base: "2023-03-01"
-
-  #  - name: "DucklingEntityExtractor" # add in Windows environment
-  #    url: "http://localhost:8000"
-  #    dimensions: [ "time", "number", "amount-of-money", "distance" ] # modify as per requirements
-
-  # Configuration for Rasa Core.
-  # https://rasa.com/docs/rasa/core/policies/
-  #policies
-
-  #- name: RulePolicy
-  #  core_fallback_threshold: 0.3
-  #  core_fallback_action_name: "action_default_fallback"
-  #  enable_fallback_prediction: True
-
-  #  - name: RulePolicy
-  ## Confidence threshold for the `core_fallback_action_name` to apply.
-  ## The action will apply if no other action was predicted with
-  ## a confidence >= core_fallback_threshold
-  #    core_fallback_threshold: 0.3
-  #    core_fallback_action_name: "action_default_fallback"
-  #    enable_fallback_prediction: True
-
-# <---------------------------------------------------PARAMETERS------------------------------------------------------->
-#pipeline:
-
-#  # default pipeline
-#  # If No configuration for the NLU pipeline was provided. The following default pipeline was used to train your model.
-#  # If you'd like to customize it, uncomment and adjust the pipeline.
-#  # See https://rasa.com/docs/rasa/tuning-your-model for more information.
-# NLU Pipeline: Configuration for Rasa NLU. https://rasa.com/docs/rasa/nlu/components/
-#  # language model
-#  - name: SpacyNLP
-#    model: en_core_web_trf
-#  - name: SpacyTokenizer
-#    intent_tokenization_flag: True # to use multi intents
-#    intent_split_symbol: "+"
-#  - name: SpacyFeaturizer
-#  - name: RegexFeaturizer
-#  - name: LexicalSyntacticFeaturizer
-#  - name: CountVectorsFeaturizer # one hot encoding
-#  - name: CountVectorsFeaturizer # char level
-#    analyzer: char_wb
-#    min_ngram: 1
-#    max_ngram: 4
-#
-#  - name: DIETClassifier
-#    epochs: 100
-#  #    learning_rate: 0.001 #  learning rate hyperparameter (0.001 default)
-#  #    number_of_transformer_layers: 4 # number of transformer layers hyperparameter (2 default)
-#  #    transformer_size: 256 # transformer size hyperparameter (256 default)
-#  #    embedding_dimension: 20 # embedding dimension hyperparameter (20 default)
-#  #    number_of_attention_heads: 1 # number of attention heads hyperparameter (1 default)
-#  #    use_masked_language_model: true # to turn on __MASK__ token
-#  #    drop_rate: 0.25 # dropout rate hyperparameter (0.2 default)
-#  #    weight_sparsity: 0.7 # weight sparsity hyperparameter (0.8 default)
-#  #    batch_size: [ 64, 256 ] # batch size hyperparameter
-#  #    hidden_layers_sizes: # hidden layers sizes hyperparameter
-#  #      text: [ 256, 128 ] # 256 FF -> 128 FF
-#  #      text: [ 512, 128 ] # 512 FF -> 128 FF
-#  #
-#  - name: utils.extractors.DateparserEntityExtractor
-#    languages: [ "en" ]
-#    prefer_dates_from: "future"
-#    constrain_similarities: true
-#
-#  - name: EntitySynonymMapper
-#  - name: ResponseSelector
-#    epochs: 100
-#    constrain_similarities: true
-#  - name: FallbackClassifier # added
-#    threshold: 0.6
-#    ambiguity_threshold: 0.1
