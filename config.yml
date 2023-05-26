@@ -4,7 +4,7 @@ language: en
 
 pipeline: # ------- NLU
 
-  - name: submodules.custom_components.language_handlers.language_translator_graph_component.LanguageHandlerAndTranslator
+  - name: submodules.custom_components.language_handlers.language_handler.LanguageHandlerAndTranslator
 
     # Load Language model
   - name: SpacyNLP
@@ -26,7 +26,7 @@ pipeline: # ------- NLU
     min_ngram: 1
     max_ngram: 4
 
-  - name: submodules.custom_components.featurizers.gpt_vectorized_featurizer.GPTVectorFeaturizer
+    #  - name: submodules.custom_components.featurizers.gpt_vectorized_featurizer.GPTVectorFeaturizer
 
     # Entity Extractor
   - name: SpacyEntityExtractor
@@ -37,7 +37,8 @@ pipeline: # ------- NLU
     epochs: 100
     constrain_similarities: true
 
-  - name: submodules.custom_components.intent_classifiers.zero_shot_gpt_intent_classifier.ZeroShotGPTIntentClassifier
+  #  - name: submodules.custom_components.intent_classifiers.zero_shot_gpt_intent_classifier.ZeroShotGPTIntentClassifier
+  - name: submodules.custom_components.intent_classifiers.zero_shot_bart_intent_classifier.ZeroShotBartIntentClassifier
 
   - name: EntitySynonymMapper
   - name: ResponseSelector

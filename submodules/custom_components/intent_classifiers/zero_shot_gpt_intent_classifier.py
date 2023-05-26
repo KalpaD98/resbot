@@ -104,18 +104,19 @@ class ZeroShotGPTIntentClassifier(GraphComponent):
         """Process the list of messages."""
         # TODO: predict only if DIET fails
         print("Processing ZeroShotGPTIntentClassifier")
-        dummy_text = "dummy text"  # TODO: fix within the file
         for message in messages:
             text = message.get(TEXT)
             if text:
                 try:
                     # Adding dummy text to bypass the error
-                    prediction = self.clf.predict([text, dummy_text])
+                    prediction = self.clf.predict_single(text)
                     print("prediction by gpt: ", prediction)
-                    if prediction and prediction[0]:  # Checking if prediction[0] is not an empty string
+                    if prediction:
                         # Set the intent of the message as the first prediction
                         # TODO: Add confidence score and uncomment the line below
+                        # We can get DIET predictions here
                         # message.set(INTENT, {"name": prediction[0], "confidence": 0.5})
+                        # Create a methodology to solve this issue
                         print("prediction of zero shot: ", prediction[0])
                 except Exception as e:
                     print(f"Failed to predict intent for text '{text}': {str(e)}")

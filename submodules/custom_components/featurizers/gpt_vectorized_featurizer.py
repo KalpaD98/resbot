@@ -1,7 +1,7 @@
 import os
 from typing import Dict, Text, Any, List, Type
 
-from rasa.engine.graph import GraphComponent, ExecutionContext
+from rasa.engine.graph import GraphComponent
 from rasa.engine.recipes.default_recipe import DefaultV1Recipe
 from rasa.engine.storage.resource import Resource
 from rasa.engine.storage.storage import ModelStorage
@@ -34,16 +34,15 @@ class GPTVectorFeaturizer(DenseFeaturizer, GraphComponent):
     def create(
             cls,
             config: Dict[Text, Any],
+            name: Text,
             model_storage: ModelStorage,
             resource: Resource,
-            execution_context: ExecutionContext,
     ) -> GraphComponent:
 
-        return cls(config, resource)
+        return cls(name, config)
 
-    def __init__(self, config: Dict[Text, Any], resource: Resource):
-        super().__init__(config, resource)
-
+    def __init__(self, name: Text, config: Dict[Text, Any]):
+        super().__init__(name=name, config=config)
         openai_key = os.getenv("OPENAI_KEY")
         openai_organization = os.getenv("OPENAI_ORGANIZATION")
 
@@ -69,7 +68,8 @@ class GPTVectorFeaturizer(DenseFeaturizer, GraphComponent):
         text = message.get(attribute)
 
         if text:
-            vector = self._gpt_model.transform([text]).reshape(1, -1)
+            # vector = self._gpt_model.transform([text]).reshape(1, -1)
+            vector = self._gpt_model.transform_single(text).reshape(1, -1)
             final_features = Features(
                 vector,
                 FEATURE_TYPE_SENTENCE,
@@ -77,16 +77,10 @@ class GPTVectorFeaturizer(DenseFeaturizer, GraphComponent):
                 self._config[FEATURIZER_CLASS_ALIAS],
             )
             print(final_features)
+            # TODO: uncomment below
             # message.add_features(final_features)
 
     @classmethod
     def validate_config(cls, config: Dict[Text, Any]) -> None:
         """Validates that the component is configured properly."""
-        if not config["lang"]:
-            raise ValueError("GPTVectorFeaturizer needs language setting via `lang`.")
-        if not config["dim"]:
-            raise ValueError(
-                "GPTVectorFeaturizer needs dimensionality setting via `dim`."
-            )
-        if not config["vs"]:
-            raise ValueError("GPTVectorFeaturizer needs a vector size setting via `vs`.")
+        pass
