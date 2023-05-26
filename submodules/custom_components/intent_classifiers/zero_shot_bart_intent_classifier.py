@@ -1,6 +1,7 @@
 import logging
 from typing import Dict, Text, Any, List, Type
 
+import numpy as np
 from dotenv import load_dotenv
 from rasa.engine.graph import GraphComponent, ExecutionContext
 from rasa.engine.recipes.default_recipe import DefaultV1Recipe
@@ -31,7 +32,7 @@ class ZeroShotBartIntentClassifier(GraphComponent):
 
     @staticmethod
     def get_default_config() -> Dict[Text, Any]:
-        return {"candidate_class_size": 5, "fallback_classifier_threshold": 0.3, "threshold":0.2}
+        return {"candidate_class_size": 5, "fallback_classifier_threshold": 0.3, "threshold": 0.2}
 
     @classmethod
     def validate_config(cls, config: Dict[Text, Any]) -> None:
@@ -153,3 +154,60 @@ class ZeroShotBartIntentClassifier(GraphComponent):
         candidate_labels = [item['name'] for item in intent_ranking[:num_intents_to_classify]]
         candidate_labels.append('other')  # to catch out of scope
         return candidate_labels
+
+    @staticmethod
+    def compute_weighted_average(diet_intent_ranking, zero_shot_intent_ranking, weights):
+        """
+        Computes the weighted average of the confidence scores from the DIET and Zero-Shot classifiers.
+
+        :param diet_intent_ranking: The intent ranking from the DIET classifier.
+        :param zero_shot_intent_ranking: The intent ranking from the Zero-Shot classifier.
+        :param weights: The weights assigned to the DIET and Zero-Shot classifiers.
+        :return: The intent ranking with confidence scores computed as the weighted average.
+        """
+        diet_confidences = {intent['name']: intent['confidence'] for intent in diet_intent_ranking}
+        zero_shot_confidences = {intent['name']: intent['confidence'] for intent in zero_shot_intent_ranking}
+
+        averaged_confidences = {}
+
+        # Compute the weighted average for each intent.
+        for intent in set(diet_confidences.keys()).union(zero_shot_confidences.keys()):
+            diet_confidence = diet_confidences.get(intent, 0)
+            zero_shot_confidence = zero_shot_confidences.get(intent, 0)
+            averaged_confidences[intent] = diet_confidence * weights[0] + zero_shot_confidence * weights[1]
+
+        # Transform the dictionary back into a list of dictionaries.
+        averaged_intent_ranking = [{'name': intent, 'confidence': confidence} for intent, confidence in
+                                   averaged_confidences.items()]
+
+        # Sort the intents by their confidence score in descending order.
+        averaged_intent_ranking.sort(key=lambda intent: -intent['confidence'])
+
+        return averaged_intent_ranking
+
+        # TODO: USAGE
+        # weighted_intent_ranking = self.compute_weighted_average(
+        #     intent_ranking, new_intent_ranking,[0.5, 0.5])  # Adjust the weights as needed.
+        # message.set(INTENT, weighted_intent_ranking[0], add_to_output=True)
+        # message.set(INTENT_RANKING_KEY, weighted_intent_ranking, add_to_output=True)
+
+    # TODO: test Softmax scoring method
+    @staticmethod
+    def softmax(x):
+        """Compute softmax values for each sets of scores in x."""
+        e_x = np.exp(x - np.max(x))
+        return e_x / e_x.sum()
+
+    @staticmethod
+    def postprocess_confidence_scores(self, intent_ranking):
+        # Convert the confidence scores to a numpy array
+        confidences = np.array([intent['confidence'] for intent in intent_ranking])
+
+        # Apply the softmax function
+        softmax_confidences = self.softmax(confidences)
+
+        # Update the confidence scores in the intent ranking
+        for i, intent in enumerate(intent_ranking):
+            intent['confidence'] = softmax_confidences[i]
+
+        return intent_ranking
