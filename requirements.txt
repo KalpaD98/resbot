@@ -19,3 +19,5 @@ joblib~=1.2.0
 scipy~=1.8.1
 python-dotenv~=1.0.0
 rasa-model-report
+tqdm~=4.65.0
+transformers

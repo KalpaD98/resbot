@@ -6,6 +6,7 @@ from rasa.engine.graph import GraphComponent, ExecutionContext
 from rasa.engine.recipes.default_recipe import DefaultV1Recipe
 from rasa.engine.storage.resource import Resource
 from rasa.engine.storage.storage import ModelStorage
+from rasa.nlu.classifiers.classifier import IntentClassifier
 from rasa.shared.nlu.constants import INTENT, TEXT, INTENT_RANKING_KEY
 from rasa.shared.nlu.training_data.message import Message
 from rasa.shared.nlu.training_data.training_data import TrainingData
@@ -21,16 +22,16 @@ logger = logging.getLogger(__name__)
 class ZeroShotBartIntentClassifier(GraphComponent):
     @classmethod
     def required_components(cls) -> List[Type]:
-        return []
+        return [IntentClassifier]
 
     @classmethod
     def required_packages(cls) -> List[Text]:
         """Any extra python dependencies required for this component to run."""
-        return []
+        return ['transformers']
 
     @staticmethod
     def get_default_config() -> Dict[Text, Any]:
-        return {"candidate_class_size": 5}
+        return {"candidate_class_size": 5, "fallback_classifier_threshold": 0.3, "threshold":0.2}
 
     @classmethod
     def validate_config(cls, config: Dict[Text, Any]) -> None:
@@ -44,6 +45,8 @@ class ZeroShotBartIntentClassifier(GraphComponent):
         self._model_storage = model_storage
         self._resource = resource
         self.candidate_class_size = config["candidate_class_size"]
+        self.threshold = config["threshold"]
+        self.fallback_classifier_threshold = config["fallback_classifier_threshold"]
 
     @classmethod
     def create(
@@ -55,19 +58,6 @@ class ZeroShotBartIntentClassifier(GraphComponent):
     ) -> GraphComponent:
         return cls(config, execution_context.node_name, model_storage, resource)
 
-    # @classmethod
-    # def load(
-    #         cls,
-    #         config: Dict[Text, Any],
-    #         model_storage: ModelStorage,
-    #         resource: Resource,
-    #         execution_context: ExecutionContext,
-    #         training_data: Optional[TrainingData] = None,
-    #         **kwargs: Any,
-    # ) -> GraphComponent:
-    #
-    #     return cls(config, execution_context.node_name, model_storage, resource)
-
     def process(self, messages: List[Message]) -> List[Message]:
         """Process the list of messages."""
         # TODO: predict only if DIET fails
@@ -77,26 +67,38 @@ class ZeroShotBartIntentClassifier(GraphComponent):
             intent_ranking = message.get(INTENT_RANKING_KEY)
             intent = message.get(INTENT)
             print("Process ZERO SHOT Bart Classifier")
-            print()
+            print("\n----Intents from diet----\n")
             print(intent_ranking)
-            print("intent: ", intent)
+            print("\nDIET choosen intent: ", intent)
             print()
             print("Process ZERO SHOT Bart Classifier complete")
             text = message.get(TEXT)
-            if text:  # check for intent being nlu_fallback if yes then run below code
+            # check for intent being nlu_fallback if yes then run below code
+            if text and intent['confidence'] <= 0.6:  # can use this condition to control
                 try:
                     # get from DIET and add from GPT pretrain and add other
-                    candidate_labels = self.get_candidate_labels(intent_ranking)
+                    candidate_labels = self.get_candidate_labels(self, intent_ranking)
+                    print(text)
+
                     prediction_data = self.clf(text, candidate_labels)
                     # Transform to intent ranking format of rasa
                     new_intent_ranking = self.get_intent_ranking(prediction_data)
-                    print("New intent rankings by bart")
+                    print("New intent rankings by bart zero shot")
                     print(new_intent_ranking)
                     if len(new_intent_ranking) > 0:
                         if new_intent_ranking[0]['name'] != 'other':  # if  new_intent_ranking[0] is other don't change
                             # remove 'other'
                             # Add as the new intent ranking
+                            # TODO: consider threshold (zero intent threshold) for new intent
+                            #  Approach: will have to increase to fbc value and reduce from other intents
+                            #  (in weighted manner)
+                            message.set(INTENT, new_intent_ranking[0], add_to_output=True)
+                            message.set(INTENT_RANKING_KEY, new_intent_ranking, add_to_output=True)
                             print("prediction of zero shot: ", new_intent_ranking[0])
+
+                # TODO: when 'haiya chatbot' is entered greet is not in intent ranking so still fail
+                # TODO: when 'hiaya chatbot' is entered greet is in intent ranking
+                #  however after sending it to ZSC confidence is < than fallback_classifier_threshold hence trigger nlu_fallback
 
                 except Exception as e:
                     print(f"Failed to predict intent for text '{text}': {str(e)}")
@@ -118,6 +120,12 @@ class ZeroShotBartIntentClassifier(GraphComponent):
 
     @staticmethod
     def get_intent_ranking(prediction_data):
+        # Remove 'other' label and its corresponding score
+        if 'other' in prediction_data['labels']:
+            index = prediction_data['labels'].index('other')
+            del prediction_data['labels'][index]
+            del prediction_data['scores'][index]
+
         # Create a list of tuples where each tuple is (label, score)
         label_score_pairs = list(zip(prediction_data['labels'], prediction_data['scores']))
 
@@ -129,7 +137,7 @@ class ZeroShotBartIntentClassifier(GraphComponent):
             selected_labels = []
             total_score = 0
             for label, score in label_score_pairs:
-                if total_score + score <= 0.9:
+                if total_score + score <= 0.99:
                     selected_labels.append({'name': label, 'confidence': score})
                     total_score += score
                 else:

@@ -37,8 +37,11 @@ pipeline: # ------- NLU
     epochs: 100
     constrain_similarities: true
 
-  #  - name: submodules.custom_components.intent_classifiers.zero_shot_gpt_intent_classifier.ZeroShotGPTIntentClassifier
+
   - name: submodules.custom_components.intent_classifiers.zero_shot_bart_intent_classifier.ZeroShotBartIntentClassifier
+    candidate_class_size: 5
+    fallback_threshold: 0.6 # fallback_classifier_threshold
+    threshold: 0.4 # threshold for zero shot classifier (must be lower than or equal to fallback_classifier_threshold)
 
   - name: EntitySynonymMapper
   - name: ResponseSelector
