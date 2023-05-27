@@ -37,12 +37,12 @@ pipeline: # ------- NLU
     epochs: 100
     constrain_similarities: true
 
-
 #  - name: submodules.custom_components.intent_classifiers.zero_shot_bart_intent_classifier.ZeroShotBartIntentClassifier
+#    threshold: 0.4
+#    ambiguity_threshold: 0.05
 #    candidate_class_size: 5
-#    threshold: 0.4 # threshold for zero shot classifier (must be lower than or equal to fallback_classifier_threshold)
-#    fallback_classifier_threshold: 0.6 # fallback_classifier_threshold
-#    fallback_classifier_ambiguity_threshold: 0.1: 0.6 # fallback_classifier_threshold
+#    fallback_classifier_threshold: 0.6 # must be same as FallbackClassifier
+#    fallback_classifier_ambiguity_threshold: 0.1 # must be same as FallbackClassifier
 
   - name: EntitySynonymMapper
   - name: ResponseSelector
