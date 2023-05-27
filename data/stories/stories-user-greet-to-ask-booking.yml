@@ -13,12 +13,30 @@ stories:
       - action: action_utter_wanna_book
       - checkpoint: checkpoint_wanna_book_restaurant
 
-  - story: User denies to check restaurant #2 user denies to check restaurant
+  - story: User denies to check restaurant #2
     steps:
       - checkpoint: checkpoint_wanna_book_restaurant
       - intent: deny
       - action: action_utter_thank_you
       - action: action_ask_anything_else
+
+  - story: ask user if he wants to book restaurant - not logged in #3b1
+    steps:
+      - checkpoint: checkpoint_wanna_book_restaurant
+      - intent: affirm
+      - slot_was_set:
+          - is_authenticated: false
+      - action: action_ask_registered_and_show_login_signup_quick_replies
+      - checkpoint: checkpoint_user_trying_to_login_or_signup
+
+  - story: User wants to see restaurants - not logged in #4b1
+    steps:
+      - checkpoint: checkpoint_wanna_book_restaurant
+      - intent: request_restaurants
+      - slot_was_set:
+          - is_authenticated: false
+      - action: action_ask_registered_and_show_login_signup_quick_replies
+      - checkpoint: checkpoint_user_trying_to_login_or_signup
 
   - story: User affirms to check restaurant - logged in #3
     steps:
@@ -29,15 +47,6 @@ stories:
       - action: action_show_cuisines
       - checkpoint: checkpoint_cuisine_selection
 
-  - story: User stops after not logged in #3b1
-    steps:
-      - checkpoint: checkpoint_wanna_book_restaurant
-      - intent: affirm
-      - slot_was_set:
-          - is_authenticated: false
-      - action: action_ask_registered_and_show_login_signup_quick_replies
-      - checkpoint: checkpoint_user_trying_to_login_or_signup
-
   - story: User request restaurant after greet and intro - logged in #4
     steps:
       - checkpoint: checkpoint_wanna_book_restaurant
@@ -46,16 +55,6 @@ stories:
           - is_authenticated: True
       - action: action_show_cuisines
       - checkpoint: checkpoint_cuisine_selection
-
-  - story: User stops after not logged in #4b1
-    steps:
-      - checkpoint: checkpoint_wanna_book_restaurant
-      - intent: request_restaurants
-      - slot_was_set:
-          - is_authenticated: false
-      - action: action_ask_registered_and_show_login_signup_quick_replies
-      - checkpoint: checkpoint_user_trying_to_login_or_signup
-
 
   - story: User logs in after being prompted
     steps:

@@ -100,9 +100,19 @@ class ZeroShotBartIntentClassifier(GraphComponent):
                 # TODO: when 'haiya chatbot' is entered greet is not in intent ranking so still fail
                 # TODO: when 'hiaya chatbot' is entered greet is in intent ranking
                 #  however after sending it to ZSC confidence is < than fallback_classifier_threshold hence trigger nlu_fallback
+                # TODO: if confidence is less than a certain value ask from user
+                #             # Set the language entity
+                #             # removed below for bug fixing TODO: uncomment for further debugging and improvements
+                #             entity = {
+                #                 'value': language,
+                #                 'confidence': 0.1,
+                #                 'entity': 'language',
+                #                 'extractor': 'LanguageHandler'
+                #             }
+                #             message.set("entities", [entity], add_to_output=True)
 
                 except Exception as e:
-                    print(f"Failed to predict intent for text '{text}': {str(e)}")
+                    print(f"Failed to predict intent by zero shot bart for text '{text}': {str(e)}")
         return messages
 
     @staticmethod

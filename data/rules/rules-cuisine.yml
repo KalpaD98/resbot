@@ -1,8 +1,2 @@
 version: "3.1"  # rules-cuisine.yml has cuisine related rules
 
-rules:
-
-  - rule: when user ask to show cuisines display quick replies with cuisines #1 ✅
-    steps:
-      - intent: request_cuisines # later add user auth
-      - action: action_show_cuisines

@@ -26,7 +26,7 @@ pipeline: # ------- NLU
     min_ngram: 1
     max_ngram: 4
 
-    #  - name: submodules.custom_components.featurizers.gpt_vectorized_featurizer.GPTVectorFeaturizer
+#  - name: submodules.custom_components.featurizers.gpt_vectorized_featurizer.GPTVectorFeaturizer
 
     # Entity Extractor
   - name: SpacyEntityExtractor
@@ -38,10 +38,11 @@ pipeline: # ------- NLU
     constrain_similarities: true
 
 
-  - name: submodules.custom_components.intent_classifiers.zero_shot_bart_intent_classifier.ZeroShotBartIntentClassifier
-    candidate_class_size: 5
-    fallback_threshold: 0.6 # fallback_classifier_threshold
-    threshold: 0.4 # threshold for zero shot classifier (must be lower than or equal to fallback_classifier_threshold)
+#  - name: submodules.custom_components.intent_classifiers.zero_shot_bart_intent_classifier.ZeroShotBartIntentClassifier
+#    candidate_class_size: 5
+#    threshold: 0.4 # threshold for zero shot classifier (must be lower than or equal to fallback_classifier_threshold)
+#    fallback_classifier_threshold: 0.6 # fallback_classifier_threshold
+#    fallback_classifier_ambiguity_threshold: 0.1: 0.6 # fallback_classifier_threshold
 
   - name: EntitySynonymMapper
   - name: ResponseSelector

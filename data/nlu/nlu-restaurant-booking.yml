@@ -44,6 +44,9 @@ nlu:
       - [40](num_people)
       - [50](num_people)
       - [100](num_people)
+      - [4] guys
+      - [12] gals
+      
 
   - intent: inform_date # find a way to extract date from descriptions apart from duckling server
     examples: |
@@ -106,3 +109,4 @@ nlu:
       - cancel this
       - stop this
       - stop booking
+      - i cant fill these

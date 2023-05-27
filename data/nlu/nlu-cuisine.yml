@@ -9,6 +9,12 @@ nlu:
       - cuisines please
       - show cuisines
       - cuisines
+      - I would like to see cuisines
+      - I want to see cuisines
+      - I want like to see the cuisines again
+      - show me the cuisines again
+      - show me the cuisines
+      - what are the available cuisines
 
   - intent: inform_cuisine
     examples: |
@@ -30,3 +36,5 @@ nlu:
       - whatever [Any](cuisine) cuisine 
       - [Any](cuisine) thing
       - [Multi](cuisine) cuisine
+      - I would like to try [italian](cuisine)
+      - any [chinese](cuisine) restaurants available?

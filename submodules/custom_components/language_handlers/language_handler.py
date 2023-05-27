@@ -66,7 +66,7 @@ class LanguageHandlerAndTranslator(GraphComponent):
             # removed below for bug fixing TODO: uncomment for further debugging and improvements
             # entity = {
             #     'value': language,
-            #     'confidence': probability,
+            #     'confidence': 0.0001,
             #     'entity': 'language',
             #     'extractor': 'LanguageHandler'
             # }
