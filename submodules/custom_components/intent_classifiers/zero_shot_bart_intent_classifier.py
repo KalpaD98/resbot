@@ -1,7 +1,6 @@
 import logging
 from typing import Dict, Text, Any, List, Type
 
-import numpy as np
 from dotenv import load_dotenv
 from rasa.engine.graph import GraphComponent, ExecutionContext
 from rasa.engine.recipes.default_recipe import DefaultV1Recipe
@@ -36,8 +35,9 @@ class ZeroShotBartIntentClassifier(GraphComponent):
             "threshold": 0.2,
             "ambiguity_threshold": 0.05,
             "candidate_class_size": 5,
-            "fallback_classifier_threshold": 0.3,
-            "fallback_classifier_ambiguity_threshold": 0.1,
+            "top_intent_confidence_threshold": 0.9,
+            "fallback_classifier_threshold": 0.3,  # must be same as the threshold given for fallback_classifier (fbc)
+            "fallback_classifier_ambiguity_threshold": 0.1,  # must be same as the ambiguity threshold (fbc)
         }
 
     @classmethod
@@ -49,6 +49,7 @@ class ZeroShotBartIntentClassifier(GraphComponent):
         print("init ZeroShotBartIntentClassifier")
         self.name = name
         print("Init ZeroShotBartIntentClassifier and model")
+        # TODO : pretrained below model in HFT
         self.clf = pipeline("zero-shot-classification", model="facebook/bart-large-mnli")
         self._model_storage = model_storage
         self._resource = resource
@@ -57,6 +58,7 @@ class ZeroShotBartIntentClassifier(GraphComponent):
         self.ambiguity_threshold = config["ambiguity_threshold"]
 
         self.candidate_class_size = config["candidate_class_size"]
+        self.top_intent_confidence_threshold = config["top_intent_confidence_threshold"]
 
         self.fallback_classifier_threshold = config["fallback_classifier_threshold"]
         self.fallback_classifier_ambiguity_threshold = config["fallback_classifier_ambiguity_threshold"]
@@ -74,41 +76,44 @@ class ZeroShotBartIntentClassifier(GraphComponent):
     def process(self, messages: List[Message]) -> List[Message]:
         """Process the list of messages."""
         # predict only if DIET fails
-        print("Processing ZeroShotBartIntentClassifier")
+        print("\nProcess ZERO SHOT Bart Classifier")
         for message in messages:
             intent_ranking = message.get(INTENT_RANKING_KEY)
             intent = message.get(INTENT)
-            print("Process ZERO SHOT Bart Classifier")
-            print("\n----Intents from diet----\n")
+
+            print("\n----Intent Ranking from DIET classifier----\n")
             print(intent_ranking)
-            print("\nDIET choosen intent: ", intent)
+            print("\nDIET chosen intent: ", intent)
             print()
-            print("Process ZERO SHOT Bart Classifier complete")
+
             text = message.get(TEXT)
             # check for intent being nlu_fallback if yes then run below code
             # can use this condition to control
             if self._should_classify_with_bart(self, text, intent_ranking):
+                print("DIET failed to predict intent within given confidence. Trying to predict via bart\n")
                 try:
                     # get from DIET and add from GPT pretrain and add other
                     candidate_labels = self._get_candidate_labels(self, intent_ranking)
-                    print(text)
+                    print("text:", text)
                     prediction_data = self.clf(text, candidate_labels)
                     # Transform to intent ranking format of rasa
-                    new_intent_ranking = self._get_bart_intent_ranking(prediction_data)
-                    print("New intent rankings by bart zero shot")
+                    new_intent_ranking = self._get_bart_intent_ranking(self, prediction_data)
+                    print("----- New intent rankings by bart zero shot -----\n")
                     print(new_intent_ranking)
 
-                    if self._should_add_to_tracker(self, new_intent_ranking):
+                    if self._should_add_new_intent_rankings_to_tracker(self, new_intent_ranking):
+                        print("prediction of zero shot: ", new_intent_ranking[0])
                         message.set(INTENT, new_intent_ranking[0], add_to_output=True)
                         message.set(INTENT_RANKING_KEY, new_intent_ranking, add_to_output=True)
-                        print("prediction of zero shot: ", new_intent_ranking[0])
+                        print("updated the tracker with new intent ranking")
                     else:
                         print("Not adding to tracker: not enough confidence")
-# TODO: when 'haiya chatbot' is entered greet is not in intent ranking so still fail
-# TODO: when 'hiaya chatbot' is entered greet is in intent ranking
-#  however after sending it to ZSC confidence is < than fallback_classifier_threshold hence trigger nlu_fallback
+                # TODO: when 'haiya chatbot' is entered greet is not in intent ranking so still fail
+                # TODO: when 'hiaya chatbot' is entered greet is in intent ranking
+                #  however after sending it to ZSC confidence is < than fallback_classifier_threshold hence trigger nlu_fallback
 
                 # TODO: if confidence is less than a certain value ask from user
+
                 #             # Set the language entity
                 #             # removed below for bug fixing
                 #             entity = {
@@ -138,23 +143,24 @@ class ZeroShotBartIntentClassifier(GraphComponent):
         return unique_intents
 
     @staticmethod
-    def _should_classify_with_bart(self, text, intent_ranking):
-        """Determines whether text should be classified with BART classifier based on intent ranking and thresholds."""
-
-        # Make sure there are at least two intents in the intent_ranking
-        if len(intent_ranking) < 2:
+    def _should_classify_with_bart(self, text, diet_intent_ranking):
+        """Determines whether text should be classified with BART classifier based on DIET intent ranking and
+        fallback classifier thresholds."""
+        if text is None or diet_intent_ranking is None or len(diet_intent_ranking) == 0:
             return False
 
-        top_intent = intent_ranking[0]
-        return (
-                text and
-                top_intent['confidence'] < self.fallback_classifier_threshold and
-                (top_intent['confidence'] - intent_ranking[1]['confidence']) <
-                self.fallback_classifier_ambiguity_threshold
-        )
+        top_intent = diet_intent_ranking[0]
+
+        # Make sure there are at least two intents in the intent_ranking
+        if len(diet_intent_ranking) < 2:
+            return False
+        second_top_intent = diet_intent_ranking[1]
+        return (top_intent['confidence'] < self.fallback_classifier_threshold or
+                (top_intent['confidence'] - second_top_intent['confidence'])
+                < self.fallback_classifier_ambiguity_threshold)
 
     @staticmethod
-    def _should_add_to_tracker(self, bart_intent_ranking):
+    def _should_add_new_intent_rankings_to_tracker(self, bart_intent_ranking):
         """Determines whether text should be processed with BART classifier based on intent ranking and thresholds."""
         top_intent = bart_intent_ranking[0]
         meet_threshold_confidence = top_intent['confidence'] >= self.threshold
@@ -167,17 +173,17 @@ class ZeroShotBartIntentClassifier(GraphComponent):
             return meet_threshold_confidence and meet_ambiguity_threshold_confidence
 
     @staticmethod
-    def _get_bart_intent_ranking(prediction_data):
+    def _get_bart_intent_ranking(self, prediction_data):
         """Transform the prediction data into the intent ranking format of rasa."""
 
         # Create a list of tuples where each tuple is (label, score)
         label_score_pairs = list(zip(prediction_data['labels'], prediction_data['scores']))
 
         # Check the first label
-        if label_score_pairs[0][1] >= 0.9:
+        if label_score_pairs[0][1] >= self.top_intent_confidence_threshold:
             new_intent_ranking = [{'name': label_score_pairs[0][0], 'confidence': label_score_pairs[0][1]}]
         else:
-            # Pick the highest scoring labels that sum up to at most 0.9
+            # Pick the highest scoring labels that sum up to at most 0.99
             new_intent_ranking = []
             total_score = 0
             for label, score in label_score_pairs:
@@ -198,8 +204,10 @@ class ZeroShotBartIntentClassifier(GraphComponent):
     def _get_candidate_labels(self, intent_ranking):
         num_intents = len(intent_ranking)
         clas_size = self.candidate_class_size
-        num_intents_to_classify = num_intents if num_intents < clas_size else clas_size  # five top intents
+        num_intents_to_classify = min(num_intents, clas_size)  # top intents
         candidate_labels = [item['name'] for item in intent_ranking[:num_intents_to_classify]]
+        print("Pushing below labels to zero shot classifier")
+        print("Candidate labels: ", candidate_labels)
         candidate_labels.append('other')  # to catch out of scope
         return candidate_labels
 
