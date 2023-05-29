@@ -137,36 +137,6 @@ class ActionUtterMoodUnhappyFeedback(Action):
         return []
 
 
-class ActionUtterEmojiGreatFeedback(Action):
-    def name(self) -> Text:
-        return "action_utter_emoji_great_feedback"
-
-    def run(self, dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        english_messages = ["😊", "😄"]
-        sinhala_messages = ["😊", "😄"]
-
-        choose_and_send_message(dispatcher, english_messages, sinhala_messages, tracker)
-
-        return []
-
-
-class ActionUtterEmojiMoodUnhappyFeedback(Action):
-    def name(self) -> Text:
-        return "action_utter_emoji_mood_unhappy_feedback"
-
-    def run(self, dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        english_messages = ["Eating something might help 🤗", "Eating something might help 😊"]
-        sinhala_messages = ["ඔක අමතක වෙන්නත් එක්ක මොනාහරි කමුද?.", "hmm, මොනාහරි කෑවනම් ඔක මගහැරෙයි සමහරවිට."]
-
-        choose_and_send_message(dispatcher, english_messages, sinhala_messages, tracker)
-
-        return []
-
-
 class ActionUtterThankYou(Action):
     def name(self) -> Text:
         return "action_utter_thank_you"

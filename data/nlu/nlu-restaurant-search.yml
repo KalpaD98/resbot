@@ -12,7 +12,6 @@ nlu:
 
   - intent: search_restaurants
     examples: |
-      - im looking for a restaurant
       - can i get [swedish](cuisine) food in any area
       - a restaurant that serves [caribbean](cuisine) food
       - id like a restaurant

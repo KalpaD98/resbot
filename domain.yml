@@ -20,11 +20,7 @@ intents:
   - deny
   - thank_you
   - stop
-  - emoji_mood_great
-  - emoji_mood_unhappy
-  - emoji_goodbye
-  - emoji_affirm
-  - emoji_deny
+
 
   # ---------------------------------------------------- cuisine.yml ------------------------------------------------- #
   - request_cuisines
@@ -462,8 +458,6 @@ actions:
   - action_utter_greet_again
   - action_utter_mood_great_feedback
   - action_utter_mood_unhappy_feedback
-  - action_utter_emoji_great_feedback
-  - action_utter_emoji_mood_unhappy_feedback
   - action_utter_thank_you
   - action_utter_welcome
   - action_utter_goodbye

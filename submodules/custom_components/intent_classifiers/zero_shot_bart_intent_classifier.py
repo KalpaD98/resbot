@@ -1,4 +1,6 @@
+import csv
 import logging
+from collections import Counter
 from typing import Dict, Text, Any, List, Type
 
 from dotenv import load_dotenv
@@ -6,7 +8,6 @@ from rasa.engine.graph import GraphComponent, ExecutionContext
 from rasa.engine.recipes.default_recipe import DefaultV1Recipe
 from rasa.engine.storage.resource import Resource
 from rasa.engine.storage.storage import ModelStorage
-from rasa.nlu.classifiers.classifier import IntentClassifier
 from rasa.shared.nlu.constants import INTENT, TEXT, INTENT_RANKING_KEY
 from rasa.shared.nlu.training_data.message import Message
 from rasa.shared.nlu.training_data.training_data import TrainingData
@@ -17,12 +18,12 @@ logger = logging.getLogger(__name__)
 
 
 @DefaultV1Recipe.register(
-    DefaultV1Recipe.ComponentType.INTENT_CLASSIFIER, is_trainable=False
+    DefaultV1Recipe.ComponentType.INTENT_CLASSIFIER, is_trainable=True
 )
 class ZeroShotBartIntentClassifier(GraphComponent):
     @classmethod
     def required_components(cls) -> List[Type]:
-        return [IntentClassifier]
+        return []
 
     @classmethod
     def required_packages(cls) -> List[Text]:
@@ -128,19 +129,33 @@ class ZeroShotBartIntentClassifier(GraphComponent):
                     print(f"Failed to predict intent by zero shot bart for text '{text}': {str(e)}")
         return messages
 
+    def train(self, training_data: TrainingData) -> Resource:
+        self._get_training_data(self, training_data)
+        return self._resource
+
     @staticmethod
-    def _get_training_data(training_data: TrainingData) -> set[Any]:
+    def _get_training_data(self, training_data: TrainingData) -> set[Any]:
         """Preprocess the training data. Retrieve the text messages and their corresponding intents."""
+
         print("Getting training data for ZeroShotBartIntentClassifier")
 
-        unique_intents = set()
+        intents = []
 
         for example in training_data.training_examples:
             intent = example.get(INTENT)
+            if intent:
+                intents.append(intent)
 
-            if intent and intent not in unique_intents:
-                unique_intents.add(intent)
-        return unique_intents
+        intent_counts = Counter(intents)
+
+        # Write intent_counts to a csv file
+        with open('intent_counts.csv', 'w', newline='') as csvfile:
+            writer = csv.writer(csvfile)
+            writer.writerow(["intent_name", "count"])
+            for intent, count in intent_counts.items():
+                writer.writerow([intent, count])
+
+        return set(intent_counts.keys())
 
     @staticmethod
     def _should_classify_with_bart(self, text, diet_intent_ranking):

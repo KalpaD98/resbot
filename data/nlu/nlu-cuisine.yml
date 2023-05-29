@@ -15,6 +15,7 @@ nlu:
       - show me the cuisines again
       - show me the cuisines
       - what are the available cuisines
+#      - show me food types
 
   - intent: inform_cuisine
     examples: |

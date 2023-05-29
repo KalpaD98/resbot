@@ -60,6 +60,9 @@ nlu:
       - im okay
       - im ok
       - im fine thank you
+      - I'm feeling 😊 today!
+      - 🥳
+      - 😆
 
   - intent: mood_unhappy
     examples: |
@@ -80,7 +83,11 @@ nlu:
       - i feel sad
       - i feel bad
       - sad
-      - bad
+      - bad 
+      - sad 😢
+      - crying 😢
+      - 😭
+      - 😢
 
   - intent: goodbye
     examples: |
@@ -100,6 +107,9 @@ nlu:
       - see you later
       - tata
       - have a great day  
+      - 👋
+      - ✌️
+      - ✋
 
   - intent: affirm
     examples: |
@@ -136,6 +146,9 @@ nlu:
       - sure
       - im in
       - i'm in
+      - 👍
+      - 🙌
+      - 🫡
 
 
   - intent: deny
@@ -159,6 +172,12 @@ nlu:
       - hell no
       - dont
       - don't
+      - nooo
+      - 👎
+      - 🙅‍♂️
+      - 🙅‍♀️
+      - 🙅
+      - 🚫
 
   - intent: thank_you
     examples: |
