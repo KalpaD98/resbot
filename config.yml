@@ -8,7 +8,7 @@ pipeline: # ------- NLU
 
     # Load Language model
   - name: SpacyNLP
-    model: en_core_web_sm
+    model: en_core_web_lg
     case_sensitive: False
 
     # Tokenizer
@@ -32,7 +32,7 @@ pipeline: # ------- NLU
 
     # Intent and Entity Extractor
   - name: DIETClassifier
-    epochs: 100
+    epochs: 150
     constrain_similarities: true
 
   - name: submodules.custom_components.intent_classifiers.zero_shot_bart_intent_classifier.ZeroShotBartIntentClassifier
@@ -40,8 +40,8 @@ pipeline: # ------- NLU
     ambiguity_threshold: 0.05
     candidate_class_size: 5
     top_intent_confidence_threshold: 0.95
-    fallback_classifier_threshold: 0.6 # must be same as FallbackClassifier
-    fallback_classifier_ambiguity_threshold: 0.1 # must be same as FallbackClassifier
+    fallback_classifier_threshold: 0.6                # must be same as FallbackClassifier threshold
+    fallback_classifier_ambiguity_threshold: 0.1      # must be same as FallbackClassifier ambiguity_threshold
 
   - name: EntitySynonymMapper
   - name: ResponseSelector
@@ -57,16 +57,16 @@ policies: # ------- Dialog Management
   - name: MemoizationPolicy
     max_history: 16
 
-  - name: AugmentedMemoizationPolicy
-    max_history: 24
-
   - name: RulePolicy
+    core_fallback_threshold: 0.3
+    core_fallback_action_name: action_default_fallback
+    enable_fallback_prediction: true
 
   - name: UnexpecTEDIntentPolicy
     max_history: 16
-    epochs: 200
+    epochs: 100
 
   - name: TEDPolicy
     max_history: 16
-    epochs: 200
+    epochs: 100
     constrain_similarities: true

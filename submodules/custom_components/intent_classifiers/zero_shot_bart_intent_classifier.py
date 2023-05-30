@@ -18,9 +18,24 @@ logger = logging.getLogger(__name__)
 
 
 @DefaultV1Recipe.register(
-    DefaultV1Recipe.ComponentType.INTENT_CLASSIFIER, is_trainable=True
+    DefaultV1Recipe.ComponentType.INTENT_CLASSIFIER, is_trainable=False
 )
 class ZeroShotBartIntentClassifier(GraphComponent):
+    """A GraphComponent in RASA for Intent classification using a ZeroShot BART model.
+
+        This component receives a list of messages as input and assigns intent labels
+        to each message based on the classification output from a pretrained BART model.
+        We do not need to train this model.
+
+        Attributes:
+            threshold: A minimum confidence score for an intent to be considered.
+            ambiguity_threshold: An intent will be considered ambiguous if the confidence difference between
+                                 it and the second-highest intent is less than this threshold.
+            candidate_class_size: Maximum number of candidate intents to consider.
+            top_intent_confidence_threshold: A minimum confidence score for the top intent.
+            fallback_classifier_threshold: A minimum confidence score of fallback  classifier.
+            fallback_classifier_ambiguity_threshold: ambiguity_threshold of fallback.
+        """
     @classmethod
     def required_components(cls) -> List[Type]:
         return []
@@ -75,7 +90,17 @@ class ZeroShotBartIntentClassifier(GraphComponent):
         return cls(config, execution_context.node_name, model_storage, resource)
 
     def process(self, messages: List[Message]) -> List[Message]:
-        """Process the list of messages."""
+        """Classify the intent of each message using ZeroShot BART model.
+
+        Args:
+        messages: A list of Message objects.
+
+        Returns:
+        A list of Message objects with additional intent and intent ranking attributes.
+
+        Raises:
+        Exception: If the ZeroShot BART model fails to predict intent due to an issue.
+        """
         # predict only if DIET fails
         print("\nProcess ZERO SHOT Bart Classifier")
         for message in messages:
@@ -88,19 +113,23 @@ class ZeroShotBartIntentClassifier(GraphComponent):
             print()
 
             text = message.get(TEXT)
+
+            if '/' in text:  # If intent is explicitly defined we do not need to run zero shot classifier
+                break
+
             # check for intent being nlu_fallback if yes then run below code
-            # can use this condition to control
-            if self._should_classify_with_bart(self, text, intent_ranking):
+            if self._should_classify_with_bart(self, text, intent_ranking):  # can use this condition to control
                 print("DIET failed to predict intent within given confidence. Trying to predict via bart\n")
                 try:
                     # get from DIET and add from GPT pretrain and add other
                     candidate_labels = self._get_candidate_labels(self, intent_ranking)
                     print("text:", text)
+                    print("candidate_labels: ", candidate_labels)
                     prediction_data = self.clf(text, candidate_labels)
                     # Transform to intent ranking format of rasa
+
                     new_intent_ranking = self._get_bart_intent_ranking(self, prediction_data)
-                    print("----- New intent rankings by bart zero shot -----\n")
-                    print(new_intent_ranking)
+                    print("New intent rankings by bart zero shot: ", new_intent_ranking)
 
                     if self._should_add_new_intent_rankings_to_tracker(self, new_intent_ranking):
                         print("prediction of zero shot: ", new_intent_ranking[0])
@@ -129,9 +158,9 @@ class ZeroShotBartIntentClassifier(GraphComponent):
                     print(f"Failed to predict intent by zero shot bart for text '{text}': {str(e)}")
         return messages
 
-    def train(self, training_data: TrainingData) -> Resource:
-        self._get_training_data(self, training_data)
-        return self._resource
+    # def train(self, training_data: TrainingData) -> Resource:
+    #     self._get_training_data(self, training_data)
+    #     return self._resource
 
     @staticmethod
     def _get_training_data(self, training_data: TrainingData) -> set[Any]:
@@ -177,6 +206,8 @@ class ZeroShotBartIntentClassifier(GraphComponent):
     @staticmethod
     def _should_add_new_intent_rankings_to_tracker(self, bart_intent_ranking):
         """Determines whether text should be processed with BART classifier based on intent ranking and thresholds."""
+        if not bart_intent_ranking:
+            return False
         top_intent = bart_intent_ranking[0]
         meet_threshold_confidence = top_intent['confidence'] >= self.threshold
         if len(bart_intent_ranking) < 2:
@@ -189,14 +220,17 @@ class ZeroShotBartIntentClassifier(GraphComponent):
 
     @staticmethod
     def _get_bart_intent_ranking(self, prediction_data):
+        print("_get_bart_intent_ranking")
         """Transform the prediction data into the intent ranking format of rasa."""
-
+        print()
+        new_intent_ranking = []
         # Create a list of tuples where each tuple is (label, score)
         label_score_pairs = list(zip(prediction_data['labels'], prediction_data['scores']))
-
+        print("label_score_pairs: ", label_score_pairs)
         # Check the first label
         if label_score_pairs[0][1] >= self.top_intent_confidence_threshold:
             new_intent_ranking = [{'name': label_score_pairs[0][0], 'confidence': label_score_pairs[0][1]}]
+            print("new intent ranking: ", new_intent_ranking)
         else:
             # Pick the highest scoring labels that sum up to at most 0.99
             new_intent_ranking = []
@@ -212,7 +246,7 @@ class ZeroShotBartIntentClassifier(GraphComponent):
         else:
             # Remove other
             new_intent_ranking = [intent for intent in new_intent_ranking if intent['name'] != 'other']
-
+        print("end _get_bart_intent_ranking")
         return new_intent_ranking
 
     @staticmethod

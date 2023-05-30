@@ -60,22 +60,21 @@ class LanguageHandlerAndTranslator(GraphComponent):
                     translated_text = translator.translate(text, src='si', dest='en')
                     text = translated_text.text  # Update the text with the translated version
                     print("translated message: " + text)
+                    message.set('text', text, add_to_output=True)
+                    print("setting message: " + message.get('text'))
+                    # Set the language entity
+
+                    # TODO: uncomment for further debugging and improvements (removed below for bug fixing)
+                    # entity = {
+                    #     'value': language,
+                    #     'confidence': 0.0001,
+                    #     'entity': 'language',
+                    #     'extractor': 'LanguageHandler'
+                    # }
+                    # message.set("entities", [entity], add_to_output=True)
+
+                    # Update the message's text with the translated version
                     break
-
-            # Set the language entity
-            # removed below for bug fixing TODO: uncomment for further debugging and improvements
-            # entity = {
-            #     'value': language,
-            #     'confidence': 0.0001,
-            #     'entity': 'language',
-            #     'extractor': 'LanguageHandler'
-            # }
-            # message.set("entities", [entity], add_to_output=True)
-
-            # Update the message's text with the translated version
-            message.set('text', text.lower(), add_to_output=True)
-
-            print("setting message: " + message.get('text'))
 
         print("---------------------LanguageHandler Ended---------------------")
         return messages

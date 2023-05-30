@@ -1,7 +1,7 @@
 version: "3.1" # nlu-query-knowledge-base.yml
 nlu:
 
-  - intent: query_knowledge_base
+  - intent: query_knowledge_base #TODO: change this data to match with our KB
     examples: |
       - I am looking for a [French](cuisine) restaurant in the [new york](location) area
       - what [restaurants]{"entity": "object_type", "value": "restaurant"} can you recommend?

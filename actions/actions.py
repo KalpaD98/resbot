@@ -1,7 +1,6 @@
 # Actions.py This files contains custom all_actions which can be used to run custom Python code.
 # See this guide on how to implement these action:
 # https://rasa.com/docs/rasa/custom-actions
-from rasa_sdk.events import UserUtteranceReverted
 
 # noinspection PyUnresolvedReferences
 from actions.all_actions.bot_response_actions import *  # bot response actions
@@ -139,25 +138,56 @@ class ActionClearRestaurantBookingSlots(Action):
                 SlotSet(TIME, None)]
 
 
+from typing import Any, Dict, List, Text
+
+from rasa_sdk import Action, Tracker
+from rasa_sdk.events import UserUtteranceReverted, FollowupAction
+from rasa_sdk.executor import CollectingDispatcher
+
+
 class ActionDefaultFallback(Action):
-    """Executes the fallback action and
-    goes back to the previous state
-    of the dialogue"""
-
     def name(self) -> Text:
-        return ACTION_DEFAULT_FALLBACK
+        return "action_default_fallback"
 
-    async def run(
+    def run(
             self,
             dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any],
     ) -> List[Dict[Text, Any]]:
-        language = LanguageSelector.get_language(tracker)
-        if language == SIN:
-            dispatcher.utter_message(template="my_custom_fallback_template_sin")
-        else:
-            dispatcher.utter_message(template="my_custom_fallback_template")
+        # get the list of intents from the latest user message
+        intents = [intent['name'] for intent in tracker.latest_message['intent_ranking']]
 
-        # Revert user message which led to fallback.
-        return [UserUtteranceReverted()]
+        # generate a message with a list of buttons for user to select
+        buttons = [{"title": intent, "payload": f"/{intent}"} for intent in intents]
+
+        dispatcher.utter_message(
+            text="I'm not sure about that. Did you mean one of these?",
+            buttons=buttons,
+        )
+
+        return [UserUtteranceReverted(), FollowupAction("action_listen")]
+#
+#
+# class ActionDefaultFallback(Action):
+#     """Executes the fallback action and
+#     goes back to the previous state
+#     of the dialogue"""
+#
+#     def name(self) -> Text:
+#         return ACTION_DEFAULT_FALLBACK
+#
+#     async def run(
+#             self,
+#             dispatcher: CollectingDispatcher,
+#             tracker: Tracker,
+#             domain: Dict[Text, Any],
+#     ) -> List[Dict[Text, Any]]:
+#         language = LanguageSelector.get_language(tracker)
+#         if language == SIN:
+#             dispatcher.utter_message(template="my_custom_fallback_template_sin")
+#         else:
+#             dispatcher.utter_message(template="my_custom_fallback_template")
+#
+#         # Revert user message which led to fallback.
+#         return [UserUtteranceReverted()]
