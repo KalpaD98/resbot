@@ -64,27 +64,6 @@ class ActionUtterWannaBook(Action):
         return []
 
 
-class ActionUtterPleaseRephrase(Action):
-    def name(self) -> Text:
-        return "action_utter_please_rephrase"
-
-    def run(self, dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        english_messages = [
-            "I'm sorry, I couldn't understand that. Could you rephrase it?",
-            "Sorry I didn't get that. Can you rephrase?",
-            "Sorry, I'm not sure I understand. Can you rephrase?"
-        ]
-        sinhala_messages = [
-            "සමාවෙන්න, මට එය තේරුම් ගන්න බැරි විය. වෙනස් වචනයෙන් නැවත කිව හැකිද?",
-            "කණගාටුයි, මට තේරුන් නැහැ. වෙනස් වචනයෙන් නැවත කිව හැකිද?"
-        ]
-        choose_and_send_message(dispatcher, english_messages, sinhala_messages, tracker)
-
-        return []
-
-
 class ActionUtterGreetAgain(Action):  # not used in any stories
     def name(self) -> Text:
         return "action_utter_greet_again"
@@ -545,6 +524,28 @@ class ActionUtterAskRegisteredUser(Action):  # not used in any story
         english_messages = ["Are you a registered user?"]
         sinhala_messages = ["ඔබ ලියාපදිංචි පරිශීලකයෙක්ද?"]
 
+        choose_and_send_message(dispatcher, english_messages, sinhala_messages, tracker)
+
+        return []
+
+
+class ActionUtterPleaseRephrase(Action):
+    def name(self) -> Text:
+        return "action_utter_please_rephrase"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        english_messages = [
+            "I'm sorry, I couldn't understand that. Could you rephrase it?",
+            "I'm sorry, I didn't quite understand that. Could you rephrase?",
+            "Sorry, I'm not sure I understand. Can you rephrase?",
+            "Sorry I didn't get that. Can you rephrase?",
+        ]
+        sinhala_messages = [
+            "සමාවෙන්න, මට එය තේරුම් ගන්න බැරි විය. වෙනස් වචනයෙන් නැවත කිව හැකිද?",
+            "කණගාටුයි, මට තේරුන් නැහැ. වෙනස් වචනයෙන් නැවත කිව හැකිද?"
+        ]
         choose_and_send_message(dispatcher, english_messages, sinhala_messages, tracker)
 
         return []

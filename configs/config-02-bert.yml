@@ -6,7 +6,7 @@ pipeline:
   - name: WhitespaceTokenizer
   - name: RegexFeaturizer
   - name: LexicalSyntacticFeaturizer
-  - name: LanguageModelFeaturizer
+  - name: LanguageModelFeaturizer # dense features
     model_name: "bert"
     model_weights: "bert-base-uncased"
   - name: CountVectorsFeaturizer

@@ -12,22 +12,17 @@ rules:
       - intent: out_of_scope
       - action: utter_out_of_scope
 
-  - rule: Ask the user to rephrase whenever they send a message with low NLU confidence #3 ✅
+  - rule: when user say thank you reply welcome #3 ✅
     steps:
-      - intent: nlu_fallback
-      - action: action_utter_please_rephrase
+      - intent: thank_you
+      - action: action_utter_welcome
 
   - rule: say goodbye whenever user says goodbye #4 ✅
     steps:
       - intent: goodbye
       - action: action_utter_goodbye
 
-  - rule: when user say thank you reply welcome #5 ✅
-    steps:
-      - intent: thank_you
-      - action: action_utter_welcome
-
-#  - rule: when user say stop reply see you later #6 ✅
+#  - rule: when user say stop reply see you later #5 ✅
 #    steps:
 #      - intent: stop
 #      - action: action_clear_restaurant_booking_slots

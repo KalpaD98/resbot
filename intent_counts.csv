@@ -1,11 +1,6 @@
 intent_name,count
 request_cuisines,14
 inform_cuisine,21
-emoji_mood_great,16
-emoji_mood_unhappy,12
-emoji_goodbye,6
-emoji_affirm,3
-emoji_deny,5
 inform_permanent_language,17
 query_knowledge_base,19
 user_wants_to_cancel_booking,7
@@ -37,7 +32,7 @@ request_more_restaurant_options,10
 request_opening_hours,2
 request_ambiance,10
 want_to_search_restaurants,7
-search_restaurants,44
+search_restaurants,43
 bot_challenge,11
 out_of_scope,19
 inform_favorite_cuisines,5
@@ -48,11 +43,11 @@ inform_user_name,18
 inform_user_email,6
 inform_user_password,5
 greet,27
-mood_great,27
-mood_unhappy,17
-goodbye,17
-affirm,31
-deny,19
+mood_great,31
+mood_unhappy,22
+goodbye,20
+affirm,34
+deny,25
 thank_you,12
 stop,19
 nlu_fallback,1

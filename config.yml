@@ -8,25 +8,23 @@ pipeline: # ------- NLU
 
     # Load Language model
   - name: SpacyNLP
-    model: en_core_web_trf
+    model: en_core_web_sm
     case_sensitive: False
 
     # Tokenizer
   - name: SpacyTokenizer
-    intent_tokenization_flag: True # to use multi intents
+    intent_tokenization_flag: True        # to use multi intents
     intent_split_symbol: "+"
 
     # Featurizers
-  - name: RegexFeaturizer
-  - name: SpacyFeaturizer
-  - name: LexicalSyntacticFeaturizer
-  - name: CountVectorsFeaturizer # one hot encoding
-  - name: CountVectorsFeaturizer # char level n-grams
+  - name: RegexFeaturizer                 # Sparse featurizer
+  - name: SpacyFeaturizer                 # Dense featurizer
+  - name: LexicalSyntacticFeaturizer      # Sparse featurizer
+  - name: CountVectorsFeaturizer          # Sparse featurizer | one hot encoding
+  - name: CountVectorsFeaturizer          # Sparse featurizer | char level n-grams
     analyzer: char_wb
     min_ngram: 1
     max_ngram: 4
-
-    #  - name: submodules.custom_components.featurizers.gpt_vectorized_featurizer.GPTVectorFeaturizer
 
     # Entity Extractor
   - name: SpacyEntityExtractor
@@ -57,13 +55,18 @@ pipeline: # ------- NLU
 policies: # ------- Dialog Management
 
   - name: MemoizationPolicy
+    max_history: 16
+
+  - name: AugmentedMemoizationPolicy
+    max_history: 24
+
   - name: RulePolicy
 
   - name: UnexpecTEDIntentPolicy
-    max_history: 8
-    epochs: 100
+    max_history: 16
+    epochs: 200
 
   - name: TEDPolicy
     max_history: 16
-    epochs: 100
+    epochs: 200
     constrain_similarities: true
