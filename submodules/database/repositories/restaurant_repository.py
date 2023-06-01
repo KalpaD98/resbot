@@ -79,7 +79,26 @@ class RestaurantRepository:
         :return: List of Restaurant objects
         """
         try:
-            cursor = self.collection.find({"cuisine": cuisine}).skip(offset).limit(limit)
+            # Use the aggregation pipeline to add a new field
+            pipeline = [
+                {
+                    "$addFields": {
+                        "cuisine_categories": {"$concatArrays": ["$categories", ["$cuisine"]]}
+                    }
+                },
+                {
+                    "$match": {
+                        "cuisine_categories": cuisine
+                    }
+                },
+                {
+                    "$skip": offset
+                },
+                {
+                    "$limit": limit
+                }
+            ]
+            cursor = self.collection.aggregate(pipeline)
             return [Restaurant.from_dict(doc) for doc in cursor]
         except PyMongoError as e:
             raise Exception(f"Error retrieving restaurants by cuisine: {e}")
