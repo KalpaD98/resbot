@@ -2,7 +2,7 @@
 recipe: default.v1
 language: en
 
-pipeline: # ------- NLU
+pipeline: # -------------------------------------------------- NLU -----------------------------------------------------
 
   - name: submodules.custom_components.language_handlers.language_handler.LanguageHandlerAndTranslator
 
@@ -13,22 +13,22 @@ pipeline: # ------- NLU
 
     # Tokenizer
   - name: SpacyTokenizer
-    intent_tokenization_flag: True        # to use multi intents
+    intent_tokenization_flag: True                      # to use multi intents
     intent_split_symbol: "+"
 
     # Featurizers
-  - name: RegexFeaturizer                 # Sparse featurizer
-  - name: SpacyFeaturizer                 # Dense featurizer
-  - name: LexicalSyntacticFeaturizer      # Sparse featurizer
-  - name: CountVectorsFeaturizer          # Sparse featurizer | one hot encoding
-  - name: CountVectorsFeaturizer          # Sparse featurizer | char level n-grams
+  - name: RegexFeaturizer                               # Sparse featurizer
+  - name: SpacyFeaturizer                               # Dense featurizer
+  - name: LexicalSyntacticFeaturizer                    # Sparse featurizer
+  - name: CountVectorsFeaturizer                        # Sparse featurizer | one hot encoding
+  - name: CountVectorsFeaturizer                        # Sparse featurizer | char level n-grams
     analyzer: char_wb
     min_ngram: 1
     max_ngram: 4
 
     # Entity Extractor
-  - name: SpacyEntityExtractor
-    dimensions: [ "PERSON" ]
+#  - name: SpacyEntityExtractor
+#    dimensions: [ "PERSON" ]
 
     # Intent and Entity Extractor
   - name: DIETClassifier
@@ -40,8 +40,8 @@ pipeline: # ------- NLU
     ambiguity_threshold: 0.05
     candidate_class_size: 5
     top_intent_confidence_threshold: 0.95
-    fallback_classifier_threshold: 0.6                # must be same as FallbackClassifier threshold
-    fallback_classifier_ambiguity_threshold: 0.1      # must be same as FallbackClassifier ambiguity_threshold
+    fallback_classifier_threshold: 0.6                    # must be same as FallbackClassifier threshold
+    fallback_classifier_ambiguity_threshold: 0.1          # must be same as FallbackClassifier ambiguity_threshold
 
   - name: EntitySynonymMapper
   - name: ResponseSelector
@@ -52,7 +52,7 @@ pipeline: # ------- NLU
     threshold: 0.6
     ambiguity_threshold: 0.1
 
-policies: # ------- Dialog Management
+policies: # -------------------------------------------- Dialog Management --------------------------------------------
 
   - name: MemoizationPolicy
     max_history: 16

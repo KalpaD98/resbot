@@ -28,6 +28,10 @@ from actions.all_actions.slot_validation_actions import *  # slot validation act
 from actions.all_actions.user_actions import *  # user actions
 # noinspection PyUnresolvedReferences
 from actions.all_actions.user_preference_action import *  # user preference actions
+# noinspection PyUnresolvedReferences
+from actions.all_actions.fallback_actions import *  # fallback  actions
+
+
 
 # CONSTANTS
 ACTION_ASK_ANYTHING_ELSE = "action_ask_anything_else"
@@ -137,38 +141,31 @@ class ActionClearRestaurantBookingSlots(Action):
                 SlotSet(DATE, None),
                 SlotSet(TIME, None)]
 
-
-from typing import Any, Dict, List, Text
-
-from rasa_sdk import Action, Tracker
-from rasa_sdk.events import UserUtteranceReverted, FollowupAction
-from rasa_sdk.executor import CollectingDispatcher
-
-
-class ActionDefaultFallback(Action):
-    def name(self) -> Text:
-        return "action_default_fallback"
-
-    def run(
-            self,
-            dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: Dict[Text, Any],
-    ) -> List[Dict[Text, Any]]:
-        # get the list of intents from the latest user message
-        intents = [intent['name'] for intent in tracker.latest_message['intent_ranking']]
-
-        # generate a message with a list of buttons for user to select
-        buttons = [{"title": intent, "payload": f"/{intent}"} for intent in intents]
-
-        dispatcher.utter_message(
-            text="I'm not sure about that. Did you mean one of these?",
-            buttons=buttons,
-        )
-
-        return [UserUtteranceReverted(), FollowupAction("action_listen")]
 #
+# class ActionDefaultFallback(Action):
+#     def name(self) -> Text:
+#         return "action_default_fallback"
 #
+#     def run(
+#             self,
+#             dispatcher: CollectingDispatcher,
+#             tracker: Tracker,
+#             domain: Dict[Text, Any],
+#     ) -> List[Dict[Text, Any]]:
+#         # get the list of intents from the latest user message
+#         intents = [intent['name'] for intent in tracker.latest_message['intent_ranking']]
+#
+#         # generate a message with a list of buttons for user to select
+#         buttons = [{"title": intent, "payload": f"/{intent}"} for intent in intents]
+#
+#         dispatcher.utter_message(
+#             text="I'm not sure about that. Did you mean one of these?",
+#             buttons=buttons,
+#         )
+#
+#         return [UserUtteranceReverted(), FollowupAction("action_listen")]
+
+
 # class ActionDefaultFallback(Action):
 #     """Executes the fallback action and
 #     goes back to the previous state

@@ -42,8 +42,9 @@ class LanguageHandlerAndTranslator(GraphComponent):
         translator = Translator()
         print("---------------------LanguageHandler---------------------")
         for message in messages:
-            print(message.get('text'))
-            text = message.get('text')
+
+            text = ' '.join(message.get('text').splitlines())
+            print(text)
 
             # Detect languages
             detected_languages = LanguageDetector.detect_languages(text)
@@ -54,17 +55,18 @@ class LanguageHandlerAndTranslator(GraphComponent):
 
             for lang, prob in detected_languages:
                 if lang == SIN:
-                    language = SIN
-                    probability = prob
+
                     # Translate the text to English
                     translated_text = translator.translate(text, src='si', dest='en')
                     text = translated_text.text  # Update the text with the translated version
                     print("translated message: " + text)
                     message.set('text', text, add_to_output=True)
                     print("setting message: " + message.get('text'))
-                    # Set the language entity
 
                     # TODO: uncomment for further debugging and improvements (removed below for bug fixing)
+                    # Set the language entity
+                    # language = SIN
+                    # probability = prob
                     # entity = {
                     #     'value': language,
                     #     'confidence': 0.0001,

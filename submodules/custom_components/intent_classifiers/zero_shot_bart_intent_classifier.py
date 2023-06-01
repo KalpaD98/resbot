@@ -140,7 +140,8 @@ class ZeroShotBartIntentClassifier(GraphComponent):
                         print("Not adding to tracker: not enough confidence")
                 # TODO: when 'haiya chatbot' is entered greet is not in intent ranking so still fail
                 # TODO: when 'hiaya chatbot' is entered greet is in intent ranking
-                #  however after sending it to ZSC confidence is < than fallback_classifier_threshold hence trigger nlu_fallback
+                #  however after sending it to ZSC confidence is < than fallback_classifier_threshold hence
+                #  trigger nlu_fallback
 
                 # TODO: if confidence is less than a certain value ask from user
 

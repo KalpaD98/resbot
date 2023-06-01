@@ -488,6 +488,8 @@ actions:
   - action_utter_no_changes_made_to_booking
   - action_utter_ask_favorite_cuisines
 
+  - action_enhanced_two_stage_fallback
+
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # ------------------------------------------- Responses: Bot Utterances --------------------------------------------- #
