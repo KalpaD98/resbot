@@ -120,7 +120,7 @@ class ActionLoginUser(Action):
             if user.password == login_password:
 
                 quick_replies_with_payload = [
-                    {"title": "Checkout restaurants", "payload": "/request_restaurants"},
+                    {"title": "Browse restaurants", "payload": "/request_restaurants"},
                     {"title": "Search restaurants", "payload": "/search_restaurants"},
                     {"title": "View bookings", "payload": "/view_bookings"}
                 ]

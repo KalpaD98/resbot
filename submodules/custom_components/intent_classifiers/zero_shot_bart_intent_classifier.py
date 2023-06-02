@@ -36,6 +36,7 @@ class ZeroShotBartIntentClassifier(GraphComponent):
             fallback_classifier_threshold: A minimum confidence score of fallback  classifier.
             fallback_classifier_ambiguity_threshold: ambiguity_threshold of fallback.
         """
+
     @classmethod
     def required_components(cls) -> List[Type]:
         return []
@@ -59,7 +60,25 @@ class ZeroShotBartIntentClassifier(GraphComponent):
     @classmethod
     def validate_config(cls, config: Dict[Text, Any]) -> None:
         """Validates that the component is configured properly."""
-        pass
+        defaults = cls.get_default_config()
+        for key, value in config.items():
+            if key not in defaults:
+                raise ValueError(f"Invalid config key: {key}")
+            if not isinstance(value, float):
+                raise ValueError(f"Invalid type for key {key}: expected float, got {type(value).__name__}")
+            if value < 0 or value > 1:
+                raise ValueError(f"Invalid value for key {key}: expected value between 0 and 1, got {value}")
+        # Check for specific keys
+        print("validate with fallback values")
+        print(config.get("threshold", defaults["threshold"]))
+        print(config.get("ambiguity_threshold", defaults["ambiguity_threshold"]))
+        if "fallback_classifier_threshold" in config and config["fallback_classifier_threshold"] != config.get(
+                "threshold", defaults["threshold"]):
+            raise ValueError("'fallback_classifier_threshold' must be the same as 'threshold'")
+        if "fallback_classifier_ambiguity_threshold" in config and config[
+            "fallback_classifier_ambiguity_threshold"] != config.get("ambiguity_threshold",
+                                                                     defaults["ambiguity_threshold"]):
+            raise ValueError("'fallback_classifier_ambiguity_threshold' must be the same as 'ambiguity_threshold'")
 
     def __init__(self, config: Dict[Text, Any], name: Text, model_storage: ModelStorage, resource: Resource) -> None:
         print("init ZeroShotBartIntentClassifier")
@@ -159,9 +178,9 @@ class ZeroShotBartIntentClassifier(GraphComponent):
                     print(f"Failed to predict intent by zero shot bart for text '{text}': {str(e)}")
         return messages
 
-    # def train(self, training_data: TrainingData) -> Resource:
-    #     self._get_training_data(self, training_data)
-    #     return self._resource
+    def train(self, training_data: TrainingData) -> Resource:
+        self._get_training_data(self, training_data)
+        return self._resource
 
     @staticmethod
     def _get_training_data(self, training_data: TrainingData) -> set[Any]:
@@ -228,6 +247,7 @@ class ZeroShotBartIntentClassifier(GraphComponent):
         # Create a list of tuples where each tuple is (label, score)
         label_score_pairs = list(zip(prediction_data['labels'], prediction_data['scores']))
         print("label_score_pairs: ", label_score_pairs)
+
         # Check the first label
         if label_score_pairs[0][1] >= self.top_intent_confidence_threshold:
             new_intent_ranking = [{'name': label_score_pairs[0][0], 'confidence': label_score_pairs[0][1]}]
