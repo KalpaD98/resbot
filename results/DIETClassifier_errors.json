@@ -1,0 +1,121 @@
+[
+  {
+    "text": "[4] guys",
+    "entities": [],
+    "predicted_entities": [
+      {
+        "entity": "num_people",
+        "start": 1,
+        "end": 2,
+        "confidence_entity": 0.6553989052772522,
+        "value": "4",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "7 pm",
+    "entities": [
+      {
+        "start": 0,
+        "end": 4,
+        "value": "7 pm",
+        "entity": "time"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "num_people",
+        "start": 0,
+        "end": 4,
+        "confidence_entity": 0.698913037776947,
+        "value": "7 pm",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "kalpa@gmail.com",
+    "entities": [
+      {
+        "start": 0,
+        "end": 15,
+        "value": "kalpa@gmail.com",
+        "entity": "user_email"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "chethiya@gmail.com",
+    "entities": [
+      {
+        "start": 0,
+        "end": 18,
+        "value": "chethiya@gmail.com",
+        "entity": "user_email"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "dileepa@gmail.com",
+    "entities": [
+      {
+        "start": 0,
+        "end": 17,
+        "value": "dileepa@gmail.com",
+        "entity": "user_email"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "upeksha@gmail.com",
+    "entities": [
+      {
+        "start": 0,
+        "end": 17,
+        "value": "upeksha@gmail.com",
+        "entity": "user_email"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "sagara@gmail.com",
+    "entities": [
+      {
+        "start": 0,
+        "end": 16,
+        "value": "sagara@gmail.com",
+        "entity": "user_email"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "chamalka@gmail.com",
+    "entities": [
+      {
+        "start": 0,
+        "end": 18,
+        "value": "chamalka@gmail.com",
+        "entity": "user_email"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "pass",
+    "entities": [
+      {
+        "start": 0,
+        "end": 4,
+        "value": "pass",
+        "entity": "password"
+      }
+    ],
+    "predicted_entities": []
+  }
+]

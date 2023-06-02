@@ -1,6 +1,142 @@
 #### This file contains tests to evaluate that your bot behaves as expected.
 
 stories:
+  - story: Test Greeting and bot introduction with checkpoint
+    steps:
+      - user: |
+          Hello!
+        intent: greet
+      - action: action_utter_greet_and_intro
+      - action: action_ask_language_preference
+      - user: |
+          [en](permanent_language)
+        intent: inform_permanent_language
+      - action: action_set_permanent_language
+      - action: action_utter_wanna_book
+
+  - story: Test User denies to check restaurant
+    steps:
+      - user: |
+          Hello!
+        intent: greet
+      - action: action_utter_greet_and_intro
+      - action: action_ask_language_preference
+      - user: |
+          [en](permanent_language)
+        intent: inform_permanent_language
+      - action: action_set_permanent_language
+      - action: action_utter_wanna_book
+      - user: |
+          No, thank you.
+        intent: deny
+      - action: action_utter_thank_you
+      - action: action_ask_anything_else
+
+  - story: Test user affirms to check restaurant after logging in
+    steps:
+      - user: |
+          Hello!
+        intent: greet
+      - action: action_utter_greet_and_intro
+      - action: action_ask_language_preference
+      - user: |
+          [en](permanent_language)
+        intent: inform_permanent_language
+      - action: action_set_permanent_language
+      - action: action_utter_wanna_book
+      - user: |
+          Yes, I'd like to.
+        intent: affirm
+      - action: action_ask_registered_and_show_login_signup_quick_replies
+      - user: |
+          I'd like to log in.
+        intent: request_login_form
+      - action: login_form
+      - active_loop: login_form
+      - user: |
+          [kalpa@gmail.com](user_email)
+        intent: inform_user_email
+      - action: login_form
+      - user: |
+          [pass](user_password)
+        intent: inform_user_password
+      - action: login_form
+      - active_loop: null
+      - action: action_login_user
+
+      - action: action_show_cuisines
+      - user: /inform_cuisine{{"cuisine":"chinese"}}
+        intent: inform_cuisine
+      - action: action_show_restaurants
+      - user: /inform_booking_restaurant_id{{"restaurant_id":"rid_6431ac87d5f9f6b0be596abb"}}
+        intent: inform_booking_restaurant_id
+      - action: action_show_selected_restaurant_ask_booking_confirmation
+      - user: |
+          Yes, please book.
+        intent: affirm
+      - action: restaurant_booking_form
+      - active_loop: restaurant_booking_form
+      - user: |
+          [2](num_people) peeps
+        intent: inform_num_people
+      - user: |
+          [2024/01/01](date)
+        intent: inform_date
+      - action: restaurant_booking_form
+      - active_loop: null
+      - action: action_show_booking_summary
+      - user: |
+          yes
+        intent: affirm
+      - action: action_confirm_booking
+      - action: action_utter_thank_you
+
+  - story: Test User wants to see restaurants - not logged in
+    steps:
+      - user: |
+          I want to see the restaurants.
+        intent: request_restaurants
+      - action: action_ask_registered_and_show_login_signup_quick_replies
+      - user: |
+          I'd like to register.
+        intent: request_user_registration_form
+      - action: registration_form
+      - user: |
+          Here are my registration details.
+        intent: provide_registration_details
+      - action: action_save_user_and_complete_registration
+      - action: action_show_cuisines
+
+  - story: Test User stops after being prompted to log in or sign up
+    steps:
+      - user: |
+          I want to stop.
+        intent: stop
+      - action: action_clear_restaurant_booking_slots
+      - action: action_utter_bye_see_you_later
+
+#  - story: Test User wants to book a restaurant after view details
+
+
+  - story: Test User denies after viewing restaurant details or book directly
+    steps:
+      - user: |
+          I'd like to view details.
+        intent: inform_view_details_restaurant_id
+      - action: action_show_selected_restaurant_details
+      - user: |
+          No, I don't want to book.
+        intent: deny
+      - action: action_clear_restaurant_booking_slots
+      - action: action_utter_thank_you
+      - action: action_ask_anything_else
+
+#  - story: booking restaurant after asking details happy path 1
+#  - story: booking restaurant after selecting happy path 2
+#  - story: deny booking restaurant after asking details sad path 1
+#  - story: deny booking restaurant after selecting happy path 1
+
+#
 #  - story: happy path 1
 #    steps:
 #      - user: |
@@ -11,7 +147,7 @@ stories:
 #          amazing
 #        intent: mood_great
 #      - action: utter_happy
-#
+
 #  - story: happy path 2
 #    steps:
 #      - user: |
@@ -89,4 +225,4 @@ stories:
 #        intent: bot_challenge
 #      - action: utter_iamabot
 
-#### If you want to learn more, please see the docs: https://rasa.com/docs/rasa/testing-your-assistant
+### If you want to learn more, please see the docs: https://rasa.com/docs/rasa/testing-your-assistant

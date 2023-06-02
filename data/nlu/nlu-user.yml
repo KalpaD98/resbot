@@ -20,6 +20,7 @@ nlu:
       - Sign me in
       - I want to sign in
       - login
+      - I'd like to log in.
 
   # logout
   - intent: logout
@@ -39,19 +40,18 @@ nlu:
       - [upeksha](user_name)
       - [sagara](user_name)
       - [chamalka](user_name)
-      - [kalpa](PERSON)
-      - [chethiya](PERSON)
-      - [dileepa](PERSON)
-      - [upeksha](PERSON)
-      - [sagara](PERSON)
-      - [chamalka](PERSON)
-      - kalpa
-      - chethiya
-      - dileepa
-      - upeksha
-      - sagara
-      - chamalka
-
+#      - [kalpa](PERSON)
+#      - [chethiya](PERSON)
+#      - [dileepa](PERSON)
+#      - [upeksha](PERSON)
+#      - [sagara](PERSON)
+#      - [chamalka](PERSON)
+#      - kalpa
+#      - chethiya
+#      - dileepa
+#      - upeksha
+#      - sagara
+#      - chamalka
   #      - [kalpa](user_name)
   #      - username: [dileepa](user_name)
   #      - username = [chethiya](user_name)
@@ -66,12 +66,12 @@ nlu:
 
   - intent: inform_user_email
     examples: |
-      - kalpa@gmail.com
-      - chethiya@gmail.com
-      - dileepa@gmail.com
-      - upeksha@gmail.com
-      - sagara@gmail.com
-      - chamalka@gmail.com
+      - [kalpa@gmail.com](user_email)
+      - [chethiya@gmail.com](user_email)
+      - [dileepa@gmail.com](user_email)
+      - [upeksha@gmail.com](user_email)
+      - [sagara@gmail.com](user_email)
+      - [chamalka@gmail.com](user_email)
   #      - email = [dileepa@gmail.com](user_email)
   #      - My email is [upekshag@uom.lk](user_email)
   #      - Please use [sagara@yahoo.com](user_email) for my email
@@ -84,11 +84,12 @@ nlu:
 
   - intent: inform_user_password
     examples: |
-      - 1234
-      - pass
-      - mypass
+      
       - [pass](password)
       - [1234](password)
+#      - 1234
+#      - pass
+#      - mypass
 #      - password: [1234](password)
 #      - password = [johndoe](password)
 #      - My password is [pass](password)

@@ -1,0 +1,28 @@
+[
+  {
+    "text": "kalpa@gmail.com",
+    "entities": [
+      {
+        "text": "kalpa@gmail.com",
+        "start": 0,
+        "end": 15,
+        "entity": "user_email",
+        "value": "kalpa@gmail.com"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "pass",
+    "entities": [
+      {
+        "text": "pass",
+        "start": 0,
+        "end": 4,
+        "entity": "user_password",
+        "value": "pass"
+      }
+    ],
+    "predicted_entities": []
+  }
+]

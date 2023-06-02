@@ -1,0 +1,121 @@
+version: "3.1"
+stories:
+- story: sad path 1 (./venv/lib/python3.9/site-packages/rasa/cli/initial_project/tests/test_stories.yml)
+  steps:
+  - intent: greet
+  - action: utter_greet  # predicted: action_utter_greet_and_intro
+  - intent: mood_unhappy
+  - action: utter_cheer_up  # predicted: action_utter_mood_unhappy_feedback
+  - action: utter_did_that_help  # predicted: action_default_fallback
+  - action: action_listen  # predicted: action_default_fallback
+  - intent: affirm
+  - action: utter_happy  # predicted: action_ask_registered_and_show_login_signup_quick_replies
+  - action: action_listen  # predicted: action_default_fallback
+- story: sad path 2 (./venv/lib/python3.9/site-packages/rasa/cli/initial_project/tests/test_stories.yml)
+  steps:
+  - intent: greet
+  - action: utter_greet  # predicted: action_utter_greet_and_intro
+  - intent: mood_unhappy
+  - action: utter_cheer_up  # predicted: action_utter_mood_unhappy_feedback
+  - action: utter_did_that_help  # predicted: action_default_fallback
+  - action: action_listen  # predicted: action_default_fallback
+  - intent: deny
+  - action: utter_goodbye  # predicted: action_utter_thank_you
+  - action: action_listen  # predicted: action_default_fallback
+- story: sad path 3 (./venv/lib/python3.9/site-packages/rasa/cli/initial_project/tests/test_stories.yml)
+  steps:
+  - intent: greet
+  - action: utter_greet  # predicted: action_utter_greet_and_intro
+  - intent: mood_unhappy
+  - action: utter_cheer_up  # predicted: action_utter_mood_unhappy_feedback
+  - action: utter_did_that_help  # predicted: action_default_fallback
+  - action: action_listen  # predicted: action_default_fallback
+  - intent: deny
+  - action: utter_goodbye  # predicted: action_utter_thank_you
+  - action: action_listen  # predicted: action_default_fallback
+- story: say goodbye (./venv/lib/python3.9/site-packages/rasa/cli/initial_project/tests/test_stories.yml)
+  steps:
+  - intent: goodbye  # predicted: goodbye: bye[-](date)bye!
+  - action: utter_goodbye  # predicted: action_utter_goodbye
+- story: bot challenge (./venv/lib/python3.9/site-packages/rasa/cli/initial_project/tests/test_stories.yml)
+  steps:
+  - intent: bot_challenge
+  - action: utter_iamabot  # predicted: utter_bot_challenge/bot
+- story: Test Greeting and bot introduction with checkpoint (./tests/test_stories.yml)
+  steps:
+  - intent: greet
+  - action: action_utter_greet_and_intro
+  - action: action_ask_language_preference
+  - intent: inform_permanent_language  # predicted: nlu_fallback: [en](permanent_language)
+  - action: action_set_permanent_language
+  - action: action_utter_wanna_book
+- story: Test User denies to check restaurant (./tests/test_stories.yml)
+  steps:
+  - intent: deny  # predicted: nlu_fallback: No, thank you.
+  - action: action_utter_thank_you  # predicted: action_unlikely_intent
+  - action: action_ask_anything_else
+- story: Test user affirms to check restaurant - not logged in (./tests/test_stories.yml)
+  steps:
+  - intent: affirm
+  - action: action_ask_registered_and_show_login_signup_quick_replies  # predicted: action_unlikely_intent
+  - intent: request_login_form  # predicted: nlu_fallback: I'd like to log in.
+  - action: login_form
+  - active_loop: login_form
+  - slot_was_set:
+    - user_email: kalpa@gmail.com
+  - slot_was_set:
+    - user_password: pass
+  - active_loop: null
+  - action: action_login_user
+  - action: action_show_cuisines  # predicted: action_listen
+  - action: action_listen  # predicted: action_show_restaurants
+- story: Test User wants to see restaurants - not logged in (./tests/test_stories.yml)
+  steps:
+  - intent: request_restaurants  # predicted: nlu_fallback: I want to see the restaurants.
+  - action: action_ask_registered_and_show_login_signup_quick_replies  # predicted: action_unlikely_intent
+  - intent: request_user_registration_form  # predicted: nlu_fallback: I'd like to register.
+  - action: registration_form
+  - action: action_listen  # predicted: action_save_user_and_complete_registration
+  - intent: provide_registration_details  # predicted: nlu_fallback: Here are my registration details.
+  - action: action_save_user_and_complete_registration  # predicted: action_default_fallback
+  - action: action_show_cuisines  # predicted: action_listen
+  - action: action_listen  # predicted: action_show_restaurants
+- story: Test User wants to book a restaurant directly (./tests/test_stories.yml)
+  steps:
+  - intent: inform_cuisine  # predicted: nlu_fallback: I'd like [Italian](cuisine).
+  - action: action_show_restaurants  # predicted: action_unlikely_intent
+  - intent: inform_booking_restaurant_id  # predicted: nlu_fallback: I'll choose this one.
+  - action: action_show_selected_restaurant_ask_booking_confirmation
+  - intent: affirm
+  - action: restaurant_booking_form
+  - action: action_listen  # predicted: action_show_booking_summary
+  - intent: provide_booking_details  # predicted: nlu_fallback: I'm booking for [2](num_people) on [June](date) 6th.
+  - action: action_show_booking_summary  # predicted: action_ask_registered_and_show_login_signup_quick_replies
+  - intent: affirm  # predicted: nlu_fallback: Confirm booking.
+  - action: action_confirm_booking  # predicted: action_ask_registered_and_show_login_signup_quick_replies
+  - action: action_utter_thank_you  # predicted: action_utter_bye_see_you_later
+  - action: action_listen  # predicted: action_ask_anything_else
+- story: Test User denies after viewing restaurant details or book directly (./tests/test_stories.yml)
+  steps:
+  - intent: inform_view_details_restaurant_id  # predicted: nlu_fallback: I'd like to view details.
+  - action: action_show_selected_restaurant_details
+  - intent: deny  # predicted: nlu_fallback: No, I don't want to book.
+  - action: action_clear_restaurant_booking_slots  # predicted: action_utter_thank_you after action_unlikely_intent
+  - action: action_utter_thank_you  # predicted: action_ask_anything_else
+  - action: action_ask_anything_else
+- story: happy path 1 (./venv/lib/python3.9/site-packages/rasa/cli/initial_project/tests/test_stories.yml)
+  steps:
+  - intent: greet
+  - action: utter_greet  # predicted: action_utter_greet_and_intro
+  - intent: mood_great
+  - action: utter_happy  # predicted: action_utter_mood_great_feedback
+  - action: action_listen  # predicted: action_default_fallback
+- story: happy path 2 (./venv/lib/python3.9/site-packages/rasa/cli/initial_project/tests/test_stories.yml)
+  steps:
+  - intent: greet
+  - action: utter_greet  # predicted: action_utter_greet_and_intro
+  - intent: mood_great
+  - action: utter_happy  # predicted: action_utter_mood_great_feedback
+  - action: action_listen  # predicted: action_default_fallback
+  - intent: goodbye  # predicted: goodbye: bye[-](date)bye!
+  - action: utter_goodbye  # predicted: action_utter_goodbye

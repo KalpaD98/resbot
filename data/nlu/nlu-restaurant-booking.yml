@@ -64,6 +64,7 @@ nlu:
   - intent: inform_time
     examples: |
       - [7 pm](time)
+      - [7 a.m](time)
       - [10:30 am](time)
       - [12:00 p.m.](time)
       - [12:00 pm](time)
