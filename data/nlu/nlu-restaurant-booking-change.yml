@@ -5,12 +5,22 @@ nlu:
     examples: |
       - i want to change my booking
       - change my booking
+      - is there anyway to alter my restaurant reservation
       - modify my reservation
+      - I would like to change my restaurant reservation. 
+      - I want to change the restaurant booking
       - update my booking
+      - Can I change my restaurant booking?
       - alter my reservation
+      - I want to change my restaurant booking, can you help me ? 
+      - I'm afraid I'd have to make a change for my reservation
       - reschedule my booking
       - I need to make changes to my booking
       - I want to update my reservation details
+      - I want to change my restaurant booking
+      - I need to change the reservation. can I?
+      - Can you change my restaurant booking please?
+      - Please change my booking,
       - I'd like to make some changes to my booking
       - Can I make changes to my existing reservation?
 
@@ -19,25 +29,51 @@ nlu:
       - I want to change my reservation date
       - Can I change the date of my booking?
       - I need to reschedule my booking
+      - Can I change my reservation date?
       - I'd like to change the date for my reservation
+      - can I reschedule the booking 
+      - I want to change my booking date. Can I?
       - How do I change the date of my reservation?
       - Is it possible to modify the reservation date?
+      - need to change my booking date
+      - I would like to change the date of my restaurant booking. Is it possible to reschedule?"
       - Can you help me change the date of my booking?
       - I want to move my booking to another day
+      - Could I change the date of my booking?
+      - Can you change the schedule?
       - I need to change my restaurant reservation date
+      - I want to change my booking date
       - I'd like to reschedule my reservation to a different date
 
   - intent: user_wants_to_change_restaurant_booking_num_people
     examples: |
       - i want to change the number of people in my reservation
       - can I change the number of people in my booking?
+      - I want to change the number of people in my reservation
+      - Is it possible to change the count of people for my booking
+      - Can I change the reservation? I need to change the participation 
+      - I need to change the amount of people in my reservation 
+      - I need to change the people count for my booking , is it possible?
+      - is there any way for me to change the number of adults for my reservation
+      - I want to change the head count for my booking.
+      - need to change no of people for my booking 
 
   - intent: user_wants_to_change_both_restaurant_booking_date_and_num_people
     examples: |
       - i want to change the booking date and number of people 
       - can i change both booking date and number of people
+      - I need to change the date and the number of people for my booking.
+      - Can I change these. Booking date and number of people 
+      - need to change no of people for my booking and its date
       - both date and number of people
+      - I want to update booking date ans number of people 
+      - can I change the booking date and number of people for the booking?
+      - can I change both count of people and date for my booking
+      - I want to change date and number of guest in my reservation
       - both
+      - Can you change the number of people and booking date?
+      - Could I change the date and the number of people for my booking.
+      - Please change the date and number of people in the reservation 
 
   - intent: inform_change_booking_id
     examples: |

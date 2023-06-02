@@ -84,6 +84,36 @@ stories:
       - action: action_show_cuisines
       - checkpoint: checkpoint_cuisine_selection
 
+  - story: User logs in after being prompted - request restaurants
+    steps:
+      - checkpoint: checkpoint_user_trying_to_login_or_signup
+      - intent: request_login_form
+      - action: login_form
+      - active_loop: login_form
+      - action: login_form
+      - active_loop: null
+      - slot_was_set:
+          - requested_slot: null
+      - action: action_login_user
+      - intent: request_restaurants
+      - action: action_show_cuisines
+      - checkpoint: checkpoint_cuisine_selection
+
+  - story: User registers and logs in after being prompted - request restaurants
+    steps:
+      - checkpoint: checkpoint_user_trying_to_login_or_signup
+      - intent: request_user_registration_form
+      - action: registration_form
+      - active_loop: registration_form
+      - action: registration_form
+      - active_loop: null
+      - slot_was_set:
+          - requested_slot: null
+      - action: action_save_user_and_complete_registration
+      - intent: request_restaurants
+      - action: action_show_cuisines
+      - checkpoint: checkpoint_cuisine_selection
+
   - story: User stops after being prompted to log in or sign up
     steps:
       - checkpoint: checkpoint_user_trying_to_login_or_signup

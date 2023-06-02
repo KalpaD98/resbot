@@ -18,7 +18,7 @@ logger = logging.getLogger(__name__)
 
 
 @DefaultV1Recipe.register(
-    DefaultV1Recipe.ComponentType.INTENT_CLASSIFIER, is_trainable=False
+    DefaultV1Recipe.ComponentType.INTENT_CLASSIFIER, is_trainable=True
 )
 class ZeroShotBartIntentClassifier(GraphComponent):
     """A GraphComponent in RASA for Intent classification using a ZeroShot BART model.

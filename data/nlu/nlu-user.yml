@@ -87,6 +87,9 @@ nlu:
       
       - [pass](password)
       - [1234](password)
+      - [mypass](password)
+      - [password123](password)
+      - [securepass](password)
 #      - 1234
 #      - pass
 #      - mypass

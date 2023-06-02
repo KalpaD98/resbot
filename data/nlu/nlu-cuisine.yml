@@ -5,17 +5,28 @@ nlu:
       - what cuisines are available
       - what meals are available ?
       - what kind of foods are available
+      - show cuisines
+      - can you show me the cuisines?
+      - list cuisines
       - suggest foods
+      - Can I see the available cuisines?
       - cuisines please
       - show cuisines
       - cuisines
       - I would like to see cuisines
-      - I want to see cuisines
-      - I want like to see the cuisines again
+      - what are the available types of foods
+      - Can you please show me the available cuisines ?
       - show me the cuisines again
-      - show me the cuisines
+      - I want to see cuisines
+      - show me cuisines
       - what are the available cuisines
-#      - show me food types
+      - show me food types
+      - what are the cuisines you have?
+      - list all cuisines
+      - I want like to see the cuisines again
+      - give me the available cuisines list
+      - what types of cuisines are available?
+      - can i view the cuisines?
 
   - intent: inform_cuisine
     examples: |
@@ -23,17 +34,22 @@ nlu:
       - I would like to have [Italian](cuisine)
       - I want [Thai](cuisine) food
       - [Korean](cuisine) restaurants
+      - I prefer [bbq](cuisine)
+      - I would like to have [american](cuisine) food
       - [Chinese](cuisine) food
       - I want to order some [Mexican](cuisine) food
       - [italian](cuisine) restaurant
+      - I want [Chinese](cuisine) food
       - I'm in the mood for [Thai](cuisine) food tonight
       - [Japanese](cuisine) please
       - I'm looking for a [Vietnam](cuisine) restaurant
       - looking for a [Vietnam](cuisine) restaurant
+      - I want to order [Chinese](cuisine) food
       - I'm in the mood for something different. How about [Korean](cuisine) food?
       - craving for [Mexican](cuisine) food
       - craving for some [Italian](cuisine) food
       - [Any](cuisine) cuisine
+      - I like [indian](cuisine) curries
       - whatever [Any](cuisine) cuisine 
       - [Any](cuisine) thing
       - [Multi](cuisine) cuisine

@@ -7,9 +7,11 @@ nlu:
   - intent: request_restaurants
     examples: |
       - show me restaurants
+      - Suggest restuarent for dinning
       - show restaurants 
       - what restaurants are available
       - show me the restaurants
+      - suggest some good restaurants?
       - show me restaurants please
       - restaurant recommendations
       - display restaurants
@@ -20,6 +22,7 @@ nlu:
       - can i check restaurants 
       - show some restaurants
       - restaurants please
+      - Can you show me some restaurants with ratings above 4.0
       - restuarants
       - restaurants
       - show me some restaurants
@@ -28,36 +31,64 @@ nlu:
     examples: |
       - what foods are available in this restaurant
       - show me the foods they have
+      - Can you shoe me the menu of that restaurant 
       - i want to see their menu
+      - Show the restaurant menu please
       - can i see their menu
+      - Could you please show me the restaurant's menu
       - show me the menu
+      - Could you show me the menue of this restaurant 
       - menu please
+      - show its menu
       - show menu
+      - Can I get the restaurant menu
 
   - intent: request_more_restaurant_options
     examples: |
       - anything else?
       - any other places?
+      - Can you suggest more restaurant options
       - can i have more recommendations
+      - show more restaurant options
       - can i see more restaurants
+      - Could you show me more restaurant options 
       - more options
       - more suggestions
+      - Can I see more restaurants?
       - more places
+      - Can you give me more restaurant options?
       - any other suggestions
       - more restaurants
+      - Can you recommend few other good restaurants with good ratings
 
   - intent: request_opening_hours
     examples: |
+      - What are the opening hours of the restaurant?
       - what are the opening hours
+      - opening hours of the restaurant
       - what are the opening hours of [McDonalds](restaurant_name)
+      - When is it opened
+      - what are the working hours for this restaurant?
+      - When does this restaurant open at??
+      - Show me the opening hours of here
+      - What is the opening time of the restaurants?
+      - When is the reaturent open
+      - what are the opening hours?
 
   - intent: request_ambiance
     examples: |
+      - What's the ambiance like at the restaurant?
       - what is the ambiance
       - what is the atmosphere
       - tell me about the ambiance
+      - What is the vibe of the restaurant?
+      - Whats the environment 
+      - How about the location?
+      - How does it look like in?
       - tell me about the atmosphere
+      - How is the environment
       - what is the atmosphere like
+      - Hows the restaurant inside?
       - what is the ambiance like
       - what is the atmosphere like in the restaurant
       - what is the ambiance like in the restaurant

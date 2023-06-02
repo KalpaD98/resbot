@@ -1,224 +1,20 @@
 {
-  "action_ask_registered_and_show_login_signup_quick_replies": {
-    "precision": 0.4,
-    "recall": 1.0,
-    "f1-score": 0.5714285714285715,
-    "support": 2
-  },
-  "request_login_form": {
-    "precision": 0.0,
-    "recall": 0.0,
-    "f1-score": 0.0,
-    "support": 1
-  },
-  "[pass](user_password)": {
-    "precision": 0.0,
-    "recall": 0.0,
-    "f1-score": 0.0,
-    "support": 1
-  },
-  "bot_challenge": {
+  "inform_date": {
     "precision": 1.0,
     "recall": 1.0,
     "f1-score": 1.0,
     "support": 1
   },
-  "registration_form": {
-    "precision": 1.0,
-    "recall": 1.0,
-    "f1-score": 1.0,
-    "support": 1
-  },
-  "utter_did_that_help": {
-    "precision": 0.0,
-    "recall": 0.0,
-    "f1-score": 0.0,
-    "support": 3
-  },
-  "inform_booking_restaurant_id": {
-    "precision": 0.0,
-    "recall": 0.0,
-    "f1-score": 0.0,
-    "support": 1
-  },
-  "goodbye": {
+  "inform_permanent_language": {
     "precision": 1.0,
     "recall": 1.0,
     "f1-score": 1.0,
     "support": 2
-  },
-  "action_listen": {
-    "precision": 0.9130434782608695,
-    "recall": 0.6176470588235294,
-    "f1-score": 0.7368421052631579,
-    "support": 34
-  },
-  "action_show_cuisines": {
-    "precision": 0.0,
-    "recall": 0.0,
-    "f1-score": 0.0,
-    "support": 2
-  },
-  "action_show_booking_summary": {
-    "precision": 0.0,
-    "recall": 0.0,
-    "f1-score": 0.0,
-    "support": 1
-  },
-  "action_ask_language_preference": {
-    "precision": 1.0,
-    "recall": 1.0,
-    "f1-score": 1.0,
-    "support": 1
   },
   "action_clear_restaurant_booking_slots": {
     "precision": 1.0,
-    "recall": 0.5,
-    "f1-score": 0.6666666666666666,
-    "support": 2
-  },
-  "utter_goodbye": {
-    "precision": 0.0,
-    "recall": 0.0,
-    "f1-score": 0.0,
-    "support": 4
-  },
-  "greet": {
-    "precision": 1.0,
     "recall": 1.0,
     "f1-score": 1.0,
-    "support": 6
-  },
-  "provide_registration_details": {
-    "precision": 0.0,
-    "recall": 0.0,
-    "f1-score": 0.0,
-    "support": 1
-  },
-  "action_show_selected_restaurant_ask_booking_confirmation": {
-    "precision": 1.0,
-    "recall": 1.0,
-    "f1-score": 1.0,
-    "support": 1
-  },
-  "utter_greet": {
-    "precision": 0.0,
-    "recall": 0.0,
-    "f1-score": 0.0,
-    "support": 5
-  },
-  "login_form": {
-    "precision": 1.0,
-    "recall": 1.0,
-    "f1-score": 1.0,
-    "support": 3
-  },
-  "None": {
-    "precision": 0.0,
-    "recall": 0.0,
-    "f1-score": 0.0,
-    "support": 6
-  },
-  "action_set_permanent_language": {
-    "precision": 1.0,
-    "recall": 1.0,
-    "f1-score": 1.0,
-    "support": 1
-  },
-  "action_utter_thank_you": {
-    "precision": 0.25,
-    "recall": 0.3333333333333333,
-    "f1-score": 0.28571428571428575,
-    "support": 3
-  },
-  "request_restaurants": {
-    "precision": 0.0,
-    "recall": 0.0,
-    "f1-score": 0.0,
-    "support": 1
-  },
-  "inform_user_email": {
-    "precision": 1.0,
-    "recall": 1.0,
-    "f1-score": 1.0,
-    "support": 1
-  },
-  "action_show_restaurants": {
-    "precision": 0.3333333333333333,
-    "recall": 1.0,
-    "f1-score": 0.5,
-    "support": 1
-  },
-  "inform_view_details_restaurant_id": {
-    "precision": 0.0,
-    "recall": 0.0,
-    "f1-score": 0.0,
-    "support": 1
-  },
-  "affirm": {
-    "precision": 1.0,
-    "recall": 0.75,
-    "f1-score": 0.8571428571428571,
-    "support": 4
-  },
-  "utter_happy": {
-    "precision": 0.0,
-    "recall": 0.0,
-    "f1-score": 0.0,
-    "support": 3
-  },
-  "action_show_selected_restaurant_details": {
-    "precision": 1.0,
-    "recall": 1.0,
-    "f1-score": 1.0,
-    "support": 1
-  },
-  "[kalpa@gmail.com](user_email)": {
-    "precision": 0.0,
-    "recall": 0.0,
-    "f1-score": 0.0,
-    "support": 1
-  },
-  "action_utter_greet_and_intro": {
-    "precision": 0.16666666666666666,
-    "recall": 1.0,
-    "f1-score": 0.2857142857142857,
-    "support": 1
-  },
-  "action_confirm_booking": {
-    "precision": 0.0,
-    "recall": 0.0,
-    "f1-score": 0.0,
-    "support": 1
-  },
-  "utter_iamabot": {
-    "precision": 0.0,
-    "recall": 0.0,
-    "f1-score": 0.0,
-    "support": 1
-  },
-  "provide_booking_details": {
-    "precision": 0.0,
-    "recall": 0.0,
-    "f1-score": 0.0,
-    "support": 1
-  },
-  "deny": {
-    "precision": 1.0,
-    "recall": 0.5,
-    "f1-score": 0.6666666666666666,
-    "support": 4
-  },
-  "action_utter_wanna_book": {
-    "precision": 1.0,
-    "recall": 1.0,
-    "f1-score": 1.0,
-    "support": 1
-  },
-  "request_user_registration_form": {
-    "precision": 0.0,
-    "recall": 0.0,
-    "f1-score": 0.0,
     "support": 1
   },
   "action_login_user": {
@@ -227,40 +23,118 @@
     "f1-score": 1.0,
     "support": 1
   },
-  "inform_user_password": {
+  "action_set_permanent_language": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 2
+  },
+  "action_listen": {
+    "precision": 0.9411764705882353,
+    "recall": 0.9411764705882353,
+    "f1-score": 0.9411764705882353,
+    "support": 17
+  },
+  "inform_cuisine": {
     "precision": 1.0,
     "recall": 1.0,
     "f1-score": 1.0,
     "support": 1
   },
-  "restaurant_booking_form": {
+  "action_show_selected_restaurant_ask_booking_confirmation": {
     "precision": 1.0,
     "recall": 1.0,
     "f1-score": 1.0,
     "support": 1
   },
   "action_utter_bye_see_you_later": {
-    "precision": 0.5,
+    "precision": 1.0,
     "recall": 1.0,
-    "f1-score": 0.6666666666666666,
+    "f1-score": 1.0,
     "support": 1
   },
-  "inform_permanent_language": {
+  "[pass](user_password)": {
     "precision": 0.0,
     "recall": 0.0,
     "f1-score": 0.0,
     "support": 1
   },
-  "action_save_user_and_complete_registration": {
+  "action_show_cuisines": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 1
+  },
+  "affirm": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 3
+  },
+  "request_restaurants": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 1
+  },
+  "action_utter_wanna_book": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 2
+  },
+  "inform_num_people": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 1
+  },
+  "[2024/01/01](date)": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 1
+  },
+  "action_ask_anything_else": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 2
+  },
+  "action_confirm_booking": {
     "precision": 0.0,
     "recall": 0.0,
     "f1-score": 0.0,
     "support": 1
   },
-  "inform_cuisine": {
-    "precision": 0.0,
-    "recall": 0.0,
-    "f1-score": 0.0,
+  "request_login_form": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 1
+  },
+  "inform_booking_restaurant_id": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 1
+  },
+  "inform_user_email": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 1
+  },
+  "[kalpa@gmail.com](user_email)": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 1
+  },
+  "action_ask_registered_and_show_login_signup_quick_replies": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
     "support": 1
   },
   "stop": {
@@ -269,53 +143,95 @@
     "f1-score": 1.0,
     "support": 1
   },
-  "mood_unhappy": {
+  "action_show_restaurants": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 1
+  },
+  "action_utter_greet_and_intro": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 2
+  },
+  "login_form": {
     "precision": 1.0,
     "recall": 1.0,
     "f1-score": 1.0,
     "support": 3
   },
-  "utter_cheer_up": {
-    "precision": 0.0,
-    "recall": 0.0,
-    "f1-score": 0.0,
-    "support": 3
-  },
-  "action_ask_anything_else": {
-    "precision": 0.5,
+  "deny": {
+    "precision": 1.0,
     "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 1
+  },
+  "action_show_booking_summary": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 1
+  },
+  "action_ask_language_preference": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 2
+  },
+  "greet": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 2
+  },
+  "inform_user_password": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 1
+  },
+  "action_utter_thank_you": {
+    "precision": 1.0,
+    "recall": 0.5,
     "f1-score": 0.6666666666666666,
     "support": 2
   },
-  "mood_great": {
+  "restaurant_booking_form": {
+    "precision": 1.0,
+    "recall": 0.5,
+    "f1-score": 0.6666666666666666,
+    "support": 2
+  },
+  "[2](num_people)": {
     "precision": 1.0,
     "recall": 1.0,
     "f1-score": 1.0,
-    "support": 2
+    "support": 1
   },
   "micro avg": {
-    "precision": 0.7411764705882353,
-    "recall": 0.5121951219512195,
-    "f1-score": 0.6057692307692307,
-    "support": 123
+    "precision": 0.9833333333333333,
+    "recall": 0.921875,
+    "f1-score": 0.9516129032258064,
+    "support": 64
   },
   "macro avg": {
-    "precision": 0.4706743566992015,
-    "recall": 0.5041016406562625,
-    "f1-score": 0.4674185463659148,
-    "support": 123
+    "precision": 0.9411764705882352,
+    "recall": 0.9126050420168067,
+    "f1-score": 0.9221288515406164,
+    "support": 64
   },
   "weighted avg": {
-    "precision": 0.5901908801696713,
-    "recall": 0.5121951219512195,
-    "f1-score": 0.5306253438474234,
-    "support": 123
+    "precision": 0.953125,
+    "recall": 0.921875,
+    "f1-score": 0.9322916666666667,
+    "support": 64
   },
-  "accuracy": 0.5121951219512195,
+  "accuracy": 0.921875,
   "conversation_accuracy": {
-    "accuracy": 0.07142857142857142,
-    "correct": 1,
+    "accuracy": 0.6666666666666666,
+    "correct": 2,
     "with_warnings": 0,
-    "total": 14
+    "total": 3
   }
 }

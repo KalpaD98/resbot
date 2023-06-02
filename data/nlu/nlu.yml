@@ -9,32 +9,32 @@ nlu:
       - ello
       - hello there
       - good morning
-      - good morning 🌞
+      - Hello, nice to meet you
+      - hey there
       - gm
       - good evening
+      - hi, good evening
       - ge
       - moin
-      - hey there
-      - let's go
+      - good morning 🌞
+      - hello resbot
       - hey dude
       - goodmorning
       - goodevening
       - good afternoon
       - gummorning
-      - heyho
+      - hey
       - how is it going?
-      - Bonjour
-      - Ciao
-      - Salve
-      - hola
-      - Hola 
+      - hi, good morning
 
   - intent: mood_great
     examples: |
       - perfect
+      - everythings perfect
       - great
       - cool
       - amazing
+      - fantastic
       - feeling like a king
       - wonderful
       - I am feeling very good
@@ -43,72 +43,94 @@ nlu:
       - I am going to save the world
       - super stoked
       - extremely good
+      - feeling happy
+      - delighted
       - so so perfect
+      - I'm delighted to chat with you today.
+      - a good day
       - so good
       - so perfect
       - good
       - i'm great
       - feels good
       - im fine
+      - excellent
       - i'm fine
       - feeling awesome
       - fine
       - im cool
       - great
       - im great
+      - doing well
       - im okay
       - im ok
       - im fine thank you
-      - I'm feeling 😊 today!
-      - 🥳
-      - 😆
+      - I'm feeling great today!
+#      - 🥳
+#      - 😆
 
   - intent: mood_unhappy
     examples: |
       - my day was horrible
       - I am sad
+      - having a bad day
       - I don't feel very well
       - I am disappointed
       - super sad
       - I'm so sad
+      - bad day
       - sad
+      - i feel bad
+      - I'm feeling really frustrated
       - very sad
       - unhappy
+      - overwhelmed right now.
+      - not feeling ok
       - not good
+      - I'm not feeling very well
       - not very good
       - extremly sad
       - so saad
+      - Feeling down today
+      - moody
+      - Ugh, everything seems to be going wrong
+      - I am not in a good mood today
       - so sad
       - i feel sad
-      - i feel bad
       - sad
       - bad 
       - sad 😢
       - crying 😢
-      - 😭
-      - 😢
+#      - 😭
+#      - 😢
 
   - intent: goodbye
     examples: |
       - cu
+      - Good bye!
       - cee you later
       - good night
+      - Take care and goodbye!
       - bye
       - goodbye
+      - Bye 👋 
       - good bye
       - have a nice day
       - have a good one
       - farewell
+      - ✋
+      - see you soon
       - I am going
       - I am leaving bye
       - see you around
+      - ✌️
       - bye bye
       - see you later
       - tata
       - have a great day  
       - 👋
-      - ✌️
-      - ✋
+      - See you soon!
+
 
   - intent: affirm
     examples: |
@@ -122,11 +144,14 @@ nlu:
       - that sounds good
       - correct
       - yep
+      - yes, I agree
       - ya
       - aye
+      - yes ofcourse
       - ay
       - yes please
       - yes
+      - yeap
       - yeah
       - yea
       - yep
@@ -134,9 +159,12 @@ nlu:
       - correct
       - great choice
       - sounds really good
+      - Definitely
       - sounds ok
       - indeed
       - that's right
+      - Yeah, aligned with my opinion.
+      - go ahead
       - ok
       - yeah sure
       - cool ok
@@ -145,9 +173,9 @@ nlu:
       - sure
       - im in
       - i'm in
-      - 👍
-      - 🙌
-      - 🫡
+#      - 👍
+#      - 🙌
+#      - 🫡
 
 
   - intent: deny
@@ -160,36 +188,52 @@ nlu:
       - no way
       - not really
       - nah
+      - No it isn't
       - na
+      - That's not what I was looking for 
       - nah
+      - That doesn't sound right
       - nop
       - negative
       - no need
+      - Nope
       - nah I am ok
       - no thanks
+      - No, I can't agree with your response.
       - nope
       - hell no
       - dont
+      - I'm sorry, but I have to disagree with that statement
       - don't
       - nooo
-      - 👎
-      - 🙅‍♂️
-      - 🙅‍♀️
-      - 🙅
-      - 🚫
+#      - 👎
+#      - 🙅‍♂️
+#      - 🙅‍♀️
+#      - 🙅
+#      - 🚫
 
   - intent: thank_you
     examples: |
       - thank you
+      - Thank you for your help.
       - thanks
+      - I appreciate it
       - thank you very much
-      - thanks a lot
+      - Thanks a lot!
       - thanks a bunch
+      - Thank you so much ❤
+      - Thank U
       - thanks a ton
+      - Thnksn
+      - Thanks for the help
+      - Thanks for everything 
+      - Thanks chatbot
       - thams
+      - Thank you so much for your help
       - thx
       - thnx
       - thx a lot
+      - Thank you so much
       - thnx a lot
 
   - intent: stop
@@ -197,6 +241,7 @@ nlu:
       - stop
       - stop go back
       - shut up
+      - Please stop
       - shutup
       - ok then you cant help me
       - that was shit, you're not helping
@@ -208,6 +253,7 @@ nlu:
       - ok, but that doesnt help me
       - that doesnt help me
       - this is leading to nothing
+      - Stop please
       - this conversation is not really helpful
       - you cannot help me with what I want
       - I think you cant help me

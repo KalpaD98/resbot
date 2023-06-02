@@ -2,18 +2,17 @@ version: "3.1" # nlu-booking.yml: NLU training data for booking related intents
 
 nlu:
   # booking flow
-
+  # how to catch only me, me and my wife (girlfriend), me and my friends, me and my family,
+  # me wife and the kids, my family
   - intent: inform_num_people
     examples: |
       - [2](num_people)
       - [3](num_people) peeps
-      - about [4](num_people) people
       - about [4](num_people) peeps
       - around [4](num_people)
       - around [4](num_people) people
       - [4](num_people) people
       - [5](num_people) people are joining
-      - [10](num_people) people
       - [4](num_people) pax
       - [4](num_people) peeps
       - for [ten](num_people) people
@@ -30,36 +29,47 @@ nlu:
       - no just [2](num_people) people
       - sorry only [5](num_people) people
       - [1](num_people)
-      - [2](num_people)
-      - [3](num_people)
       - [4](num_people)
-      - [5](num_people)
-      - [6](num_people)
       - [7](num_people)
-      - [8](num_people)
       - [9](num_people)
       - [10](num_people)
-      - [20](num_people)
-      - [30](num_people)
-      - [40](num_people)
-      - [50](num_people)
       - [100](num_people)
       - [4] guys
       - [12] gals
       
-
-  - intent: inform_date # find a way to extract date from descriptions apart from duckling server
+ # find a way to extract date from descriptions apart from duckling server
+  - intent: inform_date
     examples: |
-      - [2023-04-01](date)
-      - [2023 01 01](date)
-      - [2023-02-05](date)
-      - [2024/01/01](date)
-      - Can I make a reservation for [tomorrow](date)?
-      - What availability do you have for [Sunday](date)?
-      - I need to reserve a table for [next Friday](date).
-      - Can you tell me what times you have available on [Wednesday](date)?
-      - I want to make a reservation for [this Thursday](date).
       - Do you have any tables available at [next Monday](date)?
+      - [2023-04-01](date)
+      - I want to make a reservation for [this Thursday](date).
+      - [2023 01 01](date)
+      - I need to reserve a table for [next Friday](date).
+      - [2023-02-05](date)
+      - Can I make a reservation for [tomorrow](date)?
+      - [2024/01/01](date)
+      - What availability do you have for [Sunday](date)?
+      - Can you tell me what times you have available on [Wednesday](date)?
+      - I'd like to book for [Tuesday](date).
+      - Can I book a table for [Saturday](date)?
+      - I'm looking for a reservation on [next Wednesday](date).
+      - Can you reserve a table for [April 10th](date)?
+      - We want to come in on [June 15th, 2023](date).
+      - Is there availability on [July 20th](date)?
+      - Can you reserve for [2023-08-15](date)?
+      - I'd like a reservation for [2024/06/10](date).
+      - What's the availability on [October 5th](date)?
+      - I'd like to reserve for [December 25th, 2023](date).
+      - Can I book a spot for [2024-05-30](date)?
+      - Is there space for us on [2023/12/01](date)?
+      - Can I book a table for [next Saturday](date)?
+      - We are planning for the [day after tomorrow](date).
+      - Let's make it this [coming Monday](date).
+      - Is [this Friday](date) available?
+      - Can we book for [two days from now](date)?
+      - I'd like to reserve a spot for the [coming Sunday](date).
+      - Let's set it for[2024-09-30](date).
+      - We'd like to come in on [2023/11/15](date).
 
   - intent: inform_time
     examples: |
@@ -68,6 +78,31 @@ nlu:
       - [10:30 am](time)
       - [12:00 p.m.](time)
       - [12:00 pm](time)
+      - at [1 pm](time)
+      - [2 o'clock](time)
+      - [2:30 pm](time)
+      - around [3 pm](time)
+      - [4:00 p.m.](time)
+      - [5 in the evening](time)
+      - [6 p.m.](time)
+      - [7:30 pm](time)
+      - [8 o'clock](time)
+      - at [8:30 a.m.](time)
+      - around [9 pm](time)
+      - [10 in the evening](time)
+      - [11 p.m.](time)
+      - at [midnight](time)
+      - at [noon](time)
+      - [12:30 pm](time)
+      - [1:00 p.m.](time)
+      - [2:30 a.m.](time)
+      - [3:00 p.m.](time)
+      - [4:30 a.m.](time)
+      - [5:30 a.m.](time)
+      - [6 in the morning](time)
+      - [9:30 a.m.](time)
+      - [10:00 a.m.](time)
+      - [11 in the morning](time)
 
   - intent: request_booking_details
     examples: |
@@ -79,24 +114,52 @@ nlu:
       - reservation details
       - booking details please
       - reservation details pls
-    # how to catch only me, me and my wife (girlfriend), me and my friends, me and my family,
-    # me wife and the kids, my family
+      - Can you show me my booking information?
+      - Can I have my reservation details?
+      - Please provide details of my booking
+      - Could you give me details about my reservation?
+      - Check my reservation status
+      - Get my booking details
+      - I need information on my reservation
+      - Fetch my booking details
+      - Can you retrieve my reservation details?
+      - I'd like to know about my booking details
+      - What's the current status of my booking?
+      - Please update me about my reservation
+      - What are the details of my booking?
+      - Can you fetch the details of my reservation?
+      - I would like to check my reservation details
+      - Can you provide the details of my booking?
+      - I'd like to know the status of my reservation
+      - I want to see my booking details
+      - Please display my reservation details
+      - Can you please check my booking?
+      - Show me the details of my booking
+
+    
 
   - intent: inform_restaurant_id
     examples: |
       - [rid_6431ac87d5f9f6b0be596abb](restaurant_id)
+      - [rid_6431ac87d5f9f6b0be596abb](restaurant_id) is the restaurant id
       - [rid_6431ac87d5f9f6b0be596ac0](restaurant_id)
       - restaurant_id is [rid_6431ac87d5f9f6b0be596abd](restaurant_id)
       - restaurant_id: [rid_6431ac87d5f9f6b0be596abf](restaurant_id)
 
   - intent: inform_booking_restaurant_id
     examples: |
+      - [rid_6431ac87d5f9f6b0be596abc](restaurant_id) is the restaurant id I want to book
+      - [rid_6431ac87d5f9f6b0be596abc](restaurant_id) is the restaurant id I want to book a table at
       - book [rid_6431ac87d5f9f6b0be596abc](restaurant_id)
       - book restaurant [rid_6431ac87d5f9f6b0be596abc](restaurant_id)
+      - book restaurant [rid_6431ac87d5f9f6b0be596abc](restaurant_id) for me
 
   - intent: inform_view_details_restaurant_id
     examples: |
       - view details [rid_6431ac87d5f9f6b0be596abd](restaurant_id)
+      - view details of [rid_6431ac87d5f9f6b0be596abd](restaurant_id) restaurant
+      - view details [rid_6431ac87d5f9f6b0be596abd](restaurant_id) please
+      - view details of [rid_6431ac87d5f9f6b0be596abd](restaurant_id)
       - view details of restaurant [rid_6431ac87d5f9f6b0be596abb](restaurant_id)
 
   - intent: stop_restaurant_booking_form
@@ -105,9 +168,29 @@ nlu:
       - I'll check out another restaurant
       - I changed my mind
       - cancel the booking
+      - Please stop the booking process
       - I don't want to book anymore
+      - stop booking
+      - I would like to cancel the restaurant booking process. Please stop.
       - cancel
+      - Terminate booking
+      - I want to stop the booking process
       - cancel this
       - stop this
+      - Plz stop the process
+      - I want to terminate this booking.
       - stop booking
       - i cant fill these
+      - Stop the process
+      - I'm not interested anymore, cancel it
+      - I changed my mind, stop the booking
+      - No longer interested, halt the process
+      - Cease the reservation process
+      - Please abort the booking
+      - Cancel my booking process
+      - I've changed my plans, cancel the booking
+      - I won't be booking now, stop the process
+      - Discontinue the booking process, please
+      - Please pause the booking procedure
+      - I would like to abort the reservation
+      - Please suspend the booking process

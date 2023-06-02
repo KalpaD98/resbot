@@ -4,7 +4,7 @@ language: en
 
 pipeline: # -------------------------------------------------- NLU -----------------------------------------------------
 
-  - name: submodules.custom_components.language_handlers.language_handler.LanguageHandlerAndTranslator
+#  - name: submodules.custom_components.language_handlers.language_handler.LanguageHandlerAndTranslator
 
     # Load Language model
   - name: SpacyNLP
@@ -55,7 +55,7 @@ pipeline: # -------------------------------------------------- NLU -------------
 policies: # -------------------------------------------- Dialog Management --------------------------------------------
 
   - name: MemoizationPolicy
-    max_history: 16
+    max_history: 32
 
   - name: RulePolicy
     core_fallback_threshold: 0.3
@@ -63,10 +63,10 @@ policies: # -------------------------------------------- Dialog Management -----
     enable_fallback_prediction: true
 
   - name: UnexpecTEDIntentPolicy
-    max_history: 16
+    max_history: 32
     epochs: 100
 
   - name: TEDPolicy
-    max_history: 16
+    max_history: 32
     epochs: 100
     constrain_similarities: true

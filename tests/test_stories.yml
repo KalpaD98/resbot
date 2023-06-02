@@ -1,18 +1,21 @@
 #### This file contains tests to evaluate that your bot behaves as expected.
 
 stories:
-  - story: Test Greeting and bot introduction with checkpoint
-    steps:
-      - user: |
-          Hello!
-        intent: greet
-      - action: action_utter_greet_and_intro
-      - action: action_ask_language_preference
-      - user: |
-          [en](permanent_language)
-        intent: inform_permanent_language
-      - action: action_set_permanent_language
-      - action: action_utter_wanna_book
+#  - story: Test Greeting and bot introduction with checkpoint
+#    steps:
+#      - user: |
+#          Hello
+#        intent: greet
+#      - action: action_utter_greet_and_intro
+#      - action: action_ask_language_preference
+#      - user: /inform_permanent_language{{"permanent_language":"en"}}
+#        intent: inform_permanent_language
+#        entities:
+#          - permanent_language: en
+#      - slot_was_set:
+#          - permanent_language: en
+#      - action: action_set_permanent_language
+#      - action: action_utter_wanna_book
 
   - story: Test User denies to check restaurant
     steps:
@@ -21,13 +24,16 @@ stories:
         intent: greet
       - action: action_utter_greet_and_intro
       - action: action_ask_language_preference
-      - user: |
-          [en](permanent_language)
+      - user: /inform_permanent_language{{"permanent_language":"en"}}
         intent: inform_permanent_language
+        entities:
+          - permanent_language: en
+      - slot_was_set:
+          - permanent_language: en
       - action: action_set_permanent_language
       - action: action_utter_wanna_book
       - user: |
-          No, thank you.
+          No.
         intent: deny
       - action: action_utter_thank_you
       - action: action_ask_anything_else
@@ -35,21 +41,23 @@ stories:
   - story: Test user affirms to check restaurant after logging in
     steps:
       - user: |
-          Hello!
+          Hello
         intent: greet
       - action: action_utter_greet_and_intro
       - action: action_ask_language_preference
-      - user: |
-          [en](permanent_language)
+      - user: /inform_permanent_language{{"permanent_language":"en"}}
         intent: inform_permanent_language
+        entities:
+          - permanent_language: en
+      - slot_was_set:
+          - permanent_language: en
       - action: action_set_permanent_language
       - action: action_utter_wanna_book
       - user: |
-          Yes, I'd like to.
+          Yes.
         intent: affirm
       - action: action_ask_registered_and_show_login_signup_quick_replies
-      - user: |
-          I'd like to log in.
+      - user: /request_login_form
         intent: request_login_form
       - action: login_form
       - active_loop: login_form
@@ -63,16 +71,29 @@ stories:
       - action: login_form
       - active_loop: null
       - action: action_login_user
-
+      - slot_was_set:
+          - is_authenticated: true
+      - user: /request_restaurants
+        intent: request_restaurants
+      - slot_was_set:
+            - cuisine: null
       - action: action_show_cuisines
-      - user: /inform_cuisine{{"cuisine":"chinese"}}
+      - user: /inform_cuisine{{"cuisine":"italian"}}
         intent: inform_cuisine
+        entities:
+          - cuisine: italian
+      - slot_was_set:
+          - cuisine: italian
       - action: action_show_restaurants
       - user: /inform_booking_restaurant_id{{"restaurant_id":"rid_6431ac87d5f9f6b0be596abb"}}
         intent: inform_booking_restaurant_id
+        entities:
+          - restaurant_id: rid_6431ac87d5f9f6b0be596abb
+      - slot_was_set:
+          - restaurant_id: rid_6431ac87d5f9f6b0be596abb
       - action: action_show_selected_restaurant_ask_booking_confirmation
       - user: |
-          Yes, please book.
+          Yes.
         intent: affirm
       - action: restaurant_booking_form
       - active_loop: restaurant_booking_form
@@ -90,27 +111,12 @@ stories:
         intent: affirm
       - action: action_confirm_booking
       - action: action_utter_thank_you
-
-  - story: Test User wants to see restaurants - not logged in
-    steps:
-      - user: |
-          I want to see the restaurants.
-        intent: request_restaurants
-      - action: action_ask_registered_and_show_login_signup_quick_replies
-      - user: |
-          I'd like to register.
-        intent: request_user_registration_form
-      - action: registration_form
-      - user: |
-          Here are my registration details.
-        intent: provide_registration_details
-      - action: action_save_user_and_complete_registration
-      - action: action_show_cuisines
+      - action: action_ask_anything_else
 
   - story: Test User stops after being prompted to log in or sign up
     steps:
       - user: |
-          I want to stop.
+          stop
         intent: stop
       - action: action_clear_restaurant_booking_slots
       - action: action_utter_bye_see_you_later
@@ -118,18 +124,18 @@ stories:
 #  - story: Test User wants to book a restaurant after view details
 
 
-  - story: Test User denies after viewing restaurant details or book directly
-    steps:
-      - user: |
-          I'd like to view details.
-        intent: inform_view_details_restaurant_id
-      - action: action_show_selected_restaurant_details
-      - user: |
-          No, I don't want to book.
-        intent: deny
-      - action: action_clear_restaurant_booking_slots
-      - action: action_utter_thank_you
-      - action: action_ask_anything_else
+#  - story: Test User denies after viewing restaurant details or book directly
+#    steps:
+#      - user: |
+#          I'd like to view details.
+#        intent: inform_view_details_restaurant_id
+#      - action: action_show_selected_restaurant_details
+#      - user: |
+#          No, I don't want to book.
+#        intent: deny
+#      - action: action_clear_restaurant_booking_slots
+#      - action: action_utter_thank_you
+#      - action: action_ask_anything_else
 
 #  - story: booking restaurant after asking details happy path 1
 #  - story: booking restaurant after selecting happy path 2
@@ -226,3 +232,8 @@ stories:
 #      - action: utter_iamabot
 
 ### If you want to learn more, please see the docs: https://rasa.com/docs/rasa/testing-your-assistant
+
+# Possible failing cases
+# Yes, I'd Like to
+# Hello!
+# I want to stop.

@@ -4,11 +4,17 @@ nlu:
     examples: |
       - I would like to search restaurants
       - can I filter restaurants
+      - I want to fimd more resturents, please show
       - I want to search for restaurants
       - Can you help me find a restaurant?
+      - need to search for restaurants
       - Can you recommend some restaurants?
+      - I'm looking for suitable restaurents
       - I'm looking for a place to eat
       - Where can I find some good restaurants?
+      - I want to search for a suitable restaurant
+      - What are the restaurants?
+      - I want to search for restaurants.
 
   - intent: search_restaurants
     examples: |
@@ -92,3 +98,25 @@ nlu:
 #      - Can you recommend a restaurant that is open [late](opening_hours) for [10](num_people) people?
 #      - I'm looking for a restaurant that is open [early](opening_hours) for [2](num_people) people
 #      - Can you suggest a restaurant that is open [24 hours](opening_hours) for [3](num_people) people?
+
+#  - intent: query_knowledge_base #TODO: change this data to match with our KB
+#    examples: |
+#      - I am looking for a [French](cuisine) restaurant in the [new york](location) area
+#      - what [restaurants]{"entity": "object_type", "value": "restaurant"} can you recommend?
+#      - list some [restaurants]{"entity": "object_type", "value": "restaurant"}
+#      - can you name some [restaurants]{"entity": "object_type", "value": "restaurant"} please?
+#      - can you show me some [restaurant]{"entity": "object_type", "value": "restaurant"} options
+#      - list [German]{"entity": "cuisine"} [restaurants]{"entity": "object_type", "value": "restaurant"}
+#      - do you have any [mexican]{"entity": "cuisine"} [restaurants]{"entity": "object_type", "value": "restaurant"}?
+#      - do you know the [price range]{"entity": "attribute", "value": "price-range"} of [that one]{"entity": "mention"}?
+#      - what [cuisine]{"entity": "attribute"} is [it]{"entity": "mention"}?
+#      - do you know what [cuisine]{"entity": "attribute"} the [last one]{"entity": "mention", "value": "LAST"} has?
+#      - does [Donath]{"entity": "restaurant"} have [outside seating]{"entity": "attribute", "value": "outside-seating"}?
+#      - what is the [price range]{"entity": "attribute", "value": "price-range"} of [Berlin Burrito Company]{"entity": "restaurant"}?
+#      - what is with [I due forni]{"entity": "restaurant"}?
+#      - Do you also have any [Vietnamese]{"entity": "cuisine"} [restaurants]{"entity": "object_type", "value": "restaurant"}?
+#      - What about any [Mexican]{"entity": "cuisine", "value": "mexican"} [restaurants]{"entity": "object_type", "value": "restaurant"}?
+#      - Do you also know some [Italian]{"entity": "cuisine"} [restaurants]{"entity": "object_type", "value": "restaurant"}?
+#      - can you tell me the [price range]{"entity": "attribute", "value": "price-range"} of [that restaurant]{"entity": "mention"}?
+#      - what [cuisine]{"entity": "attribute"} do [they]{"entity": "mention"} have?
+#      - what is the [price range]{"entity": "attribute", "value": "price-range"} of [that place]{"entity": "mention"}?

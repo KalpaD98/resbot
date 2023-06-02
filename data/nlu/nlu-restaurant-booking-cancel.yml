@@ -10,8 +10,38 @@ nlu:
       - Can you help me cancel a booking?
       - Cancel a reservation for me
       - i want to cancel a booking
+      - I want to cancel my booking
+      - Cancel the booking
+      - Please cancel my booking
+      - I would like to cancel the booking I made
+      - Please cancel my booking
+      - I want to cancel my order
+      - Could i cancel my booking.
+      - I want to cancel my booking
+      - I would like to cancel my booking
+      - I would like to cancel my booking 
+      - cancel booking
+      - I would like to cancel my booking.
+      - please cancel booking
+      - I need to cancel my booking
+      - I'd like to cancel my booking 
+      - cancel my booking
+      - I'd like to cancel my booking 
+      - can you cancel my booking
+      - How can I cancel the booking
+      - I want to cancel my booking
+      - Please cancel my booking
+      - Is there anyway that can cancel my booking?
+      - I would like to cancel my booking. 
+      - Can you please assist me with the cancellation process?
+      - I would like to cancel my booking.
+      - Can you please cancel the booking
+      - Can I cancel my previous order?
 
   - intent: inform_cancel_booking_id
     examples: |
       - cancel booking [bid_6435a6e1bef00a88687f1823](booking_id)
       - cancel [bid_6436555b937c8209a6a93609](booking_id)
+      - I want to cancel my booking [bid_6436555b937c8209a6a93609](booking_id)
+      - I need to cancel this booking [bid_6436555b937c8209a6a93609](booking_id)
+      - please cancel my booking [bid_6436555b937c8209a6a93609](booking_id)

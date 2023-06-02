@@ -1,55 +1,46 @@
 version: "3.1" # nlu-restaurant-inform.yml is a file where you define your NLU training data.
 nlu:
+# TODO: uncomment when using
 
-  - intent: inform_location
-    examples: |
-      - [north](location)
-      - [south](location)
+#  - intent: inform_city
+#    examples: |
+#      - [brooklyn](city)
+#      - [manhattan](city)]
+#      - [queens](city)
+#      - recommend a restaurant in [new york](location)
+#      - the city is [new york](location)
+#      - im from [manhattan](location)
+#      - it is in [brooklyn](location)
 
-  - intent: inform_city
-    examples: |
-      - [brooklyn](city)
-      - [manhattan](city)]
-      - [queens](city)
-      - recommend a restaurant in [new york](location)
-
-  - intent: inform_state
-    examples: |
-      - [new york](state)
-      - [new jersey](state)
-      - [california](state)
-      - [texas](state)
-      - [florida](state)
-      - [illinois](state)
-      - in [new york](state)
-      - from [new york](state)
-
-  - intent: inform_restaurant_name
-    examples: |
-      - [Burger King](restaurant_name)
-      - [McDonalds](restaurant_name)
-      - [KFC](restaurant_name)
-      - [Pizza Hut](restaurant_name)
-      - [Subway](restaurant_name)
-      - [Domino's Pizza](restaurant_name)
-      - [Wendy's](restaurant_name)
-      - [Taco Bell](restaurant_name)
-      - [Panda Express](restaurant_name)
-      - [Starbucks](restaurant_name)
-      - [Dunkin' Donuts](restaurant_name)
-      - [Chipotle Mexican Grill](restaurant_name)
-      - [Chick-fil-A](restaurant_name)
-      - [Jack in the Box](restaurant_name)
-      - [Dairy Queen](restaurant_name)
-      - [Popeyes Louisiana Kitchen](restaurant_name)
-      - [Sonic Drive-In](restaurant_name)
-      - [Little Caesars](restaurant_name)
-      - [Papa John's](restaurant_name)
-      - [Pizza Inn](restaurant_name)
-      - [Pizza Ranch](restaurant_name)
-      - [Pizza Hut](restaurant_name)
-      - [Papa Murphy's](restaurant_name)
-      - [Papa Gino's](restaurant_name)
+#  - intent: inform_state
+#    examples: |
+#      - [new york](state)
+#      - [new jersey](state)
+#      - [california](state)
+#      - [texas](state)
+#      - [florida](state)
+#      - [illinois](state)
+#      - in [new york](state)
+#      - from [new york](state)
+#
+#  - intent: inform_restaurant_name
+#    examples: |
+#      - [Burger King](restaurant_name)
+#      - [McDonalds](restaurant_name)
+#      - [Domino's Pizza](restaurant_name)
+#      - [Wendy's](restaurant_name)
+#      - [Subway](restaurant_name) restaurant
+#      - [Taco Bell](restaurant_name)
+#      - [Panda Express](restaurant_name)
+#      - It is called [Starbucks](restaurant_name)
+#      - the restaurant is called [McDonalds](restaurant_name)
+#      - [Dunkin' Donuts](restaurant_name)
+#      - select [Pizza Ranch](restaurant_name)
+#      - I would like to go with [Pizza Hut](restaurant_name)
+#      - I wanna try [Papa Murphy's](restaurant_name)
+#      - [Papa Gino's](restaurant_name)
+#      - the restaurant is [Burger King](restaurant_name)
+#
 
 #  - intent: inform_restaurant_type
 #    examples: |
