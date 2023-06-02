@@ -1,6 +1,7 @@
 version: "3.1" # nlu.yml is a file where you define your NLU training data.
 
 nlu:
+
   - intent: greet
     examples: |
       - hey
@@ -26,6 +27,13 @@ nlu:
       - hey
       - how is it going?
       - hi, good morning
+      - hi there
+      - greetings
+      - howdy
+      - hiya
+      - good day
+      - hi, nice to meet you
+      - salutations
 
   - intent: mood_great
     examples: |
@@ -37,37 +45,29 @@ nlu:
       - fantastic
       - feeling like a king
       - wonderful
-      - I am feeling very good
-      - I am great
-      - I am amazing
-      - I am going to save the world
-      - super stoked
-      - extremely good
+      - feeling very good
+      - I am great amazing
+      - save the world
       - feeling happy
       - delighted
-      - so so perfect
       - I'm delighted to chat with you today.
       - a good day
       - so good
       - so perfect
       - good
-      - i'm great
       - feels good
       - im fine
       - excellent
       - i'm fine
       - feeling awesome
       - fine
+      - 🥳
       - im cool
-      - great
       - im great
       - doing well
-      - im okay
-      - im ok
-      - im fine thank you
+      - im okay ok
       - I'm feeling great today!
-#      - 🥳
-#      - 😆
+      - 😆
 
   - intent: mood_unhappy
     examples: |
@@ -87,22 +87,20 @@ nlu:
       - overwhelmed right now.
       - not feeling ok
       - not good
+      - 😢
       - I'm not feeling very well
       - not very good
       - extremly sad
-      - so saad
       - Feeling down today
       - moody
+      - 😭
       - Ugh, everything seems to be going wrong
       - I am not in a good mood today
       - so sad
       - i feel sad
-      - sad
       - bad 
       - sad 😢
       - crying 😢
-#      - 😭
-#      - 😢
 
   - intent: goodbye
     examples: |
@@ -123,6 +121,12 @@ nlu:
       - I am going
       - I am leaving bye
       - see you around
+      - Catch you later
+      - So long
+      - Till next time
+      - Cheerio
+      - Later alligator
+      - Until we meet again
       - ✌️
       - bye bye
       - see you later
@@ -130,7 +134,6 @@ nlu:
       - have a great day  
       - 👋
       - See you soon!
-
 
   - intent: affirm
     examples: |
@@ -148,23 +151,21 @@ nlu:
       - ya
       - aye
       - yes ofcourse
-      - ay
       - yes please
-      - yes
       - yeap
       - yeah
       - yea
-      - yep
       - right
-      - correct
+      - 🙌
       - great choice
       - sounds really good
       - Definitely
       - sounds ok
       - indeed
       - that's right
-      - Yeah, aligned with my opinion.
+      - aligns with my opinion.
       - go ahead
+      - 👍
       - ok
       - yeah sure
       - cool ok
@@ -173,10 +174,7 @@ nlu:
       - sure
       - im in
       - i'm in
-#      - 👍
-#      - 🙌
-#      - 🫡
-
+      - 🫡
 
   - intent: deny
     examples: |
@@ -192,25 +190,25 @@ nlu:
       - na
       - That's not what I was looking for 
       - nah
+      - 🙅‍♂️
       - That doesn't sound right
       - nop
       - negative
       - no need
       - Nope
+      - 🙅‍♀️
       - nah I am ok
       - no thanks
+      - 🚫
       - No, I can't agree with your response.
       - nope
       - hell no
       - dont
+      - 🙅
       - I'm sorry, but I have to disagree with that statement
       - don't
       - nooo
-#      - 👎
-#      - 🙅‍♂️
-#      - 🙅‍♀️
-#      - 🙅
-#      - 🚫
+      - 👎
 
   - intent: thank_you
     examples: |
@@ -225,6 +223,14 @@ nlu:
       - Thank U
       - thanks a ton
       - Thnksn
+      - I'm grateful for your assistance
+      - Cheers!
+      - I can't thank you enough
+      - Gracias!
+      - I owe you one
+      - You're a lifesaver
+      - I really appreciate it
+      - My gratitude is immense
       - Thanks for the help
       - Thanks for everything 
       - Thanks chatbot
@@ -258,3 +264,13 @@ nlu:
       - you cannot help me with what I want
       - I think you cant help me
       - hm i don't think you can do what i want
+      - you're not making sense
+      - I'm not getting the help I need
+      - Stop right there
+      - Can you quit it?
+      - I don't think you're helping
+      - stop the conversation
+      - you're not being helpful
+      - cease and desist
+      - Enough, you're not helping
+      - halt, you're not assisting me
