@@ -7,11 +7,34 @@ nlu:
 #      - [brooklyn](city)
 #      - [manhattan](city)]
 #      - [queens](city)
-#      - recommend a restaurant in [new york](location)
-#      - the city is [new york](location)
-#      - im from [manhattan](location)
-#      - it is in [brooklyn](location)
-
+#      - recommend a restaurant in [new york](city)
+#      - the city is [new york](city)
+#      - im from [manhattan](city)
+#      - it is in [brooklyn](city)
+#      - I am currently in [Los Angeles](city)
+#      - I live in [Boston](city)
+#      - I'm from [Chicago](city)
+#      - I stay in [San Francisco](city)
+#      - The city is [Houston](city)
+#      - I'm in [Phoenix](city)
+#      - I am currently staying in [Philadelphia](city)
+#      - I come from [San Antonio](city)
+#      - The place is [San Diego](city)
+#      - It is in [Dallas](city)
+#      - I am currently at [Austin](city)
+#      - I am in [San Jose](city)
+#      - Currently, I am in [Fort Worth](city)
+#      - I'm staying in [Jacksonville](city)
+#      - I live in [Columbus](city)
+#      - The city I am in is [Charlotte](city)
+#      - I am residing in [Indianapolis](city)
+#      - I'm located in [Seattle](city)
+#      - The city is [Denver](city)
+#      - I am from [Washington](city)
+#      - I'm living in [Nashville](city)
+#      - My location is [Las Vegas](city)
+#      - I'm currently in [Portland](city)
+#
 #  - intent: inform_state
 #    examples: |
 #      - [new york](state)
@@ -22,6 +45,28 @@ nlu:
 #      - [illinois](state)
 #      - in [new york](state)
 #      - from [new york](state)
+#      - I live in [Georgia](state)
+#      - I'm from [Ohio](state)
+#      - I am in [Michigan](state)
+#      - I'm staying in [North Carolina](state)
+#      - I'm currently in [Pennsylvania](state)
+#      - I am in [Virginia](state)
+#      - The state is [Massachusetts](state)
+#      - I reside in [Arizona](state)
+#      - I'm located in [Tennessee](state)
+#      - I'm currently in [Indiana](state)
+#      - I'm from [Missouri](state)
+#      - The state is [Maryland](state)
+#      - I'm in [Wisconsin](state)
+#      - I am currently at [Colorado](state)
+#      - I am residing in [Minnesota](state)
+#      - The place is [South Carolina](state)
+#      - Currently, I am in [Alabama](state)
+#      - I'm staying in [Louisiana](state)
+#      - I live in [Kentucky](state)
+#      - I am in [Oregon](state)
+#      - My location is [Oklahoma](state)
+#      - I am currently in [Connecticut](state)
 #
 #  - intent: inform_restaurant_name
 #    examples: |
@@ -40,27 +85,50 @@ nlu:
 #      - I wanna try [Papa Murphy's](restaurant_name)
 #      - [Papa Gino's](restaurant_name)
 #      - the restaurant is [Burger King](restaurant_name)
-#
-
-#  - intent: inform_restaurant_type
-#    examples: |
-#      - I would like to visit an italian restaurant
-#      - A family restaurant
-#      - mexican
-#      - Indian
-#      - Chinese restaurant
-#      - any restaurant
-#      - I would like to visit a multicusine restaurant
-#      - restaurant with a bar
-#      - restaurant above 4 stars
-#      - restaurant in open area
-#      - kid-friendly restaurant
-#      - restaurant with great ambience
-#      - the highest rated restaurant
-#      - dinning with a view
-#      - restaurant on a terrace
-#      - fusion restaurant
+#      - I'd like to book at [Terry Black's Barbecue](restaurant_name)
+#      - [Atlanta Breakfast Club](restaurant_name) is the restaurant
+#      - My choice is [1618 Asian Fusion](restaurant_name)
+#      - Let's go for [Poor Calvin's](restaurant_name)
+#      - It's [Breakfast at Barneys](restaurant_name)
+#      - I would prefer [Café Tu Tu Tango](restaurant_name)
+#      - The restaurant name is [The Boathouse](restaurant_name)
+#      - I've selected [Chef Art Smith's Homecomin'](restaurant_name)
+#      - We're planning for [Hattie B's Hot Chicken - Atlanta](restaurant_name)
+#      - I want to book at [Moonshine Patio Bar & Grill](restaurant_name)
+#      - [Bird Bird Biscuit](restaurant_name) sounds good
+#      - [Screen Door](restaurant_name) is the one
+#      - I would like to try [Franklin Barbecue](restaurant_name)
+#      - The restaurant is [Mike's Pastry](restaurant_name)
+#      - Book a table at [The Diner](restaurant_name)
 #
 #  - intent: inform_restaurant_food_type
 #    examples: |
-#      - I like to have pizza
+#      - I would like to eat [sushi](food_type)
+#      - I'm craving [burgers](food_type)
+#      - I want to eat [Mexican](food_type) food
+#      - We are interested in a [Thai](food_type) restaurant
+#      - I'm in the mood for [Italian](food_type) cuisine
+#      - I'd love some [Chinese](food_type) food
+#      - I want to have [Indian](food_type) cuisine
+#      - We are looking for [vegetarian](food_type) options
+#      - I would like to try some [seafood](food_type)
+#      - I'm looking for a place with good [barbecue](food_type)
+#      - I feel like eating [Korean](food_type) food today
+#      - I am looking for a [vegan](food_type) restaurant
+#      - We're interested in [Japanese](food_type) food
+#      - We would like to eat [French](food_type) cuisine
+#      - I want [Mediterranean](food_type) food
+#      - We're in the mood for [Greek](food_type) cuisine
+#      - I'm thinking about [Vietnamese](food_type) food
+#      - I would love to eat [American](food_type) food
+#      - We're craving [Lebanese](food_type) cuisine
+#      - I'm interested in [Spanish](food_type) food
+#      - I would like [German](food_type) cuisine
+#      - We want to try [Brazilian](food_type) food
+#      - I am looking for [Caribbean](food_type) cuisine
+#      - We're feeling like [Middle Eastern](food_type) food today
+#      - I'm looking for a place that serves [steak](food_type)
+#      - I want to try [Tex-Mex](food_type) cuisine
+#      - I'm interested in [gluten-free](food_type) options
+#      - I'm in the mood for [soul food](food_type)
+#      - I would like [organic](food_type) options
