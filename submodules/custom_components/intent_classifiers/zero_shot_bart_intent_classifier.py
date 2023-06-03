@@ -19,7 +19,7 @@ logger = logging.getLogger(__name__)
 
 
 @DefaultV1Recipe.register(
-    DefaultV1Recipe.ComponentType.INTENT_CLASSIFIER, is_trainable=True
+    DefaultV1Recipe.ComponentType.INTENT_CLASSIFIER, is_trainable=False
 )
 class ZeroShotBartIntentClassifier(GraphComponent):
     """A GraphComponent in RASA for Intent classification using a ZeroShot BART model.
@@ -179,37 +179,37 @@ class ZeroShotBartIntentClassifier(GraphComponent):
                     print(f"Failed to predict intent by zero shot bart for text '{text}': {str(e)}")
         return messages
 
-    def train(self, training_data: TrainingData) -> Resource:
-        self._get_training_data(self, training_data)
-        return self._resource
-
-    @staticmethod
-    def _get_training_data(self, training_data: TrainingData) -> set[Any]:
-        """Preprocess the training data. Retrieve the text messages and their corresponding intents."""
-
-        print("Getting training data for ZeroShotBartIntentClassifier")
-
-        intents = []
-
-        for example in training_data.training_examples:
-            intent = example.get(INTENT)
-            if intent:
-                intents.append(intent)
-
-        intent_counts = Counter(intents)
-
-        # Sort intent_counts by count in descending order
-        sorted_counts = sorted(intent_counts.items(), key=itemgetter(1), reverse=True)
-
-        # Write sorted_counts to a csv file
-        with open('intent_counts.csv', 'w', newline='') as csvfile:
-            print("Writing data to CSV")
-            writer = csv.writer(csvfile)
-            writer.writerow(["intent_name", "count"])
-            for intent, count in sorted_counts:
-                writer.writerow([intent, count])
-
-        return set(intent_counts.keys())
+    # def train(self, training_data: TrainingData) -> Resource:
+    #     self._get_training_data(self, training_data)
+    #     return self._resource
+    #
+    # @staticmethod
+    # def _get_training_data(self, training_data: TrainingData) -> set[Any]:
+    #     """Preprocess the training data. Retrieve the text messages and their corresponding intents."""
+    #
+    #     print("Getting training data for ZeroShotBartIntentClassifier")
+    #
+    #     intents = []
+    #
+    #     for example in training_data.training_examples:
+    #         intent = example.get(INTENT)
+    #         if intent:
+    #             intents.append(intent)
+    #
+    #     intent_counts = Counter(intents)
+    #
+    #     # Sort intent_counts by count in descending order
+    #     sorted_counts = sorted(intent_counts.items(), key=itemgetter(1), reverse=True)
+    #
+    #     # Write sorted_counts to a csv file
+    #     with open('intent_counts.csv', 'w', newline='') as csvfile:
+    #         print("Writing data to CSV")
+    #         writer = csv.writer(csvfile)
+    #         writer.writerow(["intent_name", "count"])
+    #         for intent, count in sorted_counts:
+    #             writer.writerow([intent, count])
+    #
+    #     return set(intent_counts.keys())
 
     @staticmethod
     def _should_classify_with_bart(self, text, diet_intent_ranking):

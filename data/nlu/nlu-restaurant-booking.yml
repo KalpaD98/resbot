@@ -34,8 +34,8 @@ nlu:
       - [9](num_people)
       - [10](num_people)
       - [100](num_people)
-      - [4] guys
-      - [12] gals
+      - [4](num_people) guys
+      - [12](num_people) gals
       
  # find a way to extract date from descriptions apart from duckling server
   - intent: inform_date
