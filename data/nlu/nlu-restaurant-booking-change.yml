@@ -1,6 +1,7 @@
 version: "3.1" # nlu-booking.yml: NLU training data for booking related intents
 
 nlu:
+
   - intent: user_wants_to_change_restaurant_booking
     examples: |
       - i want to change my booking
@@ -23,6 +24,17 @@ nlu:
       - Please change my booking,
       - I'd like to make some changes to my booking
       - Can I make changes to my existing reservation?
+      - Can you assist me in changing my booking?
+      - I need to adjust my booking
+      - Is it possible to modify my reservation?
+      - I want to alter my booking details
+      - I wish to reschedule my booking
+      - Can you help me change my booking?
+      - I need to reschedule my restaurant reservation
+      - I would like to adjust my reservation
+      - Could you please help me update my booking?
+      - Is it possible to reschedule my booking?
+
 
   - intent: user_wants_to_change_restaurant_booking_date
     examples: |
@@ -44,6 +56,19 @@ nlu:
       - I need to change my restaurant reservation date
       - I want to change my booking date
       - I'd like to reschedule my reservation to a different date
+      - Can we shift the booking to another date?
+      - I want to postpone my reservation
+      - Can we reschedule the reservation to a later date?
+      - I need to push my booking to a later date
+      - Could you help me reschedule my booking?
+      - I want to update the date of my reservation
+      - Is it possible to postpone my reservation?
+      - Can we move the reservation to another day?
+      - I would like to postpone my booking
+      - Can we change the reservation to a future date?
+      - I need to adjust the date of my booking
+      - Could we shift the booking to a different day?
+
 
   - intent: user_wants_to_change_restaurant_booking_num_people
     examples: |
@@ -74,8 +99,31 @@ nlu:
       - Can you change the number of people and booking date?
       - Could I change the date and the number of people for my booking.
       - Please change the date and number of people in the reservation 
+      - Can we update the headcount for the booking?
+      - I'd like to revise the guest count for my booking
+      - Could I modify the guest number in my booking?
+      - I want to alter the number of guests in my reservation
+      - How can I adjust the people count in my booking?
+      - I need to increase the party size in my reservation
+      - I would like to add more people to my booking
+      - Can I increase the number of people for the booking?
+      - I'd like to change the count of attendees in my booking
+      - I have to update the number of guests for my booking
+      - I need to decrease the number of people in my booking
+      - Can I modify the count of people in my reservation?
+      - I want to reduce the guest count in my booking
+      - Is it possible to update the people count in my reservation?
+      - Can I change the party size of my reservation?
+      - I want to add more guests to my booking
+      - Can we adjust the number of seats for my booking?
+      - I need to change the booking for more people
+      - I want to change the guest quantity in my booking
+      - I would like to alter the size of my party for the booking
 
   - intent: inform_change_booking_id
     examples: |
       - change booking [bid_6435a6e1bef00a88687f1823](booking_id)
       - change [bid_6435a6e1bef00a88687f1ac4](booking_id)
+      - change [bid_6435a6e1bef00a88687f1ac4](booking_id) please
+      - I need to change [bid_6435a6e1bef00a88687f1ac4](booking_id)
+      - can I change [bid_6435a6e1bef00a88687f1ac4](booking_id)
