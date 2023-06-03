@@ -7,11 +7,25 @@ nlu:
       - are you a human?
       - am I talking to a bot?
       - am I talking to a human?
+      - Are you an AI?
+      - Are you an Artificial Intelligence?
+      - Am I chatting with a bot?
+      - Is this an AI I am chatting with?
+      - Are you a machine?
+      - Is this a real person or a bot?
 
   - intent: bot_challenge/what_can_you_do
     examples: |
       - what can you do?
       - what can you do for me?
+      - what services do you provide?
+      - Can you tell me your capabilities?
+      - What is your functionality?
+      - How can you assist me?
+      - What tasks can you perform?
+      - What help can you provide?
+      - What are your abilities?
+      - What can you offer me?
 
   - intent: bot_challenge/who_are_you
     examples: |
@@ -19,6 +33,12 @@ nlu:
       - what are you?
       - what are you doing?
       - what is your name?
+      - Can you tell me about yourself?
+      - What is your identity?
+      - What's your purpose?
+      - Tell me about yourself?
+      - Could you introduce yourself?
+      - What do you represent?
 
   - intent: out_of_scope/out_of_functionality
     examples: |
@@ -28,6 +48,10 @@ nlu:
       - Who's the US President?
       - What's the weather today?
       - can you answer any question ?
+      - Who won the last World Cup?
+      - What's the population of China?
+      - Can you tell me a joke?
+      - What's the current exchange rate?
 
   - intent: out_of_scope/food
     examples: |
@@ -37,6 +61,10 @@ nlu:
       - I want to order a sandwich
       - can i order food
       - check food
+      - Can I order a salad?
+      - I want to order.
+      - Do you have deliver food?
+      - I want to order something to eat.
 
   - intent: out_of_scope/hotel
     examples: |
@@ -46,3 +74,7 @@ nlu:
       - I want to book a double room
       - can i book a hotel room
       - check hotels
+      - I'm looking for a luxury hotel.
+      - I want to book a resort.
+      - Can I book a hotel with a pool?
+      - I'm looking for a budget hotel.
