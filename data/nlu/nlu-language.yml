@@ -20,7 +20,6 @@ nlu:
       - can you speak in [Sinhala](permanent_language)
       - I want to communicate in [english](permanent_language)
       - I prefer [sinhala](permanent_language)
-      - Let's switch to [english](permanent_language)
       - chat in [Sinhala](permanent_language)
       - Change the language to [English](permanent_language)
       - Let's use [sinhala](permanent_language) instead

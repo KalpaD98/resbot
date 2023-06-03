@@ -26,6 +26,16 @@ nlu:
       - restuarants
       - restaurants
       - show me some restaurants
+      - Can you suggest some nice places to eat?
+      - Could you recommend some dining spots?
+      - I'd like to see some restaurant options
+      - Can you display the list of available restaurants?
+      - I'm looking for restaurants around me
+      - Please provide a list of restaurants
+      - I need recommendations for good places to eat
+      - I would like to explore restaurant options
+      - I am looking for some restaurant suggestions
+      - What are some good restaurants you can suggest?
 
   - intent: request_menu
     examples: |
@@ -42,6 +52,23 @@ nlu:
       - show its menu
       - show menu
       - Can I get the restaurant menu
+      - Can you display the food items available at this restaurant?
+      - Could I see the list of dishes at the restaurant?
+      - I'd like to see what's on their menu
+      - Show me what food they serve
+      - I would like to review the restaurant's menu
+      - Can I check the menu of this place?
+      - What does the restaurant serve?
+      - What are the dishes available at this restaurant?
+      - Can you please provide the menu of this restaurant?
+      - What is on the menu at this restaurant?
+      - I am interested in seeing the restaurant's menu
+      - Could you provide a list of the food they serve?
+      - I want to know what dishes they have
+      - What are the food options at this restaurant?
+      - Let's see what's on the menu
+      - Can I get a look at their menu?
+      - What can I order from this restaurant?
 
   - intent: request_more_restaurant_options
     examples: |
@@ -60,6 +87,21 @@ nlu:
       - any other suggestions
       - more restaurants
       - Can you recommend few other good restaurants with good ratings
+      - Can you suggest other restaurants?
+      - I'd like more restaurant suggestions, please.
+      - Can you give me more choices?
+      - Are there any other restaurants you can recommend?
+      - Show me other restaurant options.
+      - Can I have some more options, please?
+      - I would like to see more restaurant choices.
+      - Do you have other restaurant recommendations?
+      - I need more options for restaurants.
+      - Show me more options, please.
+      - Could I get more restaurant suggestions?
+      - I want to see more choices.
+      - Do you have any more restaurant options?
+      - Could you give me a few more restaurant suggestions?
+      - I'd like to explore more restaurants, can you show more?
 
   - intent: request_opening_hours
     examples: |
@@ -74,6 +116,25 @@ nlu:
       - What is the opening time of the restaurants?
       - When is the reaturent open
       - what are the opening hours?
+      - Can you tell me the working hours of the restaurant?
+      - What's the schedule for this place?
+      - I want to know the opening times of the restaurant.
+      - What are the hours for [Domino's Pizza](restaurant_name)?
+      - When does [Starbucks](restaurant_name) open?
+      - When does this place close?
+      - Could you tell me when [Taco Bell](restaurant_name) opens and closes?
+      - What are the operational hours of this restaurant?
+      - Can I know the timings of this restaurant?
+      - What's the timing of [Subway](restaurant_name)?
+      - Can you tell me the hours for this restaurant?
+      - What time does the restaurant open?
+      - I would like to know the opening and closing time of the restaurant.
+      - What are the service hours for [Burger King](restaurant_name)?
+      - Could you let me know the hours of operation for this place?
+      - At what time does [Wendy's](restaurant_name) open?
+      - What time does [Panda Express](restaurant_name) close?
+      - What are the business hours of this restaurant?
+      - When is [McDonalds](restaurant_name) open for service?
 
   - intent: request_ambiance
     examples: |
@@ -94,3 +155,16 @@ nlu:
       - what is the ambiance like in the restaurant
       - what is the atmosphere like in the place
       - what is the ambiance like in the place
+      - Can you tell me about the restaurant's atmosphere?
+      - I'm interested in the ambiance of the restaurant.
+      - Is the atmosphere of the restaurant pleasant?
+      - How is the overall environment at [Burger King](restaurant_name)?
+      - What kind of ambiance does [McDonalds](restaurant_name) have?
+      - Can you describe the vibe at [Starbucks](restaurant_name)?
+      - What's the feel of the restaurant?
+      - I'm curious about the atmosphere at [Domino's Pizza](restaurant_name).
+      - What's the setting like at [Taco Bell](restaurant_name)?
+      - What is the mood like in [Panda Express](restaurant_name)?
+      - Can you describe the ambiance in [Wendy's](restaurant_name)?
+      - How is the setting at the restaurant?
+      - Can you tell me about the environment at [Subway](restaurant_name)?

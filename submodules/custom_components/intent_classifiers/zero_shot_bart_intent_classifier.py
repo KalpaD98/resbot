@@ -1,6 +1,7 @@
 import csv
 import logging
 from collections import Counter
+from operator import itemgetter
 from typing import Dict, Text, Any, List, Type
 
 from dotenv import load_dotenv
@@ -197,11 +198,15 @@ class ZeroShotBartIntentClassifier(GraphComponent):
 
         intent_counts = Counter(intents)
 
-        # Write intent_counts to a csv file
+        # Sort intent_counts by count in descending order
+        sorted_counts = sorted(intent_counts.items(), key=itemgetter(1), reverse=True)
+
+        # Write sorted_counts to a csv file
         with open('intent_counts.csv', 'w', newline='') as csvfile:
+            print("Writing data to CSV")
             writer = csv.writer(csvfile)
             writer.writerow(["intent_name", "count"])
-            for intent, count in intent_counts.items():
+            for intent, count in sorted_counts:
                 writer.writerow([intent, count])
 
         return set(intent_counts.keys())

@@ -56,7 +56,6 @@ nlu:
       - so perfect
       - good
       - feels good
-      - im fine
       - excellent
       - i'm fine
       - feeling awesome
@@ -162,11 +161,12 @@ nlu:
       - Definitely
       - sounds ok
       - indeed
+      - sounds great
       - that's right
       - aligns with my opinion.
       - go ahead
       - 👍
-      - ok
+      - oky
       - yeah sure
       - cool ok
       - sounds cool
@@ -187,7 +187,6 @@ nlu:
       - not really
       - nah
       - No it isn't
-      - na
       - That's not what I was looking for 
       - nah
       - 🙅‍♂️
@@ -251,7 +250,6 @@ nlu:
       - shutup
       - ok then you cant help me
       - that was shit, you're not helping
-      - you can't help me
       - you can't help me with what i need
       - i guess you can't help me then
       - ok i guess you can't help me

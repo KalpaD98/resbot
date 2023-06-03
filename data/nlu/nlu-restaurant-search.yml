@@ -1,5 +1,6 @@
 version: "3.1" # nlu-restaurant-search.yml
 nlu:
+
   - intent: want_to_search_restaurants
     examples: |
       - I would like to search restaurants
@@ -15,53 +16,70 @@ nlu:
       - I want to search for a suitable restaurant
       - What are the restaurants?
       - I want to search for restaurants.
+      - Can you assist me in finding a restaurant?
+      - I need to find a good place to eat.
+      - Could you help me find a restaurant?
+      - I'm searching for the best restaurants around.
+      - Can you suggest some restaurants to me?
+      - I want to explore different restaurant options.
+      - Could you help me search for suitable restaurants?
+      - Where can I find a decent place to eat?
+      - I'm in the mood for some restaurant hunting.
+      - Can you help me search for restaurants?
+      - I'd like to explore the restaurants around.
+      - I am searching for a nice place to dine.
+      - Help me look up some restaurants.
+      - Assist me in searching for a restaurant.
+      - Can you recommend restaurants for me?
+      - I need to find a restaurant for dinner.
+      - Help me find a place to eat.
 
-  - intent: search_restaurants
-    examples: |
-      - can i get [swedish](cuisine) food in any area
-      - a restaurant that serves [caribbean](cuisine) food
-      - id like a restaurant
-      - im looking for a restaurant that serves [mediterranean](cuisine) food
-      - can i find a restaurant that serves [chinese](cuisine)
-      - i am looking for any place that serves [indonesian](cuisine) food for three
-      - i need to find a restaurant
-      - uh im looking for a restaurant that serves [kosher](cuisine) food
-      - uh can i find a restaurant and it should serve [brazilian](cuisine) food
-      - im looking for a restaurant serving [italian](cuisine) food
-      - i'd like to book a table for two with [spanish](cuisine) cuisine
-      - i need a table for [4](num_people)
-      - book me a table for three at the [italian](cuisine) restaurant
-      - can you please book a table for [5](num_people)?
-      - I would like to book a table for [2](num_people)
-      - looking for a table at the [mexican](cuisine) restaurant for five
-      - find me a table for [7](num_people) people
-      - Can I get a table for four at the place which server [greek](cuisine) food?
-      - I'm looking for a place to eat in [New York](location)
-      - I'm looking for a place in the [north](location) of town
-      - Show me [Chinese](cuisine) restaurants in [San Francisco](location)
-      - Show me a [Mexican](cuisine) place in the [downtown](location)
-      - I am looking for an [Indian](cuisine) spot in [Chicago](location)
-      - Search for restaurants in [Los Angeles](location)
-      - Find me some restaurants in [Houston](location)
-      - Find me a restaurant in [Seattle](location)
-      - I'm hungry in [Miami](location)!
-      - Find a restaurant in [Philadelphia](location)
-      - Can you suggest me some places to eat in [Boston](location)?
-      - List of restaurants in [San Diego](location)
-      - I want to grab lunch in [Las Vegas](location)
-      - I am searching for a dinner spot in [Orlando](location)
-      - Anywhere near [18328](location)
-      - I am looking a restaurant in [29432](location)
-      - In [New York](location) City
-      - [Chicago](location)
-      - Oh, sorry, in [Los Angeles](location)
-      - In [Houston](location)
-      - In [Seattle](location)
-      - I am looking for some restaurants in [San Francisco](location).
-      - Please help me to find restaurants in [Chicago](location)
-      - I’m hungry. Looking out for some good [Chinese](cuisine) restaurants in [Los Angeles](location)
-      - Find restaurants in [New York](location) for [Chinese](cuisine) cuisine
-    
+#  - intent: search_restaurants
+#    examples: |
+#      - can i get [swedish](cuisine) food in any area
+#      - a restaurant that serves [caribbean](cuisine) food
+#      - id like a restaurant
+#      - im looking for a restaurant that serves [mediterranean](cuisine) food
+#      - can i find a restaurant that serves [chinese](cuisine)
+#      - i am looking for any place that serves [indonesian](cuisine) food for three
+#      - i need to find a restaurant
+#      - uh im looking for a restaurant that serves [kosher](cuisine) food
+#      - uh can i find a restaurant and it should serve [brazilian](cuisine) food
+#      - im looking for a restaurant serving [italian](cuisine) food
+#      - i'd like to book a table for two with [spanish](cuisine) cuisine
+#      - i need a table for [4](num_people)
+#      - book me a table for three at the [italian](cuisine) restaurant
+#      - can you please book a table for [5](num_people)?
+#      - I would like to book a table for [2](num_people)
+#      - looking for a table at the [mexican](cuisine) restaurant for five
+#      - find me a table for [7](num_people) people
+#      - Can I get a table for four at the place which server [greek](cuisine) food?
+#      - I'm looking for a place to eat in [New York](city)
+#      - I'm looking for a place in the [north](city) of town
+#      - Show me [Chinese](cuisine) restaurants in [San Francisco](city)
+#      - Show me a [Mexican](cuisine) place in the [downtown](city)
+#      - I am looking for an [Indian](cuisine) spot in [Chicago](city)
+#      - Search for restaurants in [Los Angeles](city)
+#      - Find me some restaurants in [Houston](city)
+#      - Find me a restaurant in [Seattle](city)
+#      - I'm hungry in [Miami](city)!
+#      - Find a restaurant in [Philadelphia](city)
+#      - Can you suggest me some places to eat in [Boston](city)?
+#      - List of restaurants in [San Diego](city)
+#      - I want to grab lunch in [Las Vegas](city)
+#      - I am searching for a dinner spot in [Orlando](city)
+#      - Anywhere near [18328](city)
+#      - I am looking a restaurant in [29432](city)
+#      - In [New York](city) City
+#      - [Chicago](city)
+#      - Oh, sorry, in [Los Angeles](city)
+#      - In [Houston](city)
+#      - In [Seattle](city)
+#      - I am looking for some restaurants in [San Francisco](city).
+#      - Please help me to find restaurants in [Chicago](city)
+#      - I’m hungry. Looking out for some good [Chinese](cuisine) restaurants in [Los Angeles](city)
+#      - Find restaurants in [New York](city) for [Chinese](cuisine) cuisine
+#
 
     # nlu-search-restaurant-multi-intents.yml has multi-intent examples
 
@@ -73,12 +91,12 @@ nlu:
 #      - I'm looking for a restaurant that is open [early](opening_hours)
 #      - Can you suggest a restaurant that is open [24 hours](opening_hours)?
 #
-#  - intent: search_restaurant + inform_location
+#  - intent: search_restaurant + inform_city
 #    examples: |
-#      - i need to find a restaurant in [central park](location)
-#      - Can you recommend a restaurant that is open [brooklyn](location)?
-#      - I'm looking for a restaurant in [boston](location)
-#      - Can you suggest a restaurant in [New York city](location)?
+#      - i need to find a restaurant in [central park](city)
+#      - Can you recommend a restaurant that is open [brooklyn](city)?
+#      - I'm looking for a restaurant in [boston](city)
+#      - Can you suggest a restaurant in [New York city](city)?
 #
 #  - intent: search_restaurant + inform_date + inform_num_people
 #    examples: |
@@ -101,7 +119,7 @@ nlu:
 
 #  - intent: query_knowledge_base #TODO: change this data to match with our KB
 #    examples: |
-#      - I am looking for a [French](cuisine) restaurant in the [new york](location) area
+#      - I am looking for a [French](cuisine) restaurant in the [new york](city) area
 #      - what [restaurants]{"entity": "object_type", "value": "restaurant"} can you recommend?
 #      - list some [restaurants]{"entity": "object_type", "value": "restaurant"}
 #      - can you name some [restaurants]{"entity": "object_type", "value": "restaurant"} please?

@@ -26,7 +26,6 @@ nlu:
       - Can you please cancel the booking
       - Can I cancel my previous order?
       - I've changed my mind, please cancel my booking
-      - I don't need the reservation anymore, cancel it please
       - Could you cancel my booking, please?
       - I want to cancel my booking, please assist me
       - I won't be able to make it, cancel my booking
@@ -34,7 +33,6 @@ nlu:
       - I'd like to cancel the reservation I made earlier
       - Cancel my previous booking
       - I need to cancel the booking I made last week
-
 
   - intent: inform_cancel_booking_id
     examples: |

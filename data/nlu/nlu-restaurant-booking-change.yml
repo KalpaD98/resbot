@@ -21,7 +21,6 @@ nlu:
       - I want to change my restaurant booking
       - I need to change the reservation. can I?
       - Can you change my restaurant booking please?
-      - Please change my booking,
       - I'd like to make some changes to my booking
       - Can I make changes to my existing reservation?
       - Can you assist me in changing my booking?
@@ -57,7 +56,6 @@ nlu:
       - I want to change my booking date
       - I'd like to reschedule my reservation to a different date
       - Can we shift the booking to another date?
-      - I want to postpone my reservation
       - Can we reschedule the reservation to a later date?
       - I need to push my booking to a later date
       - Could you help me reschedule my booking?
@@ -70,7 +68,7 @@ nlu:
       - Could we shift the booking to a different day?
 
 
-  - intent: user_wants_to_change_restaurant_booking_num_people
+  - intent: user_wants_to_change_restaurant_booking_num_people # TODO: add more examples
     examples: |
       - i want to change the number of people in my reservation
       - can I change the number of people in my booking?
@@ -104,11 +102,9 @@ nlu:
       - Could I modify the guest number in my booking?
       - I want to alter the number of guests in my reservation
       - How can I adjust the people count in my booking?
-      - I need to increase the party size in my reservation
       - I would like to add more people to my booking
       - Can I increase the number of people for the booking?
       - I'd like to change the count of attendees in my booking
-      - I have to update the number of guests for my booking
       - I need to decrease the number of people in my booking
       - Can I modify the count of people in my reservation?
       - I want to reduce the guest count in my booking
@@ -117,7 +113,6 @@ nlu:
       - I want to add more guests to my booking
       - Can we adjust the number of seats for my booking?
       - I need to change the booking for more people
-      - I want to change the guest quantity in my booking
       - I would like to alter the size of my party for the booking
 
   - intent: inform_change_booking_id

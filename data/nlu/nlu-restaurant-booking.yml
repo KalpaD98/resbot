@@ -68,7 +68,7 @@ nlu:
       - Is [this Friday](date) available?
       - Can we book for [two days from now](date)?
       - I'd like to reserve a spot for the [coming Sunday](date).
-      - Let's set it for[2024-09-30](date).
+      - Let's set it for [2024-09-30](date).
       - We'd like to come in on [2023/11/15](date).
 
   - intent: inform_time
@@ -120,6 +120,7 @@ nlu:
       - Could you give me details about my reservation?
       - Check my reservation status
       - Get my booking details
+      - show booking details
       - I need information on my reservation
       - Fetch my booking details
       - Can you retrieve my reservation details?
