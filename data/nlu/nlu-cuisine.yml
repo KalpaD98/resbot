@@ -26,7 +26,12 @@ nlu:
       - I want like to see the cuisines again
       - give me the available cuisines list
       - what types of cuisines are available?
+      - Could you list the food styles available?
+      - Show me the variety of food options.
       - can i view the cuisines?
+      - Can you tell me what types of food I can order?
+      - What food styles are on offer?
+      - Show me the food options.
 
   - intent: inform_cuisine
     examples: |
@@ -44,6 +49,11 @@ nlu:
       - [Japanese](cuisine) please
       - I'm looking for a [Vietnam](cuisine) restaurant
       - looking for a [Vietnam](cuisine) restaurant
+      - I feel like having some [French](cuisine) food.
+      - Any recommendations for [Lebanese](cuisine) food?
+      - Can you suggest a good [Greek](cuisine) restaurant?
+      - Is there a good [Brazilian](cuisine) steakhouse around?
+      - Show me some [Ethiopian](cuisine) restaurants.
       - I want to order [Chinese](cuisine) food
       - I'm in the mood for something different. How about [Korean](cuisine) food?
       - craving for [Mexican](cuisine) food
