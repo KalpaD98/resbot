@@ -1,0 +1,72 @@
+{
+  "bot_challenge/bot": {
+    "precision": 0.9090909090909091,
+    "recall": 1.0,
+    "f1-score": 0.9523809523809523,
+    "support": 10,
+    "confused_with": {}
+  },
+  "bot_challenge/what_can_you_do": {
+    "precision": 0.8181818181818182,
+    "recall": 0.9,
+    "f1-score": 0.8571428571428572,
+    "support": 10,
+    "confused_with": {
+      "bot_challenge/who_are_you": 1
+    }
+  },
+  "bot_challenge/who_are_you": {
+    "precision": 0.75,
+    "recall": 0.9,
+    "f1-score": 0.8181818181818182,
+    "support": 10,
+    "confused_with": {
+      "bot_challenge/bot": 1
+    }
+  },
+  "out_of_scope/hotel": {
+    "precision": 0.8181818181818182,
+    "recall": 0.9,
+    "f1-score": 0.8571428571428572,
+    "support": 10,
+    "confused_with": {
+      "out_of_scope/out_of_functionality": 1
+    }
+  },
+  "out_of_scope/out_of_functionality": {
+    "precision": 0.8,
+    "recall": 0.4,
+    "f1-score": 0.5333333333333333,
+    "support": 10,
+    "confused_with": {
+      "out_of_scope/hotel": 2,
+      "bot_challenge/who_are_you": 2
+    }
+  },
+  "out_of_scope/food": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 10,
+    "confused_with": {}
+  },
+  "accuracy": 0.85,
+  "macro avg": {
+    "precision": 0.8492424242424242,
+    "recall": 0.85,
+    "f1-score": 0.8363636363636364,
+    "support": 60
+  },
+  "weighted avg": {
+    "precision": 0.8492424242424242,
+    "recall": 0.85,
+    "f1-score": 0.8363636363636363,
+    "support": 60
+  },
+  "micro avg": {
+    "precision": 0.85,
+    "recall": 0.85,
+    "f1-score": 0.85,
+    "support": 60
+  }
+}

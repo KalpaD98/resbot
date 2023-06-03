@@ -1,5 +1,10 @@
 Sample queries
 
+#   test code for latest
+-------------------------------------------------------
+rasa test nlu --nlu data --config configs/config-base.yml configs/config-base-trf.yml configs/config-base-bart.yml configs/config-base-bart-trf.yml --cross-validation --runs 4 --percentages 0 10 20 40 80 --folds 5 --out gridresults/config-results
+-------------------------------------------------------
+
 what restaurants can you recommend ?
 list some restaurants
 

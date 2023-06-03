@@ -8,7 +8,7 @@ pipeline: # -------------------------------------------------- NLU -------------
 
     # Load Language model
   - name: SpacyNLP
-    model: en_core_web_lg
+    model: en_core_web_trf
     case_sensitive: False
 
     # Tokenizer

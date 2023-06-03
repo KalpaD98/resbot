@@ -1,0 +1,74 @@
+[
+  {
+    "text": "I want to book a flight",
+    "intent_response_key_target": "out_of_scope/out_of_functionality",
+    "intent_response_key_prediction": {
+      "name": "out_of_scope/hotel",
+      "confidence": 0.45131197571754456
+    }
+  },
+  {
+    "text": "What is 2 + 2?",
+    "intent_response_key_target": "out_of_scope/out_of_functionality",
+    "intent_response_key_prediction": {
+      "name": "bot_challenge/who_are_you",
+      "confidence": 0.9995725750923157
+    }
+  },
+  {
+    "text": "I want to book a suite",
+    "intent_response_key_target": "out_of_scope/hotel",
+    "intent_response_key_prediction": {
+      "name": "out_of_scope/out_of_functionality",
+      "confidence": 0.46325963735580444
+    }
+  },
+  {
+    "text": "who are you?",
+    "intent_response_key_target": "bot_challenge/who_are_you",
+    "intent_response_key_prediction": {
+      "name": "bot_challenge/bot",
+      "confidence": 0.5657813549041748
+    }
+  },
+  {
+    "text": "Who's the US President?",
+    "intent_response_key_target": "out_of_scope/out_of_functionality",
+    "intent_response_key_prediction": {
+      "name": "bot_challenge/who_are_you",
+      "confidence": 0.8859873414039612
+    }
+  },
+  {
+    "text": "Can you tell me a joke?",
+    "intent_response_key_target": "out_of_scope/out_of_functionality",
+    "intent_response_key_prediction": {
+      "name": "bot_challenge/what_can_you_do",
+      "confidence": 0.536332905292511
+    }
+  },
+  {
+    "text": "what can you do?",
+    "intent_response_key_target": "bot_challenge/what_can_you_do",
+    "intent_response_key_prediction": {
+      "name": "bot_challenge/who_are_you",
+      "confidence": 0.7414091229438782
+    }
+  },
+  {
+    "text": "I want to book a taxi",
+    "intent_response_key_target": "out_of_scope/out_of_functionality",
+    "intent_response_key_prediction": {
+      "name": "out_of_scope/hotel",
+      "confidence": 0.9244824051856995
+    }
+  },
+  {
+    "text": "can you answer any question ?",
+    "intent_response_key_target": "out_of_scope/out_of_functionality",
+    "intent_response_key_prediction": {
+      "name": "bot_challenge/what_can_you_do",
+      "confidence": 0.9880594611167908
+    }
+  }
+]
