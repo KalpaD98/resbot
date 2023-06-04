@@ -3,7 +3,11 @@ language: en
 
 pipeline:
   # 02: Default + BERT
-  - name: WhitespaceTokenizer
+    # Tokenizer
+  - name: SpacyTokenizer
+    intent_tokenization_flag: True                      # to use multi intents
+    intent_split_symbol: "+"
+
   - name: RegexFeaturizer
   - name: LexicalSyntacticFeaturizer
   - name: LanguageModelFeaturizer # dense features

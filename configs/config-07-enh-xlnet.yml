@@ -2,8 +2,12 @@ recipe: default.v1
 language: en
 
 pipeline:
-  # 04: Default + xlNet
-  - name: WhitespaceTokenizer
+
+    # Tokenizer
+  - name: SpacyTokenizer
+    intent_tokenization_flag: True                      # to use multi intents
+    intent_split_symbol: "+"
+
   - name: RegexFeaturizer
   - name: LexicalSyntacticFeaturizer
   - name: LanguageModelFeaturizer
