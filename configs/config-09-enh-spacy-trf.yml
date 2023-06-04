@@ -4,17 +4,17 @@ language: en
 
 pipeline: # -------------------------------------------------- NLU -----------------------------------------------------
 
-    # Load Language model
+  # Load Language model
   - name: SpacyNLP
     model: en_core_web_trf
     case_sensitive: False
 
-    # Tokenizer
+  # Tokenizer
   - name: SpacyTokenizer
     intent_tokenization_flag: True                      # to use multi intents
     intent_split_symbol: "+"
 
-    # Featurizers
+  # Featurizers
   - name: RegexFeaturizer                               # Sparse featurizer
   - name: SpacyFeaturizer                               # Dense featurizer
   - name: LexicalSyntacticFeaturizer                    # Sparse featurizer
@@ -24,7 +24,7 @@ pipeline: # -------------------------------------------------- NLU -------------
     min_ngram: 1
     max_ngram: 4
 
-    # Intent and Entity Extractor
+  # Intent and Entity Extractor
   - name: DIETClassifier
     epochs: 150
     constrain_similarities: true

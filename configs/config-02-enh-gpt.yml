@@ -3,22 +3,25 @@ language: en
 
 pipeline:
 
-    # Tokenizer
+  # Tokenizer
   - name: SpacyTokenizer
     intent_tokenization_flag: True                      # to use multi intents
     intent_split_symbol: "+"
 
+  # Featurizers
   - name: RegexFeaturizer
   - name: LexicalSyntacticFeaturizer
   - name: LanguageModelFeaturizer
     model_name: "gpt"
     model_weights: "openai-gpt"
-  - name: CountVectorsFeaturizer
+
+  - name: CountVectorsFeaturizer                        # Sparse featurizer | one hot encoding
+  - name: CountVectorsFeaturizer                        # Sparse featurizer | char level n-grams
     analyzer: char_wb
     min_ngram: 1
     max_ngram: 4
 
-    # Intent and Entity Extractor
+  # Intent and Entity Extractor
   - name: DIETClassifier
     epochs: 150
     constrain_similarities: true
