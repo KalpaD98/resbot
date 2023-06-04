@@ -1,6 +1,7 @@
 Sample queries
 
-#   test code for latest
+# Test codes #
+
 -----------------------------------------------------------------------------------------------------------------------
 rasa test nlu --nlu data --config config-base-bart.yml config-base-bart-trf.yml config-base.yml config-base-trf.yml  --cross-validation --runs 4 --percentages 0 10 20 40 80 --folds 5 --out gridresults/config-results
 
@@ -8,10 +9,19 @@ rasa test nlu --nlu data --config config-base-bart.yml config-base-same.yml --cr
 
 rasa test nlu --nlu data --config config-base-bart.yml config-base-same.yml --cross-validation --runs 2 --percentages 0 10 20 40 60 80 90 --folds 5 --out gridresults/config-results
 
----------------------------------------------# Transfer Learning test---------------------------------------------------
+
+--------------------------------------------# Transfer Learning test #--------------------------------------------------
 rasa test nlu --nlu data --config configs/config-00-default.yml configs/config-01-enh.yml configs/config-02-enh-gpt.yml configs/config-03-enh-gpt-2.yml configs/config-04-enh-bert.yml configs/config-05-enh-roberta.yml configs/config-06-enh-distillbert.yml configs/config-07-enh-xlnet.yml configs/config-08-enh-spacy-lg.yml configs/config-09-enh-spacy-trf.yml --cross-validation --runs 5 --percentages 0 20 40 60 80 --folds 5 --out gridresults/transfer-learning-results
-------------------------------------------------- epochs test ----------------------------------------------------------
-rasa test nlu --nlu data --config configs/config-00-default.yml configs/config-00-default-epochs-100-c-60.yml configs/config-00-default-epochs-125.yml configs/config-00-default-epochs-150.yml configs/config-00-default-epochs-150-c-60.yml --cross-validation --runs 3 --percentages 0 20 40 60 80 --folds 5 --out gridresults/transfer-learning-results
+------------------------------------------------------------------------------------------------------------------------
+
+
+------------------------------------------------# Epochs Test #---------------------------------------------------------
+rasa test nlu --nlu data --config configs/config-00-default.yml configs/config-00-default-epochs-100-c-60.yml configs/config-00-default-epochs-125.yml configs/config-00-default-epochs-150.yml configs/config-00-default-epochs-150-c-60.yml --cross-validation --runs 5 --percentages 0 20 40 60 80 --folds 5 --out gridresults/Different-Epochs
+------------------------------------------------------------------------------------------------------------------------
+
+
+------------------------------------------------# With and Without Bart #-----------------------------------------------
+rasa test nlu --nlu data --config <configs here> --runs 5 --percentages 0 10 20 30 40 50 60 70 80 90 --folds 5 --out gridresults/with-and-without-bart-results
 ------------------------------------------------------------------------------------------------------------------------
 
 what restaurants can you recommend ?
@@ -63,7 +73,6 @@ rasa test nlu --config configs/config-convert.yml --cross-validation --runs 1 --
 
 # default
 rasa test nlu --config config.yml --cross-validation --runs 1 --folds 2 --out gridresults/config-default
-
 
 # run codes
 rasa run -m models --enable-api --cors "*"
