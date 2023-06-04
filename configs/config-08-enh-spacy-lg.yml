@@ -4,8 +4,6 @@ language: en
 
 pipeline: # -------------------------------------------------- NLU -----------------------------------------------------
 
-#  - name: submodules.custom_components.language_handlers.language_handler.LanguageHandlerAndTranslator
-
   # Load Language model
   - name: SpacyNLP
     model: en_core_web_lg

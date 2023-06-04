@@ -4,6 +4,11 @@ language: en
 
 pipeline: # -------------------------------------------------- NLU -----------------------------------------------------
 
+  # Load Language model
+  - name: SpacyNLP
+    model: en_core_web_lg
+    case_sensitive: False
+
   # Tokenizer
   - name: SpacyTokenizer
     intent_tokenization_flag: True                      # to use multi intents
