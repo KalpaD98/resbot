@@ -89,7 +89,7 @@ nlu:
       - How do I sign out?
       - Can you help me to log out?
       - Can you assist me with logging out?
-
+# TODO: uncomment when using
 #  - intent: inform_user_name
 #    examples: |
 #      - [kalpa](user_name)

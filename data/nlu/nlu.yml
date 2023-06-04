@@ -35,72 +35,6 @@ nlu:
       - hi, nice to meet you
       - salutations
 
-  - intent: mood_great
-    examples: |
-      - perfect
-      - everythings perfect
-      - great
-      - cool
-      - amazing
-      - fantastic
-      - feeling like a king
-      - wonderful
-      - feeling very good
-      - I am great amazing
-      - save the world
-      - feeling happy
-      - delighted
-      - I'm delighted to chat with you today.
-      - a good day
-      - so good
-      - so perfect
-      - good
-      - feels good
-      - excellent
-      - i'm fine
-      - feeling awesome
-      - fine
-      - 🥳
-      - im cool
-      - im great
-      - doing well
-      - im okay ok
-      - I'm feeling great today!
-      - 😆
-
-  - intent: mood_unhappy
-    examples: |
-      - my day was horrible
-      - I am sad
-      - having a bad day
-      - I don't feel very well
-      - I am disappointed
-      - super sad
-      - I'm so sad
-      - bad day
-      - sad
-      - i feel bad
-      - I'm feeling really frustrated
-      - very sad
-      - unhappy
-      - overwhelmed right now.
-      - not feeling ok
-      - not good
-      - 😢
-      - I'm not feeling very well
-      - not very good
-      - extremly sad
-      - Feeling down today
-      - moody
-      - 😭
-      - Ugh, everything seems to be going wrong
-      - I am not in a good mood today
-      - so sad
-      - i feel sad
-      - bad 
-      - sad 😢
-      - crying 😢
-
   - intent: goodbye
     examples: |
       - cu
@@ -155,7 +89,7 @@ nlu:
       - yeah
       - yea
       - right
-      - 🙌
+      - yes, please
       - great choice
       - sounds really good
       - Definitely
@@ -165,7 +99,7 @@ nlu:
       - that's right
       - aligns with my opinion.
       - go ahead
-      - 👍
+      - seems ok
       - oky
       - yeah sure
       - cool ok
@@ -174,7 +108,7 @@ nlu:
       - sure
       - im in
       - i'm in
-      - 🫡
+      - maybe ok
 
   - intent: deny
     examples: |
@@ -189,25 +123,25 @@ nlu:
       - No it isn't
       - That's not what I was looking for 
       - nah
-      - 🙅‍♂️
+      - how about no
+      - maybe no
       - That doesn't sound right
       - nop
+      - doesnt seems good
       - negative
       - no need
       - Nope
-      - 🙅‍♀️
+      - please no
       - nah I am ok
+      - maybe not
       - no thanks
-      - 🚫
       - No, I can't agree with your response.
       - nope
       - hell no
       - dont
-      - 🙅
       - I'm sorry, but I have to disagree with that statement
       - don't
       - nooo
-      - 👎
 
   - intent: thank_you
     examples: |

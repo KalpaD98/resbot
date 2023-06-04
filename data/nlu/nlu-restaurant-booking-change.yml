@@ -1,7 +1,7 @@
 version: "3.1" # nlu-booking.yml: NLU training data for booking related intents
 
 nlu:
-
+  # TODO: Merge these 3 if possible into 1 intent
   - intent: user_wants_to_change_restaurant_booking
     examples: |
       - i want to change my booking

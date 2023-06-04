@@ -54,7 +54,7 @@ intents:
   - inform_change_booking_id
   - user_wants_to_change_both_restaurant_booking_date_and_num_people
 
-  # -------------------------------------------- nlu-restaurant-inform.yml  ----------------------------------------- #
+  # -------------------------------------------- nlu-restaurant-search-inform.yml  ----------------------------------------- #
   - inform_location
   - inform_city
   - inform_state

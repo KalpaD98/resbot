@@ -1,43 +1,144 @@
 version: "3.1" # nlu-booking.yml: NLU training data for booking related intents
 
 nlu:
-  - intent: inform_cancel_booking_id
-    examples: |
-      - cancel booking [bid_6435a6e1bef00a88687f1823](booking_id)
-      - cancel [bid_6436555b937c8209a6a93609](booking_id)
-      - I want to cancel my booking [bid_6436555b937c8209a6a93609](booking_id)
-      - I need to cancel this booking [bid_6436555b937c8209a6a93609](booking_id)
-      - please cancel my booking [bid_6436555b937c8209a6a93609](booking_id)
+#  - intent: inform_cancel_booking_id
+#    examples: |
+#      - cancel booking [bid_6435a6e1bef00a88687f1823](booking_id)
+#      - cancel [bid_6436555b937c8209a6a93609](booking_id)
+#      - I want to cancel my booking [bid_6436555b937c8209a6a93609](booking_id)
+#      - I need to cancel this booking [bid_6436555b937c8209a6a93609](booking_id)
+#      - please cancel my booking [bid_6436555b937c8209a6a93609](booking_id)
+#
+#  - intent: inform_restaurant_id
+#    examples: |
+#      - [rid_6431ac87d5f9f6b0be596abb](restaurant_id)
+#      - [rid_6431ac87d5f9f6b0be596abb](restaurant_id) is the restaurant id
+#      - [rid_6431ac87d5f9f6b0be596ac0](restaurant_id)
+#      - restaurant_id is [rid_6431ac87d5f9f6b0be596abd](restaurant_id)
+#      - restaurant_id: [rid_6431ac87d5f9f6b0be596abf](restaurant_id)
+#
+#  - intent: inform_booking_restaurant_id
+#    examples: |
+#      - [rid_6431ac87d5f9f6b0be596abc](restaurant_id) is the restaurant id I want to book
+#      - [rid_6431ac87d5f9f6b0be596abc](restaurant_id) is the restaurant id I want to book a table at
+#      - book [rid_6431ac87d5f9f6b0be596abc](restaurant_id)
+#      - book restaurant [rid_6431ac87d5f9f6b0be596abc](restaurant_id)
+#      - book restaurant [rid_6431ac87d5f9f6b0be596abc](restaurant_id) for me
+#
+#  - intent: inform_view_details_restaurant_id
+#    examples: |
+#      - view details [rid_6431ac87d5f9f6b0be596abd](restaurant_id)
+#      - view details of [rid_6431ac87d5f9f6b0be596abd](restaurant_id) restaurant
+#      - view details [rid_6431ac87d5f9f6b0be596abd](restaurant_id) please
+#      - view details of [rid_6431ac87d5f9f6b0be596abd](restaurant_id)
+#      - view details of restaurant [rid_6431ac87d5f9f6b0be596abb](restaurant_id)
+#
+#
+#  - intent: inform_change_booking_id
+#    examples: |
+#      - change booking [bid_6435a6e1bef00a88687f1823](booking_id)
+#      - change [bid_6435a6e1bef00a88687f1ac4](booking_id)
+#      - change [bid_6435a6e1bef00a88687f1ac4](booking_id) please
+#      - I need to change [bid_6435a6e1bef00a88687f1ac4](booking_id)
+#      - can I change [bid_6435a6e1bef00a88687f1ac4](booking_id)
 
-  - intent: inform_restaurant_id
-    examples: |
-      - [rid_6431ac87d5f9f6b0be596abb](restaurant_id)
-      - [rid_6431ac87d5f9f6b0be596abb](restaurant_id) is the restaurant id
-      - [rid_6431ac87d5f9f6b0be596ac0](restaurant_id)
-      - restaurant_id is [rid_6431ac87d5f9f6b0be596abd](restaurant_id)
-      - restaurant_id: [rid_6431ac87d5f9f6b0be596abf](restaurant_id)
 
-  - intent: inform_booking_restaurant_id
-    examples: |
-      - [rid_6431ac87d5f9f6b0be596abc](restaurant_id) is the restaurant id I want to book
-      - [rid_6431ac87d5f9f6b0be596abc](restaurant_id) is the restaurant id I want to book a table at
-      - book [rid_6431ac87d5f9f6b0be596abc](restaurant_id)
-      - book restaurant [rid_6431ac87d5f9f6b0be596abc](restaurant_id)
-      - book restaurant [rid_6431ac87d5f9f6b0be596abc](restaurant_id) for me
+#  - intent: mood_great
+#    examples: |
+#      - perfect
+#      - everythings perfect
+#      - great
+#      - cool
+#      - amazing
+#      - fantastic
+#      - feeling like a king
+#      - wonderful
+#      - feeling very good
+#      - I am great amazing
+#      - save the world
+#      - feeling happy
+#      - delighted
+#      - I'm delighted to chat with you today.
+#      - a good day
+#      - so good
+#      - so perfect
+#      - good
+#      - feels good
+#      - excellent
+#      - i'm fine
+#      - feeling awesome
+#      - fine
+#      - 🥳
+#      - im cool
+#      - im great
+#      - doing well
+#      - im okay ok
+#      - I'm feeling great today!
+#      - 😆
+#
+#  - intent: mood_unhappy
+#    examples: |
+#      - my day was horrible
+#      - I am sad
+#      - having a bad day
+#      - I don't feel very well
+#      - I am disappointed
+#      - super sad
+#      - I'm so sad
+#      - bad day
+#      - sad
+#      - i feel bad
+#      - I'm feeling really frustrated
+#      - very sad
+#      - unhappy
+#      - overwhelmed right now.
+#      - not feeling ok
+#      - not good
+#      - 😢
+#      - I'm not feeling very well
+#      - not very good
+#      - extremly sad
+#      - Feeling down today
+#      - moody
+#      - 😭
+#      - Ugh, everything seems to be going wrong
+#      - I am not in a good mood today
+#      - so sad
+#      - i feel sad
+#      - bad
+#      - sad 😢
+#      - crying 😢
 
-  - intent: inform_view_details_restaurant_id
-    examples: |
-      - view details [rid_6431ac87d5f9f6b0be596abd](restaurant_id)
-      - view details of [rid_6431ac87d5f9f6b0be596abd](restaurant_id) restaurant
-      - view details [rid_6431ac87d5f9f6b0be596abd](restaurant_id) please
-      - view details of [rid_6431ac87d5f9f6b0be596abd](restaurant_id)
-      - view details of restaurant [rid_6431ac87d5f9f6b0be596abb](restaurant_id)
 
-
-  - intent: inform_change_booking_id
-    examples: |
-      - change booking [bid_6435a6e1bef00a88687f1823](booking_id)
-      - change [bid_6435a6e1bef00a88687f1ac4](booking_id)
-      - change [bid_6435a6e1bef00a88687f1ac4](booking_id) please
-      - I need to change [bid_6435a6e1bef00a88687f1ac4](booking_id)
-      - can I change [bid_6435a6e1bef00a88687f1ac4](booking_id)
+#  - intent: request_more_restaurant_options
+#    examples: |
+#      - anything else?
+#      - any other places?
+#      - Can you suggest more restaurant options
+#      - can i have more recommendations
+#      - show more restaurant options
+#      - can i see more restaurants
+#      - Could you show me more restaurant options
+#      - more options
+#      - more suggestions
+#      - Can I see more restaurants?
+#      - more places
+#      - Can you give me more restaurant options?
+#      - any other suggestions
+#      - more restaurants
+#      - Can you recommend few other good restaurants with good ratings
+#      - Can you suggest other restaurants?
+#      - I'd like more restaurant suggestions, please.
+#      - Can you give me more choices?
+#      - Are there any other restaurants you can recommend?
+#      - Show me other restaurant options.
+#      - Can I have some more options, please?
+#      - I would like to see more restaurant choices.
+#      - Do you have other restaurant recommendations?
+#      - I need more options for restaurants.
+#      - Show me more options, please.
+#      - Could I get more restaurant suggestions?
+#      - I want to see more choices.
+#      - Do you have any more restaurant options?
+#      - Could you give me a few more restaurant suggestions?
+#      - I'd like to explore more restaurants, can you show more?
