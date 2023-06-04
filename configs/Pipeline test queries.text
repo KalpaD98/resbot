@@ -1,10 +1,15 @@
 Sample queries
 
 #   test code for latest
--------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------
 rasa test nlu --nlu data --config config-base-bart.yml config-base-bart-trf.yml config-base.yml config-base-trf.yml  --cross-validation --runs 4 --percentages 0 10 20 40 80 --folds 5 --out gridresults/config-results
-rasa test nlu --nlu data --config config-base-bart.yml config-base.yml --cross-validation --runs 2 --percentages 0 20 50 80 90 --folds 5 --out gridresults/config-results
--------------------------------------------------------
+
+rasa test nlu --nlu data --config config-base-bart.yml config-base-same.yml --cross-validation --runs 2 --percentages 0 10 20 40 60 80 90 --folds 5 --out gridresults/config-results
+
+rasa test nlu --nlu data --config config-base-bart.yml config-base-same.yml --cross-validation --runs 2 --percentages 0 10 20 40 60 80 90 --folds 5 --out gridresults/config-results
+
+rasa test nlu --nlu data --config config-base-bart.yml config-base-same.yml --cross-validation --runs 2 --percentages 0 10 20 40 60 80 90 --folds 5 --out gridresults/config-results
+-----------------------------------------------------------------------------------------------------------------------
 
 what restaurants can you recommend ?
 list some restaurants

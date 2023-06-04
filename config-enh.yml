@@ -8,7 +8,7 @@ pipeline: # -------------------------------------------------- NLU -------------
 
     # Load Language model
   - name: SpacyNLP
-    model: en_core_web_trf
+    model: en_core_web_lg
     case_sensitive: False
 
     # Tokenizer
@@ -34,14 +34,14 @@ pipeline: # -------------------------------------------------- NLU -------------
   - name: DIETClassifier
     epochs: 150
     constrain_similarities: true
-#
-#  - name: submodules.custom_components.intent_classifiers.zero_shot_bart_intent_classifier.ZeroShotBartIntentClassifier
-#    threshold: 0.4
-#    ambiguity_threshold: 0.05
-#    candidate_class_size: 10
-#    top_intent_confidence_threshold: 0.95
-#    fallback_classifier_threshold: 0.6                    # must be same as FallbackClassifier threshold
-#    fallback_classifier_ambiguity_threshold: 0.1          # must be same as FallbackClassifier ambiguity_threshold
+
+  - name: submodules.custom_components.intent_classifiers.zero_shot_bart_intent_classifier.ZeroShotBartIntentClassifier
+    threshold: 0.4
+    ambiguity_threshold: 0.05
+    candidate_class_size: 5
+    top_intent_confidence_threshold: 0.95
+    fallback_classifier_threshold: 0.6                    # must be same as FallbackClassifier threshold
+    fallback_classifier_ambiguity_threshold: 0.1          # must be same as FallbackClassifier ambiguity_threshold
 
   - name: EntitySynonymMapper
   - name: ResponseSelector

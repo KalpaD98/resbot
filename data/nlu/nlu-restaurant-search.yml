@@ -1,38 +1,38 @@
 version: "3.1" # nlu-restaurant-search.yml
 nlu:
 
-  - intent: want_to_search_restaurants
-    examples: |
-      - I would like to search restaurants
-      - can I filter restaurants
-      - I want to fimd more resturents, please show
-      - I want to search for restaurants
-      - Can you help me find a restaurant?
-      - need to search for restaurants
-      - Can you recommend some restaurants?
-      - I'm looking for suitable restaurents
-      - I'm looking for a place to eat
-      - Where can I find some good restaurants?
-      - I want to search for a suitable restaurant
-      - What are the restaurants?
-      - I want to search for restaurants.
-      - Can you assist me in finding a restaurant?
-      - I need to find a good place to eat.
-      - Could you help me find a restaurant?
-      - I'm searching for the best restaurants around.
-      - Can you suggest some restaurants to me?
-      - I want to explore different restaurant options.
-      - Could you help me search for suitable restaurants?
-      - Where can I find a decent place to eat?
-      - I'm in the mood for some restaurant hunting.
-      - Can you help me search for restaurants?
-      - I'd like to explore the restaurants around.
-      - I am searching for a nice place to dine.
-      - Help me look up some restaurants.
-      - Assist me in searching for a restaurant.
-      - Can you recommend restaurants for me?
-      - I need to find a restaurant for dinner.
-      - Help me find a place to eat.
+#  - intent: want_to_search_restaurants
+#    examples: |
+#      - I would like to search restaurants
+#      - can I filter restaurants
+#      - I want to fimd more resturents, please show
+#      - I want to search for restaurants
+#      - Can you help me find a restaurant?
+#      - need to search for restaurants
+#      - Can you recommend some restaurants?
+#      - I'm looking for suitable restaurents
+#      - I'm looking for a place to eat
+#      - Where can I find some good restaurants?
+#      - I want to search for a suitable restaurant
+#      - What are the restaurants?
+#      - I want to search for restaurants.
+#      - Can you assist me in finding a restaurant?
+#      - I need to find a good place to eat.
+#      - Could you help me find a restaurant?
+#      - I'm searching for the best restaurants around.
+#      - Can you suggest some restaurants to me?
+#      - I want to explore different restaurant options.
+#      - Could you help me search for suitable restaurants?
+#      - Where can I find a decent place to eat?
+#      - I'm in the mood for some restaurant hunting.
+#      - Can you help me search for restaurants?
+#      - I'd like to explore the restaurants around.
+#      - I am searching for a nice place to dine.
+#      - Help me look up some restaurants.
+#      - Assist me in searching for a restaurant.
+#      - Can you recommend restaurants for me?
+#      - I need to find a restaurant for dinner.
+#      - Help me find a place to eat.
 
 #  - intent: search_restaurants
 #    examples: |

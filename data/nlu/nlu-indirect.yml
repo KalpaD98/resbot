@@ -1,0 +1,43 @@
+version: "3.1" # nlu-booking.yml: NLU training data for booking related intents
+
+nlu:
+  - intent: inform_cancel_booking_id
+    examples: |
+      - cancel booking [bid_6435a6e1bef00a88687f1823](booking_id)
+      - cancel [bid_6436555b937c8209a6a93609](booking_id)
+      - I want to cancel my booking [bid_6436555b937c8209a6a93609](booking_id)
+      - I need to cancel this booking [bid_6436555b937c8209a6a93609](booking_id)
+      - please cancel my booking [bid_6436555b937c8209a6a93609](booking_id)
+
+  - intent: inform_restaurant_id
+    examples: |
+      - [rid_6431ac87d5f9f6b0be596abb](restaurant_id)
+      - [rid_6431ac87d5f9f6b0be596abb](restaurant_id) is the restaurant id
+      - [rid_6431ac87d5f9f6b0be596ac0](restaurant_id)
+      - restaurant_id is [rid_6431ac87d5f9f6b0be596abd](restaurant_id)
+      - restaurant_id: [rid_6431ac87d5f9f6b0be596abf](restaurant_id)
+
+  - intent: inform_booking_restaurant_id
+    examples: |
+      - [rid_6431ac87d5f9f6b0be596abc](restaurant_id) is the restaurant id I want to book
+      - [rid_6431ac87d5f9f6b0be596abc](restaurant_id) is the restaurant id I want to book a table at
+      - book [rid_6431ac87d5f9f6b0be596abc](restaurant_id)
+      - book restaurant [rid_6431ac87d5f9f6b0be596abc](restaurant_id)
+      - book restaurant [rid_6431ac87d5f9f6b0be596abc](restaurant_id) for me
+
+  - intent: inform_view_details_restaurant_id
+    examples: |
+      - view details [rid_6431ac87d5f9f6b0be596abd](restaurant_id)
+      - view details of [rid_6431ac87d5f9f6b0be596abd](restaurant_id) restaurant
+      - view details [rid_6431ac87d5f9f6b0be596abd](restaurant_id) please
+      - view details of [rid_6431ac87d5f9f6b0be596abd](restaurant_id)
+      - view details of restaurant [rid_6431ac87d5f9f6b0be596abb](restaurant_id)
+
+
+  - intent: inform_change_booking_id
+    examples: |
+      - change booking [bid_6435a6e1bef00a88687f1823](booking_id)
+      - change [bid_6435a6e1bef00a88687f1ac4](booking_id)
+      - change [bid_6435a6e1bef00a88687f1ac4](booking_id) please
+      - I need to change [bid_6435a6e1bef00a88687f1ac4](booking_id)
+      - can I change [bid_6435a6e1bef00a88687f1ac4](booking_id)

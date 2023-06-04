@@ -1,7 +1,6 @@
 version: "3.1" # nlu-booking.yml: NLU training data for booking related intents
 
 nlu:
-
   - intent: user_wants_to_cancel_booking
     examples: |
       - I want to cancel my booking
@@ -33,11 +32,3 @@ nlu:
       - I'd like to cancel the reservation I made earlier
       - Cancel my previous booking
       - I need to cancel the booking I made last week
-
-  - intent: inform_cancel_booking_id
-    examples: |
-      - cancel booking [bid_6435a6e1bef00a88687f1823](booking_id)
-      - cancel [bid_6436555b937c8209a6a93609](booking_id)
-      - I want to cancel my booking [bid_6436555b937c8209a6a93609](booking_id)
-      - I need to cancel this booking [bid_6436555b937c8209a6a93609](booking_id)
-      - please cancel my booking [bid_6436555b937c8209a6a93609](booking_id)
