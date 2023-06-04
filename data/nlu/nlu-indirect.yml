@@ -1,6 +1,7 @@
 version: "3.1" # nlu-booking.yml: NLU training data for booking related intents
 
 nlu:
+# TODO: uncomment when using
 #  - intent: inform_cancel_booking_id
 #    examples: |
 #      - cancel booking [bid_6435a6e1bef00a88687f1823](booking_id)
@@ -42,6 +43,38 @@ nlu:
 #      - I need to change [bid_6435a6e1bef00a88687f1ac4](booking_id)
 #      - can I change [bid_6435a6e1bef00a88687f1ac4](booking_id)
 
+#  - intent: request_more_restaurant_options
+#    examples: |
+#      - anything else?
+#      - any other places?
+#      - Can you suggest more restaurant options
+#      - can i have more recommendations
+#      - show more restaurant options
+#      - can i see more restaurants
+#      - Could you show me more restaurant options
+#      - more options
+#      - more suggestions
+#      - Can I see more restaurants?
+#      - more places
+#      - Can you give me more restaurant options?
+#      - any other suggestions
+#      - more restaurants
+#      - Can you recommend few other good restaurants with good ratings
+#      - Can you suggest other restaurants?
+#      - I'd like more restaurant suggestions, please.
+#      - Can you give me more choices?
+#      - Are there any other restaurants you can recommend?
+#      - Show me other restaurant options.
+#      - Can I have some more options, please?
+#      - I would like to see more restaurant choices.
+#      - Do you have other restaurant recommendations?
+#      - I need more options for restaurants.
+#      - Show me more options, please.
+#      - Could I get more restaurant suggestions?
+#      - I want to see more choices.
+#      - Do you have any more restaurant options?
+#      - Could you give me a few more restaurant suggestions?
+#      - I'd like to explore more restaurants, can you show more?
 
 #  - intent: mood_great
 #    examples: |
@@ -108,37 +141,3 @@ nlu:
 #      - bad
 #      - sad 😢
 #      - crying 😢
-
-
-#  - intent: request_more_restaurant_options
-#    examples: |
-#      - anything else?
-#      - any other places?
-#      - Can you suggest more restaurant options
-#      - can i have more recommendations
-#      - show more restaurant options
-#      - can i see more restaurants
-#      - Could you show me more restaurant options
-#      - more options
-#      - more suggestions
-#      - Can I see more restaurants?
-#      - more places
-#      - Can you give me more restaurant options?
-#      - any other suggestions
-#      - more restaurants
-#      - Can you recommend few other good restaurants with good ratings
-#      - Can you suggest other restaurants?
-#      - I'd like more restaurant suggestions, please.
-#      - Can you give me more choices?
-#      - Are there any other restaurants you can recommend?
-#      - Show me other restaurant options.
-#      - Can I have some more options, please?
-#      - I would like to see more restaurant choices.
-#      - Do you have other restaurant recommendations?
-#      - I need more options for restaurants.
-#      - Show me more options, please.
-#      - Could I get more restaurant suggestions?
-#      - I want to see more choices.
-#      - Do you have any more restaurant options?
-#      - Could you give me a few more restaurant suggestions?
-#      - I'd like to explore more restaurants, can you show more?

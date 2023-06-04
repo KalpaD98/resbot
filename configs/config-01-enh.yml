@@ -15,7 +15,7 @@ pipeline: # -------------------------------------------------- NLU -------------
 
     # Intent and Entity Extractor
   - name: DIETClassifier
-    epochs: 150
+    epochs: 150                           # only difference from default config is epochs
     constrain_similarities: true
 
   - name: EntitySynonymMapper
