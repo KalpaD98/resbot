@@ -47,13 +47,13 @@ nlu:
       - I want [Chinese](cuisine) food
       - I'm in the mood for [Thai](cuisine) food tonight
       - [Japanese](cuisine) please
-      - I'm looking for a [Vietnam](cuisine) restaurant
-      - looking for a [Vietnam](cuisine) restaurant
+      - I'm looking for something [Vietnamese](cuisine) 
+      - looking for a [Vietnamese](cuisine) restaurant
       - I feel like having some [French](cuisine) food.
       - Any recommendations for [Lebanese](cuisine) food?
-      - Can you suggest a good [Greek](cuisine) restaurant?
+      - [Greek](cuisine) food would be nice
       - Is there a good [Brazilian](cuisine) steakhouse around?
-      - Show me some [Ethiopian](cuisine) restaurants.
+      - would love some [Ethiopian](cuisine) food.
       - I want to order [Chinese](cuisine) food
       - I'm in the mood for something different. How about [Korean](cuisine) food?
       - craving for [Mexican](cuisine) food
@@ -64,4 +64,4 @@ nlu:
       - [Any](cuisine) thing
       - [Multi](cuisine) cuisine
       - I would like to try [italian](cuisine)
-      - any [chinese](cuisine) restaurants available?
+      - [chinese](cuisine) places available?

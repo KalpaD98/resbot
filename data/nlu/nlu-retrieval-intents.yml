@@ -1,5 +1,5 @@
 version: "3.1"
-# nlu-small-talk-and-out-of-scope.yml has out-of-scope intent examples
+# nlu-retrieval-intents.yml has out-of-scope intent examples
 nlu:
   - intent: bot_challenge/bot
     examples: |
@@ -31,10 +31,8 @@ nlu:
     examples: |
       - who are you?
       - what are you?
-      - what are you doing?
       - what is your name?
       - Can you tell me about yourself?
-      - What is your identity?
       - What's your purpose?
       - Tell me about yourself?
       - Could you introduce yourself?
@@ -48,10 +46,7 @@ nlu:
       - Who's the US President?
       - What's the weather today?
       - can you answer any question ?
-      - Who won the last World Cup?
-      - What's the population of China?
       - Can you tell me a joke?
-      - What's the current exchange rate?
 
   - intent: out_of_scope/food
     examples: |

@@ -180,6 +180,108 @@ nlu:
 #      - I need to change the booking for more people
 #      - I would like to alter the size of my party for the booking
 
+# ------------------------------------ View restaurant booking related intents -----------------------------------------
+
+#  - intent: view_all_bookings
+#    examples: |
+#      - show me all my bookings
+#      - show me all my reservations
+#      - can you display all my bookings
+#      - let me see all my bookings
+#      - Can i see all my booking details?
+#      - what are all my bookings
+#      - all bookings
+#      - Can I see all my bookings
+#      - can you show all my reservations
+#      - display all my reservations
+#      - Could I see all my bookings?
+#      - let me see all my reservations
+#      - what are my total bookings
+#      - Can you show my all reservations?
+#      - Can I get an overview of all my bookings?
+#      - Please list every booking I have.
+#      - Could you present all of my reservations?
+#      - I'd like to review all my bookings.
+#      - What's the total number of my reservations?
+#      - Show me the full list of my bookings.
+#      - What's every booking I've made?
+#      - I need to see all my reservation details.
+#      - Can you fetch all my booking information?
+#      - Can I get a summary of all my bookings?
+#      - I'd like to see the complete list of my reservations.
+#      - Please provide a list of all my bookings.
+#      - Can you list each and every reservations of mine?
+#      - I want to check all my booking details.
+#      - Can I see all reservations I have made?
+#      - I need to see the full list of my bookings.
+#
+#  - intent: view_upcoming_bookings
+#    examples: |
+#      - show me my upcoming reservations
+#      - I'd like to see my upcoming reservations
+#      - what are my future bookings
+#      - can you display my upcoming bookings
+#      - Can I see the upcoming bookings
+#      - show me my upcoming bookings
+#      - let me see my future bookings
+#      - what bookings do I have coming up
+#      - Could I see my upcoming bookings?
+#      - I want to see my upcomming booking details.
+#      - upcoming bookings
+#      - what are my bookings in the future
+#      - can you show my future reservations
+#      - What are my up coming bookings
+#      - display my upcoming reservations
+#      - let me see my upcoming reservations
+#      - Can you show my upcoming reservations?
+#      - Can I see my upcoming bookings?
+#      - what reservations do I have coming up
+#      - future bookings
+#      - I'd like to review my future reservations.
+#      - Please list my upcoming bookings.
+#      - Could you present all of my future bookings?
+#      - Can you display my future reservations?
+#      - What's on my booking schedule?
+#      - Can you fetch my upcoming booking information?
+#      - Can I get a summary of my upcoming reservations?
+#      - Please provide a list of all my future bookings.
+#      - I want to check all my upcoming booking details.
+#      - What reservations do I have in the near future?
+#
+#  - intent: view_past_bookings
+#    examples: |
+#      - show me my past reservations
+#      - what were my previous bookings
+#      - can you display my past bookings
+#      - Can you show past reservations?
+#      - show me my past bookings
+#      - Can I check my past bookings
+#      - let me see my previous bookings
+#      - what bookings have I had in the past
+#      - Could I see my past bookings?
+#      - Can i see my past bookings?
+#      - past bookings
+#      - what are my bookings in the past
+#      - show my booking history
+#      - can you show my previous reservations
+#      - display my past reservations
+#      - let me see my past reservations
+#      - show my past bookings
+#      - what reservations have I had before
+#      - previous bookings
+#      - Can you retrieve my old reservations?
+#      - I want to see my old booking details.
+#      - What reservations have I had in the past?
+#      - I'd like to check my previous booking details.
+#      - Could you show me my booking history?
+#      - I'd like to review my past reservations.
+#      - Can you show me my past booking details?
+#      - I want to view my previous reservations.
+#      - Please show me the history of my bookings.
+#      - Could you pull up my past reservations?
+#      - May I see my previous bookings, please?
+
+
 ## -------------------------------------------- user mood related intents ----------------------------------------------
 
 #  - intent: mood_great

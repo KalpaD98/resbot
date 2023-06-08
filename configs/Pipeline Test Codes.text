@@ -2,6 +2,8 @@ Sample queries
 
 # Running cross validation test for single config #
 rasa test nlu --nlu data --config config.yml --cross-validation --folds 5  --out gridresults/cross-validation-results/config
+rasa test nlu --nlu data --config config-with-bart-zero-shot.yml --cross-validation --folds 5  --out gridresults/cross-validation-results/config-with-bart-zero-shot
+rasa test nlu --nlu data --config config-without-bart-zero-shot.yml --cross-validation --folds 5  --out gridresults/cross-validation-results/config-without-bart-zero-shot
 
 --config config-with-bart.yml config-without-bart.yml
 

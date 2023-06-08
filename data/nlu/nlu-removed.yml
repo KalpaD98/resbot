@@ -1,0 +1,70 @@
+#version: "3.1" # nlu-removed.yml
+#
+#nlu:
+
+## removed from nlu-restaurant-booking.yml
+#  - intent: request_booking_details
+#    examples: |
+#      - What's the status of my reservation
+#      - What's the status of my booking
+#      - show my booking details
+#      - show my reservation details
+#      - booking details
+#      - reservation details
+#      - booking details please
+#      - reservation details pls
+#      - Can you show me my booking information?
+#      - Can I have my reservation details?
+#      - Please provide details of my booking
+#      - Could you give me details about my reservation?
+#      - Check my reservation status
+#      - Get my booking details
+#      - show booking details
+#      - I need information on my reservation
+#      - Fetch my booking details
+#      - Can you retrieve my reservation details?
+#      - I'd like to know about my booking details
+#      - What's the current status of my booking?
+#      - Please update me about my reservation
+#      - What are the details of my booking?
+#      - Can you fetch the details of my reservation?
+#      - I would like to check my reservation details
+#      - Can you provide the details of my booking?
+#      - I'd like to know the status of my reservation
+#      - I want to see my booking details
+#      - Please display my reservation details
+#      - Can you please check my booking?
+#      - Show me the details of my booking
+
+#  - intent: stop_restaurant_booking_form
+#    examples: |
+#      - I don't want to book
+#      - I'll check out another restaurant
+#      - I changed my mind
+#      - cancel the booking
+#      - Please stop the booking process
+#      - I don't want to book anymore
+#      - stop booking
+#      - I would like to cancel the restaurant booking process. Please stop.
+#      - cancel
+#      - Terminate booking
+#      - I want to stop the booking process
+#      - cancel this
+#      - stop this
+#      - Plz stop the process
+#      - I want to terminate this booking.
+#      - stop booking
+#      - i cant fill these
+#      - Stop the process
+#      - I'm not interested anymore, cancel it
+#      - I changed my mind, stop the booking
+#      - No longer interested, halt the process
+#      - Cease the reservation process
+#      - Please abort the booking
+#      - Cancel my booking process
+#      - I've changed my plans, cancel the booking
+#      - I won't be booking now, stop the process
+#      - Discontinue the booking process, please
+#      - Please pause the booking procedure
+#      - I would like to abort the reservation
+#      - Please suspend the booking process

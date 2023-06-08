@@ -80,15 +80,12 @@ nlu:
       - Let's log out
       - I wish to log out
       - Time to log out
-      - I want to start logging out
-      - Can I start the logout process?
-      - I need to start logging out
+      - I want to lg out
+      - I need to log out
       - I am interested in logging out
       - I would like to sign out
       - I need to sign out
-      - How do I sign out?
-      - Can you help me to log out?
-      - Can you assist me with logging out?
+
 # TODO: uncomment when using
 #  - intent: inform_user_name
 #    examples: |

@@ -74,7 +74,7 @@ intents:
   # ---------------------------------------------- nlu-restaurant-search.yml ----------------------------------------- #
   - want_to_search_restaurants
   - search_restaurants
-  # ------------------------------------ nlu-small-talk-and-out-of-scope.yml ----------------------------------------- #
+  # ------------------------------------ nlu-retrieval-intents.yml ----------------------------------------- #
 
   # No need to add retrieval intents?
   - bot_challenge

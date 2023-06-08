@@ -30,8 +30,6 @@ nlu:
       - hi there
       - greetings
       - howdy
-      - hiya
-      - good day
       - hi, nice to meet you
       - salutations
 
@@ -40,8 +38,7 @@ nlu:
       - cu
       - Good bye!
       - cee you later
-      - good night
-      - Take care and goodbye!
+      - Take care
       - bye
       - goodbye
       - Bye 👋 
@@ -57,8 +54,7 @@ nlu:
       - Catch you later
       - So long
       - Till next time
-      - Cheerio
-      - Later alligator
+      - Later
       - Until we meet again
       - ✌️
       - bye bye
@@ -121,7 +117,6 @@ nlu:
       - not really
       - nah
       - No it isn't
-      - That's not what I was looking for 
       - nah
       - how about no
       - maybe no
@@ -139,7 +134,6 @@ nlu:
       - nope
       - hell no
       - dont
-      - I'm sorry, but I have to disagree with that statement
       - don't
       - nooo
 
@@ -148,7 +142,7 @@ nlu:
       - thank you
       - Thank you for your help.
       - thanks
-      - I appreciate it
+      - appreciate it
       - thank you very much
       - Thanks a lot!
       - thanks a bunch
@@ -158,11 +152,11 @@ nlu:
       - Thnksn
       - I'm grateful for your assistance
       - Cheers!
-      - I can't thank you enough
+      - can't thank you enough
       - Gracias!
-      - I owe you one
+      - owe you one
       - You're a lifesaver
-      - I really appreciate it
+      - really appreciate it
       - My gratitude is immense
       - Thanks for the help
       - Thanks for everything 
@@ -183,13 +177,12 @@ nlu:
       - Please stop
       - shutup
       - ok then you cant help me
-      - that was shit, you're not helping
-      - you can't help me with what i need
       - i guess you can't help me then
-      - ok i guess you can't help me
+      - cant fill these
       - that's not what i want
       - ok, but that doesnt help me
       - that doesnt help me
+      - suspend
       - this is leading to nothing
       - Stop please
       - this conversation is not really helpful
@@ -199,10 +192,10 @@ nlu:
       - you're not making sense
       - I'm not getting the help I need
       - Stop right there
-      - Can you quit it?
+      - quit it?
       - I don't think you're helping
       - stop the conversation
       - you're not being helpful
-      - cease and desist
+      - enough
       - Enough, you're not helping
       - halt, you're not assisting me
