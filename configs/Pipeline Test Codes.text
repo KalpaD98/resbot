@@ -1,5 +1,13 @@
 Sample queries
 
+# Running cross validation test for single config #
+rasa test nlu --nlu data --config config.yml --cross-validation --folds 5  --out gridresults/cross-validation-results/config-with-bart
+
+--config config-with-bart.yml config-without-bart.yml
+
+# nlu_comparison_results
+rasa test nlu --nlu data/nlu.yml --config config_1.yml config_2.yml --runs 4 --percentages 0 25 50 70 90
+
 # Test codes #
 
 -----------------------------------------------------------------------------------------------------------------------
@@ -11,18 +19,26 @@ rasa test nlu --nlu data --config config-base-bart.yml config-base-same.yml --cr
 
 
 --------------------------------------------# Transfer Learning test #--------------------------------------------------
-rasa test nlu --nlu data --config configs/config-00-default.yml configs/config-01-enh.yml configs/config-02-enh-gpt.yml configs/config-03-enh-gpt-2.yml configs/config-04-enh-bert.yml configs/config-05-enh-roberta.yml configs/config-06-enh-distillbert.yml configs/config-07-enh-xlnet.yml configs/config-08-enh-spacy-lg.yml configs/config-09-enh-spacy-trf.yml --cross-validation --runs 5 --percentages 0 20 40 60 80 --folds 5 --out gridresults/transfer-learning-results
+rasa test nlu --nlu data --config configs/config-00-default.yml configs/config-01-enh.yml configs/config-02-enh-gpt.yml configs/config-03-enh-gpt-2.yml configs/config-04-enh-bert.yml configs/config-05-enh-roberta.yml configs/config-06-enh-distillbert.yml configs/config-07-enh-xlnet.yml configs/config-08-enh-spacy-lg.yml configs/config-09-enh-spacy-trf.yml --cross-validation --runs 3 --percentages 0 20 40 60 80 --folds 5 --out gridresults/transfer-learning-results
+rasa test nlu --nlu data --config configs/config-default.yml configs/config-spaCy-lg.yml configs/config-spaCy-md.yml configs/config-spaCy-sm.yml configs/config-spaCy-trf.yml --runs 3 --percentages 0 20 40 60 80  --out gridresults/spacy-transfer-learning-results
 ------------------------------------------------------------------------------------------------------------------------
-
 
 ------------------------------------------------# Epochs Test #---------------------------------------------------------
-rasa test nlu --nlu data --config configs/config-00-default.yml configs/config-00-default-epochs-100-c-60.yml configs/config-00-default-epochs-125.yml configs/config-00-default-epochs-150.yml configs/config-00-default-epochs-150-c-60.yml --cross-validation --runs 5 --percentages 0 20 40 60 80 --folds 5 --out gridresults/Different-Epochs
+rasa test nlu --nlu data --config configs/config-00-default.yml configs/config-00-default-epochs-100-c-60.yml configs/config-00-default-epochs-125.yml configs/config-00-default-epochs-150.yml configs/config-00-default-epochs-150-c-60.yml --cross-validation --runs 5 --percentages 0 20 40 60 80 --out gridresults/Different-Epochs
 ------------------------------------------------------------------------------------------------------------------------
-
 
 ------------------------------------------------# With and Without Bart #-----------------------------------------------
-rasa test nlu --nlu data --config <configs here> --runs 5 --percentages 0 10 20 30 40 50 60 70 80 90 --folds 5 --out gridresults/with-and-without-bart-results
+
+rasa test nlu --nlu data --config <configs here> --runs 5 --percentages 0 10 20 30 40 50 60 70 80 90  --out gridresults/with-and-without-bart-results
+
+rasa test nlu --nlu data --config config-with-bart.yml config-without-bart.yml  --runs 5 --percentages 0 20 40 60 80 --out gridresults/with-and-without-bart-results
+
 ------------------------------------------------------------------------------------------------------------------------
+
+rasa test nlu --nlu data --config config-with-bart.yml config-without-bart.yml  --runs 3 --percentages 0 20 40 60 80 --out gridresults/with-and-without-bert-results-with-bart
+
+rasa test nlu --nlu data --config config-with-bart.yml config-without-bart.yml  --runs 3 --percentages 0 10 20 30 40 50 60 70 80 90 --out gridresults/with-and-without-bart-plus-bert
+
 
 what restaurants can you recommend ?
 list some restaurants
