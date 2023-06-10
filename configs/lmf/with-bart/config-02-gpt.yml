@@ -1,37 +1,40 @@
-# config.yml The config recipe.
 recipe: default.v1
 language: en
 
-pipeline: # ----------------------------------------- NLU Pipeline -----------------------------------------------------
+pipeline:
 
-  - name: submodules.custom_components.language_handlers.language_handler.LanguageHandlerAndTranslator
-
-  - name: SpacyNLP                                       # Load Language model
+  # Load Language model
+  - name: SpacyNLP
     model: en_core_web_lg
     case_sensitive: False
 
-  - name: SpacyTokenizer                                # Tokenizer
+  # Tokenizer
+  - name: SpacyTokenizer
     intent_tokenization_flag: True                      # to use multi intents
     intent_split_symbol: "+"
 
-    # Featurizers
-  - name: RegexFeaturizer                               # Sparse featurizer
-  - name: SpacyFeaturizer                               # Dense featurizer
-  - name: LexicalSyntacticFeaturizer                    # Sparse featurizer
+  # Featurizers
+  - name: RegexFeaturizer
+  - name: LexicalSyntacticFeaturizer
+  - name: LanguageModelFeaturizer
+    model_name: "gpt"
+    model_weights: "openai-gpt"
+
   - name: CountVectorsFeaturizer                        # Sparse featurizer | one hot encoding
   - name: CountVectorsFeaturizer                        # Sparse featurizer | char level n-grams
     analyzer: char_wb
     min_ngram: 1
     max_ngram: 4
 
-  - name: DIETClassifier                                # Intent and Entity Extractor
-    epochs: 125
+  # Intent and Entity Extractor
+  - name: DIETClassifier
+    epochs: 150
     constrain_similarities: true
 
   - name: submodules.custom_components.intent_classifiers.zero_shot_bart_intent_classifier.ZeroShotBartIntentClassifier
-    threshold: 0.6
+    threshold: 0.5
     ambiguity_threshold: 0.05
-    candidate_class_size: 5
+    candidate_class_size: 7
     top_intent_confidence_threshold: 0.95
     fallback_classifier_threshold: 0.4                    # must be same as FallbackClassifier threshold
     fallback_classifier_ambiguity_threshold: 0.1          # must be same as FallbackClassifier ambiguity_threshold
@@ -42,7 +45,7 @@ pipeline: # ----------------------------------------- NLU Pipeline -------------
     constrain_similarities: true
 
   - name: FallbackClassifier
-    threshold: 0.4
+    threshold: 0.6
     ambiguity_threshold: 0.1
 
 policies: # -------------------------------------------- Dialog Management --------------------------------------------

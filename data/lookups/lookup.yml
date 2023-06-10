@@ -3,36 +3,6 @@ version: "3.1"
 # lookup.yml is the file where you define the lookup tables for your assistant.
 
 nlu:
-  #----------------------------------------------------LOOKUP-TABLE-------------------------------------------------------
-  # create lookups for all restaurants, their categories and their foods
-  # add the top 20 restaurant names from the dataset
-  # Examples only >> Change to fit the dataset ->  use a separate file (check docs)
-  - lookup: cuisine
-    examples: |
-      - any cuisine
-      - italian
-      - japanese
-      - chinese
-      - thai
-      - thailand
-      - fast food
-      - fast-food
-      - indian
-      - singaporean
-      - american
-      - mexican
-      - french
-      - spanish
-      - korean
-      - malay
-      - malaysian
-      - greek
-      - street food
-      - caribbean
-      - swedish
-      - vietnamese
-      - german
-  
 
   # Examples only >> Change to fit the dataset ->  use a separate file (check docs)
   - lookup: restaurant_name

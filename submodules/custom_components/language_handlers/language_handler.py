@@ -61,24 +61,6 @@ class LanguageHandlerAndTranslator(GraphComponent):
                     text = translated_text.text  # Update the text with the translated version
                     print("translated message: " + text)
                     message.set('text', text, add_to_output=True)
-                    print("setting message: " + message.get('text'))
-
-                    # TODO: uncomment for further debugging and improvements (removed below for bug fixing)
-                    # Set the language entity
-                    # language = SIN
-                    # probability = prob
-                    # entity = {
-                    #     'value': language,
-                    #     'confidence': 0.0001,
-                    #     'entity': 'language',
-                    #     'extractor': 'LanguageHandler'
-                    # }
-                    # message.set("entities", [entity], add_to_output=True)
-
-                    # Update the message's text with the translated version
-                    break
-
-        print("---------------------LanguageHandler Ended---------------------")
         return messages
 
     def process_training_data(self, training_data: TrainingData) -> TrainingData:

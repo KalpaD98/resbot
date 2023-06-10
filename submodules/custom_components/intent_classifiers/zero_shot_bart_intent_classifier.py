@@ -85,7 +85,6 @@ class ZeroShotBartIntentClassifier(GraphComponent):
         print("init ZeroShotBartIntentClassifier")
         self.name = name
         print("Init ZeroShotBartIntentClassifier and model")
-        # TODO : pretrained below model in HFT
         self.clf = pipeline("zero-shot-classification", model="facebook/bart-large-mnli")
         self._model_storage = model_storage
         self._resource = resource
@@ -230,7 +229,7 @@ class ZeroShotBartIntentClassifier(GraphComponent):
 
     @staticmethod
     def _should_add_new_intent_rankings_to_tracker(self, bart_intent_ranking):
-        """Determines whether text should be processed with BART classifier based on intent ranking and thresholds."""
+        """Determines whether text should be processed with zero shot classifier based on intent ranking and thresholds."""
         if not bart_intent_ranking:
             return False
         top_intent = bart_intent_ranking[0]

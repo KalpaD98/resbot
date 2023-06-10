@@ -1,0 +1,206 @@
+version: "3.1" # state-lookup.yml contains all states in the US
+
+nlu:
+  - lookup: state
+    examples: |
+      - Alabama
+      - Alaska
+      - Arizona
+      - Arkansas
+      - California
+      - Colorado
+      - Connecticut
+      - Delaware
+      - Florida
+      - Georgia
+      - Hawaii
+      - Idaho
+      - Illinois
+      - Indiana
+      - Iowa
+      - Kansas
+      - Kentucky
+      - Louisiana
+      - Maine
+      - Maryland
+      - Massachusetts
+      - Michigan
+      - Minnesota
+      - Mississippi
+      - Missouri
+      - Montana
+      - Nebraska
+      - Nevada
+      - New Hampshire
+      - New Jersey
+      - New Mexico
+      - New York
+      - North Carolina
+      - North Dakota
+      - Ohio
+      - Oklahoma
+      - Oregon
+      - Pennsylvania
+      - Rhode Island
+      - South Carolina
+      - South Dakota
+      - Tennessee
+      - Texas
+      - Utah
+      - Vermont
+      - Virginia
+      - Washington
+      - West Virginia
+      - Wisconsin
+      - Wyoming
+
+  - synonym: Alabama
+    examples: |
+      - AL
+  - synonym: Alaska
+    examples: |
+      - AK
+  - synonym: Arizona
+    examples: |
+      - AZ
+  - synonym: Arkansas
+    examples: |
+      - AR
+  - synonym: California
+    examples: |
+      - CA
+  - synonym: Colorado
+    examples: |
+      - CO
+  - synonym: Connecticut
+    examples: |
+      - CT
+  - synonym: Delaware
+    examples: |
+      - DE
+  - synonym: Florida
+    examples: |
+      - FL
+  - synonym: Georgia
+    examples: |
+      - GA
+  - synonym: Hawaii
+    examples: |
+      - HI
+  - synonym: Idaho
+    examples: |
+      - ID
+  - synonym: Illinois
+    examples: |
+      - IL
+  - synonym: Indiana
+    examples: |
+      - IN
+  - synonym: Iowa
+    examples: |
+      - IA
+  - synonym: Kansas
+    examples: |
+      - KS
+  - synonym: Kentucky
+    examples: |
+      - KY
+  - synonym: Louisiana
+    examples: |
+      - LA
+  - synonym: Maine
+    examples: |
+      - ME
+  - synonym: Maryland
+    examples: |
+      - MD
+  - synonym: Massachusetts
+    examples: |
+      - MA
+  - synonym: Michigan
+    examples: |
+      - MI
+  - synonym: Minnesota
+    examples: |
+      - MN
+  - synonym: Mississippi
+    examples: |
+      - MS
+  - synonym: Missouri
+    examples: |
+      - MO
+  - synonym: Montana
+    examples: |
+      - MT
+  - synonym: Nebraska
+    examples: |
+      - NE
+  - synonym: Nevada
+    examples: |
+      - NV
+  - synonym: New Hampshire
+    examples: |
+      - NH
+  - synonym: New Jersey
+    examples: |
+      - NJ
+  - synonym: New Mexico
+    examples: |
+      - NM
+  - synonym: New York
+    examples: |
+      - NY
+  - synonym: North Carolina
+    examples: |
+      - NC
+  - synonym: North Dakota
+    examples: |
+      - ND
+  - synonym: Ohio
+    examples: |
+      - OH
+  - synonym: Oklahoma
+    examples: |
+      - OK
+  - synonym: Oregon
+    examples: |
+      - OR
+  - synonym: Pennsylvania
+    examples: |
+      - PA
+  - synonym: Rhode Island
+    examples: |
+      - RI
+  - synonym: South Carolina
+    examples: |
+      - SC
+  - synonym: South Dakota
+    examples: |
+      - SD
+  - synonym: Tennessee
+    examples: |
+      - TN
+  - synonym: Texas
+    examples: |
+      - TX
+  - synonym: Utah
+    examples: |
+      - UT
+  - synonym: Vermont
+    examples: |
+      - VT
+  - synonym: Virginia
+    examples: |
+      - VA
+  - synonym: Washington
+    examples: |
+      - WA
+  - synonym: West Virginia
+    examples: |
+      - WV
+  - synonym: Wisconsin
+    examples: |
+      - WI
+  - synonym: Wyoming
+    examples: |
+      - WY

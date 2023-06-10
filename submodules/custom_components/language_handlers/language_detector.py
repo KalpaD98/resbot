@@ -14,3 +14,4 @@ class LanguageDetector:
         labels, probs = LanguageDetector.model.predict(text, k=k)
         detected_languages = [(label[-2:], prob) for label, prob in zip(labels, probs)]
         return detected_languages
+
