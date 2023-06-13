@@ -1,9 +1,9 @@
-version: "3.1" # nlu-booking.yml: NLU training data for booking related intents
-
-nlu:
-# TODO: uncomment when using
+#version: "3.1" # nlu-booking.yml: NLU training data for booking related intents
+#
+#nlu:
+## TODO: uncomment when using
 ## ---------------------------------------- Restaurant Booking related intents -----------------------------------------
-
+#
 #  - intent: inform_restaurant_id
 #    examples: |
 #      - [rid_6431ac87d5f9f6b0be596abb](restaurant_id)
@@ -11,7 +11,7 @@ nlu:
 #      - [rid_6431ac87d5f9f6b0be596ac0](restaurant_id)
 #      - restaurant_id is [rid_6431ac87d5f9f6b0be596abd](restaurant_id)
 #      - restaurant_id: [rid_6431ac87d5f9f6b0be596abf](restaurant_id)
-
+#
 #  - intent: inform_booking_restaurant_id
 #    examples: |
 #      - [rid_6431ac87d5f9f6b0be596abc](restaurant_id) is the restaurant id I want to book
@@ -19,7 +19,7 @@ nlu:
 #      - book [rid_6431ac87d5f9f6b0be596abc](restaurant_id)
 #      - book restaurant [rid_6431ac87d5f9f6b0be596abc](restaurant_id)
 #      - book restaurant [rid_6431ac87d5f9f6b0be596abc](restaurant_id) for me
-
+#
 #  - intent: inform_view_details_restaurant_id
 #    examples: |
 #      - view details [rid_6431ac87d5f9f6b0be596abd](restaurant_id)
@@ -27,7 +27,7 @@ nlu:
 #      - view details [rid_6431ac87d5f9f6b0be596abd](restaurant_id) please
 #      - view details of [rid_6431ac87d5f9f6b0be596abd](restaurant_id)
 #      - view details of restaurant [rid_6431ac87d5f9f6b0be596abb](restaurant_id)
-
+#
 #  - intent: request_more_restaurant_options
 #    examples: |
 #      - anything else?
@@ -60,9 +60,9 @@ nlu:
 #      - Do you have any more restaurant options?
 #      - Could you give me a few more restaurant suggestions?
 #      - I'd like to explore more restaurants, can you show more?
-
+#
 ## --------------------------------------- Booking Change/Cancel related intents ---------------------------------------
-
+#
 #  - intent: inform_change_booking_id
 #    examples: |
 #      - change booking [bid_6435a6e1bef00a88687f1823](booking_id)
@@ -70,7 +70,7 @@ nlu:
 #      - change [bid_6435a6e1bef00a88687f1ac4](booking_id) please
 #      - I need to change [bid_6435a6e1bef00a88687f1ac4](booking_id)
 #      - can I change [bid_6435a6e1bef00a88687f1ac4](booking_id)
-
+#
 #  - intent: inform_cancel_booking_id
 #    examples: |
 #      - cancel booking [bid_6435a6e1bef00a88687f1823](booking_id)
@@ -78,8 +78,8 @@ nlu:
 #      - I want to cancel my booking [bid_6436555b937c8209a6a93609](booking_id)
 #      - I need to cancel this booking [bid_6436555b937c8209a6a93609](booking_id)
 #      - please cancel my booking [bid_6436555b937c8209a6a93609](booking_id)
-
-
+#
+#
 #  - intent: user_wants_to_change_restaurant_booking_date
 #    examples: |
 #      - I want to change my reservation date
@@ -179,9 +179,9 @@ nlu:
 #      - Can we adjust the number of seats for my booking?
 #      - I need to change the booking for more people
 #      - I would like to alter the size of my party for the booking
-
-# ------------------------------------ View restaurant booking related intents -----------------------------------------
-
+#
+# ## ------------------------------------ View restaurant booking related intents -----------------------------------------
+#
 #  - intent: view_all_bookings
 #    examples: |
 #      - show me all my bookings
@@ -280,10 +280,10 @@ nlu:
 #      - Please show me the history of my bookings.
 #      - Could you pull up my past reservations?
 #      - May I see my previous bookings, please?
-
-
+#
+#
 ## -------------------------------------------- user mood related intents ----------------------------------------------
-
+#
 #  - intent: mood_great
 #    examples: |
 #      - perfect

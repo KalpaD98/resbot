@@ -2,19 +2,19 @@
 recipe: default.v1
 language: en
 
-pipeline: # -------------------------------------------------- NLU -----------------------------------------------------
+pipeline: # ----------------------------------------- NLU Pipeline -----------------------------------------------------
 
-  # Load Language model
-  - name: SpacyNLP
-    model: en_core_web_trf
+  - name: submodules.custom_components.language_handlers.language_handler.LanguageHandlerAndTranslator
+
+  - name: SpacyNLP                                       # Load Language model
+    model: en_core_web_lg
     case_sensitive: False
 
-  # Tokenizer
-  - name: SpacyTokenizer
+  - name: SpacyTokenizer                                # Tokenizer
     intent_tokenization_flag: True                      # to use multi intents
     intent_split_symbol: "+"
 
-  # Featurizers
+    # Featurizers
   - name: RegexFeaturizer                               # Sparse featurizer
   - name: SpacyFeaturizer                               # Dense featurizer
   - name: LexicalSyntacticFeaturizer                    # Sparse featurizer
@@ -24,10 +24,17 @@ pipeline: # -------------------------------------------------- NLU -------------
     min_ngram: 1
     max_ngram: 4
 
-  # Intent and Entity Extractor
-  - name: DIETClassifier
-    epochs: 150
+  - name: DIETClassifier                                # Intent and Entity Extractor
+    epochs: 125
     constrain_similarities: true
+
+  - name: submodules.custom_components.intent_classifiers.zero_shot_bart_intent_classifier.ZeroShotBartIntentClassifier
+    threshold: 0.35
+    ambiguity_threshold: 0.05
+    candidate_class_size: 7
+    top_intent_confidence_threshold: 0.95
+    fallback_classifier_threshold: 0.6                    # must be same as FallbackClassifier threshold
+    fallback_classifier_ambiguity_threshold: 0.1          # must be same as FallbackClassifier ambiguity_threshold
 
   - name: EntitySynonymMapper
   - name: ResponseSelector
@@ -35,7 +42,7 @@ pipeline: # -------------------------------------------------- NLU -------------
     constrain_similarities: true
 
   - name: FallbackClassifier
-    threshold: 0.6
+    threshold: 0.4
     ambiguity_threshold: 0.1
 
 policies: # -------------------------------------------- Dialog Management --------------------------------------------

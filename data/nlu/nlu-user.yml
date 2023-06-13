@@ -85,8 +85,8 @@ nlu:
       - I am interested in logging out
       - I would like to sign out
       - I need to sign out
-
-# TODO: uncomment when using
+#
+#  # TODO: uncomment when using
 #  - intent: inform_user_name
 #    examples: |
 #      - [kalpa](user_name)
@@ -170,50 +170,44 @@ nlu:
 #      - [pass123abc](password)
 
 
-  #      - email = [dileepa@gmail.com](user_email)
-  #      - My email is [upekshag@uom.lk](user_email)
-  #      - Please use [sagara@yahoo.com](user_email) for my email
-  #      - My email address is [mike88@example.com](user_email)
-  #      - You can reach me at [sarah_123@example.com](user_email)
-  #      - My email is [susan@example.com](user_email)
-  #      - Please contact me at [bobby@example.com](user_email)
-  #      - [john.doe@example.com](user_email) is my email address
-  #      - I want to use [jane.smith@example.com](user_email) as my email
+#        - email = [dileepa@gmail.com](user_email)
+#        - My email is [upekshag@uom.lk](user_email)
+#        - Please use [sagara@yahoo.com](user_email) for my email
+#        - My email address is [mike88@example.com](user_email)
+#        - You can reach me at [sarah_123@example.com](user_email)
+#        - My email is [susan@example.com](user_email)
+#        - Please contact me at [bobby@example.com](user_email)
+#        - [john.doe@example.com](user_email) is my email address
+#        - I want to use [jane.smith@example.com](user_email) as my email
 
-  #      - 1234
-  #      - pass
-  #      - mypass
-  #      - password: [1234](password)
-  #      - password = [johndoe](password)
-  #      - My password is [pass](password)
-  #      - Use [supersecret](password) as my password
-  #      - [helloworld](password) is my password
-  #      - I want to set my password to [abc123](password)
-  #      - My password should be [password123](password)
-  #      - Please set my password to [qwerty](password)
-  #      - I want to use [testpass](password) as my password
-  #      - My chosen password is [securepass](password)
+#        - 1234
+#        - pass
+#        - mypass
+#        - password: [1234](password)
+#        - password = [johndoe](password)
+#        - My password is [pass](password)
+#        - Use [supersecret](password) as my password
+#        - [helloworld](password) is my password
+#        - I want to set my password to [abc123](password)
+#        - My password should be [password123](password)
+#        - Please set my password to [qwerty](password)
+#        - I want to use [testpass](password) as my password
+#        - My chosen password is [securepass](password)
 
-  #      - [kalpa](PERSON)
-  #      - [chethiya](PERSON)
-  #      - [dileepa](PERSON)
-  #      - [upeksha](PERSON)
-  #      - [sagara](PERSON)
-  #      - [chamalka](PERSON)
-  #      - kalpa
-  #      - chethiya
-  #      - dileepa
-  #      - upeksha
-  #      - sagara
-  #      - chamalka
-  #      - [kalpa](user_name)
-  #      - username: [dileepa](user_name)
-  #      - username = [chethiya](user_name)
-  #      - My name is [upeksha](user_name)
-  #      - [sagara](user_name) is my user name
-  #      - I go by [mike88](user_name)
-  #      - Please use [sarah_123](user_name) as my username
-  #      - My user name is [susan](user_name)
-  #      - You can call me [bobby](user_name)
-  #      - [john_doe](user_name) is my preferred username
-  #      - I want to use [jane_smith](user_name) as my username
+#        - kalpa
+#        - chethiya
+#        - dileepa
+#        - upeksha
+#        - sagara
+#        - chamalka
+#        - [kalpa](user_name)
+#        - username: [dileepa](user_name)
+#        - username = [chethiya](user_name)
+#        - My name is [upeksha](user_name)
+#        - [sagara](user_name) is my user name
+#        - I go by [mike88](user_name)
+#        - Please use [sarah_123](user_name) as my username
+#        - My user name is [susan](user_name)
+#        - You can call me [bobby](user_name)
+#        - [john_doe](user_name) is my preferred username
+#        - I want to use [jane_smith](user_name) as my username

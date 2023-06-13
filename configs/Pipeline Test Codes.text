@@ -1,7 +1,12 @@
 Sample queries
 
 # Running cross validation test for single config #
+
 rasa test nlu --nlu data --config config.yml --cross-validation --folds 5  --out gridresults/cross-validation-results/config
+
+rasa test nlu --nlu data --config configs/Test/ablation/config_.yml --cross-validation --folds 5  --out gridresults/cross-validation-results/config_
+rasa test nlu --nlu data --config configs/Test/ablation/config_with_zero_shot.yml --cross-validation --folds 5  --out gridresults/cross-validation-results/config_with_zero_shot
+
 rasa test nlu --nlu data --config config-with-bart-zero-shot.yml --cross-validation --folds 5  --out gridresults/cross-validation-results/config-with-bart-zero-shot
 rasa test nlu --nlu data --config config-without-bart-zero-shot.yml --cross-validation --folds 5  --out gridresults/cross-validation-results/config-without-bart-zero-shot
 
@@ -18,17 +23,24 @@ rasa test nlu --nlu data --config config-base-bart.yml config-base-bart-trf.yml 
 rasa test nlu --nlu data --config config-base-bart.yml config-base-same.yml  --runs 2 --percentages 0 10 20 40 60 80 90  --out gridresults/config-results
 
 --------------------------------------------# Transfer Learning test #--------------------------------------------------
-rasa test nlu --nlu data --config configs/config-00-default.yml configs/config-01-enh.yml configs/config-02-enh-gpt.yml configs/config-03-enh-gpt-2.yml configs/config-04-enh-bert.yml configs/config-05-enh-roberta.yml configs/config-06-enh-distillbert.yml configs/config-07-enh-xlnet.yml configs/config-08-enh-spacy-lg.yml configs/config-09-enh-spacy-trf.yml --cross-validation --runs 3 --percentages 0 20 40 60 80 --folds 5 --out gridresults/transfer-learning-results
-rasa test nlu --nlu data --config configs/config-default.yml configs/config-spaCy-lg.yml configs/config-spaCy-md.yml configs/config-spaCy-sm.yml configs/config-spaCy-trf.yml --runs 3 --percentages 0 20 40 60 80  --out gridresults/spacy-transfer-learning-results
+# Test template
+rasa test nlu --nlu data --config <configs> --runs 3 --percentages 0 20 40 60 80 --folds 5 --out gridresults/file-name
+
+# - with-zero-shot
+rasa test nlu --nlu data --config configs/Test/with-zero-shot/config-01.yml configs/Test/with-zero-shot/config-02-gpt.yml configs/Test/with-zero-shot/config-03-gpt-2.yml configs/Test/with-zero-shot/config-04-bert.yml configs/Test/with-zero-shot/config-05-roberta.yml configs/Test/with-zero-shot/config-06-distillbert.yml configs/Test/with-zero-shot/config-07-xlnet.yml configs/Test/with-zero-shot/config-08-spacy-lg.yml configs/Test/with-zero-shot/config-09-spacy-trf.yml --runs 3 --percentages 0 20 40 60 80  --out gridresults/test-with-zero-shot-results
+
+# - without-zero-shot
+rasa test nlu --nlu data --config configs/Test/without-zero-shot/config-01.yml configs/Test/without-zero-shot/config-02-gpt.yml configs/Test/without-zero-shot/config-03-gpt-2.yml configs/Test/without-zero-shot/config-04-bert.yml configs/Test/without-zero-shot/config-05-roberta.yml configs/Test/without-zero-shot/config-06-distillbert.yml configs/Test/without-zero-shot/config-07-xlnet.yml configs/Test/without-zero-shot/config-08-spacy-lg.yml configs/Test/without-zero-shot/config-09-spacy-trf.yml --runs 3 --percentages 0 20 40 60 80  --out gridresults/test-without-zero-shot-results
 
 ------------------------------------------------# Epochs Test #---------------------------------------------------------
 rasa test nlu --nlu data --config configs/config-00-default.yml configs/config-00-default-epochs-100-c-60.yml configs/config-00-default-epochs-125.yml configs/config-00-default-epochs-150.yml configs/config-00-default-epochs-150-c-60.yml --cross-validation --runs 5 --percentages 0 20 40 60 80 --out gridresults/Different-Epochs
 
-------------------------------------------------# With and Without Bart #-----------------------------------------------
+------------------------------------------------# Ablation testing #-----------------------------------------------
 
-rasa test nlu --nlu data --config <configs here> --runs 5 --percentages 0 10 20 30 40 50 60 70 80 90  --out gridresults/with-and-without-bart-results
+rasa test nlu --nlu data --config <configs here> --runs 3 --percentages 0  20 40 60 80  --out gridresults/with-and-without-bart-results
 
-rasa test nlu --nlu data --config config-with-bart-zero-shot.yml config-without-bart-zero-shot.yml  --runs 5 --percentages 0 20 40 60 80 --out gridresults/with-and-without-bart-results
+rasa test nlu --nlu data --config configs/Test/ablation/config_.yml configs/Test/ablation/config_with_zero_shot.yml --runs 5 --percentages 0 20 40 60 80  --out gridresults/ablation-with-and-without-zero-shot-5-runs
+rasa test nlu --nlu data --config configs/Test/ablation-enh/config_.yml configs/Test/ablation-enh/config_with_zero_shot.yml --runs 5 --percentages 0 20 40 60 80  --out gridresults/ablation-with-and-without-zero-shot-5-runs
 
 ------------------------------------------------------------------------------------------------------------------------
 
