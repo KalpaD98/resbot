@@ -31,11 +31,10 @@ pipeline:
     epochs: 150
     constrain_similarities: true
 
-  - name: submodules.custom_components.intent_classifiers.zero_shot_bart_intent_classifier.ZeroShotBartIntentClassifier
-    threshold: 0.5
+  - name: submodules.custom_components.intent_classifiers.zero_shot_intent_classifier.ZeroShotIntentClassifier
+    threshold: 0.3
     ambiguity_threshold: 0.05
     candidate_class_size: 7
-    top_intent_confidence_threshold: 0.95
     fallback_classifier_threshold: 0.4                    # must be same as FallbackClassifier threshold
     fallback_classifier_ambiguity_threshold: 0.1          # must be same as FallbackClassifier ambiguity_threshold
 
@@ -45,7 +44,7 @@ pipeline:
     constrain_similarities: true
 
   - name: FallbackClassifier
-    threshold: 0.6
+    threshold: 0.4
     ambiguity_threshold: 0.1
 
 policies: # -------------------------------------------- Dialog Management --------------------------------------------

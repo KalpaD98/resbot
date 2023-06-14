@@ -111,10 +111,10 @@ class ZeroShotIntentClassifier(GraphComponent):
         A list of Message objects with additional intent and intent ranking attributes.
 
         Raises:
-        Exception: If the ZeroShot BART model fails to predict intent due to an issue.
+        Exception: If the Zero-Shot classifier fails to predict intent due to an issue.
         """
         # predict only if DIET fails
-        print("\nProcess ZERO SHOT Bart Classifier")
+        print("\nProcess ZERO SHOT Classifier")
         for message in messages:
             intent_ranking = message.get(INTENT_RANKING_KEY)
             intent = message.get(INTENT)
@@ -141,7 +141,7 @@ class ZeroShotIntentClassifier(GraphComponent):
                     prediction_data = self.clf(text, candidate_labels)
                     # Transform to intent ranking format of rasa
                     new_intent_ranking = self._get_zero_shot_classification_intent_ranking(self, prediction_data)
-                    print("Intent rankings by bart zero shot classifier\n", new_intent_ranking)
+                    print("Intent rankings by zero shot classifier\n", new_intent_ranking)
                     # check if intent ranking is within confidence threshold and ambiguity threshold
                     if self._check_confidence_and_ambiguity_threshold_for_zero_shot_classification(self,
                                                                                                    new_intent_ranking):
@@ -153,13 +153,13 @@ class ZeroShotIntentClassifier(GraphComponent):
                         print("Not adding to tracker: not enough confidence")
 
                 except Exception as e:
-                    print(f"Failed to predict intent by zero shot bart for text '{text}': {str(e)}")
+                    print(f"Failed to predict intent by zero shot classifier for text '{text}': {str(e)}")
         return messages
 
     @staticmethod
     def _check_DIET_predictions_confidence_and_ambiguity(self, text, diet_intent_ranking):
-        """Determines whether text should be classified with BART classifier based on DIET intent ranking and
-        fallback classifier thresholds."""
+        """Determines whether text should be classified with zero shot classifier based on DIET intent ranking
+        and fallback classifier thresholds."""
         if text is None or diet_intent_ranking is None or len(diet_intent_ranking) == 0:
             return False
 
@@ -213,7 +213,7 @@ class ZeroShotIntentClassifier(GraphComponent):
         else:
             # Remove other
             new_intent_ranking = [intent for intent in new_intent_ranking if intent['name'] != 'other']
-        print("end _get_bart_intent_ranking")
+        print("end _get_zero_shot_classification_intent_ranking")
         return new_intent_ranking
 
     @staticmethod
