@@ -29,7 +29,6 @@ class ZeroShotIntentClassifier(GraphComponent):
             ambiguity_threshold: An intent will be considered ambiguous if the confidence difference between
                                  it and the second-highest intent is less than this threshold.
             candidate_class_size: Maximum number of candidate intents to consider.
-            top_intent_confidence_threshold: A minimum confidence score for the top intent.
             fallback_classifier_threshold: A minimum confidence score of fallback  classifier.
             fallback_classifier_ambiguity_threshold: ambiguity_threshold of fallback.
         """
@@ -49,7 +48,6 @@ class ZeroShotIntentClassifier(GraphComponent):
             "threshold": 0.2,
             "ambiguity_threshold": 0.05,
             "candidate_class_size": 5,
-            "top_intent_confidence_threshold": 0.9,
             "fallback_classifier_threshold": 0.3,  # must be same as the threshold given for fallback_classifier (fbc)
             "fallback_classifier_ambiguity_threshold": 0.1,  # must be same as the ambiguity threshold (fbc)
         }
@@ -89,7 +87,6 @@ class ZeroShotIntentClassifier(GraphComponent):
         self.ambiguity_threshold = config["ambiguity_threshold"]
 
         self.candidate_class_size = config["candidate_class_size"]
-        self.top_intent_confidence_threshold = config["top_intent_confidence_threshold"]
 
         self.fallback_classifier_threshold = config["fallback_classifier_threshold"]
         self.fallback_classifier_ambiguity_threshold = config["fallback_classifier_ambiguity_threshold"]
@@ -146,7 +143,8 @@ class ZeroShotIntentClassifier(GraphComponent):
                     new_intent_ranking = self._get_zero_shot_classification_intent_ranking(self, prediction_data)
                     print("Intent rankings by bart zero shot classifier\n", new_intent_ranking)
                     # check if intent ranking is within confidence threshold and ambiguity threshold
-                    if self._check_confidence_and_ambiguity_threshold_for_zero_shot_classification(self, new_intent_ranking):
+                    if self._check_confidence_and_ambiguity_threshold_for_zero_shot_classification(self,
+                                                                                                   new_intent_ranking):
                         print("prediction of zero shot: ", new_intent_ranking[0])
                         message.set(INTENT, new_intent_ranking[0], add_to_output=True)
                         message.set(INTENT_RANKING_KEY, new_intent_ranking, add_to_output=True)
@@ -192,24 +190,24 @@ class ZeroShotIntentClassifier(GraphComponent):
 
     @staticmethod
     def _get_zero_shot_classification_intent_ranking(self, prediction_data):
-        print("_get_bart_intent_ranking")
+        print("_get_zero_shot_classification_intent_ranking")
         """Transform the prediction data into the intent ranking format of rasa."""
-        print()
-        new_intent_ranking = []
         # Create a list of tuples where each tuple is (label, score)
         label_score_pairs = list(zip(prediction_data['labels'], prediction_data['scores']))
         print("label_score_pairs: ", label_score_pairs)
 
-
-        # Pick the highest scoring labels that sum up to at most 0.99
+        # Pick the highest scoring labels that sum up to at most 0.999
         new_intent_ranking = []
         total_score = 0
+
+        # new intent rankings: Create a list of tuples where each tuple is (label, score)
         for label, score in label_score_pairs:
-            if total_score + score <= 0.99:
+            if total_score + score <= 0.999:
                 new_intent_ranking.append({'name': label, 'confidence': score})
                 total_score += score
             else:
                 break
+
         if new_intent_ranking[0]['name'] == 'other':
             new_intent_ranking = []
         else:
