@@ -32,6 +32,12 @@ rasa test nlu --nlu data --config configs/Test/with-zero-shot/config-01.yml conf
 # - without-zero-shot
 rasa test nlu --nlu data --config configs/Test/without-zero-shot/config-01.yml configs/Test/without-zero-shot/config-02-gpt.yml configs/Test/without-zero-shot/config-03-gpt-2.yml configs/Test/without-zero-shot/config-04-bert.yml configs/Test/without-zero-shot/config-05-roberta.yml configs/Test/without-zero-shot/config-06-distillbert.yml configs/Test/without-zero-shot/config-07-xlnet.yml configs/Test/without-zero-shot/config-08-spacy-lg.yml configs/Test/without-zero-shot/config-09-spacy-trf.yml --runs 3 --percentages 0 20 40 60 80  --out gridresults/test-without-zero-shot-results
 
+
+# - with-zero-shot and without-zero-shot
+
+rasa test nlu --nlu data --config configs/Test/with-and-without-zero-shot/config-02-gpt.yml configs/Test/with-and-without-zero-shot/config-02-gpt-with-zero-shot.yml configs/Test/with-and-without-zero-shot/config-03-gpt-2.yml configs/Test/with-and-without-zero-shot/config-03-gpt-2-with-zero-shot.yml configs/Test/with-and-without-zero-shot/config-04-bert.yml configs/Test/with-and-without-zero-shot/config-04-bert-with-zero-shot.yml configs/Test/with-and-without-zero-shot/config-05-roberta.yml configs/Test/with-and-without-zero-shot/config-05-roberta-with-zero-shot.yml configs/Test/with-and-without-zero-shot/config-06-distillbert.yml configs/Test/with-and-without-zero-shot/config-06-distillbert-with-zero-shot.yml configs/Test/with-and-without-zero-shot/config-07-xlnet.yml configs/Test/with-and-without-zero-shot/config-07-xlnet-with-zero-shot.yml configs/Test/with-and-without-zero-shot/config-08-spacy-lg.yml configs/Test/with-and-without-zero-shot/config-08-spacy-lg-with-zero-shot.yml configs/Test/with-and-without-zero-shot/config-09-spacy-trf.yml configs/Test/with-and-without-zero-shot/config-09-spacy-trf-with-zero-shot.yml --runs 5 --percentages 0 20 40 60 80 --folds 5 --out gridresults/with-and-without-zero-shot-5-runs-4-configs
+
+
 ------------------------------------------------# Epochs Test #---------------------------------------------------------
 rasa test nlu --nlu data --config configs/config-00-default.yml configs/config-00-default-epochs-100-c-60.yml configs/config-00-default-epochs-125.yml configs/config-00-default-epochs-150.yml configs/config-00-default-epochs-150-c-60.yml --cross-validation --runs 5 --percentages 0 20 40 60 80 --out gridresults/Different-Epochs
 
