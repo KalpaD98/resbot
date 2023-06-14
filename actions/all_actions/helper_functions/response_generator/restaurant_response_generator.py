@@ -25,9 +25,8 @@ class RestaurantResponseGenerator:
             button1[URL] = restaurant.menu_url  # later replace this with restaurant menu url
 
             button2 = SUBCOMPONENT_BUTTON_PAYLOAD.copy()
-            button2[TITLE] = "Book Table"
+            button2[TITLE] = "Select"
             button2[PAYLOAD] = "/inform_booking_restaurant_id{\"restaurant_id\":\"" + restaurant.id + "\"}"
-            # book table intent has not been added yet, example: book rid_s3wjdsud3, book restaurant rid_s3wjdsud3
 
             button3 = SUBCOMPONENT_BUTTON_PAYLOAD.copy()
             button3[TITLE] = "View Details"

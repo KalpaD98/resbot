@@ -50,14 +50,14 @@ class ActionAnythingElse(Action):
         sinhala_text = "ඔබට උදව් අවශ්යයි වෙනත් යමක් තිබේද?"
 
         english_quick_replies_with_payload = [
-            {"title": QR_SEARCH_RESTAURANTS, "payload": "/want_to_search_restaurants"},
+            # {"title": QR_SEARCH_RESTAURANTS, "payload": "/want_to_search_restaurants"},
             {"title": QR_BROWSE_RESTAURANTS, "payload": "/request_restaurants"},
             {"title": "View bookings", "payload": "/view_bookings"},
             {"title": "No thanks", "payload": "/goodbye"},
         ]
 
         sinhala_quick_replies_with_payload = [
-            {"title": "ආපනශාලා සොයන්න", "payload": "/want_to_search_restaurants"},
+            # {"title": "ආපනශාලා සොයන්න", "payload": "/want_to_search_restaurants"},
             {"title": "ආපනශාලා පෙන්වන්න", "payload": "/request_restaurants"},
             {"title": "Bookings පෙන්වන්න", "payload": "/view_bookings"},
             {"title": "නැත ස්තුතියි", "payload": "/goodbye"},

@@ -122,7 +122,7 @@ class ActionShowPastBookingsCarousal(Action):
             if language == SIN:
                 message = "ඔබගේ පසුගිය bookings මෙන්න"
 
-            dispatcher.utter_message(text=message,attachment=ResponseGenerator.card_options_carousal(carousel_items))
+            dispatcher.utter_message(text=message, attachment=ResponseGenerator.card_options_carousal(carousel_items))
 
         except Exception as e:
             logger.error(f"An error occurred in ActionShowPastBookingsCarousal: {e}")

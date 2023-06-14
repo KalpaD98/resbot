@@ -76,3 +76,27 @@ nlu:
       - swedish
       - vietnamese
       - german
+      - multi-cuisine
+
+  - synonym: multi cuisine
+    examples: |
+      - multi-cuisine
+      - multiple cuisine
+      - multi cusine
+      - multicusine
+      - Multi Cuisine
+
+  - synonym: cuisine
+    examples: |
+      - cusine
+      - cusines
+
+  - synonym: any cuisine
+    examples: |
+      - whatever you want
+      - any cuisine
+      - any
+      - any food
+      - anything
+      - no specific cuisine
+      - no specific food

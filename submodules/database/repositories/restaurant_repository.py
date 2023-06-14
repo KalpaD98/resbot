@@ -103,7 +103,7 @@ class RestaurantRepository:
         except PyMongoError as e:
             raise Exception(f"Error retrieving restaurants by cuisine: {e}")
 
-    def get_unique_cuisines(self, limit: int = 10, offset: int = 0) -> List[str]:
+    def get_unique_cuisines(self, limit: int = 5, offset: int = 0) -> List[str]:
         """
         Get a list of unique cuisines with pagination.
 

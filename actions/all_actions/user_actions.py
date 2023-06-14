@@ -121,7 +121,7 @@ class ActionLoginUser(Action):
 
                 quick_replies_with_payload = [
                     {"title": "Browse restaurants", "payload": "/request_restaurants"},
-                    {"title": "Search restaurants", "payload": "/search_restaurants"},
+                    # {"title": "Search restaurants", "payload": "/search_restaurants"},
                     {"title": "View bookings", "payload": "/view_bookings"}
                 ]
                 message = "You have successfully logged in. Welcome back!"
@@ -131,7 +131,7 @@ class ActionLoginUser(Action):
 
                     quick_replies_with_payload = [
                         {"title": "Restaurants පෙන්වන්න", "payload": "/request_restaurants"},
-                        {"title": "Restaurants සොයන්න", "payload": "/search_restaurants"},
+                        # {"title": "Restaurants සොයන්න", "payload": "/search_restaurants"},
                         {"title": "Bookings පෙන්වන්න", "payload": "/view_bookings"}
                     ]
 
