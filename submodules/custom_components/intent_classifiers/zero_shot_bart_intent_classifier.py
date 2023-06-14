@@ -200,20 +200,16 @@ class ZeroShotIntentClassifier(GraphComponent):
         label_score_pairs = list(zip(prediction_data['labels'], prediction_data['scores']))
         print("label_score_pairs: ", label_score_pairs)
 
-        # Check the first label
-        if label_score_pairs[0][1] >= self.top_intent_confidence_threshold:
-            new_intent_ranking = [{'name': label_score_pairs[0][0], 'confidence': label_score_pairs[0][1]}]
-            print("new intent ranking: ", new_intent_ranking)
-        else:
-            # Pick the highest scoring labels that sum up to at most 0.99
-            new_intent_ranking = []
-            total_score = 0
-            for label, score in label_score_pairs:
-                if total_score + score <= 0.99:
-                    new_intent_ranking.append({'name': label, 'confidence': score})
-                    total_score += score
-                else:
-                    break
+
+        # Pick the highest scoring labels that sum up to at most 0.99
+        new_intent_ranking = []
+        total_score = 0
+        for label, score in label_score_pairs:
+            if total_score + score <= 0.99:
+                new_intent_ranking.append({'name': label, 'confidence': score})
+                total_score += score
+            else:
+                break
         if new_intent_ranking[0]['name'] == 'other':
             new_intent_ranking = []
         else:
