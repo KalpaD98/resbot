@@ -1,7 +1,4 @@
-import csv
 import logging
-from collections import Counter
-from operator import itemgetter
 from typing import Dict, Text, Any, List, Type
 
 from dotenv import load_dotenv
@@ -11,7 +8,6 @@ from rasa.engine.storage.resource import Resource
 from rasa.engine.storage.storage import ModelStorage
 from rasa.shared.nlu.constants import INTENT, TEXT, INTENT_RANKING_KEY
 from rasa.shared.nlu.training_data.message import Message
-from rasa.shared.nlu.training_data.training_data import TrainingData
 from transformers import pipeline
 
 load_dotenv()
@@ -21,11 +17,11 @@ logger = logging.getLogger(__name__)
 @DefaultV1Recipe.register(
     DefaultV1Recipe.ComponentType.INTENT_CLASSIFIER, is_trainable=False
 )
-class ZeroShotBartIntentClassifier(GraphComponent):
-    """A GraphComponent in RASA for Intent classification using a ZeroShot BART model.
+class ZeroShotIntentClassifier(GraphComponent):
+    """A GraphComponent in RASA for Intent classification using a Zero-Shot classification with BART pre-train model.
 
         This component receives a list of messages as input and assigns intent labels
-        to each message based on the classification output from a pretrained BART model.
+        to each message based on if DIET classifier fails to predict intent with confidence and ambiguity threshold.
         We do not need to train this model.
 
         Attributes:
@@ -82,9 +78,9 @@ class ZeroShotBartIntentClassifier(GraphComponent):
             raise ValueError("'fallback_classifier_ambiguity_threshold' must be the same as 'ambiguity_threshold'")
 
     def __init__(self, config: Dict[Text, Any], name: Text, model_storage: ModelStorage, resource: Resource) -> None:
-        print("init ZeroShotBartIntentClassifier")
+        print("init ZeroShotIntentClassifier")
         self.name = name
-        print("Init ZeroShotBartIntentClassifier and model")
+        print("Init ZeroShotIntentClassifier and model")
         self.clf = pipeline("zero-shot-classification", model="facebook/bart-large-mnli")
         self._model_storage = model_storage
         self._resource = resource
@@ -105,11 +101,11 @@ class ZeroShotBartIntentClassifier(GraphComponent):
             model_storage: ModelStorage,
             resource: Resource,
             execution_context: ExecutionContext,
-    ) -> 'ZeroShotBartIntentClassifier':
+    ) -> 'ZeroShotIntentClassifier':
         return cls(config, execution_context.node_name, model_storage, resource)
 
     def process(self, messages: List[Message]) -> List[Message]:
-        """Classify the intent of each message using ZeroShot BART model.
+        """Classify the intent of each message using Zero-Shot intent classification.
 
         Args:
         messages: A list of Message objects.
@@ -126,92 +122,44 @@ class ZeroShotBartIntentClassifier(GraphComponent):
             intent_ranking = message.get(INTENT_RANKING_KEY)
             intent = message.get(INTENT)
 
-            print("\n----Intent Ranking from DIET classifier----\n")
+            text = message.get(TEXT)
+            if '/' in text:  # If intent is explicitly defined we do not need to run zero shot classifier
+                break
+            print("Text: ", message.get(TEXT))
+            print("\n-------------------------------Intent Ranking from DIET classifier-------------------------------")
             print(intent_ranking)
+            print(
+                "----------------------------------------------------------------------------------------------------")
             print("\nDIET chosen intent: ", intent)
             print()
 
-            text = message.get(TEXT)
-
-            if '/' in text:  # If intent is explicitly defined we do not need to run zero shot classifier
-                break
-
             # check for intent being nlu_fallback if yes then run below code
-            if self._should_classify_with_bart(self, text, intent_ranking):  # can use this condition to control
-                print("DIET failed to predict intent within given confidence. Trying to predict via bart\n")
+            if self._check_DIET_predictions_confidence_and_ambiguity(self, text, intent_ranking):
+                print("DIET classifier failed to predict intent within given confidence. Passing to Zero Shot\n")
                 try:
-                    # get from DIET and add from GPT pretrain and add other
-                    candidate_labels = self._get_candidate_labels(self, intent_ranking)
-                    print("text:", text)
+                    # get candidate labels from DIET intent ranking
+                    candidate_labels = self._get_candidate_labels_from_DIET_intent_ranking(self, intent_ranking)
                     print("candidate_labels: ", candidate_labels)
+                    # predict intent using zero shot classifier with candidate labels from DIET
                     prediction_data = self.clf(text, candidate_labels)
                     # Transform to intent ranking format of rasa
-
-                    new_intent_ranking = self._get_bart_intent_ranking(self, prediction_data)
-                    print("New intent rankings by bart zero shot: ", new_intent_ranking)
-
-                    if self._should_add_new_intent_rankings_to_tracker(self, new_intent_ranking):
+                    new_intent_ranking = self._get_zero_shot_classification_intent_ranking(self, prediction_data)
+                    print("Intent rankings by bart zero shot classifier\n", new_intent_ranking)
+                    # check if intent ranking is within confidence threshold and ambiguity threshold
+                    if self._check_confidence_and_ambiguity_threshold_for_zero_shot_classification(self, new_intent_ranking):
                         print("prediction of zero shot: ", new_intent_ranking[0])
                         message.set(INTENT, new_intent_ranking[0], add_to_output=True)
                         message.set(INTENT_RANKING_KEY, new_intent_ranking, add_to_output=True)
                         print("updated the tracker with new intent ranking")
                     else:
                         print("Not adding to tracker: not enough confidence")
-                # TODO: when 'haiya chatbot' is entered greet is not in intent ranking so still fail
-                # TODO: when 'hiaya chatbot' is entered greet is in intent ranking
-                #  however after sending it to ZSC confidence is < than fallback_classifier_threshold hence
-                #  trigger nlu_fallback
-
-                # TODO: if confidence is less than a certain value ask from user
-
-                #             # Set the language entity
-                #             # removed below for bug fixing
-                #             entity = {
-                #                 'value': language,
-                #                 'confidence': 0.1,
-                #                 'entity': 'language',
-                #                 'extractor': 'LanguageHandler'
-                #             }
-                #             message.set("entities", [entity], add_to_output=True)
 
                 except Exception as e:
                     print(f"Failed to predict intent by zero shot bart for text '{text}': {str(e)}")
         return messages
 
-    def train(self, training_data: TrainingData) -> Resource:
-        self._get_training_data(self, training_data)
-        return self._resource
-
     @staticmethod
-    def _get_training_data(self, training_data: TrainingData) -> set[Any]:
-        """Preprocess the training data. Retrieve the text messages and their corresponding intents."""
-
-        print("Getting training data for ZeroShotBartIntentClassifier")
-
-        intents = []
-
-        for example in training_data.training_examples:
-            intent = example.get(INTENT)
-            if intent:
-                intents.append(intent)
-
-        intent_counts = Counter(intents)
-
-        # Sort intent_counts by count in descending order
-        sorted_counts = sorted(intent_counts.items(), key=itemgetter(1), reverse=True)
-
-        # Write sorted_counts to a csv file
-        with open('intent_counts.csv', 'w', newline='') as csvfile:
-            print("Writing data to CSV")
-            writer = csv.writer(csvfile)
-            writer.writerow(["intent_name", "count"])
-            for intent, count in sorted_counts:
-                writer.writerow([intent, count])
-
-        return set(intent_counts.keys())
-
-    @staticmethod
-    def _should_classify_with_bart(self, text, diet_intent_ranking):
+    def _check_DIET_predictions_confidence_and_ambiguity(self, text, diet_intent_ranking):
         """Determines whether text should be classified with BART classifier based on DIET intent ranking and
         fallback classifier thresholds."""
         if text is None or diet_intent_ranking is None or len(diet_intent_ranking) == 0:
@@ -228,22 +176,22 @@ class ZeroShotBartIntentClassifier(GraphComponent):
                 < self.fallback_classifier_ambiguity_threshold)
 
     @staticmethod
-    def _should_add_new_intent_rankings_to_tracker(self, bart_intent_ranking):
+    def _check_confidence_and_ambiguity_threshold_for_zero_shot_classification(self, zero_shot_intent_rankings):
         """Determines whether text should be processed with zero shot classifier based on intent ranking and thresholds."""
-        if not bart_intent_ranking:
+        if not zero_shot_intent_rankings:
             return False
-        top_intent = bart_intent_ranking[0]
+        top_intent = zero_shot_intent_rankings[0]
         meet_threshold_confidence = top_intent['confidence'] >= self.threshold
-        if len(bart_intent_ranking) < 2:
+        if len(zero_shot_intent_rankings) < 2:
             return meet_threshold_confidence
         else:
-            second_top_intent = bart_intent_ranking[1]
+            second_top_intent = zero_shot_intent_rankings[1]
             diff = top_intent['confidence'] - second_top_intent['confidence']
             meet_ambiguity_threshold_confidence = diff >= self.ambiguity_threshold
             return meet_threshold_confidence and meet_ambiguity_threshold_confidence
 
     @staticmethod
-    def _get_bart_intent_ranking(self, prediction_data):
+    def _get_zero_shot_classification_intent_ranking(self, prediction_data):
         print("_get_bart_intent_ranking")
         """Transform the prediction data into the intent ranking format of rasa."""
         print()
@@ -275,7 +223,7 @@ class ZeroShotBartIntentClassifier(GraphComponent):
         return new_intent_ranking
 
     @staticmethod
-    def _get_candidate_labels(self, intent_ranking):
+    def _get_candidate_labels_from_DIET_intent_ranking(self, intent_ranking):
         num_intents = len(intent_ranking)
         clas_size = self.candidate_class_size
         num_intents_to_classify = min(num_intents, clas_size)  # top intents
@@ -286,7 +234,39 @@ class ZeroShotBartIntentClassifier(GraphComponent):
         return candidate_labels
 
     # Unused methods
-    #
+
+    # def train(self, training_data: TrainingData) -> Resource:
+    #     self._get_training_data(self, training_data)
+    #     return self._resource
+    # 
+    # @staticmethod
+    # def _get_training_data(self, training_data: TrainingData) -> set[Any]:
+    #     """Preprocess the training data. Retrieve the text messages and their corresponding intents."""
+    # 
+    #     print("Getting training data for ZeroShotIntentClassifier")
+    # 
+    #     intents = []
+    # 
+    #     for example in training_data.training_examples:
+    #         intent = example.get(INTENT)
+    #         if intent:
+    #             intents.append(intent)
+    # 
+    #     intent_counts = Counter(intents)
+    # 
+    #     # Sort intent_counts by count in descending order
+    #     sorted_counts = sorted(intent_counts.items(), key=itemgetter(1), reverse=True)
+    # 
+    #     # Write sorted_counts to a csv file
+    #     with open('intent_counts.csv', 'w', newline='') as csvfile:
+    #         print("Writing data to CSV")
+    #         writer = csv.writer(csvfile)
+    #         writer.writerow(["intent_name", "count"])
+    #         for intent, count in sorted_counts:
+    #             writer.writerow([intent, count])
+    # 
+    #     return set(intent_counts.keys())
+
     # @staticmethod
     # def compute_weighted_average(diet_intent_ranking, zero_shot_intent_ranking, weights):
     #     """
@@ -343,3 +323,20 @@ class ZeroShotBartIntentClassifier(GraphComponent):
     #         intent['confidence'] = softmax_confidences[i]
     #
     #     return intent_ranking
+
+    # TODO: when 'haiya chatbot' is entered greet is not in intent ranking so still fail
+    # TODO: when 'hiaya chatbot' is entered greet is in intent ranking
+    #  however after sending it to ZSC confidence is < than fallback_classifier_threshold hence
+    #  trigger nlu_fallback
+
+    # TODO: if confidence is less than a certain value ask from user
+
+    #             # Set the language entity
+    #             # removed below for bug fixing
+    #             entity = {
+    #                 'value': language,
+    #                 'confidence': 0.1,
+    #                 'entity': 'language',
+    #                 'extractor': 'LanguageHandler'
+    #             }
+    #             message.set("entities", [entity], add_to_output=True)
