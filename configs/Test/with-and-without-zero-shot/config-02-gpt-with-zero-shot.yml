@@ -8,6 +8,8 @@ pipeline:
     model: en_core_web_lg
     case_sensitive: False
 
+  - name: submodules.custom_components.language_handlers.language_handler.LanguageHandlerAndTranslator
+
   # Tokenizer
   - name: SpacyTokenizer
     intent_tokenization_flag: True                      # to use multi intents

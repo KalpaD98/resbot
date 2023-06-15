@@ -36,7 +36,6 @@ nlu:
       - right about [100](num_people)
       - [4](num_people) guys
       - [12](num_people) gals
-      
  # find a way to extract date from descriptions apart from duckling server
   - intent: inform_date
     examples: |
@@ -70,7 +69,6 @@ nlu:
       - I'd like to reserve a spot for the [coming Sunday](date).
       - Let's set it for [2024-09-30](date).
       - We'd like to come in on [2023/11/15](date).
-
   - intent: inform_time
     examples: |
       - [7 pm](time)

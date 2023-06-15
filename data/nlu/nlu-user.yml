@@ -1,174 +1,174 @@
-version: "3.1" # nlu/nlu-user.yml is a file where you define your NLU training data.
-nlu:
-  # user reg
-  - intent: request_user_registration_form
-    examples: |
-      - I want to register
-      - Create an account for me
-      - Sign me up
-      - I want to sign up
-      - register me
-      - register
-      - I would like to register
-      - Can you register me?
-      - How do I register?
-      - I need to register
-      - I am interested in registering
-      - I would like to sign up
-      - Can I register please?
-      - Please register me
-      - I'd like to register
-      - I am ready to register
-      - I wish to register
-      - Let's register
-      - I desire to register
-      - Time to register
-      - Can I start the registration process?
-      - I am interested in signing up
-      - I would like to create an account
-      - I need to create an account
-      - How do I sign up?
-      - Can you help me to register?
-      - Can you assist me with registration?
-
-  # login
-  - intent: request_login_form
-    examples: |
-      - I want to log in
-      - i want to login
-      - Log me in
-      - Sign me in
-      - I want to sign in
-      - login
-      - I'd like to log in.
-      - Can you log me in?
-      - How do I log in?
-      - I need to log in
-      - I would like to log in
-      - Can I log in please?
-      - Please log me in
-      - I am ready to log in
-      - Let's log in
-      - I wish to log in
-      - Time to log in
-      - I want to start logging in
-      - Can I start the login process?
-      - I need to start logging in
-      - I am interested in logging in
-      - I would like to sign in
-      - I need to sign in
-      - How do I sign in?
-      - Can you help me to log in?
-      - Can you assist me with logging in?
-
-  # logout
-  - intent: logout
-    examples: |
-      - I want to log out
-      - Log me out
-      - Sign me out
-      - I want to sign out
-      - logout
-      - log out
-      - Can you log me out?
-      - How do I log out?
-      - I need to log out
-      - I would like to log out
-      - Can I log out please?
-      - Please log me out
-      - I am ready to log out
-      - Let's log out
-      - I wish to log out
-      - Time to log out
-      - I want to lg out
-      - I need to log out
-      - I am interested in logging out
-      - I would like to sign out
-      - I need to sign out
-
-  # TODO: uncomment when using -----------------------------------------------------------------------------------------
-
-  - intent: inform_user_name
-    examples: |
-      - [kalpa](user_name)
-      - [chethiya](user_name)
-      - [dileepa](user_name)
-      - [upeksha](user_name)
-      - [sagara](user_name)
-      - [chamalka](user_name)
-      - [kalpani](user_name)
-      - [dinuka](user_name)
-      - [chamara](user_name)
-      - [dilini](user_name)
-      - [hasini](user_name)
-      - [tharindu](user_name)
-      - [isuru](user_name)
-      - [thilini](user_name)
-      - [kasuni](user_name)
-      - [nidusha](user_name)
-      - [madushani](user_name)
-      - [pasindu](user_name)
-      - [buddhika](user_name)
-      - [surangi](user_name)
-      - [rasika](user_name)
-      - [nadeeka](user_name)
-      - [rashmika](user_name)
-      - [kasun](user_name)
-
-  - intent: inform_user_email
-    examples: |
-      - [kalpa@gmail.com](user_email)
-      - [chethiya@gmail.com](user_email)
-      - [dileepa@gmail.com](user_email)
-      - [upeksha@gmail.com](user_email)
-      - [sagara@gmail.com](user_email)
-      - [chamalka@gmail.com](user_email)
-      - [kalpani@gmail.com](user_email)
-      - [dinuka@gmail.com](user_email)
-      - [chamara@gmail.com](user_email)
-      - [dilini@gmail.com](user_email)
-      - [hasini@gmail.com](user_email)
-      - [tharindu@gmail.com](user_email)
-      - [isuru@gmail.com](user_email)
-      - [thilini@gmail.com](user_email)
-      - [kasuni@gmail.com](user_email)
-      - [nidusha@gmail.com](user_email)
-      - [madushani@gmail.com](user_email)
-      - [pasindu@gmail.com](user_email)
-      - [buddhika@gmail.com](user_email)
-      - [surangi@gmail.com](user_email)
-      - [rasika@gmail.com](user_email)
-      - [nadeeka@gmail.com](user_email)
-      - [rashmika@gmail.com](user_email)
-      - [kasun@gmail.com](user_email)
-
-  - intent: inform_user_password
-    examples: |
-      - [pass](password)
-      - [1234](password)
-      - [mypass](password)
-      - [password123](password)
-      - [securepass](password)
-      - [pass1234](password)
-      - [password](password)
-      - [mysecurepass](password)
-      - [passcode](password)
-      - [mypassword](password)
-      - [mypassword1234](password)
-      - [passcode1234](password)
-      - [mysecurepassword](password)
-      - [secretpass](password)
-      - [secure1234](password)
-      - [mypassword123](password)
-      - [passcode123](password)
-      - [passwordabc](password)
-      - [securepasscode](password)
-      - [passwordabc123](password)
-      - [secretpass123](password)
-      - [passcodeabc](password)
-      - [securepassword](password)
-      - [mypasswordabc](password)
-      - [pass123abc](password)
+#version: "3.1" # nlu/nlu-user.yml is a file where you define your NLU training data.
+#nlu:
+## user reg
+#  - intent: request_user_registration_form
+#    examples: |
+#      - I want to register
+#      - Create an account for me
+#      - Sign me up
+#      - I want to sign up
+#      - register me
+#      - register
+#      - I would like to register
+#      - Can you register me?
+#      - How do I register?
+#      - I need to register
+#      - I am interested in registering
+#      - I would like to sign up
+#      - Can I register please?
+#      - Please register me
+#      - I'd like to register
+#      - I am ready to register
+#      - I wish to register
+#      - Let's register
+#      - I desire to register
+#      - Time to register
+#      - Can I start the registration process?
+#      - I am interested in signing up
+#      - I would like to create an account
+#      - I need to create an account
+#      - How do I sign up?
+#      - Can you help me to register?
+#      - Can you assist me with registration?
+#
+#  # login
+#  - intent: request_login_form
+#    examples: |
+#      - I want to log in
+#      - i want to login
+#      - Log me in
+#      - Sign me in
+#      - I want to sign in
+#      - login
+#      - I'd like to log in.
+#      - Can you log me in?
+#      - How do I log in?
+#      - I need to log in
+#      - I would like to log in
+#      - Can I log in please?
+#      - Please log me in
+#      - I am ready to log in
+#      - Let's log in
+#      - I wish to log in
+#      - Time to log in
+#      - I want to start logging in
+#      - Can I start the login process?
+#      - I need to start logging in
+#      - I am interested in logging in
+#      - I would like to sign in
+#      - I need to sign in
+#      - How do I sign in?
+#      - Can you help me to log in?
+#      - Can you assist me with logging in?
+#
+#  # logout
+#  - intent: logout
+#    examples: |
+#      - I want to log out
+#      - Log me out
+#      - Sign me out
+#      - I want to sign out
+#      - logout
+#      - log out
+#      - Can you log me out?
+#      - How do I log out?
+#      - I need to log out
+#      - I would like to log out
+#      - Can I log out please?
+#      - Please log me out
+#      - I am ready to log out
+#      - Let's log out
+#      - I wish to log out
+#      - Time to log out
+#      - I want to lg out
+#      - I need to log out
+#      - I am interested in logging out
+#      - I would like to sign out
+#      - I need to sign out
+#
+#  # TODO: uncomment when using -----------------------------------------------------------------------------------------
+#
+#  - intent: inform_user_name
+#    examples: |
+#      - [kalpa](user_name)
+#      - [chethiya](user_name)
+#      - [dileepa](user_name)
+#      - [upeksha](user_name)
+#      - [sagara](user_name)
+#      - [chamalka](user_name)
+#      - [kalpani](user_name)
+#      - [dinuka](user_name)
+#      - [chamara](user_name)
+#      - [dilini](user_name)
+#      - [hasini](user_name)
+#      - [tharindu](user_name)
+#      - [isuru](user_name)
+#      - [thilini](user_name)
+#      - [kasuni](user_name)
+#      - [nidusha](user_name)
+#      - [madushani](user_name)
+#      - [pasindu](user_name)
+#      - [buddhika](user_name)
+#      - [surangi](user_name)
+#      - [rasika](user_name)
+#      - [nadeeka](user_name)
+#      - [rashmika](user_name)
+#      - [kasun](user_name)
+#
+#  - intent: inform_user_email
+#    examples: |
+#      - [kalpa@gmail.com](user_email)
+#      - [chethiya@gmail.com](user_email)
+#      - [dileepa@gmail.com](user_email)
+#      - [upeksha@gmail.com](user_email)
+#      - [sagara@gmail.com](user_email)
+#      - [chamalka@gmail.com](user_email)
+#      - [kalpani@gmail.com](user_email)
+#      - [dinuka@gmail.com](user_email)
+#      - [chamara@gmail.com](user_email)
+#      - [dilini@gmail.com](user_email)
+#      - [hasini@gmail.com](user_email)
+#      - [tharindu@gmail.com](user_email)
+#      - [isuru@gmail.com](user_email)
+#      - [thilini@gmail.com](user_email)
+#      - [kasuni@gmail.com](user_email)
+#      - [nidusha@gmail.com](user_email)
+#      - [madushani@gmail.com](user_email)
+#      - [pasindu@gmail.com](user_email)
+#      - [buddhika@gmail.com](user_email)
+#      - [surangi@gmail.com](user_email)
+#      - [rasika@gmail.com](user_email)
+#      - [nadeeka@gmail.com](user_email)
+#      - [rashmika@gmail.com](user_email)
+#      - [kasun@gmail.com](user_email)
+#
+#  - intent: inform_user_password
+#    examples: |
+#      - [pass](password)
+#      - [1234](password)
+#      - [mypass](password)
+#      - [password123](password)
+#      - [securepass](password)
+#      - [pass1234](password)
+#      - [password](password)
+#      - [mysecurepass](password)
+#      - [passcode](password)
+#      - [mypassword](password)
+#      - [mypassword1234](password)
+#      - [passcode1234](password)
+#      - [mysecurepassword](password)
+#      - [secretpass](password)
+#      - [secure1234](password)
+#      - [mypassword123](password)
+#      - [passcode123](password)
+#      - [passwordabc](password)
+#      - [securepasscode](password)
+#      - [passwordabc123](password)
+#      - [secretpass123](password)
+#      - [passcodeabc](password)
+#      - [securepassword](password)
+#      - [mypasswordabc](password)
+#      - [pass123abc](password)
 
 
 # ------------------------------------------------ Some Extra Data ------------------------------------------------

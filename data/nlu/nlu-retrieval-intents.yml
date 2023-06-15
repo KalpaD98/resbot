@@ -13,7 +13,6 @@ nlu:
       - Is this an AI I am chatting with?
       - Are you a machine?
       - Is this a real person or a bot?
-
   - intent: bot_challenge/what_can_you_do
     examples: |
       - what can you do?
@@ -26,7 +25,6 @@ nlu:
       - What help can you provide?
       - What are your abilities?
       - What can you offer me?
-
   - intent: bot_challenge/who_are_you
     examples: |
       - who are you?
@@ -37,7 +35,6 @@ nlu:
       - Tell me about yourself?
       - Could you introduce yourself?
       - What do you represent?
-
   - intent: out_of_scope/out_of_functionality
     examples: |
       - I want to book a flight
@@ -47,7 +44,6 @@ nlu:
       - What's the weather today?
       - can you answer any question ?
       - Can you tell me a joke?
-
   - intent: out_of_scope/food
     examples: |
       - I want to order food
@@ -60,7 +56,6 @@ nlu:
       - I want to order.
       - Do you have deliver food?
       - I want to order something to eat.
-
   - intent: out_of_scope/hotel
     examples: |
       - I want to book a hotel

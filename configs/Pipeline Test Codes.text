@@ -7,6 +7,15 @@ rasa test nlu --nlu data --config config.yml --cross-validation --folds 5  --out
 rasa test nlu --nlu data --config configs/Test/ablation/config_.yml --cross-validation --folds 5  --out gridresults/cross-validation-results/config_
 rasa test nlu --nlu data --config configs/Test/ablation/config_with_zero_shot.yml --cross-validation --folds 5  --out gridresults/cross-validation-results/config_with_zero_shot
 
+# with bert
+rasa test nlu --nlu data/nlu --config configs/Test/with-and-without-zero-shot/config-04-bert.yml --cross-validation --folds 5  --out gridresults/cross-validation-results/bert
+rasa test nlu --nlu data/nlu --config configs/Test/with-and-without-zero-shot/config-04-bert-with-zero-shot.yml --cross-validation --folds 5  --out gridresults/cross-validation-results/bert_with_zero_shot
+
+# with gpt
+rasa test nlu --nlu data --config configs/Test/with-and-without-zero-shot/config-02-gpt.yml --cross-validation --folds 5  --out gridresults/cross-validation-results/gpt
+rasa test nlu --nlu data --config configs/Test/with-and-without-zero-shot/config-02-gpt-with-zero-shot.yml --cross-validation --folds 5  --out gridresults/cross-validation-results/gpt_with_zero_shot
+
+
 rasa test nlu --nlu data --config config-with-bart-zero-shot.yml --cross-validation --folds 5  --out gridresults/cross-validation-results/config-with-bart-zero-shot
 rasa test nlu --nlu data --config config-without-bart-zero-shot.yml --cross-validation --folds 5  --out gridresults/cross-validation-results/config-without-bart-zero-shot
 

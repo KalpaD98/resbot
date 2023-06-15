@@ -1,5 +1,4 @@
 version: "3.1" # nlu.yml is a file where you define your NLU training data.
-
 nlu:
 
   - intent: greet
@@ -32,7 +31,6 @@ nlu:
       - howdy
       - hi, nice to meet you
       - salutations
-
   - intent: goodbye
     examples: |
       - cu
@@ -56,14 +54,12 @@ nlu:
       - Till next time
       - Later
       - Until we meet again
-      - ✌️
       - bye bye
       - see you later
       - tata
       - have a great day  
       - 👋
       - See you soon!
-
   - intent: affirm
     examples: |
       - yes
@@ -80,7 +76,6 @@ nlu:
       - ya
       - aye
       - yes ofcourse
-      - yes please
       - yeap
       - yeah
       - yea
@@ -105,7 +100,6 @@ nlu:
       - im in
       - i'm in
       - maybe ok
-
   - intent: deny
     examples: |
       - no
@@ -136,7 +130,6 @@ nlu:
       - dont
       - don't
       - nooo
-
   - intent: thank_you
     examples: |
       - thank you
@@ -168,7 +161,6 @@ nlu:
       - thx a lot
       - Thank you so much
       - thnx a lot
-
   - intent: stop
     examples: |
       - stop
@@ -199,3 +191,6 @@ nlu:
       - enough
       - Enough, you're not helping
       - halt, you're not assisting me
+
+# Removed
+# ✌️

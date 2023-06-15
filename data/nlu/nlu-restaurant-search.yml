@@ -1,6 +1,6 @@
-version: "3.1" # nlu-restaurant-search.yml
-nlu:
-# TODO: uncomment when using
+#version: "3.1" # nlu-restaurant-search.yml
+#nlu:
+## TODO: uncomment when using
 #  - intent: want_to_search_restaurants
 #    examples: |
 #      - I would like to search restaurants

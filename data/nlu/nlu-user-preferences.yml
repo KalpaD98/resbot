@@ -1,6 +1,6 @@
-version: "3.1" # nlu-user-preferences.yml
-
-nlu:
+#version: "3.1" # nlu-user-preferences.yml
+#
+#nlu:
 # TODO: uncomment when using
 #  - intent: inform_favorite_cuisines
 #    examples: |
