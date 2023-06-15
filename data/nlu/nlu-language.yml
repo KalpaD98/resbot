@@ -10,14 +10,12 @@ nlu:
       - change language to [si](permanent_language)
       - Change the language to [Sinhala](permanent_language)
       - change to [English](permanent_language)
-      - change to [Sinhala](permanent_language)
       - chat in [English](permanent_language)
       - shall we chat in [English](permanent_language)
       - shall we chat in [Sinhala](permanent_language)
       - can you speak [sinhala](permanent_language)
       - change language to [sinhala](permanent_language)      
       - can you speak in [English](permanent_language)
-      - can you speak in [Sinhala](permanent_language)
       - I want to communicate in [english](permanent_language)
       - I prefer [sinhala](permanent_language)
       - chat in [Sinhala](permanent_language)
@@ -27,9 +25,11 @@ nlu:
       - Please use [sinhala](permanent_language)
       - Could we talk in [english](permanent_language)?
       - Can we switch to [sinhala](permanent_language)?
-      - I'd like to converse in [english](permanent_language)
+      - I'd like to chat in [english](permanent_language)
       - Let's talk in [sinhala](permanent_language)
       - Would it be possible to switch to [english](permanent_language)?
       - I want to use [sinhala](permanent_language) please
       - I wish to speak in [english](permanent_language)
       - I would prefer if we could chat in [sinhala](permanent_language)
+      - [en](permanent_language)
+      - [sin](permanent_language)
