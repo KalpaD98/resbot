@@ -33,11 +33,11 @@ class ActionShowSelectedRestaurantAskBookingConfirmation(Action):
             message = "You selected " + restaurant.name + '\n\n' + "Would you like to proceed with the booking?"
 
             if language == SIN:
-                message = "ඔබ " + restaurant.name + '\n\n' + " හී table එකක් වෙන් කරවාගන්න කැමතිද?"
+                message = "ඔබ " + restaurant.name + '' + " හී table එකක් වෙන් කරවාගන්න කැමතිද?"
 
             dispatcher.utter_message(text=message,
                                      quick_replies=ResponseGenerator.
-                                     quick_reply_yes_no_with_payload())
+                                     quick_reply_yes_no_with_payload(language))
             # if yes -> fill slot else remove prev slots
             return [SlotSet(NUM_PEOPLE, None), SlotSet(DATE, None), SlotSet(TIME, None),
                     SlotSet(SELECTED_RESTAURANT, restaurant.to_dict())]

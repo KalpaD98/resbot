@@ -202,7 +202,7 @@ class ActionValidateAndCompareBookingChanges(Action):
                 if language == SIN:
                     message = "මෙම වෙනස්කම් තහවුරු කරන්නේද?"
                 dispatcher.utter_message(
-                    text="message",
+                    text=message,
                     quick_replies=ResponseGenerator.quick_reply_yes_no_with_payload(language=language)
                 )
 

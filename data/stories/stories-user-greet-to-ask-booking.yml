@@ -7,7 +7,7 @@ stories:
     steps:
       - intent: greet
       - action: action_utter_greet_and_intro
-      - action: action_ask_language_preference
+      - action: action_ask_language_preference # write a separate story for this : ask lang if not sign in
       - intent: inform_permanent_language
       - action: action_set_permanent_language
       - action: action_utter_wanna_book

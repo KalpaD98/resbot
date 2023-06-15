@@ -81,18 +81,14 @@ stories:
       - checkpoint: checkpoint_booking_change_confirmation
       - intent: affirm
       - action: action_change_restaurant_booking_details
-      - checkpoint: checkpoint_after_booking_change_flow_completion
+      - action: action_clear_booking_data_slots
+      - action: action_utter_thank_you
+      - action: action_ask_anything_else
 
   - story: User deny to change booking details # deny
     steps:
       - checkpoint: checkpoint_booking_change_confirmation
       - intent: deny
-      - action: action_utter_no_future_bookings_found
-      - checkpoint: checkpoint_after_booking_change_flow_completion
-
-  - story: Continuation after the booking change flow is completed # continuation
-    steps:
-      - checkpoint: checkpoint_after_booking_change_flow_completion
       - action: action_clear_booking_data_slots
       - action: action_utter_thank_you
       - action: action_ask_anything_else

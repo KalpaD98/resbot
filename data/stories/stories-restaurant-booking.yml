@@ -31,8 +31,17 @@ stories:
 
   - story: User denies after viewing restaurant details or book directly #6 Sad Path
     steps:
-      - checkpoint: checkpoint_ask_to_book_or_not
+      - checkpoint: checkpoint_ask_to_book_or_not             # write for mood unhappy
       - intent: deny # dont book
+      - action: action_clear_restaurant_booking_slots
+      - action: action_utter_thank_you
+      - action: action_ask_anything_else
+
+
+  - story: User not in mood after viewing restaurant details or book directly #7 Sad Path
+    steps:
+      - checkpoint: checkpoint_ask_to_book_or_not             # write for mood unhappy
+      - intent: mood_unhappy # dont book
       - action: action_clear_restaurant_booking_slots
       - action: action_utter_thank_you
       - action: action_ask_anything_else
@@ -51,6 +60,20 @@ stories:
       - action: action_show_booking_summary
       - checkpoint: checkpoint_booking_summary # ask to confirm booking or deny
 
+  - story: User fills restaurant booking form after mood_great to continue booking #5 Happy Path
+    steps:
+      - checkpoint: checkpoint_ask_to_book_or_not
+      - intent: mood_great # book
+      - action: restaurant_booking_form
+      - active_loop: restaurant_booking_form
+      - slot_was_set:
+          - num_people: '2'
+      - slot_was_set:
+          - date: 2023-06-06
+      - active_loop: null
+      - action: action_show_booking_summary
+      - checkpoint: checkpoint_booking_summary # ask to confirm booking or deny
+
   - story: Stop restaurant booking form filling # Sad Path
     steps:
       - checkpoint: checkpoint_ask_to_book_or_not
@@ -59,6 +82,7 @@ stories:
       - active_loop: restaurant_booking_form
       - or:
           - intent: stop
+          - intent: mood_unhappy
           - intent: request_restaurants
       - action: action_deactivate_form
       - active_loop: null
@@ -69,15 +93,19 @@ stories:
   - story: User affirm to book after viewing booking summary
     steps:
       - checkpoint: checkpoint_booking_summary
-      - intent: affirm # confirm booking
+      - or:
+          - intent: affirm      # confirm booking
+          - intent: mood_great
       - action: action_confirm_booking
       - action: action_utter_thank_you
       - checkpoint: checkpoint_after_booking_complete
 
-  - story: User deny to book after viewing booking summary
+  - story: User deny or not in mood to book after viewing booking summary
     steps:
       - checkpoint: checkpoint_booking_summary
-      - intent: deny # deny booking
+      - or:
+          - intent: deny          # deny booking
+          - intent: mood_unhappy
       - action: action_clear_restaurant_booking_slots
       - action: action_utter_thank_you
       - action: action_ask_anything_else
@@ -85,7 +113,9 @@ stories:
   - story: after booking complete say bye  # happy Path
     steps:
       - checkpoint: checkpoint_after_booking_complete
-      - intent: affirm
+      - or:
+          - intent: affirm
+          - intent: mood_great
       - action: action_utter_goodbye
 
   - story: Stop restaurant booking form
@@ -95,6 +125,7 @@ stories:
       - or:
           - intent: stop
           - intent: request_restaurants
+          - intent: mood_unhappy
       - action: action_deactivate_form
       - active_loop: null
       - action: action_clear_restaurant_booking_slots
