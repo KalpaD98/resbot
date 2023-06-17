@@ -1,0 +1,66 @@
+# restaurant_names-lookup.yml is the file where you define the lookup tables for your assistant.
+
+version: '3.1'
+nlu:
+- lookup: restaurant_name
+  examples: |
+    - Terry Black's Barbecue
+    - Atlanta Breakfast Club
+    - 1618 Asian Fusion
+    - Poor Calvin's
+    - Breakfast at Barneys
+    - Café Tu Tu Tango
+    - The Boathouse
+    - Chef Art Smith's Homecomin'
+    - Hattie B's Hot Chicken - Atlanta
+    - Moonshine Patio Bar & Grill
+    - Bird Bird Biscuit
+    - Screen Door
+    - Franklin Barbecue
+    - Mike's Pastry
+    - @ The Diner
+    - Phoebe's Diner
+    - Kitchen Social
+    - Ezell's Famous Chicken
+    - Slutty Vegan
+    - Gus's World Famous Fried Chicken
+    - Jewboy Burgers
+    - Carmelina's
+    - Voodoo Doughnut - Old Town
+    - Fox Bros. Bar-B-Q
+    - Taquero Mucho
+    - The Toothsome Chocolate Emporium And Savory Feast Kitchen
+    - The Friendly Toast
+    - Old Lady Gang
+    - Loro
+    - Home Slice Pizza
+    - Tumble22
+    - Pip's Original Doughnuts & Chai
+    - The Salt Lick BBQ
+    - Roc South Cuisine
+    - Chi-Kin
+    - Sofrito Latin Cafe
+    - Cheryl’s on 12th
+    - The OASIS on Lake Travis
+    - DOMU - Orlando
+    - The Pirate's Boil
+    - Din Tai Fung
+    - The Real Milk & Honey
+    - Valentina's Tex Mex BBQ
+    - Okiboru Tsukemen & Ramen
+    - Grana
+    - Chicken Fire
+    - Mia's Italian Kitchen
+    - Neptune Oyster
+    - Bao's Castle
+    - Crab404
+    - Louisiana Bistreaux - East Point
+    - The Polite Pig
+    - Sugar Factory
+    - Luc Lac
+    - Sixty Vines
+    - Mary Mac's Tea Room
+    - Hopdoddy Burger Bar
+    - Bae's Fried Chicken
+    - El Patron Mexican Restaurant & Cantina
+    - Morimoto Asia

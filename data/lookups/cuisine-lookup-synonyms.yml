@@ -1,0 +1,198 @@
+version: "3.1" # cuisine-lookup-synonyms.yml
+
+nlu:
+  - lookup: cuisine
+    examples: |
+      - ethiopian
+      - moroccan
+      - south african
+      - mediterranean
+      - greek
+      - spanish
+      - turkish
+      - lebanese
+      - indian
+      - pakistani
+      - bangladeshi
+      - nepalese
+      - sri lankan
+      - japanese
+      - korean
+      - chinese
+      - vietnamese
+      - thai
+      - filipino
+      - indonesian
+      - malaysian
+      - singaporean
+      - mexican
+      - peruvian
+      - argentinian
+      - brazilian
+      - venezuelan
+      - american
+      - canadian
+      - french
+      - italian
+      - german
+      - austrian
+      - swiss
+      - polish
+      - hungarian
+      - russian
+      - ukrainian
+      - nordic
+      - swedish
+      - norwegian
+      - finnish
+      - danish
+      - icelandic
+      - british
+      - irish
+      - scottish
+      - welsh
+      - australian
+      - new zealand
+      - any cuisine
+      - italian
+      - japanese
+      - chinese
+      - thai
+      - thailand
+      - fast food
+      - fast-food
+      - indian
+      - singaporean
+      - american
+      - mexican
+      - french
+      - spanish
+      - korean
+      - malay
+      - malaysian
+      - greek
+      - street food
+      - caribbean
+      - swedish
+      - vietnamese
+      - german
+      - multi-cuisine
+      - sandwiches
+      - barbeque
+      - southern
+      - restaurants
+      - salad
+      - breakfast
+      - brunch
+      - american traditional
+      - coffee
+      - tea
+      - american new
+      - food
+      - thai
+      - desserts
+      - asian fusion
+      - noodles
+      - dim sum
+      - chinese
+      - singaporean
+      - vietnamese
+      - soup
+      - nightlife
+      - ethnic food
+      - beer
+      - wine
+      - spirits
+      - bars
+      - comfort food
+      - specialty food
+      - seafood
+      - tapas bars
+      - mexican
+      - small plates
+      - cocktail bars
+      - tacos
+      - latin american
+      - live/raw food
+      - steakhouses
+      - venues
+      - event spaces
+      - event planning
+      - services
+      - caterers
+      - bakeries
+      - cajun/creole
+      - local flavor
+      - food stands
+      - candy stores
+      - gelato
+      - patisserie/cake shop
+      - ice cream
+      - frozen yogurt
+      - waffles
+      - diners
+      - gastropubs
+      - pizza
+      - chicken shop
+      - vegan
+      - soul food
+      - chicken wings
+      - burgers
+      - food trucks
+      - vegetarian
+      - gluten-free
+      - italian
+      - donuts
+      - wedding chapels
+      - shopping
+      - chocolatiers
+      - shops
+      - wine bars
+      - smokehouse
+      - japanese
+      - bagels
+      - wineries
+      - arts
+      - entertainment
+      - korean
+      - cafes
+      - caribbean
+      - puerto rican
+      - venezuelan
+      - delis
+      - wedding planning
+      - tex-mex
+      - ramen
+      - sports bars
+      - taiwanese
+      - arabian
+      - beer bar
+      - lounges
+      - tea rooms
+      - new mexican cuisine
+      - spanish
+      - sushi bars
+
+  - synonym: multi cuisine
+    examples: |
+      - multi-cuisine
+      - multiple cuisine
+      - multi cusine
+      - multicusine
+      - Multi Cuisine
+      - Multiple cuisines
+
+  - synonym: cuisine
+    examples: |
+      - cusine
+      - cusines
+
+  - synonym: any cuisine
+    examples: |
+      - whatever you want
+      - any cuisine
+      - any
+      - any food
+      - anything
+      - no specific cuisine
+      - no specific food

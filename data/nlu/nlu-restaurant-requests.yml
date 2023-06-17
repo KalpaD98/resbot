@@ -52,8 +52,8 @@ nlu:
       - show its menu
       - show menu
       - Can I get the restaurant menu
-      - Can you display the food items available at this restaurant?
-      - Could I see the list of dishes at the restaurant?
+      - Can you display the food items available at this?
+      - Could I see the list of dishes at the place?
       - I'd like to see what's on their menu
       - Show me what food they serve
       - I would like to review the restaurant's menu
@@ -69,6 +69,7 @@ nlu:
       - Let's see what's on the menu
       - Can I get a look at their menu?
       - What can I order from this restaurant?
+
   - intent: request_opening_hours
     examples: |
       - What are the opening hours of the restaurant?
@@ -101,6 +102,7 @@ nlu:
       - What time does [Panda Express](restaurant_name) close?
       - What are the business hours of this restaurant?
       - When is [McDonalds](restaurant_name) open for service?
+
   - intent: request_ambiance
     examples: |
       - What's the ambiance like at the restaurant?

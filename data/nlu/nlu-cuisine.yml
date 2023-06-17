@@ -8,12 +8,13 @@ nlu:
       - show cuisines
       - can you show me the cuisines?
       - list cuisines
-      - suggest foods
+      - suggest food types
       - Can I see the available cuisines?
       - cuisines please
       - show cuisines
       - cuisines
       - I would like to see cuisines
+      - food types
       - what are the available types of foods
       - Can you please show me the available cuisines ?
       - show me the cuisines again
@@ -37,15 +38,15 @@ nlu:
       - [mexican](cuisine)
       - I would like to have [Italian](cuisine)
       - I want [Thai](cuisine) food
-      - [Korean](cuisine) restaurants
-      - I prefer [bbq](cuisine)
+      - [korean](cuisine) restaurants
+      - prefer [bbq](cuisine)
       - I would like to have [american](cuisine) food
       - [Chinese](cuisine) food
       - I want to order some [Mexican](cuisine) food
       - [italian](cuisine) restaurant
       - I want [Chinese](cuisine) food
       - I'm in the mood for [Thai](cuisine) food tonight
-      - [Japanese](cuisine) please
+      - [Japanese](cuisine) restaurants
       - I'm looking for something [Vietnamese](cuisine) 
       - looking for a [Vietnamese](cuisine) restaurant
       - I feel like having some [French](cuisine) food.
@@ -53,10 +54,11 @@ nlu:
       - [Greek](cuisine) food would be nice
       - Is there a good [Brazilian](cuisine) steakhouse around?
       - would love some [Ethiopian](cuisine) food.
-      - I want to order [Chinese](cuisine) food
+      - I want [Chinese](cuisine) food
       - I'm in the mood for something different. How about [Korean](cuisine) food?
       - craving for [Mexican](cuisine) food
       - craving for some [Italian](cuisine) food
+      - [Any](cuisine) restaurant
       - [Any](cuisine) cuisine
       - I like [indian](cuisine) curries
       - whatever [Any](cuisine) cuisine 

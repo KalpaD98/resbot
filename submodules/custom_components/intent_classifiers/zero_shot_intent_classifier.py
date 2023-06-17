@@ -219,8 +219,8 @@ class ZeroShotIntentClassifier(GraphComponent):
     @staticmethod
     def _get_candidate_labels_from_DIET_intent_ranking(self, intent_ranking):
         num_intents = len(intent_ranking)
-        clas_size = self.candidate_class_size
-        num_intents_to_classify = min(num_intents, clas_size)  # top intents
+        class_size = self.candidate_class_size
+        num_intents_to_classify = min(num_intents, class_size)  # top intents
         candidate_labels = [item['name'] for item in intent_ranking[:num_intents_to_classify]]
         print("Pushing below labels to zero shot classifier")
         print("Candidate labels: ", candidate_labels)

@@ -7,6 +7,7 @@ import fasttext
 class LanguageDetector:
     with warnings.catch_warnings():
         warnings.simplefilter("ignore")
+        # load language identification model
         model = fasttext.load_model("submodules/custom_components/language_handlers/models/lid.176.bin")
 
     @staticmethod

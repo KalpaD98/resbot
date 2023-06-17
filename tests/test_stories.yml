@@ -1,21 +1,6 @@
 #### This file contains tests to evaluate that your bot behaves as expected.
 
 stories:
-#  - story: Test Greeting and bot introduction with checkpoint
-#    steps:
-#      - user: |
-#          Hello
-#        intent: greet
-#      - action: action_utter_greet_and_intro
-#      - action: action_ask_language_preference
-#      - user: /inform_permanent_language{{"permanent_language":"en"}}
-#        intent: inform_permanent_language
-#        entities:
-#          - permanent_language: en
-#      - slot_was_set:
-#          - permanent_language: en
-#      - action: action_set_permanent_language
-#      - action: action_utter_wanna_book
 
   - story: Test User denies to check restaurant
     steps:
@@ -121,8 +106,247 @@ stories:
       - action: action_clear_restaurant_booking_slots
       - action: action_utter_bye_see_you_later
 
-#  - story: Test User wants to book a restaurant after view details
+  - story: Test user logs in, changes language preference and stops
+    steps:
+      - user: |
+          Hello
+        intent: greet
+      - action: action_utter_greet_and_intro
+      - action: action_ask_language_preference
+      - user: /inform_permanent_language{{"permanent_language":"en"}}
+        intent: inform_permanent_language
+        entities:
+          - permanent_language: en
+      - slot_was_set:
+          - permanent_language: en
+      - action: action_set_permanent_language
+      - action: action_utter_wanna_book
+      - user: |
+          Yes.
+        intent: affirm
+      - action: action_ask_registered_and_show_login_signup_quick_replies
+      - user: /request_login_form
+        intent: request_login_form
+      - action: login_form
+      - active_loop: login_form
+      - user: |
+          [example@gmail.com](user_email)
+        intent: inform_user_email
+      - action: login_form
+      - user: |
+          [pass](user_password)
+        intent: inform_user_password
+      - action: login_form
+      - active_loop: null
+      - action: action_login_user
+      - slot_was_set:
+          - is_authenticated: true
+      - user: /inform_permanent_language{{"permanent_language":"en"}}
+        intent: inform_permanent_language
+        entities:
+          - permanent_language: en
+      - slot_was_set:
+          - permanent_language: en
+      - action: action_set_permanent_language
+      - user: |
+          stop
+        intent: stop
+      - action: action_clear_restaurant_booking_slots
+      - action: action_utter_bye_see_you_later
 
+  - story: Test user signs up, makes a booking but changes mind
+    steps:
+      - user: |
+          Hello
+        intent: greet
+      - action: action_utter_greet_and_intro
+      - action: action_ask_language_preference
+      - user: /inform_permanent_language{{"permanent_language":"en"}}
+        intent: inform_permanent_language
+        entities:
+          - permanent_language: en
+      - slot_was_set:
+          - permanent_language: en
+      - action: action_set_permanent_language
+      - action: action_utter_wanna_book
+      - user: |
+          Yes.
+        intent: affirm
+      - action: action_ask_registered_and_show_login_signup_quick_replies
+      - user: /request_signup_form
+        intent: request_signup_form
+      - action: signup_form
+      - active_loop: signup_form
+      - user: |
+          [example@gmail.com](user_email)
+        intent: inform_user_email
+      - action: signup_form
+      - user: |
+          [pass](user_password)
+        intent: inform_user_password
+      - action: signup_form
+      - active_loop: null
+      - action: action_signup_user
+      - slot_was_set:
+          - is_authenticated: true
+      - user: /request_restaurants
+        intent: request_restaurants
+      - slot_was_set:
+            - cuisine: null
+      - action: action_show_cuisines
+      - user: /inform_cuisine{{"cuisine":"italian"}}
+        intent: inform_cuisine
+        entities:
+          - cuisine: italian
+      - slot_was_set:
+          - cuisine: italian
+      - action: action_show_restaurants
+      - user: /inform_booking_restaurant_id{{"restaurant_id":"rid_6431ac87d5f9f6b0be596abb"}}
+        intent: inform_booking_restaurant_id
+        entities:
+          - restaurant_id: rid_6431ac87d5f9f6b0be596abb
+      - slot_was_set:
+          - restaurant_id: rid_6431ac87d5f9f6b0be596abb
+      - action: action_show_selected_restaurant_ask_booking_confirmation
+      - user: |
+          Yes.
+        intent: affirm
+      - action: restaurant_booking_form
+      - active_loop: restaurant_booking_form
+      - user: |
+          [4](num_people) peeps
+        intent: inform_num_people
+      - user: |
+          [2024/01/15](date)
+        intent: inform_date
+      - action: restaurant_booking_form
+      - active_loop: null
+      - action: action_show_booking_summary
+      - user: |
+          no
+        intent: deny
+      - action: action_utter_thank_you
+      - action: action_ask_anything_else
+  - story: Test user changes booking date
+    steps:
+      - user: |
+          Hello!
+        intent: greet
+      - action: action_utter_greet_and_intro
+      - action: action_ask_language_preference
+      - user: /inform_permanent_language{{"permanent_language":"en"}}
+        intent: inform_permanent_language
+        entities:
+          - permanent_language: en
+      - slot_was_set:
+          - permanent_language: en
+      - action: action_set_permanent_language
+      - action: action_utter_wanna_book
+      - user: |
+          Yes.
+        intent: affirm
+      - action: restaurant_booking_form
+      - active_loop: restaurant_booking_form
+      - user: |
+          [2](num_people) people
+        intent: inform_num_people
+      - user: |
+          [2024/02/01](date)
+        intent: inform_date
+      - action: restaurant_booking_form
+      - user: |
+          Actually, can we change the date to 2024/02/02?
+        intent: inform_date
+        entities:
+          - date: 2024/02/02
+      - slot_was_set:
+          - date: 2024/02/02
+      - action: restaurant_booking_form
+      - active_loop: null
+      - action: action_show_booking_summary
+
+  - story: Test user changes booking num_people
+    steps:
+      - user: |
+          Hello!
+        intent: greet
+      - action: action_utter_greet_and_intro
+      - action: action_ask_language_preference
+      - user: /inform_permanent_language{{"permanent_language":"en"}}
+        intent: inform_permanent_language
+        entities:
+          - permanent_language: en
+      - slot_was_set:
+          - permanent_language: en
+      - action: action_set_permanent_language
+      - action: action_utter_wanna_book
+      - user: |
+          Yes.
+        intent: affirm
+      - action: restaurant_booking_form
+      - active_loop: restaurant_booking_form
+      - user: |
+          [2](num_people) people
+        intent: inform_num_people
+      - user: |
+          [2024/02/01](date)
+        intent: inform_date
+      - action: restaurant_booking_form
+      - user: |
+          Actually, can we make it for 4 people?
+        intent: inform_num_people
+        entities:
+          - num_people: 4
+      - slot_was_set:
+          - num_people: 4
+      - action: restaurant_booking_form
+      - active_loop: null
+      - action: action_show_booking_summary
+
+  - story: Test user changes both booking date and num_people
+    steps:
+      - user: |
+          Hello!
+        intent: greet
+      - action: action_utter_greet_and_intro
+      - action: action_ask_language_preference
+      - user: /inform_permanent_language{{"permanent_language":"en"}}
+        intent: inform_permanent_language
+        entities:
+          - permanent_language: en
+      - slot_was_set:
+          - permanent_language: en
+      - action: action_set_permanent_language
+      - action: action_utter_wanna_book
+      - user: |
+          Yes.
+        intent: affirm
+      - action: restaurant_booking_form
+      - active_loop: restaurant_booking_form
+      - user: |
+          [2](num_people) people
+        intent: inform_num_people
+      - user: |
+          [2024/02/01](date)
+        intent: inform_date
+      - action: restaurant_booking_form
+      - user: |
+          Actually, can we change the date to 2024/02/02 and make it for 4 people?
+        intent: inform_changes
+        entities:
+          - num_people: 4
+          - date: 2024/02/02
+      - slot_was_set:
+          - num_people: 4
+          - date: 2024/02/02
+      - action: restaurant_booking_form
+      - active_loop: null
+      - action: action_show_booking_summary
+
+
+#######################################################################################################################
+
+#  - story: Test User wants to book a restaurant after view details
 
 #  - story: Test User denies after viewing restaurant details or book directly
 #    steps:

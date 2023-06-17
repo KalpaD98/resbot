@@ -29,7 +29,6 @@ pipeline: # -------------------------------------------------- NLU -------------
     epochs: 125
     constrain_similarities: true
 
-
   - name: submodules.custom_components.intent_classifiers.zero_shot_intent_classifier.ZeroShotIntentClassifier
     threshold: 0.3
     ambiguity_threshold: 0.05

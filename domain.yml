@@ -155,7 +155,7 @@ slots:
 
   restaurant_id:
     type: text
-    influence_conversation: false
+    influence_conversation: False
     mappings:
       - type: from_entity
         entity: restaurant_id
@@ -166,14 +166,14 @@ slots:
 
   selected_restaurant:
     type: any
-    influence_conversation: false
+    influence_conversation: False
     mappings:
       - type: from_entity
         entity: selected_restaurant
 
   restaurant_offset:
     type: float
-    influence_conversation: false
+    influence_conversation: False
     initial_value: 0
     mappings:
       - type: from_entity
@@ -181,19 +181,19 @@ slots:
 
   selected_booking:
     type: any
-    influence_conversation: false
+    influence_conversation: False
     mappings:
       - type: from_entity
         entity: selected_booking
   booking_id:
     type: text
-    influence_conversation: false
+    influence_conversation: False
     mappings:
       - type: from_entity
         entity: booking_id
   num_people:
     type: text
-    influence_conversation: false
+    influence_conversation: False
     mappings:
       - type: from_entity
         entity: num_people
@@ -201,7 +201,7 @@ slots:
           - inform_num_people
   date:
     type: text
-    influence_conversation: false
+    influence_conversation: False
     mappings:
       - type: from_entity
         entity: date
@@ -210,7 +210,7 @@ slots:
           - search_restaurants
   time:
     type: text
-    influence_conversation: false
+    influence_conversation: False
     mappings:
       - type: from_entity
         entity: time
@@ -223,26 +223,26 @@ slots:
 
   is_authenticated:
     type: bool
-    influence_conversation: true
-    initial_value: false
+    influence_conversation: True
+    initial_value: False
     mappings:
       - type: custom
 
   logged_user:
     type: any
-    influence_conversation: false
+    influence_conversation: False
     mappings:
       - type: from_entity
         entity: logged_user
   user_id:
     type: text
-    influence_conversation: false
+    influence_conversation: False
     mappings:
       - type: from_entity
         entity: user_id
   user_name:
     type: text
-    influence_conversation: false
+    influence_conversation: False
     mappings:
       - type: from_entity
         entity: PERSON # spacy
@@ -253,7 +253,7 @@ slots:
           - inform_user_name
   user_email:
     type: text
-    influence_conversation: false
+    influence_conversation: False
     mappings:
       - type: from_entity
         entity: user_email
@@ -262,7 +262,7 @@ slots:
           - inform_user_email
   user_password:
     type: text
-    influence_conversation: false
+    influence_conversation: False
     mappings:
       - type: from_entity
         entity: user_password
@@ -273,7 +273,7 @@ slots:
 
   permanent_language:
     type: text
-    influence_conversation: false
+    influence_conversation: False
     initial_value: en
     mappings:
       - type: from_entity
@@ -283,7 +283,7 @@ slots:
 
   language:
     type: categorical
-    influence_conversation: false
+    influence_conversation: False
     values:
       - en # english
       - si # sinhala
@@ -296,42 +296,42 @@ slots:
 
   object_type:
     type: text
-    influence_conversation: false
+    influence_conversation: False
     mappings:
       - type: from_entity
         entity: object_type
 
   mention:
     type: text
-    influence_conversation: false
+    influence_conversation: False
     mappings:
       - type: from_entity
         entity: mention
 
   attribute:
     type: text
-    influence_conversation: false
+    influence_conversation: False
     mappings:
       - type: from_entity
         entity: attribute
 
   preferences:
     type: list
-    influence_conversation: false
+    influence_conversation: False
     mappings:
       - type: from_entity
         entity: preferences
 
   restaurant_name:
     type: text
-    influence_conversation: false
+    influence_conversation: False
     mappings:
       - type: from_entity
         entity: restaurant_name
 
   city:
     type: text
-    influence_conversation: false
+    influence_conversation: False
     mappings:
       - type: from_entity
         entity: city
@@ -498,34 +498,30 @@ actions:
 responses:
 
   # ------------------------------------------ Retrieval Intent Responses -------------------------------------------- #
-  utter_bot_challenge/what_can_you_do:
-    - text: I can help you book a restaurant 🍴.
-    - text: I can help you find restaurants and book a table 🍽️.
+  utter_bot_challenge:
+    - condition:
+        - type: slot
+          name: permanent_language
+          value: si
+      text: මම ResBot, මට අවන්හල් නිර්දේශ කිරීමට සහ ඒවා වෙන් කරවා ගැනීමට සහය විය හැක 🍴
 
-  utter_out_of_scope/out_of_functionality:
-    - text: Sorry, I can't handle that request 🥲. I can help you book a restaurant 😃.
-    - text: Sorry, I can't do that 😢. I can help you book a restaurant 😃.
-    - text: Sorry, I can't help you with that 🥹. I can help you book a restaurant 😃.
-
-  utter_bot_challenge/bot:
-    - text: I am ResBot, powered by Rasa.
-    - text: I am ResBot, a bot powered by Rasa.
-
-  utter_bot_challenge/who_are_you:
     - text: I am ResBot, I can recommend restaurants and help you make a reservation 🍴.
     - text: I am ResBot, I can help you find restaurants and book a table 🍽️.
 
-  utter_out_of_scope/food:
-    - text: I understand you want to order food, but i'm afraid i can't handle that skill yet 😢.
+  utter_out_of_scope:
+    - condition:
+        - type: slot
+          name: permanent_language
+          value: si
+      text: මට එසේ කිරීමට හැකියාවක් නැත 😢
 
-  utter_out_of_scope/hotel:
-    - text: I understand you want to book a hotel, but i'm afraid i can't handle that skill yet 😢.
+    - text: I'm afraid i can't handle that skill yet 😢.
 
 # -------------------------------------------------------------------------------------------------------------------- #
 
 # config:
-#  store_entities_as_slots: true
+#  store_entities_as_slots: True
 
 session_config:
   session_expiration_time: 60
-  carry_over_slots_to_new_session: true
+  carry_over_slots_to_new_session: True

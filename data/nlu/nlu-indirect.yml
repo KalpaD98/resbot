@@ -1,352 +1,338 @@
 version: "3.1" # nlu-booking.yml: NLU training data for booking related intents
 
 nlu:
-# TODO: uncomment when using
-# ---------------------------------------- Restaurant Booking related intents -----------------------------------------
+  # TODO: uncomment when using
+  # ---------------------------------------- Restaurant Booking related intents ----------------------------------------
 
   - intent: inform_restaurant_id
     examples: |
       - [rid_6431ac87d5f9f6b0be596abb](restaurant_id)
-      - [rid_6431ac87d5f9f6b0be596abb](restaurant_id) is the restaurant id
-      - [rid_6431ac87d5f9f6b0be596ac0](restaurant_id)
-      - restaurant_id is [rid_6431ac87d5f9f6b0be596abd](restaurant_id)
-      - restaurant_id: [rid_6431ac87d5f9f6b0be596abf](restaurant_id)
+      - [rid_6431ac87d5f9f6b0be596ac0](restaurant_id) is the restaurant id
 
   - intent: inform_booking_restaurant_id
     examples: |
-      - [rid_6431ac87d5f9f6b0be596abc](restaurant_id) is the restaurant id I want to book
-      - [rid_6431ac87d5f9f6b0be596abc](restaurant_id) is the restaurant id I want to book a table at
-      - book [rid_6431ac87d5f9f6b0be596abc](restaurant_id)
+      - [rid_6431ac87d5f9f6b0be596abc](restaurant_id)
       - book restaurant [rid_6431ac87d5f9f6b0be596abc](restaurant_id)
-      - book restaurant [rid_6431ac87d5f9f6b0be596abc](restaurant_id) for me
 
   - intent: inform_view_details_restaurant_id
     examples: |
-      - view details [rid_6431ac87d5f9f6b0be596abd](restaurant_id)
+      - [rid_6431ac87d5f9f6b0be596abd](restaurant_id)
       - view details of [rid_6431ac87d5f9f6b0be596abd](restaurant_id) restaurant
-      - view details [rid_6431ac87d5f9f6b0be596abd](restaurant_id) please
-      - view details of [rid_6431ac87d5f9f6b0be596abd](restaurant_id)
-      - view details of restaurant [rid_6431ac87d5f9f6b0be596abb](restaurant_id)
+
+  - intent: inform_change_booking_id
+    examples: |
+      - change booking [bid_6435a6e1bef00a88687f1823](booking_id)
+      - [bid_6435a6e1bef00a88687f1ac4](booking_id)
+
+  - intent: inform_cancel_booking_id
+    examples: |
+      - cancel booking [bid_6435a6e1bef00a88687f1823](booking_id)
+      - [bid_6436555b937c8209a6a93609](booking_id)
 
   - intent: request_more_restaurant_options
     examples: |
       - anything else?
       - any other places?
-      - Can you suggest more restaurant options
-      - can i have more recommendations
-      - show more restaurant options
-      - can i see more restaurants
-      - Could you show me more restaurant options
-      - more options
-      - more suggestions
-      - Can I see more restaurants?
-      - more places
-      - Can you give me more restaurant options?
-      - any other suggestions
-      - more restaurants
-      - Can you recommend few other good restaurants with good ratings
-      - Can you suggest other restaurants?
-      - I'd like more restaurant suggestions, please.
-      - Can you give me more choices?
-      - Are there any other restaurants you can recommend?
-      - Show me other restaurant options.
-      - Can I have some more options, please?
-      - I would like to see more restaurant choices.
-      - Do you have other restaurant recommendations?
-      - I need more options for restaurants.
-      - Show me more options, please.
-      - Could I get more restaurant suggestions?
-      - I want to see more choices.
-      - Do you have any more restaurant options?
-      - Could you give me a few more restaurant suggestions?
-      - I'd like to explore more restaurants, can you show more?
+#      - Can you suggest more restaurant options
+#      - can i have more recommendations
+#      - show more restaurant options
+#      - can i see more restaurants
+#      - Could you show me more restaurant options
+#      - more options
+#      - more suggestions
+#      - Can I see more restaurants?
+#      - more places
+#      - Can you give me more restaurant options?
+#      - any other suggestions
+#      - more restaurants
+#      - Can you recommend few other good restaurants with good ratings
+#      - Can you suggest other restaurants?
+#      - I'd like more restaurant suggestions, please.
+#      - Can you give me more choices?
+#      - Are there any other restaurants you can recommend?
+#      - Show me other restaurant options.
+#      - Can I have some more options, please?
+#      - I would like to see more restaurant choices.
+#      - Do you have other restaurant recommendations?
+#      - I need more options for restaurants.
+#      - Show me more options, please.
+#      - Could I get more restaurant suggestions?
+#      - I want to see more choices.
+#      - Do you have any more restaurant options?
+#      - Could you give me a few more restaurant suggestions?
+#      - I'd like to explore more restaurants, can you show more?
 
-# --------------------------------------- Booking Change/Cancel related intents ---------------------------------------
+  # --------------------------------------- Booking Change/Cancel related intents ---------------------------------------
 
-  - intent: inform_change_booking_id
-    examples: |
-      - change booking [bid_6435a6e1bef00a88687f1823](booking_id)
-      - change [bid_6435a6e1bef00a88687f1ac4](booking_id)
-      - change [bid_6435a6e1bef00a88687f1ac4](booking_id) please
-      - I need to change [bid_6435a6e1bef00a88687f1ac4](booking_id)
-      - can I change [bid_6435a6e1bef00a88687f1ac4](booking_id)
-
-  - intent: inform_cancel_booking_id
-    examples: |
-      - cancel booking [bid_6435a6e1bef00a88687f1823](booking_id)
-      - cancel [bid_6436555b937c8209a6a93609](booking_id)
-      - I want to cancel my booking [bid_6436555b937c8209a6a93609](booking_id)
-      - I need to cancel this booking [bid_6436555b937c8209a6a93609](booking_id)
-      - please cancel my booking [bid_6436555b937c8209a6a93609](booking_id)
 
 
   - intent: user_wants_to_change_restaurant_booking_date
     examples: |
       - I want to change my reservation date
       - Can I change the date of my booking?
-      - I need to reschedule my booking
-      - Can I change my reservation date?
-      - I'd like to change the date for my reservation
-      - can I reschedule the booking
-      - I want to change my booking date. Can I?
-      - How do I change the date of my reservation?
-      - Is it possible to modify the reservation date?
-      - need to change my booking date
-      - I would like to change the date of my restaurant booking. Is it possible to reschedule?"
-      - Can you help me change the date of my booking?
-      - I want to move my booking to another day
-      - Could I change the date of my booking?
-      - Can you change the schedule?
-      - I need to change my restaurant reservation date
-      - I want to change my booking date
-      - I'd like to reschedule my reservation to a different date
-      - Can we shift the booking to another date?
-      - Can we reschedule the reservation to a later date?
-      - I need to push my booking to a later date
-      - Could you help me reschedule my booking?
-      - I want to update the date of my reservation
-      - Is it possible to postpone my reservation?
-      - Can we move the reservation to another day?
-      - I would like to postpone my booking
-      - Can we change the reservation to a future date?
-      - I need to adjust the date of my booking
-      - Could we shift the booking to a different day?
+#      - I need to reschedule my booking
+#      - Can I change my reservation date?
+#      - I'd like to change the date for my reservation
+#      - can I reschedule the booking
+#      - I want to change my booking date. Can I?
+#      - How do I change the date of my reservation?
+#      - Is it possible to modify the reservation date?
+#      - need to change my booking date
+#      - I would like to change the date of my restaurant booking. Is it possible to reschedule?"
+#      - Can you help me change the date of my booking?
+#      - I want to move my booking to another day
+#      - Could I change the date of my booking?
+#      - Can you change the schedule?
+#      - I need to change my restaurant reservation date
+#      - I want to change my booking date
+#      - I'd like to reschedule my reservation to a different date
+#      - Can we shift the booking to another date?
+#      - Can we reschedule the reservation to a later date?
+#      - I need to push my booking to a later date
+#      - Could you help me reschedule my booking?
+#      - I want to update the date of my reservation
+#      - Is it possible to postpone my reservation?
+#      - Can we move the reservation to another day?
+#      - I would like to postpone my booking
+#      - Can we change the reservation to a future date?
+#      - I need to adjust the date of my booking
+#      - Could we shift the booking to a different day?
 
 
   - intent: user_wants_to_change_restaurant_booking_num_people
     examples: |
       - i want to change the number of people in my reservation
       - can I change the number of people in my booking?
-      - I want to change the number of people in my reservation
-      - Is it possible to change the count of people for my booking
-      - Can I change the reservation? I need to change the participation
-      - I need to change the amount of people in my reservation
-      - I need to change the people count for my booking , is it possible?
-      - is there any way for me to change the number of adults for my reservation
-      - I want to change the head count for my booking.
-      - need to change no of people for my booking
-      - I have to update the number of people in my booking
-      - Can I edit the number of guests in my reservation?
-      - I made a mistake, I need to change the number of guests in my booking
-      - I would like to change the number of people I booked for
-      - Could I modify the number of people in my reservation?
-      - Can I increase the number of people in my restaurant booking?
-      - Is it possible to decrease the number of people in my booking?
-      - I need to update the number of guests in my reservation
-      - How can I change the count of people for my booking?
-      - Can I add more people to my booking?
-      - I want to remove some people from my reservation
-      - I would like to revise the number of people in my booking
-      - How can I adjust the number of people for my reservation?
-      - Can I alter the number of guests in my restaurant booking?
-      - Is it feasible to modify the number of persons in my reservation?
-      - I'd like to edit the headcount for my reservation
-      - Can I amend the number of people in my restaurant booking?
-      - I need to change the quantity of guests for my booking
-      - Is it possible to revise the number of attendees in my booking?
-      - I have a change in plans and need to adjust the number of people in my reservation
+#      - I want to change the number of people in my reservation
+#      - Is it possible to change the count of people for my booking
+#      - Can I change the reservation? I need to change the participation
+#      - I need to change the amount of people in my reservation
+#      - I need to change the people count for my booking , is it possible?
+#      - is there any way for me to change the number of adults for my reservation
+#      - I want to change the head count for my booking.
+#      - need to change no of people for my booking
+#      - I have to update the number of people in my booking
+#      - Can I edit the number of guests in my reservation?
+#      - I made a mistake, I need to change the number of guests in my booking
+#      - I would like to change the number of people I booked for
+#      - Could I modify the number of people in my reservation?
+#      - Can I increase the number of people in my restaurant booking?
+#      - Is it possible to decrease the number of people in my booking?
+#      - I need to update the number of guests in my reservation
+#      - How can I change the count of people for my booking?
+#      - Can I add more people to my booking?
+#      - I want to remove some people from my reservation
+#      - I would like to revise the number of people in my booking
+#      - How can I adjust the number of people for my reservation?
+#      - Can I alter the number of guests in my restaurant booking?
+#      - Is it feasible to modify the number of persons in my reservation?
+#      - I'd like to edit the headcount for my reservation
+#      - Can I amend the number of people in my restaurant booking?
+#      - I need to change the quantity of guests for my booking
+#      - Is it possible to revise the number of attendees in my booking?
+#      - I have a change in plans and need to adjust the number of people in my reservation
 
   - intent: user_wants_to_change_both_restaurant_booking_date_and_num_people
     examples: |
       - i want to change the booking date and number of people
       - can i change both booking date and number of people
-      - I need to change the date and the number of people for my booking.
-      - Can I change these. Booking date and number of people
-      - need to change no of people for my booking and its date
-      - both date and number of people
-      - I want to update booking date ans number of people
-      - can I change the booking date and number of people for the booking?
-      - can I change both count of people and date for my booking
-      - I want to change date and number of guest in my reservation
-      - both
-      - Can you change the number of people and booking date?
-      - Could I change the date and the number of people for my booking.
-      - Please change the date and number of people in the reservation
-      - Can we update the headcount for the booking?
-      - I'd like to revise the guest count for my booking
-      - Could I modify the guest number in my booking?
-      - I want to alter the number of guests in my reservation
-      - How can I adjust the people count in my booking?
-      - I would like to add more people to my booking
-      - Can I increase the number of people for the booking?
-      - I'd like to change the count of attendees in my booking
-      - I need to decrease the number of people in my booking
-      - Can I modify the count of people in my reservation?
-      - I want to reduce the guest count in my booking
-      - Is it possible to update the people count in my reservation?
-      - Can I change the party size of my reservation?
-      - I want to add more guests to my booking
-      - Can we adjust the number of seats for my booking?
-      - I need to change the booking for more people
-      - I would like to alter the size of my party for the booking
+#      - I need to change the date and the number of people for my booking.
+#      - Can I change these. Booking date and number of people
+#      - need to change no of people for my booking and its date
+#      - both date and number of people
+#      - I want to update booking date ans number of people
+#      - can I change the booking date and number of people for the booking?
+#      - can I change both count of people and date for my booking
+#      - I want to change date and number of guest in my reservation
+#      - both
+#      - Can you change the number of people and booking date?
+#      - Could I change the date and the number of people for my booking.
+#      - Please change the date and number of people in the reservation
+#      - Can we update the headcount for the booking?
+#      - I'd like to revise the guest count for my booking
+#      - Could I modify the guest number in my booking?
+#      - I want to alter the number of guests in my reservation
+#      - How can I adjust the people count in my booking?
+#      - I would like to add more people to my booking
+#      - Can I increase the number of people for the booking?
+#      - I'd like to change the count of attendees in my booking
+#      - I need to decrease the number of people in my booking
+#      - Can I modify the count of people in my reservation?
+#      - I want to reduce the guest count in my booking
+#      - Is it possible to update the people count in my reservation?
+#      - Can I change the party size of my reservation?
+#      - I want to add more guests to my booking
+#      - Can we adjust the number of seats for my booking?
+#      - I need to change the booking for more people
+#      - I would like to alter the size of my party for the booking
 
- ## ------------------------------------ View restaurant booking related intents -----------------------------------------
+  ## ------------------------------------ View restaurant booking related intents -----------------------------------------
 
   - intent: view_all_bookings
     examples: |
       - show me all my bookings
       - show me all my reservations
-      - can you display all my bookings
-      - let me see all my bookings
-      - Can i see all my booking details?
-      - what are all my bookings
-      - all bookings
-      - Can I see all my bookings
-      - can you show all my reservations
-      - display all my reservations
-      - Could I see all my bookings?
-      - let me see all my reservations
-      - what are my total bookings
-      - Can you show my all reservations?
-      - Can I get an overview of all my bookings?
-      - Please list every booking I have.
-      - Could you present all of my reservations?
-      - I'd like to review all my bookings.
-      - What's the total number of my reservations?
-      - Show me the full list of my bookings.
-      - What's every booking I've made?
-      - I need to see all my reservation details.
-      - Can you fetch all my booking information?
-      - Can I get a summary of all my bookings?
-      - I'd like to see the complete list of my reservations.
-      - Please provide a list of all my bookings.
-      - Can you list each and every reservations of mine?
-      - I want to check all my booking details.
-      - Can I see all reservations I have made?
-      - I need to see the full list of my bookings.
+#      - can you display all my bookings
+#      - let me see all my bookings
+#      - Can i see all my booking details?
+#      - what are all my bookings
+#      - all bookings
+#      - Can I see all my bookings
+#      - can you show all my reservations
+#      - display all my reservations
+#      - Could I see all my bookings?
+#      - let me see all my reservations
+#      - what are my total bookings
+#      - Can you show my all reservations?
+#      - Can I get an overview of all my bookings?
+#      - Please list every booking I have.
+#      - Could you present all of my reservations?
+#      - I'd like to review all my bookings.
+#      - What's the total number of my reservations?
+#      - Show me the full list of my bookings.
+#      - What's every booking I've made?
+#      - I need to see all my reservation details.
+#      - Can you fetch all my booking information?
+#      - Can I get a summary of all my bookings?
+#      - I'd like to see the complete list of my reservations.
+#      - Please provide a list of all my bookings.
+#      - Can you list each and every reservations of mine?
+#      - I want to check all my booking details.
+#      - Can I see all reservations I have made?
+#      - I need to see the full list of my bookings.
 
   - intent: view_upcoming_bookings
     examples: |
       - show me my upcoming reservations
       - I'd like to see my upcoming reservations
-      - what are my future bookings
-      - can you display my upcoming bookings
-      - Can I see the upcoming bookings
-      - show me my upcoming bookings
-      - let me see my future bookings
-      - what bookings do I have coming up
-      - Could I see my upcoming bookings?
-      - I want to see my upcomming booking details.
-      - upcoming bookings
-      - what are my bookings in the future
-      - can you show my future reservations
-      - What are my up coming bookings
-      - display my upcoming reservations
-      - let me see my upcoming reservations
-      - Can you show my upcoming reservations?
-      - Can I see my upcoming bookings?
-      - what reservations do I have coming up
-      - future bookings
-      - I'd like to review my future reservations.
-      - Please list my upcoming bookings.
-      - Could you present all of my future bookings?
-      - Can you display my future reservations?
-      - What's on my booking schedule?
-      - Can you fetch my upcoming booking information?
-      - Can I get a summary of my upcoming reservations?
-      - Please provide a list of all my future bookings.
-      - I want to check all my upcoming booking details.
-      - What reservations do I have in the near future?
+#      - what are my future bookings
+#      - can you display my upcoming bookings
+#      - Can I see the upcoming bookings
+#      - show me my upcoming bookings
+#      - let me see my future bookings
+#      - what bookings do I have coming up
+#      - Could I see my upcoming bookings?
+#      - I want to see my upcomming booking details.
+#      - upcoming bookings
+#      - what are my bookings in the future
+#      - can you show my future reservations
+#      - What are my up coming bookings
+#      - display my upcoming reservations
+#      - let me see my upcoming reservations
+#      - Can you show my upcoming reservations?
+#      - Can I see my upcoming bookings?
+#      - what reservations do I have coming up
+#      - future bookings
+#      - I'd like to review my future reservations.
+#      - Please list my upcoming bookings.
+#      - Could you present all of my future bookings?
+#      - Can you display my future reservations?
+#      - What's on my booking schedule?
+#      - Can you fetch my upcoming booking information?
+#      - Can I get a summary of my upcoming reservations?
+#      - Please provide a list of all my future bookings.
+#      - I want to check all my upcoming booking details.
+#      - What reservations do I have in the near future?
 
   - intent: view_past_bookings
     examples: |
       - show me my past reservations
       - what were my previous bookings
-      - can you display my past bookings
-      - Can you show past reservations?
-      - show me my past bookings
-      - Can I check my past bookings
-      - let me see my previous bookings
-      - what bookings have I had in the past
-      - Could I see my past bookings?
-      - Can i see my past bookings?
-      - past bookings
-      - what are my bookings in the past
-      - show my booking history
-      - can you show my previous reservations
-      - display my past reservations
-      - let me see my past reservations
-      - show my past bookings
-      - what reservations have I had before
-      - previous bookings
-      - Can you retrieve my old reservations?
-      - I want to see my old booking details.
-      - What reservations have I had in the past?
-      - I'd like to check my previous booking details.
-      - Could you show me my booking history?
-      - I'd like to review my past reservations.
-      - Can you show me my past booking details?
-      - I want to view my previous reservations.
-      - Please show me the history of my bookings.
-      - Could you pull up my past reservations?
-      - May I see my previous bookings, please?
+#      - can you display my past bookings
+#      - Can you show past reservations?
+#      - show me my past bookings
+#      - Can I check my past bookings
+#      - let me see my previous bookings
+#      - what bookings have I had in the past
+#      - Could I see my past bookings?
+#      - Can i see my past bookings?
+#      - past bookings
+#      - what are my bookings in the past
+#      - show my booking history
+#      - can you show my previous reservations
+#      - display my past reservations
+#      - let me see my past reservations
+#      - show my past bookings
+#      - what reservations have I had before
+#      - previous bookings
+#      - Can you retrieve my old reservations?
+#      - I want to see my old booking details.
+#      - What reservations have I had in the past?
+#      - I'd like to check my previous booking details.
+#      - Could you show me my booking history?
+#      - I'd like to review my past reservations.
+#      - Can you show me my past booking details?
+#      - I want to view my previous reservations.
+#      - Please show me the history of my bookings.
+#      - Could you pull up my past reservations?
+#      - May I see my previous bookings, please?
+  
 
-
-# -------------------------------------------- user mood related intents ----------------------------------------------
-
-  - intent: mood_great
-    examples: |
-      - perfect
-      - everythings perfect
-      - great
-      - cool
-      - amazing
-      - fantastic
-      - feeling like a king
-      - wonderful
-      - feeling very good
-      - I am great amazing
-      - save the world
-      - feeling happy
-      - delighted
-      - I'm delighted to chat with you today.
-      - a good day
-      - so good
-      - so perfect
-      - good
-      - feels good
-      - excellent
-      - i'm fine
-      - feeling awesome
-      - fine
-      - 🥳
-      - im cool
-      - im great
-      - doing well
-      - im okay ok
-      - I'm feeling great today!
-      - 😆
-
-  - intent: mood_unhappy
-    examples: |
-      - my day was horrible
-      - I am sad
-      - having a bad day
-      - I don't feel very well
-      - I am disappointed
-      - super sad
-      - I'm so sad
-      - bad day
-      - sad
-      - i feel bad
-      - I'm feeling really frustrated
-      - very sad
-      - unhappy
-      - overwhelmed right now.
-      - not feeling ok
-      - not good
-      - 😢
-      - I'm not feeling very well
-      - not very good
-      - extremly sad
-      - Feeling down today
-      - moody
-      - 😭
-      - Ugh, everything seems to be going wrong
-      - I am not in a good mood today
-      - so sad
-      - i feel sad
-      - bad
-      - sad 😢
-      - crying 😢
-      - not in mood
+  # -------------------------------------------- user mood related intents ----------------------------------------------
+#
+#  - intent: mood_great
+#    examples: |
+#      - perfect
+#      - everythings perfect
+#      - great
+#      - cool
+#      - amazing
+#      - fantastic
+#      - feeling like a king
+#      - wonderful
+#      - feeling very good
+#      - I am great amazing
+#      - save the world
+#      - feeling happy
+#      - delighted
+#      - I'm delighted to chat with you today.
+#      - a good day
+#      - so good
+#      - so perfect
+#      - good
+#      - feels good
+#      - excellent
+#      - i'm fine
+#      - feeling awesome
+#      - fine
+#      - 🥳
+#      - im cool
+#      - im great
+#      - doing well
+#      - im okay ok
+#      - I'm feeling great today!
+#      - 😆
+#
+#  - intent: mood_unhappy
+#    examples: |
+#      - my day was horrible
+#      - I am sad
+#      - having a bad day
+#      - I don't feel very well
+#      - I am disappointed
+#      - super sad
+#      - I'm so sad
+#      - bad day
+#      - sad
+#      - i feel bad
+#      - I'm feeling really frustrated
+#      - very sad
+#      - unhappy
+#      - overwhelmed right now.
+#      - not feeling ok
+#      - not good
+#      - 😢
+#      - I'm not feeling very well
+#      - not very good
+#      - extremly sad
+#      - Feeling down today
+#      - moody
+#      - 😭
+#      - Ugh, everything seems to be going wrong
+#      - I am not in a good mood today
+#      - so sad
+#      - i feel sad
+#      - bad
+#      - sad 😢
+#      - crying 😢
+#      - not in mood

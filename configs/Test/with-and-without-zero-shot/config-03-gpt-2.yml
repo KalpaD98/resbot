@@ -28,7 +28,7 @@ pipeline:
 
   # Intent and Entity Extractor
   - name: DIETClassifier
-    epochs: 150
+    epochs: 125
     constrain_similarities: true
 
   - name: EntitySynonymMapper
