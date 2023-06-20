@@ -20,4 +20,4 @@ scipy~=1.8.1
 python-dotenv~=1.0.0
 rasa-model-report
 tqdm~=4.65.0
-transformers
+transformers~=4.28.1

@@ -45,7 +45,7 @@ class ZeroShotIntentClassifier(GraphComponent):
     @staticmethod
     def get_default_config() -> Dict[Text, Any]:
         return {
-            "threshold": 0.2,
+            "threshold": 0.25,
             "ambiguity_threshold": 0.05,
             "candidate_class_size": 5,
             "fallback_classifier_threshold": 0.3,  # must be same as the threshold given for fallback_classifier (fbc)
@@ -136,12 +136,14 @@ class ZeroShotIntentClassifier(GraphComponent):
                 try:
                     # get candidate labels from DIET intent ranking
                     candidate_labels = self._get_candidate_labels_from_DIET_intent_ranking(self, intent_ranking)
-                    print("candidate_labels: ", candidate_labels)
+
                     # predict intent using zero shot classifier with candidate labels from DIET
                     prediction_data = self.clf(text, candidate_labels)
+
                     # Transform to intent ranking format of rasa
                     new_intent_ranking = self._get_zero_shot_classification_intent_ranking(self, prediction_data)
                     print("Intent rankings by zero shot classifier\n", new_intent_ranking)
+
                     # check if intent ranking is within confidence threshold and ambiguity threshold
                     if self._check_confidence_and_ambiguity_threshold_for_zero_shot_classification(self,
                                                                                                    new_intent_ranking):
@@ -202,6 +204,8 @@ class ZeroShotIntentClassifier(GraphComponent):
 
         # new intent rankings: Create a list of tuples where each tuple is (label, score)
         for label, score in label_score_pairs:
+            # Replace spaces with underscores in the label name
+            label = label.replace(" ", "_")
             if total_score + score <= 0.999:
                 new_intent_ranking.append({'name': label, 'confidence': score})
                 total_score += score
@@ -221,7 +225,7 @@ class ZeroShotIntentClassifier(GraphComponent):
         num_intents = len(intent_ranking)
         class_size = self.candidate_class_size
         num_intents_to_classify = min(num_intents, class_size)  # top intents
-        candidate_labels = [item['name'] for item in intent_ranking[:num_intents_to_classify]]
+        candidate_labels = [item['name'].replace("_", " ") for item in intent_ranking[:num_intents_to_classify]]
         print("Pushing below labels to zero shot classifier")
         print("Candidate labels: ", candidate_labels)
         candidate_labels.append('other')  # to catch out of scope

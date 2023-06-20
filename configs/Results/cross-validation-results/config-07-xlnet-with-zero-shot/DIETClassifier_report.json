@@ -1,0 +1,90 @@
+{
+  "date": {
+    "precision": 0.96875,
+    "recall": 0.8378378378378378,
+    "f1-score": 0.8985507246376812,
+    "support": 74,
+    "confused_with": {}
+  },
+  "restaurant_name": {
+    "precision": 1.0,
+    "recall": 0.6896551724137931,
+    "f1-score": 0.8163265306122449,
+    "support": 29,
+    "confused_with": {}
+  },
+  "permanent_language": {
+    "precision": 1.0,
+    "recall": 0.896551724137931,
+    "f1-score": 0.9454545454545454,
+    "support": 29,
+    "confused_with": {}
+  },
+  "cuisine": {
+    "precision": 0.9565217391304348,
+    "recall": 0.7333333333333333,
+    "f1-score": 0.8301886792452831,
+    "support": 30,
+    "confused_with": {
+      "user_name": 2
+    }
+  },
+  "num_people": {
+    "precision": 0.8928571428571429,
+    "recall": 0.8333333333333334,
+    "f1-score": 0.8620689655172413,
+    "support": 30,
+    "confused_with": {
+      "time": 1
+    }
+  },
+  "user_email": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 24,
+    "confused_with": {}
+  },
+  "time": {
+    "precision": 0.9692307692307692,
+    "recall": 0.9545454545454546,
+    "f1-score": 0.9618320610687022,
+    "support": 66,
+    "confused_with": {}
+  },
+  "user_name": {
+    "precision": 0.84,
+    "recall": 0.875,
+    "f1-score": 0.8571428571428572,
+    "support": 24,
+    "confused_with": {}
+  },
+  "password": {
+    "precision": 1.0,
+    "recall": 0.92,
+    "f1-score": 0.9583333333333334,
+    "support": 25,
+    "confused_with": {
+      "num_people": 1
+    }
+  },
+  "micro avg": {
+    "precision": 0.959731543624161,
+    "recall": 0.8640483383685801,
+    "f1-score": 0.9093799682034976,
+    "support": 331
+  },
+  "macro avg": {
+    "precision": 0.9585955168020386,
+    "recall": 0.8600285395112981,
+    "f1-score": 0.9033219663346544,
+    "support": 331
+  },
+  "weighted avg": {
+    "precision": 0.9616256713862783,
+    "recall": 0.8640483383685801,
+    "f1-score": 0.9074405199616233,
+    "support": 331
+  },
+  "accuracy": 0.9845526085689303
+}

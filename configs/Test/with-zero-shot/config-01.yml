@@ -25,7 +25,7 @@ pipeline: # -------------------------------------------------- NLU -------------
 
   # Intent and Entity Extractor
   - name: DIETClassifier
-    epochs: 150                           # only difference from default config is epochs
+    epochs: 125                           # only difference from default config is epochs
     constrain_similarities: true
 
   - name: submodules.custom_components.intent_classifiers.zero_shot_intent_classifier.ZeroShotIntentClassifier

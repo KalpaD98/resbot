@@ -1,0 +1,247 @@
+{
+  "request_opening_hours": {
+    "precision": 0.967741935483871,
+    "recall": 1.0,
+    "f1-score": 0.9836065573770492,
+    "support": 30,
+    "confused_with": {}
+  },
+  "out_of_scope": {
+    "precision": 0.8235294117647058,
+    "recall": 0.6363636363636364,
+    "f1-score": 0.717948717948718,
+    "support": 22,
+    "confused_with": {
+      "bot_challenge": 4,
+      "request_restaurants": 2
+    }
+  },
+  "inform_user_email": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 24,
+    "confused_with": {}
+  },
+  "request_login_form": {
+    "precision": 0.9629629629629629,
+    "recall": 1.0,
+    "f1-score": 0.9811320754716981,
+    "support": 26,
+    "confused_with": {}
+  },
+  "greet": {
+    "precision": 0.9565217391304348,
+    "recall": 0.8148148148148148,
+    "f1-score": 0.8800000000000001,
+    "support": 27,
+    "confused_with": {
+      "affirm": 2,
+      "goodbye": 1
+    }
+  },
+  "deny": {
+    "precision": 0.92,
+    "recall": 0.7931034482758621,
+    "f1-score": 0.851851851851852,
+    "support": 29,
+    "confused_with": {
+      "affirm": 3,
+      "thank_you": 1
+    }
+  },
+  "request_cuisines": {
+    "precision": 1.0,
+    "recall": 0.9666666666666667,
+    "f1-score": 0.983050847457627,
+    "support": 30,
+    "confused_with": {
+      "inform_cuisine": 1
+    }
+  },
+  "inform_cuisine": {
+    "precision": 0.9629629629629629,
+    "recall": 0.8666666666666667,
+    "f1-score": 0.912280701754386,
+    "support": 30,
+    "confused_with": {
+      "request_restaurants": 2,
+      "affirm": 1
+    }
+  },
+  "affirm": {
+    "precision": 0.7804878048780488,
+    "recall": 0.8421052631578947,
+    "f1-score": 0.810126582278481,
+    "support": 38,
+    "confused_with": {
+      "deny": 2,
+      "goodbye": 2
+    }
+  },
+  "request_user_registration_form": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 27,
+    "confused_with": {}
+  },
+  "inform_date": {
+    "precision": 0.8823529411764706,
+    "recall": 1.0,
+    "f1-score": 0.9375,
+    "support": 30,
+    "confused_with": {}
+  },
+  "inform_num_people": {
+    "precision": 1.0,
+    "recall": 0.9666666666666667,
+    "f1-score": 0.983050847457627,
+    "support": 30,
+    "confused_with": {
+      "inform_date": 1
+    }
+  },
+  "request_restaurants": {
+    "precision": 0.8709677419354839,
+    "recall": 0.9310344827586207,
+    "f1-score": 0.9,
+    "support": 29,
+    "confused_with": {
+      "view_bookings": 1,
+      "out_of_scope": 1
+    }
+  },
+  "logout": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 20,
+    "confused_with": {}
+  },
+  "inform_user_name": {
+    "precision": 0.8888888888888888,
+    "recall": 1.0,
+    "f1-score": 0.9411764705882353,
+    "support": 24,
+    "confused_with": {}
+  },
+  "request_ambiance": {
+    "precision": 0.9666666666666667,
+    "recall": 0.9666666666666667,
+    "f1-score": 0.9666666666666667,
+    "support": 30,
+    "confused_with": {
+      "request_login_form": 1
+    }
+  },
+  "user_wants_to_cancel_booking": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 29,
+    "confused_with": {}
+  },
+  "thank_you": {
+    "precision": 0.9259259259259259,
+    "recall": 0.8620689655172413,
+    "f1-score": 0.8928571428571429,
+    "support": 29,
+    "confused_with": {
+      "goodbye": 3,
+      "stop": 1
+    }
+  },
+  "goodbye": {
+    "precision": 0.7777777777777778,
+    "recall": 0.7777777777777778,
+    "f1-score": 0.7777777777777778,
+    "support": 27,
+    "confused_with": {
+      "affirm": 2,
+      "inform_user_name": 2
+    }
+  },
+  "request_menu": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 30,
+    "confused_with": {}
+  },
+  "inform_user_password": {
+    "precision": 1.0,
+    "recall": 0.96,
+    "f1-score": 0.9795918367346939,
+    "support": 25,
+    "confused_with": {
+      "inform_date": 1
+    }
+  },
+  "inform_permanent_language": {
+    "precision": 0.9354838709677419,
+    "recall": 1.0,
+    "f1-score": 0.9666666666666666,
+    "support": 29,
+    "confused_with": {}
+  },
+  "bot_challenge": {
+    "precision": 0.8275862068965517,
+    "recall": 0.96,
+    "f1-score": 0.888888888888889,
+    "support": 25,
+    "confused_with": {
+      "request_opening_hours": 1
+    }
+  },
+  "view_bookings": {
+    "precision": 0.9666666666666667,
+    "recall": 1.0,
+    "f1-score": 0.983050847457627,
+    "support": 29,
+    "confused_with": {}
+  },
+  "inform_time": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 30,
+    "confused_with": {}
+  },
+  "user_wants_to_change_restaurant_booking": {
+    "precision": 0.9666666666666667,
+    "recall": 1.0,
+    "f1-score": 0.983050847457627,
+    "support": 29,
+    "confused_with": {}
+  },
+  "stop": {
+    "precision": 0.9259259259259259,
+    "recall": 0.8928571428571429,
+    "f1-score": 0.9090909090909091,
+    "support": 28,
+    "confused_with": {
+      "out_of_scope": 2,
+      "affirm": 1
+    }
+  },
+  "accuracy": 0.9351851851851852,
+  "macro avg": {
+    "precision": 0.9373746702473241,
+    "recall": 0.9346960073403577,
+    "f1-score": 0.9344209716956917,
+    "support": 756
+  },
+  "weighted avg": {
+    "precision": 0.9364623975540112,
+    "recall": 0.9351851851851852,
+    "f1-score": 0.9343061200090055,
+    "support": 756
+  },
+  "micro avg": {
+    "precision": 0.9351851851851852,
+    "recall": 0.9351851851851852,
+    "f1-score": 0.9351851851851852,
+    "support": 756
+  }
+}

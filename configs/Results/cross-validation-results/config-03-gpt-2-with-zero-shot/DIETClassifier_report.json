@@ -1,0 +1,90 @@
+{
+  "password": {
+    "precision": 1.0,
+    "recall": 0.96,
+    "f1-score": 0.9795918367346939,
+    "support": 25,
+    "confused_with": {
+      "num_people": 1
+    }
+  },
+  "permanent_language": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 29,
+    "confused_with": {}
+  },
+  "user_email": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 24,
+    "confused_with": {}
+  },
+  "time": {
+    "precision": 0.9696969696969697,
+    "recall": 0.9696969696969697,
+    "f1-score": 0.9696969696969697,
+    "support": 66,
+    "confused_with": {}
+  },
+  "restaurant_name": {
+    "precision": 1.0,
+    "recall": 0.9310344827586207,
+    "f1-score": 0.9642857142857143,
+    "support": 29,
+    "confused_with": {}
+  },
+  "date": {
+    "precision": 0.9130434782608695,
+    "recall": 0.8513513513513513,
+    "f1-score": 0.881118881118881,
+    "support": 74,
+    "confused_with": {
+      "num_people": 1
+    }
+  },
+  "user_name": {
+    "precision": 0.9230769230769231,
+    "recall": 1.0,
+    "f1-score": 0.9600000000000001,
+    "support": 24,
+    "confused_with": {}
+  },
+  "num_people": {
+    "precision": 0.8064516129032258,
+    "recall": 0.8333333333333334,
+    "f1-score": 0.819672131147541,
+    "support": 30,
+    "confused_with": {
+      "time": 1
+    }
+  },
+  "cuisine": {
+    "precision": 0.8518518518518519,
+    "recall": 0.7666666666666667,
+    "f1-score": 0.8070175438596491,
+    "support": 30,
+    "confused_with": {}
+  },
+  "micro avg": {
+    "precision": 0.9380804953560371,
+    "recall": 0.9154078549848943,
+    "f1-score": 0.926605504587156,
+    "support": 331
+  },
+  "macro avg": {
+    "precision": 0.9404578706433155,
+    "recall": 0.9235647559785493,
+    "f1-score": 0.9312647863159387,
+    "support": 331
+  },
+  "weighted avg": {
+    "precision": 0.9379702945250841,
+    "recall": 0.9154078549848943,
+    "f1-score": 0.925974528959716,
+    "support": 331
+  },
+  "accuracy": 0.9868842902943749
+}
