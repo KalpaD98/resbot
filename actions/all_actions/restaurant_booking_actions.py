@@ -38,7 +38,7 @@ class ActionShowSelectedRestaurantAskBookingConfirmation(Action):
             dispatcher.utter_message(text=message,
                                      quick_replies=ResponseGenerator.
                                      quick_reply_yes_no_with_payload(language))
-            # if yes -> fill slot else remove prev slots
+
             return [SlotSet(NUM_PEOPLE, None), SlotSet(DATE, None), SlotSet(TIME, None),
                     SlotSet(SELECTED_RESTAURANT, restaurant.to_dict())]
 

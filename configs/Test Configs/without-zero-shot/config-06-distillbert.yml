@@ -17,8 +17,8 @@ pipeline:
   - name: RegexFeaturizer
   - name: LexicalSyntacticFeaturizer
   - name: LanguageModelFeaturizer
-    model_name: "roberta"
-    model_weights: "roberta-base"
+    model_name: "distilbert"
+    model_weights: "distilbert-base-uncased"
 
   - name: CountVectorsFeaturizer                        # Sparse featurizer | one hot encoding
   - name: CountVectorsFeaturizer                        # Sparse featurizer | char level n-grams
@@ -28,7 +28,7 @@ pipeline:
 
   # Intent and Entity Extractor
   - name: DIETClassifier
-    epochs: 150
+    epochs: 125
     constrain_similarities: true
 
   - name: EntitySynonymMapper

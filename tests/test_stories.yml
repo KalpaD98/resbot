@@ -175,16 +175,16 @@ stories:
       - action: action_ask_registered_and_show_login_signup_quick_replies
       - user: /request_signup_form
         intent: request_signup_form
-      - action: signup_form
-      - active_loop: signup_form
+      - action: registration_form
+      - active_loop: registration_form
       - user: |
           [example@gmail.com](user_email)
         intent: inform_user_email
-      - action: signup_form
+      - action: registration_form
       - user: |
           [pass](user_password)
         intent: inform_user_password
-      - action: signup_form
+      - action: registration_form
       - active_loop: null
       - action: action_signup_user
       - slot_was_set:
@@ -343,6 +343,20 @@ stories:
       - active_loop: null
       - action: action_show_booking_summary
 
+  - story: say goodbye
+    steps:
+      - user: |
+          bye-bye!
+        intent: goodbye
+      - action: action_utter_goodbye
+
+  - story: bot challenge
+    steps:
+      - user: |
+          are you a bot?
+        intent: bot_challenge
+      - action: utter_iamabot
+
 
 #######################################################################################################################
 
@@ -441,20 +455,6 @@ stories:
 #        intent: deny
 #      - action: action_utter_goodbye
 #
-#  - story: say goodbye
-#    steps:
-#      - user: |
-#          bye-bye!
-#        intent: goodbye
-#      - action: action_utter_goodbye
-#
-#  - story: bot challenge
-#    steps:
-#      - user: |
-#          are you a bot?
-#        intent: bot_challenge
-#      - action: utter_iamabot
-
 ### If you want to learn more, please see the docs: https://rasa.com/docs/rasa/testing-your-assistant
 
 # Possible failing cases

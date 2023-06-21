@@ -1,12 +1,11 @@
-# config.yml The config recipe.
 recipe: default.v1
 language: en
 
-pipeline: # -------------------------------------------------- NLU -----------------------------------------------------
+pipeline:
 
   # Load Language model
   - name: SpacyNLP
-    model: en_core_web_trf
+    model: en_core_web_lg
     case_sensitive: False
 
   # Tokenizer
@@ -15,9 +14,12 @@ pipeline: # -------------------------------------------------- NLU -------------
     intent_split_symbol: "+"
 
   # Featurizers
-  - name: RegexFeaturizer                               # Sparse featurizer
-  - name: SpacyFeaturizer                               # Dense featurizer
-  - name: LexicalSyntacticFeaturizer                    # Sparse featurizer
+  - name: RegexFeaturizer
+  - name: LexicalSyntacticFeaturizer
+  - name: LanguageModelFeaturizer
+    model_name: "gpt"
+    model_weights: "openai-gpt"
+
   - name: CountVectorsFeaturizer                        # Sparse featurizer | one hot encoding
   - name: CountVectorsFeaturizer                        # Sparse featurizer | char level n-grams
     analyzer: char_wb
@@ -26,7 +28,7 @@ pipeline: # -------------------------------------------------- NLU -------------
 
   # Intent and Entity Extractor
   - name: DIETClassifier
-    epochs: 150
+    epochs: 125
     constrain_similarities: true
 
   - name: EntitySynonymMapper

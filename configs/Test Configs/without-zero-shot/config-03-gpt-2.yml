@@ -1,8 +1,7 @@
-# config.yml The config recipe.
 recipe: default.v1
 language: en
 
-pipeline: # -------------------------------------------------- NLU -----------------------------------------------------
+pipeline:
 
   # Load Language model
   - name: SpacyNLP
@@ -15,8 +14,12 @@ pipeline: # -------------------------------------------------- NLU -------------
     intent_split_symbol: "+"
 
   # Featurizers
-  - name: RegexFeaturizer                               # Sparse featurizer
-  - name: LexicalSyntacticFeaturizer                    # Sparse featurizer
+  - name: RegexFeaturizer
+  - name: LexicalSyntacticFeaturizer
+  - name: LanguageModelFeaturizer
+    model_name: "gpt2"
+    model_weights: "gpt2"
+
   - name: CountVectorsFeaturizer                        # Sparse featurizer | one hot encoding
   - name: CountVectorsFeaturizer                        # Sparse featurizer | char level n-grams
     analyzer: char_wb
@@ -25,7 +28,7 @@ pipeline: # -------------------------------------------------- NLU -------------
 
   # Intent and Entity Extractor
   - name: DIETClassifier
-    epochs: 150                           # only difference from default config is epochs
+    epochs: 125
     constrain_similarities: true
 
   - name: EntitySynonymMapper

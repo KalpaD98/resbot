@@ -94,9 +94,9 @@ class ActionAskWhatUserWants(Action):
             {
                 TITLE: QR_BROWSE_RESTAURANTS,
                 PAYLOAD: "/request_restaurants"},
-            {
-                TITLE: QR_SEARCH_RESTAURANTS,
-                PAYLOAD: "/want_to_search_restaurants"}
+            # {
+            #     TITLE: QR_SEARCH_RESTAURANTS,
+            #     PAYLOAD: "/want_to_search_restaurants"}
         ]
 
         sinhala_quick_replies_with_payload = [
@@ -106,9 +106,9 @@ class ActionAskWhatUserWants(Action):
             {
                 TITLE: "ආපනශාලා පෙන්වන්න",
                 PAYLOAD: "/request_restaurants"},
-            {
-                TITLE: "ආපනශාලා සොයන්න",
-                PAYLOAD: "/want_to_search_restaurants"}
+            # {
+            #     TITLE: "ආපනශාලා සොයන්න",
+            #     PAYLOAD: "/want_to_search_restaurants"}
         ]
 
         final_text, final_quick_replies_with_payload = \
@@ -140,6 +140,8 @@ class ActionClearRestaurantBookingSlots(Action):
                 SlotSet(DATE, None),
                 SlotSet(TIME, None)]
 
+
+# --------------------------------------------------------------------------------------------- #
 
 class TwoStageFallbackAction(LoopAction, Action):
     def __init__(self, action_endpoint: Optional[EndpointConfig] = None) -> None:

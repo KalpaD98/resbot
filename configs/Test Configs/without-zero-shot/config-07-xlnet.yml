@@ -16,9 +16,9 @@ pipeline:
   # Featurizers
   - name: RegexFeaturizer
   - name: LexicalSyntacticFeaturizer
-  - name: LanguageModelFeaturizer # dense features
-    model_name: "bert"
-    model_weights: "bert-base-uncased"
+  - name: LanguageModelFeaturizer
+    model_name: "xlnet"
+    model_weights: "xlnet-base-cased"
 
   - name: CountVectorsFeaturizer                        # Sparse featurizer | one hot encoding
   - name: CountVectorsFeaturizer                        # Sparse featurizer | char level n-grams
@@ -28,7 +28,7 @@ pipeline:
 
   # Intent and Entity Extractor
   - name: DIETClassifier
-    epochs: 150
+    epochs: 125
     constrain_similarities: true
 
   - name: EntitySynonymMapper

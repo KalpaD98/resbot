@@ -1,0 +1,197 @@
+[
+  {
+    "text": "kalpa@gmail.com",
+    "entities": [
+      {
+        "start": 0,
+        "end": 15,
+        "value": "kalpa@gmail.com",
+        "entity": "user_email"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "pass",
+    "entities": [
+      {
+        "text": "pass",
+        "start": 0,
+        "end": 4,
+        "entity": "user_password",
+        "value": "pass"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "2 peeps",
+    "entities": [
+      {
+        "start": 0,
+        "end": 1,
+        "value": "2",
+        "entity": "num_people"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "2024/01/01",
+    "entities": [
+      {
+        "start": 0,
+        "end": 10,
+        "value": "2024/01/01",
+        "entity": "date"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "example@gmail.com",
+    "entities": [
+      {
+        "start": 0,
+        "end": 17,
+        "value": "example@gmail.com",
+        "entity": "user_email"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "pass",
+    "entities": [
+      {
+        "text": "pass",
+        "start": 0,
+        "end": 4,
+        "entity": "user_password",
+        "value": "pass"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "example@gmail.com",
+    "entities": [
+      {
+        "start": 0,
+        "end": 17,
+        "value": "example@gmail.com",
+        "entity": "user_email"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "pass",
+    "entities": [
+      {
+        "text": "pass",
+        "start": 0,
+        "end": 4,
+        "entity": "user_password",
+        "value": "pass"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "4 peeps",
+    "entities": [
+      {
+        "start": 0,
+        "end": 1,
+        "value": "4",
+        "entity": "num_people"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "2024/01/15",
+    "entities": [
+      {
+        "start": 0,
+        "end": 10,
+        "value": "2024/01/15",
+        "entity": "date"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "2 people",
+    "entities": [
+      {
+        "start": 0,
+        "end": 1,
+        "value": "2",
+        "entity": "num_people"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "2024/02/01",
+    "entities": [
+      {
+        "start": 0,
+        "end": 10,
+        "value": "2024/02/01",
+        "entity": "date"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "2 people",
+    "entities": [
+      {
+        "start": 0,
+        "end": 1,
+        "value": "2",
+        "entity": "num_people"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "2024/02/01",
+    "entities": [
+      {
+        "start": 0,
+        "end": 10,
+        "value": "2024/02/01",
+        "entity": "date"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "2 people",
+    "entities": [
+      {
+        "start": 0,
+        "end": 1,
+        "value": "2",
+        "entity": "num_people"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "2024/02/01",
+    "entities": [
+      {
+        "start": 0,
+        "end": 10,
+        "value": "2024/02/01",
+        "entity": "date"
+      }
+    ],
+    "predicted_entities": []
+  }
+]
