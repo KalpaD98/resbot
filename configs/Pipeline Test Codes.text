@@ -53,7 +53,13 @@ rasa test nlu --nlu data --config configs/Test/with-and-without-zero-shot/config
 --config config-with-bart.yml config-without-bart.yml
 
 # nlu_comparison_results
-rasa test nlu --nlu data/nlu.yml --config config_1.yml config_2.yml --runs 4 --percentages 0 25 50 70 90
+rasa test nlu --nlu data/nlu --config config_1.yml config_2.yml --runs 4 --percentages 0 25 50 70 90
+
+# Best vs Default
+rasa test nlu --nlu data/nlu --config config.yml config_default.yml --runs 5 --percentages 0 20 40 60 80 --out gridresults/best-vs-default
+
+# Default vs Default-wth-hybrid
+rasa test nlu --nlu data/nlu --config configs/Test-Configs/ablation-default/config_default_with_hybrid_intent-clf.yml configs/Test-Configs/ablation-default/config_default.yml --runs 5 --percentages 0 20 40 60 80 --out gridresults/default-vs-default-with-hybrid
 
 # Test codes #
 

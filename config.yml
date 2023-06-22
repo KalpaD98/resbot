@@ -35,9 +35,9 @@ pipeline: # ----------------------------------------- NLU Pipeline -------------
     constrain_similarities: true
 
   - name: submodules.custom_components.intent_classifiers.zero_shot_intent_classifier.ZeroShotIntentClassifier
-    threshold: 0.6
+    threshold: 0.3
     ambiguity_threshold: 0.05
-    candidate_class_size: 5
+    candidate_class_size: 7
     fallback_classifier_threshold: 0.4                    # must be same as FallbackClassifier threshold
     fallback_classifier_ambiguity_threshold: 0.1          # must be same as FallbackClassifier ambiguity_threshold
 
