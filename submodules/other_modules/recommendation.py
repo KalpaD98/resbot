@@ -131,15 +131,15 @@ def collaborative_filtering(target_user, df_user_res_grp, df_user_grp, features,
         df_user_res_wt_sim['similarity_score'], axis=0)
 
     aggregated_ratings = \
-    df_user_res_wt_sim[df_user_res_wt_sim['user_id'].isin(filtered_user_ids)].groupby('business_id')[
-        sel_usr_features].apply(lambda x: x[x != 0].mean())
+        df_user_res_wt_sim[df_user_res_wt_sim['user_id'].isin(filtered_user_ids)].groupby('business_id')[
+            sel_usr_features].apply(lambda x: x[x != 0].mean())
     aggregated_ratings.fillna(0.0, inplace=True)
 
     predicted_ratings_scr = aggregated_ratings.apply(lambda x: x[x != 0].mean(), axis=1)
     predicted_ratings_scr = predicted_ratings_scr.dropna()
 
     normalized_ratings = (predicted_ratings_scr - predicted_ratings_scr.min()) / (
-                predicted_ratings_scr.max() - predicted_ratings_scr.min()) * 4 + 1
+            predicted_ratings_scr.max() - predicted_ratings_scr.min()) * 4 + 1
 
     all_businesses = normalized_ratings.sort_values(ascending=False)
 
@@ -219,3 +219,13 @@ df = pd.read_csv(path)
 
 result = recommendation('sbcPtUZ9gKmwQ4LnP8udew', df, 10)
 result
+
+
+# function to get recommendation by passing user id and number of restaurants to recommend
+def get_recommendation(user_id, n_restaurants=10):
+    # check if recommendations stored is not derive and store
+
+    df = pd.read_csv('data/post20by20.csv')
+
+    result = recommendation(user_id, df, n_restaurants)
+    return result
