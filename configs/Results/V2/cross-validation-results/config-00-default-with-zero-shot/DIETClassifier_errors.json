@@ -1,0 +1,1003 @@
+[
+  {
+    "text": "prefer bbq",
+    "entities": [
+      {
+        "start": 7,
+        "end": 10,
+        "value": "bbq",
+        "entity": "cuisine"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "I feel like having some French food.",
+    "entities": [
+      {
+        "start": 24,
+        "end": 30,
+        "value": "French",
+        "entity": "cuisine"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "2 please",
+    "entities": [
+      {
+        "start": 0,
+        "end": 1,
+        "value": "2",
+        "entity": "num_people"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "num_people",
+        "start": 0,
+        "end": 8,
+        "confidence_entity": 0.5268862843513489,
+        "value": "2 please",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "I'd like to reserve for December 25th, 2023.",
+    "entities": [
+      {
+        "start": 24,
+        "end": 43,
+        "value": "December 25th, 2023",
+        "entity": "date"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "time",
+        "start": 2,
+        "end": 11,
+        "confidence_entity": 0.47069332003593445,
+        "value": "d like to",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "date",
+        "start": 24,
+        "end": 37,
+        "confidence_entity": 0.43538445234298706,
+        "value": "December 25th",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "date",
+        "start": 39,
+        "end": 43,
+        "confidence_entity": 0.9500717520713806,
+        "value": "2023",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "Let's make it this coming Monday.",
+    "entities": [
+      {
+        "start": 19,
+        "end": 32,
+        "value": "coming Monday",
+        "entity": "date"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "date",
+        "start": 14,
+        "end": 18,
+        "confidence_entity": 0.9854174256324768,
+        "value": "this",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "date",
+        "start": 19,
+        "end": 32,
+        "confidence_entity": 0.9976155757904053,
+        "value": "coming Monday",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "Is this Friday available?",
+    "entities": [
+      {
+        "start": 3,
+        "end": 14,
+        "value": "this Friday",
+        "entity": "date"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "date",
+        "start": 0,
+        "end": 2,
+        "confidence_entity": 0.5651656985282898,
+        "value": "Is",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "date",
+        "start": 3,
+        "end": 14,
+        "confidence_entity": 0.9792011976242065,
+        "value": "this Friday",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "12:00 p.m.",
+    "entities": [
+      {
+        "start": 0,
+        "end": 10,
+        "value": "12:00 p.m.",
+        "entity": "time"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "i want to book another one",
+    "entities": [],
+    "predicted_entities": [
+      {
+        "entity": "num_people",
+        "start": 23,
+        "end": 26,
+        "confidence_entity": 0.9166164398193359,
+        "value": "one",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "What can I order from this restaurant?",
+    "entities": [],
+    "predicted_entities": [
+      {
+        "entity": "date",
+        "start": 17,
+        "end": 21,
+        "confidence_entity": 0.9961084723472595,
+        "value": "from",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "What is 2 + 2?",
+    "entities": [],
+    "predicted_entities": [
+      {
+        "entity": "time",
+        "start": 5,
+        "end": 7,
+        "confidence_entity": 0.7388781309127808,
+        "value": "is",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "date",
+        "start": 8,
+        "end": 9,
+        "confidence_entity": 0.61,
+        "value": "2",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "date",
+        "start": 12,
+        "end": 13,
+        "confidence_entity": 0.7880752682685852,
+        "value": "2",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "korean restaurants",
+    "entities": [
+      {
+        "start": 0,
+        "end": 6,
+        "value": "korean",
+        "entity": "cuisine"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "I'm in the mood for something different. How about Korean food?",
+    "entities": [
+      {
+        "start": 51,
+        "end": 57,
+        "value": "Korean",
+        "entity": "cuisine"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "whatever Any cuisine",
+    "entities": [
+      {
+        "start": 9,
+        "end": 12,
+        "value": "Any",
+        "entity": "cuisine"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "Multi cuisine",
+    "entities": [
+      {
+        "start": 0,
+        "end": 5,
+        "value": "Multi",
+        "entity": "cuisine"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "4 folks",
+    "entities": [
+      {
+        "start": 0,
+        "end": 1,
+        "value": "4",
+        "entity": "num_people"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "time",
+        "start": 0,
+        "end": 7,
+        "confidence_entity": 0.34973642230033875,
+        "value": "4 folks",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "7 a.m",
+    "entities": [
+      {
+        "start": 0,
+        "end": 5,
+        "value": "7 a.m",
+        "entity": "time"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "4:00 p.m.",
+    "entities": [
+      {
+        "start": 0,
+        "end": 9,
+        "value": "4:00 p.m.",
+        "entity": "time"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "at 8:30 a.m.",
+    "entities": [
+      {
+        "start": 3,
+        "end": 12,
+        "value": "8:30 a.m.",
+        "entity": "time"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "5:30 a.m.",
+    "entities": [
+      {
+        "start": 0,
+        "end": 9,
+        "value": "5:30 a.m.",
+        "entity": "time"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "Can you display the food items available at this?",
+    "entities": [],
+    "predicted_entities": [
+      {
+        "entity": "date",
+        "start": 44,
+        "end": 48,
+        "confidence_entity": 0.9386906623840332,
+        "value": "this",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "good afternoon",
+    "entities": [],
+    "predicted_entities": [
+      {
+        "entity": "date",
+        "start": 5,
+        "end": 14,
+        "confidence_entity": 0.5032203197479248,
+        "value": "afternoon",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "I would like to have american food",
+    "entities": [
+      {
+        "start": 21,
+        "end": 29,
+        "value": "american",
+        "entity": "cuisine"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "Any thing",
+    "entities": [
+      {
+        "start": 0,
+        "end": 3,
+        "value": "Any",
+        "entity": "cuisine"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "cuisine",
+        "start": 0,
+        "end": 9,
+        "confidence_entity": 0.505168080329895,
+        "value": "Any thing",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "for ten people",
+    "entities": [
+      {
+        "start": 4,
+        "end": 7,
+        "value": "ten",
+        "entity": "num_people"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "just one person",
+    "entities": [
+      {
+        "start": 5,
+        "end": 8,
+        "value": "one",
+        "entity": "num_people"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "4 guys",
+    "entities": [
+      {
+        "start": 0,
+        "end": 1,
+        "value": "4",
+        "entity": "num_people"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "time",
+        "start": 0,
+        "end": 6,
+        "confidence_entity": 0.66,
+        "value": "4 guys",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "12 gals",
+    "entities": [
+      {
+        "start": 0,
+        "end": 2,
+        "value": "12",
+        "entity": "num_people"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "time",
+        "start": 0,
+        "end": 7,
+        "confidence_entity": 0.5999306440353394,
+        "value": "12 gals",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "Is there availability on July 20th?",
+    "entities": [
+      {
+        "start": 25,
+        "end": 34,
+        "value": "July 20th",
+        "entity": "date"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "date",
+        "start": 30,
+        "end": 34,
+        "confidence_entity": 0.9839438199996948,
+        "value": "20th",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "at 10:30 am",
+    "entities": [
+      {
+        "start": 3,
+        "end": 11,
+        "value": "10:30 am",
+        "entity": "time"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "11 p.m.",
+    "entities": [
+      {
+        "start": 0,
+        "end": 7,
+        "value": "11 p.m.",
+        "entity": "time"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "at noon",
+    "entities": [
+      {
+        "start": 3,
+        "end": 7,
+        "value": "noon",
+        "entity": "time"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "1:00 p.m.",
+    "entities": [
+      {
+        "start": 0,
+        "end": 9,
+        "value": "1:00 p.m.",
+        "entity": "time"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "2:30 a.m.",
+    "entities": [
+      {
+        "start": 0,
+        "end": 9,
+        "value": "2:30 a.m.",
+        "entity": "time"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "10:00 a.m.",
+    "entities": [
+      {
+        "start": 0,
+        "end": 10,
+        "value": "10:00 a.m.",
+        "entity": "time"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "Are you a machine?",
+    "entities": [],
+    "predicted_entities": [
+      {
+        "entity": "cuisine",
+        "start": 10,
+        "end": 17,
+        "confidence_entity": 0.9177137017250061,
+        "value": "machine",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "change language to si",
+    "entities": [
+      {
+        "start": 19,
+        "end": 21,
+        "value": "si",
+        "entity": "permanent_language"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "for three people",
+    "entities": [
+      {
+        "start": 4,
+        "end": 9,
+        "value": "three",
+        "entity": "num_people"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "nine people",
+    "entities": [
+      {
+        "start": 0,
+        "end": 4,
+        "value": "nine",
+        "entity": "num_people"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "2023 01 01",
+    "entities": [
+      {
+        "start": 0,
+        "end": 10,
+        "value": "2023 01 01",
+        "entity": "date"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "num_people",
+        "start": 0,
+        "end": 4,
+        "confidence_entity": 0.9831240177154541,
+        "value": "2023",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "num_people",
+        "start": 5,
+        "end": 7,
+        "confidence_entity": 0.9755070805549622,
+        "value": "01",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "num_people",
+        "start": 8,
+        "end": 10,
+        "confidence_entity": 0.9707213640213013,
+        "value": "01",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "Can I make a reservation for tomorrow?",
+    "entities": [
+      {
+        "start": 29,
+        "end": 37,
+        "value": "tomorrow",
+        "entity": "date"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "Can you reserve a table for April 10th?",
+    "entities": [
+      {
+        "start": 28,
+        "end": 38,
+        "value": "April 10th",
+        "entity": "date"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "date",
+        "start": 34,
+        "end": 38,
+        "confidence_entity": 0.9118558764457703,
+        "value": "10th",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "We are planning for the day after tomorrow.",
+    "entities": [
+      {
+        "start": 24,
+        "end": 42,
+        "value": "day after tomorrow",
+        "entity": "date"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "Can we book for two days from now?",
+    "entities": [
+      {
+        "start": 16,
+        "end": 33,
+        "value": "two days from now",
+        "entity": "date"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "3:00 p.m.",
+    "entities": [
+      {
+        "start": 0,
+        "end": 9,
+        "value": "3:00 p.m.",
+        "entity": "time"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "4:30 a.m.",
+    "entities": [
+      {
+        "start": 0,
+        "end": 9,
+        "value": "4:30 a.m.",
+        "entity": "time"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "9:30 a.m.",
+    "entities": [
+      {
+        "start": 0,
+        "end": 9,
+        "value": "9:30 a.m.",
+        "entity": "time"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "Can you show me some restaurants with ratings above 4.0",
+    "entities": [],
+    "predicted_entities": [
+      {
+        "entity": "date",
+        "start": 52,
+        "end": 55,
+        "confidence_entity": 0.4821849465370178,
+        "value": "4.0",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "Till next time",
+    "entities": [],
+    "predicted_entities": [
+      {
+        "entity": "date",
+        "start": 5,
+        "end": 9,
+        "confidence_entity": 0.9948970675468445,
+        "value": "next",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "Any recommendations for Lebanese food?",
+    "entities": [
+      {
+        "start": 24,
+        "end": 32,
+        "value": "Lebanese",
+        "entity": "cuisine"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "cuisine",
+        "start": 0,
+        "end": 3,
+        "confidence_entity": 0.9996054768562317,
+        "value": "Any",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "cuisine",
+        "start": 24,
+        "end": 32,
+        "confidence_entity": 0.9991592168807983,
+        "value": "Lebanese",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "Greek food would be nice",
+    "entities": [
+      {
+        "start": 0,
+        "end": 5,
+        "value": "Greek",
+        "entity": "cuisine"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "I like indian curries",
+    "entities": [
+      {
+        "start": 7,
+        "end": 13,
+        "value": "indian",
+        "entity": "cuisine"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "5 people are joining",
+    "entities": [
+      {
+        "start": 0,
+        "end": 1,
+        "value": "5",
+        "entity": "num_people"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "num_people",
+        "start": 0,
+        "end": 1,
+        "confidence_entity": 0.8504719734191895,
+        "value": "5",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "time",
+        "start": 13,
+        "end": 20,
+        "confidence_entity": 0.8033739924430847,
+        "value": "joining",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "book for seven people",
+    "entities": [
+      {
+        "start": 9,
+        "end": 14,
+        "value": "seven",
+        "entity": "num_people"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "sorry only 5 people",
+    "entities": [
+      {
+        "start": 11,
+        "end": 12,
+        "value": "5",
+        "entity": "num_people"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "num_people",
+        "start": 6,
+        "end": 10,
+        "confidence_entity": 0.6947788596153259,
+        "value": "only",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "num_people",
+        "start": 11,
+        "end": 12,
+        "confidence_entity": 0.9965606331825256,
+        "value": "5",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "What's the availability on October 5th?",
+    "entities": [
+      {
+        "start": 27,
+        "end": 38,
+        "value": "October 5th",
+        "entity": "date"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "2 o'clock",
+    "entities": [
+      {
+        "start": 0,
+        "end": 9,
+        "value": "2 o'clock",
+        "entity": "time"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "num_people",
+        "start": 0,
+        "end": 1,
+        "confidence_entity": 0.9963060617446899,
+        "value": "2",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "6 p.m.",
+    "entities": [
+      {
+        "start": 0,
+        "end": 6,
+        "value": "6 p.m.",
+        "entity": "time"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "8 o'clock",
+    "entities": [
+      {
+        "start": 0,
+        "end": 9,
+        "value": "8 o'clock",
+        "entity": "time"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "num_people",
+        "start": 0,
+        "end": 1,
+        "confidence_entity": 0.9963060617446899,
+        "value": "8",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "at midnight",
+    "entities": [
+      {
+        "start": 3,
+        "end": 11,
+        "value": "midnight",
+        "entity": "time"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "What are the service hours for Burger King?",
+    "entities": [
+      {
+        "start": 31,
+        "end": 42,
+        "value": "Burger King",
+        "entity": "restaurant_name"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "At what time does Wendy's open?",
+    "entities": [
+      {
+        "start": 18,
+        "end": 25,
+        "value": "Wendy's",
+        "entity": "restaurant_name"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "restaurant_name",
+        "start": 18,
+        "end": 23,
+        "confidence_entity": 0.9889881014823914,
+        "value": "Wendy",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "How is the overall environment at Burger King?",
+    "entities": [
+      {
+        "start": 34,
+        "end": 45,
+        "value": "Burger King",
+        "entity": "restaurant_name"
+      }
+    ],
+    "predicted_entities": []
+  }
+]
