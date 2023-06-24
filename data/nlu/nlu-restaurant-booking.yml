@@ -1,9 +1,11 @@
 version: "3.1" # nlu-booking.yml: NLU training data for booking related intents
 
 nlu:
+  # duckling server not compatible with arm64 yet
   # booking flow
   # how to catch only me, me and my wife (girlfriend), me and my friends, me and my family,
   # me wife and the kids, my family
+
   - intent: inform_num_people
     examples: |
       - [2](num_people)
@@ -11,7 +13,7 @@ nlu:
       - about [4](num_people) peeps
       - around [4](num_people)
       - around [4](num_people) people
-      - [4](num_people) people
+      - [4](num_people) ppl
       - [5](num_people) people are joining
       - [4](num_people) folks
       - [4](num_people) peeps
@@ -36,39 +38,40 @@ nlu:
       - right about [100](num_people)
       - [4](num_people) guys
       - [12](num_people) gals
- # find a way to extract date from descriptions apart from duckling server
+
   - intent: inform_date
     examples: |
       - Do you have any tables available at [next Monday](date)?
       - [2023-04-01](date)
       - I want to make a reservation for [this Thursday](date).
       - [2023 01 01](date)
-      - I need to reserve a table for [next Friday](date).
-      - [2023-02-05](date)
+      - [2023.02.05](date)
       - Can I make a reservation for [tomorrow](date)?
       - [2024/01/01](date)
-      - What availability do you have for [Sunday](date)?
       - Can you tell me what times you have available on [Wednesday](date)?
       - I'd like to book for [Tuesday](date).
       - Can I book a table for [Saturday](date)?
-      - I'm looking for a reservation on [next Wednesday](date).
       - Can you reserve a table for [April 10th](date)?
       - We want to come in on [June 15th, 2023](date).
       - Is there availability on [July 20th](date)?
       - Can you reserve for [2023-08-15](date)?
       - I'd like a reservation for [2024/06/10](date).
-      - What's the availability on [October 5th](date)?
-      - I'd like to reserve for [December 25th, 2023](date).
       - Can I book a spot for [2024-05-30](date)?
       - Is there space for us on [2023/12/01](date)?
-      - Can I book a table for [next Saturday](date)?
-      - We are planning for the [day after tomorrow](date).
-      - Let's make it this [coming Monday](date).
-      - Is [this Friday](date) available?
-      - Can we book for [two days from now](date)?
-      - I'd like to reserve a spot for the [coming Sunday](date).
       - Let's set it for [2024-09-30](date).
       - We'd like to come in on [2023/11/15](date).
+      - I need to reserve a table for [next Friday](date).
+      - What availability do you have for [Sunday](date)?
+      - I'm looking for a reservation on [next Wednesday](date).
+      - Let's make it this [coming Monday](date).
+      - Can I book a table for [next Saturday](date)?
+      - We are planning for the [day after tomorrow](date).
+      - Is [this Friday](date) available?
+      - What's the availability on [October 5th](date)?
+      - I'd like to reserve for [December 25th, 2023](date).
+      - Can we book for [two days from now](date)?
+      - I'd like to reserve a spot for the [coming Sunday](date).
+
   - intent: inform_time
     examples: |
       - [7 pm](time)
