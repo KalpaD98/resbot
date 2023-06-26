@@ -79,6 +79,9 @@ class ActionShowRestaurants(Action):
                     message = "ඔබට try කර බැලීම සදහා විශිෂ්ට අවන්හල් කිහිපයක්!"
 
                 restaurants_list = restaurant_repo.get_all_restaurants(limit=10)
+
+                # TODO: recommendation module restaurants list | Comment when not in use
+                # restaurants_list = restaurant_repo.get_restaurants_with_recommendation_module()
             else:
                 message = f"I've found some great {cuisine.lower()} restaurants for you to try out!"
                 if language == SIN:
@@ -86,11 +89,11 @@ class ActionShowRestaurants(Action):
 
                 # Get the restaurant list from the database into an array
 
-                # TODO : uncomment get restaurants by cuisine
-                # restaurants_list = restaurant_repo.get_restaurants_filter_by_cuisine(cuisine, limit=10)
+                # TODO : comment when using recommendation
+                restaurants_list = restaurant_repo.get_restaurants_filter_by_cuisine(cuisine, limit=10)
 
                 # TODO: recommendation module restaurants list | Comment when not in use
-                restaurants_list = restaurant_repo.get_restaurants_with_recommendation_module()
+                # restaurants_list = restaurant_repo.get_restaurants_with_recommendation_module()
 
             dispatcher.utter_message(text=message,
                                      attachment=ResponseGenerator.card_options_carousal(
