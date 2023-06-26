@@ -53,7 +53,7 @@ pipeline: # ----------------------------------------- NLU Pipeline -------------
 policies: # -------------------------------------------- Dialog Management --------------------------------------------
 
   - name: MemoizationPolicy
-    max_history: 32
+#    max_history: 32
 
   - name: RulePolicy
     core_fallback_threshold: 0.3
@@ -61,10 +61,10 @@ policies: # -------------------------------------------- Dialog Management -----
     enable_fallback_prediction: true
 
   - name: UnexpecTEDIntentPolicy
-    max_history: 32
-    epochs: 100
+#    max_history: 32
+    epochs: 200
 
   - name: TEDPolicy
-    max_history: 32
-    epochs: 100
+#    max_history: 32
+    epochs: 200
     constrain_similarities: true

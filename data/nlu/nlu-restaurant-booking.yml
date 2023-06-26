@@ -38,6 +38,8 @@ nlu:
       - right about [100](num_people)
       - [4](num_people) guys
       - [12](num_people) gals
+      - [7](num_people) p
+      - [2](num_people) ps
 
   - intent: inform_date
     examples: |

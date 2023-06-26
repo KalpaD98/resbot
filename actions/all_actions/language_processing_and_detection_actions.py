@@ -25,7 +25,7 @@ class ActionAskLanguagePreference(Action):
                 PAYLOAD: "/inform_permanent_language{\"permanent_language\":\"" + 'en' + "\"}",
             },
             {
-                TITLE: "සිංහලට මාරු වෙන්න",
+                TITLE: "සිංහලට මාරු වන්න",
                 PAYLOAD: "/inform_permanent_language{\"permanent_language\":\"" + 'si' + "\"}",
             }
         ]

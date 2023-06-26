@@ -1,2 +1,14 @@
 version: "3.1"  # rules-cuisine.yml has cuisine related rules
 
+rules:
+  - rule: when user inform cuisine show restaurants #1 added 26 monday
+    steps:
+      - intent: inform_cuisine
+      - slot_was_set:
+          - cuisine: 'any'
+      - action: action_show_restaurants
+
+  - rule: when user ask to show cuisines show them #2 added 26 monday
+    steps:
+      - intent: request_cuisines
+      - action: action_show_cuisines
