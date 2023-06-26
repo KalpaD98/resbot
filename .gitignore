@@ -191,5 +191,6 @@ fabric.properties
 actions/__pycache__/
 models/
 gridresults/
+external_data/
 submodules/custom_components/language_handlers/models/lid.176.bin
 submodules/custom_components/resources/*
