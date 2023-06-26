@@ -6,4 +6,6 @@ rules:
       - intent: inform_change_booking_id
       - slot_was_set:
           - is_authenticated: true
+      - slot_was_set:
+          - booking_id: 'bid_6436555b937c8209a6a93609'
       - action: action_ask_what_user_want_to_change_in_booking

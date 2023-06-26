@@ -2,9 +2,9 @@ version: "3.1" # stories-restaurant-booking.yml has general stories for the book
 
 stories:
 
-  - story: User wants to book a restaurant directly #1 Happy Path
+  - story: User informs cuisines and get restaurants #1 Happy Path
     steps:
-      - checkpoint: checkpoint_cuisine_selection # continue from #3,4 (greeting)
+      - checkpoint: checkpoint_cuisine_selection #2 continue from #3,4 (greeting)
       - intent: inform_cuisine
       - slot_was_set:
           - cuisine: 'italian'
@@ -36,6 +36,7 @@ stories:
       - action: action_clear_restaurant_booking_slots
       - action: action_utter_thank_you
       - action: action_ask_anything_else
+      - checkpoint: checkpoint_after_ask_anything_else
 
 
   - story: User not in mood after viewing restaurant details or book directly #7 Sad Path
@@ -45,6 +46,7 @@ stories:
       - action: action_clear_restaurant_booking_slots
       - action: action_utter_thank_you
       - action: action_ask_anything_else
+      - checkpoint: checkpoint_after_ask_anything_else
 
   - story: User fills restaurant booking form after affirm to continue booking #5 Happy Path
     steps:
@@ -98,7 +100,8 @@ stories:
           - intent: mood_great
       - action: action_confirm_booking
       - action: action_utter_thank_you
-      - checkpoint: checkpoint_after_booking_complete
+      - action: action_ask_anything_else
+      - checkpoint: checkpoint_after_ask_anything_else
 
   - story: User deny or not in mood to book after viewing booking summary
     steps:
@@ -109,14 +112,7 @@ stories:
       - action: action_clear_restaurant_booking_slots
       - action: action_utter_thank_you
       - action: action_ask_anything_else
-
-  - story: after booking complete say bye  # happy Path
-    steps:
-      - checkpoint: checkpoint_after_booking_complete
-      - or:
-          - intent: affirm
-          - intent: mood_great
-      - action: action_utter_goodbye
+      - checkpoint: checkpoint_after_ask_anything_else
 
   - story: Stop restaurant booking form
     steps:
@@ -130,3 +126,16 @@ stories:
       - active_loop: null
       - action: action_clear_restaurant_booking_slots
       - action: action_ask_anything_else
+      - checkpoint: checkpoint_after_ask_anything_else
+
+  - story: user asks to browse restaurants again
+    steps:
+      - checkpoint: checkpoint_after_ask_anything_else
+      - intent: request_restaurants
+      - action: action_show_cuisines
+
+  - story: user asks to check bookings
+    steps:
+      - checkpoint: checkpoint_after_ask_anything_else
+      - intent: view_bookings
+      - action: action_show_booking_view_options

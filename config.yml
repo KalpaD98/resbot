@@ -62,9 +62,9 @@ policies: # -------------------------------------------- Dialog Management -----
 
   - name: UnexpecTEDIntentPolicy
 #    max_history: 32
-    epochs: 200
+    epochs: 100
 
   - name: TEDPolicy
 #    max_history: 32
-    epochs: 200
+    epochs: 100
     constrain_similarities: true
