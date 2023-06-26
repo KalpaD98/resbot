@@ -1,82 +1,82 @@
-import nltk
+# import nltk
 import pandas as pd
-from nltk.corpus import stopwords
-from nltk.stem import WordNetLemmatizer
-from nltk.tokenize import sent_tokenize, word_tokenize
+# from nltk.corpus import stopwords
+# from nltk.stem import WordNetLemmatizer
+# from nltk.tokenize import sent_tokenize, word_tokenize
 from sklearn.metrics.pairwise import cosine_similarity
 from textblob import TextBlob
 
-nltk.download('stopwords')
-nltk.download('punkt')
-nltk.download('wordnet')
+# nltk.download('stopwords')
+# nltk.download('punkt')
+# nltk.download('wordnet')
 
 
-def get_feature_words():
-    return {
-        'feature 1': ['service', 'experience', 'look', 'flavor', 'star', 'dish', 'store', 'tasty', 'come', 'return'],
-        'feature 2': ['order', 'lunch', 'dinner', 'enjoy', 'friend', 'breakfast', 'onion', 'soup', 'point', 'town'],
-        'feature 3': ['eat', 'way', 'option', 'feel', 'portion', 'bowl', 'start', 'house', 'size', 'think'],
-        'feature 4': ['visit', 'staff', 'night', 'serve', 'work', 'chip', 'change', 'let', 'counter', 'taste'],
-        'feature 5': ['chicken', 'fry', 'sandwich', 'roll', 'bread', 'tender', 'make', 'shrimp', 'appetizer', 'grill'],
-        'feature 6': ['time', 'year', 'spot', 'bit', 'couple', 'use', 'water', 'thank', 'treat', 'dog'],
-        'feature 7': ['location', 'item', 'space', 'quality', 'share', 'stuff', 'plan', 'menu', 'favorite', 'trip'],
-        'feature 8': ['place', 'day', 'wait', 'minute', 'choice', 'delivery', 'crispy', 'pay', 'tea', 'bite'],
-        'feature 9': ['pizza', 'review', 'beer', 'parking', 'style', 'park', 'stop', 'street', 'plenty', 'walk'],
-        'feature 10': ['restaurant', 'home', 'rice', 'ask', 'pork', 'need', 'dine', 'customer', 'pack', 'wine'],
-        'feature 11': ['food', 'thing', 'lot', 'plate', 'cup', 'truck', 'taste', 'chain', 'juice', 'protein'],
-        'feature 12': ['menu', 'meal', 'people', 'price', 'salad', 'potato', 'business', 'head', 'ingredient',
-                       'reason'],
-        'feature 13': ['seat', 'hour', 'pick', 'piece', 'half', 'person', 'course', 'grab', 'deal', 'note'],
-        'feature 14': ['bar', 'table', 'drink', 'sit', 'cook', 'fun', 'tell', 'steak', 'honey', 'cold'],
-        'feature 15': ['try', 'love', 'area', 'room', 'dessert', 'kind', 'reservation', 'locate', 'miss', 'manager'],
-        'feature 16': ['cheese', 'end', 'slice', 'husband', 'bring', 'pie', 'crust', 'sweet', 'base', 'group'],
-        'feature 17': ['coffee', 'egg', 'bacon', 'tomato', 'cake', 'mushroom', 'pepper', 'sausage', 'pickle', 'mix'],
-        'feature 18': ['sauce', 'drive', 'family', 'door', 'today', 'touch', 'heat', 'distance', 'boy', 'face'],
-        'feature 19': ['meat', 'line', 'beef', 'bun', 'wall', 'morning', 'establishment', 'phone', 'pub', 'stand'],
-        'feature 20': ['spicy', 'hand', 'mask', 'super', 'car', 'window', 'purchase', 'toast', 'kitchen', 'sign'],
-    }
+# def get_feature_words():
+#     return {
+#         'feature 1': ['service', 'experience', 'look', 'flavor', 'star', 'dish', 'store', 'tasty', 'come', 'return'],
+#         'feature 2': ['order', 'lunch', 'dinner', 'enjoy', 'friend', 'breakfast', 'onion', 'soup', 'point', 'town'],
+#         'feature 3': ['eat', 'way', 'option', 'feel', 'portion', 'bowl', 'start', 'house', 'size', 'think'],
+#         'feature 4': ['visit', 'staff', 'night', 'serve', 'work', 'chip', 'change', 'let', 'counter', 'taste'],
+#         'feature 5': ['chicken', 'fry', 'sandwich', 'roll', 'bread', 'tender', 'make', 'shrimp', 'appetizer', 'grill'],
+#         'feature 6': ['time', 'year', 'spot', 'bit', 'couple', 'use', 'water', 'thank', 'treat', 'dog'],
+#         'feature 7': ['location', 'item', 'space', 'quality', 'share', 'stuff', 'plan', 'menu', 'favorite', 'trip'],
+#         'feature 8': ['place', 'day', 'wait', 'minute', 'choice', 'delivery', 'crispy', 'pay', 'tea', 'bite'],
+#         'feature 9': ['pizza', 'review', 'beer', 'parking', 'style', 'park', 'stop', 'street', 'plenty', 'walk'],
+#         'feature 10': ['restaurant', 'home', 'rice', 'ask', 'pork', 'need', 'dine', 'customer', 'pack', 'wine'],
+#         'feature 11': ['food', 'thing', 'lot', 'plate', 'cup', 'truck', 'taste', 'chain', 'juice', 'protein'],
+#         'feature 12': ['menu', 'meal', 'people', 'price', 'salad', 'potato', 'business', 'head', 'ingredient',
+#                        'reason'],
+#         'feature 13': ['seat', 'hour', 'pick', 'piece', 'half', 'person', 'course', 'grab', 'deal', 'note'],
+#         'feature 14': ['bar', 'table', 'drink', 'sit', 'cook', 'fun', 'tell', 'steak', 'honey', 'cold'],
+#         'feature 15': ['try', 'love', 'area', 'room', 'dessert', 'kind', 'reservation', 'locate', 'miss', 'manager'],
+#         'feature 16': ['cheese', 'end', 'slice', 'husband', 'bring', 'pie', 'crust', 'sweet', 'base', 'group'],
+#         'feature 17': ['coffee', 'egg', 'bacon', 'tomato', 'cake', 'mushroom', 'pepper', 'sausage', 'pickle', 'mix'],
+#         'feature 18': ['sauce', 'drive', 'family', 'door', 'today', 'touch', 'heat', 'distance', 'boy', 'face'],
+#         'feature 19': ['meat', 'line', 'beef', 'bun', 'wall', 'morning', 'establishment', 'phone', 'pub', 'stand'],
+#         'feature 20': ['spicy', 'hand', 'mask', 'super', 'car', 'window', 'purchase', 'toast', 'kitchen', 'sign'],
+#     }
 
 
-def extract_sentences_with_features(text, feature_words):
-    stopwords_set = set(stopwords.words('english'))
-    lemmatizer = WordNetLemmatizer()
+# def extract_sentences_with_features(text, feature_words):
+#     stopwords_set = set(stopwords.words('english'))
+#     lemmatizer = WordNetLemmatizer()
+#
+#     def preprocess_token(token):
+#         token = token.lower()
+#         token = lemmatizer.lemmatize(token)
+#         return token
+#
+#     def preprocess_sentence(sentence):
+#         tokens = word_tokenize(sentence)
+#         tokens = [preprocess_token(token) for token in tokens if token.isalpha()]
+#         tokens = [token for token in tokens if token not in stopwords_set]
+#         return tokens
+#
+#     preprocessed_text = [preprocess_sentence(sentence) for sentence in sent_tokenize(text)]
+#
+#     relevant_sentences = {}
+#     for feature_word, related_words in feature_words.items():
+#         relevant_sentences[feature_word] = []
+#         for sentence_tokens in preprocessed_text:
+#             if any((feature_word in sentence_tokens) or (related_word in sentence_tokens) for related_word in
+#                    related_words):
+#                 relevant_sentences[feature_word].append(' '.join(sentence_tokens))
+#
+#     return relevant_sentences
 
-    def preprocess_token(token):
-        token = token.lower()
-        token = lemmatizer.lemmatize(token)
-        return token
 
-    def preprocess_sentence(sentence):
-        tokens = word_tokenize(sentence)
-        tokens = [preprocess_token(token) for token in tokens if token.isalpha()]
-        tokens = [token for token in tokens if token not in stopwords_set]
-        return tokens
-
-    preprocessed_text = [preprocess_sentence(sentence) for sentence in sent_tokenize(text)]
-
-    relevant_sentences = {}
-    for feature_word, related_words in feature_words.items():
-        relevant_sentences[feature_word] = []
-        for sentence_tokens in preprocessed_text:
-            if any((feature_word in sentence_tokens) or (related_word in sentence_tokens) for related_word in
-                   related_words):
-                relevant_sentences[feature_word].append(' '.join(sentence_tokens))
-
-    return relevant_sentences
-
-
-def get_feature_df(df, feature_words):
-    df['feature_summaries'] = df['review'].apply(lambda x: extract_sentences_with_features(x, feature_words))
-
-    for index, row in df.iterrows():
-        relevant_sentences = row['feature_summaries']
-        dic = {}
-        for feature_word, sentences in relevant_sentences.items():
-            joined_sentence = ' '.join(sentences)
-            dic[feature_word] = joined_sentence
-        df.at[index, 'feature_summaries'] = dic
-
-    return df
+# def get_feature_df(df, feature_words):
+#     df['feature_summaries'] = df['review'].apply(lambda x: extract_sentences_with_features(x, feature_words))
+#
+#     for index, row in df.iterrows():
+#         relevant_sentences = row['feature_summaries']
+#         dic = {}
+#         for feature_word, sentences in relevant_sentences.items():
+#             joined_sentence = ' '.join(sentences)
+#             dic[feature_word] = joined_sentence
+#         df.at[index, 'feature_summaries'] = dic
+#
+#     return df
 
 
 def calculate_sentiment_score(sentence):
@@ -181,16 +181,16 @@ def hybrid_recommendation(colab_df, content_df, content_weight, collab_filtering
 
 
 def recommendation(user_id, df, n_restaurants=10):
-    df = df.drop(columns=['categories', 'address', 'state_', 'city', 'postal_code', 'latitude', 'longitude', 'stars',
-                          'review_count', 'is_open', 'hours', 'review_id', 'useful', 'funny', 'cool', 'date_', 'name'])
-    df = df.rename(columns={'text_': 'review'})
-    df = df.dropna()
-    df = df.drop_duplicates()
+    # df = df.drop(columns=['categories', 'address', 'state_', 'city', 'postal_code', 'latitude', 'longitude', 'stars',
+    #                       'review_count', 'is_open', 'hours', 'review_id', 'useful', 'funny', 'cool', 'date_', 'name'])
+    # df = df.rename(columns={'text_': 'review'})
+    # df = df.dropna()
+    # df = df.drop_duplicates()
 
-    feature_words = get_feature_words()
+    # feature_words = get_feature_words()
 
-    df_sent = get_feature_df(df, feature_words)
-
+    # df_sent = get_feature_df(df, feature_words)
+    df_sent = df.copy()
     feature_name_list = list(df_sent['feature_summaries'][0].keys())
 
     df_sent["sentiment_scores"] = df_sent["feature_summaries"].apply(
@@ -217,7 +217,7 @@ def recommendation(user_id, df, n_restaurants=10):
 def get_business_ids(user_id, n_restaurants=10):
     # check if recommendations stored is not derive and store
 
-    df = pd.read_csv('/Users/kalpafernando/PycharmProjects/resbot/submodules/other_modules/top_60_reviews_data.csv')
+    df = pd.read_csv('/Users/kalpafernando/PycharmProjects/resbot/submodules/other_modules/top_60_reviews_data_preprocessed.csv')
     # user_id = "iewIMUeTeCYW7VZQvifP0g"
     user_id = "V1AMJ5p050XTl2PZB13YfQ"
     result = recommendation(user_id, df, n_restaurants)

@@ -33,6 +33,7 @@ nlu:
       - Can you tell me what types of food I can order?
       - What food styles are on offer?
       - Show me the food options.
+      - cuisine
 
   - intent: inform_cuisine
     examples: |

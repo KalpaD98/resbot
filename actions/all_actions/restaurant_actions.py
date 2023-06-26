@@ -94,13 +94,20 @@ class ActionShowRestaurants(Action):
 
                 # TODO: recommendation module restaurants list | Comment when not in use
                 # restaurants_list = restaurant_repo.get_restaurants_with_recommendation_module()
+            if len(restaurants_list) > 0:
+                dispatcher.utter_message(text=message,
+                                         attachment=ResponseGenerator.card_options_carousal(
+                                             RestaurantResponseGenerator.
+                                             restaurant_list_to_carousal_object(restaurants_list)))
+                # consider adding view more option
+                return [SlotSet("restaurant_offset", 0)]
+            else:
 
-            dispatcher.utter_message(text=message,
-                                     attachment=ResponseGenerator.card_options_carousal(
-                                         RestaurantResponseGenerator.
-                                         restaurant_list_to_carousal_object(restaurants_list)))
-            # consider adding view more option
-            return [SlotSet("restaurant_offset", 0)]
+                message = "Sorry, I couldn't find any " + cuisine + " restaurants"
+                if language == SIN:
+                    message = "කණගාටුයි, " + cuisine.lower + " ආපනශාලා සොයා ගැනීමට නොහැකි විය"
+                dispatcher.utter_message(text=message)
+                return [FollowupAction(ACTION_SHOW_CUISINES)]
 
         except Exception as e:
             logging.error(f"Error in ActionShowRestaurants: {e}")

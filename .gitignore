@@ -192,5 +192,6 @@ actions/__pycache__/
 models/
 gridresults/
 submodules/other_modules/top_60_reviews_data.csv
+submodules/other_modules/top_60_reviews_data_preprocessed.csv
 submodules/custom_components/language_handlers/models/lid.176.bin
 submodules/custom_components/resources/*
