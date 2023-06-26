@@ -4,6 +4,7 @@ from pymongo.errors import PyMongoError
 
 from submodules.database.connectors.mongo_connector import db
 from submodules.database.data_models.restaurant import Restaurant
+from submodules.other_modules.recommendation import get_business_ids
 
 
 class RestaurantRepository:
@@ -141,3 +142,25 @@ class RestaurantRepository:
             return [doc['_id'] for doc in results]
         except PyMongoError as e:
             raise Exception(f"Error retrieving unique cuisines ordered: {e}")
+
+    """
+        get restaurants from recommendation module
+        get a list of business_ids' from recommendation module
+        use business_ids' to get restaurants from database
+    """
+
+    def get_restaurants_with_recommendation_module(self, limit: int = 10) -> List[Restaurant]:
+        """
+        Get a list of restaurants by business_ids from recommendation module.
+
+        :return: List of Restaurant objects
+        """
+        # user_id = "iewIMUeTeCYW7VZQvifP0g"
+        user_id = "V1AMJ5p050XTl2PZB13YfQ"
+        business_ids = get_business_ids(user_id, limit)
+
+        try:
+            cursor = self.collection.find({"business_id": {"$in": business_ids}})
+            return [Restaurant.from_dict(doc) for doc in cursor]
+        except PyMongoError as e:
+            raise Exception(f"Error retrieving restaurants by business_ids: {e}")

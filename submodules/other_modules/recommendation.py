@@ -213,19 +213,12 @@ def recommendation(user_id, df, n_restaurants=10):
     return ranked_rest_ids
 
 
-# Run this
-path = '/content/drive/MyDrive/FYP/data/post20by20.csv'
-df = pd.read_csv(path)
-
-result = recommendation('sbcPtUZ9gKmwQ4LnP8udew', df, 10)
-result
-
-
 # function to get recommendation by passing user id and number of restaurants to recommend
-def get_recommendation(user_id, n_restaurants=10):
+def get_business_ids(user_id, n_restaurants=10):
     # check if recommendations stored is not derive and store
 
-    df = pd.read_csv('data/post20by20.csv')
-
+    df = pd.read_csv('/Users/kalpafernando/PycharmProjects/resbot/submodules/other_modules/top_60_reviews_data.csv')
+    # user_id = "iewIMUeTeCYW7VZQvifP0g"
+    user_id = "V1AMJ5p050XTl2PZB13YfQ"
     result = recommendation(user_id, df, n_restaurants)
     return result
