@@ -33,6 +33,7 @@ nlu:
       - Can you tell me what types of food I can order?
       - What food styles are on offer?
       - Show me the food options.
+
   - intent: inform_cuisine
     examples: |
       - [mexican](cuisine)
@@ -66,3 +67,4 @@ nlu:
       - [Multi](cuisine) cuisine
       - I would like to try [italian](cuisine)
       - [chinese](cuisine) places available?
+      - change of mind show [japanese](cuisine) restaurants

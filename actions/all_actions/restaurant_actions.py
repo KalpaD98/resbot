@@ -86,8 +86,9 @@ class ActionShowRestaurants(Action):
                 # Get the restaurant list from the database into an array
 
                 # TODO : uncomment get restaurants by cuisine
-                # restaurants_list = restaurant_repo.get_restaurants_by_cuisine(cuisine, limit=10)
-                restaurants_list = restaurant_repo.get_all_restaurants(limit=10)
+                restaurants_list = restaurant_repo.get_restaurants_filter_by_cuisine(cuisine, limit=10)
+                # TODO : comment get all restaurants
+                # restaurants_list = restaurant_repo.get_all_restaurants(limit=10)
 
             dispatcher.utter_message(text=message,
                                      attachment=ResponseGenerator.card_options_carousal(
