@@ -82,6 +82,7 @@ class ActionShowRestaurants(Action):
 
                 # TODO: recommendation module restaurants list | Comment when not in use
                 # restaurants_list = restaurant_repo.get_restaurants_with_recommendation_module()
+
             else:
                 message = f"I've found some great {cuisine.lower()} restaurants for you to try out!"
                 if language == SIN:
@@ -94,6 +95,7 @@ class ActionShowRestaurants(Action):
 
                 # TODO: recommendation module restaurants list | Comment when not in use
                 # restaurants_list = restaurant_repo.get_restaurants_with_recommendation_module()
+
             if len(restaurants_list) > 0:
                 dispatcher.utter_message(text=message,
                                          attachment=ResponseGenerator.card_options_carousal(
