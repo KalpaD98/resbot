@@ -21,7 +21,7 @@ class ActionShowCuisines(Action):
         try:
             # get top 10 personalised cuisines for a particular user from the recommendation engine or most popular
             # (frequent)
-            cuisines = restaurant_repo.get_unique_cuisines()
+            cuisines = restaurant_repo.get_unique_cuisines_ordered()
 
             cuisines.append('any cuisine')  # generate synonyms for 'Any' cuisine
 
@@ -78,10 +78,10 @@ class ActionShowRestaurants(Action):
                 if language == SIN:
                     message = "ඔබට try කර බැලීම සදහා විශිෂ්ට අවන්හල් කිහිපයක්!"
 
-                restaurants_list = restaurant_repo.get_all_restaurants(limit=10)
+                # restaurants_list = restaurant_repo.get_all_restaurants(limit=10)
 
                 # TODO: recommendation module restaurants list | Comment when not in use
-                # restaurants_list = restaurant_repo.get_restaurants_with_recommendation_module()
+                restaurants_list = restaurant_repo.get_restaurants_with_recommendation_module()
 
             else:
                 message = f"I've found some great {cuisine.lower()} restaurants for you to try out!"
@@ -91,10 +91,10 @@ class ActionShowRestaurants(Action):
                 # Get the restaurant list from the database into an array
 
                 # TODO : comment when using recommendation
-                restaurants_list = restaurant_repo.get_restaurants_filter_by_cuisine(cuisine, limit=10)
+                # restaurants_list = restaurant_repo.get_restaurants_filter_by_cuisine(cuisine, limit=10)
 
                 # TODO: recommendation module restaurants list | Comment when not in use
-                # restaurants_list = restaurant_repo.get_restaurants_with_recommendation_module()
+                restaurants_list = restaurant_repo.get_restaurants_with_recommendation_module(cuisine=cuisine)
 
             if len(restaurants_list) > 0:
                 dispatcher.utter_message(text=message,

@@ -305,11 +305,5 @@
     "f1-score": 0.8669196005801898,
     "support": 217
   },
-  "accuracy": 0.8663594470046083,
-  "conversation_accuracy": {
-    "accuracy": 0.3,
-    "correct": 3,
-    "with_warnings": 0,
-    "total": 10
-  }
+  "accuracy": 0.8663594470046083
 }

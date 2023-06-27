@@ -1,3 +1,4 @@
+import logging
 from typing import List, Dict, Optional
 
 from pymongo.errors import PyMongoError
@@ -104,26 +105,7 @@ class RestaurantRepository:
         except PyMongoError as e:
             raise Exception(f"Error retrieving restaurants by cuisine: {e}")
 
-    def get_unique_cuisines(self, limit: int = 5, offset: int = 0) -> List[str]:
-        """
-        Get a list of unique cuisines with pagination.
-
-        :param limit: Number of cuisines to retrieve
-        :param offset: Offset for the query (pagination)
-        :return: List of unique cuisine types
-    """
-        try:
-            pipeline = [
-                {"$group": {"_id": "$cuisine"}},
-                {"$skip": offset},
-                {"$limit": limit}
-            ]
-            results = self.collection.aggregate(pipeline)
-            return [doc['_id'] for doc in results]
-        except PyMongoError as e:
-            raise Exception(f"Error retrieving unique cuisines: {e}")
-
-    def get_unique_cuisines_ordered(self, limit: int = 10, offset: int = 0) -> List[str]:
+    def get_unique_cuisines_ordered(self, limit: int = 7, offset: int = 0) -> List[str]:
         """
         Get a list of unique cuisines ordered by count with pagination.
 
@@ -149,18 +131,25 @@ class RestaurantRepository:
         use business_ids' to get restaurants from database
     """
 
-    def get_restaurants_with_recommendation_module(self, limit: int = 10) -> List[Restaurant]:
+    def get_restaurants_with_recommendation_module(self, limit: int = 10, cuisine: str = None, offset: int = 0) -> \
+            List[Restaurant]:
         """
-        Get a list of restaurants by business_ids from recommendation module.
+        Get a list of restaurants by business_ids from the recommendation module, filtered by cuisine.
 
+        :param limit: Maximum number of restaurants to retrieve (default: 10)
+        :param cuisine: Cuisine type to filter the restaurants (optional)
+        :param offset: Offset for the query (pagination)
         :return: List of Restaurant objects
         """
-        # user_id = "iewIMUeTeCYW7VZQvifP0g"
+        logging.info(f"Getting restaurants from recommendation module with cuisine={cuisine}")
         user_id = "V1AMJ5p050XTl2PZB13YfQ"
-        business_ids = get_business_ids(user_id, limit)
+        business_ids = get_business_ids(user_id)
 
         try:
-            cursor = self.collection.find({"business_id": {"$in": business_ids}})
+            filter_query = {"business_id": {"$in": business_ids}}
+            if cuisine:
+                filter_query["cuisine"] = cuisine
+            cursor = self.collection.find(filter_query).skip(offset).limit(limit)
             return [Restaurant.from_dict(doc) for doc in cursor]
         except PyMongoError as e:
             raise Exception(f"Error retrieving restaurants by business_ids: {e}")
