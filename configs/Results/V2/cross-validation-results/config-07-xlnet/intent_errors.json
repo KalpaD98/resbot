@@ -1,0 +1,794 @@
+[
+  {
+    "text": "prefer bbq",
+    "intent": "inform_cuisine",
+    "intent_prediction": {
+      "name": "inform_user_password",
+      "confidence": 0.3592381179332733
+    }
+  },
+  {
+    "text": "I feel like having some French food.",
+    "intent": "inform_cuisine",
+    "intent_prediction": {
+      "name": "out_of_scope",
+      "confidence": 0.4532589614391327
+    }
+  },
+  {
+    "text": "Is there a good Brazilian steakhouse around?",
+    "intent": "inform_cuisine",
+    "intent_prediction": {
+      "name": "bot_challenge",
+      "confidence": 0.1617530882358551
+    }
+  },
+  {
+    "text": "whatever Any cuisine",
+    "intent": "inform_cuisine",
+    "intent_prediction": {
+      "name": "request_cuisines",
+      "confidence": 0.6259573698043823
+    }
+  },
+  {
+    "text": "Multi cuisine",
+    "intent": "inform_cuisine",
+    "intent_prediction": {
+      "name": "request_cuisines",
+      "confidence": 0.7325480580329895
+    }
+  },
+  {
+    "text": "en",
+    "intent": "inform_permanent_language",
+    "intent_prediction": {
+      "name": "deny",
+      "confidence": 0.3033711314201355
+    }
+  },
+  {
+    "text": "I need to view my booking",
+    "intent": "view_bookings",
+    "intent_prediction": {
+      "name": "user_wants_to_change_restaurant_booking",
+      "confidence": 0.7654340267181396
+    }
+  },
+  {
+    "text": "What's the schedule for this place?",
+    "intent": "request_opening_hours",
+    "intent_prediction": {
+      "name": "request_ambiance",
+      "confidence": 0.3673373758792877
+    }
+  },
+  {
+    "text": "What's the timing of Subway?",
+    "intent": "request_opening_hours",
+    "intent_prediction": {
+      "name": "request_ambiance",
+      "confidence": 0.47439590096473694
+    }
+  },
+  {
+    "text": "Who's the US President?",
+    "intent": "out_of_scope",
+    "intent_prediction": {
+      "name": "request_menu",
+      "confidence": 0.4801441431045532
+    }
+  },
+  {
+    "text": "I want to lg out",
+    "intent": "logout",
+    "intent_prediction": {
+      "name": "inform_cuisine",
+      "confidence": 0.6849309206008911
+    }
+  },
+  {
+    "text": "1234",
+    "intent": "inform_user_password",
+    "intent_prediction": {
+      "name": "inform_num_people",
+      "confidence": 0.47571149468421936
+    }
+  },
+  {
+    "text": "gm",
+    "intent": "greet",
+    "intent_prediction": {
+      "name": "affirm",
+      "confidence": 0.3600827157497406
+    }
+  },
+  {
+    "text": "moin",
+    "intent": "greet",
+    "intent_prediction": {
+      "name": "request_ambiance",
+      "confidence": 0.16802312433719635
+    }
+  },
+  {
+    "text": "Take care",
+    "intent": "goodbye",
+    "intent_prediction": {
+      "name": "out_of_scope",
+      "confidence": 0.3604274094104767
+    }
+  },
+  {
+    "text": "So long",
+    "intent": "goodbye",
+    "intent_prediction": {
+      "name": "inform_permanent_language",
+      "confidence": 0.4877025783061981
+    }
+  },
+  {
+    "text": "Till next time",
+    "intent": "goodbye",
+    "intent_prediction": {
+      "name": "inform_user_name",
+      "confidence": 0.2881084680557251
+    }
+  },
+  {
+    "text": "Until we meet again",
+    "intent": "goodbye",
+    "intent_prediction": {
+      "name": "request_restaurants",
+      "confidence": 0.3443440794944763
+    }
+  },
+  {
+    "text": "nah I am ok",
+    "intent": "deny",
+    "intent_prediction": {
+      "name": "affirm",
+      "confidence": 0.2947195768356323
+    }
+  },
+  {
+    "text": "I'm grateful for your assistance",
+    "intent": "thank_you",
+    "intent_prediction": {
+      "name": "user_wants_to_cancel_booking",
+      "confidence": 0.60882169008255
+    }
+  },
+  {
+    "text": "shut up",
+    "intent": "stop",
+    "intent_prediction": {
+      "name": "affirm",
+      "confidence": 0.36685097217559814
+    }
+  },
+  {
+    "text": "that doesnt help me",
+    "intent": "stop",
+    "intent_prediction": {
+      "name": "deny",
+      "confidence": 0.7670834064483643
+    }
+  },
+  {
+    "text": "you're not making sense",
+    "intent": "stop",
+    "intent_prediction": {
+      "name": "deny",
+      "confidence": 0.36743101477622986
+    }
+  },
+  {
+    "text": "Greek food would be nice",
+    "intent": "inform_cuisine",
+    "intent_prediction": {
+      "name": "thank_you",
+      "confidence": 0.2818392515182495
+    }
+  },
+  {
+    "text": "I've changed my mind, please cancel my booking",
+    "intent": "user_wants_to_cancel_booking",
+    "intent_prediction": {
+      "name": "user_wants_to_change_restaurant_booking",
+      "confidence": 0.6185243725776672
+    }
+  },
+  {
+    "text": "What are the food options at this restaurant?",
+    "intent": "request_menu",
+    "intent_prediction": {
+      "name": "request_opening_hours",
+      "confidence": 0.6808135509490967
+    }
+  },
+  {
+    "text": "What time does Panda Express close?",
+    "intent": "request_opening_hours",
+    "intent_prediction": {
+      "name": "bot_challenge",
+      "confidence": 0.29126235842704773
+    }
+  },
+  {
+    "text": "What's the feel of the restaurant?",
+    "intent": "request_ambiance",
+    "intent_prediction": {
+      "name": "request_opening_hours",
+      "confidence": 0.7344788312911987
+    }
+  },
+  {
+    "text": "Is this an AI I am chatting with?",
+    "intent": "bot_challenge",
+    "intent_prediction": {
+      "name": "stop",
+      "confidence": 0.3610003888607025
+    }
+  },
+  {
+    "text": "What is 2 + 2?",
+    "intent": "out_of_scope",
+    "intent_prediction": {
+      "name": "inform_date",
+      "confidence": 0.40102729201316833
+    }
+  },
+  {
+    "text": "can you answer any question ?",
+    "intent": "out_of_scope",
+    "intent_prediction": {
+      "name": "request_restaurants",
+      "confidence": 0.29920199513435364
+    }
+  },
+  {
+    "text": "gummorning",
+    "intent": "greet",
+    "intent_prediction": {
+      "name": "inform_user_name",
+      "confidence": 0.36801719665527344
+    }
+  },
+  {
+    "text": "tata",
+    "intent": "goodbye",
+    "intent_prediction": {
+      "name": "affirm",
+      "confidence": 0.427685022354126
+    }
+  },
+  {
+    "text": "yup",
+    "intent": "affirm",
+    "intent_prediction": {
+      "name": "request_user_registration_form",
+      "confidence": 0.40209612250328064
+    }
+  },
+  {
+    "text": "nah",
+    "intent": "deny",
+    "intent_prediction": {
+      "name": "affirm",
+      "confidence": 0.5709862112998962
+    }
+  },
+  {
+    "text": "suspend",
+    "intent": "stop",
+    "intent_prediction": {
+      "name": "affirm",
+      "confidence": 0.4497874677181244
+    }
+  },
+  {
+    "text": "Stop right there",
+    "intent": "stop",
+    "intent_prediction": {
+      "name": "request_menu",
+      "confidence": 0.4270011782646179
+    }
+  },
+  {
+    "text": "I don't think you're helping",
+    "intent": "stop",
+    "intent_prediction": {
+      "name": "deny",
+      "confidence": 0.5748383402824402
+    }
+  },
+  {
+    "text": "Show me the food options.",
+    "intent": "request_cuisines",
+    "intent_prediction": {
+      "name": "request_menu",
+      "confidence": 0.6395356059074402
+    }
+  },
+  {
+    "text": "i want to book another one",
+    "intent": "request_restaurants",
+    "intent_prediction": {
+      "name": "out_of_scope",
+      "confidence": 0.9448703527450562
+    }
+  },
+  {
+    "text": "What does the restaurant serve?",
+    "intent": "request_menu",
+    "intent_prediction": {
+      "name": "request_ambiance",
+      "confidence": 0.719157874584198
+    }
+  },
+  {
+    "text": "Can you tell me your capabilities?",
+    "intent": "bot_challenge",
+    "intent_prediction": {
+      "name": "inform_date",
+      "confidence": 0.2338745892047882
+    }
+  },
+  {
+    "text": "How can you assist me?",
+    "intent": "bot_challenge",
+    "intent_prediction": {
+      "name": "logout",
+      "confidence": 0.2114359736442566
+    }
+  },
+  {
+    "text": "What's the weather today?",
+    "intent": "out_of_scope",
+    "intent_prediction": {
+      "name": "request_ambiance",
+      "confidence": 0.5055240988731384
+    }
+  },
+  {
+    "text": "hasini",
+    "intent": "inform_user_name",
+    "intent_prediction": {
+      "name": "greet",
+      "confidence": 0.32805389165878296
+    }
+  },
+  {
+    "text": "salutations",
+    "intent": "greet",
+    "intent_prediction": {
+      "name": "affirm",
+      "confidence": 0.1531481146812439
+    }
+  },
+  {
+    "text": "cu",
+    "intent": "goodbye",
+    "intent_prediction": {
+      "name": "deny",
+      "confidence": 0.10924042761325836
+    }
+  },
+  {
+    "text": "Later",
+    "intent": "goodbye",
+    "intent_prediction": {
+      "name": "stop",
+      "confidence": 0.6627310514450073
+    }
+  },
+  {
+    "text": "why not",
+    "intent": "affirm",
+    "intent_prediction": {
+      "name": "deny",
+      "confidence": 0.3627851903438568
+    }
+  },
+  {
+    "text": "That doesn't sound right",
+    "intent": "deny",
+    "intent_prediction": {
+      "name": "stop",
+      "confidence": 0.5371681451797485
+    }
+  },
+  {
+    "text": "negative",
+    "intent": "deny",
+    "intent_prediction": {
+      "name": "goodbye",
+      "confidence": 0.8096763491630554
+    }
+  },
+  {
+    "text": "Any thing",
+    "intent": "inform_cuisine",
+    "intent_prediction": {
+      "name": "deny",
+      "confidence": 0.46856313943862915
+    }
+  },
+  {
+    "text": "chinese places available?",
+    "intent": "inform_cuisine",
+    "intent_prediction": {
+      "name": "request_cuisines",
+      "confidence": 0.4650604724884033
+    }
+  },
+  {
+    "text": "sin",
+    "intent": "inform_permanent_language",
+    "intent_prediction": {
+      "name": "deny",
+      "confidence": 0.3325181007385254
+    }
+  },
+  {
+    "text": "12 gals",
+    "intent": "inform_num_people",
+    "intent_prediction": {
+      "name": "inform_time",
+      "confidence": 0.32944589853286743
+    }
+  },
+  {
+    "text": "Can we book for two days from now?",
+    "intent": "inform_date",
+    "intent_prediction": {
+      "name": "request_cuisines",
+      "confidence": 0.507684051990509
+    }
+  },
+  {
+    "text": "Can you show me some restaurants with ratings above 4.0",
+    "intent": "request_restaurants",
+    "intent_prediction": {
+      "name": "inform_date",
+      "confidence": 0.4111636281013489
+    }
+  },
+  {
+    "text": "Can you display the list of available restaurants?",
+    "intent": "request_restaurants",
+    "intent_prediction": {
+      "name": "request_cuisines",
+      "confidence": 0.8353156447410583
+    }
+  },
+  {
+    "text": "Can you display the food items available at this?",
+    "intent": "request_menu",
+    "intent_prediction": {
+      "name": "request_cuisines",
+      "confidence": 0.9125871658325195
+    }
+  },
+  {
+    "text": "How about the location?",
+    "intent": "request_ambiance",
+    "intent_prediction": {
+      "name": "greet",
+      "confidence": 0.1865459382534027
+    }
+  },
+  {
+    "text": "How does it look like in?",
+    "intent": "request_ambiance",
+    "intent_prediction": {
+      "name": "request_login_form",
+      "confidence": 0.6386396288871765
+    }
+  },
+  {
+    "text": "your purpose?",
+    "intent": "bot_challenge",
+    "intent_prediction": {
+      "name": "stop",
+      "confidence": 0.34740254282951355
+    }
+  },
+  {
+    "text": "I want to order food",
+    "intent": "out_of_scope",
+    "intent_prediction": {
+      "name": "inform_cuisine",
+      "confidence": 0.4059951603412628
+    }
+  },
+  {
+    "text": "Do you have deliver food?",
+    "intent": "out_of_scope",
+    "intent_prediction": {
+      "name": "inform_cuisine",
+      "confidence": 0.41977521777153015
+    }
+  },
+  {
+    "text": "check hotels",
+    "intent": "out_of_scope",
+    "intent_prediction": {
+      "name": "request_restaurants",
+      "confidence": 0.3850539028644562
+    }
+  },
+  {
+    "text": "Can you log me out?",
+    "intent": "logout",
+    "intent_prediction": {
+      "name": "bot_challenge",
+      "confidence": 0.39327555894851685
+    }
+  },
+  {
+    "text": "How do I log out?",
+    "intent": "logout",
+    "intent_prediction": {
+      "name": "request_login_form",
+      "confidence": 0.4807654321193695
+    }
+  },
+  {
+    "text": "sagara",
+    "intent": "inform_user_name",
+    "intent_prediction": {
+      "name": "goodbye",
+      "confidence": 0.6105899810791016
+    }
+  },
+  {
+    "text": "greetings",
+    "intent": "greet",
+    "intent_prediction": {
+      "name": "goodbye",
+      "confidence": 0.13907107710838318
+    }
+  },
+  {
+    "text": "y not",
+    "intent": "affirm",
+    "intent_prediction": {
+      "name": "deny",
+      "confidence": 0.8624773025512695
+    }
+  },
+  {
+    "text": "yeap",
+    "intent": "affirm",
+    "intent_prediction": {
+      "name": "greet",
+      "confidence": 0.7615270614624023
+    }
+  },
+  {
+    "text": "yea",
+    "intent": "affirm",
+    "intent_prediction": {
+      "name": "greet",
+      "confidence": 0.2308286875486374
+    }
+  },
+  {
+    "text": "that's right",
+    "intent": "affirm",
+    "intent_prediction": {
+      "name": "goodbye",
+      "confidence": 0.61922687292099
+    }
+  },
+  {
+    "text": "n",
+    "intent": "deny",
+    "intent_prediction": {
+      "name": "greet",
+      "confidence": 0.24938461184501648
+    }
+  },
+  {
+    "text": "Thnksn",
+    "intent": "thank_you",
+    "intent_prediction": {
+      "name": "inform_user_password",
+      "confidence": 0.2991062104701996
+    }
+  },
+  {
+    "text": "You're a lifesaver",
+    "intent": "thank_you",
+    "intent_prediction": {
+      "name": "bot_challenge",
+      "confidence": 0.34471890330314636
+    }
+  },
+  {
+    "text": "this is leading to nothing",
+    "intent": "stop",
+    "intent_prediction": {
+      "name": "deny",
+      "confidence": 0.3532668352127075
+    }
+  },
+  {
+    "text": "mexican",
+    "intent": "inform_cuisine",
+    "intent_prediction": {
+      "name": "inform_user_name",
+      "confidence": 0.7363008856773376
+    }
+  },
+  {
+    "text": "Could you please list out all of my bookings?",
+    "intent": "view_bookings",
+    "intent_prediction": {
+      "name": "user_wants_to_change_restaurant_booking",
+      "confidence": 0.5567571520805359
+    }
+  },
+  {
+    "text": "Can I make a reservation for tomorrow?",
+    "intent": "inform_date",
+    "intent_prediction": {
+      "name": "view_bookings",
+      "confidence": 0.369035929441452
+    }
+  },
+  {
+    "text": "2 o'clock",
+    "intent": "inform_time",
+    "intent_prediction": {
+      "name": "inform_num_people",
+      "confidence": 0.3406754434108734
+    }
+  },
+  {
+    "text": "8 o'clock",
+    "intent": "inform_time",
+    "intent_prediction": {
+      "name": "inform_num_people",
+      "confidence": 0.27957096695899963
+    }
+  },
+  {
+    "text": "show rest",
+    "intent": "request_restaurants",
+    "intent_prediction": {
+      "name": "request_menu",
+      "confidence": 0.20211628079414368
+    }
+  },
+  {
+    "text": "Is this a real person or a bot?",
+    "intent": "bot_challenge",
+    "intent_prediction": {
+      "name": "out_of_scope",
+      "confidence": 0.5149402022361755
+    }
+  },
+  {
+    "text": "what services do you provide?",
+    "intent": "bot_challenge",
+    "intent_prediction": {
+      "name": "request_menu",
+      "confidence": 0.6356729865074158
+    }
+  },
+  {
+    "text": "isuru",
+    "intent": "inform_user_name",
+    "intent_prediction": {
+      "name": "inform_date",
+      "confidence": 0.4527226686477661
+    }
+  },
+  {
+    "text": "passwordabc",
+    "intent": "inform_user_password",
+    "intent_prediction": {
+      "name": "inform_user_name",
+      "confidence": 0.5085962414741516
+    }
+  },
+  {
+    "text": "ello",
+    "intent": "greet",
+    "intent_prediction": {
+      "name": "affirm",
+      "confidence": 0.27431485056877136
+    }
+  },
+  {
+    "text": "ge",
+    "intent": "greet",
+    "intent_prediction": {
+      "name": "goodbye",
+      "confidence": 0.176250159740448
+    }
+  },
+  {
+    "text": "how is it going?",
+    "intent": "greet",
+    "intent_prediction": {
+      "name": "bot_challenge",
+      "confidence": 0.760575532913208
+    }
+  },
+  {
+    "text": "I am going",
+    "intent": "goodbye",
+    "intent_prediction": {
+      "name": "bot_challenge",
+      "confidence": 0.5129563212394714
+    }
+  },
+  {
+    "text": "go ahead",
+    "intent": "affirm",
+    "intent_prediction": {
+      "name": "thank_you",
+      "confidence": 0.3304108679294586
+    }
+  },
+  {
+    "text": "maybe ok",
+    "intent": "affirm",
+    "intent_prediction": {
+      "name": "deny",
+      "confidence": 0.5148259401321411
+    }
+  },
+  {
+    "text": "I don't think so",
+    "intent": "deny",
+    "intent_prediction": {
+      "name": "stop",
+      "confidence": 0.5235244035720825
+    }
+  },
+  {
+    "text": "dont",
+    "intent": "deny",
+    "intent_prediction": {
+      "name": "stop",
+      "confidence": 0.5597757697105408
+    }
+  },
+  {
+    "text": "Gracias!",
+    "intent": "thank_you",
+    "intent_prediction": {
+      "name": "request_cuisines",
+      "confidence": 0.2858675718307495
+    }
+  },
+  {
+    "text": "owe you one",
+    "intent": "thank_you",
+    "intent_prediction": {
+      "name": "deny",
+      "confidence": 0.2411065548658371
+    }
+  },
+  {
+    "text": "quit it?",
+    "intent": "stop",
+    "intent_prediction": {
+      "name": "bot_challenge",
+      "confidence": 0.7736981511116028
+    }
+  },
+  {
+    "text": "enough",
+    "intent": "stop",
+    "intent_prediction": {
+      "name": "affirm",
+      "confidence": 0.6318415403366089
+    }
+  }
+]

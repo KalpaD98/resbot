@@ -1,0 +1,90 @@
+{
+  "permanent_language": {
+    "precision": 1.0,
+    "recall": 0.896551724137931,
+    "f1-score": 0.9454545454545454,
+    "support": 29,
+    "confused_with": {}
+  },
+  "restaurant_name": {
+    "precision": 1.0,
+    "recall": 0.8620689655172413,
+    "f1-score": 0.9259259259259259,
+    "support": 29,
+    "confused_with": {}
+  },
+  "user_name": {
+    "precision": 0.7931034482758621,
+    "recall": 0.9583333333333334,
+    "f1-score": 0.8679245283018867,
+    "support": 24,
+    "confused_with": {}
+  },
+  "cuisine": {
+    "precision": 0.8076923076923077,
+    "recall": 0.7,
+    "f1-score": 0.75,
+    "support": 30,
+    "confused_with": {}
+  },
+  "password": {
+    "precision": 1.0,
+    "recall": 0.96,
+    "f1-score": 0.9795918367346939,
+    "support": 25,
+    "confused_with": {
+      "num_people": 1
+    }
+  },
+  "user_email": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 24,
+    "confused_with": {}
+  },
+  "time": {
+    "precision": 0.8648648648648649,
+    "recall": 0.9696969696969697,
+    "f1-score": 0.9142857142857143,
+    "support": 66,
+    "confused_with": {}
+  },
+  "num_people": {
+    "precision": 0.7857142857142857,
+    "recall": 0.7333333333333333,
+    "f1-score": 0.7586206896551724,
+    "support": 30,
+    "confused_with": {
+      "time": 4
+    }
+  },
+  "date": {
+    "precision": 0.8939393939393939,
+    "recall": 0.7972972972972973,
+    "f1-score": 0.8428571428571429,
+    "support": 74,
+    "confused_with": {
+      "num_people": 3
+    }
+  },
+  "micro avg": {
+    "precision": 0.8944099378881988,
+    "recall": 0.8700906344410876,
+    "f1-score": 0.8820826952526799,
+    "support": 331
+  },
+  "macro avg": {
+    "precision": 0.9050349222763016,
+    "recall": 0.8752535137017896,
+    "f1-score": 0.8871844870238978,
+    "support": 331
+  },
+  "weighted avg": {
+    "precision": 0.8974902622157543,
+    "recall": 0.8700906344410876,
+    "f1-score": 0.8808547573159734,
+    "support": 331
+  },
+  "accuracy": 0.9798892451180414
+}

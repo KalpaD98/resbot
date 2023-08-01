@@ -1,0 +1,88 @@
+{
+  "user_email": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 24,
+    "confused_with": {}
+  },
+  "permanent_language": {
+    "precision": 1.0,
+    "recall": 0.9310344827586207,
+    "f1-score": 0.9642857142857143,
+    "support": 29,
+    "confused_with": {}
+  },
+  "restaurant_name": {
+    "precision": 1.0,
+    "recall": 0.5862068965517241,
+    "f1-score": 0.7391304347826086,
+    "support": 29,
+    "confused_with": {}
+  },
+  "num_people": {
+    "precision": 0.7631578947368421,
+    "recall": 0.9666666666666667,
+    "f1-score": 0.8529411764705883,
+    "support": 30,
+    "confused_with": {}
+  },
+  "date": {
+    "precision": 0.9850746268656716,
+    "recall": 0.8918918918918919,
+    "f1-score": 0.9361702127659575,
+    "support": 74,
+    "confused_with": {}
+  },
+  "password": {
+    "precision": 1.0,
+    "recall": 0.92,
+    "f1-score": 0.9583333333333334,
+    "support": 25,
+    "confused_with": {
+      "num_people": 1
+    }
+  },
+  "cuisine": {
+    "precision": 1.0,
+    "recall": 0.9,
+    "f1-score": 0.9473684210526316,
+    "support": 30,
+    "confused_with": {}
+  },
+  "time": {
+    "precision": 1.0,
+    "recall": 0.9393939393939394,
+    "f1-score": 0.96875,
+    "support": 66,
+    "confused_with": {
+      "num_people": 4
+    }
+  },
+  "user_name": {
+    "precision": 1.0,
+    "recall": 0.9583333333333334,
+    "f1-score": 0.9787234042553191,
+    "support": 24,
+    "confused_with": {}
+  },
+  "micro avg": {
+    "precision": 0.9675324675324676,
+    "recall": 0.9003021148036254,
+    "f1-score": 0.9327073552425665,
+    "support": 331
+  },
+  "macro avg": {
+    "precision": 0.9720258357336127,
+    "recall": 0.899280801177353,
+    "f1-score": 0.9273002996606837,
+    "support": 331
+  },
+  "weighted avg": {
+    "precision": 0.9751971577950603,
+    "recall": 0.9003021148036254,
+    "f1-score": 0.9307255197245311,
+    "support": 331
+  },
+  "accuracy": 0.9889245118041388
+}

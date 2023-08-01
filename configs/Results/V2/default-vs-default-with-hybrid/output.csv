@@ -1,0 +1,3 @@
+Configuration,0% exc,20% exc,40% exc,60% exc,80% exc
+config_default_with_hybrid_intent-clf,83.79%,82.87%,79.56%,73.48%,64.7%
+config_default,82.48%,82.15%,78.52%,70.51%,56.1%

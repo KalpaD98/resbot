@@ -1,0 +1,90 @@
+{
+  "time": {
+    "precision": 0.9848484848484849,
+    "recall": 0.9848484848484849,
+    "f1-score": 0.9848484848484849,
+    "support": 66,
+    "confused_with": {}
+  },
+  "cuisine": {
+    "precision": 1.0,
+    "recall": 0.9,
+    "f1-score": 0.9473684210526316,
+    "support": 30,
+    "confused_with": {}
+  },
+  "permanent_language": {
+    "precision": 1.0,
+    "recall": 0.896551724137931,
+    "f1-score": 0.9454545454545454,
+    "support": 29,
+    "confused_with": {}
+  },
+  "num_people": {
+    "precision": 0.9310344827586207,
+    "recall": 0.9,
+    "f1-score": 0.9152542372881356,
+    "support": 30,
+    "confused_with": {
+      "time": 1
+    }
+  },
+  "user_name": {
+    "precision": 0.9583333333333334,
+    "recall": 0.9583333333333334,
+    "f1-score": 0.9583333333333334,
+    "support": 24,
+    "confused_with": {}
+  },
+  "date": {
+    "precision": 0.9692307692307692,
+    "recall": 0.8513513513513513,
+    "f1-score": 0.9064748201438849,
+    "support": 74,
+    "confused_with": {}
+  },
+  "restaurant_name": {
+    "precision": 1.0,
+    "recall": 0.8275862068965517,
+    "f1-score": 0.9056603773584906,
+    "support": 29,
+    "confused_with": {
+      "date": 1
+    }
+  },
+  "user_email": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 24,
+    "confused_with": {}
+  },
+  "password": {
+    "precision": 1.0,
+    "recall": 0.96,
+    "f1-score": 0.9795918367346939,
+    "support": 25,
+    "confused_with": {
+      "num_people": 1
+    }
+  },
+  "micro avg": {
+    "precision": 0.9805825242718447,
+    "recall": 0.9154078549848943,
+    "f1-score": 0.9468750000000001,
+    "support": 331
+  },
+  "macro avg": {
+    "precision": 0.9826052300190232,
+    "recall": 0.919852344507517,
+    "f1-score": 0.949220672912689,
+    "support": 331
+  },
+  "weighted avg": {
+    "precision": 0.9808281311354548,
+    "recall": 0.9154078549848943,
+    "f1-score": 0.9460119187940058,
+    "support": 331
+  },
+  "accuracy": 0.9909647333139027
+}
